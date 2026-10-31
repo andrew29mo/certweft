@@ -1,0 +1,117 @@
+{
+  "passed": false,
+  "cases": [
+    {
+      "name": "allowed_certificate",
+      "passed": true,
+      "seconds": 0.12751711100000307,
+      "detail": "7c0b913cde0d647d5bb05f4afc4b24daa791f584d14a4bdea3636563cb252564"
+    },
+    {
+      "name": "wrong_name",
+      "passed": true,
+      "seconds": 0.06468671899999379,
+      "detail": {
+        "ca_rejected": true,
+        "reason": "CW_NAME",
+        "client_returncode": 1
+      }
+    },
+    {
+      "name": "extra_name",
+      "passed": true,
+      "seconds": 0.0635880990000004,
+      "detail": {
+        "ca_rejected": true,
+        "reason": "CW_NAME",
+        "client_returncode": 1
+      }
+    },
+    {
+      "name": "ip_san",
+      "passed": true,
+      "seconds": 0.06637902800000006,
+      "detail": {
+        "ca_rejected": true,
+        "reason": "CW_NAME",
+        "client_returncode": 1
+      }
+    },
+    {
+      "name": "client_auth",
+      "passed": true,
+      "seconds": 0.06283589299999903,
+      "detail": {
+        "ca_rejected": true,
+        "reason": "CW_EKU",
+        "client_returncode": 1
+      }
+    },
+    {
+      "name": "p384",
+      "passed": true,
+      "seconds": 0.0684838410000026,
+      "detail": {
+        "ca_rejected": true,
+        "reason": "CW_KEY",
+        "client_returncode": 1
+      }
+    },
+    {
+      "name": "rsa",
+      "passed": true,
+      "seconds": 0.06464725000000726,
+      "detail": {
+        "ca_rejected": true,
+        "reason": "CW_KEY",
+        "client_returncode": 1
+      }
+    },
+    {
+      "name": "ca_true",
+      "passed": true,
+      "seconds": 0.06402931600000272,
+      "detail": {
+        "ca_rejected": true,
+        "reason": "CW_CA",
+        "client_returncode": 1
+      }
+    },
+    {
+      "name": "excess_duration",
+      "passed": true,
+      "seconds": 0.06251708899999642,
+      "detail": {
+        "ca_rejected": true,
+        "reason": "maximum",
+        "client_returncode": 1
+      }
+    }
+  ],
+  "scope": "real step-ca; transient systemd credential service; Linux VM",
+  "untested": [
+    "persistent daemon deployment",
+    "remote CA network",
+    "TPM/HSM",
+    "root compromise",
+    "orphan executor",
+    "power loss"
+  ],
+  "error": "CalledProcessError",
+  "source_sha256": {
+    "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certweft/core.py": "fe51b8ffcb8a4445e7c3dfc86e66fff803e9863e661ea4c050f8b53e25d6cdcf",
+    "certweft/ca.py": "079742fdd9acde1b8f2999686e73f81928572002c59ae9fdecd90c7eb6c49d1d",
+    "tools/policy_vm.py": "a86fbdf26ea9f97ec88ee8e5827f96fa8a57242974db8ab91b95deb3dec1d3ed",
+    "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
+    "tests/test_core.py": "b32695cf50c0cbbf1ce6348a90bdaa927b5377fcdf2c944f0e52f4d6f9821da2",
+    "policy/server.tpl": "89fc6bf81f9b22d55f155ae12dc5c1c12accbd556ce4ebf43812519537d6e865"
+  },
+  "source_unchanged": true,
+  "versions": {
+    "step": "Smallstep CLI/0.31.0 (linux/arm64)",
+    "step_ca": "Smallstep CA/0.30.2 (linux/arm64)",
+    "python": "3.12.3"
+  },
+  "elapsed_seconds": 2.1281807790000045
+}

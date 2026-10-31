@@ -19,6 +19,13 @@ provisioner policy and secret delivery remain design gates before the MVP.
 
 See [independent review and corrections](docs/REVIEW.md).
 
+## CSR authority milestone
+
+[CA-enforced CSR policy and credential delivery](docs/CSR_AUTHORITY.md) now has
+real CA rejection and transient systemd signer evidence. This does not qualify
+the persistent deployment or privileged executor. The older token-renewal finding
+and exploration reports retain their recorded scope.
+
 ## Evidence
 
 [JSON](evidence/exploration.json) and [HTML](evidence/exploration.html) contain the

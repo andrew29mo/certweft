@@ -1,0 +1,144 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "name": "allowed_certificate",
+      "passed": true,
+      "seconds": 0.14376786299999367,
+      "detail": {
+        "verified": true,
+        "actual_validity_seconds": 1860.0,
+        "requested_default_seconds": 1800,
+        "allowed_backdate_seconds": 60
+      }
+    },
+    {
+      "name": "wrong_name",
+      "passed": true,
+      "seconds": 0.0619371089999845,
+      "detail": {
+        "ca_rejected": true,
+        "reason": "CW_NAME",
+        "client_returncode": 1
+      }
+    },
+    {
+      "name": "extra_name",
+      "passed": true,
+      "seconds": 0.062343768000005184,
+      "detail": {
+        "ca_rejected": true,
+        "reason": "CW_NAME",
+        "client_returncode": 1
+      }
+    },
+    {
+      "name": "ip_san",
+      "passed": true,
+      "seconds": 0.061955617999984725,
+      "detail": {
+        "ca_rejected": true,
+        "reason": "CW_NAME",
+        "client_returncode": 1
+      }
+    },
+    {
+      "name": "client_auth",
+      "passed": true,
+      "seconds": 0.06332648899999072,
+      "detail": {
+        "ca_rejected": true,
+        "reason": "CW_EKU",
+        "client_returncode": 1
+      }
+    },
+    {
+      "name": "p384",
+      "passed": true,
+      "seconds": 0.06346395899998925,
+      "detail": {
+        "ca_rejected": true,
+        "reason": "CW_KEY",
+        "client_returncode": 1
+      }
+    },
+    {
+      "name": "rsa",
+      "passed": true,
+      "seconds": 0.06352673699998945,
+      "detail": {
+        "ca_rejected": true,
+        "reason": "CW_KEY",
+        "client_returncode": 1
+      }
+    },
+    {
+      "name": "ca_true",
+      "passed": true,
+      "seconds": 0.06414147999998931,
+      "detail": {
+        "ca_rejected": true,
+        "reason": "CW_CA",
+        "client_returncode": 1
+      }
+    },
+    {
+      "name": "excess_duration",
+      "passed": true,
+      "seconds": 0.06390107400000034,
+      "detail": {
+        "ca_rejected": true,
+        "reason": "maximum",
+        "client_returncode": 1
+      }
+    },
+    {
+      "name": "insufficient_duration",
+      "passed": true,
+      "seconds": 0.06259435399999802,
+      "detail": {
+        "ca_rejected": true,
+        "reason": "minimum",
+        "client_returncode": 1
+      }
+    },
+    {
+      "name": "systemd_credential_delivery",
+      "passed": true,
+      "seconds": 0.16428735499999902,
+      "detail": "non-login signer issued through LoadCredential; no secret contents in argv or captured output"
+    },
+    {
+      "name": "credential_source_isolation",
+      "passed": true,
+      "seconds": 0.007314387999997507,
+      "detail": "nobody and signer cannot read source password or CA private keys"
+    }
+  ],
+  "scope": "real step-ca; transient systemd credential service; Linux VM",
+  "untested": [
+    "persistent daemon deployment",
+    "remote CA network",
+    "TPM/HSM",
+    "root compromise",
+    "orphan executor",
+    "power loss"
+  ],
+  "cleanup_verified": true,
+  "source_sha256": {
+    "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certweft/core.py": "fe51b8ffcb8a4445e7c3dfc86e66fff803e9863e661ea4c050f8b53e25d6cdcf",
+    "certweft/ca.py": "e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c",
+    "tools/policy_vm.py": "b5934426cede23340ddead19c57fc7e29dbf2954024035691aaff5d907a3f4c9",
+    "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
+    "tests/test_core.py": "ee918917589be402a89855f72faadcac52f7de090375fe8bd4edf16a7c07dc9d",
+    "policy/server.tpl": "89fc6bf81f9b22d55f155ae12dc5c1c12accbd556ce4ebf43812519537d6e865"
+  },
+  "source_unchanged": true,
+  "versions": {
+    "step": "Smallstep CLI/0.31.0 (linux/arm64)",
+    "step_ca": "Smallstep CA/0.30.2 (linux/arm64)",
+    "python": "3.12.3"
+  },
+  "elapsed_seconds": 2.2294052659999863
+}

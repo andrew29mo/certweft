@@ -2,11 +2,12 @@
 
 ## Reviewed run
 
-The current source-bound report passes 18 VM cases plus six separately run
-unittest tests. Elapsed workflow time was 16.99 seconds; Python driver peak
-RSS was 33,888 KiB and private fixture logical size was 52,830 bytes. Source
+The current source-bound report passes 18 VM cases plus eight separately run
+unittest tests. Elapsed workflow time was 16.67 seconds; Python driver peak
+RSS was 33,892 KiB and private fixture logical size was 52,861 bytes. Source
 unchanged and owned Nginx process cleanup checks passed. These measurements
-are not comparable total-service benchmarks. See REVIEW.md for corrections.
+are not comparable total-service benchmarks. The separate CSR authority milestone
+has 12 CA/credential cases; see CSR_AUTHORITY.md and evidence/policy.json.
 
 ## Original exploratory run (historical)
 

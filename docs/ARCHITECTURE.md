@@ -80,3 +80,12 @@ acceptance gates, not implemented capabilities. No VM reboot, abrupt power-loss,
 zero-gap boot, long-term rotation or zero-downtime claim is made.
 
 Review corrections and distinctions between real and injected faults are in [REVIEW.md](REVIEW.md).
+
+## P0-1 update
+
+CA-side rejection of forbidden names, EKU, public-key algorithms and requested
+lifetimes, plus transient systemd credential delivery are now qualified by
+[CSR_AUTHORITY.md](CSR_AUTHORITY.md) and its separate report. The original
+exploration gates above are historical; persistent deployment, executor fencing,
+whole-operation deadlines and recovery gates remain open. CSR authorization is
+restricted to one service identity, not bound to one host or public key.

@@ -58,3 +58,20 @@ class CurvePolicy(unittest.TestCase):
                  '-addext','subjectAltName=DNS:localhost','-addext','basicConstraints=critical,CA:FALSE',
                  '-addext','extendedKeyUsage=serverAuth','-out',cert])
             with self.assertRaisesRegex(Rejected,'algorithm_policy'):validate(cert,key,cert,'localhost')
+
+class CredentialBoundary(unittest.TestCase):
+    def test_missing_systemd_credential_rejected(self):
+        from unittest.mock import patch
+        from certweft.ca import reissue_credential
+        with patch.dict('os.environ',{},clear=True):
+            with self.assertRaisesRegex(Rejected,'credential_missing'):
+                reissue_credential('step','url','root','key','out')
+    def test_public_credential_rejected_before_signing(self):
+        from unittest.mock import patch
+        from certweft.ca import reissue_credential
+        with tempfile.TemporaryDirectory() as t:
+            f=Path(t)/'provisioner-password';f.write_text('private-test-only');f.chmod(0o644)
+            with patch.dict('os.environ',{'CREDENTIALS_DIRECTORY':t}),patch('certweft.ca.reissue') as sign:
+                with self.assertRaisesRegex(Rejected,'credential_permissions'):
+                    reissue_credential('step','url','root','key','out')
+                sign.assert_not_called()
