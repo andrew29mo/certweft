@@ -1,0 +1,126 @@
+<!doctype html><meta charset="utf-8"><title>Certweft evidence</title><pre>{
+  &quot;passed&quot;: true,
+  &quot;cases&quot;: [
+    {
+      &quot;name&quot;: &quot;baseline_fresh_tls&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.2632180570000173,
+      &quot;detail&quot;: &quot;b3ce52d849d50543c53bb8eaa83722f190e8d5179e34b5504eaba0935b462b68&quot;
+    },
+    {
+      &quot;name&quot;: &quot;server_only_token_renewal_incompatibility_observed&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.01822680599997284,
+      &quot;detail&quot;: &quot;observed incompatible-key-usage rejection in CA log; not supported by tested version pair&quot;
+    },
+    {
+      &quot;name&quot;: &quot;real_ca_same_key_reissuance&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.07848513300001514,
+      &quot;detail&quot;: &quot;real CA same-key CSR reissuance&quot;
+    },
+    {
+      &quot;name&quot;: &quot;candidate_validation&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.0480818579999891,
+      &quot;detail&quot;: &quot;b17cbfa37e1c8edb8d4b80b60388829ed79cde657de01812da6b21274340b2d2&quot;
+    },
+    {
+      &quot;name&quot;: &quot;wrong_san_rejected&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.0014801540000348723,
+      &quot;detail&quot;: &quot;rejected&quot;
+    },
+    {
+      &quot;name&quot;: &quot;wrong_key_rejected&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.020149561000039284,
+      &quot;detail&quot;: &quot;rejected&quot;
+    },
+    {
+      &quot;name&quot;: &quot;real_activation_new_tls&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.6587015119999933,
+      &quot;detail&quot;: &quot;READY&quot;
+    },
+    {
+      &quot;name&quot;: &quot;old_authority_rejected&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.0002195460000393723,
+      &quot;detail&quot;: &quot;rejected&quot;
+    },
+    {
+      &quot;name&quot;: &quot;old_fingerprint_rejected&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.0009626859999798398,
+      &quot;detail&quot;: &quot;rejected&quot;
+    },
+    {
+      &quot;name&quot;: &quot;selected_failure_verified_rollback&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.9245462220000036,
+      &quot;detail&quot;: &quot;b17cbfa37e1c8edb8d4b80b60388829ed79cde657de01812da6b21274340b2d2&quot;
+    },
+    {
+      &quot;name&quot;: &quot;process_crash_recovery&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 3.1735199400000056,
+      &quot;detail&quot;: &quot;SIGKILL at four boundaries; prior committed fingerprint re-observed&quot;
+    },
+    {
+      &quot;name&quot;: &quot;delayed_executor_blocks_takeover&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 2.006830882000031,
+      &quot;detail&quot;: &quot;rejected&quot;
+    },
+    {
+      &quot;name&quot;: &quot;sqlite_full_no_false_commit&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.005575083999985964,
+      &quot;detail&quot;: &quot;real SQLite max_page_count FULL; existing transaction retained&quot;
+    },
+    {
+      &quot;name&quot;: &quot;reload_signal_without_application_not_success&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 6.111077362000003,
+      &quot;detail&quot;: &quot;real master SIGSTOP: reload signal is insufficient; candidate confirmation times out; old workers still serve committed certificate; verified rollback and repair pass&quot;
+    },
+    {
+      &quot;name&quot;: &quot;real_readonly_mount_rejection_and_repair&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.394175625999992,
+      &quot;detail&quot;: &quot;READY&quot;
+    }
+  ],
+  &quot;platform&quot;: &quot;Linux-6.8.0-117-generic-aarch64-with-glibc2.39&quot;,
+  &quot;scope&quot;: &quot;Linux VM; private loopback fixture; process crashes, not power loss&quot;,
+  &quot;untested&quot;: [
+    &quot;systemd installation&quot;,
+    &quot;VM reboot&quot;,
+    &quot;power loss&quot;,
+    &quot;untrusted worker privilege separation&quot;,
+    &quot;missing intermediate wire negative&quot;,
+    &quot;clock jumps&quot;,
+    &quot;long-term rotation&quot;,
+    &quot;serverAuth-only renew token compatibility&quot;,
+    &quot;privileged helper exec inheritance&quot;,
+    &quot;post-publication physical ENOSPC&quot;,
+    &quot;expired rollback certificate&quot;
+  ],
+  &quot;elapsed_seconds&quot;: 15.065348779000033,
+  &quot;controller_maxrss_kib&quot;: 28408,
+  &quot;private_fixture_bytes&quot;: 50166,
+  &quot;versions&quot;: {
+    &quot;step&quot;: &quot;Smallstep CLI/0.31.0 (linux/arm64)&quot;,
+    &quot;step_ca&quot;: &quot;Smallstep CA/0.30.2 (linux/arm64)&quot;,
+    &quot;nginx&quot;: &quot;nginx version: nginx/1.24.0 (Ubuntu)&quot;,
+    &quot;python&quot;: &quot;3.12.3&quot;,
+    &quot;openssl&quot;: &quot;OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)&quot;
+  },
+  &quot;source_sha256&quot;: {
+    &quot;certweft/__init__.py&quot;: &quot;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855&quot;,
+    &quot;certweft/core.py&quot;: &quot;e3c29d6c078561365bd99c2d08514a1f36b746da6bee869bb61db106dd4a7cd5&quot;,
+    &quot;certweft/ca.py&quot;: &quot;68b7206e58c8223877d5e40c1f7f1efabea95f9138a02ead9a356002edd8c44c&quot;,
+    &quot;tools/explore.py&quot;: &quot;c18e5df6fb8bb7d148b68ca12f8f7994cfd63a5a08ba5d385b0c217223700701&quot;
+  }
+}</pre>

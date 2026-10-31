@@ -1,0 +1,40 @@
+{
+  "passed": false,
+  "cases": [
+    {
+      "name": "baseline_fresh_tls",
+      "passed": true,
+      "seconds": 0.2686962169999987,
+      "detail": "1708979cfad0bb39d3d271831eb2bfaca85ea3ade3023599eebaa311ac7f83a8"
+    },
+    {
+      "name": "real_ca_token_renewal",
+      "passed": false,
+      "error": "CalledProcessError"
+    }
+  ],
+  "platform": "Linux-6.8.0-117-generic-aarch64-with-glibc2.39",
+  "scope": "Linux VM; private loopback fixture; process crashes, not power loss",
+  "untested": [
+    "systemd installation",
+    "VM reboot",
+    "power loss",
+    "untrusted worker privilege separation",
+    "missing intermediate wire negative",
+    "clock jumps",
+    "long-term rotation"
+  ],
+  "error": "CalledProcessError",
+  "elapsed_seconds": 1.635179062000006,
+  "controller_maxrss_kib": 22656,
+  "private_fixture_bytes": 27526,
+  "versions": {
+    "python": "3.12.3",
+    "openssl": "OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)"
+  },
+  "source_sha256": {
+    "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certweft/core.py": "f6a49d89763883b61c2be948ca57408841f8f0d1b62b809dcee1dd07609f789f",
+    "tools/explore.py": "81a9c94f67228501c2e72a7244692cecb873387bd12554984277ec5d703a2d83"
+  }
+}
