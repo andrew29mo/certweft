@@ -6,7 +6,10 @@ The dedicated `exploration` JWK provisioner accepts exactly one DNS identity:
 CN localhost, a single DNS SAN localhost, no IP/email/URI SANs, serverAuth-only,
 and an ECDSA P-256 public key. A CA request is prohibited. Its server-side
 [template](../policy/server.tpl) uses `fail` to reject violations before signing;
-it does not silently rewrite forbidden requests. The issued signature algorithm
+it does not silently rewrite forbidden requests. Raw SAN DER must encode only
+the single localhost DNS entry. Only SAN, EKU and basicConstraints CSR extension
+OIDs are supported; an explicit keyUsage extension is rejected, even if its
+value is digitalSignature. Arbitrary standards-compliant CSRs are not supported. The issued signature algorithm
 is fixed to ECDSA-SHA256. This does not constrain a CSR's own signature hash.
 
 Provisioner claims set minimum requested lifetime 5 minutes, default 30 minutes,
@@ -43,7 +46,8 @@ The formal adapter `reissue_credential` receives only a password-file path throu
 systemd's CREDENTIALS_DIRECTORY. Actual secret bytes are not arguments or environment
 values. A real transient service uses a separate non-login signer user,
 LoadCredential, NoNewPrivileges and ProtectSystem=strict; only its private client
-directory is writable. It calls the actual certweft.ca module and validates the
+directory is explicitly allowed for filesystem writes. This is not a claim
+that every possible IPC or device write is prevented. The observation wrapper calls the actual reissue_credential adapter and validates the
 result against the CA root. This qualifies a one-shot credential path, not the
 future persistent daemon, privilege-separated writer or orphan executor.
 
@@ -55,8 +59,14 @@ both nobody and the signer to be denied source password, CA private keys and raw
 CA logs; nobody is also denied the service key. The signer is intentionally able
 to read its delivered credential and service key. Host root remains trusted.
 
-Tests scan the transient command/captured output and service journal for the
+Tests scan the transient command, both stdout and stderr, and service journal for the
 random provisioner secret, and public report serialization must not contain it.
+The actual service also reports its effective UID/GID and capabilities; tests
+require the configured signer identity and zero effective capabilities. While
+it remains alive, nobody must receive PermissionError opening the delivered
+credential. Cleanup requires no remaining signer UID processes, empty unit
+cgroup/MainPID and removal of the runtime credential path.
+
 This is evidence for the exercised paths, not proof against root, memory dumps,
 all process inspection, compromise of the signer, or arbitrary future logging.
 Private CA logs may contain tokens and remain inside the VM; never upload them.
@@ -90,3 +100,18 @@ Private fixture files remain for diagnosis. Do not delete unrelated VM data.
 - https://www.freedesktop.org/software/systemd/man/latest/systemd.exec.html
 
 The sources explain mechanisms; the report records the specific tested versions.
+
+## P0-1 independent review
+
+Two read-only agents reviewed CA scope and credential evidence. A real otherName
+CSR was accepted by the original template; the failed run is retained. The
+raw-extension check now rejects both otherName and registeredID at the CA.
+The review also fixed missing stderr inspection and missing-file isolation false
+passes. Protected files must first exist and be root-readable, then actual open
+attempts by the tested identities must fail with PermissionError. A stderr-only
+secret marker negative test challenges the output collector. The observation
+marker is atomically published to avoid partial-read false failures.
+
+The reviewed milestone has 14 VM cases and nine separate unit tests. Prior
+18-case activation/recovery results remain historical and are not represented
+as a new qualification of this credential milestone.

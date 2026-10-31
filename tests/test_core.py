@@ -75,3 +75,10 @@ class CredentialBoundary(unittest.TestCase):
                 with self.assertRaisesRegex(Rejected,'credential_permissions'):
                     reissue_credential('step','url','root','key','out')
                 sign.assert_not_called()
+
+class SecretOutput(unittest.TestCase):
+    def test_stderr_only_secret_is_rejected(self):
+        from tools.policy_vm import check_outputs
+        with self.assertRaisesRegex(AssertionError,'secret_output'):
+            check_outputs('sentinel',b'clean',b'error sentinel')
+        check_outputs('sentinel',b'clean',b'clean')

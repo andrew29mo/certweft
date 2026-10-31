@@ -1,13 +1,13 @@
 # Exploration results
 
-## Reviewed run
+## Earlier activation/recovery regression (historical)
 
-The current source-bound report passes 18 VM cases plus eight separately run
+The retained activation/recovery report passed 18 VM cases plus eight separately run
 unittest tests. Elapsed workflow time was 16.67 seconds; Python driver peak
 RSS was 33,892 KiB and private fixture logical size was 52,861 bytes. Source
 unchanged and owned Nginx process cleanup checks passed. These measurements
-are not comparable total-service benchmarks. The separate CSR authority milestone
-has 12 CA/credential cases; see CSR_AUTHORITY.md and evidence/policy.json.
+are not comparable total-service benchmarks. The reviewed CSR authority milestone
+has 14 CA/credential cases and nine separate unit tests; see CSR_AUTHORITY.md and evidence/policy.json.
 
 ## Original exploratory run (historical)
 

@@ -6,6 +6,9 @@ P=pathlib.Path(__file__).resolve().parents[1]
 def hashes():
     return {str(p.relative_to(P)):hashlib.sha256(p.read_bytes()).hexdigest() for folder in ['certweft','tools','tests','policy'] for p in (P/folder).glob('*') if p.is_file()}
 
+def check_outputs(secret,stdout,stderr):
+    if secret.encode() in stdout or secret.encode() in stderr:raise AssertionError('secret_output')
+
 def main():
     os.umask(0o077)
     source=hashes();out=P/'evidence/policy.json';out.parent.mkdir(exist_ok=True)
@@ -73,7 +76,7 @@ def main():
             assert 1800<=duration<=1860
             return {'verified':True,'actual_validity_seconds':duration,'requested_default_seconds':1800,'allowed_backdate_seconds':60}
         check('allowed_certificate',allowed)
-        for name,kwargs,reason in [('wrong_name',{'san':'DNS:wrong.invalid'},'CW_NAME'),('extra_name',{'san':'DNS:localhost,DNS:wrong.invalid'},'CW_NAME'),('ip_san',{'san':'DNS:localhost,IP:127.0.0.1'},'CW_NAME'),('client_auth',{'eku':'serverAuth,clientAuth'},'CW_EKU'),('p384',{'curve':'secp384r1'},'CW_KEY'),('rsa',{'curve':'rsa'},'CW_KEY'),('ca_true',{'extra':'basicConstraints=critical,CA:TRUE'},'CW_CA')]:
+        for name,kwargs,reason in [('other_name',{'san':'DNS:localhost,otherName:1.2.3.4;UTF8:evil'},'CW_NAME'),('registered_id',{'san':'DNS:localhost,RID:1.2.3.4'},'CW_NAME'),('wrong_name',{'san':'DNS:wrong.invalid'},'CW_NAME'),('extra_name',{'san':'DNS:localhost,DNS:wrong.invalid'},'CW_NAME'),('ip_san',{'san':'DNS:localhost,IP:127.0.0.1'},'CW_NAME'),('client_auth',{'eku':'serverAuth,clientAuth'},'CW_EKU'),('p384',{'curve':'secp384r1'},'CW_KEY'),('rsa',{'curve':'rsa'},'CW_KEY'),('ca_true',{'extra':'basicConstraints=critical,CA:TRUE'},'CW_CA')]:
             _,req=csr(name,**kwargs);check(name,lambda n=name,r=req,why=reason:sign(n,r,reason=why))
         check('excess_duration',lambda:sign('long',request,duration='2h',reason='maximum'))
         check('insufficient_duration',lambda:sign('short',request,duration='1m',reason='minimum'))
@@ -84,22 +87,46 @@ def main():
         client=work/'client';client.mkdir(mode=0o700);os.chown(client,uid,gid)
         shutil.copyfile(key,client/'key.pem');os.chown(client/'key.pem',uid,gid);os.chmod(client/'key.pem',0o600)
         def delivered():
-            command=['systemd-run','--unit',unit,'--wait','--collect','--pipe','-p','User='+account,'-p','NoNewPrivileges=yes','-p','ProtectSystem=strict','-p','ProtectHome=read-only','-p','ReadWritePaths='+str(client),'-p','LoadCredential=provisioner-password:'+str(work/'prov-pass'),'-p','Environment=STEPPATH='+str(client/'step'),'-p','Environment=PYTHONPATH='+str(P),'python3','-m','certweft.ca',step,'https://localhost:19091',root,client/'key.pem',client/'cert.pem']
-            try:output=run(command,25)
-            except subprocess.CalledProcessError as e:
-                (work/'service-error').write_bytes(e.stdout+b'\n'+e.stderr);os.chmod(work/'service-error',0o600)
-                raise
-            assert secret.encode() not in output and secret not in ' '.join(map(str,command))
-            validate(client/'cert.pem',client/'key.pem',root,'localhost')
-            journal=run(['journalctl','-u',unit,'--no-pager'])
-            assert secret.encode() not in journal
-            return 'non-login signer issued through LoadCredential; no secret contents in argv or captured output'
+            command=['systemd-run','--unit',unit,'--wait','--collect','--pipe','-p','User='+account,'-p','NoNewPrivileges=yes','-p','ProtectSystem=strict','-p','ProtectHome=read-only','-p','ReadWritePaths='+str(client),'-p','LoadCredential=provisioner-password:'+str(work/'prov-pass'),'-p','Environment=STEPPATH='+str(client/'step'),'-p','Environment=PYTHONPATH='+str(P),'python3',str(P/'tools/credential_probe.py'),step,'https://localhost:19091',root,client/'key.pem',client/'cert.pem']
+            process=subprocess.Popen(list(map(str,command)),stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+            try:
+                end=time.monotonic()+10
+                marker=client/'observed.json'
+                while not marker.exists():
+                    if process.poll() is not None or time.monotonic()>end:raise AssertionError('signer_not_ready')
+                    time.sleep(.02)
+                observed=json.loads(marker.read_text())
+                assert observed['uid']==uid and observed['gid']==gid and int(observed['caps'],16)==0
+                cred=pathlib.Path(observed['credential_path'])
+                assert cred.is_file()
+                denial=subprocess.run(['runuser','-u','nobody','--','python3','-c',
+                    'import sys;\ntry: open(sys.argv[1],"rb").read(); sys.exit(2)\nexcept PermissionError: sys.exit(0)',str(cred)])
+                assert denial.returncode==0
+                (client/'release').touch()
+                stdout,stderr=process.communicate(timeout=15)
+                check_outputs(secret,stdout,stderr)
+                assert process.returncode==0
+                assert secret not in ' '.join(map(str,command))
+                validate(client/'cert.pem',client/'key.pem',root,'localhost')
+                journal=run(['journalctl','-u',unit,'--no-pager'])
+                check_outputs(secret,journal,b'')
+                report['credential_runtime_path_removed']=not cred.exists()
+                assert not cred.exists()
+                return {'runtime_identity_matches':True,'effective_capabilities_zero':True,
+                        'credential_mode':observed['credential_mode'],'live_unrelated_reader_denied':True,
+                        'stdout_stderr_journal_secret_scan':True}
+            finally:
+                (client/'release').touch()
+                if process.poll() is None:
+                    subprocess.run(['systemctl','stop',unit],capture_output=True)
+                    process.communicate(timeout=5)
         check('systemd_credential_delivery',delivered)
         def denied():
             for path in [work/'prov-pass',work/'ca/secrets/root_ca_key',work/'ca/secrets/intermediate_ca_key',work/'ca.log']:
                 for identity in ['nobody',account]:
-                    code=subprocess.run(['runuser','-u',identity,'--','test','-r',str(path)]).returncode
-                    assert code!=0
+                    assert path.is_file() and path.read_bytes()
+                    code=subprocess.run(['runuser','-u',identity,'--','python3','-c','import sys;\ntry: open(sys.argv[1],"rb").read(); sys.exit(2)\nexcept PermissionError: sys.exit(0)',str(path)]).returncode
+                    assert code==0
             assert subprocess.run(['runuser','-u','nobody','--','test','-r',str(client/'key.pem')]).returncode!=0
             return 'nobody and signer denied source password, CA private keys and raw CA logs; nobody denied service key'
         check('credential_source_isolation',denied)
@@ -117,7 +144,24 @@ def main():
         subprocess.run(['userdel',account],capture_output=True)
         remaining=subprocess.run(['id',account],capture_output=True).returncode==0
         active=subprocess.run(['systemctl','is-active',unit],capture_output=True).returncode==0
-        report['cleanup_verified']=not remaining and not active and (ca is None or ca.poll() is not None)
+        live=[]
+        if 'uid' in locals():
+            for status in pathlib.Path('/proc').glob('[0-9]*/status'):
+                try:
+                    lines=status.read_text().splitlines()
+                    owner=next(x.split()[1] for x in lines if x.startswith('Uid:'))
+                    if int(owner)==uid:live.append(status.parent.name)
+                except FileNotFoundError:pass
+        credentials_gone=not pathlib.Path('/run/credentials',unit+'.service').exists()
+        state=subprocess.run(['systemctl','show',unit,'-p','MainPID','-p','ControlGroup','-p','ActiveState'],capture_output=True,text=True)
+        properties=dict(x.split('=',1) for x in state.stdout.splitlines() if '=' in x)
+        cgroup=properties.get('ControlGroup','')
+        cgroup_empty=True
+        if cgroup:
+            for procfile in (pathlib.Path('/sys/fs/cgroup')/cgroup.lstrip('/')).rglob('cgroup.procs'):
+                if procfile.read_text().strip():cgroup_empty=False
+        report['cleanup_verified']=(not remaining and not active and not live and credentials_gone
+            and properties.get('MainPID','0')=='0' and cgroup_empty and (ca is None or ca.poll() is not None))
         if not report['cleanup_verified']:report['cleanup_error']='owned_resources_remain'
         report['source_sha256']=source;report['source_unchanged']=source==hashes()
         report['versions']={'step':run([step,'version']).decode().splitlines()[0],'step_ca':run([stepca,'version']).decode().splitlines()[0],'python':platform.python_version()}

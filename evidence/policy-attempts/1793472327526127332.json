@@ -1,0 +1,48 @@
+{
+  "passed": false,
+  "cases": [
+    {
+      "name": "allowed_certificate",
+      "passed": true,
+      "seconds": 0.13877465799999555,
+      "detail": {
+        "verified": true,
+        "actual_validity_seconds": 1860.0,
+        "requested_default_seconds": 1800,
+        "allowed_backdate_seconds": 60
+      }
+    },
+    {
+      "name": "other_name",
+      "passed": false,
+      "error": "AssertionError"
+    }
+  ],
+  "scope": "real step-ca; transient systemd credential service; Linux VM",
+  "untested": [
+    "persistent daemon deployment",
+    "remote CA network",
+    "TPM/HSM",
+    "root compromise",
+    "orphan executor",
+    "power loss"
+  ],
+  "error": "AssertionError",
+  "cleanup_verified": true,
+  "source_sha256": {
+    "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certweft/core.py": "fe51b8ffcb8a4445e7c3dfc86e66fff803e9863e661ea4c050f8b53e25d6cdcf",
+    "certweft/ca.py": "e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c",
+    "tools/policy_vm.py": "470741be38646f4767ecc0ec6024ac93bfd61edf661a2e80cba3c6d1406467f5",
+    "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
+    "tests/test_core.py": "ee918917589be402a89855f72faadcac52f7de090375fe8bd4edf16a7c07dc9d",
+    "policy/server.tpl": "89fc6bf81f9b22d55f155ae12dc5c1c12accbd556ce4ebf43812519537d6e865"
+  },
+  "source_unchanged": true,
+  "versions": {
+    "step": "Smallstep CLI/0.31.0 (linux/arm64)",
+    "step_ca": "Smallstep CA/0.30.2 (linux/arm64)",
+    "python": "3.12.3"
+  },
+  "elapsed_seconds": 1.5004370799999975
+}

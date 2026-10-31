@@ -4,7 +4,7 @@
     {
       "name": "allowed_certificate",
       "passed": true,
-      "seconds": 0.14891531899999677,
+      "seconds": 0.1404989670000134,
       "detail": {
         "verified": true,
         "actual_validity_seconds": 1860.0,
@@ -13,9 +13,29 @@
       }
     },
     {
+      "name": "other_name",
+      "passed": true,
+      "seconds": 0.06584875099997589,
+      "detail": {
+        "ca_rejected": true,
+        "reason": "CW_NAME",
+        "client_returncode": 1
+      }
+    },
+    {
+      "name": "registered_id",
+      "passed": true,
+      "seconds": 0.06383682200001317,
+      "detail": {
+        "ca_rejected": true,
+        "reason": "CW_NAME",
+        "client_returncode": 1
+      }
+    },
+    {
       "name": "wrong_name",
       "passed": true,
-      "seconds": 0.0655401500000039,
+      "seconds": 0.06430474199999026,
       "detail": {
         "ca_rejected": true,
         "reason": "CW_NAME",
@@ -25,7 +45,7 @@
     {
       "name": "extra_name",
       "passed": true,
-      "seconds": 0.06444157399999995,
+      "seconds": 0.062253521000002365,
       "detail": {
         "ca_rejected": true,
         "reason": "CW_NAME",
@@ -35,7 +55,7 @@
     {
       "name": "ip_san",
       "passed": true,
-      "seconds": 0.06701044399997613,
+      "seconds": 0.06329165200000375,
       "detail": {
         "ca_rejected": true,
         "reason": "CW_NAME",
@@ -45,7 +65,7 @@
     {
       "name": "client_auth",
       "passed": true,
-      "seconds": 0.06673180100000309,
+      "seconds": 0.06432690799999818,
       "detail": {
         "ca_rejected": true,
         "reason": "CW_EKU",
@@ -55,7 +75,7 @@
     {
       "name": "p384",
       "passed": true,
-      "seconds": 0.06622692599998459,
+      "seconds": 0.06673629499999834,
       "detail": {
         "ca_rejected": true,
         "reason": "CW_KEY",
@@ -65,7 +85,7 @@
     {
       "name": "rsa",
       "passed": true,
-      "seconds": 0.06502439999999865,
+      "seconds": 0.06319589700001416,
       "detail": {
         "ca_rejected": true,
         "reason": "CW_KEY",
@@ -75,7 +95,7 @@
     {
       "name": "ca_true",
       "passed": true,
-      "seconds": 0.06453502400000843,
+      "seconds": 0.0626563939999869,
       "detail": {
         "ca_rejected": true,
         "reason": "CW_CA",
@@ -85,7 +105,7 @@
     {
       "name": "excess_duration",
       "passed": true,
-      "seconds": 0.06294223899999452,
+      "seconds": 0.06180201399999419,
       "detail": {
         "ca_rejected": true,
         "reason": "maximum",
@@ -95,7 +115,7 @@
     {
       "name": "insufficient_duration",
       "passed": true,
-      "seconds": 0.06271698200001197,
+      "seconds": 0.06211868200000481,
       "detail": {
         "ca_rejected": true,
         "reason": "minimum",
@@ -105,13 +125,19 @@
     {
       "name": "systemd_credential_delivery",
       "passed": true,
-      "seconds": 0.16929291499999977,
-      "detail": "non-login signer issued through LoadCredential; no secret contents in argv or captured output"
+      "seconds": 0.29037750499998083,
+      "detail": {
+        "runtime_identity_matches": true,
+        "effective_capabilities_zero": true,
+        "credential_mode": "0o440",
+        "live_unrelated_reader_denied": true,
+        "stdout_stderr_journal_secret_scan": true
+      }
     },
     {
       "name": "credential_source_isolation",
       "passed": true,
-      "seconds": 0.01056660199998305,
+      "seconds": 0.08521306200000822,
       "detail": "nobody and signer denied source password, CA private keys and raw CA logs; nobody denied service key"
     }
   ],
@@ -124,15 +150,17 @@
     "orphan executor",
     "power loss"
   ],
+  "credential_runtime_path_removed": true,
   "cleanup_verified": true,
   "source_sha256": {
     "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "certweft/core.py": "fe51b8ffcb8a4445e7c3dfc86e66fff803e9863e661ea4c050f8b53e25d6cdcf",
     "certweft/ca.py": "e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c",
-    "tools/policy_vm.py": "dbaf57b6584be98d22f2132c2f245c7a4b7a54b978afe7217771b4c2c8b31c20",
+    "tools/policy_vm.py": "27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6",
     "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
-    "tests/test_core.py": "ee918917589be402a89855f72faadcac52f7de090375fe8bd4edf16a7c07dc9d",
-    "policy/server.tpl": "89fc6bf81f9b22d55f155ae12dc5c1c12accbd556ce4ebf43812519537d6e865"
+    "tools/credential_probe.py": "8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46",
+    "tests/test_core.py": "e5f45f34d6c4d34e08675af7cd64b0e56684443ffd5bef49bc576ade151dca89",
+    "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
   },
   "source_unchanged": true,
   "versions": {
@@ -140,5 +168,5 @@
     "step_ca": "Smallstep CA/0.30.2 (linux/arm64)",
     "python": "3.12.3"
   },
-  "elapsed_seconds": 2.3696018509999988
+  "elapsed_seconds": 2.671919638999981
 }

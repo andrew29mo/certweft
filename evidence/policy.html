@@ -4,7 +4,7 @@
     {
       &quot;name&quot;: &quot;allowed_certificate&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.14891531899999677,
+      &quot;seconds&quot;: 0.1404989670000134,
       &quot;detail&quot;: {
         &quot;verified&quot;: true,
         &quot;actual_validity_seconds&quot;: 1860.0,
@@ -13,9 +13,29 @@
       }
     },
     {
+      &quot;name&quot;: &quot;other_name&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.06584875099997589,
+      &quot;detail&quot;: {
+        &quot;ca_rejected&quot;: true,
+        &quot;reason&quot;: &quot;CW_NAME&quot;,
+        &quot;client_returncode&quot;: 1
+      }
+    },
+    {
+      &quot;name&quot;: &quot;registered_id&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.06383682200001317,
+      &quot;detail&quot;: {
+        &quot;ca_rejected&quot;: true,
+        &quot;reason&quot;: &quot;CW_NAME&quot;,
+        &quot;client_returncode&quot;: 1
+      }
+    },
+    {
       &quot;name&quot;: &quot;wrong_name&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.0655401500000039,
+      &quot;seconds&quot;: 0.06430474199999026,
       &quot;detail&quot;: {
         &quot;ca_rejected&quot;: true,
         &quot;reason&quot;: &quot;CW_NAME&quot;,
@@ -25,7 +45,7 @@
     {
       &quot;name&quot;: &quot;extra_name&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.06444157399999995,
+      &quot;seconds&quot;: 0.062253521000002365,
       &quot;detail&quot;: {
         &quot;ca_rejected&quot;: true,
         &quot;reason&quot;: &quot;CW_NAME&quot;,
@@ -35,7 +55,7 @@
     {
       &quot;name&quot;: &quot;ip_san&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.06701044399997613,
+      &quot;seconds&quot;: 0.06329165200000375,
       &quot;detail&quot;: {
         &quot;ca_rejected&quot;: true,
         &quot;reason&quot;: &quot;CW_NAME&quot;,
@@ -45,7 +65,7 @@
     {
       &quot;name&quot;: &quot;client_auth&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.06673180100000309,
+      &quot;seconds&quot;: 0.06432690799999818,
       &quot;detail&quot;: {
         &quot;ca_rejected&quot;: true,
         &quot;reason&quot;: &quot;CW_EKU&quot;,
@@ -55,7 +75,7 @@
     {
       &quot;name&quot;: &quot;p384&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.06622692599998459,
+      &quot;seconds&quot;: 0.06673629499999834,
       &quot;detail&quot;: {
         &quot;ca_rejected&quot;: true,
         &quot;reason&quot;: &quot;CW_KEY&quot;,
@@ -65,7 +85,7 @@
     {
       &quot;name&quot;: &quot;rsa&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.06502439999999865,
+      &quot;seconds&quot;: 0.06319589700001416,
       &quot;detail&quot;: {
         &quot;ca_rejected&quot;: true,
         &quot;reason&quot;: &quot;CW_KEY&quot;,
@@ -75,7 +95,7 @@
     {
       &quot;name&quot;: &quot;ca_true&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.06453502400000843,
+      &quot;seconds&quot;: 0.0626563939999869,
       &quot;detail&quot;: {
         &quot;ca_rejected&quot;: true,
         &quot;reason&quot;: &quot;CW_CA&quot;,
@@ -85,7 +105,7 @@
     {
       &quot;name&quot;: &quot;excess_duration&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.06294223899999452,
+      &quot;seconds&quot;: 0.06180201399999419,
       &quot;detail&quot;: {
         &quot;ca_rejected&quot;: true,
         &quot;reason&quot;: &quot;maximum&quot;,
@@ -95,7 +115,7 @@
     {
       &quot;name&quot;: &quot;insufficient_duration&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.06271698200001197,
+      &quot;seconds&quot;: 0.06211868200000481,
       &quot;detail&quot;: {
         &quot;ca_rejected&quot;: true,
         &quot;reason&quot;: &quot;minimum&quot;,
@@ -105,13 +125,19 @@
     {
       &quot;name&quot;: &quot;systemd_credential_delivery&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.16929291499999977,
-      &quot;detail&quot;: &quot;non-login signer issued through LoadCredential; no secret contents in argv or captured output&quot;
+      &quot;seconds&quot;: 0.29037750499998083,
+      &quot;detail&quot;: {
+        &quot;runtime_identity_matches&quot;: true,
+        &quot;effective_capabilities_zero&quot;: true,
+        &quot;credential_mode&quot;: &quot;0o440&quot;,
+        &quot;live_unrelated_reader_denied&quot;: true,
+        &quot;stdout_stderr_journal_secret_scan&quot;: true
+      }
     },
     {
       &quot;name&quot;: &quot;credential_source_isolation&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.01056660199998305,
+      &quot;seconds&quot;: 0.08521306200000822,
       &quot;detail&quot;: &quot;nobody and signer denied source password, CA private keys and raw CA logs; nobody denied service key&quot;
     }
   ],
@@ -124,15 +150,17 @@
     &quot;orphan executor&quot;,
     &quot;power loss&quot;
   ],
+  &quot;credential_runtime_path_removed&quot;: true,
   &quot;cleanup_verified&quot;: true,
   &quot;source_sha256&quot;: {
     &quot;certweft/__init__.py&quot;: &quot;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855&quot;,
     &quot;certweft/core.py&quot;: &quot;fe51b8ffcb8a4445e7c3dfc86e66fff803e9863e661ea4c050f8b53e25d6cdcf&quot;,
     &quot;certweft/ca.py&quot;: &quot;e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c&quot;,
-    &quot;tools/policy_vm.py&quot;: &quot;dbaf57b6584be98d22f2132c2f245c7a4b7a54b978afe7217771b4c2c8b31c20&quot;,
+    &quot;tools/policy_vm.py&quot;: &quot;27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6&quot;,
     &quot;tools/explore.py&quot;: &quot;0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec&quot;,
-    &quot;tests/test_core.py&quot;: &quot;ee918917589be402a89855f72faadcac52f7de090375fe8bd4edf16a7c07dc9d&quot;,
-    &quot;policy/server.tpl&quot;: &quot;89fc6bf81f9b22d55f155ae12dc5c1c12accbd556ce4ebf43812519537d6e865&quot;
+    &quot;tools/credential_probe.py&quot;: &quot;8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46&quot;,
+    &quot;tests/test_core.py&quot;: &quot;e5f45f34d6c4d34e08675af7cd64b0e56684443ffd5bef49bc576ade151dca89&quot;,
+    &quot;policy/server.tpl&quot;: &quot;e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550&quot;
   },
   &quot;source_unchanged&quot;: true,
   &quot;versions&quot;: {
@@ -140,5 +168,5 @@
     &quot;step_ca&quot;: &quot;Smallstep CA/0.30.2 (linux/arm64)&quot;,
     &quot;python&quot;: &quot;3.12.3&quot;
   },
-  &quot;elapsed_seconds&quot;: 2.3696018509999988
+  &quot;elapsed_seconds&quot;: 2.671919638999981
 }</pre>
