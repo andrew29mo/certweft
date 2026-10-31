@@ -4,6 +4,7 @@ import fcntl
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import socket
 import sqlite3
@@ -36,7 +37,10 @@ def validate(cert, key, root, host, margin=30):
     san=run(['openssl','x509','-in',cert,'-ext','subjectAltName','-noout']).decode()
     if san.strip().splitlines()[-1].strip() != 'DNS:'+host:
         raise Rejected('san_policy')
-    if 'ASN1 OID: prime256v1' not in text or 'sha256' not in text.lower():
+    algorithms=re.findall(r'Signature Algorithm: ([^\r\n]+)',text)
+    eku=run(['openssl','x509','-in',cert,'-ext','extendedKeyUsage','-noout']).decode()
+    if eku.strip().splitlines()[-1].strip()!='TLS Web Server Authentication':raise Rejected('eku_policy')
+    if not re.search(r'^\s*ASN1 OID: prime256v1\s*$',text,re.M) or not algorithms or any(a.strip()!='ecdsa-with-SHA256' for a in algorithms):
         raise Rejected('algorithm_policy')
     return fingerprint(cert)
 
@@ -56,7 +60,10 @@ def probe(ip, port, host, root, expected, timeout=2):
                 if not chunk:break
                 data+=chunk
                 if len(data)>4096 or time.monotonic()>end:raise Rejected('http_budget')
-            if not data.startswith(b'HTTP/1.1 200 '):raise Rejected('http_health')
+            if b'\r\n\r\n' not in data:raise Rejected('http_health')
+            lines=data.split(b'\r\n\r\n',1)[0].split(b'\r\n')
+            if not re.fullmatch(rb'HTTP/1\.1 200 [^\r\n]*',lines[0]):raise Rejected('http_health')
+            if any(not re.fullmatch(rb"[!#$%&'*+.^_`|~0-9A-Za-z-]+:[^\r\n]*",h) for h in lines[1:]):raise Rejected('http_headers')
     return expected
 
 class Writer:
@@ -76,7 +83,7 @@ class Writer:
         row=db.execute('SELECT data FROM state WHERE id=1').fetchone()
         if not row:raise Rejected('uninitialized')
         s=json.loads(row[0])
-        if s['schema']!=1 or s['state'] not in {'READY','APPLYING','DEGRADED'}:raise Rejected('journal_schema')
+        if type(s) is not dict or s.get('schema')!=1 or s['state'] not in {'READY','APPLYING','DEGRADED'}:raise Rejected('journal_schema')
         for name in [s['committed'],s.get('candidate')]:
             if name and (len(name)!=32 or any(c not in '0123456789abcdef' for c in name)):raise Rejected('generation')
         active=self.root/'active.conf'
@@ -88,7 +95,11 @@ class Writer:
         d=self.root/('v-'+name)
         return hashlib.sha256(b''.join((d/f).read_bytes() for f in ['cert.pem','key.pem','tls.conf'])).hexdigest()
     def save(self,db,s):
-        db.execute('INSERT OR REPLACE INTO state VALUES(1,?)',(json.dumps(s),));db.commit()
+        try:
+            db.execute('INSERT OR REPLACE INTO state VALUES(1,?)',(json.dumps(s),));db.commit()
+        except Exception:
+            db.rollback()
+            raise
     def stage(self,cert):
         data=Path(cert).read_bytes()
         if len(data)>32768:raise Rejected('certificate_budget')
@@ -121,7 +132,7 @@ class Writer:
         while time.monotonic()<end:
             try:probe(self.ip,self.port,self.host,self.ca,expected);count+=1
             except (OSError,Rejected):count=0
-            if count==3:return expected
+            if count==3 and time.monotonic()<end:return expected
             time.sleep(.1)
         raise Rejected('confirmation_timeout')
     def initialize(self,cert):
@@ -142,8 +153,10 @@ class Writer:
                 self.confirm(name,end);checkpoint('confirmed')
                 if time.monotonic()>=end:raise Rejected('expired')
                 self.check(name)
+                if time.monotonic()>=end:raise Rejected('expired')
                 s.update(committed=name,committed_digest=self.digest(name),candidate=None,state='READY');self.save(db,s)
             except Exception:
+                db.rollback()
                 # Recover uses durable state, never an in-memory partially committed object.
                 self.recover_locked(db);raise
             return s

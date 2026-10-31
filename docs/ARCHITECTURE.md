@@ -78,3 +78,5 @@ clock anomaly handling, strict journal schema validation, safe operator repair,
 and an installable systemd service with tested privilege separation. These are
 acceptance gates, not implemented capabilities. No VM reboot, abrupt power-loss,
 zero-gap boot, long-term rotation or zero-downtime claim is made.
+
+Review corrections and distinctions between real and injected faults are in [REVIEW.md](REVIEW.md).

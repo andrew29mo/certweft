@@ -19,9 +19,10 @@ sudo env CW_STEP="$CW_STEP" CW_CA="$CW_CA" timeout 150 python3 tools/explore.py
 
 A nonzero exit, outer timeout, missing final report or failed case is failure.
 Inspect both passed and cleanup_error. Run report files are overwritten only
-with the previous completed JSON retained in evidence/attempts. If the process
-is killed before finalization, an old report can remain: verify current source
-fingerprints and invocation outcome; never treat report existence as success.
+with the previous completed JSON retained in evidence/attempts. At invocation start, the prior report is archived and an in-progress failure
+marker is written. A killed process leaves that marker rather than a passing
+result. Verify current source fingerprints and invocation outcome; never treat
+report existence as success. Source changes during a run invalidate it.
 
 Private fixtures remain under /var/tmp/certweft-* (0700), entirely inside the VM.
 They include test CA keys, provisioner password and logs; never upload them.

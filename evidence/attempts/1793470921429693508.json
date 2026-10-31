@@ -1,0 +1,138 @@
+{
+  "passed": false,
+  "cases": [
+    {
+      "name": "baseline_fresh_tls",
+      "passed": true,
+      "seconds": 0.2632167229999993,
+      "detail": "92e67210c90a7bebd174f2c2ceacebb91577f153bda6f8ec52b35540e3d72f72"
+    },
+    {
+      "name": "server_only_token_renewal_incompatibility_observed",
+      "passed": true,
+      "seconds": 0.03275645600000132,
+      "detail": {
+        "returncode": 1,
+        "ca_reason": "incompatible key usage",
+        "leaf_eku": "serverAuth only"
+      }
+    },
+    {
+      "name": "real_ca_same_key_reissuance",
+      "passed": true,
+      "seconds": 0.07259279000000163,
+      "detail": "real CA same-key CSR reissuance"
+    },
+    {
+      "name": "candidate_validation",
+      "passed": true,
+      "seconds": 0.04674221199999806,
+      "detail": "65b38d0f27a974454926a252cd8ce0fc25c76eacbb9181208ded3eb31cac5dd8"
+    },
+    {
+      "name": "wrong_san_rejected",
+      "passed": true,
+      "seconds": 0.0013274020000011433,
+      "detail": "rejected"
+    },
+    {
+      "name": "wrong_key_rejected",
+      "passed": true,
+      "seconds": 0.019946187999991594,
+      "detail": "rejected"
+    },
+    {
+      "name": "real_activation_new_tls",
+      "passed": true,
+      "seconds": 0.6591641840000051,
+      "detail": "READY"
+    },
+    {
+      "name": "old_authority_rejected",
+      "passed": true,
+      "seconds": 0.0001888309999884541,
+      "detail": "rejected"
+    },
+    {
+      "name": "old_fingerprint_rejected",
+      "passed": true,
+      "seconds": 0.0009127400000039643,
+      "detail": "rejected"
+    },
+    {
+      "name": "selected_failure_verified_rollback",
+      "passed": true,
+      "seconds": 0.9196944480000013,
+      "detail": "65b38d0f27a974454926a252cd8ce0fc25c76eacbb9181208ded3eb31cac5dd8"
+    },
+    {
+      "name": "process_crash_recovery",
+      "passed": true,
+      "seconds": 3.1580866249999957,
+      "detail": "SIGKILL at four boundaries; prior committed fingerprint re-observed"
+    },
+    {
+      "name": "delayed_executor_blocks_takeover",
+      "passed": true,
+      "seconds": 2.0066513259999965,
+      "detail": "rejected"
+    },
+    {
+      "name": "sqlite_full_no_false_commit",
+      "passed": true,
+      "seconds": 0.006044538999987026,
+      "detail": "real SQLite max_page_count FULL; existing transaction retained"
+    },
+    {
+      "name": "reload_signal_without_application_not_success",
+      "passed": true,
+      "seconds": 6.062842310999997,
+      "detail": "real master SIGSTOP: reload signal is insufficient; candidate confirmation times out; old workers still serve committed certificate; verified rollback and repair pass"
+    },
+    {
+      "name": "injected_open_transaction_commit_failure",
+      "passed": true,
+      "seconds": 1.3817989770000025,
+      "detail": "65b38d0f27a974454926a252cd8ce0fc25c76eacbb9181208ded3eb31cac5dd8"
+    },
+    {
+      "name": "real_readonly_mount_rejection_and_repair",
+      "passed": true,
+      "seconds": 0.39161536900000726,
+      "detail": "READY"
+    }
+  ],
+  "platform": "Linux-6.8.0-117-generic-aarch64-with-glibc2.39",
+  "scope": "Linux VM; private loopback fixture; process crashes, not power loss",
+  "untested": [
+    "systemd installation",
+    "VM reboot",
+    "power loss",
+    "untrusted worker privilege separation",
+    "missing intermediate wire negative",
+    "clock jumps",
+    "long-term rotation",
+    "serverAuth-only renew token compatibility",
+    "privileged helper exec inheritance",
+    "post-publication physical ENOSPC",
+    "expired rollback certificate"
+  ],
+  "nginx_process_cleanup": true,
+  "elapsed_seconds": 16.434427239,
+  "controller_maxrss_kib": 33120,
+  "private_fixture_bytes": 52136,
+  "versions": {
+    "step": "Smallstep CLI/0.31.0 (linux/arm64)",
+    "step_ca": "Smallstep CA/0.30.2 (linux/arm64)",
+    "python": "3.12.3",
+    "openssl": "OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)"
+  },
+  "source_sha256": {
+    "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certweft/core.py": "d4a4387a41fcc23e194dda887d90c41b88c5ebd566fe72d3710328ae6892eb66",
+    "certweft/ca.py": "68b7206e58c8223877d5e40c1f7f1efabea95f9138a02ead9a356002edd8c44c",
+    "tools/explore.py": "5c1b2a209dc1dcfbb19195293584ac4a61fa00c7d415803defa195573d480c64",
+    "tests/test_core.py": "f971a7eec531f110b15259836260d4c7dae4a43b7bcbcb6d784f55ac5e1ddbe4"
+  },
+  "source_unchanged": false
+}

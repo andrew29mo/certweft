@@ -4,91 +4,113 @@
     {
       &quot;name&quot;: &quot;baseline_fresh_tls&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.2632180570000173,
-      &quot;detail&quot;: &quot;b3ce52d849d50543c53bb8eaa83722f190e8d5179e34b5504eaba0935b462b68&quot;
+      &quot;seconds&quot;: 0.26414412400001197,
+      &quot;detail&quot;: &quot;9d592376fc6c0fbb33e931fbe805a93dfce881bfa2b71004e116a28bc3f1e8c9&quot;
     },
     {
       &quot;name&quot;: &quot;server_only_token_renewal_incompatibility_observed&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.01822680599997284,
-      &quot;detail&quot;: &quot;observed incompatible-key-usage rejection in CA log; not supported by tested version pair&quot;
+      &quot;seconds&quot;: 0.03299023200000306,
+      &quot;detail&quot;: {
+        &quot;returncode&quot;: 1,
+        &quot;ca_reason&quot;: &quot;incompatible key usage&quot;,
+        &quot;leaf_eku&quot;: &quot;serverAuth only&quot;
+      }
     },
     {
       &quot;name&quot;: &quot;real_ca_same_key_reissuance&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.07848513300001514,
+      &quot;seconds&quot;: 0.0755480509999984,
       &quot;detail&quot;: &quot;real CA same-key CSR reissuance&quot;
     },
     {
       &quot;name&quot;: &quot;candidate_validation&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.0480818579999891,
-      &quot;detail&quot;: &quot;b17cbfa37e1c8edb8d4b80b60388829ed79cde657de01812da6b21274340b2d2&quot;
+      &quot;seconds&quot;: 0.0547296059999951,
+      &quot;detail&quot;: &quot;1866fc7fa1321982124d625da17bc134663bf4fa220cf73483bf06e14958ce2a&quot;
     },
     {
       &quot;name&quot;: &quot;wrong_san_rejected&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.0014801540000348723,
+      &quot;seconds&quot;: 0.0013250530000163963,
       &quot;detail&quot;: &quot;rejected&quot;
     },
     {
       &quot;name&quot;: &quot;wrong_key_rejected&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.020149561000039284,
+      &quot;seconds&quot;: 0.019768832000011116,
       &quot;detail&quot;: &quot;rejected&quot;
+    },
+    {
+      &quot;name&quot;: &quot;real_tls_truncated_http_rejected&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.010787029999988818,
+      &quot;detail&quot;: &quot;rejected&quot;
+    },
+    {
+      &quot;name&quot;: &quot;dual_eku_policy_rejected&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.047806516000008514,
+      &quot;detail&quot;: &quot;dual EKU specifically rejected&quot;
     },
     {
       &quot;name&quot;: &quot;real_activation_new_tls&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.6587015119999933,
+      &quot;seconds&quot;: 0.8194368930000167,
       &quot;detail&quot;: &quot;READY&quot;
     },
     {
       &quot;name&quot;: &quot;old_authority_rejected&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.0002195460000393723,
+      &quot;seconds&quot;: 0.00019047800000748794,
       &quot;detail&quot;: &quot;rejected&quot;
     },
     {
       &quot;name&quot;: &quot;old_fingerprint_rejected&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.0009626859999798398,
+      &quot;seconds&quot;: 0.0009693500000196309,
       &quot;detail&quot;: &quot;rejected&quot;
     },
     {
       &quot;name&quot;: &quot;selected_failure_verified_rollback&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.9245462220000036,
-      &quot;detail&quot;: &quot;b17cbfa37e1c8edb8d4b80b60388829ed79cde657de01812da6b21274340b2d2&quot;
+      &quot;seconds&quot;: 0.9721954440000218,
+      &quot;detail&quot;: &quot;1866fc7fa1321982124d625da17bc134663bf4fa220cf73483bf06e14958ce2a&quot;
     },
     {
       &quot;name&quot;: &quot;process_crash_recovery&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 3.1735199400000056,
+      &quot;seconds&quot;: 3.223293935999976,
       &quot;detail&quot;: &quot;SIGKILL at four boundaries; prior committed fingerprint re-observed&quot;
     },
     {
       &quot;name&quot;: &quot;delayed_executor_blocks_takeover&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 2.006830882000031,
+      &quot;seconds&quot;: 2.0077924750000022,
       &quot;detail&quot;: &quot;rejected&quot;
     },
     {
       &quot;name&quot;: &quot;sqlite_full_no_false_commit&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.005575083999985964,
+      &quot;seconds&quot;: 0.005621959999984938,
       &quot;detail&quot;: &quot;real SQLite max_page_count FULL; existing transaction retained&quot;
     },
     {
       &quot;name&quot;: &quot;reload_signal_without_application_not_success&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 6.111077362000003,
+      &quot;seconds&quot;: 6.146599611999989,
       &quot;detail&quot;: &quot;real master SIGSTOP: reload signal is insufficient; candidate confirmation times out; old workers still serve committed certificate; verified rollback and repair pass&quot;
+    },
+    {
+      &quot;name&quot;: &quot;injected_open_transaction_commit_failure&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 1.4555838980000146,
+      &quot;detail&quot;: &quot;1866fc7fa1321982124d625da17bc134663bf4fa220cf73483bf06e14958ce2a&quot;
     },
     {
       &quot;name&quot;: &quot;real_readonly_mount_rejection_and_repair&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.394175625999992,
+      &quot;seconds&quot;: 0.41765614199999845,
       &quot;detail&quot;: &quot;READY&quot;
     }
   ],
@@ -107,20 +129,23 @@
     &quot;post-publication physical ENOSPC&quot;,
     &quot;expired rollback certificate&quot;
   ],
-  &quot;elapsed_seconds&quot;: 15.065348779000033,
-  &quot;controller_maxrss_kib&quot;: 28408,
-  &quot;private_fixture_bytes&quot;: 50166,
+  &quot;nginx_process_cleanup&quot;: true,
+  &quot;elapsed_seconds&quot;: 16.986873814000006,
+  &quot;controller_maxrss_kib&quot;: 33888,
+  &quot;private_fixture_bytes&quot;: 52830,
   &quot;versions&quot;: {
+    &quot;nginx&quot;: &quot;nginx version: nginx/1.24.0 (Ubuntu)&quot;,
     &quot;step&quot;: &quot;Smallstep CLI/0.31.0 (linux/arm64)&quot;,
     &quot;step_ca&quot;: &quot;Smallstep CA/0.30.2 (linux/arm64)&quot;,
-    &quot;nginx&quot;: &quot;nginx version: nginx/1.24.0 (Ubuntu)&quot;,
     &quot;python&quot;: &quot;3.12.3&quot;,
     &quot;openssl&quot;: &quot;OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)&quot;
   },
   &quot;source_sha256&quot;: {
     &quot;certweft/__init__.py&quot;: &quot;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855&quot;,
-    &quot;certweft/core.py&quot;: &quot;e3c29d6c078561365bd99c2d08514a1f36b746da6bee869bb61db106dd4a7cd5&quot;,
+    &quot;certweft/core.py&quot;: &quot;fe51b8ffcb8a4445e7c3dfc86e66fff803e9863e661ea4c050f8b53e25d6cdcf&quot;,
     &quot;certweft/ca.py&quot;: &quot;68b7206e58c8223877d5e40c1f7f1efabea95f9138a02ead9a356002edd8c44c&quot;,
-    &quot;tools/explore.py&quot;: &quot;c18e5df6fb8bb7d148b68ca12f8f7994cfd63a5a08ba5d385b0c217223700701&quot;
-  }
+    &quot;tools/explore.py&quot;: &quot;0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec&quot;,
+    &quot;tests/test_core.py&quot;: &quot;b32695cf50c0cbbf1ce6348a90bdaa927b5377fcdf2c944f0e52f4d6f9821da2&quot;
+  },
+  &quot;source_unchanged&quot;: true
 }</pre>

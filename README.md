@@ -17,6 +17,8 @@ requires provisioner credentials; it is not equivalent to possession-only renewa
 The fixture CA template fixes SAN to localhost. Production credential scoping,
 provisioner policy and secret delivery remain design gates before the MVP.
 
+See [independent review and corrections](docs/REVIEW.md).
+
 ## Evidence
 
 [JSON](evidence/exploration.json) and [HTML](evidence/exploration.html) contain the

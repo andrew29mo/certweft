@@ -4,91 +4,113 @@
     {
       "name": "baseline_fresh_tls",
       "passed": true,
-      "seconds": 0.2632180570000173,
-      "detail": "b3ce52d849d50543c53bb8eaa83722f190e8d5179e34b5504eaba0935b462b68"
+      "seconds": 0.26414412400001197,
+      "detail": "9d592376fc6c0fbb33e931fbe805a93dfce881bfa2b71004e116a28bc3f1e8c9"
     },
     {
       "name": "server_only_token_renewal_incompatibility_observed",
       "passed": true,
-      "seconds": 0.01822680599997284,
-      "detail": "observed incompatible-key-usage rejection in CA log; not supported by tested version pair"
+      "seconds": 0.03299023200000306,
+      "detail": {
+        "returncode": 1,
+        "ca_reason": "incompatible key usage",
+        "leaf_eku": "serverAuth only"
+      }
     },
     {
       "name": "real_ca_same_key_reissuance",
       "passed": true,
-      "seconds": 0.07848513300001514,
+      "seconds": 0.0755480509999984,
       "detail": "real CA same-key CSR reissuance"
     },
     {
       "name": "candidate_validation",
       "passed": true,
-      "seconds": 0.0480818579999891,
-      "detail": "b17cbfa37e1c8edb8d4b80b60388829ed79cde657de01812da6b21274340b2d2"
+      "seconds": 0.0547296059999951,
+      "detail": "1866fc7fa1321982124d625da17bc134663bf4fa220cf73483bf06e14958ce2a"
     },
     {
       "name": "wrong_san_rejected",
       "passed": true,
-      "seconds": 0.0014801540000348723,
+      "seconds": 0.0013250530000163963,
       "detail": "rejected"
     },
     {
       "name": "wrong_key_rejected",
       "passed": true,
-      "seconds": 0.020149561000039284,
+      "seconds": 0.019768832000011116,
       "detail": "rejected"
+    },
+    {
+      "name": "real_tls_truncated_http_rejected",
+      "passed": true,
+      "seconds": 0.010787029999988818,
+      "detail": "rejected"
+    },
+    {
+      "name": "dual_eku_policy_rejected",
+      "passed": true,
+      "seconds": 0.047806516000008514,
+      "detail": "dual EKU specifically rejected"
     },
     {
       "name": "real_activation_new_tls",
       "passed": true,
-      "seconds": 0.6587015119999933,
+      "seconds": 0.8194368930000167,
       "detail": "READY"
     },
     {
       "name": "old_authority_rejected",
       "passed": true,
-      "seconds": 0.0002195460000393723,
+      "seconds": 0.00019047800000748794,
       "detail": "rejected"
     },
     {
       "name": "old_fingerprint_rejected",
       "passed": true,
-      "seconds": 0.0009626859999798398,
+      "seconds": 0.0009693500000196309,
       "detail": "rejected"
     },
     {
       "name": "selected_failure_verified_rollback",
       "passed": true,
-      "seconds": 0.9245462220000036,
-      "detail": "b17cbfa37e1c8edb8d4b80b60388829ed79cde657de01812da6b21274340b2d2"
+      "seconds": 0.9721954440000218,
+      "detail": "1866fc7fa1321982124d625da17bc134663bf4fa220cf73483bf06e14958ce2a"
     },
     {
       "name": "process_crash_recovery",
       "passed": true,
-      "seconds": 3.1735199400000056,
+      "seconds": 3.223293935999976,
       "detail": "SIGKILL at four boundaries; prior committed fingerprint re-observed"
     },
     {
       "name": "delayed_executor_blocks_takeover",
       "passed": true,
-      "seconds": 2.006830882000031,
+      "seconds": 2.0077924750000022,
       "detail": "rejected"
     },
     {
       "name": "sqlite_full_no_false_commit",
       "passed": true,
-      "seconds": 0.005575083999985964,
+      "seconds": 0.005621959999984938,
       "detail": "real SQLite max_page_count FULL; existing transaction retained"
     },
     {
       "name": "reload_signal_without_application_not_success",
       "passed": true,
-      "seconds": 6.111077362000003,
+      "seconds": 6.146599611999989,
       "detail": "real master SIGSTOP: reload signal is insufficient; candidate confirmation times out; old workers still serve committed certificate; verified rollback and repair pass"
+    },
+    {
+      "name": "injected_open_transaction_commit_failure",
+      "passed": true,
+      "seconds": 1.4555838980000146,
+      "detail": "1866fc7fa1321982124d625da17bc134663bf4fa220cf73483bf06e14958ce2a"
     },
     {
       "name": "real_readonly_mount_rejection_and_repair",
       "passed": true,
-      "seconds": 0.394175625999992,
+      "seconds": 0.41765614199999845,
       "detail": "READY"
     }
   ],
@@ -107,20 +129,23 @@
     "post-publication physical ENOSPC",
     "expired rollback certificate"
   ],
-  "elapsed_seconds": 15.065348779000033,
-  "controller_maxrss_kib": 28408,
-  "private_fixture_bytes": 50166,
+  "nginx_process_cleanup": true,
+  "elapsed_seconds": 16.986873814000006,
+  "controller_maxrss_kib": 33888,
+  "private_fixture_bytes": 52830,
   "versions": {
+    "nginx": "nginx version: nginx/1.24.0 (Ubuntu)",
     "step": "Smallstep CLI/0.31.0 (linux/arm64)",
     "step_ca": "Smallstep CA/0.30.2 (linux/arm64)",
-    "nginx": "nginx version: nginx/1.24.0 (Ubuntu)",
     "python": "3.12.3",
     "openssl": "OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)"
   },
   "source_sha256": {
     "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "certweft/core.py": "e3c29d6c078561365bd99c2d08514a1f36b746da6bee869bb61db106dd4a7cd5",
+    "certweft/core.py": "fe51b8ffcb8a4445e7c3dfc86e66fff803e9863e661ea4c050f8b53e25d6cdcf",
     "certweft/ca.py": "68b7206e58c8223877d5e40c1f7f1efabea95f9138a02ead9a356002edd8c44c",
-    "tools/explore.py": "c18e5df6fb8bb7d148b68ca12f8f7994cfd63a5a08ba5d385b0c217223700701"
-  }
+    "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
+    "tests/test_core.py": "b32695cf50c0cbbf1ce6348a90bdaa927b5377fcdf2c944f0e52f4d6f9821da2"
+  },
+  "source_unchanged": true
 }

@@ -1,5 +1,15 @@
 # Exploration results
 
+## Reviewed run
+
+The current source-bound report passes 18 VM cases plus six separately run
+unittest tests. Elapsed workflow time was 16.99 seconds; Python driver peak
+RSS was 33,888 KiB and private fixture logical size was 52,830 bytes. Source
+unchanged and owned Nginx process cleanup checks passed. These measurements
+are not comparable total-service benchmarks. See REVIEW.md for corrections.
+
+## Original exploratory run (historical)
+
 Final run: 15 listed VM cases passed in approximately 15 seconds. Three separate
 unittest contract tests passed on Linux. This is not 18 distinct end-to-end cases.
 Driver peak RSS was 28,408 KiB; logical private fixture data was 50,166 bytes.
