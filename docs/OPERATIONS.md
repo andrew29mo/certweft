@@ -1,5 +1,9 @@
 # P0-3a: durable requests and cancellation/commit boundary
 
+P0-3b-1 now adds optional timeout_seconds and persistent activation/recovery
+budgets; see [DEADLINES.md](DEADLINES.md). Earlier deadline-pending statements
+below describe the original P0-3a scope. CA signing remains separate.
+
 ## Scope and API
 
 This milestone wraps certificate **activation**, after a certificate has been

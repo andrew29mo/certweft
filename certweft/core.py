@@ -12,13 +12,16 @@ import ssl
 import subprocess
 import time
 import uuid
+from . import deadlines
 
 class Rejected(Exception):
     pass
 
 def run(args, timeout=8):
-    return subprocess.run(list(map(str,args)), check=True, timeout=timeout,
-                          capture_output=True).stdout
+    try:result=subprocess.run(list(map(str,args)), check=True, timeout=deadlines.timeout(timeout),capture_output=True).stdout
+    except subprocess.TimeoutExpired:
+        deadlines.check();raise
+    deadlines.check();return result
 
 def fingerprint(cert):
     return hashlib.sha256(run(['openssl','x509','-in',cert,'-outform','DER'])).hexdigest()
@@ -48,14 +51,16 @@ def probe(ip, port, host, root, expected, timeout=2):
     ctx=ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
     ctx.load_verify_locations(cafile=str(root))
     ctx.minimum_version=ssl.TLSVersion.TLSv1_2
-    with socket.create_connection((ip,port),timeout) as raw:
+    with socket.create_connection((ip,port),deadlines.timeout(timeout)) as raw:
+        raw.settimeout(deadlines.timeout(timeout))
         with ctx.wrap_socket(raw,server_hostname=host) as tls:
             if tls.session_reused or hashlib.sha256(tls.getpeercert(True)).hexdigest()!=expected:
                 raise Rejected('wire_certificate')
+            deadlines.check();tls.settimeout(deadlines.timeout(timeout))
             tls.sendall(('GET /health HTTP/1.1\r\nHost: '+host+'\r\nConnection: close\r\n\r\n').encode())
             data=b''; end=time.monotonic()+timeout
             while b'\r\n\r\n' not in data:
-                tls.settimeout(max(.001,end-time.monotonic()))
+                tls.settimeout(deadlines.timeout(max(.001,end-time.monotonic())))
                 chunk=tls.recv(1024)
                 if not chunk:break
                 data+=chunk
@@ -64,7 +69,7 @@ def probe(ip, port, host, root, expected, timeout=2):
             lines=data.split(b'\r\n\r\n',1)[0].split(b'\r\n')
             if not re.fullmatch(rb'HTTP/1\.1 200 [^\r\n]*',lines[0]):raise Rejected('http_health')
             if any(not re.fullmatch(rb"[!#$%&'*+.^_`|~0-9A-Za-z-]+:[^\r\n]*",h) for h in lines[1:]):raise Rejected('http_headers')
-    return expected
+    deadlines.check();return expected
 
 class Writer:
     def __init__(self, root, nginx, conf, ca, key, host, ip, port):
@@ -121,9 +126,10 @@ class Writer:
         try:os.fsync(fd)
         finally:os.close(fd)
     def select(self,name):
+        deadlines.check()
         tmp=self.root/'next'
         if tmp.is_symlink():tmp.unlink()
-        tmp.symlink_to('v-'+name+'/tls.conf');os.replace(tmp,self.root/'active.conf');self.sync(self.root)
+        tmp.symlink_to('v-'+name+'/tls.conf');deadlines.check();os.replace(tmp,self.root/'active.conf');self.sync(self.root)
     def check(self,name):
         d=self.root/('v-'+name)
         return validate(d/'cert.pem',d/'key.pem',self.ca,self.host)
@@ -135,7 +141,7 @@ class Writer:
             try:probe(self.ip,self.port,self.host,self.ca,expected);count+=1
             except (OSError,Rejected):count=0
             if count==3 and time.monotonic()<end:return expected
-            time.sleep(.1)
+            time.sleep(deadlines.timeout(.1))
         raise Rejected('confirmation_timeout')
     def initialize(self,cert):
         with self.locked() as (db,lock):

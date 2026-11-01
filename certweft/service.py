@@ -72,9 +72,12 @@ def serve(config_path):
             if state['state']=='DEGRADED':
                 for identity in pending:operations.finish(identity,'DEGRADED',{'recovered':False,'replayed':False,'error':'startup_degraded'})
             else:
-                recovered=execute({'op':'recover'},0)
-                if not recovered['ok']:raise RuntimeError('startup_recovery_failed')
-                for identity in pending:operations.finish(identity,'INTERRUPTED',{'recovered':True,'replayed':False})
+                for identity in pending:
+                    recovered=execute({'op':'recover-request','request_id':identity},0)
+                    if not recovered['ok']:
+                        if Writer(**config['writer']).status()['state']!='DEGRADED':raise RuntimeError('startup_recovery_failed')
+                        operations.finish(identity,'DEGRADED',{'recovered':False,'replayed':False})
+                    else:operations.finish(identity,'INTERRUPTED',{'recovered':True,'replayed':False})
         def work(body):
             try:
                 reply=execute({'op':'execute',**{k:v for k,v in body.items() if k!='op'}},0)
@@ -126,7 +129,7 @@ def serve(config_path):
                                 except Exception:guard.release();raise
                                 reply={'ok':True,'result':result,'created':created}
                         else:
-                            if op=='execute' or op=='activate' and not config.get('legacy_api',False):raise Rejected('use_submit')
+                            if op in {'execute','recover-request'} or op=='activate' and not config.get('legacy_api',False):raise Rejected('use_submit')
                             if not guard.acquire(False):raise Rejected('busy')
                             try:reply=execute(body,uid)
                             finally:guard.release()

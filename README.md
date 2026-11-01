@@ -40,6 +40,13 @@ responsive request-status/cancel handling and an atomic cancellation/COMMIT
 boundary. CA signing is still a separate step; whole-operation deadlines and
 controlled DEGRADED repair remain pending.
 
+## Persistent deadlines
+
+[P0-3b-1 deadline contract](docs/DEADLINES.md) persists activation timing and a
+separate first-attempt recovery budget. Replays/restarts do not renew them.
+Expiry blocks COMMIT authorization; exhausted recovery remains DEGRADED.
+This covers activation, not CA signing or hard realtime storage completion.
+
 ## Evidence
 
 [JSON](evidence/exploration.json) and [HTML](evidence/exploration.html) contain the

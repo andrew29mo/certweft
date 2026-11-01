@@ -3,9 +3,24 @@ import json,os,sys,signal,tempfile,stat
 from pathlib import Path
 from .core import Writer,Rejected,run
 from .operations import Operations,Cancelled
+from . import deadlines
 
 class FixedWriter(Writer):
     operation_id=None
+    def save(self,db,state):
+        if state.get('state')!='DEGRADED':deadlines.check()
+        super().save(db,state)
+    def recover_locked(self,db):
+        if not self.operation_id:return super().recover_locked(db)
+        try:
+            record=Operations(self.root).recovery_budget(self.operation_id)
+            with deadlines.use(record):
+                getattr(self,'recovery_checkpoint',lambda _:None)('recovery')
+                deadlines.check();return super().recover_locked(db)
+        except deadlines.Expired:
+            db.rollback();state=self.read(db);state['state']='DEGRADED'
+            super().save(db,state)
+            raise
     def commit_state(self,db,state):
         if self.operation_id:Operations.commit(db,self.operation_id,state)
         else:super().commit_state(db,state)
@@ -18,23 +33,26 @@ class FixedWriter(Writer):
             start=raw[raw.rfind(')')+2:].split()[19]
             if start!=self.master['start']:raise Rejected('master_identity')
             if os.path.realpath('/proc/'+str(pid)+'/exe')!=os.path.realpath(self.nginx):raise Rejected('master_binary')
-            signal.pidfd_send_signal(handle,signal.SIGHUP)
+            deadlines.check();signal.pidfd_send_signal(handle,signal.SIGHUP)
         finally:os.close(handle)
 
 def dispatch(config,request,peer_uid,checkpoint=lambda _:None):
     op=request.get('op')
     fields={'status':{'op'},'recover':{'op'},'activate':{'op','certificate','epoch','revision'},'execute':{'op','request_id','certificate','epoch','revision'}}
-    if op not in fields or set(request)!=fields[op]:raise Rejected('request_shape')
-    if op in {'recover','execute'} and peer_uid!=0:raise Rejected('admin_required')
+    fields['recover-request']={'op','request_id'}
+    if op not in fields or set(request)-({'timeout_seconds'} if op=='execute' else set())!=fields[op]:raise Rejected('request_shape')
+    if op in {'recover','recover-request','execute'} and peer_uid!=0:raise Rejected('admin_required')
     if peer_uid not in {0,config['controller_uid']}:raise Rejected('peer_denied')
     root=Path(config['writer']['root']);st=root.lstat()
     if not stat.S_ISDIR(st.st_mode) or st.st_uid!=0 or st.st_mode & 0o077:raise Rejected('store_permissions')
     for field in ['key','conf','ca']:
         st=Path(config['writer'][field]).lstat()
         if not stat.S_ISREG(st.st_mode) or st.st_uid!=0 or st.st_mode & 0o022:raise Rejected('target_permissions')
-    w=FixedWriter(**config['writer']);w.master=config['master']
+    w=FixedWriter(**config['writer']);w.master=config['master'];w.recovery_checkpoint=checkpoint
     if op=='status':return w.status()
     if op=='recover':return w.recover()
+    if op=='recover-request':
+        w.operation_id=request['request_id'];return w.recover()
     if type(request['certificate']) is not str or len(request['certificate'].encode())>32768:raise Rejected('certificate_budget')
     if type(request['epoch']) is not str or type(request['revision']) is not int:raise Rejected('authority_shape')
     operations=Operations(root)
@@ -49,9 +67,14 @@ def dispatch(config,request,peer_uid,checkpoint=lambda _:None):
         def boundary(point):
             if point=='intent':owned_intent[0]=True
             checkpoint(point)
-            if w.operation_id:operations.check_cancel(w.operation_id)
+            if w.operation_id:
+                deadlines.check();operations.check_cancel(w.operation_id)
         try:
-            result=w.activate(path,request['epoch'],request['revision'],boundary)
+            if w.operation_id:
+                with deadlines.use(operations.get(w.operation_id)['timing']['activation']):
+                    checkpoint('preparing');deadlines.check()
+                    result=w.activate(path,request['epoch'],request['revision'],boundary)
+            else:result=w.activate(path,request['epoch'],request['revision'],boundary)
             return operations.get(w.operation_id) if w.operation_id else result
         except Exception as error:
             if not w.operation_id:raise
@@ -61,9 +84,12 @@ def dispatch(config,request,peer_uid,checkpoint=lambda _:None):
                 if state['state']=='APPLYING' and owned_intent[0]:
                     w.recover();state=w.status()
                 if state['state']!='READY':terminal='DEGRADED'
-                else:terminal='ROLLED_BACK' if isinstance(error,Cancelled) else 'FAILED'
+                else:
+                    if isinstance(error,Cancelled):terminal='ROLLED_BACK'
+                    elif isinstance(error,deadlines.Expired):terminal='ROLLED_BACK' if owned_intent[0] else 'EXPIRED'
+                    else:terminal='FAILED'
             except Exception:terminal='DEGRADED'
-            return operations.finish(w.operation_id,terminal,{'error':type(error).__name__})
+            return operations.finish(w.operation_id,terminal,{'error':type(error).__name__,'expired':isinstance(error,deadlines.Expired)})
     finally:Path(path).unlink(missing_ok=True)
 
 def main():
@@ -73,6 +99,8 @@ def main():
     actual=os.fstat(lease);expected=os.stat(config['lease'])
     if (actual.st_dev,actual.st_ino)!=(expected.st_dev,expected.st_ino):raise Rejected('lease_identity')
     def checkpoint(point):
+        if config.get('delay_at')==point:
+            import time;time.sleep(config['delay_seconds'])
         # Root-owned VM fixture configuration only, never part of request API.
         if config.get('pause_at')==point:
             descendants=[]

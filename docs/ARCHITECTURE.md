@@ -105,3 +105,10 @@ journal with atomic COMMIT results. Cancellation is a durable tentative state,
 not an immediate stop claim. See [OPERATIONS.md](OPERATIONS.md) for state,
 replay/restart behavior and the fixed 64-row history bound. P0-3b deadlines,
 controlled repair and formal deployment remain open.
+
+## P0-3b-1 update
+
+Activation budgets now start at durable admission and persist across replay and
+process restart. Recovery gets one separately persisted five-second budget,
+reused across interrupted attempts. See [DEADLINES.md](DEADLINES.md) for decision
+semantics, clock assumptions, schema compatibility and remaining limitations.
