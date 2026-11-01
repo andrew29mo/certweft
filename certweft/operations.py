@@ -146,8 +146,8 @@ class Operations:
         path=db.execute('PRAGMA database_list').fetchone()[2]
         if not path:raise Rejected('file_journal_required')
         with decision(path):
-            from .gate import Gate
-            if gate_authority is not None:Gate(Path(path).parent).require(gate_authority)
+            from .opening import require_updates
+            if gate_authority is not None:require_updates(Path(path).parent,gate_authority,db)
             # Same SQLite transaction commits the selected version and request outcome.
             db.execute('BEGIN IMMEDIATE')
             row=db.execute('SELECT state,timing FROM requests WHERE id=?',(identity,)).fetchone()
@@ -158,6 +158,6 @@ class Operations:
             db.execute('INSERT OR REPLACE INTO state VALUES(1,?)',(json.dumps(state),))
             db.execute("UPDATE requests SET state='COMMITTED',result=? WHERE id=?",(json.dumps({'committed':state['committed']}),identity))
             checkpoint()
-            if gate_authority is not None:Gate(Path(path).parent).require(gate_authority)
+            if gate_authority is not None:require_updates(Path(path).parent,gate_authority,db)
             if timing:deadlines.remaining(timing['activation'])
             db.commit()

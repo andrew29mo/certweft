@@ -109,3 +109,11 @@ atomic main-journal reconciliation. Paired completion remains closed; it does
 not reopen updates, rewrite terminal history or automatically resume after a
 process restart. Installed deployment and VM reboot/power-loss qualification
 remain pending.
+
+## Closed opening intentions
+
+[Opening intentions and shared admission guard](docs/OPENING_INTENT.md) bind a
+persistent root intention to the current Gate, preparation receipt, core and exact
+DEGRADED history. Partial publication, expiry and restart never grant updates.
+The formal entry, executor and bound COMMIT guard still reject recovered sessions,
+even with a RUNNING label. Actual reopening is a separate pending milestone.

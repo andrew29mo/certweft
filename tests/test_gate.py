@@ -59,6 +59,8 @@ class RestartGate(unittest.TestCase):
 
     def test_gate_change_after_sql_writes_prevents_final_commit(self):
         self.gate.provision();current=self.gate.start();ops=Operations(self.root);ops.initialize()
+        from certweft.recovery import RecoveryStore
+        RecoveryStore(self.root).initialize()
         ops.admit({'op':'submit','request_id':'late','certificate':'pem','epoch':'core','revision':0});ops.begin('late')
         with sqlite3.connect(ops.path) as db:
             db.execute('CREATE TABLE state(id INTEGER PRIMARY KEY,data TEXT)');db.execute('INSERT INTO state VALUES(1,?)',(json.dumps({'committed':'old'}),));db.commit()

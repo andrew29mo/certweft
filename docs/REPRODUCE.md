@@ -49,3 +49,8 @@ authority reports retain their original source hashes.
 
 See [CLOSED_PREPARATION.md](CLOSED_PREPARATION.md) for the root contract and Linux
 VM command. This stage keeps admission closed; no unlock command is provided.
+
+## Closed opening intention
+
+See [OPENING_INTENT.md](OPENING_INTENT.md) and run tools/opening_vm.py as root in
+the isolated Linux VM. There is still no release/unlock command.

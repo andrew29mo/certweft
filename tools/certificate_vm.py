@@ -34,8 +34,11 @@ def exercise(root,work,config,parent,call,normal_job,mode):
         proc=subprocess.Popen([sys.executable,'-m','certweft.service',str(cfg)],cwd=P,stdout=log,stderr=subprocess.STDOUT);log.close()
         for _ in range(120):
             if proc.poll() is not None:raise AssertionError('certificate_startup')
-            if pathlib.Path(config['socket']).exists():return proc
-            time.sleep(.025)
+            try:
+                ready=request(config['socket'],{'op':'recovery-status'})
+                assert ready.get('ok'),ready
+                proc.fixture_gate_authority=Gate.token(ready['gate']);return proc
+            except (OSError,EOFError):time.sleep(.025)
         proc.kill();proc.wait();raise AssertionError('certificate_endpoint')
     def poll(identity):
         for _ in range(300):
@@ -46,6 +49,11 @@ def exercise(root,work,config,parent,call,normal_job,mode):
     points={'wrong-leaf':'restore-reloaded','bad-http':'restore-reloaded','crash-selected':'restore-selected','crash-reloaded':'restore-reloaded','crash-confirmed':'restore-confirmed','crash-proof':'certificate-proof','crash-gate':'closed-gate-published','expired-tls':'restore-confirmed','expired-commit':'closed-result-commit'}
     frozen={k:v for k,v in config.items() if k not in {'pause_at','storage_latch_marker','unrecorded_storage_marker','gate_stop_sync_eio'}}
     frozen.update(verification_pause_at=points.get(mode,'restore-validated') if not mode.startswith('invalid-') else 'restoration-start',verification_marker=str(work/'certificate-marker.json'),verification_pause_once=True)
+    if mode.startswith('opening-'):
+        from tools.reconcile_vm import settings as preparation_settings
+        from tools.opening_vm import settings as opening_settings
+        frozen.update(preparation_settings(work,'latched'));frozen.update(opening_settings(work,mode.removeprefix('opening-')))
+        frozen['sqlite_max_pages']=config['sqlite_max_pages']+4
     if mode.startswith('reconcile-'):
         from tools.reconcile_vm import settings
         frozen.update(settings(work,mode.removeprefix('reconcile-')))
@@ -161,6 +169,13 @@ def exercise(root,work,config,parent,call,normal_job,mode):
         if mode.startswith('reconcile-'):
             from tools.reconcile_vm import exercise as prepare_journal
             detail['journal_preparation'],parent=prepare_journal(root,work,frozen,parent,call,normal_job,row,mode.removeprefix('reconcile-'))
+        if mode.startswith('opening-'):
+            from tools.reconcile_vm import exercise as prepare_journal
+            from tools.opening_vm import exercise as opening_exercise
+            preparation,parent=prepare_journal(root,work,frozen,parent,call,normal_job,row,'latched')
+            prepared=root_call({'op':'recovery-request-status','request_id':'prepare-one'})['result']
+            detail['journal_preparation']=preparation
+            detail['opening_intent'],parent=opening_exercise(root,work,frozen,parent,call,normal_job,prepared,mode.removeprefix('opening-'))
         detail['terminal_result']=row['result']
         detail.update(terminal=row['state'],logical_journal_unchanged=True,immutable_generations_unchanged=True,updates_enabled=False)
         return detail,parent

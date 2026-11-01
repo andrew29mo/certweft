@@ -1,6 +1,13 @@
 # Results and provenance
 
-## Current closed journal preparation milestone
+## Current closed opening-intention milestone
+
+See [OPENING_INTENT.md](OPENING_INTENT.md) for persistent intentions, exact
+Gate/journal/DEGRADED pairing and the shared admission guard. This stage never
+releases updates. Previous unit records are historical; current unit evidence
+is opening-units.json/html.
+
+## Closed journal preparation milestone
 
 See [CLOSED_PREPARATION.md](CLOSED_PREPARATION.md) for the additive preparation
 contract, main/root paired evidence and limits. This stage reconciles live

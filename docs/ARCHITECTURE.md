@@ -170,3 +170,12 @@ journal, then records separate closed root completion. Receipt plus current
 root result are required for journal_prepared_closed; neither enables admission.
 See [closed preparation contract](CLOSED_PREPARATION.md). Terminal DEGRADED
 history is preserved; its admission policy and actual reopening remain pending.
+
+## Opening assessment, no release
+
+[OPENING_INTENT.md](OPENING_INTENT.md) adds an additive prepare-opening root kind
+and a latest main-journal opening_intent marker. Marker/root publication is
+paired and deadline-bound but does not change Gate or enable admission. Exact
+DEGRADED row references are evaluated without rewriting terminal history. Shared
+entry/executor/COMMIT eligibility permits untouched bootstrap only; recovered
+sessions still require a future explicit release handoff.

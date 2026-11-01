@@ -351,9 +351,13 @@ def scenario(kind,phase,check_gate=False,lifecycle_mode=None,verification_mode=N
             log=(work/'prepared-restart.log').open('wb');parent=subprocess.Popen([sys.executable,'-m','certweft.service',str(cfg)],cwd=P,stdout=log,stderr=subprocess.STDOUT);log.close()
             for _ in range(120):
                 if parent.poll() is not None:raise AssertionError('prepared_restart_failed')
-                if pathlib.Path(config['socket']).exists():break
-                time.sleep(.025)
-            now=request(config['socket'],{'op':'recovery-status'})['gate'];assert now['state']=='RECOVERY_REQUIRED'
+                try:
+                    ready=request(config['socket'],{'op':'recovery-status'})
+                    assert ready.get('ok'),ready
+                    break
+                except (OSError,EOFError):time.sleep(.025)
+            else:raise AssertionError('prepared_restart_endpoint_timeout')
+            now=ready['gate'];assert now['state']=='RECOVERY_REQUIRED'
             assert os.readlink(mount/'active.conf')==saved_pointer and {p.name for p in mount.glob('v-*')}==saved_generations
             response=request(config['socket'],{'op':'prepare-recovery',**authority(prepared['gate'])});assert not response['ok'] and response['reason']=='stale_gate_authority'
             assert not call(config['socket'],{**job,'request_id':'second-restart-update'})['ok']

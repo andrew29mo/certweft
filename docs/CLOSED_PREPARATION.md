@@ -1,5 +1,9 @@
 # Closed journal and health preparation
 
+The next [opening-intention stage](OPENING_INTENT.md) assesses exact references
+without opening updates. The 75-unit record below is historical after that stage;
+current unit evidence is linked there. VM preparation regressions are rerun.
+
 This milestone prepares a recovered journal for a future explicit admission
 handoff. It never opens normal updates. A certificate-recovery result alone is
 not sufficient: the main journal may still be APPLYING/DEGRADED, storage health
@@ -143,7 +147,7 @@ fixture generation/fingerprint identifiers and hashes, not private material.
 
 ## Current validation
 
-The current source passes 75 Linux unit tests with no failures, errors or skips,
+At this milestone the source passed 75 Linux unit tests with no failures, errors or skips,
 and 19 closed journal-preparation VM fixtures. The separate certificate (17),
 storage-verification (15), gate (10) and storage (14) matrices retain their own
 scope and reports; they are regressions, not additional preparation scenarios.

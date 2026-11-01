@@ -62,9 +62,9 @@ def dispatch(config,request,peer_uid,checkpoint=lambda _:None):
     w=FixedWriter(**config['writer']);w.master=config['master'];w.recovery_checkpoint=checkpoint;w.commit_checkpoint=checkpoint;w.sqlite_max_pages=config.get('sqlite_max_pages')
     if op=='status':return w.status()
     if op=='recover':raise Rejected('use_prepare_recovery')
-    if op=='recover-request':
-        w.operation_id=request['request_id'];return w.recover()
-    Gate(root).require(config['gate_authority']);w.gate_authority=config['gate_authority']
+    if op=='recover-request':raise Rejected('use_prepare_recovery')
+    from .opening import require_updates
+    require_updates(root,config['gate_authority']);w.gate_authority=config['gate_authority']
     if type(request['certificate']) is not str or len(request['certificate'].encode())>32768:raise Rejected('certificate_budget')
     if type(request['epoch']) is not str or type(request['revision']) is not int:raise Rejected('authority_shape')
     operations=Operations(root,config.get('sqlite_max_pages'))

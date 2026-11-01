@@ -1,5 +1,9 @@
 # P0-3b-1: persistent activation and independent recovery budgets
 
+Current [opening-intention rules](OPENING_INTENT.md) add a shared admission guard
+and refuse the old direct normal-executor recover-request route. The historical
+automatic-recovery descriptions below are not current behavior.
+
 **Startup-policy update:** [RESTART_GATE.md](RESTART_GATE.md) supersedes the
 earlier automatic process-recovery/reopening descriptions below. Old report
 counts and source hashes are historical. Current source validation uses the

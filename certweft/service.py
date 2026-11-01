@@ -4,6 +4,7 @@ from .operations import Operations,decision
 from .gate import Gate
 from .recovery import RecoveryStore
 from . import storage
+from .opening import require_updates
 from .core import Rejected,Writer
 from pathlib import Path
 
@@ -158,7 +159,7 @@ def serve(config_path):
                             data+=chunk
                             if len(data)>49152:raise ValueError('budget')
                         body=json.loads(data);op=body.get('op')
-                        if op in {'verify-storage','recover-certificate','reconcile-closed','recovery-request-status'}:
+                        if op in {'verify-storage','recover-certificate','reconcile-closed','prepare-opening','recovery-request-status'}:
                             if uid!=0:raise Rejected('admin_required')
                             if op=='recovery-request-status':
                                 if set(body)!={'op','request_id'} or type(body['request_id']) is not str:raise Rejected('request_shape')
@@ -198,7 +199,13 @@ def serve(config_path):
                                 current=gate.read()
                                 from .reconciliation import completion_recorded
                                 journal_ready=not guard.locked() and completion_recorded(root,current,recovery)
-                                reply={'ok':True,'gate':current,'executor_busy':guard.locked(),'gate_allows_updates':current['state']=='RUNNING','storage_health_not_verified':not journal_ready,'journal_prepared_closed':journal_ready,'completion_recorded':recovery.completion_recorded(current)}
+                                from .opening import ready_closed
+                                opening_ready=not guard.locked() and ready_closed(root,current,recovery)
+                                updates_allowed=False
+                                if current['state']=='RUNNING':
+                                    try:require_updates(root,config['gate_authority']);updates_allowed=True
+                                    except (Rejected,OSError):pass
+                                reply={'ok':True,'gate':current,'executor_busy':guard.locked(),'gate_allows_updates':updates_allowed,'opening_intent_verified_closed':opening_ready,'storage_health_not_verified':not journal_ready,'journal_prepared_closed':journal_ready,'completion_recorded':recovery.completion_recorded(current)}
                         elif op in {'cancel','request-status'}:
                             if set(body)!={'op','request_id'} or type(body['request_id']) is not str:raise Rejected('request_shape')
                             result=operations.cancel(body['request_id']) if op=='cancel' else operations.get(body['request_id'])
@@ -216,7 +223,7 @@ def serve(config_path):
                             else:
                                 if not guard.acquire(False):raise Rejected('busy')
                                 try:
-                                    gate.require(config['gate_authority'])
+                                    require_updates(root,config['gate_authority'])
                                     result,created=operations.admit(body)
                                     if created:start_work(operations,body,work,config.get('fail_dispatch',False))
                                     else:guard.release()
@@ -226,7 +233,7 @@ def serve(config_path):
                             if op in {'execute','recover-request'} or op=='activate' and not config.get('legacy_api',False):raise Rejected('use_submit')
                             if not guard.acquire(False):raise Rejected('busy')
                             try:
-                                if op!='status':gate.require(config['gate_authority'])
+                                if op!='status':require_updates(root,config['gate_authority'])
                                 reply=execute(body,uid)
                                 if op=='status':reply['admission_gate']=gate.read()['state']
                             finally:guard.release()
