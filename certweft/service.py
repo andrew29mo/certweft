@@ -49,6 +49,13 @@ def serve(config_path):
         if not stat.S_ISREG(journal.st_mode) or journal.st_uid!=0 or journal.st_mode & 0o077:raise PermissionError('journal_permissions')
         # Persist uncertainty before metadata writes or exposing any endpoint.
         gate=Gate(root)
+        if config.get('gate_stop_sync_eio'):
+            def gate_checkpoint(point,state):
+                if point=='directory-sync' and state['reason']=='clean_stop':
+                    import errno
+                    if config.get('gate_stop_sync_marker'):Path(config['gate_stop_sync_marker']).write_text(json.dumps({'point':point,'errno':errno.EIO}))
+                    raise OSError(errno.EIO,'root-fixture clean-stop directory sync')
+            gate.checkpoint=gate_checkpoint
         with decision(root/'journal.db'):session=gate.start()
         config['gate_authority']=Gate.token(session)
         operations=Operations(root,config.get('sqlite_max_pages'));operations.initialize()

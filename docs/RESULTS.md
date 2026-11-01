@@ -3,8 +3,8 @@
 ## Current restart gate milestone
 
 See [RESTART_GATE.md](RESTART_GATE.md), evidence/restart-gate.json and its HTML
-for five repaired-storage real-service gate fixtures and 44 passing Linux unit
-tests. Fourteen current storage regressions are separately source-bound.
+for ten repaired-storage/lifecycle real-service gate fixtures and 47 passing Linux
+unit tests. Fourteen current storage regressions are separately source-bound.
 No full restoration/unlock or VM reboot/power-loss claim is made.
 
 ## Previous reviewed storage milestone (historical)

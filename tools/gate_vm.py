@@ -11,12 +11,17 @@ def main():
         archive=P/'evidence/gate-attempts';archive.mkdir(exist_ok=True);shutil.copyfile(out,archive/(str(time.time_ns())+'.json'))
     def publish(r):
         text=json.dumps(r,indent=2);out.write_text(text);out.with_suffix('.html').write_text('<!doctype html><meta charset="utf-8"><pre>'+html.escape(text)+'</pre>')
-    report={'passed':False,'status':'in_progress','cases':[],'scope':'source-run root certweft.service/executor; real Nginx; repaired private ext4 loop store in isolated Linux VM','untested':['full safe recovery/unlock backend','persistent systemd deployment','VM reboot','power loss','physical media loss','D-state executor','trusted root tampering']};publish(report)
+    report={'passed':False,'status':'in_progress','cases':[],'scope':'source-run root certweft.service/executor; real Nginx; repaired ext4 loop store and shutdown lifecycle in isolated Linux VM','untested':['full safe recovery/unlock backend','persistent systemd deployment','VM reboot','power loss','physical media loss','physical directory fsync faults (EIO fixture is injected)','D-state executor','trusted root tampering']};publish(report)
     try:
         for kind,phase in [('enospc','pre'),('enospc','post'),('readonly','pre'),('readonly','post'),('sqlite_full','cancel_unrecorded')]:
             try:detail=scenario(kind,phase,check_gate=True)
             except Exception as error:
                 report['cases'].append({'fault':kind,'phase':phase,'passed':False,'error':type(error).__name__+': '+str(error)});raise
+            report['cases'].append(detail);publish(report)
+        for phase,mode in [('prepare','sigterm'),('prepare','sigint'),('post','sigterm'),('post','sigint'),('pre','stop-sync-eio')]:
+            try:detail=scenario('lifecycle',phase,lifecycle_mode=mode)
+            except Exception as error:
+                report['cases'].append({'lifecycle_mode':mode,'phase':phase,'passed':False,'error':type(error).__name__+': '+str(error)});raise
             report['cases'].append(detail);publish(report)
         report['passed']=True;report['status']='completed'
     except Exception as error:

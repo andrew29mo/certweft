@@ -65,3 +65,27 @@ class RestartGate(unittest.TestCase):
             with self.assertRaises(Rejected):Operations.commit(db,'late',{'committed':'new'},checkpoint=self.gate.start,gate_authority=Gate.token(current))
             db.rollback();self.assertEqual(json.loads(db.execute('SELECT data FROM state').fetchone()[0]),{'committed':'old'})
         self.assertEqual(ops.get('late')['state'],'RUNNING')
+
+    def test_stop_directory_fsync_failure_does_not_authorize_restart(self):
+        import errno
+        self.gate.provision();current=self.gate.start();real_fsync=os.fsync;calls=[]
+        def fail_second(fd):
+            calls.append(fd)
+            if len(calls)==2:raise OSError(errno.EIO,'injected directory sync')
+            return real_fsync(fd)
+        with patch('certweft.gate.os.fsync',side_effect=fail_second):
+            with self.assertRaises(OSError):self.gate.stop(Gate.token(current))
+        self.assertEqual(self.gate.read()['state'],'STOPPED')
+        self.assertFalse(self.gate.certified(self.gate.read()))
+        self.assertEqual(self.gate.start()['state'],'RECOVERY_REQUIRED')
+    def test_stopped_record_without_matching_receipt_never_opens(self):
+        self.gate.provision();original=self.gate.read();self.gate.receipt.unlink()
+        self.assertEqual(self.gate.start()['state'],'RECOVERY_REQUIRED')
+        self.gate.write(original);self.gate.receipt.write_text('{}');os.chmod(self.gate.receipt,0o600)
+        self.assertEqual(self.gate.start()['state'],'RECOVERY_REQUIRED')
+    def test_stop_receipt_is_bound_to_exact_state_and_private_file(self):
+        self.gate.provision();current=self.gate.start();stopped=self.gate.stop(Gate.token(current))
+        self.assertTrue(self.gate.certified(stopped))
+        self.assertFalse(self.gate.certified({**stopped,'reason':'new_store'}))
+        os.chmod(self.gate.receipt,0o644)
+        with self.assertRaisesRegex(Rejected,'receipt_permissions'):self.gate.start()

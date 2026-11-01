@@ -37,7 +37,7 @@ print(json.dumps(reply))
     if result.returncode:raise RuntimeError('controller_helper_failed')
     return json.loads(result.stdout)
 
-def scenario(kind,phase,check_gate=False):
+def scenario(kind,phase,check_gate=False,lifecycle_mode=None):
     work=pathlib.Path(tempfile.mkdtemp(prefix='cw-storage-',dir='/var/tmp'));os.chmod(work,0o711)
     image=work/'disk.img';mount=work/'store';mount.mkdir(mode=0o700)
     parent=None;ngpid=None;ngworkers=[];mounted=False;bound=False;child=None;loop=None
@@ -69,6 +69,7 @@ def scenario(kind,phase,check_gate=False):
                 if phase=='cancel_unrecorded':db.execute('CREATE TRIGGER fail_health BEFORE UPDATE ON health BEGIN INSERT INTO quota_probe VALUES(zeroblob(65536)); END')
                 config['sqlite_max_pages']=db.execute('PRAGMA page_count').fetchone()[0]+1
             result['pager_max_pages']=config['sqlite_max_pages'];result['allocation_bytes']=65536
+        if lifecycle_mode=='stop-sync-eio':config.update(gate_stop_sync_eio=True,gate_stop_sync_marker=str(work/'stop-sync.json'))
         cfg=work/'config';cfg.write_text(json.dumps(config))
         log=(work/'service.log').open('wb')
         parent=subprocess.Popen([sys.executable,'-m','certweft.service',str(cfg)],cwd=P,stdout=log,stderr=subprocess.STDOUT);log.close()
@@ -141,6 +142,49 @@ def scenario(kind,phase,check_gate=False):
             now=Gate(mount).read();assert now['state']=='RUNNING' and now['epoch']!=gate_before['epoch']
             baseline=w.status();pointer=os.readlink(mount/'active.conf');job.update(epoch=baseline['epoch'],revision=baseline['revision'])
             result['clean_lifecycle']={'normal_activation_committed':True,'graceful_stop_certified':True,'clean_restart_new_epoch':True,'competing_writer_rejected_without_gate_mutation':True}
+        if lifecycle_mode:
+            from certweft.gate import Gate
+            from tools.executor_vm import request
+            authority=Gate(mount).read()
+            if phase!='pre':
+                assert call(config['socket'],job)['created']
+                for _ in range(150):
+                    if (work/'marker.json').exists():child=json.loads((work/'marker.json').read_text())['pid'];break
+                    time.sleep(.02)
+                else:raise AssertionError('shutdown_checkpoint_missing')
+                assert alive(child)
+            before_wire=wire();saved_pointer=os.readlink(mount/'active.conf');saved_versions={p.name for p in mount.glob('v-*')}
+            delivered=signal.SIGINT if lifecycle_mode=='sigint' else signal.SIGTERM
+            os.kill(parent.pid,delivered);parent.wait(4)
+            if child:assert not alive(child)
+            stopped=Gate(mount).read()
+            if lifecycle_mode=='stop-sync-eio':
+                assert parent.returncode!=0 and stopped['state']=='STOPPED' and not Gate(mount).certified(stopped)
+                diagnostic=json.loads((work/'stop-sync.json').read_text());assert diagnostic['errno']==errno.EIO
+                result['injected_failure']={'point':'primary STOPPED directory-sync','errno':errno.EIO,'physical_failure':False}
+            else:assert parent.returncode==0 and stopped['state']=='RUNNING'
+            assert wire()==before_wire and os.readlink(mount/'active.conf')==saved_pointer
+            saved_journal=hashlib.sha256((mount/'journal.db').read_bytes()).hexdigest()
+            cfg.write_text(json.dumps({k:v for k,v in config.items() if k not in {'pause_at','gate_stop_sync_eio','gate_stop_sync_marker'}}))
+            for attempt in range(2):
+                pathlib.Path(config['socket']).unlink(missing_ok=True)
+                log=(work/('shutdown-restart-'+str(attempt)+'.log')).open('wb');parent=subprocess.Popen([sys.executable,'-m','certweft.service',str(cfg)],cwd=P,stdout=log,stderr=subprocess.STDOUT);log.close()
+                for _ in range(120):
+                    if parent.poll() is not None:raise AssertionError('shutdown_gate_restart_failed')
+                    if pathlib.Path(config['socket']).exists():break
+                    time.sleep(.025)
+                current=request(config['socket'],{'op':'recovery-status'})['gate'];assert current['state']=='RECOVERY_REQUIRED'
+                refused=call(config['socket'],{**job,'request_id':'shutdown-restart-'+str(attempt)})
+                assert not refused.get('ok') and refused.get('reason')=='recovery_required'
+                stale=request(config['socket'],{'op':'prepare-recovery',**Gate.token(authority)})
+                assert not stale['ok'] and stale['reason']=='stale_gate_authority'
+                assert hashlib.sha256((mount/'journal.db').read_bytes()).hexdigest()==saved_journal
+                assert os.readlink(mount/'active.conf')==saved_pointer and {p.name for p in mount.glob('v-*')}==saved_versions and wire()==before_wire
+                # Healthy idle RECOVERY_REQUIRED must also survive both signals.
+                os.kill(parent.pid,signal.SIGINT if attempt else signal.SIGTERM);parent.wait(4)
+                assert Gate(mount).read()['state']=='RECOVERY_REQUIRED'
+            result.update(lifecycle_mode=lifecycle_mode,parent_signal='SIGINT' if delivered==signal.SIGINT else 'SIGTERM',active_executor_exited=child is not None,shutdown_record=stopped['state'],restarts_blocked=2,idle_recovery_required_survives_both_signals=True,no_tls_pointer_or_version_changes=True,journal_preserved_across_restarts=True,passed=True)
+            return result
         result['service_memory_before_fault']=memory(parent.pid)
         if phase=='pre':
             fault();reply=call(config['socket'],job);result['initial_reply']=reply
@@ -263,7 +307,7 @@ def scenario(kind,phase,check_gate=False):
             # Repair only the private fault mechanism, without changing journal,
             # active pointer, request rows or execution record.
             if parent.poll() is None:parent.terminate();parent.wait(3)
-            saved_gate=Gate(mount).read();saved_wire=wire()
+            saved_gate=Gate(mount).read();saved_wire=wire();saved_pointer=os.readlink(mount/'active.conf');saved_generations={p.name for p in mount.glob('v-*')}
             if bound:run(['umount',mount]);bound=False
             for name in ['filler','last-blocks','fault-probe']:(mount/name).unlink(missing_ok=True)
             with contextlib.closing(sqlite3.connect(mount/'journal.db')) as db, db:
@@ -282,8 +326,9 @@ def scenario(kind,phase,check_gate=False):
                 time.sleep(.025)
             else:raise AssertionError('no_recovery_endpoint')
             current=status['gate'];assert current['state']=='RECOVERY_REQUIRED' and not status['gate_allows_updates']
+            assert os.readlink(mount/'active.conf')==saved_pointer and {p.name for p in mount.glob('v-*')}==saved_generations
             assert hashlib.sha256((mount/'journal.db').read_bytes()).hexdigest()==before_journal
-            before_pointer=os.readlink(mount/'active.conf');before_count=len(list(mount.glob('v-*')))
+            before_pointer=saved_pointer;before_count=len(saved_generations)
             update=call(config['socket'],{**job,'request_id':'repaired-restart-update'});assert not update.get('ok') and update.get('reason')=='recovery_required'
             authority=lambda value:{'gate_epoch':value['epoch'],'gate_revision':value['revision']}
             stale={'op':'prepare-recovery',**authority(saved_gate)}
@@ -296,6 +341,7 @@ def scenario(kind,phase,check_gate=False):
             assert prepared['ok'] and prepared['prepared'] and not prepared['updates_enabled'] and not prepared['restored'] and prepared['gate']['state']=='VERIFY_REQUIRED'
             repeated=request(config['socket'],{'op':'prepare-recovery',**authority(current)});assert not repeated['ok'] and repeated['reason']=='stale_gate_authority'
             assert Gate(mount).read()==prepared['gate']
+            assert {p.name for p in mount.glob('v-*')}==saved_generations
             assert os.readlink(mount/'active.conf')==before_pointer and len(list(mount.glob('v-*')))==before_count and wire()==saved_wire
             assert hashlib.sha256((mount/'journal.db').read_bytes()).hexdigest()==before_journal
             parent.terminate();parent.wait(3)
@@ -308,6 +354,7 @@ def scenario(kind,phase,check_gate=False):
                 if pathlib.Path(config['socket']).exists():break
                 time.sleep(.025)
             now=request(config['socket'],{'op':'recovery-status'})['gate'];assert now['state']=='RECOVERY_REQUIRED'
+            assert os.readlink(mount/'active.conf')==saved_pointer and {p.name for p in mount.glob('v-*')}==saved_generations
             response=request(config['socket'],{'op':'prepare-recovery',**authority(prepared['gate'])});assert not response['ok'] and response['reason']=='stale_gate_authority'
             assert not call(config['socket'],{**job,'request_id':'second-restart-update'})['ok']
             assert wire()==saved_wire and hashlib.sha256((mount/'journal.db').read_bytes()).hexdigest()==before_journal

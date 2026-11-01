@@ -138,3 +138,9 @@ preexisting execution uncertainty and a conservative recovery-only mode. Root
 preparation is CAS-bound and persists VERIFY_REQUIRED without TLS/journal repair
 or unlock. The unpersistable-latch post-repair restart gap is now gated; actual
 safe restoration/reopening remains a later milestone.
+
+The restart-gate review now requires a matching clean-completion receipt: STOPPED
+publication without successful primary directory sync is insufficient to reopen.
+Active shutdown and primary-sync EIO injection are tested separately from actual
+storage-media/power-loss behavior; the receipt-final-sync ambiguity is documented
+in RESTART_GATE.md rather than claimed as a universal fault latch.

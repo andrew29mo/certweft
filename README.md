@@ -64,7 +64,8 @@ Controlled repair and persistent systemd deployment are still pending.
 before accepting work. Repairing storage and restarting leaves the service closed
 to updates; UID-0 preparation is bound to gate epoch/revision and never unlocks or
 claims TLS restoration. Abnormal restart no longer automatically restores pending
-activations. Missing legacy records also remain quarantined.
+activations. A clean restart requires STOPPED plus a matching completion receipt;
+partial STOPPED publication and missing legacy records remain quarantined.
 
 ## Evidence
 
