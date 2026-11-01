@@ -36,10 +36,10 @@ class DurableVerification(unittest.TestCase):
         self.assertFalse(reopened.admit(self.body,self.writer)[1])
         with self.assertRaisesRegex(Rejected,'stale_gate_authority'):reopened.admit({**self.body,'request_id':'new'},self.writer)
     def test_expired_request_never_runs_probe(self):
-        row=self.store.admit(self.body,self.writer)[0];row['timing']['budget']['expires_boot_ns']=deadlines.now_ns()-1
-        with self.store.transaction() as db:db.execute('UPDATE recovery_requests SET timing=?',(json.dumps(row['timing']),))
-        with patch('certweft.recovery.filesystem_probe',side_effect=AssertionError('must not probe')):
-            self.assertEqual(verify(self.config,'check')['state'],'EXPIRED')
+        row=self.store.admit(self.body,self.writer)[0];budget=row['timing']['budget']
+        with patch('certweft.deadlines.now_ns',return_value=budget['expires_boot_ns']+1),patch('certweft.deadlines.time.time_ns',return_value=budget['accepted_wall_ns']+budget['seconds']*1_000_000_000+1):
+            with patch('certweft.recovery.filesystem_probe',side_effect=AssertionError('must not probe')):
+                self.assertEqual(verify(self.config,'check')['state'],'EXPIRED')
         self.assertEqual(self.store.get('check')['timing'],row['timing'])
     def test_pager_full_is_real_and_does_not_clear_health_or_gate(self):
         self.store.admit(self.body,self.writer)
@@ -77,16 +77,32 @@ class DurableVerification(unittest.TestCase):
         with self.assertRaisesRegex(Rejected,'recovery_schema'):RecoveryStore(self.root).initialize()
     def test_final_result_sql_is_rolled_back_when_budget_expires_before_commit(self):
         import time
-        row=self.store.admit(self.body,self.writer)[0];self.store.begin('check')
-        row['timing']['budget']['expires_boot_ns']=deadlines.now_ns()+100_000_000
-        with self.store.transaction() as db:db.execute('UPDATE recovery_requests SET timing=?',(json.dumps(row['timing']),))
+        row=self.store.admit({**self.body,'timeout_seconds':1},self.writer)[0];self.store.begin('check')
         def delay_after_sql():
             while deadlines.now_ns()<=row['timing']['budget']['expires_boot_ns']:time.sleep(.005)
         self.store.commit_checkpoint=delay_after_sql
         with self.assertRaises(deadlines.Expired):self.store.finish('check','STORAGE_VERIFIED',{'storage_verified':True})
         result=self.store.get('check');self.assertEqual(result['state'],'RUNNING');self.assertIsNone(result['result'])
-
     def test_missing_control_version_is_not_implicitly_reset(self):
         with self.store.transaction() as db:db.execute('DELETE FROM recovery_meta')
         with self.assertRaisesRegex(Rejected,'recovery_schema'):RecoveryStore(self.root).initialize()
         with sqlite3.connect(self.store.path) as db:self.assertEqual(db.execute('SELECT * FROM recovery_meta').fetchall(),[])
+
+    def test_malformed_persistent_budget_never_disables_deadline(self):
+        import copy
+        row=self.store.admit(self.body,self.writer)[0];original=row['timing']
+        bad=[]
+        for budget in [None,{},dict(original['budget'],seconds=True),dict(original['budget'],seconds=11),dict(original['budget'],expires_boot_ns=original['budget']['expires_boot_ns']+1),dict(original['budget'],accepted_boot_ns=-1),dict(original['budget'],version=2)]:
+            bad.append(dict(original,budget=budget))
+        bad.extend([dict(original,authority=None),dict(original,authority={'gate_epoch':original['authority']['gate_epoch']}),dict(original,authority=dict(original['authority'],gate_revision=True))])
+        # A structurally valid but different timeout must also match the immutable digest.
+        changed=copy.deepcopy(original);changed['budget']['seconds']=9;changed['budget']['expires_boot_ns']=changed['budget']['accepted_boot_ns']+9_000_000_000;bad.append(changed)
+        for timing in bad:
+            with self.subTest(timing=timing):
+                with self.store.transaction() as db:db.execute('UPDATE recovery_requests SET timing=?',(json.dumps(timing),))
+                with self.assertRaisesRegex(Rejected,'recovery_schema'):self.store.get('check')
+                with self.assertRaisesRegex(Rejected,'recovery_schema'):RecoveryStore(self.root).initialize()
+                with patch('certweft.recovery.filesystem_probe',side_effect=AssertionError('must not probe')):
+                    with self.assertRaisesRegex(Rejected,'recovery_schema'):verify(self.config,'check')
+                with sqlite3.connect(self.store.path) as db:self.assertEqual(db.execute('SELECT state FROM recovery_requests').fetchone()[0],'ACCEPTED')
+        self.assertEqual(self.gate.read()['state'],'VERIFY_REQUIRED')

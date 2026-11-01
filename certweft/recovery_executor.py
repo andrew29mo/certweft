@@ -16,7 +16,9 @@ def main():
             if config.get('verification_pause_once') and marker.exists():return
             pending=marker.with_suffix('.pending')
             pending.write_text(json.dumps({'pid':os.getpid(),'point':point}));os.replace(pending,marker);os.kill(os.getpid(),signal.SIGSTOP)
-    try:result={'ok':True,'result':verify(config,body['request_id'],checkpoint)}
+    try:
+        checkpoint('before-verification-read')
+        result={'ok':True,'result':verify(config,body['request_id'],checkpoint)}
     except Exception as error:
         result={'ok':False,'error':type(error).__name__,'sqlite_error':getattr(error,'sqlite_errorname',None),'errno':getattr(error,'errno',None)}
     print(json.dumps(result))

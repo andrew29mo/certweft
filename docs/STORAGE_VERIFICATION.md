@@ -122,7 +122,9 @@ The FULL fixture uses a root allocation trigger on storage_probe plus a real
 max_page_count limit; it does not fabricate SQLITE_FULL with RAISE(). Control
 recording remains available under that main-journal quota. For physical-path
 ENOSPC/EROFS, recording may be impossible: the service exits 75 and the durable
-request remains unfinished/failed, never verified. A separate success case keeps
+request remains unfinished/failed, never verified. The report establishes the
+independently observed fault and safe refusal; it does not retain the exact
+verifier syscall where an unrecordable filesystem fault surfaced. A separate success case keeps
 prior STORAGE_FAILED unchanged. Normal-history capacity is root-fixture seeded
 through formal Operations metadata methods alongside the fixture's real healthy
 activation; it is not evidence of 64 successful rotations. Sixteen root requests
@@ -160,13 +162,43 @@ comparative performance claim is made.
 
 ## Current validation
 
-Current source passes 58 Linux unit tests
+Current source passes 59 Linux unit tests
 ([JSON](../evidence/recovery-units.json), [HTML](../evidence/recovery-units.html)),
-fourteen recovery-verification VM fixtures, ten restart-gate/lifecycle fixtures
+fifteen recovery-verification VM fixtures, ten restart-gate/lifecycle fixtures
 and fourteen storage regressions. Each current report binds exact source hashes
 and checks owned-process/mount cleanup. The final-expiry VM case pauses the real
 verifier after its success SQL update; an independent SQLite reader still sees
 RUNNING, and expiry must roll that transaction back rather than publish success.
+
+## Independent review correction
+
+An independent logic review found that a corrupted persistent budget of null
+could reach the general deadline helper's intentional “no deadline” mode. Valid
+API admission never generates null, but the control-record reader previously did
+not reject it; that could wrongly finish STORAGE_VERIFIED after the original
+expiry. The gate still stayed closed, so this was not an unlock bypass.
+
+Control records now require a non-null exact versioned budget: typed integers,
+Linux boot UUID, bounded timestamps, 1–10 seconds and an exact duration relation.
+Authority shape is strict, and its fields plus timeout are reconstructed to match
+the stored immutable parameter digest. Existing history is validated at startup;
+malformed data is preserved and rejected, not converted into unlimited time or
+silently repaired. This is structural validation, not authentication against a
+trusted root coherently rewriting all metadata.
+
+New units reject null, missing fields, booleans, out-of-range/inconsistent timing
+and malformed authority. Expiry tests use simulated consistent clocks or a real
+one-second budget rather than deliberately malformed timing records. The formal
+VM adds a case that pauses before the first record read, injects budget=null,
+waits past the originally admitted one-second expiry and resumes. It requires
+exit 75, no probe or successful result, and a closed gate. The raw malformed row
+remains ACCEPTED because it cannot safely be parsed/finished. This is controlled
+metadata-corruption injection, not physical disk-corruption recovery proof.
+
+The independent evidence review found current reports/source/JSON/HTML consistent;
+its note about missing exact syscall attribution for unrecordable physical-path
+faults is retained above. Reviewers' host clock substitutes are not counted as
+Linux verification; current VM results come from the actual Linux service.
 
 ## Remaining boundary
 

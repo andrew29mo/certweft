@@ -24,7 +24,7 @@ def exercise(root,work,config,parent,call,wire,normal_job,fault,mode):
     def inventory():return len((work/'executors.jsonl').read_text().splitlines()) if (work/'executors.jsonl').exists() else 0
     cfg=work/'verification-config'
     frozen={k:v for k,v in config.items() if k not in {'pause_at','storage_latch_marker','unrecorded_storage_marker','gate_stop_sync_eio'}}
-    frozen.update(verification_pause_at='verification-commit' if mode=='expired-finish' else 'probe-written' if mode=='probe-restart' else 'validation-start',verification_marker=str(work/'verification.json'),verification_pause_once=True)
+    frozen.update(verification_pause_at='before-verification-read' if mode=='malformed-budget' else 'verification-commit' if mode=='expired-finish' else 'probe-written' if mode=='probe-restart' else 'validation-start',verification_marker=str(work/'verification.json'),verification_pause_once=True)
     def start():
         pathlib.Path(config['socket']).unlink(missing_ok=True);(work/'verification.json').unlink(missing_ok=True)
         log=(work/('verification-service-'+str(time.time_ns())+'.log')).open('wb')
@@ -64,7 +64,7 @@ def exercise(root,work,config,parent,call,wire,normal_job,fault,mode):
                 job={'op':'submit','request_id':'seed-'+str(i),'certificate':'pem','epoch':'stale','revision':0}
                 ops.admit(job);ops.begin(job['request_id']);ops.finish(job['request_id'],'FAILED',{})
         before=protect();before_probe=probe_hash()
-        body={'op':'verify-storage','request_id':'verify-one','timeout_seconds':1 if mode.startswith('expired') else 10,**Gate.token(gate)}
+        body={'op':'verify-storage','request_id':'verify-one','timeout_seconds':1 if mode.startswith('expired') or mode=='malformed-budget' else 10,**Gate.token(gate)}
         rejected=call(config['socket'],body);assert not rejected['ok'] and rejected['reason']=='admin_required'
         accepted=root_call(body);assert accepted['ok'] and accepted['created'];initial=accepted['result']
         for _ in range(150):
@@ -109,6 +109,10 @@ def exercise(root,work,config,parent,call,wire,normal_job,fault,mode):
             result.update(restart_preserves_original_timing=True,pending_journal_observed_before_restart=True,old_executor_blocks_takeover=True,no_replayed_verifier=True)
         else:
             if mode.startswith('expired'):expire(initial['timing'])
+            if mode=='malformed-budget':
+                malformed={**initial['timing'],'budget':None}
+                with contextlib.closing(sqlite3.connect(root/'recovery.db')) as db, db:db.execute("UPDATE recovery_requests SET timing=? WHERE id='verify-one'",(json.dumps(malformed),))
+                expire(initial['timing'])
             if mode in {'enospc','readonly'}:fault()
             if mode=='bad-schema':
                 with contextlib.closing(sqlite3.connect(root/'journal.db')) as db, db:db.execute('DROP TABLE storage_probe')
@@ -119,13 +123,16 @@ def exercise(root,work,config,parent,call,wire,normal_job,fault,mode):
             if mode=='unknown-probe':
                 path=root/('verify-'+initial['probe']);path.mkdir();(path/'unknown').write_text('preserve')
             os.kill(child,signal.SIGCONT)
-            if mode in {'enospc','readonly'}:
+            if mode in {'enospc','readonly','malformed-budget'}:
                 parent.wait(5);assert parent.returncode==75
                 with contextlib.closing(sqlite3.connect('file:'+str(root/'recovery.db')+'?mode=ro',uri=True)) as db:
                     raw=db.execute("SELECT state,timing,result FROM recovery_requests WHERE id='verify-one'").fetchone()
-                    assert raw[0] in {'ACCEPTED','RUNNING','FAILED'} and raw[0]!='STORAGE_VERIFIED';assert json.loads(raw[1])==initial['timing']
+                    assert raw[0] in {'ACCEPTED','RUNNING','FAILED'} and raw[0]!='STORAGE_VERIFIED';assert json.loads(raw[1])==({**initial['timing'],'budget':None} if mode=='malformed-budget' else initial['timing'])
                 assert not live(child);row={'state':raw[0],'result':None}
                 result.update(service_exit=75,no_false_verified_record=True)
+                if mode=='malformed-budget':
+                    assert raw[0]=='ACCEPTED' and probe_hash()==before_probe and not (root/('verify-'+initial['probe'])).exists()
+                    result.update(malformed_budget_rejected_after_original_expiry=True,no_probe_executed=True)
             else:
                 row=poll('verify-one')
                 expected='EXPIRED' if mode.startswith('expired') else 'FAILED' if mode in {'sqlite-full','bad-schema','target-drift','unknown-probe'} else 'STORAGE_VERIFIED'
@@ -170,7 +177,7 @@ def main():
     def publish(report):
         text=json.dumps(report,indent=2);out.write_text(text);out.with_suffix('.html').write_text('<!doctype html><meta charset="utf-8"><pre>'+html.escape(text)+'</pre>')
     report={'passed':False,'status':'in_progress','cases':[],'scope':'formal source-run certweft.service + root recovery_executor; isolated Linux VM ext4 loop store; real Nginx fresh TLS observation','untested':['TLS restoration/unlock','persistent systemd deployment','VM reboot','power loss','physical media errors','D-state cleanup','automatic history/probe recycling']};publish(report)
-    matrix=[('enospc','pre','success'),('enospc','post','restart'),('enospc','pre','probe-restart'),('enospc','pre','expired-restart'),('enospc','pre','expired-run'),('enospc','pre','expired-finish'),('enospc','pre','enospc'),('readonly','pre','readonly'),('enospc','pre','sqlite-full'),('enospc','pre','bad-schema'),('enospc','pre','target-drift'),('enospc','pre','unknown-probe'),('enospc','pre','history'),('sqlite_full','post','success-latched')]
+    matrix=[('enospc','pre','success'),('enospc','post','restart'),('enospc','pre','probe-restart'),('enospc','pre','expired-restart'),('enospc','pre','expired-run'),('enospc','pre','expired-finish'),('enospc','pre','malformed-budget'),('enospc','pre','enospc'),('readonly','pre','readonly'),('enospc','pre','sqlite-full'),('enospc','pre','bad-schema'),('enospc','pre','target-drift'),('enospc','pre','unknown-probe'),('enospc','pre','history'),('sqlite_full','post','success-latched')]
     try:
         for kind,phase,mode in matrix:
             try:detail=scenario(kind,phase,check_gate=True,verification_mode=mode)

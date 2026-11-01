@@ -36,6 +36,9 @@ class RecoveryStore:
             if db.execute('SELECT version FROM recovery_meta').fetchall()!=[(1,)]:raise Rejected('recovery_schema')
             db.execute('CREATE TABLE IF NOT EXISTS recovery_requests(id TEXT PRIMARY KEY,digest TEXT NOT NULL,state TEXT NOT NULL,timing TEXT NOT NULL,target TEXT NOT NULL,probe TEXT NOT NULL,result TEXT)')
             db.execute("CREATE UNIQUE INDEX IF NOT EXISTS one_recovery ON recovery_requests((1)) WHERE state IN ('ACCEPTED','RUNNING')")
+            identities=list(db.execute('SELECT id FROM recovery_requests LIMIT 17'))
+            if len(identities)>16:raise Rejected('recovery_schema')
+            for (identity,) in identities:self.row(db,identity)
         Writer.sync(self.root)
     @staticmethod
     def identity(body):
@@ -48,10 +51,23 @@ class RecoveryStore:
     def row(db,identity):
         r=db.execute('SELECT digest,state,timing,target,probe,result FROM recovery_requests WHERE id=?',(identity,)).fetchone()
         if not r:raise Rejected('unknown_recovery_request')
-        if not re.fullmatch('[0-9a-f]{64}',r[0]) or r[1] not in {'ACCEPTED','RUNNING','STORAGE_VERIFIED','FAILED','EXPIRED','INTERRUPTED'} or type(r[4]) is not str or not re.fullmatch('[0-9a-f]{32}',r[4]):raise Rejected('recovery_schema')
+        if type(identity) is not str or not re.fullmatch('[A-Za-z0-9_-]{1,64}',identity):raise Rejected('recovery_schema')
+        if type(r[0]) is not str or not re.fullmatch('[0-9a-f]{64}',r[0]) or r[1] not in {'ACCEPTED','RUNNING','STORAGE_VERIFIED','FAILED','EXPIRED','INTERRUPTED'} or type(r[4]) is not str or not re.fullmatch('[0-9a-f]{32}',r[4]):raise Rejected('recovery_schema')
         if any(type(value) is not str or len(value)>16384 for value in [r[2],r[3]]) or r[5] is not None and (type(r[5]) is not str or len(r[5])>16384):raise Rejected('recovery_schema')
         row=dict(request_id=identity,digest=r[0],state=r[1],timing=json.loads(r[2]),target=json.loads(r[3]),probe=r[4],result=json.loads(r[5]) if r[5] else None)
         if type(row['timing']) is not dict or set(row['timing'])!={'budget','authority'} or type(row['target']) is not dict:raise Rejected('recovery_schema')
+        budget=row['timing']['budget'];authority=row['timing']['authority']
+        fields={'version','boot_id','accepted_boot_ns','expires_boot_ns','accepted_wall_ns','seconds'}
+        if type(budget) is not dict or set(budget)!=fields:raise Rejected('recovery_schema')
+        if any(type(budget[k]) is not int for k in fields-{'boot_id'}):raise Rejected('recovery_schema')
+        if budget['version']!=1 or not 1<=budget['seconds']<=10:raise Rejected('recovery_schema')
+        if type(budget['boot_id']) is not str or not re.fullmatch('[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}',budget['boot_id']):raise Rejected('recovery_schema')
+        if any(not 0<=budget[k]<2**63 for k in ['accepted_boot_ns','expires_boot_ns','accepted_wall_ns']):raise Rejected('recovery_schema')
+        if budget['expires_boot_ns']-budget['accepted_boot_ns']!=budget['seconds']*1_000_000_000:raise Rejected('recovery_schema')
+        if type(authority) is not dict or set(authority)!={'gate_epoch','gate_revision'}:raise Rejected('recovery_schema')
+        if type(authority['gate_epoch']) is not str or not re.fullmatch('[0-9a-f]{32}',authority['gate_epoch']) or type(authority['gate_revision']) is not int or not 0<=authority['gate_revision']<2**63-1:raise Rejected('recovery_schema')
+        canonical={'op':'verify-storage','request_id':identity,**authority,'timeout_seconds':budget['seconds']}
+        if RecoveryStore.identity(canonical)!=row['digest']:raise Rejected('recovery_schema')
         return row
     def get(self,identity):
         with self.transaction() as db:return self.row(db,identity)
