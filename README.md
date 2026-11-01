@@ -75,6 +75,14 @@ history. Formal filesystem and SQLite write checks can record STORAGE_VERIFIED,
 but never reset health, restore TLS or unlock. Restart interrupts rather than
 replays unfinished verification; old timing is preserved.
 
+## Committed certificate recovery
+
+[Recovery to VERIFIED_CLOSED](docs/CERTIFICATE_RECOVERY.md) adds root-only durable
+restoration of the current committed generation, real Nginx reload and fresh TLS
+confirmation. A paired completion record distinguishes finished recovery from
+partial publication. Normal updates remain blocked; health/request reconciliation
+and reopening are not implemented. Old storage-verification history stays separate.
+
 ## Evidence
 
 [JSON](evidence/exploration.json) and [HTML](evidence/exploration.html) contain the

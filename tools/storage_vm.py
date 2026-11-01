@@ -37,7 +37,7 @@ print(json.dumps(reply))
     if result.returncode:raise RuntimeError('controller_helper_failed')
     return json.loads(result.stdout)
 
-def scenario(kind,phase,check_gate=False,lifecycle_mode=None,verification_mode=None):
+def scenario(kind,phase,check_gate=False,lifecycle_mode=None,verification_mode=None,certificate_mode=None):
     work=pathlib.Path(tempfile.mkdtemp(prefix='cw-storage-',dir='/var/tmp'));os.chmod(work,0o711)
     image=work/'disk.img';mount=work/'store';mount.mkdir(mode=0o700)
     parent=None;ngpid=None;ngworkers=[];mounted=False;bound=False;child=None;loop=None
@@ -125,13 +125,13 @@ def scenario(kind,phase,check_gate=False,lifecycle_mode=None,verification_mode=N
             assert competing.returncode==73 and Gate(mount).read()==gate_before
             running_prepare=request(config['socket'],{'op':'prepare-recovery',**Gate.token(gate_before)})
             assert not running_prepare['ok'] and running_prepare['reason']=='not_recovery_required'
-            committed=call(config['socket'],{**job,'request_id':'healthy-smoke','certificate':old.read_text()});assert committed['created']
+            committed=call(config['socket'],{**job,'request_id':'healthy-smoke','certificate':(new if certificate_mode=='committed' else old).read_text()});assert committed['created']
             for _ in range(150):
                 terminal=call(config['socket'],{'op':'request-status','request_id':'healthy-smoke'})
                 if terminal.get('ok') and terminal['result']['state']=='COMMITTED' and not request(config['socket'],{'op':'recovery-status'})['executor_busy']:break
                 time.sleep(.025)
             else:raise AssertionError('healthy_activation_not_committed')
-            assert wire()=='baseline'
+            assert wire()==('candidate' if certificate_mode=='committed' else 'baseline')
             parent.terminate();parent.wait(3);assert parent.returncode==0 and Gate(mount).read()['state']=='STOPPED'
             pathlib.Path(config['socket']).unlink(missing_ok=True)
             log=(work/'healthy-restart.log').open('wb');parent=subprocess.Popen([sys.executable,'-m','certweft.service',str(cfg)],cwd=P,stdout=log,stderr=subprocess.STDOUT);log.close()
@@ -189,7 +189,7 @@ def scenario(kind,phase,check_gate=False,lifecycle_mode=None,verification_mode=N
         if phase=='pre':
             fault();reply=call(config['socket'],job);result['initial_reply']=reply
             assert not reply.get('ok') and not reply.get('created')
-            assert os.readlink(mount/'active.conf')==pointer and wire()=='baseline'
+            assert os.readlink(mount/'active.conf')==pointer and wire()==('candidate' if certificate_mode=='committed' else 'baseline')
         else:
             accepted=call(config['socket'],job);assert accepted.get('ok') and accepted.get('created')
             for _ in range(150):
@@ -363,6 +363,10 @@ def scenario(kind,phase,check_gate=False,lifecycle_mode=None,verification_mode=N
             from tools.recovery_vm import exercise
             detail,parent=exercise(mount,work,config,parent,call,wire,job,fault,verification_mode)
             result['verification']=detail
+        if certificate_mode:
+            from tools.certificate_vm import exercise
+            detail,parent=exercise(mount,work,config,parent,call,job,certificate_mode)
+            result['certificate_recovery']=detail
         result['passed']=True
     finally:
         cleanup=True

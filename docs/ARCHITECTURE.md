@@ -152,3 +152,11 @@ operation history with preserved budgets and fixed targets. A lease-fenced
 verifier checks storage/journal and writes only its reserved probe row. It never
 clears health, restores a certificate or opens the gate. Quarantined startup and
 status do not create/migrate missing main-journal schema.
+
+## Certificate restoration without reopening
+
+[CERTIFICATE_RECOVERY.md](CERTIFICATE_RECOVERY.md) adds versioned full-recovery
+requests sharing the fixed root quota. The formal backend restores only the
+captured committed identity and confirms new TLS. A durable intermediate proof
+and paired final closed marker/result distinguish incomplete publication. No
+health reset, normal-request reconciliation or RUNNING transition is delivered.

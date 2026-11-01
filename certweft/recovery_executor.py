@@ -1,7 +1,7 @@
 """Root storage verifier with inherited lifetime lease; no Nginx mutation API."""
 import json,os,signal,sys
 from pathlib import Path
-from .recovery import verify
+from .recovery import verify,RecoveryStore
 from .core import Rejected
 
 def main():
@@ -18,7 +18,12 @@ def main():
             pending.write_text(json.dumps({'pid':os.getpid(),'point':point}));os.replace(pending,marker);os.kill(os.getpid(),signal.SIGSTOP)
     try:
         checkpoint('before-verification-read')
-        result={'ok':True,'result':verify(config,body['request_id'],checkpoint)}
+        row=RecoveryStore(Path(config['writer']['root'])).get(body['request_id'])
+        if row['kind']=='recover-certificate':
+            from .certificate_recovery import recover_certificate
+            outcome=recover_certificate(config,body['request_id'],checkpoint)
+        else:outcome=verify(config,body['request_id'],checkpoint)
+        result={'ok':True,'result':outcome}
     except Exception as error:
         result={'ok':False,'error':type(error).__name__,'sqlite_error':getattr(error,'sqlite_errorname',None),'errno':getattr(error,'errno',None)}
     print(json.dumps(result))

@@ -158,7 +158,7 @@ def serve(config_path):
                             data+=chunk
                             if len(data)>49152:raise ValueError('budget')
                         body=json.loads(data);op=body.get('op')
-                        if op in {'verify-storage','recovery-request-status'}:
+                        if op in {'verify-storage','recover-certificate','recovery-request-status'}:
                             if uid!=0:raise Rejected('admin_required')
                             if op=='recovery-request-status':
                                 if set(body)!={'op','request_id'} or type(body['request_id']) is not str:raise Rejected('request_shape')
@@ -196,7 +196,7 @@ def serve(config_path):
                                 reply={'ok':True,'prepared':True,'updates_enabled':False,'restored':False,'gate':current}
                             else:
                                 current=gate.read()
-                                reply={'ok':True,'gate':current,'executor_busy':guard.locked(),'gate_allows_updates':current['state']=='RUNNING','storage_health_not_verified':True}
+                                reply={'ok':True,'gate':current,'executor_busy':guard.locked(),'gate_allows_updates':current['state']=='RUNNING','storage_health_not_verified':True,'completion_recorded':recovery.completion_recorded(current)}
                         elif op in {'cancel','request-status'}:
                             if set(body)!={'op','request_id'} or type(body['request_id']) is not str:raise Rejected('request_shape')
                             result=operations.cancel(body['request_id']) if op=='cancel' else operations.get(body['request_id'])

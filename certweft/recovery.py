@@ -5,7 +5,7 @@ from . import deadlines
 from .core import Writer,Rejected
 from .gate import Gate
 from .operations import decision
-LIVE=('ACCEPTED','RUNNING')
+LIVE=('ACCEPTED','RUNNING','CERTIFICATE_VERIFIED')
 
 class RecoveryStore:
     def __init__(self,root):self.root=Path(root);self.path=self.root/'recovery.db'
@@ -28,33 +28,42 @@ class RecoveryStore:
         else:
             fd=os.open(self.path,os.O_CREAT|os.O_EXCL|os.O_RDWR|os.O_NOFOLLOW,0o600);os.close(fd)
         with self.transaction() as db:
+            legacy=['id','digest','state','timing','target','probe','result']
             if existed:
                 if db.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name").fetchall()!=[('recovery_meta',),('recovery_requests',)]:raise Rejected('recovery_schema')
-                if [r[1] for r in db.execute('PRAGMA table_info(recovery_requests)')]!=['id','digest','state','timing','target','probe','result']:raise Rejected('recovery_schema')
-            db.execute('CREATE TABLE IF NOT EXISTS recovery_meta(version INTEGER NOT NULL)')
-            if not existed:db.execute('INSERT INTO recovery_meta VALUES(1)')
-            if db.execute('SELECT version FROM recovery_meta').fetchall()!=[(1,)]:raise Rejected('recovery_schema')
-            db.execute('CREATE TABLE IF NOT EXISTS recovery_requests(id TEXT PRIMARY KEY,digest TEXT NOT NULL,state TEXT NOT NULL,timing TEXT NOT NULL,target TEXT NOT NULL,probe TEXT NOT NULL,result TEXT)')
-            db.execute("CREATE UNIQUE INDEX IF NOT EXISTS one_recovery ON recovery_requests((1)) WHERE state IN ('ACCEPTED','RUNNING')")
+                columns=[r[1] for r in db.execute('PRAGMA table_info(recovery_requests)')]
+                version=db.execute('SELECT version FROM recovery_meta').fetchall()
+                if version==[(1,)] and columns==legacy:
+                    # Add only an explicit operation kind. Old digests/timing/results stay intact.
+                    db.execute("ALTER TABLE recovery_requests ADD COLUMN kind TEXT NOT NULL DEFAULT 'verify-storage'")
+                    db.execute('UPDATE recovery_meta SET version=2')
+                    db.execute('DROP INDEX IF EXISTS one_recovery')
+                elif version!=[(2,)] or columns!=legacy+['kind']:raise Rejected('recovery_schema')
+            else:
+                db.execute('CREATE TABLE recovery_meta(version INTEGER NOT NULL)');db.execute('INSERT INTO recovery_meta VALUES(2)')
+                db.execute("CREATE TABLE recovery_requests(id TEXT PRIMARY KEY,digest TEXT NOT NULL,state TEXT NOT NULL,timing TEXT NOT NULL,target TEXT NOT NULL,probe TEXT NOT NULL,result TEXT,kind TEXT NOT NULL DEFAULT 'verify-storage')")
+            db.execute("CREATE UNIQUE INDEX IF NOT EXISTS one_recovery_v2 ON recovery_requests((1)) WHERE state IN ('ACCEPTED','RUNNING','CERTIFICATE_VERIFIED')")
             identities=list(db.execute('SELECT id FROM recovery_requests LIMIT 17'))
             if len(identities)>16:raise Rejected('recovery_schema')
             for (identity,) in identities:self.row(db,identity)
         Writer.sync(self.root)
     @staticmethod
     def identity(body):
-        if set(body)!={'op','request_id','gate_epoch','gate_revision','timeout_seconds'} or body['op']!='verify-storage':raise Rejected('request_shape')
+        if set(body)!={'op','request_id','gate_epoch','gate_revision','timeout_seconds'} or body['op'] not in {'verify-storage','recover-certificate'}:raise Rejected('request_shape')
         if type(body['request_id']) is not str or not re.fullmatch('[A-Za-z0-9_-]{1,64}',body['request_id']):raise Rejected('request_id')
         if type(body['gate_epoch']) is not str or type(body['gate_revision']) is not int:raise Rejected('authority_shape')
         if type(body['timeout_seconds']) is not int or not 1<=body['timeout_seconds']<=10:raise Rejected('timeout_policy')
         return hashlib.sha256(json.dumps({k:v for k,v in body.items() if k!='request_id'},sort_keys=True).encode()).hexdigest()
     @staticmethod
     def row(db,identity):
-        r=db.execute('SELECT digest,state,timing,target,probe,result FROM recovery_requests WHERE id=?',(identity,)).fetchone()
+        r=db.execute('SELECT digest,state,timing,target,probe,result,kind FROM recovery_requests WHERE id=?',(identity,)).fetchone()
         if not r:raise Rejected('unknown_recovery_request')
         if type(identity) is not str or not re.fullmatch('[A-Za-z0-9_-]{1,64}',identity):raise Rejected('recovery_schema')
-        if type(r[0]) is not str or not re.fullmatch('[0-9a-f]{64}',r[0]) or r[1] not in {'ACCEPTED','RUNNING','STORAGE_VERIFIED','FAILED','EXPIRED','INTERRUPTED'} or type(r[4]) is not str or not re.fullmatch('[0-9a-f]{32}',r[4]):raise Rejected('recovery_schema')
+        if type(r[0]) is not str or not re.fullmatch('[0-9a-f]{64}',r[0]) or r[1] not in {'ACCEPTED','RUNNING','CERTIFICATE_VERIFIED','VERIFIED_CLOSED','STORAGE_VERIFIED','FAILED','EXPIRED','INTERRUPTED'} or type(r[4]) is not str or not re.fullmatch('[0-9a-f]{32}',r[4]):raise Rejected('recovery_schema')
         if any(type(value) is not str or len(value)>16384 for value in [r[2],r[3]]) or r[5] is not None and (type(r[5]) is not str or len(r[5])>16384):raise Rejected('recovery_schema')
-        row=dict(request_id=identity,digest=r[0],state=r[1],timing=json.loads(r[2]),target=json.loads(r[3]),probe=r[4],result=json.loads(r[5]) if r[5] else None)
+        if r[6] not in {'verify-storage','recover-certificate'}:raise Rejected('recovery_schema')
+        if r[6]=='verify-storage' and r[1] in {'CERTIFICATE_VERIFIED','VERIFIED_CLOSED'} or r[6]=='recover-certificate' and r[1]=='STORAGE_VERIFIED':raise Rejected('recovery_schema')
+        row=dict(kind=r[6],request_id=identity,digest=r[0],state=r[1],timing=json.loads(r[2]),target=json.loads(r[3]),probe=r[4],result=json.loads(r[5]) if r[5] else None)
         if type(row['timing']) is not dict or set(row['timing'])!={'budget','authority'} or type(row['target']) is not dict:raise Rejected('recovery_schema')
         budget=row['timing']['budget'];authority=row['timing']['authority']
         fields={'version','boot_id','accepted_boot_ns','expires_boot_ns','accepted_wall_ns','seconds'}
@@ -66,7 +75,7 @@ class RecoveryStore:
         if budget['expires_boot_ns']-budget['accepted_boot_ns']!=budget['seconds']*1_000_000_000:raise Rejected('recovery_schema')
         if type(authority) is not dict or set(authority)!={'gate_epoch','gate_revision'}:raise Rejected('recovery_schema')
         if type(authority['gate_epoch']) is not str or not re.fullmatch('[0-9a-f]{32}',authority['gate_epoch']) or type(authority['gate_revision']) is not int or not 0<=authority['gate_revision']<2**63-1:raise Rejected('recovery_schema')
-        canonical={'op':'verify-storage','request_id':identity,**authority,'timeout_seconds':budget['seconds']}
+        canonical={'op':row['kind'],'request_id':identity,**authority,'timeout_seconds':budget['seconds']}
         if RecoveryStore.identity(canonical)!=row['digest']:raise Rejected('recovery_schema')
         return row
     def get(self,identity):
@@ -82,10 +91,10 @@ class RecoveryStore:
             if Gate.token(gate)!={k:body[k] for k in ['gate_epoch','gate_revision']}:raise Rejected('stale_gate_authority')
             if gate['state']!='VERIFY_REQUIRED':raise Rejected('prepare_required')
             if db.execute('SELECT count(*) FROM recovery_requests').fetchone()[0]>=16:raise Rejected('recovery_history_full')
-            if db.execute("SELECT 1 FROM recovery_requests WHERE state IN ('ACCEPTED','RUNNING')").fetchone():raise Rejected('busy')
+            if db.execute("SELECT 1 FROM recovery_requests WHERE state IN ('ACCEPTED','RUNNING','CERTIFICATE_VERIFIED')").fetchone():raise Rejected('busy')
             with contextlib.closing(open_main(writer)) as main:target=writer.read(main)
             timing={'budget':deadlines.create(body['timeout_seconds']),'authority':Gate.token(gate)}
-            db.execute('INSERT INTO recovery_requests VALUES(?,?,?,?,?,?,NULL)',(body['request_id'],digest,'ACCEPTED',json.dumps(timing),json.dumps(target),uuid.uuid4().hex))
+            db.execute('INSERT INTO recovery_requests VALUES(?,?,?,?,?,?,NULL,?)',(body['request_id'],digest,'ACCEPTED',json.dumps(timing),json.dumps(target),uuid.uuid4().hex,body['op']))
             return self.row(db,body['request_id']),True
     def begin(self,identity):
         with self.transaction() as db:
@@ -99,17 +108,48 @@ class RecoveryStore:
         def final_authorization():
             if authorized[0] is not None:
                 getattr(self,'commit_checkpoint',lambda:None)()
-                deadlines.remaining(authorized[0]['timing']['budget']);require_authority(self.root,authorized[0])
+                require_authority(self.root,authorized[0]);deadlines.remaining(authorized[0]['timing']['budget'])
         with self.transaction(final_authorization) as db:
             row=self.row(db,identity)
             if row['state'] not in LIVE:return row
-            if state=='STORAGE_VERIFIED':
+            if state in {'STORAGE_VERIFIED','CERTIFICATE_VERIFIED'}:
                 deadlines.remaining(row['timing']['budget']);require_authority(self.root,row);authorized[0]=row
             db.execute('UPDATE recovery_requests SET state=?,result=? WHERE id=?',(state,json.dumps(result),identity))
             return self.row(db,identity)
+    def complete_closed(self,identity,result,checkpoint=lambda point:None):
+        published=[None];authorized=[None]
+        def final_authorization():
+            checkpoint('closed-result-commit')
+            current=Gate(self.root).read()
+            if current!=published[0]:raise Rejected('stale_gate_authority')
+            deadlines.remaining(authorized[0]['timing']['budget'])
+        try:
+            with self.transaction(final_authorization) as db:
+                row=self.row(db,identity)
+                if row['kind']!='recover-certificate' or row['state']!='CERTIFICATE_VERIFIED':raise Rejected('not_certificate_verified')
+                deadlines.remaining(row['timing']['budget']);require_authority(self.root,row);authorized[0]=row
+                published[0]=Gate(self.root).verified_closed(row['timing']['authority'])
+                checkpoint('closed-gate-published')
+                complete={**result,'closed_gate':Gate.token(published[0]),'updates_enabled':False}
+                db.execute("UPDATE recovery_requests SET state='VERIFIED_CLOSED',result=? WHERE id=?",(json.dumps(complete),identity))
+                return self.row(db,identity)
+        except Exception:
+            if published[0] is not None:
+                # Only this attempt's still-current closed marker may be demoted.
+                # Failure here leaves a closed but incomplete paired publication.
+                try:Gate(self.root).verification_incomplete(Gate.token(published[0]))
+                except Exception:pass
+            raise
+    def completion_recorded(self,gate):
+        if gate['state']!='VERIFIED_CLOSED':return False
+        with self.transaction() as db:
+            for (identity,) in db.execute("SELECT id FROM recovery_requests WHERE state='VERIFIED_CLOSED'").fetchall():
+                row=self.row(db,identity)
+                if row['kind']=='recover-certificate' and type(row['result']) is dict and row['result'].get('closed_gate')==Gate.token(gate):return True
+        return False
     def reconcile(self):
         with self.transaction() as db:
-            pending=list(db.execute("SELECT id FROM recovery_requests WHERE state IN ('ACCEPTED','RUNNING')"))
+            pending=list(db.execute("SELECT id FROM recovery_requests WHERE state IN ('ACCEPTED','RUNNING','CERTIFICATE_VERIFIED')"))
             for (identity,) in pending:
                 row=self.row(db,identity)
                 try:deadlines.remaining(row['timing']['budget']);state='INTERRUPTED'
@@ -195,6 +235,7 @@ def verify(config,identity,checkpoint=lambda point:None):
     writer=Writer(**config['writer']);store.commit_checkpoint=lambda:checkpoint('verification-commit')
     try:
         row=store.begin(identity)
+        if row['kind']!='verify-storage':raise Rejected('operation_kind')
         with deadlines.use(row['timing']['budget']):
             checkpoint('validation-start');deadlines.check();require_authority(writer.root,row)
             with open(writer.root/'writer.lock','a+b') as lock:

@@ -21,7 +21,7 @@ class Gate:
         if type(s) is not dict or set(s)!={'version','epoch','revision','state','reason'}:raise Rejected('gate_schema')
         if type(s['version']) is not int or s['version']!=1 or type(s['epoch']) is not str or not re.fullmatch('[0-9a-f]{32}',s['epoch']):raise Rejected('gate_schema')
         if type(s['revision']) is not int or not 0<=s['revision']<2**63-1:raise Rejected('gate_schema')
-        if s['state'] not in {'STOPPED','RUNNING','RECOVERY_REQUIRED','VERIFY_REQUIRED'} or s['reason'] not in {'new_store','clean_stop','session_started','unclean_or_blocked','legacy_store','pending_on_clean_start','operator_prepared'}:raise Rejected('gate_schema')
+        if s['state'] not in {'STOPPED','RUNNING','RECOVERY_REQUIRED','VERIFY_REQUIRED','VERIFIED_CLOSED'} or s['reason'] not in {'new_store','clean_stop','session_started','unclean_or_blocked','legacy_store','pending_on_clean_start','operator_prepared','recovery_verified','recovery_incomplete'}:raise Rejected('gate_schema')
         return s
     def certified(self,s):
         try:fd=os.open(self.receipt,os.O_RDONLY|os.O_NOFOLLOW)
@@ -88,3 +88,13 @@ class Gate:
         if self.token(s)!=authority:raise Rejected('stale_gate_authority')
         if s['state']!='RECOVERY_REQUIRED':raise Rejected('not_recovery_required')
         return self.write({**s,'revision':s['revision']+1,'state':'VERIFY_REQUIRED','reason':'operator_prepared'})
+
+    def verified_closed(self,authority):
+        s=self.read()
+        if self.token(s)!=authority:raise Rejected('stale_gate_authority')
+        if s['state']!='VERIFY_REQUIRED':raise Rejected('prepare_required')
+        return self.write({**s,'revision':s['revision']+1,'state':'VERIFIED_CLOSED','reason':'recovery_verified'})
+    def verification_incomplete(self,authority):
+        s=self.read()
+        if self.token(s)!=authority or s['state']!='VERIFIED_CLOSED':raise Rejected('stale_gate_authority')
+        return self.write({**s,'revision':s['revision']+1,'state':'VERIFY_REQUIRED','reason':'recovery_incomplete'})

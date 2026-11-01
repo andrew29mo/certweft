@@ -1,5 +1,11 @@
 # Durable root storage/journal verification (P0-1 / P0-2)
 
+**Certificate recovery update:** [CERTIFICATE_RECOVERY.md](CERTIFICATE_RECOVERY.md)
+adds a distinct full recovery kind with explicit v1-to-v2 catalog migration.
+Storage-only operations still never restore or unlock; the 59-unit/fifteen-case
+counts below describe the preceding storage milestone. Current source results
+are listed in CERTIFICATE_RECOVERY.md.
+
 ## Delivered scope
 
 This stage persists a root verification request and tests storage plus journal

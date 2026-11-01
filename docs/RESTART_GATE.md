@@ -1,5 +1,8 @@
 # P0-1 / P0-2: preexisting restart gate and root recovery preparation
 
+**Closed certificate completion:** [CERTIFICATE_RECOVERY.md](CERTIFICATE_RECOVERY.md)
+adds VERIFIED_CLOSED without admission authority; restart still quarantines it.
+
 **Storage-verification update:** [STORAGE_VERIFICATION.md](STORAGE_VERIFICATION.md)
 adds durable root verification after preparation, without restoration or unlock.
 Current unit counts and source-bound reports are listed there; the original

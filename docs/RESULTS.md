@@ -1,6 +1,13 @@
 # Results and provenance
 
-## Current durable verification milestone
+## Current closed certificate recovery milestone
+
+See [CERTIFICATE_RECOVERY.md](CERTIFICATE_RECOVERY.md) and its source-bound
+JSON/HTML for committed restoration, fresh TLS and crash/expiry cases. All normal
+admission stays closed. Storage, gate and journal verification regressions are
+rerun against the same source; prior unit records retain their historical scope.
+
+## Durable storage verification milestone
 
 See [STORAGE_VERIFICATION.md](STORAGE_VERIFICATION.md) and the source-bound recovery
 validation/unit JSON and HTML. Gate and storage regressions are rerun separately.
