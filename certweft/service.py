@@ -35,6 +35,18 @@ def start_work(operations,body,target,fail_start=False):
         except Exception:os._exit(75)
         raise
 
+def reap_executor(child,terminate):
+    """Reap this owned session, including pipe-holding descendants on error."""
+    if terminate:
+        try:os.killpg(child.pid,signal.SIGKILL)
+        except ProcessLookupError:pass
+    try:child.wait(timeout=3)
+    except subprocess.TimeoutExpired:os._exit(75)
+    for stream in (child.stdin,child.stdout,child.stderr):
+        if stream is not None:
+            try:stream.close()
+            except OSError:pass
+
 def serve(config_path):
     if os.geteuid()!=0:raise PermissionError('root writer required')
     config=load_config(config_path);lease_path=Path(config['lease'])
@@ -66,7 +78,7 @@ def serve(config_path):
         if recovery.reconcile() and session['state']=='RUNNING':
             with decision(root/'journal.db'):session=gate.block(config['gate_authority'])
             config['gate_authority']=Gate.token(session)
-        active=[None]
+        active=[None];process_lock=threading.RLock();launch_stopped=[False]
         def unrecorded_storage(error):
             # Called while the metadata decision barrier is still held. No
             # orphaned executor may race COMMIT after an unrecordable fault.
@@ -74,14 +86,12 @@ def serve(config_path):
             if config.get('unrecorded_storage_marker'):
                 try:Path(config['unrecorded_storage_marker']).write_text(json.dumps(storage.detail(error)))
                 except OSError:pass
-            child=active[0]
-            if child is not None:
-                if child.poll() is None:
-                    try:os.killpg(child.pid,signal.SIGKILL)
-                    except ProcessLookupError:pass
-                try:child.wait(timeout=3)
-                except subprocess.TimeoutExpired:os._exit(75)
-            os._exit(75)
+            # Launch/register and fatal cleanup are one critical section;
+            # cleanup cannot miss a Popen that has not yet entered active[0].
+            with process_lock:
+                child=active[0]
+                if child is not None:reap_executor(child,True)
+                os._exit(75)
         operations.unrecorded_storage=unrecorded_storage
         if config.get('storage_latch_marker'):
             def pause_storage_latch():
@@ -92,25 +102,30 @@ def serve(config_path):
             operations.before_storage_latch=pause_storage_latch
         guard=threading.Lock()
         def execute(body,uid,module='certweft.executor'):
-            child=subprocess.Popen([sys.executable,'-m',module,str(fd)],
-                start_new_session=True,pass_fds=(fd,),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-            active[0]=child
-            if config.get('executor_inventory'):
-                raw=Path('/proc',str(child.pid),'stat').read_text()
-                record=json.dumps({'pid':child.pid,'start':raw[raw.rfind(')')+2:].split()[19]})+'\n'
-                inventory=os.open(config['executor_inventory'],os.O_WRONLY|os.O_CREAT|os.O_APPEND|os.O_NOFOLLOW,0o600)
-                try:os.write(inventory,record.encode())
-                finally:os.close(inventory)
-            try:out,err=child.communicate(json.dumps({'body':body,'peer_uid':uid,'config':config}).encode(),timeout=20)
-            except subprocess.TimeoutExpired:
-                import signal
-                os.killpg(child.pid,signal.SIGKILL)
-                try:child.communicate(timeout=3)
-                except subprocess.TimeoutExpired:os._exit(75)
-                raise TimeoutError('executor_timeout')
-            if active[0] is child:active[0]=None
-            if child.returncode!=0 or len(out)>16384:raise RuntimeError('executor_failure')
-            return json.loads(out)
+            child=None;completed=False
+            try:
+                with process_lock:
+                    if launch_stopped[0]:raise Rejected('service_stopping')
+                    if active[0] is not None:raise Rejected('executor_still_registered')
+                    child=subprocess.Popen([sys.executable,'-m',module,str(fd)],
+                        start_new_session=True,pass_fds=(fd,),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+                    active[0]=child
+                if config.get('executor_inventory'):
+                    raw=Path('/proc',str(child.pid),'stat').read_text()
+                    record=json.dumps({'pid':child.pid,'start':raw[raw.rfind(')')+2:].split()[19]})+'\n'
+                    inventory=os.open(config['executor_inventory'],os.O_WRONLY|os.O_CREAT|os.O_APPEND|os.O_NOFOLLOW,0o600)
+                    try:os.write(inventory,record.encode())
+                    finally:os.close(inventory)
+                try:out,err=child.communicate(json.dumps({'body':body,'peer_uid':uid,'config':config}).encode(),timeout=20)
+                except subprocess.TimeoutExpired:raise TimeoutError('executor_timeout')
+                if child.returncode!=0 or len(out)>16384:raise RuntimeError('executor_failure')
+                result=json.loads(out);completed=True
+                return result
+            finally:
+                if child is not None:
+                    with process_lock:
+                        reap_executor(child,not completed or child.poll() is None)
+                        if active[0] is child:active[0]=None
         # A dirty session is never automatically repaired or replayed at startup.
         # Preserve pending/core evidence for the future verification backend.
         if session['state']=='RUNNING' and operations.pending():
@@ -268,14 +283,13 @@ def serve(config_path):
                     try:conn.sendall(json.dumps(reply).encode()+b'\n')
                     except OSError:pass
         for sig,handler in previous.items():signal.signal(sig,handler)
-        if active[0] is not None or guard.locked():
-            child=active[0]
-            if child is not None and child.poll() is None:
-                try:os.killpg(child.pid,signal.SIGKILL)
-                except ProcessLookupError:pass
-                child.wait(timeout=3)
-            # Never certify an exit that interrupted work.
-        elif stopping.is_set() and session['state']=='RUNNING':
+        with process_lock:
+            launch_stopped[0]=True
+            interrupted=active[0] is not None or guard.locked()
+            if active[0] is not None:
+                reap_executor(active[0],True);active[0]=None
+        # Never certify an exit that interrupted work or an unlaunched request.
+        if not interrupted and stopping.is_set() and session['state']=='RUNNING':
             if operations.clean_shutdown_allowed() and Writer(**config['writer']).status()['state']=='READY':
                 with decision(root/'journal.db'):gate.stop(config['gate_authority'])
     finally:os.close(fd)

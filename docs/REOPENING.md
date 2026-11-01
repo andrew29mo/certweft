@@ -117,8 +117,14 @@ allocation exceeding that fixed cap; the root catalog keeps its 128-page cap.
 The main-FULL case seeds an inert well-formed main record solely to install an
 INSERT trigger; it is not a prior successful reopening.
 
-The current matrix has 26 formal-service cases; the full Linux unit suite has
-111 tests (including 15 new admission-boundary tests).
+The current matrix has 27 formal-service cases; the full Linux unit suite has
+113 tests (including 16 admission-boundary tests and the real-process group
+cleanup unit). Review corrections and four negative controls are described in
+[REOPENING_REVIEW.md](REOPENING_REVIEW.md).
+
+The added root-diagnostic inventory case uses actual /dev/full write ENOSPC,
+independent lease-holder scans and repaired-service restart; it is not ext4
+exhaustion or a successful reopening case.
 
 The matrix includes real ext4 ENOSPC, read-only bind-mount EROFS and SQLite FULL
 at reserved-probe/main-publication/root-completion points; expiry, changed source

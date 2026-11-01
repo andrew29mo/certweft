@@ -2,7 +2,7 @@
 import json,sqlite3,time,unittest
 from unittest.mock import patch
 from certweft import deadlines
-from certweft.admission import open_updates,record,effective_budget
+from certweft.admission import open_updates,record,effective_budget,expected
 from certweft.core import Rejected
 from certweft.gate import Gate
 from certweft.opening import require_updates
@@ -100,14 +100,33 @@ class AdmissionLedger(unittest.TestCase):
             d.execute('CREATE TABLE pressure(data BLOB)');d.execute('CREATE TRIGGER pressure_probe BEFORE UPDATE ON storage_probe BEGIN INSERT INTO pressure VALUES(zeroblob(1048576)); END');self.config['sqlite_max_pages']=d.execute('PRAGMA page_count').fetchone()[0]+1
         out=self.run_open();self.assertEqual(out['state'],'FAILED');self.assertEqual(out['result']['sqlite_error'],'SQLITE_FULL')
         with self.assertRaises(Rejected):self.allowed()
+    def candidate(self,db):
+        state=json.loads(db.execute('SELECT data FROM state').fetchone()[0]);target={**state,'revision':state['revision']+1}
+        timing={'activation':deadlines.create(10),'recovery':None}
+        db.execute("INSERT INTO requests VALUES('valid-commit',?,'RUNNING',NULL,?)",('b'*64,json.dumps(timing)));db.commit()
+        return state,target
     def test_main_only_receipt_cannot_admit_or_commit(self):
-        self.ready()
-        def check(point):
-            if point=='admission-main-committed':
-                with self.assertRaises(Rejected):self.allowed()
-                with self.db() as d:
-                    with self.assertRaises(Rejected):Operations.commit(d,'absent',{},gate_authority=Gate.token(self.gate.read()))
-        self.assertEqual(self.run_open(check)['state'],'OPENED')
+        row=self.ready();self.store.begin('reopen')
+        with self.db() as d:
+            d.execute('CREATE TABLE admission_release(id INTEGER PRIMARY KEY,record TEXT)');d.execute('INSERT INTO admission_release VALUES(1,?)',(json.dumps(expected(row)),));d.commit()
+            before,target=self.candidate(d);reached=[]
+            with self.assertRaisesRegex(Rejected,'^recovery_required$'):
+                Operations.commit(d,'valid-commit',target,lambda:reached.append(True),gate_authority=Gate.token(self.gate.read()))
+            d.rollback()
+            self.assertFalse(reached,'commit_checkpoint_reached_before_admission')
+            self.assertEqual(json.loads(d.execute('SELECT data FROM state').fetchone()[0]),before)
+            self.assertEqual(d.execute("SELECT state,result FROM requests WHERE id='valid-commit'").fetchone(),('RUNNING',None))
+    def test_commit_second_guard_rejects_gate_change_after_sql_writes(self):
+        self.ready();self.assertEqual(self.run_open()['state'],'OPENED');authority=Gate.token(self.gate.read());new=[]
+        with self.db() as d:
+            before,target=self.candidate(d)
+            def crossing():new.append(self.gate.start())
+            with self.assertRaisesRegex(Rejected,'^stale_gate_authority$'):
+                Operations.commit(d,'valid-commit',target,crossing,gate_authority=authority)
+            d.rollback()
+            self.assertEqual(len(new),1);self.assertEqual(self.gate.read(),new[0])
+            self.assertEqual(json.loads(d.execute('SELECT data FROM state').fetchone()[0]),before)
+            self.assertEqual(d.execute("SELECT state,result FROM requests WHERE id='valid-commit'").fetchone(),('RUNNING',None))
     def test_expiry_after_durable_root_result_closes_instead_of_adopting(self):
         row=self.ready(own_seconds=1)
         def wait(point):

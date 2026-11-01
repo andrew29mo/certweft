@@ -3,14 +3,16 @@
 See [REOPENING.md](REOPENING.md) for root contract, three-record admission,
 original deadline intersection, failure/restart closure and real follow-up TLS
 activation. Earlier closed milestones below retain their narrower stage scope.
-Current unit evidence is admission-units.json/html (111 Linux tests). The new
-reopening matrix has 26 formal-service VM cases, including real follow-up
+Current unit evidence is admission-units.json/html (113 Linux tests). The new
+reopening matrix has 27 formal-service VM cases, including real follow-up
 activation and fatal-exit executor cleanup. Earlier unit reports are historical.
 
-Current fixed-source validation: 111 Linux unit tests, 26 reopening VM cases and
+Current fixed-source validation: 113 Linux unit tests, 27 reopening VM cases and
 121 VM regressions (release 26, opening 20, reconciliation 19, certificate 17,
 storage verification 15, gate 10, storage faults 14). The opening readiness
-mutation is a separate expected-failure control, not another passing scenario.
+mutation and four new admission/cleanup controls are separate expected-failure
+controls, not additional passing scenarios. See REOPENING_REVIEW.md for findings
+and the distinctions between SQL, real-process and formal-service tests.
 All nine current JSON/HTML pairs have identical rendered payloads, exact current
 source hashes and passing cleanup checks. No earlier failed/source-changed
 attempt is counted; archived attempts remain available. This is bounded isolated

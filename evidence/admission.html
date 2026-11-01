@@ -9,8 +9,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21088 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21088 kB&quot;
+        &quot;VmHWM&quot;: &quot;21352 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21352 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -19,8 +19,182 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22716 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22716 kB&quot;
+        &quot;VmHWM&quot;: &quot;22708 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22708 kB&quot;
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;error&quot;: &quot;StorageBlocked&quot;,
+        &quot;sqlite_error&quot;: null,
+        &quot;errno&quot;: null,
+        &quot;reason&quot;: &quot;storage_unavailable&quot;
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: &quot;DEGRADED&quot;,
+      &quot;request_result&quot;: {
+        &quot;error&quot;: &quot;OperationalError&quot;,
+        &quot;expired&quot;: false,
+        &quot;sqlite_error&quot;: &quot;SQLITE_FULL&quot;,
+        &quot;errno&quot;: null
+      },
+      &quot;storage_health&quot;: &quot;STORAGE_FAILED&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: null,
+      &quot;restart_still_blocks_new_updates&quot;: true,
+      &quot;restart_gate&quot;: {
+        &quot;repaired_storage_still_blocks&quot;: true,
+        &quot;journal_byte_identical_after_repair&quot;: true,
+        &quot;no_tls_or_pointer_changes&quot;: true,
+        &quot;root_only_prepare&quot;: true,
+        &quot;stale_and_duplicate_cas_rejected&quot;: true,
+        &quot;second_restart_invalidates_old_cas&quot;: true,
+        &quot;prepared_never_enables_updates&quot;: true,
+        &quot;raw_health_before_repaired_restart&quot;: &quot;STORAGE_FAILED&quot;,
+        &quot;wire_preserved&quot;: &quot;baseline&quot;
+      },
+      &quot;certificate_recovery&quot;: {
+        &quot;mode&quot;: &quot;admission-inventory-failure&quot;,
+        &quot;root_only&quot;: true,
+        &quot;fixed_committed_target&quot;: true,
+        &quot;inflight_replay_and_kind_conflict_verified&quot;: true,
+        &quot;committed_pointer_and_new_tls_verified&quot;: true,
+        &quot;paired_completion_recorded&quot;: true,
+        &quot;journal_preparation&quot;: {
+          &quot;mode&quot;: &quot;latched&quot;,
+          &quot;formal_service&quot;: true,
+          &quot;root_only&quot;: true,
+          &quot;captured_snapshot&quot;: true,
+          &quot;inflight_dedup_and_conflict&quot;: true,
+          &quot;main_receipt_and_root_proof_match&quot;: true,
+          &quot;ready_healthy_but_closed&quot;: true,
+          &quot;historical_terminal_rows_preserved&quot;: true,
+          &quot;normal_update_with_current_core_rejected_by_gate&quot;: &quot;stale_gate_authority&quot;,
+          &quot;terminal&quot;: &quot;JOURNAL_VERIFIED_CLOSED&quot;,
+          &quot;terminal_result&quot;: {
+            &quot;journal_reconciled&quot;: true,
+            &quot;health_verified&quot;: true,
+            &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
+            &quot;receipt_digest&quot;: &quot;beaa760ec77d490253a69cc4d73370084adf8348140cdf62b0bb335705bda682&quot;,
+            &quot;after_digest&quot;: &quot;2a04fca2e209be0694df00f4d533c52b03621f0f97cd3574862cc57b87272fba&quot;,
+            &quot;closed_gate&quot;: {
+              &quot;gate_epoch&quot;: &quot;04a4d212684f472799cf2da79bd9ee92&quot;,
+              &quot;gate_revision&quot;: 8
+            },
+            &quot;committed&quot;: &quot;ec12fb425a3143e48758b831ed60b272&quot;,
+            &quot;fingerprint&quot;: &quot;9ba5f64e97bf27b83cb235d9589283d60aa482bdeea2c6736a020397c12ee777&quot;,
+            &quot;updates_enabled&quot;: false,
+            &quot;main_committed&quot;: true
+          },
+          &quot;original_timing_preserved&quot;: true,
+          &quot;updates_enabled&quot;: false
+        },
+        &quot;opening_intent&quot;: {
+          &quot;mode&quot;: &quot;success&quot;,
+          &quot;root_only&quot;: true,
+          &quot;formal_service&quot;: true,
+          &quot;invalid_bindings_rejected&quot;: true,
+          &quot;inflight_dedup_and_conflict&quot;: true,
+          &quot;exact_degraded_rows_referenced_without_rewrite&quot;: true,
+          &quot;terminal&quot;: &quot;OPENING_VERIFIED_CLOSED&quot;,
+          &quot;terminal_result&quot;: {
+            &quot;pair_verified&quot;: true,
+            &quot;degraded_references_verified&quot;: true,
+            &quot;degraded_reference_count&quot;: 1,
+            &quot;marker_digest&quot;: &quot;b5b4041eb05e71e016cf2417bedbacb60de3bfdab8f4a59f11a8b5576bffc570&quot;,
+            &quot;updates_enabled&quot;: false,
+            &quot;release_authorized&quot;: false
+          },
+          &quot;original_budget_preserved&quot;: true,
+          &quot;main_history_and_health_unchanged&quot;: true,
+          &quot;gate_unchanged_except_explicit_fixture&quot;: true,
+          &quot;entry_executor_commit_reject_unpaired_running&quot;: true,
+          &quot;updates_enabled&quot;: false
+        },
+        &quot;release_preparation&quot;: {
+          &quot;mode&quot;: &quot;success&quot;,
+          &quot;formal_service&quot;: true,
+          &quot;updates_enabled&quot;: false,
+          &quot;dedup_preserves_both_original_budgets&quot;: true,
+          &quot;fresh_storage_certificate_tls_and_pair_verified&quot;: true,
+          &quot;terminal&quot;: &quot;RELEASE_VERIFIED_CLOSED&quot;,
+          &quot;terminal_result&quot;: {
+            &quot;storage_verified&quot;: true,
+            &quot;certificate_verified&quot;: true,
+            &quot;tls_confirmed&quot;: true,
+            &quot;committed&quot;: &quot;ec12fb425a3143e48758b831ed60b272&quot;,
+            &quot;fingerprint&quot;: &quot;9ba5f64e97bf27b83cb235d9589283d60aa482bdeea2c6736a020397c12ee777&quot;,
+            &quot;receipt_digest&quot;: &quot;ecce4621962a7f1358b80605de8f555b9331be4e60e7eeb15c41b08f1c040a35&quot;,
+            &quot;updates_enabled&quot;: false,
+            &quot;release_authorized&quot;: false
+          },
+          &quot;both_original_budgets_preserved&quot;: true,
+          &quot;main_history_and_health_unchanged&quot;: true,
+          &quot;normal_updates_rejected&quot;: true
+        },
+        &quot;admission&quot;: {
+          &quot;mode&quot;: &quot;inventory-failure&quot;,
+          &quot;formal_service&quot;: true,
+          &quot;fault&quot;: &quot;root-owned executor_inventory=/dev/full; actual write ENOSPC, not ext4 exhaustion&quot;,
+          &quot;errors&quot;: [
+            {
+              &quot;error&quot;: &quot;OSError&quot;,
+              &quot;errno&quot;: 28
+            },
+            {
+              &quot;error&quot;: &quot;OSError&quot;,
+              &quot;errno&quot;: 28
+            }
+          ],
+          &quot;two_launch_failures_reaped_before_reply&quot;: true,
+          &quot;no_old_lease_after_stop&quot;: true,
+          &quot;repaired_service_status_succeeded&quot;: true,
+          &quot;updates_enabled&quot;: false,
+          &quot;seconds&quot;: 0.7138754300000301
+        },
+        &quot;terminal_result&quot;: {
+          &quot;storage_verified&quot;: true,
+          &quot;certificate_verified&quot;: true,
+          &quot;tls_confirmed&quot;: true,
+          &quot;restored&quot;: true,
+          &quot;updates_enabled&quot;: false,
+          &quot;committed&quot;: &quot;ec12fb425a3143e48758b831ed60b272&quot;,
+          &quot;fingerprint&quot;: &quot;9ba5f64e97bf27b83cb235d9589283d60aa482bdeea2c6736a020397c12ee777&quot;,
+          &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
+          &quot;closed_gate&quot;: {
+            &quot;gate_epoch&quot;: &quot;04a4d212684f472799cf2da79bd9ee92&quot;,
+            &quot;gate_revision&quot;: 8
+          }
+        },
+        &quot;terminal&quot;: &quot;VERIFIED_CLOSED&quot;,
+        &quot;certificate_stage_logical_journal_unchanged&quot;: true,
+        &quot;certificate_stage_immutable_generations_unchanged&quot;: true,
+        &quot;certificate_stage_updates_enabled&quot;: false,
+        &quot;updates_enabled&quot;: false
+      },
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 6,
+      &quot;elapsed_seconds&quot;: 5.681369829999994
+    },
+    {
+      &quot;fault&quot;: &quot;sqlite_full&quot;,
+      &quot;phase&quot;: &quot;post&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;pager_max_pages&quot;: 9,
+      &quot;allocation_bytes&quot;: 65536,
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;21360 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21360 kB&quot;
+      },
+      &quot;candidate_observed_before_fault&quot;: true,
+      &quot;active_executor_fencing&quot;: {
+        &quot;prepare_denied_while_busy&quot;: true,
+        &quot;competing_writer_rejected&quot;: true,
+        &quot;gate_unchanged&quot;: true
+      },
+      &quot;executor_memory_at_checkpoint&quot;: {
+        &quot;VmHWM&quot;: &quot;22708 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22708 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -74,14 +248,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;099c38bfc356948059c0f11872918291544e391549a2120d6fb1cc8176210fbc&quot;,
-            &quot;after_digest&quot;: &quot;510c62c1076efdcd95cbb67d2b41adf38a1534421b060f83bbdf940931a486d7&quot;,
+            &quot;receipt_digest&quot;: &quot;52577a4d995252b0b5046d01f0a9bd4fbe1f919c92649f87cc17de88b0188a92&quot;,
+            &quot;after_digest&quot;: &quot;dfb9a0c2aae04d478ff103f7e281474d0466f6bc15a96e5962606f3e4e22ed9e&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;ee03a64676314fcda54272ab0ac93893&quot;,
+              &quot;gate_epoch&quot;: &quot;aadfc1cdcb2840a7821ee2aedc5d5490&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;7139b39ea87847f9a8768ed9f5d79b90&quot;,
-            &quot;fingerprint&quot;: &quot;a48905ab9606b2b1a9dbe28a30214648cd6259e26d86d6a8cdb96fcca24fced5&quot;,
+            &quot;committed&quot;: &quot;4e5699a975664a37beb6dd81a5dcafc2&quot;,
+            &quot;fingerprint&quot;: &quot;92a04ec88da564a6cad28fbbdc07e5887df047aebeac0e30e83791f65e2f6f40&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -100,7 +274,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;ab883643b2e4a93d7342fbfe5e18c7b9b5a1cb76a92dd5bf3ae3efd0c39c0689&quot;,
+            &quot;marker_digest&quot;: &quot;5ae3ab259eea3dae23e992ce02557f7049b2682c8a912f12f48434ce0d7e6653&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -121,9 +295,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;7139b39ea87847f9a8768ed9f5d79b90&quot;,
-            &quot;fingerprint&quot;: &quot;a48905ab9606b2b1a9dbe28a30214648cd6259e26d86d6a8cdb96fcca24fced5&quot;,
-            &quot;receipt_digest&quot;: &quot;fd5aee534072581dbfa45680bd18910a05f2b1736b01524c3a01ae5e5c9ee168&quot;,
+            &quot;committed&quot;: &quot;4e5699a975664a37beb6dd81a5dcafc2&quot;,
+            &quot;fingerprint&quot;: &quot;92a04ec88da564a6cad28fbbdc07e5887df047aebeac0e30e83791f65e2f6f40&quot;,
+            &quot;receipt_digest&quot;: &quot;c609cc7c476e93c63c4556bf135e96f8438836843c311527b8063690ee5a972a&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -135,12 +309,12 @@
           &quot;mode&quot;: &quot;success&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21624 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21624 kB&quot;
+            &quot;VmHWM&quot;: &quot;21736 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21736 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;21192 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21192 kB&quot;
+            &quot;VmHWM&quot;: &quot;21176 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21176 kB&quot;
           },
           &quot;real_update_committed&quot;: true,
           &quot;new_leaf_observed_over_fresh_tls&quot;: true,
@@ -149,11 +323,11 @@
           &quot;terminal_result&quot;: {
             &quot;storage_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;7139b39ea87847f9a8768ed9f5d79b90&quot;,
-            &quot;fingerprint&quot;: &quot;a48905ab9606b2b1a9dbe28a30214648cd6259e26d86d6a8cdb96fcca24fced5&quot;,
-            &quot;admission_digest&quot;: &quot;39ab3529f3f2df1737459fb71da6096f6242cb3adc7d12fdb7c2f3317c07391b&quot;,
+            &quot;committed&quot;: &quot;4e5699a975664a37beb6dd81a5dcafc2&quot;,
+            &quot;fingerprint&quot;: &quot;92a04ec88da564a6cad28fbbdc07e5887df047aebeac0e30e83791f65e2f6f40&quot;,
+            &quot;admission_digest&quot;: &quot;c4028b34ae45a381efd1bf76a7335d7ad0d63a7d63815499041a967d4c485c55&quot;,
             &quot;opened_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;ee03a64676314fcda54272ab0ac93893&quot;,
+              &quot;gate_epoch&quot;: &quot;aadfc1cdcb2840a7821ee2aedc5d5490&quot;,
               &quot;gate_revision&quot;: 9
             },
             &quot;updates_enabled&quot;: true
@@ -161,9 +335,9 @@
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
             &quot;VmHWM&quot;: &quot;21888 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21720 kB&quot;
+            &quot;VmRSS&quot;: &quot;21828 kB&quot;
           },
-          &quot;seconds&quot;: 1.4076636559998406
+          &quot;seconds&quot;: 1.433120912999982
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -171,11 +345,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;7139b39ea87847f9a8768ed9f5d79b90&quot;,
-          &quot;fingerprint&quot;: &quot;a48905ab9606b2b1a9dbe28a30214648cd6259e26d86d6a8cdb96fcca24fced5&quot;,
+          &quot;committed&quot;: &quot;4e5699a975664a37beb6dd81a5dcafc2&quot;,
+          &quot;fingerprint&quot;: &quot;92a04ec88da564a6cad28fbbdc07e5887df047aebeac0e30e83791f65e2f6f40&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;ee03a64676314fcda54272ab0ac93893&quot;,
+            &quot;gate_epoch&quot;: &quot;aadfc1cdcb2840a7821ee2aedc5d5490&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -188,7 +362,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 7,
-      &quot;elapsed_seconds&quot;: 6.02720812199982
+      &quot;elapsed_seconds&quot;: 6.274773942999957
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -197,8 +371,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21084 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21084 kB&quot;
+        &quot;VmHWM&quot;: &quot;21356 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21356 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -207,8 +381,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22720 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22720 kB&quot;
+        &quot;VmHWM&quot;: &quot;22704 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22704 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -262,14 +436,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;cfcb8251a55837bdb3e53adf207369e94fc61619aff5aaf74bfd680440886e8a&quot;,
-            &quot;after_digest&quot;: &quot;15294b1676ee4fbbc4a0e3739fc07602c2165985653dca01b79ebdd641b01ea8&quot;,
+            &quot;receipt_digest&quot;: &quot;93461d603e7418b772eb0d966e5aef7346ad3c71bfb596965d247f5090a2e10f&quot;,
+            &quot;after_digest&quot;: &quot;5cf4bfbf28f9d08430012adc93828192ef80d33c35fe9397a6f46765526815b4&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;fb47dfeaed6241f2a591ccc8a31f79d7&quot;,
+              &quot;gate_epoch&quot;: &quot;eba2a009853d4c329774fc1fe0f64123&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;5ce2506a4fb54c1ca39af6c5be679cd1&quot;,
-            &quot;fingerprint&quot;: &quot;de2292bc587ee5df886a398bb0beed9a199c34d6b7bad410f8feda54c4947719&quot;,
+            &quot;committed&quot;: &quot;738f75ef6f5c4ee6a2e12f08eed60ad5&quot;,
+            &quot;fingerprint&quot;: &quot;6c89990efb957302ee1bbaecf6d733940ef02e9dfc0904df817f436f1b3945f3&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -288,7 +462,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;25855262bbe5550ec4cf4fea2acac05965c069bfeb664c5f9931d4d9d43b9149&quot;,
+            &quot;marker_digest&quot;: &quot;e442a80ba04daaccdafdf7ae2c72e62460ab84303506f5e01bef3bbfb6b9a93d&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -309,9 +483,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;5ce2506a4fb54c1ca39af6c5be679cd1&quot;,
-            &quot;fingerprint&quot;: &quot;de2292bc587ee5df886a398bb0beed9a199c34d6b7bad410f8feda54c4947719&quot;,
-            &quot;receipt_digest&quot;: &quot;7c3deea123498875a1952642cdc43cb26ad04aee8dbdbc905c2dd800f8e9e7c3&quot;,
+            &quot;committed&quot;: &quot;738f75ef6f5c4ee6a2e12f08eed60ad5&quot;,
+            &quot;fingerprint&quot;: &quot;6c89990efb957302ee1bbaecf6d733940ef02e9dfc0904df817f436f1b3945f3&quot;,
+            &quot;receipt_digest&quot;: &quot;ef4c902ce60723814534855d317305f748eedd985b8a3d32e0c4d116905b3e8c&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -323,12 +497,12 @@
           &quot;mode&quot;: &quot;reply-lost&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21680 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21680 kB&quot;
+            &quot;VmHWM&quot;: &quot;21728 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21728 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;21192 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21192 kB&quot;
+            &quot;VmHWM&quot;: &quot;21212 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21212 kB&quot;
           },
           &quot;real_update_committed&quot;: true,
           &quot;new_leaf_observed_over_fresh_tls&quot;: true,
@@ -337,11 +511,11 @@
           &quot;terminal_result&quot;: {
             &quot;storage_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;5ce2506a4fb54c1ca39af6c5be679cd1&quot;,
-            &quot;fingerprint&quot;: &quot;de2292bc587ee5df886a398bb0beed9a199c34d6b7bad410f8feda54c4947719&quot;,
-            &quot;admission_digest&quot;: &quot;12e7e47d3a09cc3611fc383f4aa6dc71a5150ce441365d8c534d72697bdfdfdd&quot;,
+            &quot;committed&quot;: &quot;738f75ef6f5c4ee6a2e12f08eed60ad5&quot;,
+            &quot;fingerprint&quot;: &quot;6c89990efb957302ee1bbaecf6d733940ef02e9dfc0904df817f436f1b3945f3&quot;,
+            &quot;admission_digest&quot;: &quot;db272735d357cec8458a2d70ca5be7d258907b78d1274f6e0b5614eb10b4c66b&quot;,
             &quot;opened_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;fb47dfeaed6241f2a591ccc8a31f79d7&quot;,
+              &quot;gate_epoch&quot;: &quot;eba2a009853d4c329774fc1fe0f64123&quot;,
               &quot;gate_revision&quot;: 9
             },
             &quot;updates_enabled&quot;: true
@@ -349,9 +523,9 @@
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
             &quot;VmHWM&quot;: &quot;21888 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21776 kB&quot;
+            &quot;VmRSS&quot;: &quot;21824 kB&quot;
           },
-          &quot;seconds&quot;: 1.4191479189998972
+          &quot;seconds&quot;: 1.365351134999969
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -359,11 +533,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;5ce2506a4fb54c1ca39af6c5be679cd1&quot;,
-          &quot;fingerprint&quot;: &quot;de2292bc587ee5df886a398bb0beed9a199c34d6b7bad410f8feda54c4947719&quot;,
+          &quot;committed&quot;: &quot;738f75ef6f5c4ee6a2e12f08eed60ad5&quot;,
+          &quot;fingerprint&quot;: &quot;6c89990efb957302ee1bbaecf6d733940ef02e9dfc0904df817f436f1b3945f3&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;fb47dfeaed6241f2a591ccc8a31f79d7&quot;,
+            &quot;gate_epoch&quot;: &quot;eba2a009853d4c329774fc1fe0f64123&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -376,7 +550,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 7,
-      &quot;elapsed_seconds&quot;: 6.135774806999962
+      &quot;elapsed_seconds&quot;: 6.267777393000017
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -385,8 +559,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21088 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21088 kB&quot;
+        &quot;VmHWM&quot;: &quot;21364 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21364 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -395,8 +569,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22716 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22716 kB&quot;
+        &quot;VmHWM&quot;: &quot;22692 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22692 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -450,14 +624,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;c91c171aa1cc1188634dccd12328e76b05483926fcbefed2d13cb464e1afd650&quot;,
-            &quot;after_digest&quot;: &quot;3767853447b4ec84dd0cd963c62a8cc6e7dac833ad6b22aedfb3152f40389d68&quot;,
+            &quot;receipt_digest&quot;: &quot;7b3ab3c54245ff7cbc801eca725c9f7cc1197132930c138e145c3a7996e612d6&quot;,
+            &quot;after_digest&quot;: &quot;b9178a8581680cf2c9d9b6c71ecb91bccd1483f6aac131d19a7fd898f1269b09&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;e106b802090040cbbdce6d0391fef0cd&quot;,
+              &quot;gate_epoch&quot;: &quot;a3f6f3ac011c494795326f8e1afbc482&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;cbdfaa4edbbc4456bfc38f20127de673&quot;,
-            &quot;fingerprint&quot;: &quot;dc7d1a4e3c4ba05559f33a299d7415c8ac21758cd23e770a0fd55a69fe6ba363&quot;,
+            &quot;committed&quot;: &quot;ee319ec8717843ea844a065afff36eae&quot;,
+            &quot;fingerprint&quot;: &quot;9f132f0668fba3799433059d1c6a66d4b7f0430fdabfa3c93593b0b427666a67&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -476,7 +650,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;2ade1c50c391e2707e70f25fc198a80cd71d6aa0f233f17c937f267569096453&quot;,
+            &quot;marker_digest&quot;: &quot;e47bbadd2249a947a4ecaceea412af6cae5e64db261864c251f05d18d3e0ec7a&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -497,9 +671,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;cbdfaa4edbbc4456bfc38f20127de673&quot;,
-            &quot;fingerprint&quot;: &quot;dc7d1a4e3c4ba05559f33a299d7415c8ac21758cd23e770a0fd55a69fe6ba363&quot;,
-            &quot;receipt_digest&quot;: &quot;899f76062d455fa46f96849fc11b0940d15eac71aef62d1d1c314e2813dccaa4&quot;,
+            &quot;committed&quot;: &quot;ee319ec8717843ea844a065afff36eae&quot;,
+            &quot;fingerprint&quot;: &quot;9f132f0668fba3799433059d1c6a66d4b7f0430fdabfa3c93593b0b427666a67&quot;,
+            &quot;receipt_digest&quot;: &quot;e1d628ec9e5b71c16f06a9dd07a0d07476ef8561b4f449aaa9489b8ee8c93d33&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -511,12 +685,12 @@
           &quot;mode&quot;: &quot;restart-completed&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21612 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21612 kB&quot;
+            &quot;VmHWM&quot;: &quot;21736 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21736 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;21184 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21184 kB&quot;
+            &quot;VmHWM&quot;: &quot;21180 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21180 kB&quot;
           },
           &quot;real_update_committed&quot;: true,
           &quot;new_leaf_observed_over_fresh_tls&quot;: true,
@@ -526,21 +700,21 @@
           &quot;terminal_result&quot;: {
             &quot;storage_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;cbdfaa4edbbc4456bfc38f20127de673&quot;,
-            &quot;fingerprint&quot;: &quot;dc7d1a4e3c4ba05559f33a299d7415c8ac21758cd23e770a0fd55a69fe6ba363&quot;,
-            &quot;admission_digest&quot;: &quot;5b28f7d3fd39a1ff71fd5e623d350787541cbb1a983a4fa0dc6ddad6fcc2c276&quot;,
+            &quot;committed&quot;: &quot;ee319ec8717843ea844a065afff36eae&quot;,
+            &quot;fingerprint&quot;: &quot;9f132f0668fba3799433059d1c6a66d4b7f0430fdabfa3c93593b0b427666a67&quot;,
+            &quot;admission_digest&quot;: &quot;76b6a7dbd779d9dd38d30fdc825aeed65023f32283fbeff21f61a9dcba14dacc&quot;,
             &quot;opened_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;e106b802090040cbbdce6d0391fef0cd&quot;,
+              &quot;gate_epoch&quot;: &quot;a3f6f3ac011c494795326f8e1afbc482&quot;,
               &quot;gate_revision&quot;: 9
             },
             &quot;updates_enabled&quot;: true
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21600 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21600 kB&quot;
+            &quot;VmHWM&quot;: &quot;21616 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21616 kB&quot;
           },
-          &quot;seconds&quot;: 1.7122450760000447
+          &quot;seconds&quot;: 1.6257929799999715
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -548,11 +722,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;cbdfaa4edbbc4456bfc38f20127de673&quot;,
-          &quot;fingerprint&quot;: &quot;dc7d1a4e3c4ba05559f33a299d7415c8ac21758cd23e770a0fd55a69fe6ba363&quot;,
+          &quot;committed&quot;: &quot;ee319ec8717843ea844a065afff36eae&quot;,
+          &quot;fingerprint&quot;: &quot;9f132f0668fba3799433059d1c6a66d4b7f0430fdabfa3c93593b0b427666a67&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;e106b802090040cbbdce6d0391fef0cd&quot;,
+            &quot;gate_epoch&quot;: &quot;a3f6f3ac011c494795326f8e1afbc482&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -565,7 +739,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 7,
-      &quot;elapsed_seconds&quot;: 6.429270404999897
+      &quot;elapsed_seconds&quot;: 6.518972228999985
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -574,8 +748,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21088 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21088 kB&quot;
+        &quot;VmHWM&quot;: &quot;21364 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21364 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -584,8 +758,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22716 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22716 kB&quot;
+        &quot;VmHWM&quot;: &quot;22708 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22708 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -639,14 +813,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;4d169dd88c6ac4d691fbaa2d2316c436462ffe8af25da244d2f816893f0b746a&quot;,
-            &quot;after_digest&quot;: &quot;2d085ed56a67b168604f67f0d0bbaf1829e92ca18bbfe4607cfc3a60faf0d541&quot;,
+            &quot;receipt_digest&quot;: &quot;1e6c6fc765f193552b46123edd315869376a6610f009e3628322548ceb69b75c&quot;,
+            &quot;after_digest&quot;: &quot;b7af89e562918e10117b0414634889a15c2f0466d59261f34c6be9c50ae969b1&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;6dff439d1d0140d29f1b69df1787360d&quot;,
+              &quot;gate_epoch&quot;: &quot;ebdb207f246544818e01859eff9de13b&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;1964dfbb8d0e4fd79d8a348ed7c50cca&quot;,
-            &quot;fingerprint&quot;: &quot;9559b75304afb07168a1e19304aadb4f49b66eff7f17c50699b29dd29c2fc86d&quot;,
+            &quot;committed&quot;: &quot;812e4c984854458396c891d6f7270178&quot;,
+            &quot;fingerprint&quot;: &quot;0ebfc666d8b848dfd82ef345a751ef45034df6a0a62e46f754188aa443c6c0f4&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -665,7 +839,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;8f79885b6a18c6fb051104f8c79c9f2338dd950d30d0835b41b37cee1efaae59&quot;,
+            &quot;marker_digest&quot;: &quot;e761be676db3fab9a8e577a74218fce6942ed5e8c4323442b9f22536d6c4f223&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -686,9 +860,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;1964dfbb8d0e4fd79d8a348ed7c50cca&quot;,
-            &quot;fingerprint&quot;: &quot;9559b75304afb07168a1e19304aadb4f49b66eff7f17c50699b29dd29c2fc86d&quot;,
-            &quot;receipt_digest&quot;: &quot;3252b5568be5e54540de80bcf2e0d3e7c7600d52cedae98d3dd19892d927e8da&quot;,
+            &quot;committed&quot;: &quot;812e4c984854458396c891d6f7270178&quot;,
+            &quot;fingerprint&quot;: &quot;0ebfc666d8b848dfd82ef345a751ef45034df6a0a62e46f754188aa443c6c0f4&quot;,
+            &quot;receipt_digest&quot;: &quot;80c963b14e24d5ecefd70c5866b78e7221f85da415332880e357e99286f7a392&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -700,12 +874,12 @@
           &quot;mode&quot;: &quot;expired-own&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21608 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21608 kB&quot;
+            &quot;VmHWM&quot;: &quot;21732 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21732 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;22392 kB&quot;,
-            &quot;VmRSS&quot;: &quot;22392 kB&quot;
+            &quot;VmHWM&quot;: &quot;22396 kB&quot;,
+            &quot;VmRSS&quot;: &quot;22396 kB&quot;
           },
           &quot;terminal&quot;: &quot;EXPIRED&quot;,
           &quot;terminal_result&quot;: {
@@ -719,10 +893,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21600 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21600 kB&quot;
+            &quot;VmHWM&quot;: &quot;21728 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21728 kB&quot;
           },
-          &quot;seconds&quot;: 1.088442987999997
+          &quot;seconds&quot;: 1.0884240839999961
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -730,11 +904,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;1964dfbb8d0e4fd79d8a348ed7c50cca&quot;,
-          &quot;fingerprint&quot;: &quot;9559b75304afb07168a1e19304aadb4f49b66eff7f17c50699b29dd29c2fc86d&quot;,
+          &quot;committed&quot;: &quot;812e4c984854458396c891d6f7270178&quot;,
+          &quot;fingerprint&quot;: &quot;0ebfc666d8b848dfd82ef345a751ef45034df6a0a62e46f754188aa443c6c0f4&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;6dff439d1d0140d29f1b69df1787360d&quot;,
+            &quot;gate_epoch&quot;: &quot;ebdb207f246544818e01859eff9de13b&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -747,7 +921,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 6.013906538000128
+      &quot;elapsed_seconds&quot;: 5.9234473849999745
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -756,8 +930,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21072 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21072 kB&quot;
+        &quot;VmHWM&quot;: &quot;21348 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21348 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -766,8 +940,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22716 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22716 kB&quot;
+        &quot;VmHWM&quot;: &quot;22704 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22704 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -821,14 +995,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;0aaa34e9b8d9f0c73eb7d0553dfbe699a7010dcf70e16794efa4e64237294d1a&quot;,
-            &quot;after_digest&quot;: &quot;a7dd4ddf59484f69d6656ede74adf6462b97c2881446472610efbb4036df569c&quot;,
+            &quot;receipt_digest&quot;: &quot;61b0815276d39cd9861ce6cef12910f54830140f5386386a5e6417c0d04193a1&quot;,
+            &quot;after_digest&quot;: &quot;3ab4746ad77b4a679c955d65e226cbfb8fa2ac36643857b3753225eeb0c2d929&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;912b947c2cb548c9bdabd33c79056210&quot;,
+              &quot;gate_epoch&quot;: &quot;fe49a672efad4d01ab3888e0549ecf6f&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;a6b04547dd3c4f4baacd922c0059d6a6&quot;,
-            &quot;fingerprint&quot;: &quot;b5f21798a5e09bada8236e979bb57fcfd4a875566317ec59ea2fa20d2c21b414&quot;,
+            &quot;committed&quot;: &quot;febe2ff0fbdb4a27ac1b985d8ce667f7&quot;,
+            &quot;fingerprint&quot;: &quot;bfb45fa7b9cc90c1d72e1b240ab8b664f7eeb77ebff2d8ada904741fa7af6da8&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -847,7 +1021,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;6c6fd04f076b00f147dbfa648a0303c3094f0e318bb28c14046579878d45ecf3&quot;,
+            &quot;marker_digest&quot;: &quot;8e3e7c10627915a10cfba7d3120cdbe14dd3ed509611bbfa6ee46fa0720d570c&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -868,9 +1042,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;a6b04547dd3c4f4baacd922c0059d6a6&quot;,
-            &quot;fingerprint&quot;: &quot;b5f21798a5e09bada8236e979bb57fcfd4a875566317ec59ea2fa20d2c21b414&quot;,
-            &quot;receipt_digest&quot;: &quot;e705a8bf7395a5b99b1f5a8eef21407a6fce7edbd135e7ecb78116ad517c3fb9&quot;,
+            &quot;committed&quot;: &quot;febe2ff0fbdb4a27ac1b985d8ce667f7&quot;,
+            &quot;fingerprint&quot;: &quot;bfb45fa7b9cc90c1d72e1b240ab8b664f7eeb77ebff2d8ada904741fa7af6da8&quot;,
+            &quot;receipt_digest&quot;: &quot;486a0dd08f0c99fb2638ab39e1c1f3489b9f8a019a4e61d6355d1807d00a6d80&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -882,12 +1056,12 @@
           &quot;mode&quot;: &quot;expired-source&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21612 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21612 kB&quot;
+            &quot;VmHWM&quot;: &quot;21736 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21736 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;22404 kB&quot;,
-            &quot;VmRSS&quot;: &quot;22404 kB&quot;
+            &quot;VmHWM&quot;: &quot;22392 kB&quot;,
+            &quot;VmRSS&quot;: &quot;22392 kB&quot;
           },
           &quot;terminal&quot;: &quot;EXPIRED&quot;,
           &quot;terminal_result&quot;: {
@@ -901,10 +1075,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21604 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21604 kB&quot;
+            &quot;VmHWM&quot;: &quot;21728 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21728 kB&quot;
           },
-          &quot;seconds&quot;: 9.326117845999988
+          &quot;seconds&quot;: 9.33381409599997
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -912,11 +1086,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;a6b04547dd3c4f4baacd922c0059d6a6&quot;,
-          &quot;fingerprint&quot;: &quot;b5f21798a5e09bada8236e979bb57fcfd4a875566317ec59ea2fa20d2c21b414&quot;,
+          &quot;committed&quot;: &quot;febe2ff0fbdb4a27ac1b985d8ce667f7&quot;,
+          &quot;fingerprint&quot;: &quot;bfb45fa7b9cc90c1d72e1b240ab8b664f7eeb77ebff2d8ada904741fa7af6da8&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;912b947c2cb548c9bdabd33c79056210&quot;,
+            &quot;gate_epoch&quot;: &quot;fe49a672efad4d01ab3888e0549ecf6f&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -929,7 +1103,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 14.092170256000145
+      &quot;elapsed_seconds&quot;: 14.222179023000024
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -938,8 +1112,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21088 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21088 kB&quot;
+        &quot;VmHWM&quot;: &quot;21364 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21364 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -948,8 +1122,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22700 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22700 kB&quot;
+        &quot;VmHWM&quot;: &quot;22704 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22704 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -1003,14 +1177,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;0f6f5cd5efc548409c20b64205fa2d06af9393319c9cbf0450084b5b6b2709ea&quot;,
-            &quot;after_digest&quot;: &quot;94be5b7cb82613969842d15131e51691732d6a0b907a7f689fbf6e8dc04ca97f&quot;,
+            &quot;receipt_digest&quot;: &quot;483a6ed88ef3185e91ad5fc230e746926868c8e43dbddaaa72446b971b099716&quot;,
+            &quot;after_digest&quot;: &quot;d52a83b42c0341dbb35c3665a73d466a9079937ec3be9f02c33dd26fa9279ccd&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;b7a946bbb69e41e78400c5a18586b796&quot;,
+              &quot;gate_epoch&quot;: &quot;8926e36e2e9b4e17a8b7e0ead97e9cbf&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;37ddf70bdb3c491da9458dc006bba6d9&quot;,
-            &quot;fingerprint&quot;: &quot;8f60b54f08e138eb4d0da863b880a914c6c7dd5f2c651b3a90a609e8aa97cb14&quot;,
+            &quot;committed&quot;: &quot;92d4eea89af042a0a5a45db30788573f&quot;,
+            &quot;fingerprint&quot;: &quot;3d0204e972c080bd7e6eff248809091d73f85ec932e1ce733fae6850c059e811&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -1029,7 +1203,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;4dc704de6097fb22ae02b2e300b7f4f548d94c306454ff1b76699f4cb1de2c06&quot;,
+            &quot;marker_digest&quot;: &quot;5cecb03928f827855020e189970feb2b5da23f5909f553360dc4736f1bb9ce49&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -1050,9 +1224,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;37ddf70bdb3c491da9458dc006bba6d9&quot;,
-            &quot;fingerprint&quot;: &quot;8f60b54f08e138eb4d0da863b880a914c6c7dd5f2c651b3a90a609e8aa97cb14&quot;,
-            &quot;receipt_digest&quot;: &quot;d550debffd1e42f7c4ab638e4d6461ce6920696bfa0446f702defbc3f3541bc1&quot;,
+            &quot;committed&quot;: &quot;92d4eea89af042a0a5a45db30788573f&quot;,
+            &quot;fingerprint&quot;: &quot;3d0204e972c080bd7e6eff248809091d73f85ec932e1ce733fae6850c059e811&quot;,
+            &quot;receipt_digest&quot;: &quot;8cbb13e853fe80f50ad9f8e362eed06c7e057ea110efcddf2b71223c5e9aadd3&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -1064,12 +1238,12 @@
           &quot;mode&quot;: &quot;expired-release&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21624 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21624 kB&quot;
+            &quot;VmHWM&quot;: &quot;21732 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21732 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;22320 kB&quot;,
-            &quot;VmRSS&quot;: &quot;22320 kB&quot;
+            &quot;VmHWM&quot;: &quot;22344 kB&quot;,
+            &quot;VmRSS&quot;: &quot;22344 kB&quot;
           },
           &quot;terminal&quot;: &quot;EXPIRED&quot;,
           &quot;terminal_result&quot;: {
@@ -1083,10 +1257,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21620 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21620 kB&quot;
+            &quot;VmHWM&quot;: &quot;21724 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21724 kB&quot;
           },
-          &quot;seconds&quot;: 2.5387099800000215
+          &quot;seconds&quot;: 2.542288403999976
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -1094,11 +1268,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;37ddf70bdb3c491da9458dc006bba6d9&quot;,
-          &quot;fingerprint&quot;: &quot;8f60b54f08e138eb4d0da863b880a914c6c7dd5f2c651b3a90a609e8aa97cb14&quot;,
+          &quot;committed&quot;: &quot;92d4eea89af042a0a5a45db30788573f&quot;,
+          &quot;fingerprint&quot;: &quot;3d0204e972c080bd7e6eff248809091d73f85ec932e1ce733fae6850c059e811&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;b7a946bbb69e41e78400c5a18586b796&quot;,
+            &quot;gate_epoch&quot;: &quot;8926e36e2e9b4e17a8b7e0ead97e9cbf&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -1111,7 +1285,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 7.373361811999985
+      &quot;elapsed_seconds&quot;: 7.314330347999999
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -1120,8 +1294,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21088 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21088 kB&quot;
+        &quot;VmHWM&quot;: &quot;21364 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21364 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -1130,8 +1304,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22716 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22716 kB&quot;
+        &quot;VmHWM&quot;: &quot;22704 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22704 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -1185,14 +1359,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;2f716fc66d47a6daa790d5a0c8ee96ebc04e3c4cae0ff6a00625b4728422eeff&quot;,
-            &quot;after_digest&quot;: &quot;dd1da75c10aed3e820917a88d28fc55140b4575f8085e70571eaefb7e8be068d&quot;,
+            &quot;receipt_digest&quot;: &quot;1b18d54f0ddd36031cfe9c9e814e556cd2554be474bfcc1e671a3695dea51fb9&quot;,
+            &quot;after_digest&quot;: &quot;135881ed3768c10da8609a961e144bbfe0da67cc74657b25df3bdeebdc1b3104&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;4a99f3c7c12a407fb59d8d7f28392d6e&quot;,
+              &quot;gate_epoch&quot;: &quot;a5d9409be8264c099756fbd051046b18&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;faec71d820b5464eb23097a64af2848b&quot;,
-            &quot;fingerprint&quot;: &quot;ef5551433311397e78a2afad3f48331cfa71aab2902d4c4dcd8440862ccb4267&quot;,
+            &quot;committed&quot;: &quot;26502a5544ca41139d2a60b24ba10eaf&quot;,
+            &quot;fingerprint&quot;: &quot;6ff8bde4f59ae589475fe3c8f5631155f31c966a0a9e340947ec24e63e888a6c&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -1211,7 +1385,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;7e12985098d8c9bee081170ec079146e625cd0199e360528e95015b5fe102751&quot;,
+            &quot;marker_digest&quot;: &quot;8be8da3ad881610fab486e1fa27118a378d1d9548eb5316ccef266f5fa88e28e&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -1232,9 +1406,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;faec71d820b5464eb23097a64af2848b&quot;,
-            &quot;fingerprint&quot;: &quot;ef5551433311397e78a2afad3f48331cfa71aab2902d4c4dcd8440862ccb4267&quot;,
-            &quot;receipt_digest&quot;: &quot;6679a33ed5d4c16b6c352d4b850b68480f87b88bb9534d1066506b8482a7c665&quot;,
+            &quot;committed&quot;: &quot;26502a5544ca41139d2a60b24ba10eaf&quot;,
+            &quot;fingerprint&quot;: &quot;6ff8bde4f59ae589475fe3c8f5631155f31c966a0a9e340947ec24e63e888a6c&quot;,
+            &quot;receipt_digest&quot;: &quot;545499a217cf1555b11261f88bdb26482ee32a6cea955ea6a3668b2c9486f772&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -1246,33 +1420,33 @@
           &quot;mode&quot;: &quot;expired-completed&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21652 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21652 kB&quot;
+            &quot;VmHWM&quot;: &quot;21768 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21768 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;22316 kB&quot;,
-            &quot;VmRSS&quot;: &quot;22316 kB&quot;
+            &quot;VmHWM&quot;: &quot;22320 kB&quot;,
+            &quot;VmRSS&quot;: &quot;22320 kB&quot;
           },
           &quot;historical_root_commit_not_current_permission&quot;: true,
           &quot;terminal&quot;: &quot;OPENED&quot;,
           &quot;terminal_result&quot;: {
             &quot;storage_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;faec71d820b5464eb23097a64af2848b&quot;,
-            &quot;fingerprint&quot;: &quot;ef5551433311397e78a2afad3f48331cfa71aab2902d4c4dcd8440862ccb4267&quot;,
-            &quot;admission_digest&quot;: &quot;aa396259976f9559f496b5daa5fb8f831620fccf08180f32834b28dee0a22a23&quot;,
+            &quot;committed&quot;: &quot;26502a5544ca41139d2a60b24ba10eaf&quot;,
+            &quot;fingerprint&quot;: &quot;6ff8bde4f59ae589475fe3c8f5631155f31c966a0a9e340947ec24e63e888a6c&quot;,
+            &quot;admission_digest&quot;: &quot;62a2ceaa0722d00b8bb2cacd7d16be71beab976678a69ef0990efa74d11f9522&quot;,
             &quot;opened_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;4a99f3c7c12a407fb59d8d7f28392d6e&quot;,
+              &quot;gate_epoch&quot;: &quot;a5d9409be8264c099756fbd051046b18&quot;,
               &quot;gate_revision&quot;: 9
             },
             &quot;updates_enabled&quot;: true
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21780 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21780 kB&quot;
+            &quot;VmHWM&quot;: &quot;21892 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21892 kB&quot;
           },
-          &quot;seconds&quot;: 1.088395587999912
+          &quot;seconds&quot;: 1.0974282710000125
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -1280,11 +1454,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;faec71d820b5464eb23097a64af2848b&quot;,
-          &quot;fingerprint&quot;: &quot;ef5551433311397e78a2afad3f48331cfa71aab2902d4c4dcd8440862ccb4267&quot;,
+          &quot;committed&quot;: &quot;26502a5544ca41139d2a60b24ba10eaf&quot;,
+          &quot;fingerprint&quot;: &quot;6ff8bde4f59ae589475fe3c8f5631155f31c966a0a9e340947ec24e63e888a6c&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;4a99f3c7c12a407fb59d8d7f28392d6e&quot;,
+            &quot;gate_epoch&quot;: &quot;a5d9409be8264c099756fbd051046b18&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -1297,7 +1471,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 6.03176964499994
+      &quot;elapsed_seconds&quot;: 5.996464788999958
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -1306,8 +1480,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21084 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21084 kB&quot;
+        &quot;VmHWM&quot;: &quot;21364 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21364 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -1316,8 +1490,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22712 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22712 kB&quot;
+        &quot;VmHWM&quot;: &quot;22688 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22688 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -1371,14 +1545,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;4548821681baa97632f7b4895daaa41813e7b441c561c2baa721d0f6caad653f&quot;,
-            &quot;after_digest&quot;: &quot;7ddffadb482992447f5ccc8dfbdef8690d92944684a90c079350ccfd5b257643&quot;,
+            &quot;receipt_digest&quot;: &quot;8b290530851012268b1d9b4258f7f755910013c71a010a707bf2cd7ee69b12a1&quot;,
+            &quot;after_digest&quot;: &quot;d7b8085409aee38d2d50825356a0804b9588a2691ff57f8d5d0a4eeeb04c048b&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;1b915cc5923d4e4a96cfb74112f0246c&quot;,
+              &quot;gate_epoch&quot;: &quot;488a5f88008a4c01ac09d108ef0cd030&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;6de1f7d669ba4d92a3c99590e211b4cf&quot;,
-            &quot;fingerprint&quot;: &quot;0365f7a8ab0c845bdb39b1d9458244e4ba0a8ebcb9a7557ef29d0a6d597ef8d4&quot;,
+            &quot;committed&quot;: &quot;fe50ac2601d94f10a999efc20c97d6ff&quot;,
+            &quot;fingerprint&quot;: &quot;4da0c4d2910fcbf42d7d4f9b88e8935055120f4922aa769131ba31607b16b350&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -1397,7 +1571,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;271ab673c40d4ec47d708591c191a5b447ad22fd12f6ea4fdc039c18e0e70f0e&quot;,
+            &quot;marker_digest&quot;: &quot;5c412cd7b8f5f82cad8648d4cff350caa3c1eb9f7954bfa71acbd38589590bb5&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -1418,9 +1592,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;6de1f7d669ba4d92a3c99590e211b4cf&quot;,
-            &quot;fingerprint&quot;: &quot;0365f7a8ab0c845bdb39b1d9458244e4ba0a8ebcb9a7557ef29d0a6d597ef8d4&quot;,
-            &quot;receipt_digest&quot;: &quot;5594b4be660f46da633831ed7ede7466b164c0afb4f63ff30bd8b5c5e6976fca&quot;,
+            &quot;committed&quot;: &quot;fe50ac2601d94f10a999efc20c97d6ff&quot;,
+            &quot;fingerprint&quot;: &quot;4da0c4d2910fcbf42d7d4f9b88e8935055120f4922aa769131ba31607b16b350&quot;,
+            &quot;receipt_digest&quot;: &quot;a9f146f3838b47b83518569cdcbe52fb133f6a1584ac2879ed6f90f7ef6b244e&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -1432,12 +1606,12 @@
           &quot;mode&quot;: &quot;crash-main&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21612 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21612 kB&quot;
+            &quot;VmHWM&quot;: &quot;21732 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21732 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;22304 kB&quot;,
-            &quot;VmRSS&quot;: &quot;22304 kB&quot;
+            &quot;VmHWM&quot;: &quot;22312 kB&quot;,
+            &quot;VmRSS&quot;: &quot;22312 kB&quot;
           },
           &quot;incomplete_pair_not_permission&quot;: true,
           &quot;pending_or_terminal_observed_before_kill&quot;: true,
@@ -1452,10 +1626,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21592 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21592 kB&quot;
+            &quot;VmHWM&quot;: &quot;21620 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21620 kB&quot;
           },
-          &quot;seconds&quot;: 0.600264898999967
+          &quot;seconds&quot;: 0.5937736949999817
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -1463,11 +1637,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;6de1f7d669ba4d92a3c99590e211b4cf&quot;,
-          &quot;fingerprint&quot;: &quot;0365f7a8ab0c845bdb39b1d9458244e4ba0a8ebcb9a7557ef29d0a6d597ef8d4&quot;,
+          &quot;committed&quot;: &quot;fe50ac2601d94f10a999efc20c97d6ff&quot;,
+          &quot;fingerprint&quot;: &quot;4da0c4d2910fcbf42d7d4f9b88e8935055120f4922aa769131ba31607b16b350&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;1b915cc5923d4e4a96cfb74112f0246c&quot;,
+            &quot;gate_epoch&quot;: &quot;488a5f88008a4c01ac09d108ef0cd030&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -1480,7 +1654,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 5.3674399789999825
+      &quot;elapsed_seconds&quot;: 5.498095578999994
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -1489,8 +1663,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21088 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21088 kB&quot;
+        &quot;VmHWM&quot;: &quot;21360 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21360 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -1499,8 +1673,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22716 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22716 kB&quot;
+        &quot;VmHWM&quot;: &quot;22696 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22696 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -1554,14 +1728,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;29b4f4dec108b4205a5d9b04b08cdaec19661d02636bf1558421941f12474a52&quot;,
-            &quot;after_digest&quot;: &quot;b727c26d713c7369e953c2013c22c8b9c0ef703683858014a55cdcc25b09de38&quot;,
+            &quot;receipt_digest&quot;: &quot;49d9568fe864db2f9420f0bb3b075ec80504e67eb396ab0dc28e02787bc463d7&quot;,
+            &quot;after_digest&quot;: &quot;f1f07fc317994a24c64d75db8392f58574e8275cf9b1f49971f2203ce9578a9a&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;489017b8ad154eb9bb2fdb451647b066&quot;,
+              &quot;gate_epoch&quot;: &quot;6b9065af8e5c4d05a658e3fb2044d23d&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;e6078f25d6714f08af9f118ef8336488&quot;,
-            &quot;fingerprint&quot;: &quot;3ca2712e87e093afd0fd0f803957cd8f8aedf68d3729c7dec13daff653eea0a4&quot;,
+            &quot;committed&quot;: &quot;f2f9f5c08acb4af2924ba84bc8a76c37&quot;,
+            &quot;fingerprint&quot;: &quot;9dfeb8197532280ac803a2db4a52171aac59bb09a158cbb2b3aa533f44baf1fe&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -1580,7 +1754,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;ab9130a51fe12821dad0f862fa2ffd6d55813f14fe08d5e3040aad2b4a6f3707&quot;,
+            &quot;marker_digest&quot;: &quot;b02e806760ef8e4ace15d03dbeb2035c63610fef1d393bcaa65f3c6f601297b8&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -1601,9 +1775,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;e6078f25d6714f08af9f118ef8336488&quot;,
-            &quot;fingerprint&quot;: &quot;3ca2712e87e093afd0fd0f803957cd8f8aedf68d3729c7dec13daff653eea0a4&quot;,
-            &quot;receipt_digest&quot;: &quot;1d690ba70aedf0b1b6308fd2e1c6ea6afcc44cae26cf395f1383500aeed1b5f3&quot;,
+            &quot;committed&quot;: &quot;f2f9f5c08acb4af2924ba84bc8a76c37&quot;,
+            &quot;fingerprint&quot;: &quot;9dfeb8197532280ac803a2db4a52171aac59bb09a158cbb2b3aa533f44baf1fe&quot;,
+            &quot;receipt_digest&quot;: &quot;4435408718fbb9492b5a2388c29abbbe0ee680ac99aaa89eade22b0fb07f417d&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -1615,12 +1789,12 @@
           &quot;mode&quot;: &quot;crash-gate&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21632 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21608 kB&quot;
+            &quot;VmHWM&quot;: &quot;21732 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21732 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;22364 kB&quot;,
-            &quot;VmRSS&quot;: &quot;22364 kB&quot;
+            &quot;VmHWM&quot;: &quot;22356 kB&quot;,
+            &quot;VmRSS&quot;: &quot;22356 kB&quot;
           },
           &quot;incomplete_pair_not_permission&quot;: true,
           &quot;pending_or_terminal_observed_before_kill&quot;: true,
@@ -1635,10 +1809,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21596 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21596 kB&quot;
+            &quot;VmHWM&quot;: &quot;21612 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21612 kB&quot;
           },
-          &quot;seconds&quot;: 0.5923088950000874
+          &quot;seconds&quot;: 0.5953253580000251
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -1646,11 +1820,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;e6078f25d6714f08af9f118ef8336488&quot;,
-          &quot;fingerprint&quot;: &quot;3ca2712e87e093afd0fd0f803957cd8f8aedf68d3729c7dec13daff653eea0a4&quot;,
+          &quot;committed&quot;: &quot;f2f9f5c08acb4af2924ba84bc8a76c37&quot;,
+          &quot;fingerprint&quot;: &quot;9dfeb8197532280ac803a2db4a52171aac59bb09a158cbb2b3aa533f44baf1fe&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;489017b8ad154eb9bb2fdb451647b066&quot;,
+            &quot;gate_epoch&quot;: &quot;6b9065af8e5c4d05a658e3fb2044d23d&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -1663,7 +1837,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 5.420947038999884
+      &quot;elapsed_seconds&quot;: 5.52181146099997
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -1672,8 +1846,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21088 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21088 kB&quot;
+        &quot;VmHWM&quot;: &quot;21364 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21364 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -1682,8 +1856,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22720 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22720 kB&quot;
+        &quot;VmHWM&quot;: &quot;22704 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22704 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -1737,14 +1911,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;c8ee1deccd819c5932e55f5106c803e35d20c30d65180d443b878f4c76afaf00&quot;,
-            &quot;after_digest&quot;: &quot;3c4fdf573c6ebb6442a32bf5903148567c8ba777cc01bd9e69c55245e2bb3694&quot;,
+            &quot;receipt_digest&quot;: &quot;2fbd7c7f18bb35daeb2464119f7b9f27e2282f74d10413ceadb2ba5f7917956f&quot;,
+            &quot;after_digest&quot;: &quot;daff7dff80e9e20d84ce5760fd159488de562f56913e89d34a3c9bbd8149c66e&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;075cd550e7da49c4a96faf669bf5aac8&quot;,
+              &quot;gate_epoch&quot;: &quot;df286e2a84804786ab06b7a371051efa&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;0ef346906e184c8d930fb9285cdcf3b8&quot;,
-            &quot;fingerprint&quot;: &quot;a6bd2fba9b44938d9b78267b7f3a0e29e2675b1207e7ff0baf4af72e9756dc8d&quot;,
+            &quot;committed&quot;: &quot;720ec44aa53b4a91a359b6c8b1ead821&quot;,
+            &quot;fingerprint&quot;: &quot;246ab523d2485a37e42a91d2fda37fdc5540768fa8375524703f7e4110520588&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -1763,7 +1937,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;1a840f8919d9eb86ad80970661cf034d6496a977935e2d62a4926e94c324b256&quot;,
+            &quot;marker_digest&quot;: &quot;788e24cebbb2a44ef14579a25718e28da10252d6772fd56bdc6197e86444af50&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -1784,9 +1958,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;0ef346906e184c8d930fb9285cdcf3b8&quot;,
-            &quot;fingerprint&quot;: &quot;a6bd2fba9b44938d9b78267b7f3a0e29e2675b1207e7ff0baf4af72e9756dc8d&quot;,
-            &quot;receipt_digest&quot;: &quot;6fdf59119e309c5d9f7838bb1e3c658ba67857b096d655da46caf1b604f4d46b&quot;,
+            &quot;committed&quot;: &quot;720ec44aa53b4a91a359b6c8b1ead821&quot;,
+            &quot;fingerprint&quot;: &quot;246ab523d2485a37e42a91d2fda37fdc5540768fa8375524703f7e4110520588&quot;,
+            &quot;receipt_digest&quot;: &quot;17b945347b852e852e858b6471998da6b0cf8b3a848b60103108d2c421a7e088&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -1798,12 +1972,12 @@
           &quot;mode&quot;: &quot;crash-result&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21560 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21560 kB&quot;
+            &quot;VmHWM&quot;: &quot;21736 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21736 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;22404 kB&quot;,
-            &quot;VmRSS&quot;: &quot;22404 kB&quot;
+            &quot;VmHWM&quot;: &quot;22396 kB&quot;,
+            &quot;VmRSS&quot;: &quot;22396 kB&quot;
           },
           &quot;incomplete_pair_not_permission&quot;: true,
           &quot;pending_or_terminal_observed_before_kill&quot;: true,
@@ -1818,10 +1992,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21596 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21596 kB&quot;
+            &quot;VmHWM&quot;: &quot;21624 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21624 kB&quot;
           },
-          &quot;seconds&quot;: 0.6014309750000848
+          &quot;seconds&quot;: 0.6019504029999894
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -1829,11 +2003,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;0ef346906e184c8d930fb9285cdcf3b8&quot;,
-          &quot;fingerprint&quot;: &quot;a6bd2fba9b44938d9b78267b7f3a0e29e2675b1207e7ff0baf4af72e9756dc8d&quot;,
+          &quot;committed&quot;: &quot;720ec44aa53b4a91a359b6c8b1ead821&quot;,
+          &quot;fingerprint&quot;: &quot;246ab523d2485a37e42a91d2fda37fdc5540768fa8375524703f7e4110520588&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;075cd550e7da49c4a96faf669bf5aac8&quot;,
+            &quot;gate_epoch&quot;: &quot;df286e2a84804786ab06b7a371051efa&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -1846,7 +2020,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 5.518574440000066
+      &quot;elapsed_seconds&quot;: 5.4302247630000124
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -1855,8 +2029,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21072 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21072 kB&quot;
+        &quot;VmHWM&quot;: &quot;21364 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21364 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -1865,8 +2039,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22716 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22716 kB&quot;
+        &quot;VmHWM&quot;: &quot;22704 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22704 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -1920,14 +2094,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;120c0953f88f32fb27783736cbe24cfa567c62535b23623af8bee532e03d8d68&quot;,
-            &quot;after_digest&quot;: &quot;65dc3c2f9e5997bba0f75f614bf3475cb65952a8aece4f4fb9798b0b332948f2&quot;,
+            &quot;receipt_digest&quot;: &quot;9b7d8847287e06fb149a07ba0ab99e43f172aff96c888138126890dfb60fe503&quot;,
+            &quot;after_digest&quot;: &quot;d6a681a2b579712ae37e6b38712c4fbb327018e20f8330b4f2dd1428b8190c45&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;2b9db59564b04a12a6663f45e3c76193&quot;,
+              &quot;gate_epoch&quot;: &quot;086c9a8dcf2b4a58bcb69c4f9601e899&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;47d39ec3fbfe494dbb2dfecc98fdb0fd&quot;,
-            &quot;fingerprint&quot;: &quot;afcdd97b42139c8d3e3466fbd7b4613573b9c9f68db96c17c68fcb4843bfc11c&quot;,
+            &quot;committed&quot;: &quot;403dbefdd5ed4e018a37504b48fae5ce&quot;,
+            &quot;fingerprint&quot;: &quot;399aa5e867f1f9e268c83a583d51c7039e4f61a0b77aef1b13ecbf1e4112681d&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -1946,7 +2120,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;7b8cabf20689d9292a753ade20c11d3f458c1b792e9e1a71431b5326b5e2a3f2&quot;,
+            &quot;marker_digest&quot;: &quot;20915ee77bf561df27f96194e732041cd6570619162fbeb2ad032e451e882861&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -1967,9 +2141,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;47d39ec3fbfe494dbb2dfecc98fdb0fd&quot;,
-            &quot;fingerprint&quot;: &quot;afcdd97b42139c8d3e3466fbd7b4613573b9c9f68db96c17c68fcb4843bfc11c&quot;,
-            &quot;receipt_digest&quot;: &quot;88cbb3f615bbcc73d93f02e268971b03d5be7d6315333e842205353b2495c3a3&quot;,
+            &quot;committed&quot;: &quot;403dbefdd5ed4e018a37504b48fae5ce&quot;,
+            &quot;fingerprint&quot;: &quot;399aa5e867f1f9e268c83a583d51c7039e4f61a0b77aef1b13ecbf1e4112681d&quot;,
+            &quot;receipt_digest&quot;: &quot;aaac50b784461d442ece5d3bba1563ef13ab64378e9dfb56ccdf7857b381fdcc&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -1981,12 +2155,12 @@
           &quot;mode&quot;: &quot;crash-completed&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21628 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21628 kB&quot;
+            &quot;VmHWM&quot;: &quot;21716 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21716 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;22320 kB&quot;,
-            &quot;VmRSS&quot;: &quot;22320 kB&quot;
+            &quot;VmHWM&quot;: &quot;22312 kB&quot;,
+            &quot;VmRSS&quot;: &quot;22312 kB&quot;
           },
           &quot;pending_or_terminal_observed_before_kill&quot;: true,
           &quot;old_executor_fences_takeover&quot;: true,
@@ -1995,21 +2169,21 @@
           &quot;terminal_result&quot;: {
             &quot;storage_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;47d39ec3fbfe494dbb2dfecc98fdb0fd&quot;,
-            &quot;fingerprint&quot;: &quot;afcdd97b42139c8d3e3466fbd7b4613573b9c9f68db96c17c68fcb4843bfc11c&quot;,
-            &quot;admission_digest&quot;: &quot;84e62258b323f5bfc485c565b7083773d2888edc687bb873c82321f7a8831ac3&quot;,
+            &quot;committed&quot;: &quot;403dbefdd5ed4e018a37504b48fae5ce&quot;,
+            &quot;fingerprint&quot;: &quot;399aa5e867f1f9e268c83a583d51c7039e4f61a0b77aef1b13ecbf1e4112681d&quot;,
+            &quot;admission_digest&quot;: &quot;a6b33d9a6a03c5b5261e9392ec1081f0ad177c676029084897c3443efc12fb01&quot;,
             &quot;opened_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;2b9db59564b04a12a6663f45e3c76193&quot;,
+              &quot;gate_epoch&quot;: &quot;086c9a8dcf2b4a58bcb69c4f9601e899&quot;,
               &quot;gate_revision&quot;: 9
             },
             &quot;updates_enabled&quot;: true
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21584 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21584 kB&quot;
+            &quot;VmHWM&quot;: &quot;21620 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21620 kB&quot;
           },
-          &quot;seconds&quot;: 0.6520208900001307
+          &quot;seconds&quot;: 0.6425294750000035
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -2017,11 +2191,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;47d39ec3fbfe494dbb2dfecc98fdb0fd&quot;,
-          &quot;fingerprint&quot;: &quot;afcdd97b42139c8d3e3466fbd7b4613573b9c9f68db96c17c68fcb4843bfc11c&quot;,
+          &quot;committed&quot;: &quot;403dbefdd5ed4e018a37504b48fae5ce&quot;,
+          &quot;fingerprint&quot;: &quot;399aa5e867f1f9e268c83a583d51c7039e4f61a0b77aef1b13ecbf1e4112681d&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;2b9db59564b04a12a6663f45e3c76193&quot;,
+            &quot;gate_epoch&quot;: &quot;086c9a8dcf2b4a58bcb69c4f9601e899&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -2034,7 +2208,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 5.419061470000088
+      &quot;elapsed_seconds&quot;: 5.450792459000013
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -2043,8 +2217,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21088 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21088 kB&quot;
+        &quot;VmHWM&quot;: &quot;21360 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21360 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -2053,8 +2227,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22716 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22716 kB&quot;
+        &quot;VmHWM&quot;: &quot;22704 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22704 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -2108,14 +2282,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;e19d2902604696797da789ad4e1a126c7f50a670079b582e82ef7ca5d535f84b&quot;,
-            &quot;after_digest&quot;: &quot;ffed411888dc7f4bd98c287ded639f580649497e0742dd1efce80cf3fbdbe222&quot;,
+            &quot;receipt_digest&quot;: &quot;58a6b17a5f297cdcfbe039d9e9b3afce9915c9879afd50b9d47debc1d5cdb461&quot;,
+            &quot;after_digest&quot;: &quot;ae597da8aad478d5d9e3e85ccbc70a847cbe3409dee52eb95f9be5ce2b89a5e7&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;bbd156ffae414491b4005d73e1b718b6&quot;,
+              &quot;gate_epoch&quot;: &quot;bb7bc9d9424b470ca477770eeec9d992&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;12717b5bb1c64982bdd84ff178278146&quot;,
-            &quot;fingerprint&quot;: &quot;3a9a2a89b9f375a640b5d1786bb941b0ad0a15ec9e9de5780986dcc4b391fb23&quot;,
+            &quot;committed&quot;: &quot;f1ed9affa239482cbd9f5f34630658b7&quot;,
+            &quot;fingerprint&quot;: &quot;c5b0e7fc7ba06cf5188c00d911fda3903e1c0ad6797c36d05556dfc49c8f7325&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -2134,7 +2308,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;f91f735efad6ca2107590e152f07462e841d0a69c7f42e8d2399ca0dd93eaef0&quot;,
+            &quot;marker_digest&quot;: &quot;59bb8c300a83351251b6a9ce1549b85cb7212ceab49b858a551df017e472aee0&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -2155,9 +2329,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;12717b5bb1c64982bdd84ff178278146&quot;,
-            &quot;fingerprint&quot;: &quot;3a9a2a89b9f375a640b5d1786bb941b0ad0a15ec9e9de5780986dcc4b391fb23&quot;,
-            &quot;receipt_digest&quot;: &quot;6ae7b56fa2e6725ed9380745f113793e38858a90ea059cd2addecf320e5e48c4&quot;,
+            &quot;committed&quot;: &quot;f1ed9affa239482cbd9f5f34630658b7&quot;,
+            &quot;fingerprint&quot;: &quot;c5b0e7fc7ba06cf5188c00d911fda3903e1c0ad6797c36d05556dfc49c8f7325&quot;,
+            &quot;receipt_digest&quot;: &quot;057f2ce50129e67af9587cbac6679554185a3de07a9bb6324648028911ecb768&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -2169,12 +2343,12 @@
           &quot;mode&quot;: &quot;stale-main&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21628 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21628 kB&quot;
+            &quot;VmHWM&quot;: &quot;21732 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21732 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;22308 kB&quot;,
-            &quot;VmRSS&quot;: &quot;22308 kB&quot;
+            &quot;VmHWM&quot;: &quot;22316 kB&quot;,
+            &quot;VmRSS&quot;: &quot;22316 kB&quot;
           },
           &quot;terminal&quot;: &quot;FAILED&quot;,
           &quot;terminal_result&quot;: {
@@ -2188,10 +2362,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21624 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21624 kB&quot;
+            &quot;VmHWM&quot;: &quot;21724 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21724 kB&quot;
           },
-          &quot;seconds&quot;: 0.505545758999915
+          &quot;seconds&quot;: 0.5112590020000312
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -2199,11 +2373,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;12717b5bb1c64982bdd84ff178278146&quot;,
-          &quot;fingerprint&quot;: &quot;3a9a2a89b9f375a640b5d1786bb941b0ad0a15ec9e9de5780986dcc4b391fb23&quot;,
+          &quot;committed&quot;: &quot;f1ed9affa239482cbd9f5f34630658b7&quot;,
+          &quot;fingerprint&quot;: &quot;c5b0e7fc7ba06cf5188c00d911fda3903e1c0ad6797c36d05556dfc49c8f7325&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;bbd156ffae414491b4005d73e1b718b6&quot;,
+            &quot;gate_epoch&quot;: &quot;bb7bc9d9424b470ca477770eeec9d992&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -2216,7 +2390,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 5.234090165999987
+      &quot;elapsed_seconds&quot;: 5.572790563000012
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -2225,8 +2399,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21088 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21088 kB&quot;
+        &quot;VmHWM&quot;: &quot;21360 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21360 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -2235,8 +2409,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22716 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22716 kB&quot;
+        &quot;VmHWM&quot;: &quot;22704 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22704 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -2290,14 +2464,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;015e6fce2c9bbbbed0624f851febd188c2f1950e93fe5acb3f966d01988a1d96&quot;,
-            &quot;after_digest&quot;: &quot;438f6861ef59d717b3250024c8798b00937762526a6c9a90a1c737615b464dc4&quot;,
+            &quot;receipt_digest&quot;: &quot;cfa4e483430ba158b77cd32dcde2b480ac3a02f972d124963f9a14b27429a28d&quot;,
+            &quot;after_digest&quot;: &quot;4593cb64cd21c72e285aeec855f7f6795c0786dfb44ef96d39119cef936f9be4&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;9ccb0dc54e7041d59ad63c9b707e3393&quot;,
+              &quot;gate_epoch&quot;: &quot;ce1157f420aa41cc9005e347ad2ec10c&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;f06443e74dc6481c80bdad3b2bb02b70&quot;,
-            &quot;fingerprint&quot;: &quot;2874cd59074e0ed74d0e1582749910549baf7b5e5fd3ea6dd0221e936ec7fab5&quot;,
+            &quot;committed&quot;: &quot;3e911de154f14e068a15f395a685f1cd&quot;,
+            &quot;fingerprint&quot;: &quot;e37d23b4601fba6c4729fe110dc66d6cf2fc806ee8ad83e02ece3af8b26a234b&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -2316,7 +2490,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;64d1569dd4e726fbb63ed1c857fdae582b914368df91d5aafe4d1494a15396fc&quot;,
+            &quot;marker_digest&quot;: &quot;c3d65d81d83eefddc662176bfe718883961fc57b3fc7802b2db4dba4e8e76590&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -2337,9 +2511,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;f06443e74dc6481c80bdad3b2bb02b70&quot;,
-            &quot;fingerprint&quot;: &quot;2874cd59074e0ed74d0e1582749910549baf7b5e5fd3ea6dd0221e936ec7fab5&quot;,
-            &quot;receipt_digest&quot;: &quot;92874e59f016121c7a816c5d906a3f05f39d9fb263d8d56db541b0558e9c45c5&quot;,
+            &quot;committed&quot;: &quot;3e911de154f14e068a15f395a685f1cd&quot;,
+            &quot;fingerprint&quot;: &quot;e37d23b4601fba6c4729fe110dc66d6cf2fc806ee8ad83e02ece3af8b26a234b&quot;,
+            &quot;receipt_digest&quot;: &quot;680a14357c3cda072b571af4be25599a1bb95c2157e53403d1d83a85fbcf492b&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -2351,12 +2525,12 @@
           &quot;mode&quot;: &quot;stale-gate&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21628 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21628 kB&quot;
+            &quot;VmHWM&quot;: &quot;21728 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21728 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;22356 kB&quot;,
-            &quot;VmRSS&quot;: &quot;22356 kB&quot;
+            &quot;VmHWM&quot;: &quot;22344 kB&quot;,
+            &quot;VmRSS&quot;: &quot;22344 kB&quot;
           },
           &quot;terminal&quot;: &quot;FAILED&quot;,
           &quot;terminal_result&quot;: {
@@ -2370,10 +2544,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21624 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21624 kB&quot;
+            &quot;VmHWM&quot;: &quot;21724 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21724 kB&quot;
           },
-          &quot;seconds&quot;: 0.4992203720000816
+          &quot;seconds&quot;: 0.5254501379999965
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -2381,11 +2555,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;f06443e74dc6481c80bdad3b2bb02b70&quot;,
-          &quot;fingerprint&quot;: &quot;2874cd59074e0ed74d0e1582749910549baf7b5e5fd3ea6dd0221e936ec7fab5&quot;,
+          &quot;committed&quot;: &quot;3e911de154f14e068a15f395a685f1cd&quot;,
+          &quot;fingerprint&quot;: &quot;e37d23b4601fba6c4729fe110dc66d6cf2fc806ee8ad83e02ece3af8b26a234b&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;9ccb0dc54e7041d59ad63c9b707e3393&quot;,
+            &quot;gate_epoch&quot;: &quot;ce1157f420aa41cc9005e347ad2ec10c&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -2398,7 +2572,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 5.2105901229999745
+      &quot;elapsed_seconds&quot;: 5.324319252999999
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -2407,8 +2581,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21076 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21076 kB&quot;
+        &quot;VmHWM&quot;: &quot;21364 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21364 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -2417,8 +2591,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22720 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22720 kB&quot;
+        &quot;VmHWM&quot;: &quot;22704 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22704 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -2472,14 +2646,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;4dc72240974926d7694d1181816792ecf4d63fc5b59c60c6094baed4626ad1e6&quot;,
-            &quot;after_digest&quot;: &quot;8e082ede0441853e3575a9221a4ab604482483efa4af02e7b14b5825d18276d1&quot;,
+            &quot;receipt_digest&quot;: &quot;7aabe84d0f83b58a471deda8bcd910b317a6818ad9f37f75be8f3b3a7f6e7b6e&quot;,
+            &quot;after_digest&quot;: &quot;c344e9b5cef91b26b9eac1594ab20afacd68814e5b0b9256d73f183aa9117d50&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;42a4d77d1f9e485bb0ae2b31727a5d89&quot;,
+              &quot;gate_epoch&quot;: &quot;c8cda60aae0843559f799afcd11c99d2&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;db6cd81b9450433f9cdfd41a731ace3e&quot;,
-            &quot;fingerprint&quot;: &quot;9f3079302b8f0be279f9e6ec1ba0e8b61cffb9440035702a6b13a54dade5be66&quot;,
+            &quot;committed&quot;: &quot;af91640aec26447e97c4faecb72411eb&quot;,
+            &quot;fingerprint&quot;: &quot;df465e2fd82542d486d87cb6ce2c3d1a8194dba56abbe04d548af9524d3835bc&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -2498,7 +2672,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;6e336651630fd585e0c357744391f986a8b859bf1b3ec824072fefe4ed8d96b0&quot;,
+            &quot;marker_digest&quot;: &quot;8530cf7b5b4543bfa2f8b9d7de38354cf039bcde4763235b5460f8f57eda1690&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -2519,9 +2693,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;db6cd81b9450433f9cdfd41a731ace3e&quot;,
-            &quot;fingerprint&quot;: &quot;9f3079302b8f0be279f9e6ec1ba0e8b61cffb9440035702a6b13a54dade5be66&quot;,
-            &quot;receipt_digest&quot;: &quot;f46b904a0d77057d81a9b4d017ffefcfcd8c4ac0a69b18c9452584bb8dd01ec1&quot;,
+            &quot;committed&quot;: &quot;af91640aec26447e97c4faecb72411eb&quot;,
+            &quot;fingerprint&quot;: &quot;df465e2fd82542d486d87cb6ce2c3d1a8194dba56abbe04d548af9524d3835bc&quot;,
+            &quot;receipt_digest&quot;: &quot;c668a68c734972b7e149c225bba1ac491d8437fe80b6973c4b6d75512628d032&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -2533,12 +2707,12 @@
           &quot;mode&quot;: &quot;stale-result&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21624 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21624 kB&quot;
+            &quot;VmHWM&quot;: &quot;21724 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21724 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;22404 kB&quot;,
-            &quot;VmRSS&quot;: &quot;22404 kB&quot;
+            &quot;VmHWM&quot;: &quot;22384 kB&quot;,
+            &quot;VmRSS&quot;: &quot;22384 kB&quot;
           },
           &quot;terminal&quot;: &quot;FAILED&quot;,
           &quot;terminal_result&quot;: {
@@ -2552,10 +2726,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21616 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21616 kB&quot;
+            &quot;VmHWM&quot;: &quot;21720 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21720 kB&quot;
           },
-          &quot;seconds&quot;: 0.4872394069998336
+          &quot;seconds&quot;: 0.5103555649999976
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -2563,11 +2737,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;db6cd81b9450433f9cdfd41a731ace3e&quot;,
-          &quot;fingerprint&quot;: &quot;9f3079302b8f0be279f9e6ec1ba0e8b61cffb9440035702a6b13a54dade5be66&quot;,
+          &quot;committed&quot;: &quot;af91640aec26447e97c4faecb72411eb&quot;,
+          &quot;fingerprint&quot;: &quot;df465e2fd82542d486d87cb6ce2c3d1a8194dba56abbe04d548af9524d3835bc&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;42a4d77d1f9e485bb0ae2b31727a5d89&quot;,
+            &quot;gate_epoch&quot;: &quot;c8cda60aae0843559f799afcd11c99d2&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -2580,7 +2754,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 5.1717064930001015
+      &quot;elapsed_seconds&quot;: 5.370550111
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -2589,8 +2763,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21084 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21084 kB&quot;
+        &quot;VmHWM&quot;: &quot;21352 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21352 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -2599,8 +2773,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22716 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22716 kB&quot;
+        &quot;VmHWM&quot;: &quot;22708 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22708 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -2654,14 +2828,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;d146a616445b0b172cc49dd15d1915585f7115e89e5e8ca4935e7a6f56a1360b&quot;,
-            &quot;after_digest&quot;: &quot;73febc8e8877c8f91fa8df78b9468fe5efeb4911c1fbb97503b6d01b51842763&quot;,
+            &quot;receipt_digest&quot;: &quot;dab3c6f9bd08473eb7d24f81d8367bce7189447ed266387b0a187d1e25667963&quot;,
+            &quot;after_digest&quot;: &quot;0beb040b693c5974a5e3793506bdb066e24295c3a34751afdd5329d499838836&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;248b7eff2b9246b79d946d14f88a6726&quot;,
+              &quot;gate_epoch&quot;: &quot;6f5a20e780044e298c5398b7090352eb&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;dc0d5d74f7ee420a98a915559cdc6e42&quot;,
-            &quot;fingerprint&quot;: &quot;389a9cb5242b1204f1d11adc22ce5b49afbc3be2340e5e65522308318d8b698f&quot;,
+            &quot;committed&quot;: &quot;6304127329974335b777c855d8427b21&quot;,
+            &quot;fingerprint&quot;: &quot;f4eb6359eab2d1d67485f3bd28c16c7b0595c7025b68d2fd8d1fdad93a5cfb97&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -2680,7 +2854,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;66304fd58ca3be5861bc674897978e29c6e3683f666f2d39847baea111ea8974&quot;,
+            &quot;marker_digest&quot;: &quot;e80fa50acd355e2dfdc2adc60e465d75bdb54f5de01a56aaf9431e41dfeb36c5&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -2701,9 +2875,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;dc0d5d74f7ee420a98a915559cdc6e42&quot;,
-            &quot;fingerprint&quot;: &quot;389a9cb5242b1204f1d11adc22ce5b49afbc3be2340e5e65522308318d8b698f&quot;,
-            &quot;receipt_digest&quot;: &quot;12c13bfc941d311d14479fcadb328ffea85bfc811ae373d0b35b9dd3073be0fc&quot;,
+            &quot;committed&quot;: &quot;6304127329974335b777c855d8427b21&quot;,
+            &quot;fingerprint&quot;: &quot;f4eb6359eab2d1d67485f3bd28c16c7b0595c7025b68d2fd8d1fdad93a5cfb97&quot;,
+            &quot;receipt_digest&quot;: &quot;f11e8feb0adf0c5993059d5d3ca6b1ce34be11681046ee9eb4337d437df979c4&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -2715,12 +2889,12 @@
           &quot;mode&quot;: &quot;newer-record&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21628 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21628 kB&quot;
+            &quot;VmHWM&quot;: &quot;21768 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21768 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;22364 kB&quot;,
-            &quot;VmRSS&quot;: &quot;22364 kB&quot;
+            &quot;VmHWM&quot;: &quot;22352 kB&quot;,
+            &quot;VmRSS&quot;: &quot;22352 kB&quot;
           },
           &quot;incomplete_pair_not_permission&quot;: true,
           &quot;terminal&quot;: &quot;FAILED&quot;,
@@ -2735,10 +2909,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21624 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21624 kB&quot;
+            &quot;VmHWM&quot;: &quot;21760 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21760 kB&quot;
           },
-          &quot;seconds&quot;: 0.5337780260001637
+          &quot;seconds&quot;: 0.48939004300001443
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -2746,11 +2920,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;dc0d5d74f7ee420a98a915559cdc6e42&quot;,
-          &quot;fingerprint&quot;: &quot;389a9cb5242b1204f1d11adc22ce5b49afbc3be2340e5e65522308318d8b698f&quot;,
+          &quot;committed&quot;: &quot;6304127329974335b777c855d8427b21&quot;,
+          &quot;fingerprint&quot;: &quot;f4eb6359eab2d1d67485f3bd28c16c7b0595c7025b68d2fd8d1fdad93a5cfb97&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;248b7eff2b9246b79d946d14f88a6726&quot;,
+            &quot;gate_epoch&quot;: &quot;6f5a20e780044e298c5398b7090352eb&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -2763,7 +2937,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 5.2682533729998795
+      &quot;elapsed_seconds&quot;: 5.363167175000001
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -2772,8 +2946,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21088 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21088 kB&quot;
+        &quot;VmHWM&quot;: &quot;21360 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21360 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -2782,8 +2956,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22712 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22712 kB&quot;
+        &quot;VmHWM&quot;: &quot;22700 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22700 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -2837,14 +3011,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;cbbca26aa7576f96ad891960f591d8f8c3f8a61e08b656452258d5a690f20d6c&quot;,
-            &quot;after_digest&quot;: &quot;bade9aa3a4b7b6d4afd3e1ea4ff70fb9eece2b355a34d865545d2d3723d57c44&quot;,
+            &quot;receipt_digest&quot;: &quot;4e8dc1382cd3c1a28d560899fb72aac225d716c45bbe70b0f950d19fe5b73cae&quot;,
+            &quot;after_digest&quot;: &quot;241e29a8011408f911c1d669d16bdf5b3c54359d1826b882c600f9c926d2ebae&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;4651259bb6e442268fa0c0b6eeafa35f&quot;,
+              &quot;gate_epoch&quot;: &quot;dc17d6e44a7b4cf6b7306490862065e9&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;82e18316b195471bb26cabd05aca89df&quot;,
-            &quot;fingerprint&quot;: &quot;ba8df04b8ceb7ea25959741645f6fe0951a5ff25ef7e28a3ba4e35ac8ae44d84&quot;,
+            &quot;committed&quot;: &quot;275b026ad5964d51a9924606ce727c63&quot;,
+            &quot;fingerprint&quot;: &quot;ca8779e73459dbd68d83fddc39036a3b283a26c29bfaf1dcff79a0804c1c5d31&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -2863,7 +3037,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;70661432ab02e021717ea0c908d5acfa38f53d49ed7147e6763f0d403f5fa648&quot;,
+            &quot;marker_digest&quot;: &quot;070ba6d13711632bb965cb911f4f5c47a06ee6ae6a85528e759337b34302d9f7&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -2884,9 +3058,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;82e18316b195471bb26cabd05aca89df&quot;,
-            &quot;fingerprint&quot;: &quot;ba8df04b8ceb7ea25959741645f6fe0951a5ff25ef7e28a3ba4e35ac8ae44d84&quot;,
-            &quot;receipt_digest&quot;: &quot;fddd7529fc47cc5ddba8efc36983e7216daf6d0fed7df2feb37e34e9100659ca&quot;,
+            &quot;committed&quot;: &quot;275b026ad5964d51a9924606ce727c63&quot;,
+            &quot;fingerprint&quot;: &quot;ca8779e73459dbd68d83fddc39036a3b283a26c29bfaf1dcff79a0804c1c5d31&quot;,
+            &quot;receipt_digest&quot;: &quot;4dc1d3c73f815dc2bd5f3be226e57199fd4e19832fe759a37774d09586df8380&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -2898,12 +3072,12 @@
           &quot;mode&quot;: &quot;degraded-changed&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21600 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21600 kB&quot;
+            &quot;VmHWM&quot;: &quot;21736 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21736 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;21188 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21188 kB&quot;
+            &quot;VmHWM&quot;: &quot;21180 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21180 kB&quot;
           },
           &quot;terminal&quot;: &quot;FAILED&quot;,
           &quot;terminal_result&quot;: {
@@ -2917,10 +3091,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21592 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21592 kB&quot;
+            &quot;VmHWM&quot;: &quot;21728 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21728 kB&quot;
           },
-          &quot;seconds&quot;: 0.0950598770000397
+          &quot;seconds&quot;: 0.09623418600000377
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -2928,11 +3102,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;82e18316b195471bb26cabd05aca89df&quot;,
-          &quot;fingerprint&quot;: &quot;ba8df04b8ceb7ea25959741645f6fe0951a5ff25ef7e28a3ba4e35ac8ae44d84&quot;,
+          &quot;committed&quot;: &quot;275b026ad5964d51a9924606ce727c63&quot;,
+          &quot;fingerprint&quot;: &quot;ca8779e73459dbd68d83fddc39036a3b283a26c29bfaf1dcff79a0804c1c5d31&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;4651259bb6e442268fa0c0b6eeafa35f&quot;,
+            &quot;gate_epoch&quot;: &quot;dc17d6e44a7b4cf6b7306490862065e9&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -2945,7 +3119,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 4.911688984999955
+      &quot;elapsed_seconds&quot;: 4.903044807000015
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -2954,8 +3128,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21080 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21080 kB&quot;
+        &quot;VmHWM&quot;: &quot;21360 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21360 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -3019,14 +3193,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;7f89c96f2dd1df5899d52eeeeead9918973b1ecef18b5d0093a357c9a981b578&quot;,
-            &quot;after_digest&quot;: &quot;49ad483a4eeba11f71c2c5d088125cfc2831fbc0fcacdc9e1a749b353e0c47ba&quot;,
+            &quot;receipt_digest&quot;: &quot;80b527eec9c51f437a2e009b059762c087ad03addeab3955c595324619b66b9c&quot;,
+            &quot;after_digest&quot;: &quot;a648cfc1ca1f954b5c15f611e31c6ddf8de06be881cf9521c10c9f36113d9fd4&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;58401a3b474442c1933b49334dd59a42&quot;,
+              &quot;gate_epoch&quot;: &quot;771adb9cf16e4baa99b2c7584e5c399b&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;217b0a9444de4fcb96e755f2ab6de1fa&quot;,
-            &quot;fingerprint&quot;: &quot;c3ff69c5318d0400c0b06272777dfe61003a97eaf7c37039538e51ea0113c75b&quot;,
+            &quot;committed&quot;: &quot;395a48e65fe34a1291dd171e6142bc13&quot;,
+            &quot;fingerprint&quot;: &quot;e36dc49cd02f0f9e3745a3d4d36530acb1136d4cd3a54b0888448a9c33c577c7&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -3045,7 +3219,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;37daff63bb451b444e57eba83826b1640f753deb934d92dc3185557daa562ed4&quot;,
+            &quot;marker_digest&quot;: &quot;842d9444fa2d7581b86a541092d80f8e0f265150b2e1f4944f595b7e2ec85f6d&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -3066,9 +3240,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;217b0a9444de4fcb96e755f2ab6de1fa&quot;,
-            &quot;fingerprint&quot;: &quot;c3ff69c5318d0400c0b06272777dfe61003a97eaf7c37039538e51ea0113c75b&quot;,
-            &quot;receipt_digest&quot;: &quot;60450d151baf2d882767975194b87dc27fa2e421f661c8700fcd7a3bb21bed2c&quot;,
+            &quot;committed&quot;: &quot;395a48e65fe34a1291dd171e6142bc13&quot;,
+            &quot;fingerprint&quot;: &quot;e36dc49cd02f0f9e3745a3d4d36530acb1136d4cd3a54b0888448a9c33c577c7&quot;,
+            &quot;receipt_digest&quot;: &quot;272f3d8e317417624641a03a2282c969ec9410da9c7852e98b362fc91d5f8fb5&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -3080,12 +3254,12 @@
           &quot;mode&quot;: &quot;wrong-leaf&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21624 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21624 kB&quot;
+            &quot;VmHWM&quot;: &quot;21732 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21732 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;21196 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21196 kB&quot;
+            &quot;VmHWM&quot;: &quot;21176 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21176 kB&quot;
           },
           &quot;terminal&quot;: &quot;FAILED&quot;,
           &quot;terminal_result&quot;: {
@@ -3099,10 +3273,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21620 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21620 kB&quot;
+            &quot;VmHWM&quot;: &quot;21728 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21728 kB&quot;
           },
-          &quot;seconds&quot;: 5.254811810999854
+          &quot;seconds&quot;: 5.280956951999997
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -3110,11 +3284,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;217b0a9444de4fcb96e755f2ab6de1fa&quot;,
-          &quot;fingerprint&quot;: &quot;c3ff69c5318d0400c0b06272777dfe61003a97eaf7c37039538e51ea0113c75b&quot;,
+          &quot;committed&quot;: &quot;395a48e65fe34a1291dd171e6142bc13&quot;,
+          &quot;fingerprint&quot;: &quot;e36dc49cd02f0f9e3745a3d4d36530acb1136d4cd3a54b0888448a9c33c577c7&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;58401a3b474442c1933b49334dd59a42&quot;,
+            &quot;gate_epoch&quot;: &quot;771adb9cf16e4baa99b2c7584e5c399b&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -3127,7 +3301,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 9.947572649999984
+      &quot;elapsed_seconds&quot;: 10.01255549900003
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -3136,8 +3310,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21120 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21120 kB&quot;
+        &quot;VmHWM&quot;: &quot;21348 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21348 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -3201,14 +3375,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;612f38b2445f060cd5e8fa4113d517245c5ca06920924759e5abad37e795a7df&quot;,
-            &quot;after_digest&quot;: &quot;52edcfb4f291899d7fdaf5f5f3a6d1141bcbb081847c3752989c1a93a204add3&quot;,
+            &quot;receipt_digest&quot;: &quot;eba72305f94e2795e1bdc66e4f46812c0864ff03b5366db5f8626bcb2e717e30&quot;,
+            &quot;after_digest&quot;: &quot;21c548cc7c888c89bb8859fd49be85778a15940f12a5d04ccd43068900ccbb33&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;756947e34bec4f59a0c4c445b0992de5&quot;,
+              &quot;gate_epoch&quot;: &quot;b7bcca42bbad4cc380a6d60ebce20db7&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;a6e495a1328a4997a8f6680885ac588b&quot;,
-            &quot;fingerprint&quot;: &quot;bf46fe72655a88d0893ab08ebb6860369ad611d550f32264877874ef4f9fa034&quot;,
+            &quot;committed&quot;: &quot;1a3e7b8f5144403aa026b018b56382e0&quot;,
+            &quot;fingerprint&quot;: &quot;1e1ba888a06dc9ce05fbfceb107ddfb76b74b8de7f47c7ba7678de75c0469195&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -3227,7 +3401,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;1ff8cdfe534002a2551c0d9bc64395f2e34c85f15ba9df478ac278d130b0663b&quot;,
+            &quot;marker_digest&quot;: &quot;caa5692bb5b4219adf20051d36c3bc316b61f499557d6ab4e2ca0a9baad99ffb&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -3248,9 +3422,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;a6e495a1328a4997a8f6680885ac588b&quot;,
-            &quot;fingerprint&quot;: &quot;bf46fe72655a88d0893ab08ebb6860369ad611d550f32264877874ef4f9fa034&quot;,
-            &quot;receipt_digest&quot;: &quot;71f929a0ecbabda021de633d4e5223e3bdb48341ddcf22ef9d5e81175bd55039&quot;,
+            &quot;committed&quot;: &quot;1a3e7b8f5144403aa026b018b56382e0&quot;,
+            &quot;fingerprint&quot;: &quot;1e1ba888a06dc9ce05fbfceb107ddfb76b74b8de7f47c7ba7678de75c0469195&quot;,
+            &quot;receipt_digest&quot;: &quot;fb724ebcf9495b147bfd7e94d5979f818a94a19052d2c61d6e8cc15b4d8151c8&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -3262,12 +3436,12 @@
           &quot;mode&quot;: &quot;bad-http&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21624 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21624 kB&quot;
+            &quot;VmHWM&quot;: &quot;21720 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21720 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;21192 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21192 kB&quot;
+            &quot;VmHWM&quot;: &quot;21176 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21176 kB&quot;
           },
           &quot;terminal&quot;: &quot;FAILED&quot;,
           &quot;terminal_result&quot;: {
@@ -3281,10 +3455,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21620 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21620 kB&quot;
+            &quot;VmHWM&quot;: &quot;21712 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21712 kB&quot;
           },
-          &quot;seconds&quot;: 5.2711333499999
+          &quot;seconds&quot;: 5.266130235999981
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -3292,11 +3466,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;a6e495a1328a4997a8f6680885ac588b&quot;,
-          &quot;fingerprint&quot;: &quot;bf46fe72655a88d0893ab08ebb6860369ad611d550f32264877874ef4f9fa034&quot;,
+          &quot;committed&quot;: &quot;1a3e7b8f5144403aa026b018b56382e0&quot;,
+          &quot;fingerprint&quot;: &quot;1e1ba888a06dc9ce05fbfceb107ddfb76b74b8de7f47c7ba7678de75c0469195&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;756947e34bec4f59a0c4c445b0992de5&quot;,
+            &quot;gate_epoch&quot;: &quot;b7bcca42bbad4cc380a6d60ebce20db7&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -3309,7 +3483,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 9.929758265999908
+      &quot;elapsed_seconds&quot;: 10.11686870699998
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -3318,8 +3492,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21076 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21076 kB&quot;
+        &quot;VmHWM&quot;: &quot;21364 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21364 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -3328,8 +3502,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22716 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22716 kB&quot;
+        &quot;VmHWM&quot;: &quot;22704 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22704 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -3383,14 +3557,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;11cf1e2aa5b8ac174955c2439ba216d384e89c92d0616f1ba28842bd5abaf7cb&quot;,
-            &quot;after_digest&quot;: &quot;33220cf0445b0e6b24f87050c65aea6245db6394412a553bde2ad730b54aae9b&quot;,
+            &quot;receipt_digest&quot;: &quot;afb06c45f65e609cf563211fcd3b9c8a1a08a8860b9352b85f22fe9a52b1a0f0&quot;,
+            &quot;after_digest&quot;: &quot;7a0642fe74f51d84826166126d027cbb7a04e5704a0de2424222cd9c00ac46fa&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;4753e411743f4a6588846b478536b0a3&quot;,
+              &quot;gate_epoch&quot;: &quot;dce77c807f1342fe8f4618884d26289a&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;36977f61904d4c0595c1d7db99856e56&quot;,
-            &quot;fingerprint&quot;: &quot;7e3508fc19f517cb9ab7786d70b1f985f59e7343eb7dcef62e41d4e1878a81a4&quot;,
+            &quot;committed&quot;: &quot;afe738a552f44e73a56eb25cdd918bd4&quot;,
+            &quot;fingerprint&quot;: &quot;52621db3bc9e7517c9266103e1e0bec0e0c3b4092dde4c0845650bbf55aae0a7&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -3409,7 +3583,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;5f78e710ede0e1e4264321109ffd5044454178551310c77098b511234abddf5f&quot;,
+            &quot;marker_digest&quot;: &quot;b6b305ccfd8c35935f43f7e34d5cc383e47e7e7adf1357daebf8d67d82720178&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -3430,9 +3604,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;36977f61904d4c0595c1d7db99856e56&quot;,
-            &quot;fingerprint&quot;: &quot;7e3508fc19f517cb9ab7786d70b1f985f59e7343eb7dcef62e41d4e1878a81a4&quot;,
-            &quot;receipt_digest&quot;: &quot;2ddd8480f914712ce7f759abee9231821e58efaeef9a662bc3d7197c51797dc7&quot;,
+            &quot;committed&quot;: &quot;afe738a552f44e73a56eb25cdd918bd4&quot;,
+            &quot;fingerprint&quot;: &quot;52621db3bc9e7517c9266103e1e0bec0e0c3b4092dde4c0845650bbf55aae0a7&quot;,
+            &quot;receipt_digest&quot;: &quot;85f382cd33831b6070f95118cd72275a1c17ba6115cb8187ec0acf52e9c04039&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -3444,12 +3618,12 @@
           &quot;mode&quot;: &quot;enospc-before&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21628 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21628 kB&quot;
+            &quot;VmHWM&quot;: &quot;21736 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21736 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;21192 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21192 kB&quot;
+            &quot;VmHWM&quot;: &quot;21180 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21180 kB&quot;
           },
           &quot;observed_errno&quot;: 28,
           &quot;active_executor_reaped_before_repair&quot;: true,
@@ -3463,10 +3637,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21596 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21596 kB&quot;
+            &quot;VmHWM&quot;: &quot;21624 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21624 kB&quot;
           },
-          &quot;seconds&quot;: 0.1689779409998664
+          &quot;seconds&quot;: 0.16758793000008154
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -3474,11 +3648,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;36977f61904d4c0595c1d7db99856e56&quot;,
-          &quot;fingerprint&quot;: &quot;7e3508fc19f517cb9ab7786d70b1f985f59e7343eb7dcef62e41d4e1878a81a4&quot;,
+          &quot;committed&quot;: &quot;afe738a552f44e73a56eb25cdd918bd4&quot;,
+          &quot;fingerprint&quot;: &quot;52621db3bc9e7517c9266103e1e0bec0e0c3b4092dde4c0845650bbf55aae0a7&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;4753e411743f4a6588846b478536b0a3&quot;,
+            &quot;gate_epoch&quot;: &quot;dce77c807f1342fe8f4618884d26289a&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -3491,7 +3665,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 4.982978786999865
+      &quot;elapsed_seconds&quot;: 5.131468600000062
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -3500,8 +3674,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21084 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21084 kB&quot;
+        &quot;VmHWM&quot;: &quot;21360 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21360 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -3510,8 +3684,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22716 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22716 kB&quot;
+        &quot;VmHWM&quot;: &quot;22708 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22708 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -3565,14 +3739,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;1cf2f56415f02f9ceae31b45649ebd5e54ae3b6dbac633f23ae883ccf12cf816&quot;,
-            &quot;after_digest&quot;: &quot;e6e487806556741439e85f79ff7f3827e810f728b9b55673f8043c3bfd6df5c0&quot;,
+            &quot;receipt_digest&quot;: &quot;2fca6f454a9eb322aa63044dd72a59afea3f49b8f20fb4f755d896aaa0651dc0&quot;,
+            &quot;after_digest&quot;: &quot;1b438fbfbd8f9f91d3eba44fec94f21b6f71791bb2cea8cd0f438c49c04fef4d&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;7e047b15887046a1990c2d806ad9d2fd&quot;,
+              &quot;gate_epoch&quot;: &quot;07dcee7ab055473382e98af71a2dcca5&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;6b5a715e4f1f40998ecb5df64530fb5a&quot;,
-            &quot;fingerprint&quot;: &quot;e61b441c49a13e010a2a97d120d673f817bb9ae7e102c34ac578eb71e4e5c9b0&quot;,
+            &quot;committed&quot;: &quot;fd4db81ca6ec4d5198d27e0d799eb5ed&quot;,
+            &quot;fingerprint&quot;: &quot;deccc025e5ef25cf4fdcae67561ac0ef318b2b1e847d05f1e07f073e262ad563&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -3591,7 +3765,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;0fbfe5e823e4e6cc83bc5b8681d8375b22bcfb2776b5a9ad8a2321d78ff87182&quot;,
+            &quot;marker_digest&quot;: &quot;9fc63cd47c82e4996165e4a3a93a35fa838e6f75cec7eebd7eecd7719a17b583&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -3612,9 +3786,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;6b5a715e4f1f40998ecb5df64530fb5a&quot;,
-            &quot;fingerprint&quot;: &quot;e61b441c49a13e010a2a97d120d673f817bb9ae7e102c34ac578eb71e4e5c9b0&quot;,
-            &quot;receipt_digest&quot;: &quot;b7becb57b96e3a0e7306cb666324de59dad391cd5c0c064e3fb4ae99564ec67c&quot;,
+            &quot;committed&quot;: &quot;fd4db81ca6ec4d5198d27e0d799eb5ed&quot;,
+            &quot;fingerprint&quot;: &quot;deccc025e5ef25cf4fdcae67561ac0ef318b2b1e847d05f1e07f073e262ad563&quot;,
+            &quot;receipt_digest&quot;: &quot;93471e46849027e57d4ddfe261478e00b047852275bc6d11340a5dde61df8563&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -3626,12 +3800,12 @@
           &quot;mode&quot;: &quot;readonly-before&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21620 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21620 kB&quot;
+            &quot;VmHWM&quot;: &quot;21728 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21728 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;21180 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21180 kB&quot;
+            &quot;VmHWM&quot;: &quot;21196 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21196 kB&quot;
           },
           &quot;observed_errno&quot;: 30,
           &quot;active_executor_reaped_before_repair&quot;: true,
@@ -3645,10 +3819,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21596 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21596 kB&quot;
+            &quot;VmHWM&quot;: &quot;21624 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21624 kB&quot;
           },
-          &quot;seconds&quot;: 0.12024272300004668
+          &quot;seconds&quot;: 0.12571353099997395
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -3656,11 +3830,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;6b5a715e4f1f40998ecb5df64530fb5a&quot;,
-          &quot;fingerprint&quot;: &quot;e61b441c49a13e010a2a97d120d673f817bb9ae7e102c34ac578eb71e4e5c9b0&quot;,
+          &quot;committed&quot;: &quot;fd4db81ca6ec4d5198d27e0d799eb5ed&quot;,
+          &quot;fingerprint&quot;: &quot;deccc025e5ef25cf4fdcae67561ac0ef318b2b1e847d05f1e07f073e262ad563&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;7e047b15887046a1990c2d806ad9d2fd&quot;,
+            &quot;gate_epoch&quot;: &quot;07dcee7ab055473382e98af71a2dcca5&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -3673,7 +3847,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 4.85732377599993
+      &quot;elapsed_seconds&quot;: 4.921519361000037
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -3682,8 +3856,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21084 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21084 kB&quot;
+        &quot;VmHWM&quot;: &quot;21360 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21360 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -3692,8 +3866,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22704 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22704 kB&quot;
+        &quot;VmHWM&quot;: &quot;22740 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22740 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -3747,14 +3921,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;b43abe6e0f23b92b7056c7592c9e9fef64df998259323429f1df73393f370e62&quot;,
-            &quot;after_digest&quot;: &quot;2a3e00625c6ff347939e07c6403193fbcbff49e02d14ae5e9e19da7421f217f3&quot;,
+            &quot;receipt_digest&quot;: &quot;0bec9fe265d5354a33f7f4d0250654891b54ffe707652b56c30c4d052c6e54e0&quot;,
+            &quot;after_digest&quot;: &quot;9c407d3b06fc68fad3ff5a1a6411aab9230571bbe071822a8f2e3c40051f03d1&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;003d7b7313f64e628d528e530a2c8da2&quot;,
+              &quot;gate_epoch&quot;: &quot;4073ea80987e48feafa6f78fa0678b7e&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;de90d4410ec3437f9eb30bfa240b8c30&quot;,
-            &quot;fingerprint&quot;: &quot;f5455e3e98b1e4116a9c581682de227082da4fcd0e8a314e4e244737cb676a8a&quot;,
+            &quot;committed&quot;: &quot;529f4ddcf1034a15af8df5cf69c0b7be&quot;,
+            &quot;fingerprint&quot;: &quot;45b6be43751103f9557fc8a844afb8f45a7f42a15a93e0cf840b1e7a04246b9c&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -3773,7 +3947,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;6beaf1e43282276f199d96768ee2c440635eb60759c9590d57bf3b286e638636&quot;,
+            &quot;marker_digest&quot;: &quot;223c42c712228c5fbfacd6cf68ef2ea7117d255ef12e04e026dd6bf56d8589d6&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -3794,9 +3968,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;de90d4410ec3437f9eb30bfa240b8c30&quot;,
-            &quot;fingerprint&quot;: &quot;f5455e3e98b1e4116a9c581682de227082da4fcd0e8a314e4e244737cb676a8a&quot;,
-            &quot;receipt_digest&quot;: &quot;da81764221373c6b9b70c107fa04e36c24f45bd1da00bdc93e68e897af610361&quot;,
+            &quot;committed&quot;: &quot;529f4ddcf1034a15af8df5cf69c0b7be&quot;,
+            &quot;fingerprint&quot;: &quot;45b6be43751103f9557fc8a844afb8f45a7f42a15a93e0cf840b1e7a04246b9c&quot;,
+            &quot;receipt_digest&quot;: &quot;ae4ed9e0f3b9fd7c84c479c63ea11ab9ae5c2696ca933e683ce3dfdf7b57d106&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -3808,12 +3982,12 @@
           &quot;mode&quot;: &quot;readonly-stopped&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21644 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21644 kB&quot;
+            &quot;VmHWM&quot;: &quot;21732 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21732 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;21188 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21188 kB&quot;
+            &quot;VmHWM&quot;: &quot;21180 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21180 kB&quot;
           },
           &quot;observed_errno&quot;: 30,
           &quot;stopped_executor_reaped_before_repair&quot;: true,
@@ -3827,10 +4001,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21592 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21592 kB&quot;
+            &quot;VmHWM&quot;: &quot;21624 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21624 kB&quot;
           },
-          &quot;seconds&quot;: 0.12136125000006359
+          &quot;seconds&quot;: 0.12556947600000967
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -3838,11 +4012,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;de90d4410ec3437f9eb30bfa240b8c30&quot;,
-          &quot;fingerprint&quot;: &quot;f5455e3e98b1e4116a9c581682de227082da4fcd0e8a314e4e244737cb676a8a&quot;,
+          &quot;committed&quot;: &quot;529f4ddcf1034a15af8df5cf69c0b7be&quot;,
+          &quot;fingerprint&quot;: &quot;45b6be43751103f9557fc8a844afb8f45a7f42a15a93e0cf840b1e7a04246b9c&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;003d7b7313f64e628d528e530a2c8da2&quot;,
+            &quot;gate_epoch&quot;: &quot;4073ea80987e48feafa6f78fa0678b7e&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -3855,7 +4029,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 4.938125596000191
+      &quot;elapsed_seconds&quot;: 5.015317302000085
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -3864,8 +4038,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21084 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21084 kB&quot;
+        &quot;VmHWM&quot;: &quot;21360 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21360 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -3874,8 +4048,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22716 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22716 kB&quot;
+        &quot;VmHWM&quot;: &quot;22704 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22704 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -3929,14 +4103,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;8f682579875fff796bc114d7145d5bba609b9fb6668361c5b7d41b96364917ed&quot;,
-            &quot;after_digest&quot;: &quot;a536af1052b6faa6b963134695877a0126c3c9ec9610af9ff460471416623b3c&quot;,
+            &quot;receipt_digest&quot;: &quot;3b69f6fa4b4b0ae33b2e7f0f7bf7608da1f6781b5d6978349830a0359eb6dd63&quot;,
+            &quot;after_digest&quot;: &quot;003f2dad206fb66d59d5e39f8c40357f7f747efefad13f60b5bc311d72a236de&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;81396baa830e4f61bc3e8e69d2f7be39&quot;,
+              &quot;gate_epoch&quot;: &quot;ac3f513d279548bbb56bb4471f95ef54&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;6f855fbed26244edb88241e75d379d7b&quot;,
-            &quot;fingerprint&quot;: &quot;e8dd5c372fd826ff257b99a6bc4802e5ec7056d092a6f0cdc3bfd543a8f56665&quot;,
+            &quot;committed&quot;: &quot;c7a679495bda407f86f566197d1d8a89&quot;,
+            &quot;fingerprint&quot;: &quot;c3ec27f296ea3fe08e1e993fa97b618e9cbe558573b1598d66bbab445e0ee6ce&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -3955,7 +4129,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;f611e8c68ca25131a3b69f71c33db127c63a828bb3b78476b8ed63d7e3676b84&quot;,
+            &quot;marker_digest&quot;: &quot;70f56bad13ad5d4ca798bc29e2ab8a7d43ce912f02ccfb69a690712079694654&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -3976,9 +4150,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;6f855fbed26244edb88241e75d379d7b&quot;,
-            &quot;fingerprint&quot;: &quot;e8dd5c372fd826ff257b99a6bc4802e5ec7056d092a6f0cdc3bfd543a8f56665&quot;,
-            &quot;receipt_digest&quot;: &quot;369725d05371be88bcbdcacb34f4bc97c4c3f98d650400d3023753e7f7b342de&quot;,
+            &quot;committed&quot;: &quot;c7a679495bda407f86f566197d1d8a89&quot;,
+            &quot;fingerprint&quot;: &quot;c3ec27f296ea3fe08e1e993fa97b618e9cbe558573b1598d66bbab445e0ee6ce&quot;,
+            &quot;receipt_digest&quot;: &quot;6b62aea2d7ab70f833b0d1d64fc75a7285f360e09f31dde1cfa38a953e176ad4&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -3990,12 +4164,12 @@
           &quot;mode&quot;: &quot;sqlite-full-before&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21644 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21644 kB&quot;
+            &quot;VmHWM&quot;: &quot;21736 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21736 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;21184 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21184 kB&quot;
+            &quot;VmHWM&quot;: &quot;21180 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21180 kB&quot;
           },
           &quot;terminal&quot;: &quot;FAILED&quot;,
           &quot;terminal_result&quot;: {
@@ -4009,10 +4183,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21640 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21640 kB&quot;
+            &quot;VmHWM&quot;: &quot;21728 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21728 kB&quot;
           },
-          &quot;seconds&quot;: 0.1022477120000076
+          &quot;seconds&quot;: 0.09817801999997755
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -4020,11 +4194,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;6f855fbed26244edb88241e75d379d7b&quot;,
-          &quot;fingerprint&quot;: &quot;e8dd5c372fd826ff257b99a6bc4802e5ec7056d092a6f0cdc3bfd543a8f56665&quot;,
+          &quot;committed&quot;: &quot;c7a679495bda407f86f566197d1d8a89&quot;,
+          &quot;fingerprint&quot;: &quot;c3ec27f296ea3fe08e1e993fa97b618e9cbe558573b1598d66bbab445e0ee6ce&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;81396baa830e4f61bc3e8e69d2f7be39&quot;,
+            &quot;gate_epoch&quot;: &quot;ac3f513d279548bbb56bb4471f95ef54&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -4037,7 +4211,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 4.88388976400006
+      &quot;elapsed_seconds&quot;: 4.863208303999954
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -4046,8 +4220,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21072 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21072 kB&quot;
+        &quot;VmHWM&quot;: &quot;21360 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21360 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -4056,8 +4230,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22720 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22720 kB&quot;
+        &quot;VmHWM&quot;: &quot;22736 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22736 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -4111,14 +4285,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;68b2decf5902265baef58f954116809e10ab4fafe17773e973cc57820cf06948&quot;,
-            &quot;after_digest&quot;: &quot;622cc5cae8a1baed6f5ea2e0675b447358342cbd71551a9477b5de17aeb5866b&quot;,
+            &quot;receipt_digest&quot;: &quot;e77784f6699f2f778e6a5661669343ba8be36c9874cb2818b40e8f1954c617c3&quot;,
+            &quot;after_digest&quot;: &quot;2f388fc21f0478199bbb0d8e3728f2c929949674e6d66c7d494f357531ac5fc3&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;d94be21ae2a04b0db779b7b5674c93dd&quot;,
+              &quot;gate_epoch&quot;: &quot;9ba58345cd374b819b7e21f6961c1ef5&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;1baee2362be444e68de73c383b6abbe8&quot;,
-            &quot;fingerprint&quot;: &quot;a997b723953cc3aa60ff7c3f1bea3734b842cdbd1d80ee7aeeaf935dcff63d0f&quot;,
+            &quot;committed&quot;: &quot;0c64003105df4426b01bb66fdd7f3617&quot;,
+            &quot;fingerprint&quot;: &quot;f9163274bbdf49b69a579cec247d12fbd705b17928dea46e0e3be8084ee94cc2&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -4137,7 +4311,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;c1aa85b578a0e505c29f9fe2247de083191fffe81d4af832fc892899f1528fee&quot;,
+            &quot;marker_digest&quot;: &quot;85a4e452609ebbcd05ad770000bf4555d7fe9e990176ce8e011eef45fbdc5820&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -4158,9 +4332,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;1baee2362be444e68de73c383b6abbe8&quot;,
-            &quot;fingerprint&quot;: &quot;a997b723953cc3aa60ff7c3f1bea3734b842cdbd1d80ee7aeeaf935dcff63d0f&quot;,
-            &quot;receipt_digest&quot;: &quot;48b991737225540f32de274ac9a433aea0f94dd8563f05b278543d8857b91be0&quot;,
+            &quot;committed&quot;: &quot;0c64003105df4426b01bb66fdd7f3617&quot;,
+            &quot;fingerprint&quot;: &quot;f9163274bbdf49b69a579cec247d12fbd705b17928dea46e0e3be8084ee94cc2&quot;,
+            &quot;receipt_digest&quot;: &quot;b4370aadcb0148966d761fb2b33bb1677e25483752d39b6a0dca781c34cd823a&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -4172,12 +4346,12 @@
           &quot;mode&quot;: &quot;sqlite-full-main&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21612 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21612 kB&quot;
+            &quot;VmHWM&quot;: &quot;21728 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21728 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;22320 kB&quot;,
-            &quot;VmRSS&quot;: &quot;22320 kB&quot;
+            &quot;VmHWM&quot;: &quot;22304 kB&quot;,
+            &quot;VmRSS&quot;: &quot;22304 kB&quot;
           },
           &quot;terminal&quot;: &quot;FAILED&quot;,
           &quot;terminal_result&quot;: {
@@ -4191,10 +4365,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21608 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21608 kB&quot;
+            &quot;VmHWM&quot;: &quot;21724 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21724 kB&quot;
           },
-          &quot;seconds&quot;: 0.5106578679999529
+          &quot;seconds&quot;: 0.5378235819999873
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -4202,11 +4376,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;1baee2362be444e68de73c383b6abbe8&quot;,
-          &quot;fingerprint&quot;: &quot;a997b723953cc3aa60ff7c3f1bea3734b842cdbd1d80ee7aeeaf935dcff63d0f&quot;,
+          &quot;committed&quot;: &quot;0c64003105df4426b01bb66fdd7f3617&quot;,
+          &quot;fingerprint&quot;: &quot;f9163274bbdf49b69a579cec247d12fbd705b17928dea46e0e3be8084ee94cc2&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;d94be21ae2a04b0db779b7b5674c93dd&quot;,
+            &quot;gate_epoch&quot;: &quot;9ba58345cd374b819b7e21f6961c1ef5&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -4219,7 +4393,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 5.488178349000009
+      &quot;elapsed_seconds&quot;: 5.5170084039999665
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -4228,8 +4402,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21084 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21084 kB&quot;
+        &quot;VmHWM&quot;: &quot;21364 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21364 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -4238,8 +4412,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22720 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22720 kB&quot;
+        &quot;VmHWM&quot;: &quot;22708 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22708 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -4293,14 +4467,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;6143da814a93822f642b14198dfa6b7356d1d3432917436d65b826a10788fab1&quot;,
-            &quot;after_digest&quot;: &quot;f0e4c262f3299a6124ffb7d2c944e50112c1014b64ad531abd6ad944219da45f&quot;,
+            &quot;receipt_digest&quot;: &quot;7465f671420782797781c943ac8b066b70ab50669946d68adf2c1d60b6c98c1c&quot;,
+            &quot;after_digest&quot;: &quot;e3d96058673e59118fd9a0b0ca0de235d7cb0b9b941698875537a9603be29067&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;2e2ff1b44c1d4f17abfbea35b851fbcb&quot;,
+              &quot;gate_epoch&quot;: &quot;297874455c1c46629956a375f66dded0&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;8a126fcce9844af9baa528f2743cbc87&quot;,
-            &quot;fingerprint&quot;: &quot;ac914fdc9cd928ba99e6e920789fbdd13d52746dc95c73740b5f83b9ed41f081&quot;,
+            &quot;committed&quot;: &quot;57523c56cb934b14a689ce7a4ebd167d&quot;,
+            &quot;fingerprint&quot;: &quot;9cd225712defd217ff86ac17cd4bbe964d0ce51bf07459f4b46bb4ffa1dd903e&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -4319,7 +4493,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;ea8cb1f6614d928a46073fb63c00c388c6ceda81204f719c8924ab4916ce6000&quot;,
+            &quot;marker_digest&quot;: &quot;a6b5efb8309c4a08986a0b2a7f2e3ea93d212dcea6656345656b29af0e960a5f&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -4340,9 +4514,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;8a126fcce9844af9baa528f2743cbc87&quot;,
-            &quot;fingerprint&quot;: &quot;ac914fdc9cd928ba99e6e920789fbdd13d52746dc95c73740b5f83b9ed41f081&quot;,
-            &quot;receipt_digest&quot;: &quot;efdb5fae4b80df03f16b79b08c30ffa4c92a0a7b46fc9756ada459b513b0c094&quot;,
+            &quot;committed&quot;: &quot;57523c56cb934b14a689ce7a4ebd167d&quot;,
+            &quot;fingerprint&quot;: &quot;9cd225712defd217ff86ac17cd4bbe964d0ce51bf07459f4b46bb4ffa1dd903e&quot;,
+            &quot;receipt_digest&quot;: &quot;0d6606a9753f1cbd0fbc4b87c03eb64d3284df48c2af77ecf32cb6ea8590a30a&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -4354,12 +4528,12 @@
           &quot;mode&quot;: &quot;sqlite-full-result&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21652 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21652 kB&quot;
+            &quot;VmHWM&quot;: &quot;21724 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21724 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;21192 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21192 kB&quot;
+            &quot;VmHWM&quot;: &quot;21180 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21180 kB&quot;
           },
           &quot;terminal&quot;: &quot;FAILED&quot;,
           &quot;terminal_result&quot;: {
@@ -4373,10 +4547,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21644 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21644 kB&quot;
+            &quot;VmHWM&quot;: &quot;21720 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21720 kB&quot;
           },
-          &quot;seconds&quot;: 0.49734521499999573
+          &quot;seconds&quot;: 0.48973607499999616
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -4384,11 +4558,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;8a126fcce9844af9baa528f2743cbc87&quot;,
-          &quot;fingerprint&quot;: &quot;ac914fdc9cd928ba99e6e920789fbdd13d52746dc95c73740b5f83b9ed41f081&quot;,
+          &quot;committed&quot;: &quot;57523c56cb934b14a689ce7a4ebd167d&quot;,
+          &quot;fingerprint&quot;: &quot;9cd225712defd217ff86ac17cd4bbe964d0ce51bf07459f4b46bb4ffa1dd903e&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;2e2ff1b44c1d4f17abfbea35b851fbcb&quot;,
+            &quot;gate_epoch&quot;: &quot;297874455c1c46629956a375f66dded0&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -4401,7 +4575,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 5.331987224000159
+      &quot;elapsed_seconds&quot;: 5.27634293899996
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -4410,8 +4584,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21076 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21076 kB&quot;
+        &quot;VmHWM&quot;: &quot;21364 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21364 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -4420,8 +4594,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22704 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22704 kB&quot;
+        &quot;VmHWM&quot;: &quot;22708 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22708 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -4475,14 +4649,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;21ba412dc6bc41c53c6e0f3ad22f4332699640987e4667c4d1ede2d5cbaa22c6&quot;,
-            &quot;after_digest&quot;: &quot;1385bd61edf11484fbec2d0bac75bedfe4f75f394f2e6ae8655fc8804dc0bf75&quot;,
+            &quot;receipt_digest&quot;: &quot;27ec692193304780242468afbe3fd33da9b32185b498b802055b8f6c1f599d37&quot;,
+            &quot;after_digest&quot;: &quot;3507144321c3c7d6704e35982a575c68105e0175973bf21575011349f914c669&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;56d2548f7ecb4359921b0530e1309bba&quot;,
+              &quot;gate_epoch&quot;: &quot;2f259f12054042df83a903ef2ae491f8&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;b00af31e4af24a78bf4fc55d79e93de5&quot;,
-            &quot;fingerprint&quot;: &quot;13babb96c4c1074b310087b2e25a77fbfad9a4b543c5254cf6c2742d9d8494f6&quot;,
+            &quot;committed&quot;: &quot;48a8ccd0fbca4b5eb53f35a8be825355&quot;,
+            &quot;fingerprint&quot;: &quot;97bbac1914ed8ea115fa9c4d8f25439e7228bbde86ef874d1297c6e8e9e29e48&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -4501,7 +4675,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;8e18f751939852c89c1f16db0ff29daf67605059939853539e937497f4c513d7&quot;,
+            &quot;marker_digest&quot;: &quot;516d13db1c7d692396056a96653fad6def3672d30265fee5813b9d226638aff7&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -4522,9 +4696,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;b00af31e4af24a78bf4fc55d79e93de5&quot;,
-            &quot;fingerprint&quot;: &quot;13babb96c4c1074b310087b2e25a77fbfad9a4b543c5254cf6c2742d9d8494f6&quot;,
-            &quot;receipt_digest&quot;: &quot;c93889357847c8b2fbcb30f7712b0aa98e3364846ba0d6fcc7735690b6979904&quot;,
+            &quot;committed&quot;: &quot;48a8ccd0fbca4b5eb53f35a8be825355&quot;,
+            &quot;fingerprint&quot;: &quot;97bbac1914ed8ea115fa9c4d8f25439e7228bbde86ef874d1297c6e8e9e29e48&quot;,
+            &quot;receipt_digest&quot;: &quot;f19031e41468a8aea4353c44ff083678e049f7e0d08ecf137e2925913246920d&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -4536,12 +4710,12 @@
           &quot;mode&quot;: &quot;enospc-after&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21632 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21632 kB&quot;
+            &quot;VmHWM&quot;: &quot;21724 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21724 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;22352 kB&quot;,
-            &quot;VmRSS&quot;: &quot;22352 kB&quot;
+            &quot;VmHWM&quot;: &quot;22356 kB&quot;,
+            &quot;VmRSS&quot;: &quot;22356 kB&quot;
           },
           &quot;incomplete_pair_not_permission&quot;: true,
           &quot;observed_errno&quot;: 28,
@@ -4556,10 +4730,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21588 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21588 kB&quot;
+            &quot;VmHWM&quot;: &quot;21620 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21620 kB&quot;
           },
-          &quot;seconds&quot;: 0.5564780160000282
+          &quot;seconds&quot;: 0.5813336050000544
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -4567,11 +4741,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;b00af31e4af24a78bf4fc55d79e93de5&quot;,
-          &quot;fingerprint&quot;: &quot;13babb96c4c1074b310087b2e25a77fbfad9a4b543c5254cf6c2742d9d8494f6&quot;,
+          &quot;committed&quot;: &quot;48a8ccd0fbca4b5eb53f35a8be825355&quot;,
+          &quot;fingerprint&quot;: &quot;97bbac1914ed8ea115fa9c4d8f25439e7228bbde86ef874d1297c6e8e9e29e48&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;56d2548f7ecb4359921b0530e1309bba&quot;,
+            &quot;gate_epoch&quot;: &quot;2f259f12054042df83a903ef2ae491f8&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -4584,7 +4758,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 5.3726025569999365
+      &quot;elapsed_seconds&quot;: 5.583229402000029
     },
     {
       &quot;fault&quot;: &quot;sqlite_full&quot;,
@@ -4593,8 +4767,8 @@
       &quot;pager_max_pages&quot;: 9,
       &quot;allocation_bytes&quot;: 65536,
       &quot;service_memory_before_fault&quot;: {
-        &quot;VmHWM&quot;: &quot;21084 kB&quot;,
-        &quot;VmRSS&quot;: &quot;21084 kB&quot;
+        &quot;VmHWM&quot;: &quot;21356 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21356 kB&quot;
       },
       &quot;candidate_observed_before_fault&quot;: true,
       &quot;active_executor_fencing&quot;: {
@@ -4603,8 +4777,8 @@
         &quot;gate_unchanged&quot;: true
       },
       &quot;executor_memory_at_checkpoint&quot;: {
-        &quot;VmHWM&quot;: &quot;22716 kB&quot;,
-        &quot;VmRSS&quot;: &quot;22716 kB&quot;
+        &quot;VmHWM&quot;: &quot;22700 kB&quot;,
+        &quot;VmRSS&quot;: &quot;22700 kB&quot;
       },
       &quot;new_update_reply&quot;: {
         &quot;ok&quot;: false,
@@ -4658,14 +4832,14 @@
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
-            &quot;receipt_digest&quot;: &quot;ad4cdf6e349e95b6a157cfa98e795da1f51e220cf27b0d946b12dcecc24d7c7c&quot;,
-            &quot;after_digest&quot;: &quot;646fa3d12cc2ce474a492d1c0303993b2f2d79c2a0fc9ab51589c6485a8e4bf4&quot;,
+            &quot;receipt_digest&quot;: &quot;43b2eeb4a8873f56f44fb614db465afa7f5d98474d130d8af5b079db2e22b36f&quot;,
+            &quot;after_digest&quot;: &quot;635175d0576991fd5216f0b7e136976312f0dbb94951659c95fb0f8acc618568&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;1ada9790608c4c62b52eb71d401b98e3&quot;,
+              &quot;gate_epoch&quot;: &quot;891a8fb84867413993764843d0f50126&quot;,
               &quot;gate_revision&quot;: 8
             },
-            &quot;committed&quot;: &quot;661636548dd544ca877fb4b3cbec2108&quot;,
-            &quot;fingerprint&quot;: &quot;3a14c5ea373344701d0fd4067a365b2aa6caa7c394abc9710d775903ff12d222&quot;,
+            &quot;committed&quot;: &quot;bd731280f8f1468c90d02fb977e118e3&quot;,
+            &quot;fingerprint&quot;: &quot;f1a81e808c04b750abce447593f220212666e591ba73b1106e7f5dbb84f34af9&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           },
@@ -4684,7 +4858,7 @@
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 1,
-            &quot;marker_digest&quot;: &quot;81e8a54e9b95abfe2a5b6cc83c1980daef5b45d34aaeb71005ef4398fe3de27e&quot;,
+            &quot;marker_digest&quot;: &quot;4fed98b9830256df4b9d145bf5260ba57fc712f3a9b3286ee74a79d5377a7b14&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -4705,9 +4879,9 @@
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;661636548dd544ca877fb4b3cbec2108&quot;,
-            &quot;fingerprint&quot;: &quot;3a14c5ea373344701d0fd4067a365b2aa6caa7c394abc9710d775903ff12d222&quot;,
-            &quot;receipt_digest&quot;: &quot;d4707a951bf9623ba06db9f44055d7a135e3f7d31e7a0e1fece9f5fbcaf87360&quot;,
+            &quot;committed&quot;: &quot;bd731280f8f1468c90d02fb977e118e3&quot;,
+            &quot;fingerprint&quot;: &quot;f1a81e808c04b750abce447593f220212666e591ba73b1106e7f5dbb84f34af9&quot;,
+            &quot;receipt_digest&quot;: &quot;7735585d1e129eb244956d1f25c28575b91c0eae797ca147c78f8604323f9ffa&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           },
@@ -4719,12 +4893,12 @@
           &quot;mode&quot;: &quot;readonly-after&quot;,
           &quot;formal_service&quot;: true,
           &quot;service_memory_before&quot;: {
-            &quot;VmHWM&quot;: &quot;21700 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21700 kB&quot;
+            &quot;VmHWM&quot;: &quot;21732 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21732 kB&quot;
           },
           &quot;executor_memory_at_checkpoint&quot;: {
-            &quot;VmHWM&quot;: &quot;22368 kB&quot;,
-            &quot;VmRSS&quot;: &quot;22368 kB&quot;
+            &quot;VmHWM&quot;: &quot;22364 kB&quot;,
+            &quot;VmRSS&quot;: &quot;22364 kB&quot;
           },
           &quot;incomplete_pair_not_permission&quot;: true,
           &quot;observed_errno&quot;: 30,
@@ -4739,10 +4913,10 @@
           },
           &quot;all_original_budgets_preserved&quot;: true,
           &quot;service_memory_after&quot;: {
-            &quot;VmHWM&quot;: &quot;21584 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21584 kB&quot;
+            &quot;VmHWM&quot;: &quot;21620 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21620 kB&quot;
           },
-          &quot;seconds&quot;: 0.5490222939999967
+          &quot;seconds&quot;: 0.5561803629999531
         },
         &quot;terminal_result&quot;: {
           &quot;storage_verified&quot;: true,
@@ -4750,11 +4924,11 @@
           &quot;tls_confirmed&quot;: true,
           &quot;restored&quot;: true,
           &quot;updates_enabled&quot;: false,
-          &quot;committed&quot;: &quot;661636548dd544ca877fb4b3cbec2108&quot;,
-          &quot;fingerprint&quot;: &quot;3a14c5ea373344701d0fd4067a365b2aa6caa7c394abc9710d775903ff12d222&quot;,
+          &quot;committed&quot;: &quot;bd731280f8f1468c90d02fb977e118e3&quot;,
+          &quot;fingerprint&quot;: &quot;f1a81e808c04b750abce447593f220212666e591ba73b1106e7f5dbb84f34af9&quot;,
           &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
           &quot;closed_gate&quot;: {
-            &quot;gate_epoch&quot;: &quot;1ada9790608c4c62b52eb71d401b98e3&quot;,
+            &quot;gate_epoch&quot;: &quot;891a8fb84867413993764843d0f50126&quot;,
             &quot;gate_revision&quot;: 8
           }
         },
@@ -4767,7 +4941,7 @@
       &quot;passed&quot;: true,
       &quot;cleanup_verified&quot;: true,
       &quot;tracked_executors&quot;: 6,
-      &quot;elapsed_seconds&quot;: 5.4086105209999005
+      &quot;elapsed_seconds&quot;: 5.648317227000007
     }
   ],
   &quot;scope&quot;: &quot;formal source-run root service/executor and real Nginx/TLS, isolated Linux VM; no installed systemd claim&quot;,
@@ -4780,8 +4954,58 @@
     &quot;D-state cleanup&quot;,
     &quot;zero downtime&quot;
   ],
+  &quot;commit_guard_mutations&quot;: {
+    &quot;passed&quot;: true,
+    &quot;scope&quot;: &quot;real SQLite unit contracts with crypto mocks; not formal-service TLS qualification&quot;,
+    &quot;controls&quot;: [
+      {
+        &quot;passed&quot;: true,
+        &quot;removed_guard&quot;: 1,
+        &quot;expected_test_failure&quot;: &quot;test_main_only_receipt_cannot_admit_or_commit&quot;,
+        &quot;assertion_observed&quot;: &quot;commit_checkpoint_reached_before_admission&quot;,
+        &quot;original_operations_sha256&quot;: &quot;46da1610efd2b5bc25414f07d04a3556a3b57be7870c8af6751fa5c347ca7385&quot;,
+        &quot;mutant_operations_sha256&quot;: &quot;2fec9f06be34327a4c8a2f7f9bd52541c49324e8160f682a69e25ddbf7a0bc0a&quot;,
+        &quot;only_operations_source_changed&quot;: true,
+        &quot;cleanup_verified&quot;: true
+      },
+      {
+        &quot;passed&quot;: true,
+        &quot;removed_guard&quot;: 2,
+        &quot;expected_test_failure&quot;: &quot;test_commit_second_guard_rejects_gate_change_after_sql_writes&quot;,
+        &quot;assertion_observed&quot;: &quot;Rejected not raised&quot;,
+        &quot;original_operations_sha256&quot;: &quot;46da1610efd2b5bc25414f07d04a3556a3b57be7870c8af6751fa5c347ca7385&quot;,
+        &quot;mutant_operations_sha256&quot;: &quot;d95f051e350c5bc25ebf0f5f8a8f64af2b02ffd3b29d2c39d1bb82c87d883f5b&quot;,
+        &quot;only_operations_source_changed&quot;: true,
+        &quot;cleanup_verified&quot;: true
+      }
+    ],
+    &quot;working_source_unchanged&quot;: true,
+    &quot;cleanup_verified&quot;: true
+  },
+  &quot;inventory_cleanup_mutation&quot;: {
+    &quot;passed&quot;: true,
+    &quot;scope&quot;: &quot;formal root service with real /dev/full inventory write ENOSPC&quot;,
+    &quot;only_service_source_changed&quot;: true,
+    &quot;original_service_sha256&quot;: &quot;36ac2333cbf5f1f9191a239f85221bd63a498ed681d76322542e4b28aee4bb42&quot;,
+    &quot;mutant_service_sha256&quot;: &quot;3c847cc8e9ea9ef80503f0e7b0b009a6851105a26c103c649d84309174da055a&quot;,
+    &quot;expected_failure&quot;: &quot;inventory_failure_leaked_lease_holder&quot;,
+    &quot;formal_service_case_rejected&quot;: true,
+    &quot;cleanup_verified&quot;: true,
+    &quot;working_source_unchanged&quot;: true
+  },
+  &quot;group_reap_mutation&quot;: {
+    &quot;passed&quot;: true,
+    &quot;scope&quot;: &quot;real-process unit with inherited pipes and flock; not an installed service timeout scenario&quot;,
+    &quot;only_service_source_changed&quot;: true,
+    &quot;original_service_sha256&quot;: &quot;36ac2333cbf5f1f9191a239f85221bd63a498ed681d76322542e4b28aee4bb42&quot;,
+    &quot;mutant_service_sha256&quot;: &quot;d61fe5809458a3137b284712ecd20b20ae21b70a8f899a488baae237b3e7afc7&quot;,
+    &quot;expected_failure&quot;: &quot;descendant_survived_group_reap&quot;,
+    &quot;real_process_unit_rejected&quot;: true,
+    &quot;cleanup_verified&quot;: true,
+    &quot;working_source_unchanged&quot;: true
+  },
   &quot;source_sha256&quot;: {
-    &quot;certweft/service.py&quot;: &quot;703e0f25771ec009a20b9a2ce1f8025e8a4955ebf32613c655e7f857fef7be73&quot;,
+    &quot;certweft/service.py&quot;: &quot;36ac2333cbf5f1f9191a239f85221bd63a498ed681d76322542e4b28aee4bb42&quot;,
     &quot;certweft/deadlines.py&quot;: &quot;e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f&quot;,
     &quot;certweft/release.py&quot;: &quot;604a1d770f47c375989ef8d274dbd8616d3e487152f3abe6965ea1085391d44a&quot;,
     &quot;certweft/recovery.py&quot;: &quot;88a3bc08906771eb27e3ef4a57d25439522f363929b9645eb91e72a8145ac791&quot;,
@@ -4798,7 +5022,7 @@
     &quot;certweft/ca.py&quot;: &quot;e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c&quot;,
     &quot;certweft/executor.py&quot;: &quot;b99b1cead42dc43d134e8c7a13ed4d7d57dd10158415a8779bfe8306b83436c3&quot;,
     &quot;tools/policy_vm.py&quot;: &quot;27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6&quot;,
-    &quot;tools/admission_vm.py&quot;: &quot;cd5812e4ad43171056d898b2dcb6c8ada5c9bcd9b2c4aa9e77a96f39875b64dc&quot;,
+    &quot;tools/admission_vm.py&quot;: &quot;42bc276dae22dafa5d20db4e9b09054399a4bde61baf4dee34036af2fd76d86a&quot;,
     &quot;tools/certificate_vm.py&quot;: &quot;4435c71a031b395d06270dc38bbfd48a3db890cfa3bdadb53e4880295294ee09&quot;,
     &quot;tools/storage_vm.py&quot;: &quot;2d251e4e7de2c10739c2d339f372787b36613f65759a539037b075b6a7e3a14c&quot;,
     &quot;tools/deadline_vm.py&quot;: &quot;cd0d61fb4e1253cdc23b12e3fb38d10ad41fd04f2debd9c23f4574f8fa4e7cf3&quot;,
@@ -4809,6 +5033,7 @@
     &quot;tools/explore.py&quot;: &quot;0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec&quot;,
     &quot;tools/credential_probe.py&quot;: &quot;8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46&quot;,
     &quot;tools/operations_vm.py&quot;: &quot;3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85&quot;,
+    &quot;tools/admission_mutation.py&quot;: &quot;6bc50e8f7bf2a82296488096bb866f83d42db7948cdc62b9f7a68cf31790b0ed&quot;,
     &quot;tools/reconcile_vm.py&quot;: &quot;70172e146542bd3f564128fac997709f1ba7692289c681b4ae81109c5aeb3e8b&quot;,
     &quot;tools/gate_vm.py&quot;: &quot;66215b4c176fe5ca9db1fda5bd6869213f852fd5cdeb0ee3ea23412197a0fb78&quot;,
     &quot;tools/release_vm.py&quot;: &quot;e82059f514f166d81740a004d707dc78d5e62b14c06b6a08fc8ae0ad5f338812&quot;,
@@ -4817,11 +5042,12 @@
     &quot;tests/test_operations.py&quot;: &quot;f1741fae5ae944fa974e90c418c447da27e49d18051fc8ad50b4ea843041e337&quot;,
     &quot;tests/test_core.py&quot;: &quot;8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c&quot;,
     &quot;tests/test_recovery.py&quot;: &quot;cba9d1c4dd080581bd039f9d3331200a74de221e751d57c008222bdbb8bba830&quot;,
-    &quot;tests/test_admission.py&quot;: &quot;9f0edc93807bffcc5efdf0f789520b78213ff09311f812d2c7ce5024fa225f9f&quot;,
+    &quot;tests/test_admission.py&quot;: &quot;129aadb4a9ffd1b1dac3471d64117dd6daf41dbb2eadda43cdb94a67316d2418&quot;,
     &quot;tests/test_opening.py&quot;: &quot;45e4aca1cebd1d44ac9af9ad5fec47908cbc192748f04b3b7ee7ee2e48690963&quot;,
     &quot;tests/test_storage.py&quot;: &quot;07d2de55f10a9a3011db73c9141295b43ff2951f54b6e339d184117cf87af2cf&quot;,
     &quot;tests/test_gate.py&quot;: &quot;e1bcd31c414728e0022a3d1f47726bedff559a52f811e536860da60de589c8d0&quot;,
     &quot;tests/test_deadlines.py&quot;: &quot;442d8ea3cfa4af88ec62603d84f017fb2b1883e8c05d3d92bedd695811b9dd29&quot;,
+    &quot;tests/test_service_process.py&quot;: &quot;db7bccfa6248f8a9281cd380f5db317f71116b06711f195100f86a7f5a70e9b9&quot;,
     &quot;tests/test_reconciliation.py&quot;: &quot;91d301f53893145dd6400efc00c67204441a80b15428c0e9032629137db3cac9&quot;,
     &quot;policy/server.tpl&quot;: &quot;e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550&quot;
   },

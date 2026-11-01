@@ -136,3 +136,7 @@ Installed deployment, this path's VM reboot, power-loss and arbitrary storage-I/
 qualification remain pending. See the source-bound [JSON](evidence/admission.json)
 and [HTML](evidence/admission.html), including fault/cleanup evidence and separate
 VM process memory snapshots.
+
+The [reopening review](docs/REOPENING_REVIEW.md) corrects a COMMIT-test false
+positive and a root-diagnostic inventory failure cleanup gap, with targeted
+negative controls and source-bound Linux evidence.

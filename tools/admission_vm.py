@@ -7,7 +7,7 @@ from certweft.gate import Gate
 from certweft.admission import record
 from certweft.reconciliation import digest
 from tools.executor_vm import P,hashes,request
-MATRIX=['success','reply-lost','restart-completed','expired-own','expired-source','expired-release','expired-completed','crash-main','crash-gate','crash-result','crash-completed','stale-main','stale-gate','stale-result','newer-record','degraded-changed','wrong-leaf','bad-http','enospc-before','readonly-before','readonly-stopped','sqlite-full-before','sqlite-full-main','sqlite-full-result','enospc-after','readonly-after']
+MATRIX=['inventory-failure','success','reply-lost','restart-completed','expired-own','expired-source','expired-release','expired-completed','crash-main','crash-gate','crash-result','crash-completed','stale-main','stale-gate','stale-result','newer-record','degraded-changed','wrong-leaf','bad-http','enospc-before','readonly-before','readonly-stopped','sqlite-full-before','sqlite-full-main','sqlite-full-result','enospc-after','readonly-after']
 def settings(work,mode):
     point='admission-main-committed' if mode in {'crash-main','stale-main','expired-release'} else 'admission-gate-write' if mode=='stale-gate' else 'admission-gate-published' if mode in {'crash-gate','newer-record','enospc-after','readonly-after'} else 'admission-result-commit' if mode in {'crash-result','stale-result','expired-own','expired-source'} else 'admission-result-committed' if mode in {'crash-completed','expired-completed'} else 'admission-confirmed' if mode=='sqlite-full-main' else 'admission-start'
     return {'admission_pause_at':point,'admission_marker':str(work/'admission.json'),'admission_pause_once':True}
@@ -17,6 +17,17 @@ def exercise(root,work,config,parent,call,normal_job,released,mode):
     def db(path=None):return contextlib.closing(sqlite3.connect('file:'+str(path or root/'journal.db')+'?mode=ro',uri=True,timeout=.2))
     def rootcall(body):return request(config['socket'],body)
     def inventory():return len((work/'executors.jsonl').read_text().splitlines())
+    def lease_holders():
+        st=pathlib.Path(config['lease']).stat();owners=set()
+        for proc in pathlib.Path('/proc').glob('[0-9]*'):
+            try:
+                for f in (proc/'fd').iterdir():
+                    try:
+                        v=f.stat()
+                        if (v.st_dev,v.st_ino)==(st.st_dev,st.st_ino):owners.add(int(proc.name));break
+                    except (FileNotFoundError,ProcessLookupError,PermissionError):pass
+            except (FileNotFoundError,ProcessLookupError,PermissionError):pass
+        return owners
     def live(pid):
         try:return pathlib.Path('/proc',str(pid),'stat').read_text().split()[2]!='Z'
         except FileNotFoundError:return False
@@ -60,6 +71,19 @@ def exercise(root,work,config,parent,call,normal_job,released,mode):
             with ctx.wrap_socket(raw,server_hostname='localhost') as s:
                 assert not s.session_reused;fp=__import__('hashlib').sha256(s.getpeercert(True)).hexdigest();s.sendall(b'GET /health HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n');return fp,s.recv(4096).split(b'\r\n')[0]
     try:
+        if mode=='inventory-failure':
+            fixed_inventory=config['executor_inventory'];parent.terminate();parent.wait(3)
+            config['executor_inventory']='/dev/full';parent=restart()
+            errors=[]
+            for _ in range(2):
+                reply=rootcall({'op':'status'});assert not reply['ok'] and reply['errno']==errno.ENOSPC,reply
+                assert lease_holders()=={parent.pid},'inventory_failure_leaked_lease_holder'
+                errors.append({'error':reply['error'],'errno':reply['errno']})
+            parent.terminate();parent.wait(3);assert not lease_holders(),'inventory_failure_prevents_takeover'
+            config['executor_inventory']=fixed_inventory;parent=restart()
+            healthy=rootcall({'op':'status'});assert healthy['ok'],healthy
+            assert lease_holders()=={parent.pid};assert_denied()
+            return {'mode':mode,'formal_service':True,'fault':'root-owned executor_inventory=/dev/full; actual write ENOSPC, not ext4 exhaustion','errors':errors,'two_launch_failures_reaped_before_reply':True,'no_old_lease_after_stop':True,'repaired_service_status_succeeded':True,'updates_enabled':False,'seconds':time.monotonic()-start_time},parent
         with db() as d:
             old_degraded=d.execute("SELECT * FROM requests WHERE state='DEGRADED' ORDER BY id").fetchall();core=json.loads(d.execute('SELECT data FROM state').fetchone()[0])
         body={'op':'open-updates','request_id':'open-one','release_request_id':released['request_id'],'release_receipt_digest':released['result']['receipt_digest'],'timeout_seconds':1 if mode in {'expired-own','expired-completed'} else 10,**Gate.token(Gate(root).read())}
@@ -208,6 +232,17 @@ def exercise(root,work,config,parent,call,normal_job,released,mode):
         if parent.poll() is None:parent.kill();parent.wait(3)
         raise
     finally:
+        if mode=='inventory-failure':
+            # A failing negative-control run may leak unregistered children;
+            # only this fixture's exact lease-inode holders are owned here.
+            unregistered=lease_holders()-{parent.pid}
+            for pid in unregistered:
+                try:os.kill(pid,signal.SIGKILL)
+                except ProcessLookupError:pass
+            until=time.monotonic()+3
+            while (lease_holders()-{parent.pid} or any(live(pid) for pid in unregistered)) and time.monotonic()<until:time.sleep(.01)
+            assert not lease_holders()-{parent.pid} and not any(live(pid) for pid in unregistered),'inventory_unregistered_cleanup_failed'
+            config['executor_inventory']=str(work/'executors.jsonl')
         if child and live(child):os.kill(child,signal.SIGKILL)
         repair()
         for path,data in restore:path.write_bytes(data)
@@ -225,6 +260,15 @@ def main():
             try:r=scenario('sqlite_full','post',check_gate=True,certificate_mode='admission-'+mode)
             except Exception as e:report['cases'].append({'mode':mode,'passed':False,'error':type(e).__name__+': '+str(e)});raise
             report['cases'].append(r);publish(report)
+        from tools.admission_mutation import check_commit_mutations
+        report['commit_guard_mutations']=check_commit_mutations()
+        assert report['commit_guard_mutations']['passed']
+        from tools.admission_mutation import check_inventory_mutation
+        report['inventory_cleanup_mutation']=check_inventory_mutation()
+        assert report['inventory_cleanup_mutation']['passed']
+        from tools.admission_mutation import check_group_reap_mutation
+        report['group_reap_mutation']=check_group_reap_mutation()
+        assert report['group_reap_mutation']['passed']
         report.update(passed=True,status='completed')
     except Exception as e:traceback.print_exc();report.update(status='failed',error=type(e).__name__+': '+str(e))
     report.update(source_sha256=source,source_unchanged=source==hashes(),environment={'python':sys.version.split()[0],'kernel':os.uname().release,'machine':os.uname().machine});report['passed']=report['passed'] and report['source_unchanged'];publish(report)
