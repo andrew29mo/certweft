@@ -1,6 +1,9 @@
 # Reviewed architecture and exploration decisions
 
-## Actual scope
+The initial exploration sections below are historical. Current additions are
+listed in the P0 updates, including the storage contract at the end.
+
+## Original exploration scope
 
 One Linux host, one dedicated Nginx master/config/listener, one localhost DNS SAN,
 P-256 keys, SHA-256 certificate signature policy, one Smallstep CA. No session
@@ -112,3 +115,12 @@ Activation budgets now start at durable admission and persist across replay and
 process restart. Recovery gets one separately persisted five-second budget,
 reused across interrupted attempts. See [DEADLINES.md](DEADLINES.md) for decision
 semantics, clock assumptions, schema compatibility and remaining limitations.
+
+## P0-3b-2 first-round update
+
+[Storage failure contract](STORAGE.md) adds an independent durable storage-health
+latch and fail-stop when even failure recording cannot persist. Twelve real-service
+VM cases cover ext4 ENOSPC, path-level read-only EROFS and actual SQLite pager FULL
+at admission, preparation, confirmed publication and cancel boundaries. Required
+recovery remains permitted; restored TLS does not clear the storage fault.
+Controlled repair, installed systemd lifecycle and power-loss testing remain open.

@@ -80,7 +80,7 @@ class Writer:
     def locked(self):
         with open(self.root/'writer.lock','a+b') as lock:
             fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
-            with sqlite3.connect(self.root/'journal.db',timeout=.2) as db:
+            with contextlib.closing(sqlite3.connect(self.root/'journal.db',timeout=.2)) as db, db:
                 db.execute('PRAGMA synchronous=FULL')
                 db.execute('CREATE TABLE IF NOT EXISTS state (id INTEGER PRIMARY KEY CHECK(id=1), data TEXT NOT NULL)')
                 yield db,lock

@@ -4,55 +4,55 @@
     {
       &quot;name&quot;: &quot;replay_does_not_extend_budget&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.05051813099998981,
+      &quot;seconds&quot;: 0.060553163999998105,
       &quot;detail&quot;: &quot;same timing returned; timeout extension under same ID rejected&quot;
     },
     {
       &quot;name&quot;: &quot;expiry_after_confirmation_rollback&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 1.6871402970000133,
+      &quot;seconds&quot;: 1.7578199440000617,
       &quot;detail&quot;: &quot;expired after fresh candidate TLS; COMMIT denied; independent persisted recovery budget restores baseline&quot;
     },
     {
       &quot;name&quot;: &quot;expiry_after_sql_writes_before_commit&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 1.579405252000015,
+      &quot;seconds&quot;: 1.5904384429999254,
       &quot;detail&quot;: &quot;actual executor paused after both SQL writes; final expiry guard rejects commit and restores baseline&quot;
     },
     {
       &quot;name&quot;: &quot;expiry_before_publication&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 1.4623306149999848,
+      &quot;seconds&quot;: 1.5080913499999724,
       &quot;detail&quot;: &quot;intent persisted but selected pointer unchanged at expiry; no candidate COMMIT&quot;
     },
     {
       &quot;name&quot;: &quot;preparation_consumes_overall_budget&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 1.129011926000004,
+      &quot;seconds&quot;: 1.1429978499999152,
       &quot;detail&quot;: &quot;SIGSTOP preparation delay consumes admission budget; no publication or fresh recovery allocation&quot;
     },
     {
       &quot;name&quot;: &quot;restart_before_expiry_no_reset&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 1.413227384999999,
+      &quot;seconds&quot;: 1.4272690699999657,
       &quot;detail&quot;: &quot;pending journal recovered without replay; activation timing identical; expired=False&quot;
     },
     {
       &quot;name&quot;: &quot;restart_after_expiry_no_reset&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 1.7154099239999994,
+      &quot;seconds&quot;: 1.6250109310000198,
       &quot;detail&quot;: &quot;pending journal recovered without replay; activation timing identical; expired=True&quot;
     },
     {
       &quot;name&quot;: &quot;recovery_budget_reused_before_expiry&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 2.6322375379999983,
+      &quot;seconds&quot;: 2.487975213000027,
       &quot;detail&quot;: &quot;persisted recovery budget unchanged across restart; exhausted=False&quot;
     },
     {
       &quot;name&quot;: &quot;recovery_budget_not_reset_after_restart&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 7.048209014000008,
+      &quot;seconds&quot;: 7.226201814999968,
       &quot;detail&quot;: &quot;persisted recovery budget unchanged across restart; exhausted=True&quot;
     }
   ],
@@ -69,21 +69,24 @@
   &quot;tracked_executors&quot;: 24,
   &quot;owned_processes_exited&quot;: true,
   &quot;source_sha256&quot;: {
-    &quot;certweft/service.py&quot;: &quot;6c53aba8c1d06a02be274231ed1a127001797e943e0e7568297cf74344e33112&quot;,
+    &quot;certweft/service.py&quot;: &quot;738bb13f26dda6c4db1eade4ad82471643a19d560f36d0324e71f4e1f2682392&quot;,
     &quot;certweft/deadlines.py&quot;: &quot;e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f&quot;,
     &quot;certweft/__init__.py&quot;: &quot;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855&quot;,
-    &quot;certweft/core.py&quot;: &quot;4a2a7382cfb55c47238d0d5530898164e6c9aa60b213bb8241edbf9e50706945&quot;,
-    &quot;certweft/operations.py&quot;: &quot;410e0ee71dd9e30edb655693b9240382faf859600eb7cbf22a8e075014672ff7&quot;,
+    &quot;certweft/core.py&quot;: &quot;fcd88d4940249cee3c2b05b472447bb61a0e91ae3f718bbd40f6699efd1d223c&quot;,
+    &quot;certweft/operations.py&quot;: &quot;87b21be6b4fbd8760679e3f3e6e41466b25a7ac8566b389b1fb6db8e79935a46&quot;,
+    &quot;certweft/storage.py&quot;: &quot;2f431bd3758a8a14b2cb616521f50d638cf3fdbf733278f87a7e7cb99bf1fe3b&quot;,
     &quot;certweft/ca.py&quot;: &quot;e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c&quot;,
-    &quot;certweft/executor.py&quot;: &quot;cfe8b75b925600792f157f2aa7b63ec65801b761db938c2e0432d4cc382e40e3&quot;,
+    &quot;certweft/executor.py&quot;: &quot;8f12da00340cd673133eaf732cf901fbad2f5ad63762be548c3022ad5255dfc7&quot;,
     &quot;tools/policy_vm.py&quot;: &quot;27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6&quot;,
+    &quot;tools/storage_vm.py&quot;: &quot;b769f98918fe558f5c1ab6eab3fb57d51475bf1e90feaaa6393bab747c82d830&quot;,
     &quot;tools/deadline_vm.py&quot;: &quot;cd0d61fb4e1253cdc23b12e3fb38d10ad41fd04f2debd9c23f4574f8fa4e7cf3&quot;,
-    &quot;tools/executor_vm.py&quot;: &quot;1e8f42862c3cffa640a2320cd5c95666c94fa2b8bcdda3cdc0339e7b6f648852&quot;,
+    &quot;tools/executor_vm.py&quot;: &quot;73cfc9aafee86b97f450337631caf374e79fad7e6c8c13509a36d5e7b49680a1&quot;,
     &quot;tools/explore.py&quot;: &quot;0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec&quot;,
     &quot;tools/credential_probe.py&quot;: &quot;8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46&quot;,
     &quot;tools/operations_vm.py&quot;: &quot;3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85&quot;,
     &quot;tests/test_operations.py&quot;: &quot;f1741fae5ae944fa974e90c418c447da27e49d18051fc8ad50b4ea843041e337&quot;,
     &quot;tests/test_core.py&quot;: &quot;8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c&quot;,
+    &quot;tests/test_storage.py&quot;: &quot;d35a99ae869742d01e59c3e8bb94eebbe39997875ceacb9373f15fabcf4734aa&quot;,
     &quot;tests/test_deadlines.py&quot;: &quot;442d8ea3cfa4af88ec62603d84f017fb2b1883e8c05d3d92bedd695811b9dd29&quot;,
     &quot;policy/server.tpl&quot;: &quot;e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550&quot;
   },

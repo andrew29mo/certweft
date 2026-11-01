@@ -191,7 +191,7 @@ def main():
             else:raise AssertionError('timeout_checkpoint_missing')
             info=json.loads((work/'timeout.json').read_text());assert info['descendants']
             thread.join(24);assert not thread.is_alive() and answers
-            assert answers[0]=={'ok':False,'error':'TimeoutError'}
+            assert answers[0]['ok'] is False and answers[0]['error']=='TimeoutError'
             for pid in [info['pid']]+info['descendants']:
                 st=pathlib.Path('/proc',str(pid),'stat')
                 assert not st.exists() or st.read_text().split()[2]=='Z'

@@ -14,8 +14,8 @@ The tested Smallstep CLI 0.31.0 / CA 0.30.2 pair rejects serverAuth-only
 `step ca renew --mtls=false` with incompatible key usage. This route is **not
 qualified**. The alternative real CA CSR reissuance path preserves the key and
 requires provisioner credentials; it is not equivalent to possession-only renewal.
-The fixture CA template fixes SAN to localhost. Production credential scoping,
-provisioner policy and secret delivery remain design gates before the MVP.
+The fixture CA template fixes SAN to localhost. The CA authority milestone below separately tests a restricted provisioner and
+credential delivery; full deployment remains a design gate before the MVP.
 
 See [independent review and corrections](docs/REVIEW.md).
 
@@ -37,8 +37,8 @@ pending.
 
 [P0-3a operation contract](docs/OPERATIONS.md) adds persistent request deduplication,
 responsive request-status/cancel handling and an atomic cancellation/COMMIT
-boundary. CA signing is still a separate step; whole-operation deadlines and
-controlled DEGRADED repair remain pending.
+boundary. CA signing is still a separate step; activation deadlines are covered below.
+Controlled DEGRADED repair remains pending.
 
 ## Persistent deadlines
 
@@ -46,6 +46,15 @@ controlled DEGRADED repair remain pending.
 separate first-attempt recovery budget. Replays/restarts do not renew them.
 Expiry blocks COMMIT authorization; exhausted recovery remains DEGRADED.
 This covers activation, not CA signing or hard realtime storage completion.
+
+## Storage failures
+
+[P0-3b-2 storage contract](docs/STORAGE.md) exercises actual ext4 ENOSPC,
+read-only bind-mount EROFS and SQLite pager FULL through the formal local service.
+Failed persistence cannot acknowledge cancellation or falsely commit/restore.
+A durable storage latch blocks new updates; if even that write fails, the service
+stops accepting requests. A candidate may remain live on an unwritable store.
+Controlled repair and persistent systemd deployment are still pending.
 
 ## Evidence
 

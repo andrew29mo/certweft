@@ -2,26 +2,42 @@
 import hashlib,json,re,sqlite3
 from contextlib import contextmanager
 from .core import Rejected
-from . import deadlines
+from . import deadlines,storage
 LIVE=('ACCEPTED','RUNNING','CANCEL_REQUESTED')
 
 class Cancelled(Rejected):pass
+class StorageBlocked(Rejected):pass
 
 class Operations:
-    def __init__(self,root):self.path=str(root/'journal.db')
+    def __init__(self,root,max_pages=None):
+        if max_pages is not None and (type(max_pages) is not int or not 1<=max_pages<=65536):raise Rejected('sqlite_page_policy')
+        self.path=str(root/'journal.db');self.max_pages=max_pages
     @contextmanager
     def transaction(self):
         db=sqlite3.connect(self.path,timeout=.5)
         try:
-            db.execute('PRAGMA synchronous=FULL');db.execute('BEGIN IMMEDIATE')
+            db.execute('PRAGMA synchronous=FULL')
+            if self.max_pages is not None:
+                actual=db.execute('PRAGMA max_page_count='+str(self.max_pages)).fetchone()[0]
+                if actual!=self.max_pages:raise Rejected('sqlite_quota_below_size')
+            db.execute('BEGIN IMMEDIATE')
             yield db;db.commit()
         except Exception:db.rollback();raise
         finally:db.close()
     def initialize(self):
         with self.transaction() as db:
+            db.execute("CREATE TABLE IF NOT EXISTS health (id INTEGER PRIMARY KEY CHECK(id=1), state TEXT NOT NULL, detail TEXT)")
+            db.execute("INSERT OR IGNORE INTO health VALUES(1,'HEALTHY',NULL)")
             db.execute('CREATE TABLE IF NOT EXISTS requests (id TEXT PRIMARY KEY, digest TEXT NOT NULL, state TEXT NOT NULL, result TEXT)')
             if 'timing' not in [row[1] for row in db.execute('PRAGMA table_info(requests)')]:db.execute('ALTER TABLE requests ADD COLUMN timing TEXT')
             db.execute("CREATE UNIQUE INDEX IF NOT EXISTS one_live_request ON requests((1)) WHERE state IN ('ACCEPTED','RUNNING','CANCEL_REQUESTED')")
+    def latch_storage(self,error):
+        with self.transaction() as db:
+            db.execute("UPDATE health SET state='STORAGE_FAILED',detail=? WHERE id=1",(json.dumps(storage.detail(error)),))
+    @staticmethod
+    def healthy(db):
+        row=db.execute('SELECT state FROM health WHERE id=1').fetchone()
+        return row is not None and row[0]=='HEALTHY'
     @staticmethod
     def identity(body):
         if set(body)-{'timeout_seconds'}!={'op','request_id','certificate','epoch','revision'} or body['op']!='submit':raise Rejected('request_shape')
@@ -44,6 +60,7 @@ class Operations:
             if existing:
                 if existing[0]!=digest:raise Rejected('request_conflict')
                 return self.row(db,identity),False
+            if not self.healthy(db):raise StorageBlocked('storage_unavailable')
             if db.execute("SELECT 1 FROM requests WHERE state='DEGRADED'").fetchone():raise Rejected('degraded')
             if db.execute('SELECT count(*) FROM requests').fetchone()[0]>=64:raise Rejected('history_full')
             if db.execute("SELECT 1 FROM requests WHERE state IN ('ACCEPTED','RUNNING','CANCEL_REQUESTED')").fetchone():raise Rejected('busy')
@@ -58,6 +75,8 @@ class Operations:
     def begin(self,identity):
         with self.transaction() as db:
             row=self.row(db,identity)
+            if not self.healthy(db):
+                db.execute("UPDATE requests SET state='DEGRADED' WHERE id=?",(identity,));return False
             if row['state']=='CANCEL_REQUESTED':
                 db.execute("UPDATE requests SET state='CANCELLED' WHERE id=?",(identity,));return False
             if row['state']!='ACCEPTED':raise Rejected('not_accepted')
@@ -90,6 +109,7 @@ class Operations:
         db.execute('BEGIN IMMEDIATE')
         row=db.execute('SELECT state,timing FROM requests WHERE id=?',(identity,)).fetchone()
         if row is None or row[0]!='RUNNING':raise Cancelled('commit_not_authorized')
+        if not Operations.healthy(db):raise StorageBlocked('storage_unavailable')
         timing=json.loads(row[1]) if row[1] else None
         if timing:deadlines.remaining(timing['activation'])
         db.execute('INSERT OR REPLACE INTO state VALUES(1,?)',(json.dumps(state),))

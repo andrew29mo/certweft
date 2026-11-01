@@ -1,6 +1,7 @@
 """Fixed local privileged writer. One bounded request/executor at a time."""
 import fcntl,json,os,socket,stat,struct,subprocess,sys,threading
 from .operations import Operations
+from . import storage
 from .core import Rejected,Writer
 from pathlib import Path
 
@@ -45,7 +46,7 @@ def serve(config_path):
         if not stat.S_ISDIR(store.st_mode) or store.st_uid!=0 or store.st_mode & 0o077:raise PermissionError('store_permissions')
         journal=(root/'journal.db').lstat()
         if not stat.S_ISREG(journal.st_mode) or journal.st_uid!=0 or journal.st_mode & 0o077:raise PermissionError('journal_permissions')
-        operations=Operations(root);operations.initialize()
+        operations=Operations(root,config.get('sqlite_max_pages'));operations.initialize()
         guard=threading.Lock()
         def execute(body,uid):
             child=subprocess.Popen([sys.executable,'-m','certweft.executor',str(fd)],
@@ -81,9 +82,12 @@ def serve(config_path):
         def work(body):
             try:
                 reply=execute({'op':'execute',**{k:v for k,v in body.items() if k!='op'}},0)
-                if not reply.get('ok'):operations.finish(body['request_id'],'DEGRADED',{'executor_error':reply.get('error')})
+                if storage.failed(reply):operations.latch_storage(reply)
+                if not reply.get('ok'):operations.finish(body['request_id'],'DEGRADED',{'executor_error':reply.get('error'),'sqlite_error':reply.get('sqlite_error'),'errno':reply.get('errno')})
             except Exception as error:
-                try:operations.finish(body['request_id'],'DEGRADED',{'executor_error':type(error).__name__})
+                try:
+                    if storage.failed(error):operations.latch_storage(error)
+                    operations.finish(body['request_id'],'DEGRADED',{'executor_error':type(error).__name__})
                 except Exception:os._exit(75)
             finally:guard.release()
         endpoint=Path(config['socket'])
@@ -134,7 +138,10 @@ def serve(config_path):
                             try:reply=execute(body,uid)
                             finally:guard.release()
                     except Exception as error:
-                        reply={'ok':False,'error':type(error).__name__}
+                        if storage.failed(error):
+                            try:operations.latch_storage(error)
+                            except Exception:os._exit(75)
+                        reply={'ok':False,'error':type(error).__name__,'sqlite_error':getattr(error,'sqlite_errorname',None),'errno':getattr(error,'errno',None)}
                         if isinstance(error,Rejected):reply['reason']=str(error)
                     try:conn.sendall(json.dumps(reply).encode()+b'\n')
                     except OSError:pass

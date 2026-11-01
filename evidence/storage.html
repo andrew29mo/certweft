@@ -1,0 +1,454 @@
+<!doctype html><meta charset="utf-8"><pre>{
+  &quot;passed&quot;: true,
+  &quot;status&quot;: &quot;completed&quot;,
+  &quot;cases&quot;: [
+    {
+      &quot;fault&quot;: &quot;enospc&quot;,
+      &quot;phase&quot;: &quot;pre&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;19296 kB&quot;,
+        &quot;VmRSS&quot;: &quot;19296 kB&quot;
+      },
+      &quot;filled_bytes&quot;: 26497024,
+      &quot;observed_errno&quot;: 28,
+      &quot;mount_options&quot;: &quot;rw,relatime&quot;,
+      &quot;initial_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: null,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 0,
+      &quot;elapsed_seconds&quot;: 0.35959519499999715
+    },
+    {
+      &quot;fault&quot;: &quot;enospc&quot;,
+      &quot;phase&quot;: &quot;prepare&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;19304 kB&quot;,
+        &quot;VmRSS&quot;: &quot;19304 kB&quot;
+      },
+      &quot;baseline_observed_before_fault&quot;: true,
+      &quot;executor_memory_at_checkpoint&quot;: {
+        &quot;VmHWM&quot;: &quot;20104 kB&quot;,
+        &quot;VmRSS&quot;: &quot;20104 kB&quot;
+      },
+      &quot;filled_bytes&quot;: 26492928,
+      &quot;observed_errno&quot;: 28,
+      &quot;mount_options&quot;: &quot;rw,relatime&quot;,
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: &quot;RUNNING&quot;,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 1,
+      &quot;elapsed_seconds&quot;: 0.62237371599997
+    },
+    {
+      &quot;fault&quot;: &quot;enospc&quot;,
+      &quot;phase&quot;: &quot;post&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;19304 kB&quot;,
+        &quot;VmRSS&quot;: &quot;19304 kB&quot;
+      },
+      &quot;candidate_observed_before_fault&quot;: true,
+      &quot;executor_memory_at_checkpoint&quot;: {
+        &quot;VmHWM&quot;: &quot;21340 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21340 kB&quot;
+      },
+      &quot;filled_bytes&quot;: 26476544,
+      &quot;observed_errno&quot;: 28,
+      &quot;mount_options&quot;: &quot;rw,relatime&quot;,
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true
+      },
+      &quot;core_state&quot;: &quot;APPLYING&quot;,
+      &quot;request_state&quot;: &quot;RUNNING&quot;,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;candidate&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 1,
+      &quot;elapsed_seconds&quot;: 1.1342932470000733
+    },
+    {
+      &quot;fault&quot;: &quot;enospc&quot;,
+      &quot;phase&quot;: &quot;cancel&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;19300 kB&quot;,
+        &quot;VmRSS&quot;: &quot;19300 kB&quot;
+      },
+      &quot;candidate_observed_before_fault&quot;: true,
+      &quot;executor_memory_at_checkpoint&quot;: {
+        &quot;VmHWM&quot;: &quot;21328 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21328 kB&quot;
+      },
+      &quot;filled_bytes&quot;: 26476544,
+      &quot;observed_errno&quot;: 28,
+      &quot;mount_options&quot;: &quot;rw,relatime&quot;,
+      &quot;cancel_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true
+      },
+      &quot;core_state&quot;: &quot;APPLYING&quot;,
+      &quot;request_state&quot;: &quot;RUNNING&quot;,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;candidate&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 1,
+      &quot;elapsed_seconds&quot;: 1.2582559710000396
+    },
+    {
+      &quot;fault&quot;: &quot;readonly&quot;,
+      &quot;phase&quot;: &quot;pre&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;19304 kB&quot;,
+        &quot;VmRSS&quot;: &quot;19304 kB&quot;
+      },
+      &quot;observed_errno&quot;: 30,
+      &quot;mount_options&quot;: &quot;rw,relatime\nro,relatime&quot;,
+      &quot;initial_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: null,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 0,
+      &quot;elapsed_seconds&quot;: 0.2809923989999561
+    },
+    {
+      &quot;fault&quot;: &quot;readonly&quot;,
+      &quot;phase&quot;: &quot;prepare&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;19292 kB&quot;,
+        &quot;VmRSS&quot;: &quot;19292 kB&quot;
+      },
+      &quot;baseline_observed_before_fault&quot;: true,
+      &quot;executor_memory_at_checkpoint&quot;: {
+        &quot;VmHWM&quot;: &quot;20100 kB&quot;,
+        &quot;VmRSS&quot;: &quot;20100 kB&quot;
+      },
+      &quot;observed_errno&quot;: 30,
+      &quot;mount_options&quot;: &quot;rw,relatime\nro,relatime&quot;,
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: &quot;RUNNING&quot;,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 1,
+      &quot;elapsed_seconds&quot;: 0.35158175300000494
+    },
+    {
+      &quot;fault&quot;: &quot;readonly&quot;,
+      &quot;phase&quot;: &quot;post&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;19312 kB&quot;,
+        &quot;VmRSS&quot;: &quot;19312 kB&quot;
+      },
+      &quot;candidate_observed_before_fault&quot;: true,
+      &quot;executor_memory_at_checkpoint&quot;: {
+        &quot;VmHWM&quot;: &quot;21340 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21340 kB&quot;
+      },
+      &quot;observed_errno&quot;: 30,
+      &quot;mount_options&quot;: &quot;rw,relatime\nro,relatime&quot;,
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true
+      },
+      &quot;core_state&quot;: &quot;APPLYING&quot;,
+      &quot;request_state&quot;: &quot;RUNNING&quot;,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;candidate&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 1,
+      &quot;elapsed_seconds&quot;: 1.079638644000056
+    },
+    {
+      &quot;fault&quot;: &quot;readonly&quot;,
+      &quot;phase&quot;: &quot;cancel&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;19308 kB&quot;,
+        &quot;VmRSS&quot;: &quot;19308 kB&quot;
+      },
+      &quot;candidate_observed_before_fault&quot;: true,
+      &quot;executor_memory_at_checkpoint&quot;: {
+        &quot;VmHWM&quot;: &quot;21336 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21336 kB&quot;
+      },
+      &quot;observed_errno&quot;: 30,
+      &quot;mount_options&quot;: &quot;rw,relatime\nro,relatime&quot;,
+      &quot;cancel_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true
+      },
+      &quot;core_state&quot;: &quot;APPLYING&quot;,
+      &quot;request_state&quot;: &quot;RUNNING&quot;,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;candidate&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 1,
+      &quot;elapsed_seconds&quot;: 1.2137554710000131
+    },
+    {
+      &quot;fault&quot;: &quot;sqlite_full&quot;,
+      &quot;phase&quot;: &quot;pre&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;pager_max_pages&quot;: 8,
+      &quot;allocation_bytes&quot;: 65536,
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;19312 kB&quot;,
+        &quot;VmRSS&quot;: &quot;19312 kB&quot;
+      },
+      &quot;initial_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;error&quot;: &quot;OperationalError&quot;,
+        &quot;sqlite_error&quot;: &quot;SQLITE_FULL&quot;,
+        &quot;errno&quot;: null
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;error&quot;: &quot;StorageBlocked&quot;,
+        &quot;sqlite_error&quot;: null,
+        &quot;errno&quot;: null,
+        &quot;reason&quot;: &quot;storage_unavailable&quot;
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: null,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;STORAGE_FAILED&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: null,
+      &quot;restart_still_blocks_new_updates&quot;: true,
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 0,
+      &quot;elapsed_seconds&quot;: 0.3068675570000323
+    },
+    {
+      &quot;fault&quot;: &quot;sqlite_full&quot;,
+      &quot;phase&quot;: &quot;prepare&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;pager_max_pages&quot;: 8,
+      &quot;allocation_bytes&quot;: 65536,
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;19312 kB&quot;,
+        &quot;VmRSS&quot;: &quot;19312 kB&quot;
+      },
+      &quot;baseline_observed_before_fault&quot;: true,
+      &quot;executor_memory_at_checkpoint&quot;: {
+        &quot;VmHWM&quot;: &quot;20100 kB&quot;,
+        &quot;VmRSS&quot;: &quot;20100 kB&quot;
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;error&quot;: &quot;StorageBlocked&quot;,
+        &quot;sqlite_error&quot;: null,
+        &quot;errno&quot;: null,
+        &quot;reason&quot;: &quot;storage_unavailable&quot;
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: &quot;DEGRADED&quot;,
+      &quot;request_result&quot;: {
+        &quot;error&quot;: &quot;OperationalError&quot;,
+        &quot;expired&quot;: false,
+        &quot;sqlite_error&quot;: &quot;SQLITE_FULL&quot;,
+        &quot;errno&quot;: null
+      },
+      &quot;storage_health&quot;: &quot;STORAGE_FAILED&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: null,
+      &quot;restart_still_blocks_new_updates&quot;: true,
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 1,
+      &quot;elapsed_seconds&quot;: 0.7820114820000299
+    },
+    {
+      &quot;fault&quot;: &quot;sqlite_full&quot;,
+      &quot;phase&quot;: &quot;post&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;pager_max_pages&quot;: 8,
+      &quot;allocation_bytes&quot;: 65536,
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;19308 kB&quot;,
+        &quot;VmRSS&quot;: &quot;19308 kB&quot;
+      },
+      &quot;candidate_observed_before_fault&quot;: true,
+      &quot;executor_memory_at_checkpoint&quot;: {
+        &quot;VmHWM&quot;: &quot;21332 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21332 kB&quot;
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;error&quot;: &quot;StorageBlocked&quot;,
+        &quot;sqlite_error&quot;: null,
+        &quot;errno&quot;: null,
+        &quot;reason&quot;: &quot;storage_unavailable&quot;
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: &quot;DEGRADED&quot;,
+      &quot;request_result&quot;: {
+        &quot;error&quot;: &quot;OperationalError&quot;,
+        &quot;expired&quot;: false,
+        &quot;sqlite_error&quot;: &quot;SQLITE_FULL&quot;,
+        &quot;errno&quot;: null
+      },
+      &quot;storage_health&quot;: &quot;STORAGE_FAILED&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: null,
+      &quot;restart_still_blocks_new_updates&quot;: true,
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 1,
+      &quot;elapsed_seconds&quot;: 1.4502797210000153
+    },
+    {
+      &quot;fault&quot;: &quot;sqlite_full&quot;,
+      &quot;phase&quot;: &quot;cancel&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;pager_max_pages&quot;: 8,
+      &quot;allocation_bytes&quot;: 65536,
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;19308 kB&quot;,
+        &quot;VmRSS&quot;: &quot;19308 kB&quot;
+      },
+      &quot;candidate_observed_before_fault&quot;: true,
+      &quot;executor_memory_at_checkpoint&quot;: {
+        &quot;VmHWM&quot;: &quot;21356 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21356 kB&quot;
+      },
+      &quot;cancel_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;error&quot;: &quot;OperationalError&quot;,
+        &quot;sqlite_error&quot;: &quot;SQLITE_FULL&quot;,
+        &quot;errno&quot;: null
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;error&quot;: &quot;StorageBlocked&quot;,
+        &quot;sqlite_error&quot;: null,
+        &quot;errno&quot;: null,
+        &quot;reason&quot;: &quot;storage_unavailable&quot;
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: &quot;DEGRADED&quot;,
+      &quot;request_result&quot;: {
+        &quot;error&quot;: &quot;StorageBlocked&quot;,
+        &quot;expired&quot;: false,
+        &quot;sqlite_error&quot;: null,
+        &quot;errno&quot;: null
+      },
+      &quot;storage_health&quot;: &quot;STORAGE_FAILED&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: null,
+      &quot;restart_still_blocks_new_updates&quot;: true,
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 1,
+      &quot;elapsed_seconds&quot;: 1.6446992620000174
+    }
+  ],
+  &quot;scope&quot;: &quot;formal certweft.service + executor; Nginx; ext4 loop filesystem in isolated Linux VM&quot;,
+  &quot;untested&quot;: [
+    &quot;physical medium failures&quot;,
+    &quot;fsync failure injection&quot;,
+    &quot;power loss&quot;,
+    &quot;VM reboot&quot;,
+    &quot;persistent systemd deployment&quot;,
+    &quot;controlled DEGRADED repair&quot;,
+    &quot;automatic quota/history recycling&quot;
+  ],
+  &quot;environment&quot;: {
+    &quot;python&quot;: &quot;3.12.3&quot;,
+    &quot;sqlite&quot;: &quot;3.45.1&quot;,
+    &quot;openssl&quot;: &quot;OpenSSL 3.0.13 30 Jan 2024&quot;,
+    &quot;kernel&quot;: &quot;6.8.0-117-generic&quot;,
+    &quot;machine&quot;: &quot;aarch64&quot;
+  },
+  &quot;source_sha256&quot;: {
+    &quot;certweft/service.py&quot;: &quot;738bb13f26dda6c4db1eade4ad82471643a19d560f36d0324e71f4e1f2682392&quot;,
+    &quot;certweft/deadlines.py&quot;: &quot;e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f&quot;,
+    &quot;certweft/__init__.py&quot;: &quot;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855&quot;,
+    &quot;certweft/core.py&quot;: &quot;fcd88d4940249cee3c2b05b472447bb61a0e91ae3f718bbd40f6699efd1d223c&quot;,
+    &quot;certweft/operations.py&quot;: &quot;87b21be6b4fbd8760679e3f3e6e41466b25a7ac8566b389b1fb6db8e79935a46&quot;,
+    &quot;certweft/storage.py&quot;: &quot;2f431bd3758a8a14b2cb616521f50d638cf3fdbf733278f87a7e7cb99bf1fe3b&quot;,
+    &quot;certweft/ca.py&quot;: &quot;e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c&quot;,
+    &quot;certweft/executor.py&quot;: &quot;8f12da00340cd673133eaf732cf901fbad2f5ad63762be548c3022ad5255dfc7&quot;,
+    &quot;tools/policy_vm.py&quot;: &quot;27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6&quot;,
+    &quot;tools/storage_vm.py&quot;: &quot;b769f98918fe558f5c1ab6eab3fb57d51475bf1e90feaaa6393bab747c82d830&quot;,
+    &quot;tools/deadline_vm.py&quot;: &quot;cd0d61fb4e1253cdc23b12e3fb38d10ad41fd04f2debd9c23f4574f8fa4e7cf3&quot;,
+    &quot;tools/executor_vm.py&quot;: &quot;73cfc9aafee86b97f450337631caf374e79fad7e6c8c13509a36d5e7b49680a1&quot;,
+    &quot;tools/explore.py&quot;: &quot;0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec&quot;,
+    &quot;tools/credential_probe.py&quot;: &quot;8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46&quot;,
+    &quot;tools/operations_vm.py&quot;: &quot;3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85&quot;,
+    &quot;tests/test_operations.py&quot;: &quot;f1741fae5ae944fa974e90c418c447da27e49d18051fc8ad50b4ea843041e337&quot;,
+    &quot;tests/test_core.py&quot;: &quot;8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c&quot;,
+    &quot;tests/test_storage.py&quot;: &quot;d35a99ae869742d01e59c3e8bb94eebbe39997875ceacb9373f15fabcf4734aa&quot;,
+    &quot;tests/test_deadlines.py&quot;: &quot;442d8ea3cfa4af88ec62603d84f017fb2b1883e8c05d3d92bedd695811b9dd29&quot;,
+    &quot;policy/server.tpl&quot;: &quot;e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550&quot;
+  },
+  &quot;source_unchanged&quot;: true
+}</pre>

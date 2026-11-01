@@ -4,73 +4,73 @@
     {
       &quot;name&quot;: &quot;formal_dispatch_failure_not_stuck&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.06986269499998343,
+      &quot;seconds&quot;: 0.08469752199994218,
       &quot;detail&quot;: &quot;root-fixture injected worker start failure persists FAILED and never leaves a live slot&quot;
     },
     {
       &quot;name&quot;: &quot;inflight_replay_and_conflict&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.8374798760000317,
+      &quot;seconds&quot;: 0.776540399000055,
       &quot;detail&quot;: &quot;duplicate while executing returns same durable request; different parameters rejected without new generation&quot;
     },
     {
       &quot;name&quot;: &quot;cancel_before_commit_wins&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.508400671000004,
+      &quot;seconds&quot;: 0.5073979310000141,
       &quot;detail&quot;: &quot;cancel persisted after new wire confirmation, before COMMIT; rollback independently observed&quot;
     },
     {
       &quot;name&quot;: &quot;restart_terminal_no_replay&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.021805405999998584,
+      &quot;seconds&quot;: 0.027564853000058065,
       &quot;detail&quot;: &quot;restart preserves terminal result; old request not rerun&quot;
     },
     {
       &quot;name&quot;: &quot;commit_before_cancel_wins&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 1.086027453999975,
+      &quot;seconds&quot;: 1.042895739999949,
       &quot;detail&quot;: &quot;COMMIT atomically wins; later cancel reports COMMITTED; restart replay does not execute&quot;
     },
     {
       &quot;name&quot;: &quot;pending_restart_no_replay&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 1.2886320139999725,
+      &quot;seconds&quot;: 1.3796349859999282,
       &quot;detail&quot;: &quot;SIGKILL preserves pending journal; startup recovers baseline and marks INTERRUPTED without replay&quot;
     },
     {
       &quot;name&quot;: &quot;cancel_write_failure_no_false_ack&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 1.336711959000013,
+      &quot;seconds&quot;: 1.2807896049999954,
       &quot;detail&quot;: &quot;injected cancellation persistence failure returns error, not acknowledgement; repaired retry rolls back&quot;
     },
     {
       &quot;name&quot;: &quot;admission_write_failure_no_false_ack&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.07144898399997146,
+      &quot;seconds&quot;: 0.08978113800003484,
       &quot;detail&quot;: &quot;injected admission INSERT failure creates no row/generation or acknowledgement; repaired retry is new&quot;
     },
     {
       &quot;name&quot;: &quot;commit_write_failure_atomic_rollback&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 1.2340512839999747,
+      &quot;seconds&quot;: 1.2875646659999802,
       &quot;detail&quot;: &quot;injected failure between core state write and COMMITTED update rolls back both; prior wire baseline restored&quot;
     },
     {
       &quot;name&quot;: &quot;controller_cannot_implicitly_repair_degraded&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.07553195899998855,
+      &quot;seconds&quot;: 0.10020865300009518,
       &quot;detail&quot;: &quot;root-injected preexisting DEGRADED cannot be repaired by controller submit; new IDs refused&quot;
     },
     {
       &quot;name&quot;: &quot;degraded_pending_restart_not_repaired&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 0.10887543299998015,
+      &quot;seconds&quot;: 0.12345886399998562,
       &quot;detail&quot;: &quot;root-injected live request plus core DEGRADED remains degraded across restart; no reload or authority reset&quot;
     },
     {
       &quot;name&quot;: &quot;formal_service_64_history_capacity&quot;,
       &quot;passed&quot;: true,
-      &quot;seconds&quot;: 3.596604580000019,
+      &quot;seconds&quot;: 4.3639021180000555,
       &quot;detail&quot;: &quot;64 real service admissions with stale authority fail before staging; 65th rejected; duplicate/conflict ordering and restart retain all history&quot;
     }
   ],
@@ -85,21 +85,24 @@
   &quot;tracked_executors&quot;: 82,
   &quot;owned_processes_exited&quot;: true,
   &quot;source_sha256&quot;: {
-    &quot;certweft/service.py&quot;: &quot;6c53aba8c1d06a02be274231ed1a127001797e943e0e7568297cf74344e33112&quot;,
+    &quot;certweft/service.py&quot;: &quot;738bb13f26dda6c4db1eade4ad82471643a19d560f36d0324e71f4e1f2682392&quot;,
     &quot;certweft/deadlines.py&quot;: &quot;e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f&quot;,
     &quot;certweft/__init__.py&quot;: &quot;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855&quot;,
-    &quot;certweft/core.py&quot;: &quot;4a2a7382cfb55c47238d0d5530898164e6c9aa60b213bb8241edbf9e50706945&quot;,
-    &quot;certweft/operations.py&quot;: &quot;410e0ee71dd9e30edb655693b9240382faf859600eb7cbf22a8e075014672ff7&quot;,
+    &quot;certweft/core.py&quot;: &quot;fcd88d4940249cee3c2b05b472447bb61a0e91ae3f718bbd40f6699efd1d223c&quot;,
+    &quot;certweft/operations.py&quot;: &quot;87b21be6b4fbd8760679e3f3e6e41466b25a7ac8566b389b1fb6db8e79935a46&quot;,
+    &quot;certweft/storage.py&quot;: &quot;2f431bd3758a8a14b2cb616521f50d638cf3fdbf733278f87a7e7cb99bf1fe3b&quot;,
     &quot;certweft/ca.py&quot;: &quot;e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c&quot;,
-    &quot;certweft/executor.py&quot;: &quot;cfe8b75b925600792f157f2aa7b63ec65801b761db938c2e0432d4cc382e40e3&quot;,
+    &quot;certweft/executor.py&quot;: &quot;8f12da00340cd673133eaf732cf901fbad2f5ad63762be548c3022ad5255dfc7&quot;,
     &quot;tools/policy_vm.py&quot;: &quot;27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6&quot;,
+    &quot;tools/storage_vm.py&quot;: &quot;b769f98918fe558f5c1ab6eab3fb57d51475bf1e90feaaa6393bab747c82d830&quot;,
     &quot;tools/deadline_vm.py&quot;: &quot;cd0d61fb4e1253cdc23b12e3fb38d10ad41fd04f2debd9c23f4574f8fa4e7cf3&quot;,
-    &quot;tools/executor_vm.py&quot;: &quot;1e8f42862c3cffa640a2320cd5c95666c94fa2b8bcdda3cdc0339e7b6f648852&quot;,
+    &quot;tools/executor_vm.py&quot;: &quot;73cfc9aafee86b97f450337631caf374e79fad7e6c8c13509a36d5e7b49680a1&quot;,
     &quot;tools/explore.py&quot;: &quot;0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec&quot;,
     &quot;tools/credential_probe.py&quot;: &quot;8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46&quot;,
     &quot;tools/operations_vm.py&quot;: &quot;3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85&quot;,
     &quot;tests/test_operations.py&quot;: &quot;f1741fae5ae944fa974e90c418c447da27e49d18051fc8ad50b4ea843041e337&quot;,
     &quot;tests/test_core.py&quot;: &quot;8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c&quot;,
+    &quot;tests/test_storage.py&quot;: &quot;d35a99ae869742d01e59c3e8bb94eebbe39997875ceacb9373f15fabcf4734aa&quot;,
     &quot;tests/test_deadlines.py&quot;: &quot;442d8ea3cfa4af88ec62603d84f017fb2b1883e8c05d3d92bedd695811b9dd29&quot;,
     &quot;policy/server.tpl&quot;: &quot;e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550&quot;
   },

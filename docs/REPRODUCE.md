@@ -33,3 +33,8 @@ finished. No host routes, host trust store or existing Nginx config are changed.
 Timings describe this VM workflow; RSS is the Python driver's process high-water
 mark, not total service memory or a comparison. Private fixture bytes are logical
 file sizes including CA database/log files, not allocated filesystem blocks.
+
+For the current source-run storage matrix, dedicated loop-filesystem prerequisites,
+cleanup and measurement limits, follow [STORAGE.md](STORAGE.md). These storage
+cases do not require the Smallstep binaries. The older exploration and CSR
+authority reports retain their original source hashes.

@@ -86,7 +86,8 @@ Existing operation and executor regressions are rerun against this source.
 
 ## Still pending
 
-Real storage-failure recovery and controlled DEGRADED repair, durable whole-flow
+First-round storage failure behavior is now covered in [STORAGE.md](STORAGE.md).
+Controlled DEGRADED repair, durable whole-flow
 CA signing integration, installed package/systemd lifecycle, actual VM reboot,
 power loss and hard realtime behavior remain unqualified. History/generation
 limits stay 64/16 without automatic recycling. No new rollback guarantee is made
@@ -108,7 +109,7 @@ is not part of caller input. Confirmed/recovery checkpoints also independently
 observe the candidate leaf before SIGKILL/rollback, and the before-expiry restart
 case explicitly asserts its time premise.
 
-The completed run has nine deadline VM cases and 26 separate unit tests, plus
+The P0-3b-1 completed run had nine deadline VM cases and 26 separate unit tests, plus
 12 operation and 12 executor regression cases. A targeted isolated-copy mutant
 removing only the final expiry guard is detected by the new unit test:
 [mutation result](../evidence/deadline-guard-mutation.json). Original source stays

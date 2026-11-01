@@ -1,19 +1,28 @@
 """Root executor entry point; inherited lease fences takeover after parent death."""
 import json,os,sys,signal,tempfile,stat
+from contextlib import contextmanager
 from pathlib import Path
 from .core import Writer,Rejected,run
-from .operations import Operations,Cancelled
-from . import deadlines
+from .operations import Operations,Cancelled,StorageBlocked
+from . import deadlines,storage
 
 class FixedWriter(Writer):
     operation_id=None
+    sqlite_max_pages=None
+    @contextmanager
+    def locked(self):
+        with super().locked() as (db,lock):
+            if self.sqlite_max_pages is not None:
+                actual=db.execute('PRAGMA max_page_count='+str(self.sqlite_max_pages)).fetchone()[0]
+                if actual!=self.sqlite_max_pages:raise Rejected('sqlite_quota_below_size')
+            yield db,lock
     def save(self,db,state):
         if state.get('state')!='DEGRADED':deadlines.check()
         super().save(db,state)
     def recover_locked(self,db):
         if not self.operation_id:return super().recover_locked(db)
         try:
-            record=Operations(self.root).recovery_budget(self.operation_id)
+            record=Operations(self.root,self.sqlite_max_pages).recovery_budget(self.operation_id)
             with deadlines.use(record):
                 getattr(self,'recovery_checkpoint',lambda _:None)('recovery')
                 deadlines.check();return super().recover_locked(db)
@@ -48,14 +57,14 @@ def dispatch(config,request,peer_uid,checkpoint=lambda _:None):
     for field in ['key','conf','ca']:
         st=Path(config['writer'][field]).lstat()
         if not stat.S_ISREG(st.st_mode) or st.st_uid!=0 or st.st_mode & 0o022:raise Rejected('target_permissions')
-    w=FixedWriter(**config['writer']);w.master=config['master'];w.recovery_checkpoint=checkpoint;w.commit_checkpoint=checkpoint
+    w=FixedWriter(**config['writer']);w.master=config['master'];w.recovery_checkpoint=checkpoint;w.commit_checkpoint=checkpoint;w.sqlite_max_pages=config.get('sqlite_max_pages')
     if op=='status':return w.status()
     if op=='recover':return w.recover()
     if op=='recover-request':
         w.operation_id=request['request_id'];return w.recover()
     if type(request['certificate']) is not str or len(request['certificate'].encode())>32768:raise Rejected('certificate_budget')
     if type(request['epoch']) is not str or type(request['revision']) is not int:raise Rejected('authority_shape')
-    operations=Operations(root)
+    operations=Operations(root,config.get('sqlite_max_pages'))
     if op=='execute':
         w.operation_id=request['request_id']
         if not operations.begin(w.operation_id):return operations.get(w.operation_id)
@@ -83,13 +92,14 @@ def dispatch(config,request,peer_uid,checkpoint=lambda _:None):
                 state=w.status()
                 if state['state']=='APPLYING' and owned_intent[0]:
                     w.recover();state=w.status()
-                if state['state']!='READY':terminal='DEGRADED'
+                if storage.failed(error):operations.latch_storage(error)
+                if state['state']!='READY' or storage.failed(error) or isinstance(error,StorageBlocked):terminal='DEGRADED'
                 else:
                     if isinstance(error,Cancelled):terminal='ROLLED_BACK'
                     elif isinstance(error,deadlines.Expired):terminal='ROLLED_BACK' if owned_intent[0] else 'EXPIRED'
                     else:terminal='FAILED'
             except Exception:terminal='DEGRADED'
-            return operations.finish(w.operation_id,terminal,{'error':type(error).__name__,'expired':isinstance(error,deadlines.Expired)})
+            return operations.finish(w.operation_id,terminal,{'error':type(error).__name__,'expired':isinstance(error,deadlines.Expired),'sqlite_error':getattr(error,'sqlite_errorname',None),'errno':getattr(error,'errno',None)})
     finally:Path(path).unlink(missing_ok=True)
 
 def main():
@@ -113,7 +123,7 @@ def main():
             os.kill(os.getpid(),signal.SIGSTOP)
     try:result={'ok':True,'result':dispatch(config,request['body'],request['peer_uid'],checkpoint)}
     except Exception as e:
-        result={'ok':False,'error':type(e).__name__}
+        result={'ok':False,'error':type(e).__name__,'sqlite_error':getattr(e,'sqlite_errorname',None),'errno':getattr(e,'errno',None)}
         if isinstance(e,Rejected):result['reason']=str(e)
     print(json.dumps(result))
 if __name__=='__main__':main()

@@ -1,0 +1,91 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "name": "replay_does_not_extend_budget",
+      "passed": true,
+      "seconds": 0.05051813099998981,
+      "detail": "same timing returned; timeout extension under same ID rejected"
+    },
+    {
+      "name": "expiry_after_confirmation_rollback",
+      "passed": true,
+      "seconds": 1.6871402970000133,
+      "detail": "expired after fresh candidate TLS; COMMIT denied; independent persisted recovery budget restores baseline"
+    },
+    {
+      "name": "expiry_after_sql_writes_before_commit",
+      "passed": true,
+      "seconds": 1.579405252000015,
+      "detail": "actual executor paused after both SQL writes; final expiry guard rejects commit and restores baseline"
+    },
+    {
+      "name": "expiry_before_publication",
+      "passed": true,
+      "seconds": 1.4623306149999848,
+      "detail": "intent persisted but selected pointer unchanged at expiry; no candidate COMMIT"
+    },
+    {
+      "name": "preparation_consumes_overall_budget",
+      "passed": true,
+      "seconds": 1.129011926000004,
+      "detail": "SIGSTOP preparation delay consumes admission budget; no publication or fresh recovery allocation"
+    },
+    {
+      "name": "restart_before_expiry_no_reset",
+      "passed": true,
+      "seconds": 1.413227384999999,
+      "detail": "pending journal recovered without replay; activation timing identical; expired=False"
+    },
+    {
+      "name": "restart_after_expiry_no_reset",
+      "passed": true,
+      "seconds": 1.7154099239999994,
+      "detail": "pending journal recovered without replay; activation timing identical; expired=True"
+    },
+    {
+      "name": "recovery_budget_reused_before_expiry",
+      "passed": true,
+      "seconds": 2.6322375379999983,
+      "detail": "persisted recovery budget unchanged across restart; exhausted=False"
+    },
+    {
+      "name": "recovery_budget_not_reset_after_restart",
+      "passed": true,
+      "seconds": 7.048209014000008,
+      "detail": "persisted recovery budget unchanged across restart; exhausted=True"
+    }
+  ],
+  "untested": [
+    "persistent systemd deployment",
+    "VM reboot",
+    "power loss",
+    "CA signing deadline",
+    "actual VM boot change",
+    "actual wall-clock jump",
+    "physical storage faults",
+    "automatic history recycling"
+  ],
+  "tracked_executors": 24,
+  "owned_processes_exited": true,
+  "source_sha256": {
+    "certweft/service.py": "6c53aba8c1d06a02be274231ed1a127001797e943e0e7568297cf74344e33112",
+    "certweft/deadlines.py": "e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f",
+    "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certweft/core.py": "4a2a7382cfb55c47238d0d5530898164e6c9aa60b213bb8241edbf9e50706945",
+    "certweft/operations.py": "410e0ee71dd9e30edb655693b9240382faf859600eb7cbf22a8e075014672ff7",
+    "certweft/ca.py": "e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c",
+    "certweft/executor.py": "cfe8b75b925600792f157f2aa7b63ec65801b761db938c2e0432d4cc382e40e3",
+    "tools/policy_vm.py": "27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6",
+    "tools/deadline_vm.py": "cd0d61fb4e1253cdc23b12e3fb38d10ad41fd04f2debd9c23f4574f8fa4e7cf3",
+    "tools/executor_vm.py": "1e8f42862c3cffa640a2320cd5c95666c94fa2b8bcdda3cdc0339e7b6f648852",
+    "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
+    "tools/credential_probe.py": "8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46",
+    "tools/operations_vm.py": "3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85",
+    "tests/test_operations.py": "f1741fae5ae944fa974e90c418c447da27e49d18051fc8ad50b4ea843041e337",
+    "tests/test_core.py": "8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c",
+    "tests/test_deadlines.py": "442d8ea3cfa4af88ec62603d84f017fb2b1883e8c05d3d92bedd695811b9dd29",
+    "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
+  },
+  "source_unchanged": true
+}
