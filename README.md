@@ -117,3 +117,10 @@ persistent root intention to the current Gate, preparation receipt, core and exa
 DEGRADED history. Partial publication, expiry and restart never grant updates.
 The formal entry, executor and bound COMMIT guard still reject recovered sessions,
 even with a RUNNING label. Actual reopening is a separate pending milestone.
+
+## Fresh release preparation, still closed
+
+[Release preparation](docs/RELEASE_PREPARATION.md) adds a fixed root contract,
+independent source/release deadlines, fresh filesystem/SQLite/certificate/TLS
+verification and a paired closed receipt. Disk faults or partial publication do
+not grant updates. Actual admission handoff remains a separate pending stage.

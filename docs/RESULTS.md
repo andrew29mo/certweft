@@ -1,6 +1,13 @@
 # Results and provenance
 
-## Current closed opening-intention milestone
+## Current fresh release-preparation milestone
+
+See [RELEASE_PREPARATION.md](RELEASE_PREPARATION.md) for the source/release deadline
+intersection, fresh verification, paired receipt and actual storage-fault points.
+Admission remains closed. Current unit evidence is release-units.json/html;
+opening-units and earlier unit records retain their historical sources.
+
+## Closed opening-intention milestone
 
 See [OPENING_INTENT.md](OPENING_INTENT.md) for persistent intentions, exact
 Gate/journal/DEGRADED pairing and the shared admission guard. This stage never

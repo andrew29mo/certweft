@@ -54,3 +54,8 @@ VM command. This stage keeps admission closed; no unlock command is provided.
 
 See [OPENING_INTENT.md](OPENING_INTENT.md) and run tools/opening_vm.py as root in
 the isolated Linux VM. There is still no release/unlock command.
+
+## Fresh closed release preparation
+
+Run tools/release_vm.py as root in the isolated Linux VM; see
+[RELEASE_PREPARATION.md](RELEASE_PREPARATION.md). It does not unlock updates.

@@ -41,7 +41,7 @@ def require_updates(root,authority,main=None):
         if catalog.execute('SELECT version FROM recovery_meta').fetchall()!=[(2,)]:raise Rejected('recovery_schema')
         if catalog.execute('SELECT 1 FROM recovery_requests LIMIT 1').fetchone():raise Rejected('opening_handoff_required')
     def check(db):
-        if db.execute("SELECT 1 FROM sqlite_master WHERE name IN ('closed_reconciliation','opening_intent') LIMIT 1").fetchone():raise Rejected('opening_handoff_required')
+        if db.execute("SELECT 1 FROM sqlite_master WHERE name IN ('closed_reconciliation','opening_intent','release_preparation') LIMIT 1").fetchone():raise Rejected('opening_handoff_required')
     if main is None:
         with readonly(root/'journal.db') as db:check(db)
     else:check(main)

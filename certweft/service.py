@@ -167,7 +167,7 @@ def serve(config_path):
                             data+=chunk
                             if len(data)>49152:raise ValueError('budget')
                         body=json.loads(data);op=body.get('op')
-                        if op in {'verify-storage','recover-certificate','reconcile-closed','prepare-opening','recovery-request-status'}:
+                        if op in {'verify-storage','recover-certificate','reconcile-closed','prepare-opening','prepare-release','recovery-request-status'}:
                             if uid!=0:raise Rejected('admin_required')
                             if op=='recovery-request-status':
                                 if set(body)!={'op','request_id'} or type(body['request_id']) is not str:raise Rejected('request_shape')
@@ -209,11 +209,13 @@ def serve(config_path):
                                 journal_ready=not guard.locked() and completion_recorded(root,current,recovery)
                                 from .opening import ready_closed
                                 opening_ready=not guard.locked() and ready_closed(root,current,recovery,readiness_checkpoint)
+                                from .release import ready_closed as release_ready_closed
+                                release_ready=not guard.locked() and release_ready_closed(root,current)
                                 updates_allowed=False
                                 if current['state']=='RUNNING':
                                     try:require_updates(root,config['gate_authority']);updates_allowed=True
                                     except (Rejected,OSError):pass
-                                reply={'ok':True,'gate':current,'executor_busy':guard.locked(),'gate_allows_updates':updates_allowed,'opening_intent_verified_closed':opening_ready,'storage_health_not_verified':not journal_ready,'journal_prepared_closed':journal_ready,'completion_recorded':recovery.completion_recorded(current)}
+                                reply={'ok':True,'gate':current,'executor_busy':guard.locked(),'gate_allows_updates':updates_allowed,'opening_intent_verified_closed':opening_ready,'release_prepared_closed':release_ready,'storage_health_not_verified':not journal_ready,'journal_prepared_closed':journal_ready,'completion_recorded':recovery.completion_recorded(current)}
                         elif op in {'cancel','request-status'}:
                             if set(body)!={'op','request_id'} or type(body['request_id']) is not str:raise Rejected('request_shape')
                             result=operations.cancel(body['request_id']) if op=='cancel' else operations.get(body['request_id'])

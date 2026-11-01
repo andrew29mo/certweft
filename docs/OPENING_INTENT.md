@@ -1,5 +1,9 @@
 # Opening intentions, still closed
 
+The next [release-preparation stage](RELEASE_PREPARATION.md) adds new verification
+without opening admission. The 86-unit record below is historical after that stage;
+current units are linked there. Opening VM regressions are rerun.
+
 This stage persists and validates an intention to reopen updates. It does not
 implement release, write RUNNING, issue a clean-stop receipt or change the normal
 DEGRADED blocking policy. OPENING_VERIFIED_CLOSED is an assessment result, never
@@ -159,7 +163,7 @@ configs and logs remain private VM fixtures, not report payloads.
 
 ## Current validation and retained failed attempt
 
-The current source passes 86 Linux unit tests with no failures, errors or skips,
+At this milestone the source passed 86 Linux unit tests with no failures, errors or skips,
 and 20 opening-intention VM fixtures, plus one expected-failure mutation control. The 19 preparation, 17 certificate,
 15 storage-verification, ten gate and fourteen storage fixtures are separate
 regressions, not additional opening scenarios. The old 75-unit preparation record

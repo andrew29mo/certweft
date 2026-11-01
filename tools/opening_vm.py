@@ -16,7 +16,7 @@ def settings(work,mode):
     if mode=='readiness-expiry':result['opening_readiness_expiry_marker']=str(work/'readiness-expiry.json')
     return result
 
-def exercise(root,work,config,parent,call,normal_job,prepared,mode):
+def exercise(root,work,config,parent,call,normal_job,prepared,mode,source_seconds=None):
     child=None;cfg=work/'opening-config';crossing_responses=[]
     def db():return contextlib.closing(sqlite3.connect('file:'+str(root/'journal.db')+'?mode=ro',uri=True,timeout=.2))
     def state():
@@ -63,7 +63,7 @@ def exercise(root,work,config,parent,call,normal_job,prepared,mode):
         assert [r for r in before['requests'] if r[2]=='DEGRADED'],'real fault must leave referenced DEGRADED history'
         with db() as d:saved_receipt=receipt(d)
         pointer=os.readlink(root/'active.conf');versions={str(p.relative_to(root)):digest(p.read_bytes().hex()) for v in root.glob('v-*') for p in v.iterdir() if p.is_file()}
-        body={'op':'prepare-opening','request_id':'opening-one','preparation_request_id':prepared['request_id'],'receipt_digest':digest(saved_receipt),'core_epoch':core['epoch'],'core_revision':core['revision'],'timeout_seconds':1 if mode.startswith('expired') or mode=='readiness-expiry' else 10,**Gate.token(old_gate)}
+        body={'op':'prepare-opening','request_id':'opening-one','preparation_request_id':prepared['request_id'],'receipt_digest':digest(saved_receipt),'core_epoch':core['epoch'],'core_revision':core['revision'],'timeout_seconds':source_seconds if source_seconds is not None else 1 if mode.startswith('expired') or mode=='readiness-expiry' else 10,**Gate.token(old_gate)}
         denied=call(config['socket'],body);assert not denied['ok'] and denied['reason']=='admin_required'
         for change in [{'receipt_digest':'0'*64},{'core_revision':core['revision']+1}]:
             bad=rootcall({**body,**change,'request_id':'invalid-binding'});assert not bad['ok'] and bad['reason'] in {'preparation_binding_mismatch','core_pair_mismatch'}

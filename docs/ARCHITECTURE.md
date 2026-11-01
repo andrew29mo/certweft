@@ -179,3 +179,11 @@ paired and deadline-bound but does not change Gate or enable admission. Exact
 DEGRADED row references are evaluated without rewriting terminal history. Shared
 entry/executor/COMMIT eligibility permits untouched bootstrap only; recovered
 sessions still require a future explicit release handoff.
+
+## Closed release evidence
+
+The additive prepare-release kind pins a completed opening marker/target and its
+original budget, plus a new release budget. The earlier expiry bounds fresh
+storage/certificate/TLS checks and separate main-receipt/root completion commits.
+No Gate transition or DEGRADED-policy relaxation is included. See
+[release preparation](RELEASE_PREPARATION.md) for tested fault points and limits.

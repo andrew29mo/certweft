@@ -11,7 +11,7 @@ def main():
     if (actual.st_dev,actual.st_ino)!=(expected.st_dev,expected.st_ino):raise Rejected('lease_identity')
     if message['peer_uid']!=0 or set(body)!={'op','request_id'} or body['op']!='run-verification':raise Rejected('admin_required')
     def checkpoint(point):
-        prefix='opening' if point.startswith('opening-') else 'reconciliation' if point.startswith('reconcile-') else 'verification'
+        prefix='release' if point.startswith('release-') else 'opening' if point.startswith('opening-') else 'reconciliation' if point.startswith('reconcile-') else 'verification'
         if config.get(prefix+'_pause_at')==point:
             marker=Path(config[prefix+'_marker'])
             if config.get(prefix+'_pause_once') and marker.exists():return
@@ -29,6 +29,9 @@ def main():
         elif row['kind']=='prepare-opening':
             from .opening import prepare_opening
             outcome=prepare_opening(config,body['request_id'],checkpoint)
+        elif row['kind']=='prepare-release':
+            from .release import prepare_release
+            outcome=prepare_release(config,body['request_id'],checkpoint)
         else:outcome=verify(config,body['request_id'],checkpoint)
         result={'ok':True,'result':outcome}
     except Exception as error:
