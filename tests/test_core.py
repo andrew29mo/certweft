@@ -82,3 +82,18 @@ class SecretOutput(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError,'secret_output'):
             check_outputs('sentinel',b'clean',b'error sentinel')
         check_outputs('sentinel',b'clean',b'clean')
+
+class ExecutorContract(unittest.TestCase):
+    def test_management_api_rejects_extra_paths_and_commands(self):
+        from certweft.executor import dispatch
+        config={'controller_uid':123}
+        for body in [{'op':'shell','command':'id'}, {'op':'activate','path':'/etc/passwd'}, {'op':'status','root':'/'}]:
+            with self.assertRaisesRegex(Rejected,'request_shape'):dispatch(config,body,123)
+    def test_controller_cannot_request_admin_recovery(self):
+        from certweft.executor import dispatch
+        with self.assertRaisesRegex(Rejected,'admin_required'):
+            dispatch({'controller_uid':123},{'op':'recover'},123)
+    def test_unconfigured_peer_rejected(self):
+        from certweft.executor import dispatch
+        with self.assertRaisesRegex(Rejected,'peer_denied'):
+            dispatch({'controller_uid':123},{'op':'status'},456)

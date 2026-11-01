@@ -26,6 +26,13 @@ real CA rejection and transient systemd signer evidence. This does not qualify
 the persistent deployment or privileged executor. The older token-renewal finding
 and exploration reports retain their recorded scope.
 
+## Writer/executor milestone
+
+[P0-2 writer boundary and takeover](docs/EXECUTOR.md) adds a fixed local Unix
+socket service, root validation, inherited executor lease and real orphan-process
+VM evidence. Formal systemd deployment and complete operation contracts remain
+pending.
+
 ## Evidence
 
 [JSON](evidence/exploration.json) and [HTML](evidence/exploration.html) contain the

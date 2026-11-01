@@ -1,0 +1,51 @@
+{
+  "passed": false,
+  "cases": [
+    {
+      "name": "unprivileged_direct_mutation_denied",
+      "passed": true,
+      "detail": "actual file writes and direct nginx reload denied",
+      "seconds": 0.03388413700000115
+    },
+    {
+      "name": "controller_status",
+      "passed": true,
+      "detail": "READY",
+      "seconds": 0.06457965299999557
+    },
+    {
+      "name": "fixed_api_rejects_escalation",
+      "passed": true,
+      "detail": "admin recovery, injected path and arbitrary op rejected",
+      "seconds": 0.16320190399999035
+    },
+    {
+      "name": "formal_controller_activation",
+      "passed": false,
+      "error": "AssertionError"
+    }
+  ],
+  "untested": [
+    "persistent systemd installation",
+    "D-state processes",
+    "power loss",
+    "VM reboot recovery",
+    "request dedup and durable deadlines",
+    "root compromise"
+  ],
+  "error": "AssertionError",
+  "source_sha256": {
+    "certweft/service.py": "09fa56f5b9e42fcde5be01d895ee6308512afca6939c2189c91d2fe3347040d2",
+    "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certweft/core.py": "fe51b8ffcb8a4445e7c3dfc86e66fff803e9863e661ea4c050f8b53e25d6cdcf",
+    "certweft/ca.py": "e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c",
+    "certweft/executor.py": "42c9e4c5b9cdebced207f7e3b6136c65fc1a7e74c8cfb261a7af7ca4b4d0a4b0",
+    "tools/policy_vm.py": "27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6",
+    "tools/executor_vm.py": "21f984f587a6b72e3658741aac292cf8d30933eac31192545422a3b8d33042ba",
+    "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
+    "tools/credential_probe.py": "8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46",
+    "tests/test_core.py": "e5f45f34d6c4d34e08675af7cd64b0e56684443ffd5bef49bc576ade151dca89",
+    "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
+  },
+  "source_unchanged": true
+}

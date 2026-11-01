@@ -89,3 +89,11 @@ lifetimes, plus transient systemd credential delivery are now qualified by
 exploration gates above are historical; persistent deployment, executor fencing,
 whole-operation deadlines and recovery gates remain open. CSR authorization is
 restricted to one service identity, not bound to one host or public key.
+
+## P0-2 update
+
+The source-run root writer and actual exec lifetime lease now have bounded
+privilege and takeover evidence; see [EXECUTOR.md](EXECUTOR.md). Nginx reload
+is signalled directly after master identity checks, removing the delayed reload
+helper path. Durable operation contracts and installed systemd deployment remain
+open; the earlier descriptions of unqualified executor inheritance are historical.
