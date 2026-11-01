@@ -1,4 +1,4 @@
-"""Root storage verifier with inherited lifetime lease; no Nginx mutation API."""
+"""Root recovery executor with an inherited lifetime lease and fixed dispatch."""
 import json,os,signal,sys
 from pathlib import Path
 from .recovery import verify,RecoveryStore
@@ -11,9 +11,10 @@ def main():
     if (actual.st_dev,actual.st_ino)!=(expected.st_dev,expected.st_ino):raise Rejected('lease_identity')
     if message['peer_uid']!=0 or set(body)!={'op','request_id'} or body['op']!='run-verification':raise Rejected('admin_required')
     def checkpoint(point):
-        if config.get('verification_pause_at')==point:
-            marker=Path(config['verification_marker'])
-            if config.get('verification_pause_once') and marker.exists():return
+        prefix='reconciliation' if point.startswith('reconcile-') else 'verification'
+        if config.get(prefix+'_pause_at')==point:
+            marker=Path(config[prefix+'_marker'])
+            if config.get(prefix+'_pause_once') and marker.exists():return
             pending=marker.with_suffix('.pending')
             pending.write_text(json.dumps({'pid':os.getpid(),'point':point}));os.replace(pending,marker);os.kill(os.getpid(),signal.SIGSTOP)
     try:
@@ -22,6 +23,9 @@ def main():
         if row['kind']=='recover-certificate':
             from .certificate_recovery import recover_certificate
             outcome=recover_certificate(config,body['request_id'],checkpoint)
+        elif row['kind']=='reconcile-closed':
+            from .reconciliation import reconcile_closed
+            outcome=reconcile_closed(config,body['request_id'],checkpoint)
         else:outcome=verify(config,body['request_id'],checkpoint)
         result={'ok':True,'result':outcome}
     except Exception as error:

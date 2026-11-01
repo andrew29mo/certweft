@@ -4,7 +4,7 @@
 adds a distinct full recovery kind with explicit v1-to-v2 catalog migration.
 Storage-only operations still never restore or unlock; the 59-unit/fifteen-case
 counts below describe the preceding storage milestone. Current source results
-are listed in CERTIFICATE_RECOVERY.md.
+are listed in CLOSED_PREPARATION.md; the storage-only contract below is unchanged.
 
 ## Delivered scope
 

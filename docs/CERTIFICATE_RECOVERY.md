@@ -1,5 +1,9 @@
 # Committed certificate recovery to VERIFIED_CLOSED
 
+The next [closed preparation stage](CLOSED_PREPARATION.md) adds a separate explicit
+operation for main-journal/health reconciliation; certificate recovery itself
+still has the unchanged boundaries below.
+
 ## Scope and API
 
 This stage adds root-only committed-certificate restoration and new TLS
@@ -156,18 +160,20 @@ Nginx/VM peak memory or a comparative performance result.
 
 ## Current validation
 
-The fixed source passes 66 Linux unit tests
+At the certificate-recovery milestone, the source passed 66 Linux unit tests
 ([JSON](../evidence/certificate-units.json), [HTML](../evidence/certificate-units.html)),
 17 certificate-recovery VM fixtures, 15 storage-verification fixtures, ten
-gate/lifecycle fixtures and fourteen storage regressions. Each current report
-checks exact source hashes and owned-process/mount cleanup. The combined root
+gate/lifecycle fixtures and fourteen storage regressions. The 66-unit record is historical after the additive closed-preparation stage;
+its current unit evidence is linked in CLOSED_PREPARATION.md. The VM regression
+reports are rerun and each checks exact source hashes and owned-process/mount cleanup. The combined root
 history remains 16 slots; more kinds do not increase or recycle that allowance.
 A dedicated success case also preserves a preexisting STORAGE_FAILED latch.
 
 ## Still pending
 
-Normal admission reopening, health reset and normal-request reconciliation require
-a separate verified handoff. Installed package/systemd lifecycle, actual VM reboot,
+Certificate recovery alone does not reset health or reconcile normal requests;
+the separate CLOSED_PREPARATION.md operation now prepares these while closed.
+Normal admission reopening still requires a future verified handoff. Installed package/systemd lifecycle, actual VM reboot,
 abrupt power loss, physical-media corruption, general fsync failure recovery (including recovery-gate directory fsync and
 control-catalog COMMIT I/O failures),
 D-state cleanup and long-term rotation remain unqualified. Repository remains

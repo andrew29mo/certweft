@@ -1,6 +1,12 @@
 # Results and provenance
 
-## Current closed certificate recovery milestone
+## Current closed journal preparation milestone
+
+See [CLOSED_PREPARATION.md](CLOSED_PREPARATION.md) for the additive preparation
+contract, main/root paired evidence and limits. This stage reconciles live
+requests and health while keeping all normal updates closed.
+
+## Closed certificate recovery milestone
 
 See [CERTIFICATE_RECOVERY.md](CERTIFICATE_RECOVERY.md) and its source-bound
 JSON/HTML for committed restoration, fresh TLS and crash/expiry cases. All normal

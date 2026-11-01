@@ -44,3 +44,8 @@ For the current source-run storage matrix, dedicated loop-filesystem prerequisit
 cleanup and measurement limits, follow [STORAGE.md](STORAGE.md). These storage
 cases do not require the Smallstep binaries. The older exploration and CSR
 authority reports retain their original source hashes.
+
+## Closed journal preparation
+
+See [CLOSED_PREPARATION.md](CLOSED_PREPARATION.md) for the root contract and Linux
+VM command. This stage keeps admission closed; no unlock command is provided.

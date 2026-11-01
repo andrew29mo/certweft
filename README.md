@@ -100,3 +100,12 @@ See [architecture and remaining acceptance gates](docs/ARCHITECTURE.md) and
 Current gate/source validation is in [RESTART_GATE.md](docs/RESTART_GATE.md).
 Earlier operation/deadline/executor reports retain their historical source and
 restart semantics; they are not qualification for the current startup policy.
+
+## Closed journal preparation
+
+[Closed journal and health preparation](docs/CLOSED_PREPARATION.md) adds the
+root-only reconcile-closed contract, fresh storage/certificate/TLS checks and
+atomic main-journal reconciliation. Paired completion remains closed; it does
+not reopen updates, rewrite terminal history or automatically resume after a
+process restart. Installed deployment and VM reboot/power-loss qualification
+remain pending.

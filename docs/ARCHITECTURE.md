@@ -160,3 +160,13 @@ requests sharing the fixed root quota. The formal backend restores only the
 captured committed identity and confirms new TLS. A durable intermediate proof
 and paired final closed marker/result distinguish incomplete publication. No
 health reset, normal-request reconciliation or RUNNING transition is delivered.
+
+## Closed journal preparation
+
+The additive reconcile-closed operation binds current certificate completion,
+gate token, core and logical journal snapshot. It performs fresh storage/TLS
+checks, atomically reconciles live normal requests/core/health in the main
+journal, then records separate closed root completion. Receipt plus current
+root result are required for journal_prepared_closed; neither enables admission.
+See [closed preparation contract](CLOSED_PREPARATION.md). Terminal DEGRADED
+history is preserved; its admission policy and actual reopening remain pending.

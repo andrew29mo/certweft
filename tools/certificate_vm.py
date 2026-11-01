@@ -46,6 +46,9 @@ def exercise(root,work,config,parent,call,normal_job,mode):
     points={'wrong-leaf':'restore-reloaded','bad-http':'restore-reloaded','crash-selected':'restore-selected','crash-reloaded':'restore-reloaded','crash-confirmed':'restore-confirmed','crash-proof':'certificate-proof','crash-gate':'closed-gate-published','expired-tls':'restore-confirmed','expired-commit':'closed-result-commit'}
     frozen={k:v for k,v in config.items() if k not in {'pause_at','storage_latch_marker','unrecorded_storage_marker','gate_stop_sync_eio'}}
     frozen.update(verification_pause_at=points.get(mode,'restore-validated') if not mode.startswith('invalid-') else 'restoration-start',verification_marker=str(work/'certificate-marker.json'),verification_pause_once=True)
+    if mode.startswith('reconcile-'):
+        from tools.reconcile_vm import settings
+        frozen.update(settings(work,mode.removeprefix('reconcile-')))
     try:
         parent.terminate();parent.wait(3)
         state=writer.status();name=state['committed'];directory=root/('v-'+name)
@@ -155,6 +158,9 @@ def exercise(root,work,config,parent,call,normal_job,mode):
         assert logical()==protected and generations()==version_bytes
         refused=call(config['socket'],{**normal_job,'request_id':'still-isolated'});assert not refused['ok']
         assert Gate(root).read()['state'] in {'VERIFY_REQUIRED','VERIFIED_CLOSED','RECOVERY_REQUIRED'}
+        if mode.startswith('reconcile-'):
+            from tools.reconcile_vm import exercise as prepare_journal
+            detail['journal_preparation'],parent=prepare_journal(root,work,frozen,parent,call,normal_job,row,mode.removeprefix('reconcile-'))
         detail['terminal_result']=row['result']
         detail.update(terminal=row['state'],logical_journal_unchanged=True,immutable_generations_unchanged=True,updates_enabled=False)
         return detail,parent
