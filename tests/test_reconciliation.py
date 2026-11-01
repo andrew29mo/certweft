@@ -1,5 +1,5 @@
 """SQL/authority contracts only. Formal service + TLS is qualified by reconcile_vm."""
-import contextlib,json,sqlite3,time,unittest,uuid
+import contextlib,copy,json,sqlite3,time,unittest,uuid
 from certweft import deadlines
 from certweft.core import Rejected
 from certweft.gate import Gate
@@ -78,3 +78,25 @@ class ClosedPreparation(unittest.TestCase):
         row=self.store.admit(self.prepare,self.writer)[0];self.store.begin('prepare')
         with self.assertRaisesRegex(Rejected,'reconciliation_schema'):self.run_main(row)
         with self.db() as db:self.assertEqual(db.execute('SELECT record FROM closed_reconciliation').fetchone()[0],'{}')
+
+    def test_complete_keys_with_invalid_values_are_preserved_and_never_qualify(self):
+        self.close();row=self.store.admit(self.prepare,self.writer)[0];self.store.begin('prepare')
+        base={'version':1,'request_id':'prepare','request_digest':row['digest'],'gate':row['timing']['authority'],'certificate_request_id':'certificate','committed':self.state['committed'],'prior_journal_digest':row['target']['journal_digest'],'core_after':self.state,'interrupted':[],'resolved_degraded':[]}
+        with self.db() as db,db:db.execute('CREATE TABLE closed_reconciliation(id INTEGER PRIMARY KEY,record TEXT)')
+        mutations=[('request_id',None),('request_id',[]),('request_digest',None),('certificate_request_id',None),('certificate_request_id','prepare'),('committed',None),('prior_journal_digest',None),('gate',{}),('gate',{'gate_epoch':'a'*32,'gate_revision':True}),('gate',{'gate_epoch':'a'*32,'gate_revision':2**63-1}),('core_after',{}),('interrupted',[['live',[]]]),('interrupted',[['live','COMMITTED']]),('interrupted',[['live','RUNNING'],['other','ACCEPTED']]),('resolved_degraded',[None]),('resolved_degraded',['same','same']),('resolved_degraded',['b','a'])]
+        for field,value in mutations:
+            damaged=copy.deepcopy(base);damaged[field]=value
+            with self.subTest(field=field,value=value):
+                encoded=json.dumps(damaged)
+                with self.db() as db,db:db.execute('INSERT OR REPLACE INTO closed_reconciliation VALUES(1,?)',(encoded,))
+                with self.db() as db:
+                    with self.assertRaisesRegex(Rejected,'reconciliation_schema'):receipt(db)
+                self.assertFalse(completion_recorded(self.root,self.gate.read(),self.store))
+                with self.assertRaisesRegex(Rejected,'reconciliation_schema'):self.run_main(row)
+                self.assertEqual(self.writer.status(),self.state)
+                with self.db() as db:self.assertEqual(db.execute('SELECT record FROM closed_reconciliation').fetchone()[0],encoded)
+        for field,value in [('schema',True),('state','APPLYING'),('candidate','a'*32),('epoch',None),('revision',True),('revision',2**63-1),('committed','a'*32),('committed_digest','not-a-digest')]:
+            damaged=copy.deepcopy(base);damaged['core_after'][field]=value
+            with self.subTest(core_field=field):
+                with self.db() as db,db:db.execute('UPDATE closed_reconciliation SET record=?',(json.dumps(damaged),))
+                with self.assertRaisesRegex(Rejected,'reconciliation_schema'):self.run_main(row)

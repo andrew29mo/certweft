@@ -4,7 +4,9 @@
 
 See [CLOSED_PREPARATION.md](CLOSED_PREPARATION.md) for the additive preparation
 contract, main/root paired evidence and limits. This stage reconciles live
-requests and health while keeping all normal updates closed.
+requests and health while keeping all normal updates closed. The follow-up review
+adds complete receipt-value validation and an explicit non-success assertion for
+both storage-fault result paths; malformed receipts are preserved, not overwritten.
 
 ## Closed certificate recovery milestone
 

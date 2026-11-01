@@ -7,7 +7,7 @@ from certweft.gate import Gate
 from certweft.reconciliation import snapshot,digest,receipt
 from tools.executor_vm import request,hashes
 P=pathlib.Path(__file__).resolve().parents[1]
-MATRIX=['success','latched','terminal-history','expired-before','expired-after','expired-result','stale-before','stale-result','journal-drift','pointer-drift','invalid-certificate','sqlite-full','readonly','enospc','crash-before','crash-after','crash-result','success-restart']
+MATRIX=['success','latched','terminal-history','expired-before','expired-after','expired-result','stale-before','stale-result','journal-drift','pointer-drift','invalid-certificate','malformed-receipt','sqlite-full','readonly','enospc','crash-before','crash-after','crash-result','success-restart']
 
 def settings(work,mode):
     point='reconcile-main-commit' if mode in {'expired-before','stale-before','crash-before'} else 'reconcile-main-committed' if mode in {'expired-after','crash-after'} else 'reconcile-result-commit' if mode in {'expired-result','stale-result','crash-result'} else 'reconcile-start'
@@ -80,6 +80,11 @@ def exercise(root,work,config,parent,call,normal_job,certificate,mode):
         if mode=='invalid-certificate':
             # Root fault after admission: structural committed digest must detect drift.
             path=root/('v-'+core['committed'])/'cert.pem';damaged=(path,path.read_bytes());path.write_text('invalid fixture certificate')
+        if mode=='malformed-receipt':
+            malformed={'version':1,'request_id':None,'request_digest':None,'gate':{},'certificate_request_id':None,'committed':None,'prior_journal_digest':None,'core_after':{},'interrupted':[],'resolved_degraded':[]}
+            malformed_text=json.dumps(malformed)
+            with contextlib.closing(sqlite3.connect(root/'journal.db')) as d,d:
+                d.execute('CREATE TABLE closed_reconciliation(id INTEGER PRIMARY KEY,record TEXT)');d.execute('INSERT INTO closed_reconciliation VALUES(1,?)',(malformed_text,))
         if mode=='readonly':
             run(['mount','--bind',root,root]);bound=True;run(['mount','-o','remount,bind,ro',root])
             try:(root/'readonly-probe').write_bytes(b'x')
@@ -136,14 +141,29 @@ def exercise(root,work,config,parent,call,normal_job,certificate,mode):
                 assert mode in {'readonly','enospc'} and parent.wait(3)==75
                 parent=start();row=poll(body['request_id']);assert row['state'] in {'INTERRUPTED','FAILED','EXPIRED'}
                 detail['result_unrecordable_failstop_then_closed_restart']=True
-            expected='EXPIRED' if mode.startswith('expired') else 'FAILED' if mode.startswith('stale') or mode in {'journal-drift','pointer-drift','invalid-certificate','sqlite-full','readonly','enospc'} else 'JOURNAL_VERIFIED_CLOSED'
-            if mode not in {'readonly','enospc'}:assert row['state']==expected,(mode,row)
+            expected='EXPIRED' if mode.startswith('expired') else 'FAILED' if mode.startswith('stale') or mode in {'journal-drift','pointer-drift','invalid-certificate','malformed-receipt','sqlite-full','readonly','enospc'} else 'JOURNAL_VERIFIED_CLOSED'
+            if mode in {'readonly','enospc'}:
+                assert row['state'] in ({'INTERRUPTED','FAILED','EXPIRED'} if detail.get('result_unrecordable_failstop_then_closed_restart') else {'FAILED'}),(mode,row)
+                assert not rootcall({'op':'recovery-status'})['journal_prepared_closed']
+                if not detail.get('result_unrecordable_failstop_then_closed_restart'):
+                    assert row['result']['journal_reconciled'] is False and row['result']['health_verified'] is False
+                    assert row['result']['failure_stage']=='storage_validation'
+                    assert row['result']['errno']=={'readonly':errno.EROFS,'enospc':errno.ENOSPC}[mode]
+                detail['storage_fault_never_successful']=True
+            else:assert row['state']==expected,(mode,row)
             if mode=='sqlite-full':assert row['result']['sqlite_error']=='SQLITE_FULL'
             if mode=='journal-drift':assert row['result']['reason']=='journal_drift'
             if mode=='pointer-drift':assert row['result']['reason']=='committed_pointer_required'
             if mode=='invalid-certificate':assert row['result']['reason']=='committed_drift'
             if mode.startswith('stale'):assert Gate(root).read()==newer and row['result']['reason']=='stale_gate_authority'
-            after,record=readmain()
+            if mode=='malformed-receipt':
+                assert row['result']['reason']=='reconciliation_schema' and row['result']['failure_stage']=='journal_reconciliation'
+                with db() as d:
+                    after=snapshot(d);stored=d.execute('SELECT record FROM closed_reconciliation').fetchone()[0]
+                assert stored==malformed_text and after==prior
+                assert not rootcall({'op':'recovery-status'})['journal_prepared_closed']
+                record=None;detail['malformed_receipt_preserved_without_health_reset']=True
+            else:after,record=readmain()
             if mode in {'expired-before','stale-before','sqlite-full','readonly','enospc'}:assert after==prior and record is None
             if mode in {'expired-after','expired-result','stale-result'}:assert record is not None and after!=prior and not rootcall({'op':'recovery-status'})['journal_prepared_closed']
             before_count=count();same=rootcall(body);assert not same['created'] and same['result']==row and count()==before_count
@@ -164,7 +184,7 @@ def exercise(root,work,config,parent,call,normal_job,certificate,mode):
                     current=rootcall({'op':'recovery-status'});assert current['gate']['state']=='RECOVERY_REQUIRED' and not current['journal_prepared_closed']
                     assert not rootcall(body)['created'] and count()==before_count and readmain()[0]==after
                     detail['completed_restart_still_closed']=True
-        current_core=json.loads(readmain()[0]['state'][0][1])
+        with db() as d:current_core=json.loads(d.execute('SELECT data FROM state WHERE id=1').fetchone()[0])
         refused=call(config['socket'],{**normal_job,'request_id':'preparation-never-opens','epoch':current_core['epoch'],'revision':current_core['revision']})
         assert not refused['ok'] and not refused.get('created')
         assert refused.get('reason') in {'stale_gate_authority','recovery_required'},refused

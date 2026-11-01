@@ -1,5 +1,5 @@
 """Fresh journal/health preparation. Never opens Gate or reloads Nginx."""
-import contextlib,fcntl,hashlib,json,os,sqlite3,stat,time,uuid
+import contextlib,fcntl,hashlib,json,os,re,sqlite3,stat,time,uuid
 from pathlib import Path
 from . import deadlines
 from .core import Rejected
@@ -21,15 +21,34 @@ def capture_target(db,writer,core,certificate,gate):
     validate_journal(db,writer,core)
     return {'core':core,'journal_digest':digest(snapshot(db)),'certificate_request_id':certificate['request_id']}
 
+def validate_receipt(value):
+    fields={'version','request_id','request_digest','gate','certificate_request_id','committed','prior_journal_digest','core_after','interrupted','resolved_degraded'}
+    def text(value,pattern):return type(value) is str and re.fullmatch(pattern,value) is not None
+    def revision(value):return type(value) is int and 0<=value<2**63-1
+    identity=r'[A-Za-z0-9_-]{1,64}';generation=r'[0-9a-f]{32}';sha=r'[0-9a-f]{64}'
+    if type(value) is not dict or set(value)!=fields or type(value['version']) is not int or value['version']!=1:raise Rejected('reconciliation_schema')
+    if any(not text(value[k],identity) for k in ['request_id','certificate_request_id']) or value['request_id']==value['certificate_request_id']:raise Rejected('reconciliation_schema')
+    if any(not text(value[k],sha) for k in ['request_digest','prior_journal_digest']) or not text(value['committed'],generation):raise Rejected('reconciliation_schema')
+    gate=value['gate'];core=value['core_after']
+    if type(gate) is not dict or set(gate)!={'gate_epoch','gate_revision'} or not text(gate['gate_epoch'],generation) or not revision(gate['gate_revision']):raise Rejected('reconciliation_schema')
+    core_fields={'schema','state','epoch','revision','committed','committed_digest','candidate'}
+    if type(core) is not dict or set(core)!=core_fields or type(core['schema']) is not int or core['schema']!=1 or core['state']!='READY' or core['candidate'] is not None:raise Rejected('reconciliation_schema')
+    if not text(core['epoch'],generation) or not revision(core['revision']) or not text(core['committed'],generation) or core['committed']!=value['committed'] or not text(core['committed_digest'],sha):raise Rejected('reconciliation_schema')
+    interrupted=value['interrupted'];degraded=value['resolved_degraded']
+    if type(interrupted) is not list or len(interrupted)>1 or type(degraded) is not list or len(degraded)>64:raise Rejected('reconciliation_schema')
+    for item in interrupted:
+        if type(item) is not list or len(item)!=2 or not text(item[0],identity) or type(item[1]) is not str or item[1] not in {'ACCEPTED','RUNNING','CANCEL_REQUESTED'}:raise Rejected('reconciliation_schema')
+    if any(not text(item,identity) for item in degraded) or degraded!=sorted(set(degraded)) or any(item[0] in degraded for item in interrupted):raise Rejected('reconciliation_schema')
+    return value
+
 def receipt(db):
     if db.execute("SELECT type FROM sqlite_master WHERE name='closed_reconciliation'").fetchone() is None:return None
     if db.execute("SELECT type FROM sqlite_master WHERE name='closed_reconciliation'").fetchone()!=('table',) or [r[1] for r in db.execute('PRAGMA table_info(closed_reconciliation)')]!=['id','record']:raise Rejected('reconciliation_schema')
     rows=db.execute('SELECT id,record FROM closed_reconciliation LIMIT 2').fetchall()
     if len(rows)!=1 or rows[0][0]!=1 or type(rows[0][1]) is not str or len(rows[0][1])>16384:raise Rejected('reconciliation_schema')
-    value=json.loads(rows[0][1])
-    fields={'version','request_id','request_digest','gate','certificate_request_id','committed','prior_journal_digest','core_after','interrupted','resolved_degraded'}
-    if type(value) is not dict or set(value)!=fields or type(value['version']) is not int or value['version']!=1 or type(value['core_after']) is not dict or type(value['gate']) is not dict or type(value['interrupted']) is not list or type(value['resolved_degraded']) is not list:raise Rejected('reconciliation_schema')
-    return value
+    try:value=json.loads(rows[0][1])
+    except (ValueError,UnicodeError):raise Rejected('reconciliation_schema')
+    return validate_receipt(value)
 
 def completion_recorded(root,gate,store):
     if gate['state']!='VERIFIED_CLOSED':return False
@@ -60,7 +79,8 @@ def reconcile_main(db,writer,row,checkpoint):
                 db.execute("UPDATE requests SET state='INTERRUPTED',result=? WHERE id=?",(json.dumps(result),identity))
             db.execute('UPDATE state SET data=? WHERE id=1',(json.dumps(after),))
             db.execute("UPDATE health SET state='HEALTHY',detail=NULL WHERE id=1")
-            record={'version':1,'request_id':row['request_id'],'request_digest':row['digest'],'gate':row['timing']['authority'],'certificate_request_id':target['certificate_request_id'],'committed':core['committed'],'prior_journal_digest':target['journal_digest'],'core_after':after,'interrupted':live,'resolved_degraded':degraded}
+            record={'version':1,'request_id':row['request_id'],'request_digest':row['digest'],'gate':row['timing']['authority'],'certificate_request_id':target['certificate_request_id'],'committed':core['committed'],'prior_journal_digest':target['journal_digest'],'core_after':after,'interrupted':[list(item) for item in live],'resolved_degraded':degraded}
+            validate_receipt(record)
             db.execute('CREATE TABLE IF NOT EXISTS closed_reconciliation(id INTEGER PRIMARY KEY CHECK(id=1),record TEXT NOT NULL)')
             db.execute('INSERT OR REPLACE INTO closed_reconciliation VALUES(1,?)',(json.dumps(record),))
             checkpoint('reconcile-main-commit');require_authority(writer.root,row);deadlines.check()

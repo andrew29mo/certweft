@@ -25,7 +25,10 @@ root executor, not an additional emergency allowance. The control schema remains
 version 2 with an additive operation kind; old binaries reject unknown kinds
 rather than silently running them. No history recycling or automatic rollover is
 added. The main journal gains one bounded closed_reconciliation receipt row;
-unknown receipt layouts are rejected rather than overwritten.
+unknown receipt layouts or malformed values are rejected rather than overwritten.
+Receipt validation covers bounded IDs/digests, gate authority, the complete READY
+core, and the element types/counts/uniqueness of interrupted/degraded references;
+this is schema validation, not cryptographic protection against a privileged attacker.
 
 Request digest binds kind, certificate request ID, gate epoch/revision and original
 1–10 second budget. Replays return historical records without dispatch; a changed
@@ -140,8 +143,8 @@ fixture generation/fingerprint identifiers and hashes, not private material.
 
 ## Current validation
 
-The current source passes 74 Linux unit tests with no failures, errors or skips,
-and 18 closed journal-preparation VM fixtures. The separate certificate (17),
+The current source passes 75 Linux unit tests with no failures, errors or skips,
+and 19 closed journal-preparation VM fixtures. The separate certificate (17),
 storage-verification (15), gate (10) and storage (14) matrices retain their own
 scope and reports; they are regressions, not additional preparation scenarios.
 The 66-unit certificate-stage record is historical rather than current-source
@@ -162,6 +165,27 @@ process exit and separately requires exit 75, closed restart and an unchanged
 main journal. A pilot rerun of read-only/full and crash cases passed owned cleanup.
 The complete source-bound matrix above is the qualification evidence, not those
 partial pilots. Neither correction weakens rejection or cleanup requirements.
+
+## Independent review corrections
+
+The follow-up review found two P2 gaps. First, the original receipt reader checked
+only top-level keys and a few container types, so an abnormal record with null IDs
+and empty core/authority objects could be overwritten. It now validates every
+field and list element, rejects inconsistent references and validates generated
+records before writing. SQL tests retain the exact malformed record and unchanged
+main journal on rejection. The added formal-service VM fixture injects a complete
+but malformed receipt after admission and requires reconciliation_schema failure,
+no health reset, no paired completion and continued Gate rejection. This is not
+proof of protection against a root attacker or arbitrary physical corruption.
+
+Second, the original read-only/ENOSPC fixture skipped an explicit terminal check
+when the service directly returned a result. The prior observed runs used exit 75
+and restart into INTERRUPTED; the finding did not demonstrate a backend success
+under those faults. Both fault paths now require a non-success result and
+journal_prepared_closed=false. Direct replies must be FAILED with the intended
+storage-validation stage and actual errno; unrecordable results still require
+observed exit 75 and a closed, non-successful restart. Gate-only assertions are
+not substitutes for operation-result validation.
 
 ## Remaining limits
 
