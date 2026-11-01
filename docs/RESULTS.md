@@ -1,18 +1,36 @@
+# Current explicit reopening stage
+
+See [REOPENING.md](REOPENING.md) for root contract, three-record admission,
+original deadline intersection, failure/restart closure and real follow-up TLS
+activation. Earlier closed milestones below retain their narrower stage scope.
+Current unit evidence is admission-units.json/html (111 Linux tests). The new
+reopening matrix has 26 formal-service VM cases, including real follow-up
+activation and fatal-exit executor cleanup. Earlier unit reports are historical.
+
+Current fixed-source validation: 111 Linux unit tests, 26 reopening VM cases and
+121 VM regressions (release 26, opening 20, reconciliation 19, certificate 17,
+storage verification 15, gate 10, storage faults 14). The opening readiness
+mutation is a separate expected-failure control, not another passing scenario.
+All nine current JSON/HTML pairs have identical rendered payloads, exact current
+source hashes and passing cleanup checks. No earlier failed/source-changed
+attempt is counted; archived attempts remain available. This is bounded isolated
+Linux VM/process evidence, not installed deployment or machine-reboot qualification.
+
 # Results and provenance
 
-## Current fresh release-preparation milestone
+## Earlier closed release-preparation milestone
 
 See [RELEASE_PREPARATION.md](RELEASE_PREPARATION.md) for the source/release deadline
 intersection, fresh verification, paired receipt and actual storage-fault points.
-Admission remains closed. Current unit evidence is release-units.json/html;
-opening-units and earlier unit records retain their historical sources.
+That preparation operation remains closed; the separate reopening stage above
+can grant admission. release-units/opening-units retain their historical sources.
 
 ## Closed opening-intention milestone
 
 See [OPENING_INTENT.md](OPENING_INTENT.md) for persistent intentions, exact
 Gate/journal/DEGRADED pairing and the shared admission guard. This stage never
-releases updates. Previous unit records are historical; current unit evidence
-is opening-units.json/html. The follow-up review adds a final original-budget
+releases updates. opening-units.json/html is the historical unit record for
+that stage. The follow-up review adds a final original-budget
 check to readiness, an exact crossing-response test and a formal-service mutation
 control that must detect removal of that check.
 

@@ -66,7 +66,7 @@ formal writer lock. No new Nginx selection or reload is performed here:
 Existing terminal results, including DEGRADED, remain byte-for-byte unchanged.
 The receipt records which DEGRADED IDs were considered, without rewriting their
 historical outcomes. Changing the normal admission policy to interpret those
-resolutions belongs to the future explicit reopening milestone. A health reset is
+resolutions belongs to the separate explicit reopening milestone in REOPENING.md. A health reset is
 not a global permission to ignore DEGRADED requests or the gate.
 
 The process owns no release method: execution.json stays VERIFIED_CLOSED with the
@@ -152,7 +152,8 @@ and 19 closed journal-preparation VM fixtures. The separate certificate (17),
 storage-verification (15), gate (10) and storage (14) matrices retain their own
 scope and reports; they are regressions, not additional preparation scenarios.
 The 66-unit certificate-stage record is historical rather than current-source
-qualification. Current unit results are preparation-units.json/html.
+qualification. preparation-units.json/html records that stage; current unit
+qualification is admission-units.json/html, described in REOPENING.md.
 
 ## Review findings and retained attempts
 
@@ -193,9 +194,9 @@ not substitutes for operation-result validation.
 
 ## Remaining limits
 
-No actual admission reopening is implemented. The current normal admission policy
-still rejects retained DEGRADED history; future reopening must use an explicit
-paired handoff rather than bypass that check. Package/systemd lifecycle, actual
+This preparation operation never reopens admission. The separate
+[explicit reopening stage](REOPENING.md) now uses a paired handoff and exact
+DEGRADED-history references; it does not rewrite terminal outcomes. Package/systemd lifecycle, actual
 VM reboot, power loss, physical-media corruption, general COMMIT I/O/fsync failure
 recovery, D-state cleanup and zero downtime remain unqualified. Linux process
 restart evidence does not qualify macOS runtime or machine reboot. Budgets use

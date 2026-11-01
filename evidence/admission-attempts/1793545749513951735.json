@@ -1,0 +1,4648 @@
+{
+  "passed": true,
+  "status": "completed",
+  "cases": [
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21036 kB",
+        "VmRSS": "21036 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22704 kB",
+        "VmRSS": "22704 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-success",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "e2aa21cb284a6bea343bc1be657bd03c46eb98f9b97fe117fcd69a2b16c0a219",
+            "after_digest": "ae3e8c98d8b8fc0aa3c8874eff9814c648e3005a226078b99edfd07421a397a5",
+            "closed_gate": {
+              "gate_epoch": "c6861ceee1614f14b3ff7e5a71b83037",
+              "gate_revision": 8
+            },
+            "committed": "c641b451d76146e99292d76fff8fdc36",
+            "fingerprint": "5e6b94b695115d74267d41d5ee66f4751c1040652e9958938caf0b0f24178f15",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "1be40d458bf392f710f1f20b0da4a88063f2f0fff64f1c488cfe54c2619d8c52",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "c641b451d76146e99292d76fff8fdc36",
+            "fingerprint": "5e6b94b695115d74267d41d5ee66f4751c1040652e9958938caf0b0f24178f15",
+            "receipt_digest": "50dac3278f9127b7f80163ea43927f86cf3449cda33673e4cb4d709b7c9dee74",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "success",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21728 kB",
+            "VmRSS": "21728 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "21164 kB",
+            "VmRSS": "21164 kB"
+          },
+          "real_update_committed": true,
+          "new_leaf_observed_over_fresh_tls": true,
+          "terminal_degraded_history_unchanged": true,
+          "terminal": "OPENED",
+          "terminal_result": {
+            "storage_verified": true,
+            "tls_confirmed": true,
+            "committed": "c641b451d76146e99292d76fff8fdc36",
+            "fingerprint": "5e6b94b695115d74267d41d5ee66f4751c1040652e9958938caf0b0f24178f15",
+            "admission_digest": "48f031fc648e7776586e7808436f128434900318a7de255b6c3cadec15cad23c",
+            "opened_gate": {
+              "gate_epoch": "c6861ceee1614f14b3ff7e5a71b83037",
+              "gate_revision": 9
+            },
+            "updates_enabled": true
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21824 kB",
+            "VmRSS": "21824 kB"
+          },
+          "seconds": 1.3297110810000277
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "c641b451d76146e99292d76fff8fdc36",
+          "fingerprint": "5e6b94b695115d74267d41d5ee66f4751c1040652e9958938caf0b0f24178f15",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "c6861ceee1614f14b3ff7e5a71b83037",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": true
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 7,
+      "elapsed_seconds": 6.101264531999959
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21052 kB",
+        "VmRSS": "21052 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22704 kB",
+        "VmRSS": "22704 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-reply-lost",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "b64c9722d0ad004f70d030d33c0cd34f141c50fe11bb6b0bbc92d4a849844dc2",
+            "after_digest": "8a8217e7ca1f575bab739f01253f2c3bfa86614de20061fed4d7ae9d6f94483e",
+            "closed_gate": {
+              "gate_epoch": "5f67ae767c13494a93693e91db361697",
+              "gate_revision": 8
+            },
+            "committed": "19f12c1b11d24d8cb3166da014618e74",
+            "fingerprint": "5af8c4fa1236042414b3adf18755dad711d30891db10e38b967bbd4e6239ba74",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "030e160557e9f2730d2e0b6641e5db95773d877a8a74d4b825dc6351eaa477d5",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "19f12c1b11d24d8cb3166da014618e74",
+            "fingerprint": "5af8c4fa1236042414b3adf18755dad711d30891db10e38b967bbd4e6239ba74",
+            "receipt_digest": "0d69d62139baf56f56647a8c86544b95c7ad04966dfb2a7318124c99d6b540ba",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "reply-lost",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21696 kB",
+            "VmRSS": "21696 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "21180 kB",
+            "VmRSS": "21180 kB"
+          },
+          "real_update_committed": true,
+          "new_leaf_observed_over_fresh_tls": true,
+          "terminal_degraded_history_unchanged": true,
+          "terminal": "OPENED",
+          "terminal_result": {
+            "storage_verified": true,
+            "tls_confirmed": true,
+            "committed": "19f12c1b11d24d8cb3166da014618e74",
+            "fingerprint": "5af8c4fa1236042414b3adf18755dad711d30891db10e38b967bbd4e6239ba74",
+            "admission_digest": "4fb5f8b6bbcebe1e569086c774ef83c0c056934ab616619c1b74e4c78177eacd",
+            "opened_gate": {
+              "gate_epoch": "5f67ae767c13494a93693e91db361697",
+              "gate_revision": 9
+            },
+            "updates_enabled": true
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "22016 kB",
+            "VmRSS": "21792 kB"
+          },
+          "seconds": 1.4195777400000225
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "19f12c1b11d24d8cb3166da014618e74",
+          "fingerprint": "5af8c4fa1236042414b3adf18755dad711d30891db10e38b967bbd4e6239ba74",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "5f67ae767c13494a93693e91db361697",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": true
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 7,
+      "elapsed_seconds": 6.092800400999977
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21056 kB",
+        "VmRSS": "21056 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22708 kB",
+        "VmRSS": "22708 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-restart-completed",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "2f8549aec6d5b300b3c50bf9c03d64db7aa4aa321e4b47e3637f99ecfd44acc3",
+            "after_digest": "df64a0f561c540cbcda61a0481c79760d2539be5e03076e16f59907da1e2effd",
+            "closed_gate": {
+              "gate_epoch": "1772de0689aa4b8fbc3272b5696d8a00",
+              "gate_revision": 8
+            },
+            "committed": "46a40b39d2cd4e788481395a12b7fa27",
+            "fingerprint": "3e632c3d2f3a5cdd45d7ca826eb09b3ad3db81365da6c666697065ae4f7476ce",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "f9c851676bdb1bc72e5a55725caa6b7f5733a623f93445924493f370d8b5cd7e",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "46a40b39d2cd4e788481395a12b7fa27",
+            "fingerprint": "3e632c3d2f3a5cdd45d7ca826eb09b3ad3db81365da6c666697065ae4f7476ce",
+            "receipt_digest": "1360fef70fce483b31277e54e6f0473ad31e72565e2221f5b7731737ba4a893e",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "restart-completed",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21700 kB",
+            "VmRSS": "21700 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "21180 kB",
+            "VmRSS": "21180 kB"
+          },
+          "real_update_committed": true,
+          "new_leaf_observed_over_fresh_tls": true,
+          "terminal_degraded_history_unchanged": true,
+          "normal_stop_restart_requires_recovery_again": true,
+          "terminal": "OPENED",
+          "terminal_result": {
+            "storage_verified": true,
+            "tls_confirmed": true,
+            "committed": "46a40b39d2cd4e788481395a12b7fa27",
+            "fingerprint": "3e632c3d2f3a5cdd45d7ca826eb09b3ad3db81365da6c666697065ae4f7476ce",
+            "admission_digest": "18c4c3a83cf265069a86c1baddc77fd371783e6a8582d27cab86d23f104f946c",
+            "opened_gate": {
+              "gate_epoch": "1772de0689aa4b8fbc3272b5696d8a00",
+              "gate_revision": 9
+            },
+            "updates_enabled": true
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21304 kB",
+            "VmRSS": "21304 kB"
+          },
+          "seconds": 1.6257327559999908
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "46a40b39d2cd4e788481395a12b7fa27",
+          "fingerprint": "3e632c3d2f3a5cdd45d7ca826eb09b3ad3db81365da6c666697065ae4f7476ce",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "1772de0689aa4b8fbc3272b5696d8a00",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 7,
+      "elapsed_seconds": 6.382041790000017
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21060 kB",
+        "VmRSS": "21060 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22700 kB",
+        "VmRSS": "22700 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-expired-own",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "6ce493fdb5a1010eb4278f835aaeac0c5af94842bc6f43c906244278fe73aaff",
+            "after_digest": "a35732e2b1c6c5428157e18feabf5d7e43c394272494e91e25110a6694044e03",
+            "closed_gate": {
+              "gate_epoch": "09d87b7c56eb49ffae1e526ecc08e2b4",
+              "gate_revision": 8
+            },
+            "committed": "6e45625b0a204445b18451db071658ce",
+            "fingerprint": "11eafb6c2f524b58c8e2a399821a75d98bc253f48b382cf05afc2c6ecccff5a3",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "b8f949624360c26658ef4c2217f1e795de693fab5f9f01eeb4328f7900439d2d",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "6e45625b0a204445b18451db071658ce",
+            "fingerprint": "11eafb6c2f524b58c8e2a399821a75d98bc253f48b382cf05afc2c6ecccff5a3",
+            "receipt_digest": "1f2ed86020f96fa17f4464376baff152e930ad1be9832b774c492c91eb34f5c2",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "expired-own",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21692 kB",
+            "VmRSS": "21692 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "22384 kB",
+            "VmRSS": "22384 kB"
+          },
+          "terminal": "EXPIRED",
+          "terminal_result": {
+            "updates_enabled": false,
+            "journal_commit_observed": true,
+            "failure_stage": "result_publication",
+            "error": "Expired",
+            "reason": "admission_or_source_expired",
+            "errno": null,
+            "sqlite_error": null
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21688 kB",
+            "VmRSS": "21688 kB"
+          },
+          "seconds": 1.1016871080000215
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "6e45625b0a204445b18451db071658ce",
+          "fingerprint": "11eafb6c2f524b58c8e2a399821a75d98bc253f48b382cf05afc2c6ecccff5a3",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "09d87b7c56eb49ffae1e526ecc08e2b4",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 6.013077898000006
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21052 kB",
+        "VmRSS": "21052 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22708 kB",
+        "VmRSS": "22708 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-expired-source",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "eef5b03eb0ff087accc60085e4b44590d781abe998cb01bd585a6db6b0104d6f",
+            "after_digest": "e2fd5257d2150f2deba2eed070d4407429bbed4ac631376b81d0b492480494c4",
+            "closed_gate": {
+              "gate_epoch": "72e70454843e47bdbc5f0db0fe2fb48e",
+              "gate_revision": 8
+            },
+            "committed": "14d2129e197b4434a9fe26caef3b866e",
+            "fingerprint": "45420cff85c207777a21f248dcae38bbde0403fc47c1103abea03f48712bf10c",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "013fb4fc8b97d0035be47a7859ee8402cc30b035ff600bd1d5facccd9919ef26",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "14d2129e197b4434a9fe26caef3b866e",
+            "fingerprint": "45420cff85c207777a21f248dcae38bbde0403fc47c1103abea03f48712bf10c",
+            "receipt_digest": "76c8ddf9d5e533ceb509284e4749e419fc3ce4a320e408cf263a00f0eede1ba6",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "expired-source",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21692 kB",
+            "VmRSS": "21692 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "22396 kB",
+            "VmRSS": "22396 kB"
+          },
+          "terminal": "EXPIRED",
+          "terminal_result": {
+            "updates_enabled": false,
+            "journal_commit_observed": true,
+            "failure_stage": "result_publication",
+            "error": "Expired",
+            "reason": "admission_or_source_expired",
+            "errno": null,
+            "sqlite_error": null
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21688 kB",
+            "VmRSS": "21688 kB"
+          },
+          "seconds": 9.315210245999992
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "14d2129e197b4434a9fe26caef3b866e",
+          "fingerprint": "45420cff85c207777a21f248dcae38bbde0403fc47c1103abea03f48712bf10c",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "72e70454843e47bdbc5f0db0fe2fb48e",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 13.974778086000015
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21056 kB",
+        "VmRSS": "21056 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22704 kB",
+        "VmRSS": "22704 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-expired-release",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "039f4d93f87a6ae6744cc7bfcf937b4463311028b422609e4ff1dd3cd41cc9d1",
+            "after_digest": "8c1ee38734590112c3290f39c4615a73a7f24f5d7da113e988059b52842f53c7",
+            "closed_gate": {
+              "gate_epoch": "9b7c291bff224910a9ffa1b08413fe8a",
+              "gate_revision": 8
+            },
+            "committed": "4a18476501454784ae9fb530c69935f1",
+            "fingerprint": "b238a9b91239cc9acae891a698dbf98935c9e470dc2efe11f4c9d3ea43299d0b",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "06f7fc3b4692957eee8a56a413d5dc762da03f6f09ac56b4b4f4cf9c1c6f2ec6",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "4a18476501454784ae9fb530c69935f1",
+            "fingerprint": "b238a9b91239cc9acae891a698dbf98935c9e470dc2efe11f4c9d3ea43299d0b",
+            "receipt_digest": "f7f2d6dde01bb5af7645f94a8b39e3b5ffce57a88898c4c63edfb6d3e0ff7d24",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "expired-release",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21696 kB",
+            "VmRSS": "21696 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "22312 kB",
+            "VmRSS": "22312 kB"
+          },
+          "terminal": "EXPIRED",
+          "terminal_result": {
+            "updates_enabled": false,
+            "journal_commit_observed": true,
+            "failure_stage": "journal_publication",
+            "error": "Expired",
+            "reason": "admission_or_source_expired",
+            "errno": null,
+            "sqlite_error": null
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21692 kB",
+            "VmRSS": "21692 kB"
+          },
+          "seconds": 2.5315629369999897
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "4a18476501454784ae9fb530c69935f1",
+          "fingerprint": "b238a9b91239cc9acae891a698dbf98935c9e470dc2efe11f4c9d3ea43299d0b",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "9b7c291bff224910a9ffa1b08413fe8a",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 7.1083151309999835
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21052 kB",
+        "VmRSS": "21052 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22700 kB",
+        "VmRSS": "22700 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-expired-completed",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "4b88f24087079544c36a22dbe30ffeda0e3376673056bc64776d3a6df1452a99",
+            "after_digest": "1727aa9cf3a4e3209753e8c1e79a7b3f5c6c8f309d8d7ca618f1aeb7c8097c8b",
+            "closed_gate": {
+              "gate_epoch": "e1ef412526734a71ae06cb10dcdf9eed",
+              "gate_revision": 8
+            },
+            "committed": "bd151b9ad2364d1ca78ecd34650761b8",
+            "fingerprint": "cefd5999deb62c18ce75e33d5e32c86309a9d096aa7f9d41b49544e029d42981",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "fe9c13f784467c344dadeec664d174250d72f00ec90afa8bd4687d6e81bf5ded",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "bd151b9ad2364d1ca78ecd34650761b8",
+            "fingerprint": "cefd5999deb62c18ce75e33d5e32c86309a9d096aa7f9d41b49544e029d42981",
+            "receipt_digest": "7c690c35a56ad9c6d8139c659e0dcc856ed5cfd7774341c88f67212fa7e87e61",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "expired-completed",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21684 kB",
+            "VmRSS": "21684 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "22316 kB",
+            "VmRSS": "22316 kB"
+          },
+          "historical_root_commit_not_current_permission": true,
+          "terminal": "OPENED",
+          "terminal_result": {
+            "storage_verified": true,
+            "tls_confirmed": true,
+            "committed": "bd151b9ad2364d1ca78ecd34650761b8",
+            "fingerprint": "cefd5999deb62c18ce75e33d5e32c86309a9d096aa7f9d41b49544e029d42981",
+            "admission_digest": "8bf83a21a09bafb5e9465a6793e086a5e13d06773d55efba6d21dbd389e8f9fd",
+            "opened_gate": {
+              "gate_epoch": "e1ef412526734a71ae06cb10dcdf9eed",
+              "gate_revision": 9
+            },
+            "updates_enabled": true
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21812 kB",
+            "VmRSS": "21812 kB"
+          },
+          "seconds": 1.0814223599999764
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "bd151b9ad2364d1ca78ecd34650761b8",
+          "fingerprint": "cefd5999deb62c18ce75e33d5e32c86309a9d096aa7f9d41b49544e029d42981",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "e1ef412526734a71ae06cb10dcdf9eed",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 5.781282041999987
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21052 kB",
+        "VmRSS": "21052 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22704 kB",
+        "VmRSS": "22704 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-crash-main",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "6447b72bfcf7770abab1368011aaedd71e49ce346d5d6aa0a5a69dc7aaf83a95",
+            "after_digest": "9fd06582fd221bc65237438f14b9a0c3c87d5fc7e1de79813e004645404b18f7",
+            "closed_gate": {
+              "gate_epoch": "92637dbb88ea498ea786221c331839de",
+              "gate_revision": 8
+            },
+            "committed": "08c78a6e494240d682e50fa9a5be6b1b",
+            "fingerprint": "1805f7db281541744460b71737093ea4ee015b78acd3d88d13140ff4031584bc",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "1a1c4090031b0175d1b72b822052a4c5778517543b7777ba1699db307779282a",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "08c78a6e494240d682e50fa9a5be6b1b",
+            "fingerprint": "1805f7db281541744460b71737093ea4ee015b78acd3d88d13140ff4031584bc",
+            "receipt_digest": "a8213118cfa1272612e371f76d268ae7f57b742951c6f4009b3f4b26d638d714",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "crash-main",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21688 kB",
+            "VmRSS": "21688 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "22304 kB",
+            "VmRSS": "22304 kB"
+          },
+          "incomplete_pair_not_permission": true,
+          "pending_or_terminal_observed_before_kill": true,
+          "old_executor_fences_takeover": true,
+          "restart_never_replays": true,
+          "terminal": "INTERRUPTED",
+          "terminal_result": {
+            "replayed": false,
+            "storage_verified": false,
+            "updates_enabled": false,
+            "restored": false
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21300 kB",
+            "VmRSS": "21300 kB"
+          },
+          "seconds": 0.6028210569999715
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "08c78a6e494240d682e50fa9a5be6b1b",
+          "fingerprint": "1805f7db281541744460b71737093ea4ee015b78acd3d88d13140ff4031584bc",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "92637dbb88ea498ea786221c331839de",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 5.341130011000018
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21056 kB",
+        "VmRSS": "21056 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22704 kB",
+        "VmRSS": "22704 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-crash-gate",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "39cee7c5ca5e4562451c552c5e3937b124ccee0e31463aba40aabdf5722bff8f",
+            "after_digest": "3343fcb1f79bd2d0b430d810d022a8978948807fb52b7c1632d6ec7a36ff67e2",
+            "closed_gate": {
+              "gate_epoch": "09c72bf7437048d0a98a3279024604ea",
+              "gate_revision": 8
+            },
+            "committed": "acbb266a4cbd4fccb95473749fb06f1f",
+            "fingerprint": "73b2e127fc2f32c1dea29bfc5726fb30e1f41b36694278ab0dc352c09403a475",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "78f06be90c8def2cadcedd0a9860c1bd0481b53c8d9b335144d131c132bb1536",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "acbb266a4cbd4fccb95473749fb06f1f",
+            "fingerprint": "73b2e127fc2f32c1dea29bfc5726fb30e1f41b36694278ab0dc352c09403a475",
+            "receipt_digest": "84f3392a341b3dabca58602ff6d615f46d76bc3052152112705cd3faee98b9e3",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "crash-gate",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21700 kB",
+            "VmRSS": "21700 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "22348 kB",
+            "VmRSS": "22348 kB"
+          },
+          "incomplete_pair_not_permission": true,
+          "pending_or_terminal_observed_before_kill": true,
+          "old_executor_fences_takeover": true,
+          "restart_never_replays": true,
+          "terminal": "INTERRUPTED",
+          "terminal_result": {
+            "replayed": false,
+            "storage_verified": false,
+            "updates_enabled": false,
+            "restored": false
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21296 kB",
+            "VmRSS": "21296 kB"
+          },
+          "seconds": 0.6064684469999975
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "acbb266a4cbd4fccb95473749fb06f1f",
+          "fingerprint": "73b2e127fc2f32c1dea29bfc5726fb30e1f41b36694278ab0dc352c09403a475",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "09c72bf7437048d0a98a3279024604ea",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 5.415238138999996
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21056 kB",
+        "VmRSS": "21056 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22704 kB",
+        "VmRSS": "22704 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-crash-result",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "fed4c867a2fefc1b0c333800f3593c98fe7d2a569be28a61114312f4dcfaff31",
+            "after_digest": "fea626ab20a9918914e4f2fd06ffc8fec3d37f7f41325a3522cab9a8377437ee",
+            "closed_gate": {
+              "gate_epoch": "ece94acd3527433e90a9e1a81be7f6d4",
+              "gate_revision": 8
+            },
+            "committed": "f09c6088648b402e935b1473ddc73fa9",
+            "fingerprint": "ad5111979f6a39fb9cd2de3463e80eb8f74e1bcc897a7c1f324adadf11d6b52a",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "f960c9e2ee46cf89baab3d38b6669613cfa364ee303320a5990def142569c87f",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "f09c6088648b402e935b1473ddc73fa9",
+            "fingerprint": "ad5111979f6a39fb9cd2de3463e80eb8f74e1bcc897a7c1f324adadf11d6b52a",
+            "receipt_digest": "0c6b4ae10318e581b4559917534568d9b0261978eab94061f4f1450ab8789871",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "crash-result",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21692 kB",
+            "VmRSS": "21692 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "22396 kB",
+            "VmRSS": "22396 kB"
+          },
+          "incomplete_pair_not_permission": true,
+          "pending_or_terminal_observed_before_kill": true,
+          "old_executor_fences_takeover": true,
+          "restart_never_replays": true,
+          "terminal": "INTERRUPTED",
+          "terminal_result": {
+            "replayed": false,
+            "storage_verified": false,
+            "updates_enabled": false,
+            "restored": false
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21300 kB",
+            "VmRSS": "21300 kB"
+          },
+          "seconds": 0.5983172140000192
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "f09c6088648b402e935b1473ddc73fa9",
+          "fingerprint": "ad5111979f6a39fb9cd2de3463e80eb8f74e1bcc897a7c1f324adadf11d6b52a",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "ece94acd3527433e90a9e1a81be7f6d4",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 5.294174601000009
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21084 kB",
+        "VmRSS": "21084 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22704 kB",
+        "VmRSS": "22704 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-crash-completed",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "37f910b961c8fae7e96b72f0306469054b7de1c94c483daee0c9d65d39ea14d1",
+            "after_digest": "6cd66dbbbc22f9600424f545a80dc93307ed3adef385bbca0c9a8c10888b1751",
+            "closed_gate": {
+              "gate_epoch": "1223fb6e82dd4c379d3af1ed757676f1",
+              "gate_revision": 8
+            },
+            "committed": "a4ca663c0c5d4977a1bf459e09631f34",
+            "fingerprint": "288ec8ae2a9704ff69c62dfb71572247a4766496533ce3a0e11fde5ef10d1adf",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "731e15cda73ac94f7689c9ceddb4aa229671246c3d7bfd88ca86b5862a28e0e1",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "a4ca663c0c5d4977a1bf459e09631f34",
+            "fingerprint": "288ec8ae2a9704ff69c62dfb71572247a4766496533ce3a0e11fde5ef10d1adf",
+            "receipt_digest": "b6b5226ee0fe1d7fca9eb1dba8a666f733d1c14f8525e1ac894d3a086aadee30",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "crash-completed",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21696 kB",
+            "VmRSS": "21696 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "22304 kB",
+            "VmRSS": "22304 kB"
+          },
+          "pending_or_terminal_observed_before_kill": true,
+          "old_executor_fences_takeover": true,
+          "restart_never_replays": true,
+          "terminal": "OPENED",
+          "terminal_result": {
+            "storage_verified": true,
+            "tls_confirmed": true,
+            "committed": "a4ca663c0c5d4977a1bf459e09631f34",
+            "fingerprint": "288ec8ae2a9704ff69c62dfb71572247a4766496533ce3a0e11fde5ef10d1adf",
+            "admission_digest": "52ea9978790ccbb3c15dc513371a638f1bf2f1c7ceddb14cd5331a9395d28738",
+            "opened_gate": {
+              "gate_epoch": "1223fb6e82dd4c379d3af1ed757676f1",
+              "gate_revision": 9
+            },
+            "updates_enabled": true
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21304 kB",
+            "VmRSS": "21304 kB"
+          },
+          "seconds": 0.6534623460000262
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "a4ca663c0c5d4977a1bf459e09631f34",
+          "fingerprint": "288ec8ae2a9704ff69c62dfb71572247a4766496533ce3a0e11fde5ef10d1adf",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "1223fb6e82dd4c379d3af1ed757676f1",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 5.5487465619999625
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21056 kB",
+        "VmRSS": "21056 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22708 kB",
+        "VmRSS": "22708 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-stale-main",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "014a2bae867d8403a02dffcb4a3904c0d56a9b3c1c1b03c364cfdba608cca7e2",
+            "after_digest": "4fa987d0d1edbf6035700b07c2a165f7d30d0da7f17bdaa13b177ffac4b88dc9",
+            "closed_gate": {
+              "gate_epoch": "d351ca33b56c4261ac363b44c5590069",
+              "gate_revision": 8
+            },
+            "committed": "409847ab9ccc4f47bb9cd20bc1d5cac1",
+            "fingerprint": "0099fcc8bd62ae20f22f7001ccfb7ae77f55d384fe09f17689c41f4767ee43df",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "23316c47766ae5997b4623a481882bf6e0d7c192c63565ae54736fe4b20eb39c",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "409847ab9ccc4f47bb9cd20bc1d5cac1",
+            "fingerprint": "0099fcc8bd62ae20f22f7001ccfb7ae77f55d384fe09f17689c41f4767ee43df",
+            "receipt_digest": "e9f86633babb84dc76333d21e7d031b4b539f03aa40b38aa734b5d5dcab9413c",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "stale-main",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21700 kB",
+            "VmRSS": "21700 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "22308 kB",
+            "VmRSS": "22308 kB"
+          },
+          "terminal": "FAILED",
+          "terminal_result": {
+            "updates_enabled": false,
+            "journal_commit_observed": true,
+            "failure_stage": "journal_publication",
+            "error": "Rejected",
+            "reason": "stale_gate_authority",
+            "errno": null,
+            "sqlite_error": null
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21692 kB",
+            "VmRSS": "21692 kB"
+          },
+          "seconds": 0.5033439540000018
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "409847ab9ccc4f47bb9cd20bc1d5cac1",
+          "fingerprint": "0099fcc8bd62ae20f22f7001ccfb7ae77f55d384fe09f17689c41f4767ee43df",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "d351ca33b56c4261ac363b44c5590069",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 5.178599372999997
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21044 kB",
+        "VmRSS": "21044 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22704 kB",
+        "VmRSS": "22704 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-stale-gate",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "f99bea42f54d30081adfa78d17e2817e5e1b32d0e657d455bdf434424d0807cd",
+            "after_digest": "bc9ea22e2112729ae8a1d0ea2e77adccbf891eff4bf5d2b5af82a0c14ae90dbc",
+            "closed_gate": {
+              "gate_epoch": "5e247190f7414c408f0dcb1bec1eb477",
+              "gate_revision": 8
+            },
+            "committed": "9b99ed65fe554b36ac3cbf2a5ebb9d81",
+            "fingerprint": "e6e014b523e6865e8aa708fe7c00ac01448f75c5b5e7f3361caa0f46dc2a0242",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "3504231f5dac9bf7bc53cf6634503cef246f24be5af25fd35332cf9af02cd193",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "9b99ed65fe554b36ac3cbf2a5ebb9d81",
+            "fingerprint": "e6e014b523e6865e8aa708fe7c00ac01448f75c5b5e7f3361caa0f46dc2a0242",
+            "receipt_digest": "a1348104818adc18a114b549c5557b06204b0ba5f0115eb007f9c36f7dce9619",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "stale-gate",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21696 kB",
+            "VmRSS": "21696 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "22348 kB",
+            "VmRSS": "22348 kB"
+          },
+          "terminal": "FAILED",
+          "terminal_result": {
+            "updates_enabled": false,
+            "journal_commit_observed": true,
+            "failure_stage": "gate_publication",
+            "error": "Rejected",
+            "reason": "stale_gate_authority",
+            "errno": null,
+            "sqlite_error": null
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21692 kB",
+            "VmRSS": "21692 kB"
+          },
+          "seconds": 0.477158572999997
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "9b99ed65fe554b36ac3cbf2a5ebb9d81",
+          "fingerprint": "e6e014b523e6865e8aa708fe7c00ac01448f75c5b5e7f3361caa0f46dc2a0242",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "5e247190f7414c408f0dcb1bec1eb477",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 5.08131833799996
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21052 kB",
+        "VmRSS": "21052 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22708 kB",
+        "VmRSS": "22708 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-stale-result",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "d0108256263530c9fdf092b7d444140bed1a613d09240fa5c98b47b7189fe8b0",
+            "after_digest": "362b5b3de515d1d377edc3b97d78e4fc0051379fc48291384ad1e099bbd609c1",
+            "closed_gate": {
+              "gate_epoch": "6d9ed65a327f401f86ebbb508f82cf93",
+              "gate_revision": 8
+            },
+            "committed": "161e768760dc414594a41ef23cf43782",
+            "fingerprint": "0f5d827eb79e8eb951253cc69427f95cabfdcb791c631dc4c1f1bfd880301321",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "26d13da8e8ba20e5a264c05246ab147b908884f821215471264a4e8e1bf83c89",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "161e768760dc414594a41ef23cf43782",
+            "fingerprint": "0f5d827eb79e8eb951253cc69427f95cabfdcb791c631dc4c1f1bfd880301321",
+            "receipt_digest": "e7b5655c60bba9acc4e8bd26e434cedfae55989a732e9bbb5aba0ec25be0ca17",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "stale-result",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21680 kB",
+            "VmRSS": "21680 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "22392 kB",
+            "VmRSS": "22392 kB"
+          },
+          "terminal": "FAILED",
+          "terminal_result": {
+            "updates_enabled": false,
+            "journal_commit_observed": true,
+            "failure_stage": "result_publication",
+            "error": "Rejected",
+            "reason": "stale_gate_authority",
+            "errno": null,
+            "sqlite_error": null
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21676 kB",
+            "VmRSS": "21676 kB"
+          },
+          "seconds": 0.5209050700000262
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "161e768760dc414594a41ef23cf43782",
+          "fingerprint": "0f5d827eb79e8eb951253cc69427f95cabfdcb791c631dc4c1f1bfd880301321",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "6d9ed65a327f401f86ebbb508f82cf93",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 5.310920361000058
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21052 kB",
+        "VmRSS": "21052 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22708 kB",
+        "VmRSS": "22708 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-newer-record",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "9c8a48cf0a839eb6f78667c96b8bb287128261999986615e27185cfedf7b0fe6",
+            "after_digest": "be9d246ab43dda13f1e4d3abd530dd9a93c0e162c893d005bedf80a1b03c5452",
+            "closed_gate": {
+              "gate_epoch": "20ee52e1a8c74e338785673ba26efd90",
+              "gate_revision": 8
+            },
+            "committed": "908edd0b3c904d6a84f56aeaaccebc28",
+            "fingerprint": "c340751066a39fde5144e26b8fddbb36828d271bd559c725b0e4d3ebeff87c03",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "d19995138a9808b7960f2893560afba0db548a7d4d28d7f72a013aad14d7c370",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "908edd0b3c904d6a84f56aeaaccebc28",
+            "fingerprint": "c340751066a39fde5144e26b8fddbb36828d271bd559c725b0e4d3ebeff87c03",
+            "receipt_digest": "fa3039f2b8740841668348f9f48d0742ae8d01c6e477e177822afbaa2bd8d2d1",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "newer-record",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21684 kB",
+            "VmRSS": "21684 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "22336 kB",
+            "VmRSS": "22336 kB"
+          },
+          "incomplete_pair_not_permission": true,
+          "terminal": "FAILED",
+          "terminal_result": {
+            "updates_enabled": false,
+            "journal_commit_observed": true,
+            "failure_stage": "result_publication",
+            "error": "Rejected",
+            "reason": "stale_admission_record",
+            "errno": null,
+            "sqlite_error": null
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21680 kB",
+            "VmRSS": "21680 kB"
+          },
+          "seconds": 0.5309544940000706
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "908edd0b3c904d6a84f56aeaaccebc28",
+          "fingerprint": "c340751066a39fde5144e26b8fddbb36828d271bd559c725b0e4d3ebeff87c03",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "20ee52e1a8c74e338785673ba26efd90",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 5.299176380999938
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21052 kB",
+        "VmRSS": "21052 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22700 kB",
+        "VmRSS": "22700 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-degraded-changed",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "5d6b01454beb6c56fbe9b4df17480fd37adbbf42f262b876475738bdd205fd51",
+            "after_digest": "76f2c6d60605f5ec14db792db26c4ca4db0efcb5a0c1235fddfc8e285144ebb2",
+            "closed_gate": {
+              "gate_epoch": "ed947b48a94646d6bde876f3e6a0cd8b",
+              "gate_revision": 8
+            },
+            "committed": "8a18699e08984582babe9427d46a89d4",
+            "fingerprint": "9526fdb41d1494736dccbbf5c2f8bbd3d6814efae8edf75b1110f969138ab966",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "9383ec62af84371119b666c0d4d2e9098eb59679b5d4c610452d74821e7c9c4d",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "8a18699e08984582babe9427d46a89d4",
+            "fingerprint": "9526fdb41d1494736dccbbf5c2f8bbd3d6814efae8edf75b1110f969138ab966",
+            "receipt_digest": "be0a4dbaec38a54fe1613554d4f6279aeccea357b21508ce4930ca1a8b7c1935",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "degraded-changed",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21700 kB",
+            "VmRSS": "21700 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "21180 kB",
+            "VmRSS": "21180 kB"
+          },
+          "terminal": "FAILED",
+          "terminal_result": {
+            "updates_enabled": false,
+            "journal_commit_observed": false,
+            "failure_stage": "storage_validation",
+            "error": "Rejected",
+            "reason": "preparation_journal_drift",
+            "errno": null,
+            "sqlite_error": null
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21692 kB",
+            "VmRSS": "21692 kB"
+          },
+          "seconds": 0.09480744699999377
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "8a18699e08984582babe9427d46a89d4",
+          "fingerprint": "9526fdb41d1494736dccbbf5c2f8bbd3d6814efae8edf75b1110f969138ab966",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "ed947b48a94646d6bde876f3e6a0cd8b",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 4.784192536999967
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21056 kB",
+        "VmRSS": "21056 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22688 kB",
+        "VmRSS": "22688 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-wrong-leaf",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "82f29e4b199994ebdcf35491e710aa27f7b538dd0f664e3238074f9e9b34ca03",
+            "after_digest": "882f778dd0b9be0fe2b67c3234a159f52be3b4208ee09da043882ee31686d496",
+            "closed_gate": {
+              "gate_epoch": "7064d4eaa0e44c7a9ff54e5c649c8b09",
+              "gate_revision": 8
+            },
+            "committed": "44692413aeae483d90199c3767147313",
+            "fingerprint": "4c7cc34b6028bc4c42cde479c314172e6fdf83ffa8fc9d3d4b09b811fdaed3b9",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "55b346242028510f36accab117ca3952b2ad03775177759b14ec45c4e6a04184",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "44692413aeae483d90199c3767147313",
+            "fingerprint": "4c7cc34b6028bc4c42cde479c314172e6fdf83ffa8fc9d3d4b09b811fdaed3b9",
+            "receipt_digest": "a76df5b27a90882ecd6ec8dcf9b1ae74e63e8246b20664e6fde6e57ac3e9227a",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "wrong-leaf",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21696 kB",
+            "VmRSS": "21696 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "21180 kB",
+            "VmRSS": "21180 kB"
+          },
+          "terminal": "FAILED",
+          "terminal_result": {
+            "updates_enabled": false,
+            "journal_commit_observed": false,
+            "failure_stage": "tls_confirmation",
+            "error": "Rejected",
+            "reason": "confirmation_timeout",
+            "errno": null,
+            "sqlite_error": null
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21692 kB",
+            "VmRSS": "21692 kB"
+          },
+          "seconds": 5.258536791999973
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "44692413aeae483d90199c3767147313",
+          "fingerprint": "4c7cc34b6028bc4c42cde479c314172e6fdf83ffa8fc9d3d4b09b811fdaed3b9",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "7064d4eaa0e44c7a9ff54e5c649c8b09",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 9.89570462200004
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21056 kB",
+        "VmRSS": "21056 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22704 kB",
+        "VmRSS": "22704 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-bad-http",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "5009c0696039350d154413cd8f6c5718b20369e9e05e574e47366fae45debf3f",
+            "after_digest": "9ac371cb8d303ac6314bfbdadbdc8ceccb0f22a02b90546cbfb9e74487efe125",
+            "closed_gate": {
+              "gate_epoch": "b0a4839eaa0245ca9d3f5d643b4f1d36",
+              "gate_revision": 8
+            },
+            "committed": "a2410750192341139b973d7973422baa",
+            "fingerprint": "7e1deb10a6ac010bf933eced45f89407afd5cf88794628e2edcc4db43d772870",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "9026febf33eb2dabbd67ec561d74730d0419c712d723c5a93bb4d25643032d54",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "a2410750192341139b973d7973422baa",
+            "fingerprint": "7e1deb10a6ac010bf933eced45f89407afd5cf88794628e2edcc4db43d772870",
+            "receipt_digest": "7a46732395438119e1e99547e6de8f09c0c41e554b0fb07e8268f812fa30a754",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "bad-http",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21688 kB",
+            "VmRSS": "21688 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "21176 kB",
+            "VmRSS": "21176 kB"
+          },
+          "terminal": "FAILED",
+          "terminal_result": {
+            "updates_enabled": false,
+            "journal_commit_observed": false,
+            "failure_stage": "tls_confirmation",
+            "error": "Rejected",
+            "reason": "confirmation_timeout",
+            "errno": null,
+            "sqlite_error": null
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21680 kB",
+            "VmRSS": "21680 kB"
+          },
+          "seconds": 5.2360649450000665
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "a2410750192341139b973d7973422baa",
+          "fingerprint": "7e1deb10a6ac010bf933eced45f89407afd5cf88794628e2edcc4db43d772870",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "b0a4839eaa0245ca9d3f5d643b4f1d36",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 9.982853440999975
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21056 kB",
+        "VmRSS": "21056 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22704 kB",
+        "VmRSS": "22704 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-enospc-before",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "bccafacd7567d3ad4e557ee91408f7d0bfff12e717c10a23458f403c2c608f39",
+            "after_digest": "797c81f62ddd882e8fe0f206e6eb25dc707f7254ab983a96b831793a09d13b2b",
+            "closed_gate": {
+              "gate_epoch": "e7001087cd1a446c81eaf814ac97c81e",
+              "gate_revision": 8
+            },
+            "committed": "345dcbc1e4d641da85df44704a1efb8b",
+            "fingerprint": "6bc8bf2fbb70743c9dd3eaf32d02106773257561d205644b035d06c55a726b58",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "a214aa509d92509a911c2de2234e07a2b74c18e323ff0cc2aab038bafed25720",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "345dcbc1e4d641da85df44704a1efb8b",
+            "fingerprint": "6bc8bf2fbb70743c9dd3eaf32d02106773257561d205644b035d06c55a726b58",
+            "receipt_digest": "fdeefdab6f49947c53badb158cdf72e4d00343f6da48c2751aca4a454daa00e4",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "enospc-before",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21696 kB",
+            "VmRSS": "21696 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "21176 kB",
+            "VmRSS": "21176 kB"
+          },
+          "observed_errno": 28,
+          "unrecordable_fault_failstop": true,
+          "terminal": "INTERRUPTED",
+          "terminal_result": {
+            "replayed": false,
+            "storage_verified": false,
+            "updates_enabled": false,
+            "restored": false
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21300 kB",
+            "VmRSS": "21300 kB"
+          },
+          "seconds": 0.17125661000000036
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "345dcbc1e4d641da85df44704a1efb8b",
+          "fingerprint": "6bc8bf2fbb70743c9dd3eaf32d02106773257561d205644b035d06c55a726b58",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "e7001087cd1a446c81eaf814ac97c81e",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 4.915706559
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21056 kB",
+        "VmRSS": "21056 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22708 kB",
+        "VmRSS": "22708 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-readonly-before",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "45632cb656c559b9827dbace924d5bad3d22482685b3d91fb991eb020f27e49b",
+            "after_digest": "01e7ca0db6a58eb2a3ecb7424c2da36d4af3239e019546e81b6843a6dd67b28a",
+            "closed_gate": {
+              "gate_epoch": "8de2c1f317234c26a1a150a10c7b5cca",
+              "gate_revision": 8
+            },
+            "committed": "a6a4938162644572a4f88485221aa1ba",
+            "fingerprint": "ca20c324c80d9c05fa122374ded0359fbf7b62cb39718f1b9a9617016de1ca11",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "bdd658c8c21f98ec550c1ae2edc6ac0040fa11cbaba4663b933d1152ee16b946",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "a6a4938162644572a4f88485221aa1ba",
+            "fingerprint": "ca20c324c80d9c05fa122374ded0359fbf7b62cb39718f1b9a9617016de1ca11",
+            "receipt_digest": "2d673879c683e22b2e3aa9edb523e79fd3e03438aab8c2344d6e5ba33cc21750",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "readonly-before",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21688 kB",
+            "VmRSS": "21688 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "21180 kB",
+            "VmRSS": "21180 kB"
+          },
+          "observed_errno": 30,
+          "unrecordable_fault_failstop": true,
+          "terminal": "INTERRUPTED",
+          "terminal_result": {
+            "replayed": false,
+            "storage_verified": false,
+            "updates_enabled": false,
+            "restored": false
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21332 kB",
+            "VmRSS": "21332 kB"
+          },
+          "seconds": 0.12479250299998057
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "a6a4938162644572a4f88485221aa1ba",
+          "fingerprint": "ca20c324c80d9c05fa122374ded0359fbf7b62cb39718f1b9a9617016de1ca11",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "8de2c1f317234c26a1a150a10c7b5cca",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 4.777565506999963
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21052 kB",
+        "VmRSS": "21052 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22704 kB",
+        "VmRSS": "22704 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-sqlite-full-before",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "286b06dcf6b15db1ad2da3014255b65efc5cb5a9dac55ccbe2738d103a65c51e",
+            "after_digest": "9ad733cdc43b2818cb85f94a968adcc974cd699737cbcf79a8a5e5e27a7f4aef",
+            "closed_gate": {
+              "gate_epoch": "bac726543d1f4472856982be48919af2",
+              "gate_revision": 8
+            },
+            "committed": "6f059792c88e41008a83ab61eb8ab34a",
+            "fingerprint": "d65d7170a67c850db98f085fa06d33ce801399172d8ae93dfdc190e77dc40991",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "5c0018665f0c43edeea6fb8acaca5f7056a1400a6457b91149d875cbf632ef68",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "6f059792c88e41008a83ab61eb8ab34a",
+            "fingerprint": "d65d7170a67c850db98f085fa06d33ce801399172d8ae93dfdc190e77dc40991",
+            "receipt_digest": "2e46fffb2a74f34ad4556559997ba8e4b3a04a75f920aaf385104a16a845295d",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "sqlite-full-before",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21692 kB",
+            "VmRSS": "21692 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "21176 kB",
+            "VmRSS": "21176 kB"
+          },
+          "terminal": "FAILED",
+          "terminal_result": {
+            "updates_enabled": false,
+            "journal_commit_observed": false,
+            "failure_stage": "storage_validation",
+            "error": "OperationalError",
+            "reason": null,
+            "errno": null,
+            "sqlite_error": "SQLITE_FULL"
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21688 kB",
+            "VmRSS": "21688 kB"
+          },
+          "seconds": 0.10312102499995035
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "6f059792c88e41008a83ab61eb8ab34a",
+          "fingerprint": "d65d7170a67c850db98f085fa06d33ce801399172d8ae93dfdc190e77dc40991",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "bac726543d1f4472856982be48919af2",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 4.9733721420000165
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21056 kB",
+        "VmRSS": "21056 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22708 kB",
+        "VmRSS": "22708 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-sqlite-full-main",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "06a83184563855bd5838ef9f91ba40f6f5c2af4e1c66f0aceb31589ff2f7e3ba",
+            "after_digest": "2161ce924b4b13b409c63bcfd709904db23ce0328cefdded4a75f2f00ba59843",
+            "closed_gate": {
+              "gate_epoch": "0eacf7ea2c5c421eb181d0a59099fc2d",
+              "gate_revision": 8
+            },
+            "committed": "9b9c7802671c4b50976d025a2bfaf40e",
+            "fingerprint": "c4f8fc25b096b282f0c62e59c0893a3d539af897fa3eb56490e380b6518c7393",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "4edeaaca46558ac46d8d86ed16d5dc568ee186b16611cce843faa8b75f1edc45",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "9b9c7802671c4b50976d025a2bfaf40e",
+            "fingerprint": "c4f8fc25b096b282f0c62e59c0893a3d539af897fa3eb56490e380b6518c7393",
+            "receipt_digest": "9f86616eb247f339971cbf77d0c1f60bea72a50d37d9812a2f62cf9497f82e02",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "sqlite-full-main",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21696 kB",
+            "VmRSS": "21696 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "22308 kB",
+            "VmRSS": "22308 kB"
+          },
+          "terminal": "FAILED",
+          "terminal_result": {
+            "updates_enabled": false,
+            "journal_commit_observed": false,
+            "failure_stage": "journal_publication",
+            "error": "OperationalError",
+            "reason": null,
+            "errno": null,
+            "sqlite_error": "SQLITE_FULL"
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21688 kB",
+            "VmRSS": "21688 kB"
+          },
+          "seconds": 0.5076913249999961
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "9b9c7802671c4b50976d025a2bfaf40e",
+          "fingerprint": "c4f8fc25b096b282f0c62e59c0893a3d539af897fa3eb56490e380b6518c7393",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "0eacf7ea2c5c421eb181d0a59099fc2d",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 5.335394258999941
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21060 kB",
+        "VmRSS": "21060 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22704 kB",
+        "VmRSS": "22704 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-sqlite-full-result",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "028f95109ac6a65eed2bd70eac2b162ea3d6211a243307845db9d09cd6c0856a",
+            "after_digest": "4066feef63591cb1ab5b5d0964677b787f9af3463da52d0bf8ee912b5f948682",
+            "closed_gate": {
+              "gate_epoch": "3708b6fbe08d496fa0bf4bd616b43732",
+              "gate_revision": 8
+            },
+            "committed": "7d8fe1b785a34625947c710e2dc940c8",
+            "fingerprint": "d9ca254a30dd5224d59d6e95cd287438ba93f67bee65c6bc200e01be12278c7e",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "d946b913b2bebeda6350fdd36229445d6e0c4f7d08d28605435b49f50bf653ef",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "7d8fe1b785a34625947c710e2dc940c8",
+            "fingerprint": "d9ca254a30dd5224d59d6e95cd287438ba93f67bee65c6bc200e01be12278c7e",
+            "receipt_digest": "d17b06903b4940a9d91d69c4b5ba4c25ad95b7404fe8a388b486545189122c95",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "sqlite-full-result",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21696 kB",
+            "VmRSS": "21696 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "21180 kB",
+            "VmRSS": "21180 kB"
+          },
+          "terminal": "FAILED",
+          "terminal_result": {
+            "updates_enabled": false,
+            "journal_commit_observed": true,
+            "failure_stage": "result_publication",
+            "error": "OperationalError",
+            "reason": null,
+            "errno": null,
+            "sqlite_error": "SQLITE_FULL"
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21692 kB",
+            "VmRSS": "21692 kB"
+          },
+          "seconds": 0.5100493039999492
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "7d8fe1b785a34625947c710e2dc940c8",
+          "fingerprint": "d9ca254a30dd5224d59d6e95cd287438ba93f67bee65c6bc200e01be12278c7e",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "3708b6fbe08d496fa0bf4bd616b43732",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 5.019379331999971
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21040 kB",
+        "VmRSS": "21040 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22708 kB",
+        "VmRSS": "22708 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-enospc-after",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "9bcb072c362f472f932d4e5e5bec70e2b27e5d702fd8254717d5a55c602e8edd",
+            "after_digest": "272ff2db72c28817571613b1630023fc4056733c1f4e5755aa0dff1a6381be89",
+            "closed_gate": {
+              "gate_epoch": "1a03f60429af4c82b5173cdcadf5ec65",
+              "gate_revision": 8
+            },
+            "committed": "89a1d9fcb5c4497d89e0a2976ac0e2c5",
+            "fingerprint": "8c5f1005b6d906d37ed8e9a7e5d116203cc9fa41e9f3e2ac72dc405ff2b50862",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "633225d34f626cc580e6e083be8347a3d036db5b651d407dbda439697880a0e2",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "89a1d9fcb5c4497d89e0a2976ac0e2c5",
+            "fingerprint": "8c5f1005b6d906d37ed8e9a7e5d116203cc9fa41e9f3e2ac72dc405ff2b50862",
+            "receipt_digest": "eb41819d9429d5642aba60e24911965146b477a2b054fd788737fa220179d79f",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "enospc-after",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21680 kB",
+            "VmRSS": "21680 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "22356 kB",
+            "VmRSS": "22356 kB"
+          },
+          "incomplete_pair_not_permission": true,
+          "observed_errno": 28,
+          "unrecordable_fault_failstop": true,
+          "terminal": "INTERRUPTED",
+          "terminal_result": {
+            "replayed": false,
+            "storage_verified": false,
+            "updates_enabled": false,
+            "restored": false
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21300 kB",
+            "VmRSS": "21300 kB"
+          },
+          "seconds": 0.5546784260000095
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "89a1d9fcb5c4497d89e0a2976ac0e2c5",
+          "fingerprint": "8c5f1005b6d906d37ed8e9a7e5d116203cc9fa41e9f3e2ac72dc405ff2b50862",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "1a03f60429af4c82b5173cdcadf5ec65",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 5.188175314999967
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21048 kB",
+        "VmRSS": "21048 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22704 kB",
+        "VmRSS": "22704 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "admission-readonly-after",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "f3d07a08a90605459203808087dbe1bdd2ade14fb228c188688a97caf1bef288",
+            "after_digest": "e62b537c3129dd1c186e4f5677c7f89914c30c98055d9687c5a8ca65198ae53b",
+            "closed_gate": {
+              "gate_epoch": "d40fa882cf2946f699ba174fa6f8d3f2",
+              "gate_revision": 8
+            },
+            "committed": "d84e5d0f8b4b41d1a1ce253297feb1a2",
+            "fingerprint": "f26ef385ebc23f929c66b35997b6b547d4b4dade9adc3945ccd05a716410f511",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "success",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "23b897718ec9af9596a7e25d6f2b412d12bd762229672f9866cedeea7b39eb71",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "release_preparation": {
+          "mode": "success",
+          "formal_service": true,
+          "updates_enabled": false,
+          "dedup_preserves_both_original_budgets": true,
+          "fresh_storage_certificate_tls_and_pair_verified": true,
+          "terminal": "RELEASE_VERIFIED_CLOSED",
+          "terminal_result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "d84e5d0f8b4b41d1a1ce253297feb1a2",
+            "fingerprint": "f26ef385ebc23f929c66b35997b6b547d4b4dade9adc3945ccd05a716410f511",
+            "receipt_digest": "e3e5e2ba6bacd0d4140f6e6a77f92d150f6a36baeb15c26b3ff3047ce0661dc3",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "both_original_budgets_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "normal_updates_rejected": true
+        },
+        "admission": {
+          "mode": "readonly-after",
+          "formal_service": true,
+          "service_memory_before": {
+            "VmHWM": "21680 kB",
+            "VmRSS": "21680 kB"
+          },
+          "executor_memory_at_checkpoint": {
+            "VmHWM": "22352 kB",
+            "VmRSS": "22352 kB"
+          },
+          "incomplete_pair_not_permission": true,
+          "observed_errno": 30,
+          "unrecordable_fault_failstop": true,
+          "terminal": "INTERRUPTED",
+          "terminal_result": {
+            "replayed": false,
+            "storage_verified": false,
+            "updates_enabled": false,
+            "restored": false
+          },
+          "all_original_budgets_preserved": true,
+          "service_memory_after": {
+            "VmHWM": "21296 kB",
+            "VmRSS": "21296 kB"
+          },
+          "seconds": 0.5508573820000038
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "d84e5d0f8b4b41d1a1ce253297feb1a2",
+          "fingerprint": "f26ef385ebc23f929c66b35997b6b547d4b4dade9adc3945ccd05a716410f511",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "d40fa882cf2946f699ba174fa6f8d3f2",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "certificate_stage_logical_journal_unchanged": true,
+        "certificate_stage_immutable_generations_unchanged": true,
+        "certificate_stage_updates_enabled": false,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 6,
+      "elapsed_seconds": 5.318676733999951
+    }
+  ],
+  "scope": "formal source-run root service/executor and real Nginx/TLS, isolated Linux VM; no installed systemd claim",
+  "untested": [
+    "installed systemd lifecycle",
+    "VM reboot",
+    "power loss",
+    "physical media",
+    "arbitrary returned-COMMIT/fsync I/O errors",
+    "D-state cleanup",
+    "zero downtime"
+  ],
+  "source_sha256": {
+    "certweft/service.py": "b432ce61de0806ed9f0412193bccb4a5dc69410b0390e1241439926d8a58f719",
+    "certweft/deadlines.py": "e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f",
+    "certweft/release.py": "604a1d770f47c375989ef8d274dbd8616d3e487152f3abe6965ea1085391d44a",
+    "certweft/recovery.py": "4c2cb064c5b8a9539d01b6cef4a22ada336c368412fc56371e02c443dd99e2d6",
+    "certweft/recovery_executor.py": "1a6a1fc983d14f132d374679f8676a09882e0918ac4fd332caaceef240a39531",
+    "certweft/reconciliation.py": "bb21824e85c89d90639837f8d144eb0e265b9652065104326f9d843584d88f45",
+    "certweft/opening.py": "c6a0083e2f38b88dfaa98e8bf96bee954019154115e8594efea055a97b2e024f",
+    "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certweft/core.py": "fc63c1d25dda209c19129440b1fec36f20d1fdd9b72ef09acd8ab032872310b1",
+    "certweft/operations.py": "46da1610efd2b5bc25414f07d04a3556a3b57be7870c8af6751fa5c347ca7385",
+    "certweft/gate.py": "60854ad11c20eca05609032c75a0fe163292c3d6bdf79427ca495576c3b80c1a",
+    "certweft/storage.py": "2f431bd3758a8a14b2cb616521f50d638cf3fdbf733278f87a7e7cb99bf1fe3b",
+    "certweft/certificate_recovery.py": "8e12ac749a8124444e1b70d2c365f74e3ba396656a530adb2f0281a481b0694e",
+    "certweft/admission.py": "0f2a589836afaf9abd4a2ca18a548fa268ec01e70e41028d9191e4927291bf29",
+    "certweft/ca.py": "e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c",
+    "certweft/executor.py": "b99b1cead42dc43d134e8c7a13ed4d7d57dd10158415a8779bfe8306b83436c3",
+    "tools/policy_vm.py": "27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6",
+    "tools/admission_vm.py": "c0df2fe7125a50451c99f5737e7218beceab27528dbd2fa27889cb6ddfb18384",
+    "tools/certificate_vm.py": "4435c71a031b395d06270dc38bbfd48a3db890cfa3bdadb53e4880295294ee09",
+    "tools/storage_vm.py": "2d251e4e7de2c10739c2d339f372787b36613f65759a539037b075b6a7e3a14c",
+    "tools/deadline_vm.py": "cd0d61fb4e1253cdc23b12e3fb38d10ad41fd04f2debd9c23f4574f8fa4e7cf3",
+    "tools/executor_vm.py": "73cfc9aafee86b97f450337631caf374e79fad7e6c8c13509a36d5e7b49680a1",
+    "tools/opening_vm.py": "656b8d1f7c461cd2657eeb3e8db1af2e50516435032c40788496916372522b04",
+    "tools/recovery_vm.py": "104fc1ee43c382f5bb0d4d7c19c3369bb4c656097966e4e05c9008b3a9f285ee",
+    "tools/opening_mutation.py": "46bb7cd1c1795ecf6fe08175fecc762e9aeeb02c4aa7fe529bb9f8a74fbca1de",
+    "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
+    "tools/credential_probe.py": "8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46",
+    "tools/operations_vm.py": "3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85",
+    "tools/reconcile_vm.py": "70172e146542bd3f564128fac997709f1ba7692289c681b4ae81109c5aeb3e8b",
+    "tools/gate_vm.py": "66215b4c176fe5ca9db1fda5bd6869213f852fd5cdeb0ee3ea23412197a0fb78",
+    "tools/release_vm.py": "e82059f514f166d81740a004d707dc78d5e62b14c06b6a08fc8ae0ad5f338812",
+    "tests/test_release.py": "08e1031f443b3ef89afbd05044d007f56facb056ac366af55fd35c3882d3f7d9",
+    "tests/test_certificate_recovery.py": "7dedc3df699699665d7c21e9b2d62592f8d648eaa9cf5dc973c31453622fdcb0",
+    "tests/test_operations.py": "f1741fae5ae944fa974e90c418c447da27e49d18051fc8ad50b4ea843041e337",
+    "tests/test_core.py": "8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c",
+    "tests/test_recovery.py": "cba9d1c4dd080581bd039f9d3331200a74de221e751d57c008222bdbb8bba830",
+    "tests/test_admission.py": "9f0edc93807bffcc5efdf0f789520b78213ff09311f812d2c7ce5024fa225f9f",
+    "tests/test_opening.py": "45e4aca1cebd1d44ac9af9ad5fec47908cbc192748f04b3b7ee7ee2e48690963",
+    "tests/test_storage.py": "07d2de55f10a9a3011db73c9141295b43ff2951f54b6e339d184117cf87af2cf",
+    "tests/test_gate.py": "e1bcd31c414728e0022a3d1f47726bedff559a52f811e536860da60de589c8d0",
+    "tests/test_deadlines.py": "442d8ea3cfa4af88ec62603d84f017fb2b1883e8c05d3d92bedd695811b9dd29",
+    "tests/test_reconciliation.py": "91d301f53893145dd6400efc00c67204441a80b15428c0e9032629137db3cac9",
+    "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
+  },
+  "source_unchanged": true,
+  "environment": {
+    "python": "3.12.3",
+    "kernel": "6.8.0-117-generic",
+    "machine": "aarch64"
+  }
+}

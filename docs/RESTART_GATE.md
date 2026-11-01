@@ -175,12 +175,12 @@ includes a real SQLite transaction in which gate authority changes after both SQ
 writes but before final COMMIT; neither the request nor core state may commit.
 The fsync-error unit is an injected call failure, not physical-media fault proof.
 
-## Not yet delivered
+## Limits of this gate-only stage
 
-The next stage must verify writable storage/journal, intended committed identity,
+The later stages verify writable storage/journal, intended committed identity,
 certificate validity, reload and new TLS before any safe reopening. Storage-health
-reset, terminal reconciliation and that reopening protocol are not implemented
-or qualified here. Missing/corrupt-gate repair, installed systemd lifecycle, VM
+reset, terminal reconciliation and reopening are not provided by the gate-only
+operation; see [current reopening qualification](REOPENING.md). Missing/corrupt-gate repair, installed systemd lifecycle, VM
 reboot, abrupt power loss, D-state cleanup and boot zero-gap behavior remain
 untested. Root tampering, physical-media durability and external WAN reachability
 are not covered. Repository remains Private; no license selected.

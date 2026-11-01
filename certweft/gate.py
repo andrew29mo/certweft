@@ -21,7 +21,7 @@ class Gate:
         if type(s) is not dict or set(s)!={'version','epoch','revision','state','reason'}:raise Rejected('gate_schema')
         if type(s['version']) is not int or s['version']!=1 or type(s['epoch']) is not str or not re.fullmatch('[0-9a-f]{32}',s['epoch']):raise Rejected('gate_schema')
         if type(s['revision']) is not int or not 0<=s['revision']<2**63-1:raise Rejected('gate_schema')
-        if s['state'] not in {'STOPPED','RUNNING','RECOVERY_REQUIRED','VERIFY_REQUIRED','VERIFIED_CLOSED'} or s['reason'] not in {'new_store','clean_stop','session_started','unclean_or_blocked','legacy_store','pending_on_clean_start','operator_prepared','recovery_verified','recovery_incomplete'}:raise Rejected('gate_schema')
+        if s['state'] not in {'STOPPED','RUNNING','RECOVERY_REQUIRED','VERIFY_REQUIRED','VERIFIED_CLOSED'} or s['reason'] not in {'new_store','clean_stop','session_started','unclean_or_blocked','legacy_store','pending_on_clean_start','operator_prepared','recovery_verified','recovery_incomplete','operator_opened'}:raise Rejected('gate_schema')
         return s
     def certified(self,s):
         try:fd=os.open(self.receipt,os.O_RDONLY|os.O_NOFOLLOW)

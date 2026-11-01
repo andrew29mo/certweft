@@ -1,3 +1,7 @@
+The separate [explicit reopening stage](REOPENING.md) now consumes these closed
+proofs. This document describes the preparation stage only; it does not itself
+authorize updates.
+
 # Release preparation with fresh evidence, still closed
 
 This milestone adds a root-only prepare-release operation. Success is
@@ -150,11 +154,11 @@ total Nginx/VM memory or a comparative benchmark.
 
 ## Current validation
 
-The source passes 96 Linux unit tests with no failures/errors/skips and 26 release
+At that milestone the source passed 96 Linux unit tests with no failures/errors/skips and 26 release
 VM fixtures. Separate opening (20, with its expected-failure mutation control),
 preparation (19), certificate (17), storage-verification (15), gate (10) and storage
-(14) matrices are regressions, not additional release scenarios. Current unit
-qualification is release-units.json/html; old unit artifacts keep historical scope.
+(14) matrices are regressions, not additional release scenarios. release-units.json/html
+records that stage; current units are admission-units.json/html in REOPENING.md.
 
 ## Still unqualified
 

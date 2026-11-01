@@ -38,7 +38,7 @@ pending.
 [P0-3a operation contract](docs/OPERATIONS.md) adds persistent request deduplication,
 responsive request-status/cancel handling and an atomic cancellation/COMMIT
 boundary. CA signing is still a separate step; activation deadlines are covered below.
-Controlled DEGRADED repair remains pending.
+Controlled DEGRADED repair and explicit reopening are covered by the later milestones below.
 
 ## Persistent deadlines
 
@@ -55,8 +55,7 @@ Failed persistence cannot acknowledge cancellation or falsely commit/restore.
 A durable storage latch blocks new updates; if even that write fails, the service
 stops accepting requests. A candidate may remain live on an unwritable store.
 The restart gate below now quarantines abnormal exits even when the fault latch
-could not be written. Full safe restoration/reopening remains pending.
-Controlled repair and persistent systemd deployment are still pending.
+could not be written. Safe restoration and explicit reopening are covered below; persistent systemd deployment remains pending.
 
 ## Restart gate and recovery preparation
 
@@ -81,7 +80,7 @@ replays unfinished verification; old timing is preserved.
 restoration of the current committed generation, real Nginx reload and fresh TLS
 confirmation. A paired completion record distinguishes finished recovery from
 partial publication. Normal updates remain blocked; health/request reconciliation
-and reopening are not implemented. Old storage-verification history stays separate.
+and reopening are separate later stages described below. Old storage-verification history stays separate.
 
 ## Evidence
 
@@ -116,11 +115,24 @@ remain pending.
 persistent root intention to the current Gate, preparation receipt, core and exact
 DEGRADED history. Partial publication, expiry and restart never grant updates.
 The formal entry, executor and bound COMMIT guard still reject recovered sessions,
-even with a RUNNING label. Actual reopening is a separate pending milestone.
+even with a RUNNING label alone. The explicit reopening stage below adds the required completion pair.
 
 ## Fresh release preparation, still closed
 
 [Release preparation](docs/RELEASE_PREPARATION.md) adds a fixed root contract,
 independent source/release deadlines, fresh filesystem/SQLite/certificate/TLS
 verification and a paired closed receipt. Disk faults or partial publication do
-not grant updates. Actual admission handoff remains a separate pending stage.
+not grant updates. The separate explicit admission handoff is described below.
+
+## Explicit reopening and real follow-up activation
+
+[Root reopening](docs/REOPENING.md) requires fresh storage/TLS verification and
+matching main-journal, Gate and root completion records. Partial publication
+does not authorize updates. Exact references resolve prior DEGRADED history
+without rewriting it; new failures remain blocking. Formal VM scenarios reopen
+and actually activate a different certificate through the controller path.
+Service restart closes a recovered store again; there is no automatic replay.
+Installed deployment, this path's VM reboot, power-loss and arbitrary storage-I/O
+qualification remain pending. See the source-bound [JSON](evidence/admission.json)
+and [HTML](evidence/admission.html), including fault/cleanup evidence and separate
+VM process memory snapshots.

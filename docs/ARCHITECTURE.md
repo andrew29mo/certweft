@@ -1,3 +1,10 @@
+# Current explicit reopening stage
+
+See [REOPENING.md](REOPENING.md) for root contract, three-record admission,
+original deadline intersection, failure/restart closure and real follow-up TLS
+activation. Earlier closed milestones below retain their narrower stage scope.
+Current unit evidence is admission-units.json/html; older unit reports are historical.
+
 # Reviewed architecture and exploration decisions
 
 The initial exploration sections below are historical. Current additions are
@@ -78,8 +85,9 @@ trusted-root replacement or revocation lookup.
 Final MVP admission requires durable deduplication, bounded outputs/history,
 protected rollback references, whole-operation persisted deadlines, cancellation,
 clock anomaly handling, strict journal schema validation, safe operator repair,
-and an installable systemd service with tested privilege separation. These are
-acceptance gates, not implemented capabilities. No VM reboot, abrupt power-loss,
+and an installable systemd service with tested privilege separation. These were the original exploration
+acceptance gates; the later milestone sections distinguish what has since been
+implemented from remaining deployment qualification. No VM reboot, abrupt power-loss,
 zero-gap boot, long-term rotation or zero-downtime claim is made.
 
 Review corrections and distinctions between real and injected faults are in [REVIEW.md](REVIEW.md).
@@ -129,7 +137,7 @@ The P0-3b-2 independent review adds a bounded decision barrier and active-execut
 stop-before-release on unrecordable metadata faults. Persisted quarantine survives
 restart; an unpersistable fault does not provide a post-repair restart gate.
 That was the reviewed first-round gap; the restart-gate update below now closes
-quarantine after repair, while full restoration/reopening remains unqualified.
+quarantine after repair, while the separate restoration/reopening stages are described below.
 
 ## Restart gate / root preparation update
 
@@ -137,7 +145,7 @@ quarantine after repair, while full restoration/reopening remains unqualified.
 preexisting execution uncertainty and a conservative recovery-only mode. Root
 preparation is CAS-bound and persists VERIFY_REQUIRED without TLS/journal repair
 or unlock. The unpersistable-latch post-repair restart gap is now gated; actual
-safe restoration/reopening remains a later milestone.
+safe restoration/reopening is provided by the separate later stages below.
 
 The restart-gate review now requires a matching clean-completion receipt: STOPPED
 publication without successful primary directory sync is insufficient to reopen.
@@ -169,7 +177,8 @@ checks, atomically reconciles live normal requests/core/health in the main
 journal, then records separate closed root completion. Receipt plus current
 root result are required for journal_prepared_closed; neither enables admission.
 See [closed preparation contract](CLOSED_PREPARATION.md). Terminal DEGRADED
-history is preserved; its admission policy and actual reopening remain pending.
+history is preserved; the separate reopening stage applies exact reference-based
+admission without rewriting it.
 
 ## Opening assessment, no release
 
@@ -177,8 +186,8 @@ history is preserved; its admission policy and actual reopening remain pending.
 and a latest main-journal opening_intent marker. Marker/root publication is
 paired and deadline-bound but does not change Gate or enable admission. Exact
 DEGRADED row references are evaluated without rewriting terminal history. Shared
-entry/executor/COMMIT eligibility permits untouched bootstrap only; recovered
-sessions still require a future explicit release handoff.
+entry/executor/COMMIT eligibility at that stage permitted untouched bootstrap
+only; the current explicit release handoff adds paired recovered-session admission.
 
 ## Closed release evidence
 

@@ -1,4 +1,4 @@
-"""Bounded root recovery catalog. No operation opens normal admission."""
+"""Bounded root catalog; explicit reopening requires three paired records."""
 import contextlib,hashlib,json,os,re,sqlite3,stat,uuid
 from pathlib import Path
 from . import deadlines
@@ -53,7 +53,8 @@ class RecoveryStore:
         if body.get('op')=='reconcile-closed':fields.add('certificate_request_id')
         if body.get('op')=='prepare-opening':fields.update({'preparation_request_id','receipt_digest','core_epoch','core_revision'})
         if body.get('op')=='prepare-release':fields.update({'opening_request_id','opening_marker_digest'})
-        if set(body)!=fields or body['op'] not in {'verify-storage','recover-certificate','reconcile-closed','prepare-opening','prepare-release'}:raise Rejected('request_shape')
+        if body.get('op')=='open-updates':fields.update({'release_request_id','release_receipt_digest'})
+        if set(body)!=fields or body['op'] not in {'verify-storage','recover-certificate','reconcile-closed','prepare-opening','prepare-release','open-updates'}:raise Rejected('request_shape')
         if body['op']=='reconcile-closed' and (type(body['certificate_request_id']) is not str or not re.fullmatch('[A-Za-z0-9_-]{1,64}',body['certificate_request_id'])):raise Rejected('request_id')
         if body['op']=='prepare-opening':
             from .opening import validate_binding
@@ -61,6 +62,9 @@ class RecoveryStore:
         if body['op']=='prepare-release':
             from .release import validate_binding
             validate_binding({k:body[k] for k in ['opening_request_id','opening_marker_digest']})
+        if body['op']=='open-updates':
+            from .admission import validate_binding
+            validate_binding({k:body[k] for k in ['release_request_id','release_receipt_digest']})
         if type(body['request_id']) is not str or not re.fullmatch('[A-Za-z0-9_-]{1,64}',body['request_id']):raise Rejected('request_id')
         if type(body['gate_epoch']) is not str or type(body['gate_revision']) is not int:raise Rejected('authority_shape')
         if type(body['timeout_seconds']) is not int or not 1<=body['timeout_seconds']<=10:raise Rejected('timeout_policy')
@@ -70,10 +74,10 @@ class RecoveryStore:
         r=db.execute('SELECT digest,state,timing,target,probe,result,kind FROM recovery_requests WHERE id=?',(identity,)).fetchone()
         if not r:raise Rejected('unknown_recovery_request')
         if type(identity) is not str or not re.fullmatch('[A-Za-z0-9_-]{1,64}',identity):raise Rejected('recovery_schema')
-        if type(r[0]) is not str or not re.fullmatch('[0-9a-f]{64}',r[0]) or r[1] not in {'ACCEPTED','RUNNING','CERTIFICATE_VERIFIED','VERIFIED_CLOSED','STORAGE_VERIFIED','JOURNAL_VERIFIED_CLOSED','OPENING_VERIFIED_CLOSED','RELEASE_VERIFIED_CLOSED','FAILED','EXPIRED','INTERRUPTED'} or type(r[4]) is not str or not re.fullmatch('[0-9a-f]{32}',r[4]):raise Rejected('recovery_schema')
+        if type(r[0]) is not str or not re.fullmatch('[0-9a-f]{64}',r[0]) or r[1] not in {'ACCEPTED','RUNNING','CERTIFICATE_VERIFIED','VERIFIED_CLOSED','STORAGE_VERIFIED','JOURNAL_VERIFIED_CLOSED','OPENING_VERIFIED_CLOSED','RELEASE_VERIFIED_CLOSED','OPENED','FAILED','EXPIRED','INTERRUPTED'} or type(r[4]) is not str or not re.fullmatch('[0-9a-f]{32}',r[4]):raise Rejected('recovery_schema')
         if any(type(value) is not str or len(value)>16384 for value in [r[2],r[3]]) or r[5] is not None and (type(r[5]) is not str or len(r[5])>16384):raise Rejected('recovery_schema')
-        if r[6] not in {'verify-storage','recover-certificate','reconcile-closed','prepare-opening','prepare-release'}:raise Rejected('recovery_schema')
-        if r[1] in {'STORAGE_VERIFIED','CERTIFICATE_VERIFIED','VERIFIED_CLOSED','JOURNAL_VERIFIED_CLOSED','OPENING_VERIFIED_CLOSED','RELEASE_VERIFIED_CLOSED'} and r[1] not in {'verify-storage':{'STORAGE_VERIFIED'},'recover-certificate':{'CERTIFICATE_VERIFIED','VERIFIED_CLOSED'},'reconcile-closed':{'JOURNAL_VERIFIED_CLOSED'},'prepare-opening':{'OPENING_VERIFIED_CLOSED'},'prepare-release':{'RELEASE_VERIFIED_CLOSED'}}[r[6]]:raise Rejected('recovery_schema')
+        if r[6] not in {'verify-storage','recover-certificate','reconcile-closed','prepare-opening','prepare-release','open-updates'}:raise Rejected('recovery_schema')
+        if r[1] in {'STORAGE_VERIFIED','CERTIFICATE_VERIFIED','VERIFIED_CLOSED','JOURNAL_VERIFIED_CLOSED','OPENING_VERIFIED_CLOSED','RELEASE_VERIFIED_CLOSED','OPENED'} and r[1] not in {'verify-storage':{'STORAGE_VERIFIED'},'recover-certificate':{'CERTIFICATE_VERIFIED','VERIFIED_CLOSED'},'reconcile-closed':{'JOURNAL_VERIFIED_CLOSED'},'prepare-opening':{'OPENING_VERIFIED_CLOSED'},'prepare-release':{'RELEASE_VERIFIED_CLOSED'},'open-updates':{'OPENED'}}[r[6]]:raise Rejected('recovery_schema')
         row=dict(kind=r[6],request_id=identity,digest=r[0],state=r[1],timing=json.loads(r[2]),target=json.loads(r[3]),probe=r[4],result=json.loads(r[5]) if r[5] else None)
         if type(row['timing']) is not dict or set(row['timing'])!={'budget','authority'} or type(row['target']) is not dict:raise Rejected('recovery_schema')
         budget=row['timing']['budget'];authority=row['timing']['authority']
@@ -99,6 +103,10 @@ class RecoveryStore:
             from .release import validate_target
             validate_target(row['target'])
             canonical.update({k:row['target'][k] for k in ['opening_request_id','opening_marker_digest']})
+        if row['kind']=='open-updates':
+            from .admission import validate_target
+            validate_target(row['target'])
+            canonical.update({k:row['target'][k] for k in ['release_request_id','release_receipt_digest']})
         if RecoveryStore.identity(canonical)!=row['digest']:raise Rejected('recovery_schema')
         return row
     def get(self,identity):
@@ -112,7 +120,7 @@ class RecoveryStore:
                 return old,False
             gate=Gate(self.root).read()
             if Gate.token(gate)!={k:body[k] for k in ['gate_epoch','gate_revision']}:raise Rejected('stale_gate_authority')
-            if gate['state']!=('VERIFIED_CLOSED' if body['op'] in {'reconcile-closed','prepare-opening','prepare-release'} else 'VERIFY_REQUIRED'):raise Rejected('prepare_required')
+            if gate['state']!=('VERIFIED_CLOSED' if body['op'] in {'reconcile-closed','prepare-opening','prepare-release','open-updates'} else 'VERIFY_REQUIRED'):raise Rejected('prepare_required')
             if db.execute('SELECT count(*) FROM recovery_requests').fetchone()[0]>=16:raise Rejected('recovery_history_full')
             if db.execute("SELECT 1 FROM recovery_requests WHERE state IN ('ACCEPTED','RUNNING','CERTIFICATE_VERIFIED')").fetchone():raise Rejected('busy')
             with contextlib.closing(open_main(writer)) as main:
@@ -126,6 +134,9 @@ class RecoveryStore:
                 elif body['op']=='prepare-release':
                     from .release import capture_source
                     target=capture_source(main,writer,db,gate,{k:body[k] for k in ['opening_request_id','opening_marker_digest']})
+                elif body['op']=='open-updates':
+                    from .admission import capture_source
+                    target=capture_source(main,writer,db,gate,{k:body[k] for k in ['release_request_id','release_receipt_digest']})
             timing={'budget':deadlines.create(body['timeout_seconds']),'authority':Gate.token(gate)}
             db.execute('INSERT INTO recovery_requests VALUES(?,?,?,?,?,?,NULL,?)',(body['request_id'],digest,'ACCEPTED',json.dumps(timing),json.dumps(target),uuid.uuid4().hex,body['op']))
             return self.row(db,body['request_id']),True
@@ -191,6 +202,9 @@ class RecoveryStore:
             return bool(pending)
 
 def operation_remaining(row):
+    if row['kind']=='open-updates':
+        from .admission import effective_budget
+        return deadlines.remaining(effective_budget(row))
     if row['kind']=='prepare-release':
         from .release import effective_budget
         return deadlines.remaining(effective_budget(row))
@@ -199,7 +213,7 @@ def operation_remaining(row):
 def require_authority(root,row):
     gate=Gate(root).read()
     if Gate.token(gate)!=row['timing']['authority']:raise Rejected('stale_gate_authority')
-    if gate['state']!=('VERIFIED_CLOSED' if row['kind'] in {'reconcile-closed','prepare-opening','prepare-release'} else 'VERIFY_REQUIRED'):raise Rejected('prepare_required')
+    if gate['state']!=('VERIFIED_CLOSED' if row['kind'] in {'reconcile-closed','prepare-opening','prepare-release','open-updates'} else 'VERIFY_REQUIRED'):raise Rejected('prepare_required')
 
 def open_main(writer,max_pages=None):
     path=writer.root/'journal.db';st=path.lstat()

@@ -164,7 +164,7 @@ At the certificate-recovery milestone, the source passed 66 Linux unit tests
 ([JSON](../evidence/certificate-units.json), [HTML](../evidence/certificate-units.html)),
 17 certificate-recovery VM fixtures, 15 storage-verification fixtures, ten
 gate/lifecycle fixtures and fourteen storage regressions. The 66-unit record is historical after the additive closed-preparation stage;
-its current unit evidence is linked in CLOSED_PREPARATION.md. The VM regression
+current unit evidence is now admission-units.json/html, linked in REOPENING.md. The VM regression
 reports are rerun and each checks exact source hashes and owned-process/mount cleanup. The combined root
 history remains 16 slots; more kinds do not increase or recycle that allowance.
 A dedicated success case also preserves a preexisting STORAGE_FAILED latch.

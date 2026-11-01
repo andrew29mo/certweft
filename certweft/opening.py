@@ -1,4 +1,4 @@
-"""Persisted opening intentions and pairing checks. No release transition exists."""
+"""Persisted opening intentions, pairing checks and shared admission guard."""
 import contextlib,fcntl,json,os,re,sqlite3,stat
 from pathlib import Path
 from . import deadlines
@@ -35,17 +35,20 @@ def readonly(path):
     finally:db.close()
 
 def require_updates(root,authority,main=None):
-    """Shared entry/executor/COMMIT guard. Only untouched bootstrap is enabled."""
+    """Shared entry/executor/COMMIT guard for bootstrap or fully paired recovery."""
     root=Path(root);Gate(root).require(authority)
     with readonly(root/'recovery.db') as catalog:
         if catalog.execute('SELECT version FROM recovery_meta').fetchall()!=[(2,)]:raise Rejected('recovery_schema')
-        if catalog.execute('SELECT 1 FROM recovery_requests LIMIT 1').fetchone():raise Rejected('opening_handoff_required')
-    def check(db):
-        if db.execute("SELECT 1 FROM sqlite_master WHERE name IN ('closed_reconciliation','opening_intent','release_preparation') LIMIT 1").fetchone():raise Rejected('opening_handoff_required')
-    if main is None:
-        with readonly(root/'journal.db') as db:check(db)
-    else:check(main)
-    # A closed-phase verified intention is deliberately never an admission grant.
+        def check(db):
+            owned=db.execute("SELECT 1 FROM sqlite_master WHERE name IN ('closed_reconciliation','opening_intent','release_preparation','admission_release') LIMIT 1").fetchone()
+            if owned or catalog.execute('SELECT 1 FROM recovery_requests LIMIT 1').fetchone():
+                from .admission import require_pair
+                require_pair(db,catalog,Gate(root).read())
+            # Untouched bootstrap remains the original enabled path.
+        if main is None:
+            with readonly(root/'journal.db') as db:check(db)
+        else:check(main)
+    Gate(root).require(authority)
     return True
 
 def capture_pair(main,writer,catalog,gate,binding):

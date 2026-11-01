@@ -1,3 +1,7 @@
+The separate [explicit reopening stage](REOPENING.md) now consumes these closed
+proofs. This document describes the preparation stage only; it does not itself
+authorize updates.
+
 # Opening intentions, still closed
 
 The next [release-preparation stage](RELEASE_PREPARATION.md) adds new verification
@@ -167,7 +171,8 @@ At this milestone the source passed 86 Linux unit tests with no failures, errors
 and 20 opening-intention VM fixtures, plus one expected-failure mutation control. The 19 preparation, 17 certificate,
 15 storage-verification, ten gate and fourteen storage fixtures are separate
 regressions, not additional opening scenarios. The old 75-unit preparation record
-is historical; current unit qualification is opening-units.json/html.
+is historical; opening-units.json/html records that stage. Current unit
+qualification is admission-units.json/html, described in REOPENING.md.
 
 The first opening matrix attempt stopped in the shared fixture's second prepared
 restart, before that case entered the new intention flow, with ConnectionRefusedError.
@@ -207,7 +212,8 @@ This demonstrates detection of this particular bug, not general mutation coverag
 
 ## Not qualified
 
-Actual reopening and successful updates after recovery are not implemented.
+Actual reopening and successful follow-up updates are qualified separately in
+[REOPENING.md](REOPENING.md); this intention operation remains closed.
 Installed systemd/package lifecycle, actual VM reboot, power loss, physical-media
 failure, opening-phase ENOSPC/EROFS/FULL and general COMMIT/fsync I/O fault matrices,
 D-state cleanup, continuous TLS health and zero downtime are not qualified.

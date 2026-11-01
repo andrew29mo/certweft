@@ -14,7 +14,7 @@ def settings(work,mode):
     point='release-main-commit' if mode in {'source-expired-before','own-expired-before','crash-before','stale-before'} else 'release-main-committed' if mode in {'source-expired-after','crash-after','newer-receipt','enospc-after','readonly-after'} else 'release-result-commit' if mode in {'source-expired-result','crash-result','stale-result'} else 'release-confirmed' if mode=='sqlite-full-receipt' else 'release-start'
     return {'release_pause_at':point,'release_marker':str(work/'release.json'),'release_pause_once':True}
 
-def exercise(root,work,config,parent,call,normal_job,source,mode):
+def exercise(root,work,config,parent,call,normal_job,source,mode,release_seconds=None):
     child=None;bound=False;filler=None;restore_files=[];cfg=work/'release-config'
     def db(path=None):return contextlib.closing(sqlite3.connect('file:'+str(path or root/'journal.db')+'?mode=ro',uri=True,timeout=.2))
     def main_state():
@@ -63,7 +63,7 @@ def exercise(root,work,config,parent,call,normal_job,source,mode):
     try:
         before=main_state();core=json.loads(before['state'][0][1]);gate=Gate(root).read();pointer=os.readlink(root/'active.conf')
         versions={str(p.relative_to(root)):digest(p.read_bytes().hex()) for v in root.glob('v-*') for p in v.iterdir() if p.is_file()}
-        body={'op':'prepare-release','request_id':'release-one','opening_request_id':source['request_id'],'opening_marker_digest':source['result']['marker_digest'],'timeout_seconds':1 if mode=='own-expired-before' else 10,**Gate.token(gate)}
+        body={'op':'prepare-release','request_id':'release-one','opening_request_id':source['request_id'],'opening_marker_digest':source['result']['marker_digest'],'timeout_seconds':release_seconds if release_seconds is not None else 1 if mode=='own-expired-before' else 10,**Gate.token(gate)}
         detail={'mode':mode,'formal_service':True,'updates_enabled':False};out=None
         if mode=='source-expired-admit':
             expire(source['timing']['budget']);denied=rootcall(body);assert not denied['ok'] and denied['error']=='Expired'

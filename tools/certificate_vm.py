@@ -49,14 +49,18 @@ def exercise(root,work,config,parent,call,normal_job,mode):
     points={'wrong-leaf':'restore-reloaded','bad-http':'restore-reloaded','crash-selected':'restore-selected','crash-reloaded':'restore-reloaded','crash-confirmed':'restore-confirmed','crash-proof':'certificate-proof','crash-gate':'closed-gate-published','expired-tls':'restore-confirmed','expired-commit':'closed-result-commit'}
     frozen={k:v for k,v in config.items() if k not in {'pause_at','storage_latch_marker','unrecorded_storage_marker','gate_stop_sync_eio'}}
     frozen.update(verification_pause_at=points.get(mode,'restore-validated') if not mode.startswith('invalid-') else 'restoration-start',verification_marker=str(work/'certificate-marker.json'),verification_pause_once=True)
-    if mode.startswith(('opening-','release-')):
+    if mode.startswith(('opening-','release-','admission-')):
         from tools.reconcile_vm import settings as preparation_settings
         from tools.opening_vm import settings as opening_settings
         frozen.update(preparation_settings(work,'latched'));frozen.update(opening_settings(work,mode.removeprefix('opening-') if mode.startswith('opening-') else 'success'))
-        frozen['sqlite_max_pages']=config['sqlite_max_pages']+(8 if mode.startswith('release-') else 4)
-        if mode.startswith('release-'):
+        frozen['sqlite_max_pages']=config['sqlite_max_pages']+(12 if mode.startswith('admission-') else 8 if mode.startswith('release-') else 4)
+        if mode.startswith(('release-','admission-')):
+
             from tools.release_vm import settings as release_settings
-            frozen.update(release_settings(work,mode.removeprefix('release-')))
+            frozen.update(release_settings(work,mode.removeprefix('release-') if mode.startswith('release-') else 'success'))
+        if mode.startswith('admission-'):
+            from tools.admission_vm import settings as admission_settings
+            frozen.update(admission_settings(work,mode.removeprefix('admission-')))
     if mode.startswith('reconcile-'):
         from tools.reconcile_vm import settings
         frozen.update(settings(work,mode.removeprefix('reconcile-')))
@@ -172,21 +176,26 @@ def exercise(root,work,config,parent,call,normal_job,mode):
         if mode.startswith('reconcile-'):
             from tools.reconcile_vm import exercise as prepare_journal
             detail['journal_preparation'],parent=prepare_journal(root,work,frozen,parent,call,normal_job,row,mode.removeprefix('reconcile-'))
-        if mode.startswith(('opening-','release-')):
+        if mode.startswith(('opening-','release-','admission-')):
             from tools.reconcile_vm import exercise as prepare_journal
             from tools.opening_vm import exercise as opening_exercise
             preparation,parent=prepare_journal(root,work,frozen,parent,call,normal_job,row,'latched')
             prepared=root_call({'op':'recovery-request-status','request_id':'prepare-one'})['result']
             detail['journal_preparation']=preparation
-            if mode.startswith('release-'):
+            if mode.startswith(('release-','admission-')):
                 from tools.release_vm import exercise as release_exercise,source_seconds
-                release_mode=mode.removeprefix('release-')
-                detail['opening_intent'],parent=opening_exercise(root,work,frozen,parent,call,normal_job,prepared,'success',source_seconds(release_mode))
+                release_mode=mode.removeprefix('release-') if mode.startswith('release-') else 'success'
+                detail['opening_intent'],parent=opening_exercise(root,work,frozen,parent,call,normal_job,prepared,'success',10 if mode.startswith('admission-') else source_seconds(release_mode))
                 source=root_call({'op':'recovery-request-status','request_id':'opening-one'})['result']
-                detail['release_preparation'],parent=release_exercise(root,work,frozen,parent,call,normal_job,source,release_mode)
+                detail['release_preparation'],parent=release_exercise(root,work,frozen,parent,call,normal_job,source,release_mode,3 if mode=='admission-expired-release' else None)
+                if mode.startswith('admission-'):
+                    from tools.admission_vm import exercise as admission_exercise
+                    released=root_call({'op':'recovery-request-status','request_id':'release-one'})['result']
+                    detail['admission'],parent=admission_exercise(root,work,frozen,parent,call,normal_job,released,mode.removeprefix('admission-'))
             else:detail['opening_intent'],parent=opening_exercise(root,work,frozen,parent,call,normal_job,prepared,mode.removeprefix('opening-'))
         detail['terminal_result']=row['result']
-        detail.update(terminal=row['state'],logical_journal_unchanged=True,immutable_generations_unchanged=True,updates_enabled=False)
+        detail.update(terminal=row['state'],certificate_stage_logical_journal_unchanged=True,certificate_stage_immutable_generations_unchanged=True,certificate_stage_updates_enabled=False)
+        detail['updates_enabled']=root_call({'op':'recovery-status'})['gate_allows_updates']
         return detail,parent
     except Exception:
         if child and live(child):os.kill(child,signal.SIGKILL)

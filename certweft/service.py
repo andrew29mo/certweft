@@ -125,15 +125,27 @@ def serve(config_path):
                 try:
                     if storage.failed(error):operations.latch_storage(error)
                     operations.finish(body['request_id'],'DEGRADED',{'executor_error':type(error).__name__})
-                except Exception:os._exit(75)
+                except Exception:unrecorded_storage(error)
             finally:guard.release()
         def work_verification(body):
             try:
                 reply=execute({'op':'run-verification','request_id':body['request_id']},0,'certweft.recovery_executor')
+                if reply.get('ok') and reply.get('result',{}).get('state')=='OPENED':
+                    with decision(root/'journal.db'):
+                        authority=reply['result']['result']['opened_gate']
+                        try:
+                            from .recovery import operation_remaining
+                            operation_remaining(reply['result']);require_updates(root,authority)
+                            operation_remaining(reply['result'])
+                            config['gate_authority']=authority
+                        except Exception:
+                            current=gate.read()
+                            if Gate.token(current)==authority and current['state']=='RUNNING':gate.block(authority)
+                            raise
                 if not reply.get('ok'):recovery.finish(body['request_id'],'FAILED',{'storage_verified':False,'updates_enabled':False,'restored':False,'error':reply.get('error'),'sqlite_error':reply.get('sqlite_error'),'errno':reply.get('errno')})
             except Exception as error:
                 try:recovery.finish(body['request_id'],'FAILED',{'storage_verified':False,'updates_enabled':False,'restored':False,'error':type(error).__name__})
-                except Exception:os._exit(75)
+                except Exception:unrecorded_storage(error)
             finally:guard.release()
         def readiness_checkpoint(budget):
             # Root-owned VM fault configuration only; never a request field.
@@ -167,7 +179,7 @@ def serve(config_path):
                             data+=chunk
                             if len(data)>49152:raise ValueError('budget')
                         body=json.loads(data);op=body.get('op')
-                        if op in {'verify-storage','recover-certificate','reconcile-closed','prepare-opening','prepare-release','recovery-request-status'}:
+                        if op in {'verify-storage','recover-certificate','reconcile-closed','prepare-opening','prepare-release','open-updates','recovery-request-status'}:
                             if uid!=0:raise Rejected('admin_required')
                             if op=='recovery-request-status':
                                 if set(body)!={'op','request_id'} or type(body['request_id']) is not str:raise Rejected('request_shape')
@@ -250,7 +262,7 @@ def serve(config_path):
                     except Exception as error:
                         if storage.failed(error):
                             try:operations.latch_storage(error)
-                            except Exception:os._exit(75)
+                            except Exception:unrecorded_storage(error)
                         reply={'ok':False,'error':type(error).__name__,'sqlite_error':getattr(error,'sqlite_errorname',None),'errno':getattr(error,'errno',None)}
                         if isinstance(error,Rejected):reply['reason']=str(error)
                     try:conn.sendall(json.dumps(reply).encode()+b'\n')

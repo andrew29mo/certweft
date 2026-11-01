@@ -94,7 +94,12 @@ class Operations:
                 if existing[0]!=digest:raise Rejected('request_conflict')
                 return self.row(db,identity),False
             if not self.healthy(db):raise StorageBlocked('storage_unavailable')
-            if db.execute("SELECT 1 FROM requests WHERE state='DEGRADED'").fetchone():raise Rejected('degraded')
+            if db.execute("SELECT 1 FROM requests WHERE state='DEGRADED'").fetchone():
+                from .opening import require_updates
+                from .gate import Gate
+                root=Path(self.path).parent
+                try:require_updates(root,Gate.token(Gate(root).read()),db)
+                except (Rejected,OSError,sqlite3.Error):raise Rejected('degraded')
             if db.execute('SELECT count(*) FROM requests').fetchone()[0]>=64:raise Rejected('history_full')
             if db.execute("SELECT 1 FROM requests WHERE state IN ('ACCEPTED','RUNNING','CANCEL_REQUESTED')").fetchone():raise Rejected('busy')
             timing={'activation':deadlines.create(body.get('timeout_seconds',10)),'recovery':None}

@@ -1,3 +1,10 @@
+# Current explicit reopening stage
+
+See [REOPENING.md](REOPENING.md) for root contract, three-record admission,
+original deadline intersection, failure/restart closure and real follow-up TLS
+activation. Earlier closed milestones below retain their narrower stage scope.
+Current unit evidence is admission-units.json/html; older unit reports are historical.
+
 # Reproduce the bounded explorations
 
 For current closed recovery use [CERTIFICATE_RECOVERY.md](CERTIFICATE_RECOVERY.md);
@@ -53,7 +60,8 @@ VM command. This stage keeps admission closed; no unlock command is provided.
 ## Closed opening intention
 
 See [OPENING_INTENT.md](OPENING_INTENT.md) and run tools/opening_vm.py as root in
-the isolated Linux VM. There is still no release/unlock command.
+the isolated Linux VM. That operation does not release updates; the separate
+open-updates contract is in REOPENING.md.
 
 ## Fresh closed release preparation
 
