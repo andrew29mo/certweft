@@ -1,10 +1,16 @@
 # Results and provenance
 
-## Current restart gate milestone
+## Current durable verification milestone
+
+See [STORAGE_VERIFICATION.md](STORAGE_VERIFICATION.md) and the source-bound recovery
+validation/unit JSON and HTML. Gate and storage regressions are rerun separately.
+No certificate restoration, health reset or unlock is claimed.
+
+## Restart gate milestone
 
 See [RESTART_GATE.md](RESTART_GATE.md), evidence/restart-gate.json and its HTML
-for ten repaired-storage/lifecycle real-service gate fixtures and 47 passing Linux
-unit tests. Fourteen current storage regressions are separately source-bound.
+for ten repaired-storage/lifecycle real-service gate fixtures. The older
+47-unit record is historical; current unit counts are in STORAGE_VERIFICATION.md. Fourteen current storage regressions are separately source-bound.
 No full restoration/unlock or VM reboot/power-loss claim is made.
 
 ## Previous reviewed storage milestone (historical)

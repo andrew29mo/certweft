@@ -1,0 +1,1087 @@
+<!doctype html><meta charset="utf-8"><pre>{
+  &quot;passed&quot;: true,
+  &quot;status&quot;: &quot;completed&quot;,
+  &quot;cases&quot;: [
+    {
+      &quot;fault&quot;: &quot;enospc&quot;,
+      &quot;phase&quot;: &quot;pre&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;clean_lifecycle&quot;: {
+        &quot;normal_activation_committed&quot;: true,
+        &quot;graceful_stop_certified&quot;: true,
+        &quot;clean_restart_new_epoch&quot;: true,
+        &quot;competing_writer_rejected_without_gate_mutation&quot;: true
+      },
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;20252 kB&quot;,
+        &quot;VmRSS&quot;: &quot;20252 kB&quot;
+      },
+      &quot;filled_bytes&quot;: 26447872,
+      &quot;observed_errno&quot;: 28,
+      &quot;mount_options&quot;: &quot;rw,relatime&quot;,
+      &quot;initial_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: true,
+        &quot;transport_error&quot;: &quot;EOFError&quot;,
+        &quot;errno&quot;: null
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: false,
+        &quot;transport_error&quot;: &quot;ConnectionRefusedError&quot;,
+        &quot;errno&quot;: 111
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: null,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;restart_during_fault_refused_updates&quot;: true,
+      &quot;fault_restart_exit&quot;: 1,
+      &quot;restart_gate&quot;: {
+        &quot;repaired_storage_still_blocks&quot;: true,
+        &quot;journal_byte_identical_after_repair&quot;: true,
+        &quot;no_tls_or_pointer_changes&quot;: true,
+        &quot;root_only_prepare&quot;: true,
+        &quot;stale_and_duplicate_cas_rejected&quot;: true,
+        &quot;second_restart_invalidates_old_cas&quot;: true,
+        &quot;prepared_never_enables_updates&quot;: true,
+        &quot;raw_health_before_repaired_restart&quot;: &quot;HEALTHY&quot;,
+        &quot;wire_preserved&quot;: &quot;baseline&quot;
+      },
+      &quot;verification&quot;: {
+        &quot;mode&quot;: &quot;success&quot;,
+        &quot;root_only&quot;: true,
+        &quot;duplicate_keeps_original_budget&quot;: true,
+        &quot;different_parameters_rejected&quot;: true,
+        &quot;no_replay_of_probe_or_executor&quot;: true,
+        &quot;terminal&quot;: &quot;STORAGE_VERIFIED&quot;,
+        &quot;storage_result&quot;: {
+          &quot;storage_verified&quot;: true,
+          &quot;journal_verified&quot;: true,
+          &quot;prior_health&quot;: &quot;HEALTHY&quot;,
+          &quot;updates_enabled&quot;: false,
+          &quot;restored&quot;: false
+        },
+        &quot;protected_journal_and_tls_unchanged&quot;: true,
+        &quot;updates_enabled&quot;: false,
+        &quot;restored&quot;: false
+      },
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 2,
+      &quot;elapsed_seconds&quot;: 2.4859721860000263
+    },
+    {
+      &quot;fault&quot;: &quot;enospc&quot;,
+      &quot;phase&quot;: &quot;post&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;20260 kB&quot;,
+        &quot;VmRSS&quot;: &quot;20260 kB&quot;
+      },
+      &quot;candidate_observed_before_fault&quot;: true,
+      &quot;active_executor_fencing&quot;: {
+        &quot;prepare_denied_while_busy&quot;: true,
+        &quot;competing_writer_rejected&quot;: true,
+        &quot;gate_unchanged&quot;: true
+      },
+      &quot;executor_memory_at_checkpoint&quot;: {
+        &quot;VmHWM&quot;: &quot;21536 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21536 kB&quot;
+      },
+      &quot;filled_bytes&quot;: 26443776,
+      &quot;observed_errno&quot;: 28,
+      &quot;mount_options&quot;: &quot;rw,relatime&quot;,
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: false,
+        &quot;transport_error&quot;: &quot;ConnectionRefusedError&quot;,
+        &quot;errno&quot;: 111
+      },
+      &quot;core_state&quot;: &quot;APPLYING&quot;,
+      &quot;request_state&quot;: &quot;RUNNING&quot;,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;candidate&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;fault_restart_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;error&quot;: &quot;Rejected&quot;,
+        &quot;sqlite_error&quot;: null,
+        &quot;errno&quot;: null,
+        &quot;reason&quot;: &quot;recovery_required&quot;
+      },
+      &quot;restart_during_fault_refused_updates&quot;: true,
+      &quot;fault_restart_exit&quot;: null,
+      &quot;restart_gate&quot;: {
+        &quot;repaired_storage_still_blocks&quot;: true,
+        &quot;journal_byte_identical_after_repair&quot;: true,
+        &quot;no_tls_or_pointer_changes&quot;: true,
+        &quot;root_only_prepare&quot;: true,
+        &quot;stale_and_duplicate_cas_rejected&quot;: true,
+        &quot;second_restart_invalidates_old_cas&quot;: true,
+        &quot;prepared_never_enables_updates&quot;: true,
+        &quot;raw_health_before_repaired_restart&quot;: &quot;HEALTHY&quot;,
+        &quot;wire_preserved&quot;: &quot;candidate&quot;
+      },
+      &quot;verification&quot;: {
+        &quot;mode&quot;: &quot;restart&quot;,
+        &quot;root_only&quot;: true,
+        &quot;duplicate_keeps_original_budget&quot;: true,
+        &quot;different_parameters_rejected&quot;: true,
+        &quot;restart_preserves_original_timing&quot;: true,
+        &quot;pending_journal_observed_before_restart&quot;: true,
+        &quot;old_executor_blocks_takeover&quot;: true,
+        &quot;no_replayed_verifier&quot;: true,
+        &quot;terminal&quot;: &quot;INTERRUPTED&quot;,
+        &quot;storage_result&quot;: {
+          &quot;replayed&quot;: false,
+          &quot;storage_verified&quot;: false,
+          &quot;updates_enabled&quot;: false,
+          &quot;restored&quot;: false
+        },
+        &quot;protected_journal_and_tls_unchanged&quot;: true,
+        &quot;updates_enabled&quot;: false,
+        &quot;restored&quot;: false
+      },
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 2,
+      &quot;elapsed_seconds&quot;: 2.555727346999902
+    },
+    {
+      &quot;fault&quot;: &quot;enospc&quot;,
+      &quot;phase&quot;: &quot;pre&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;clean_lifecycle&quot;: {
+        &quot;normal_activation_committed&quot;: true,
+        &quot;graceful_stop_certified&quot;: true,
+        &quot;clean_restart_new_epoch&quot;: true,
+        &quot;competing_writer_rejected_without_gate_mutation&quot;: true
+      },
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;20256 kB&quot;,
+        &quot;VmRSS&quot;: &quot;20256 kB&quot;
+      },
+      &quot;filled_bytes&quot;: 26447872,
+      &quot;observed_errno&quot;: 28,
+      &quot;mount_options&quot;: &quot;rw,relatime&quot;,
+      &quot;initial_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: true,
+        &quot;transport_error&quot;: &quot;EOFError&quot;,
+        &quot;errno&quot;: null
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: false,
+        &quot;transport_error&quot;: &quot;ConnectionRefusedError&quot;,
+        &quot;errno&quot;: 111
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: null,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;restart_during_fault_refused_updates&quot;: true,
+      &quot;fault_restart_exit&quot;: 1,
+      &quot;restart_gate&quot;: {
+        &quot;repaired_storage_still_blocks&quot;: true,
+        &quot;journal_byte_identical_after_repair&quot;: true,
+        &quot;no_tls_or_pointer_changes&quot;: true,
+        &quot;root_only_prepare&quot;: true,
+        &quot;stale_and_duplicate_cas_rejected&quot;: true,
+        &quot;second_restart_invalidates_old_cas&quot;: true,
+        &quot;prepared_never_enables_updates&quot;: true,
+        &quot;raw_health_before_repaired_restart&quot;: &quot;HEALTHY&quot;,
+        &quot;wire_preserved&quot;: &quot;baseline&quot;
+      },
+      &quot;verification&quot;: {
+        &quot;mode&quot;: &quot;probe-restart&quot;,
+        &quot;root_only&quot;: true,
+        &quot;duplicate_keeps_original_budget&quot;: true,
+        &quot;different_parameters_rejected&quot;: true,
+        &quot;owned_probe_preserved_after_interruption&quot;: true,
+        &quot;restart_preserves_original_timing&quot;: true,
+        &quot;pending_journal_observed_before_restart&quot;: true,
+        &quot;old_executor_blocks_takeover&quot;: true,
+        &quot;no_replayed_verifier&quot;: true,
+        &quot;terminal&quot;: &quot;INTERRUPTED&quot;,
+        &quot;storage_result&quot;: {
+          &quot;replayed&quot;: false,
+          &quot;storage_verified&quot;: false,
+          &quot;updates_enabled&quot;: false,
+          &quot;restored&quot;: false
+        },
+        &quot;protected_journal_and_tls_unchanged&quot;: true,
+        &quot;updates_enabled&quot;: false,
+        &quot;restored&quot;: false
+      },
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 2,
+      &quot;elapsed_seconds&quot;: 2.5238611790000505
+    },
+    {
+      &quot;fault&quot;: &quot;enospc&quot;,
+      &quot;phase&quot;: &quot;pre&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;clean_lifecycle&quot;: {
+        &quot;normal_activation_committed&quot;: true,
+        &quot;graceful_stop_certified&quot;: true,
+        &quot;clean_restart_new_epoch&quot;: true,
+        &quot;competing_writer_rejected_without_gate_mutation&quot;: true
+      },
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;20280 kB&quot;,
+        &quot;VmRSS&quot;: &quot;20280 kB&quot;
+      },
+      &quot;filled_bytes&quot;: 26447872,
+      &quot;observed_errno&quot;: 28,
+      &quot;mount_options&quot;: &quot;rw,relatime&quot;,
+      &quot;initial_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: true,
+        &quot;transport_error&quot;: &quot;EOFError&quot;,
+        &quot;errno&quot;: null
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: false,
+        &quot;transport_error&quot;: &quot;ConnectionRefusedError&quot;,
+        &quot;errno&quot;: 111
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: null,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;restart_during_fault_refused_updates&quot;: true,
+      &quot;fault_restart_exit&quot;: 1,
+      &quot;restart_gate&quot;: {
+        &quot;repaired_storage_still_blocks&quot;: true,
+        &quot;journal_byte_identical_after_repair&quot;: true,
+        &quot;no_tls_or_pointer_changes&quot;: true,
+        &quot;root_only_prepare&quot;: true,
+        &quot;stale_and_duplicate_cas_rejected&quot;: true,
+        &quot;second_restart_invalidates_old_cas&quot;: true,
+        &quot;prepared_never_enables_updates&quot;: true,
+        &quot;raw_health_before_repaired_restart&quot;: &quot;HEALTHY&quot;,
+        &quot;wire_preserved&quot;: &quot;baseline&quot;
+      },
+      &quot;verification&quot;: {
+        &quot;mode&quot;: &quot;expired-restart&quot;,
+        &quot;root_only&quot;: true,
+        &quot;duplicate_keeps_original_budget&quot;: true,
+        &quot;different_parameters_rejected&quot;: true,
+        &quot;restart_preserves_original_timing&quot;: true,
+        &quot;pending_journal_observed_before_restart&quot;: true,
+        &quot;old_executor_blocks_takeover&quot;: true,
+        &quot;no_replayed_verifier&quot;: true,
+        &quot;terminal&quot;: &quot;EXPIRED&quot;,
+        &quot;storage_result&quot;: {
+          &quot;replayed&quot;: false,
+          &quot;storage_verified&quot;: false,
+          &quot;updates_enabled&quot;: false,
+          &quot;restored&quot;: false
+        },
+        &quot;protected_journal_and_tls_unchanged&quot;: true,
+        &quot;updates_enabled&quot;: false,
+        &quot;restored&quot;: false
+      },
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 2,
+      &quot;elapsed_seconds&quot;: 3.533002140999997
+    },
+    {
+      &quot;fault&quot;: &quot;enospc&quot;,
+      &quot;phase&quot;: &quot;pre&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;clean_lifecycle&quot;: {
+        &quot;normal_activation_committed&quot;: true,
+        &quot;graceful_stop_certified&quot;: true,
+        &quot;clean_restart_new_epoch&quot;: true,
+        &quot;competing_writer_rejected_without_gate_mutation&quot;: true
+      },
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;20252 kB&quot;,
+        &quot;VmRSS&quot;: &quot;20252 kB&quot;
+      },
+      &quot;filled_bytes&quot;: 26447872,
+      &quot;observed_errno&quot;: 28,
+      &quot;mount_options&quot;: &quot;rw,relatime&quot;,
+      &quot;initial_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: true,
+        &quot;transport_error&quot;: &quot;EOFError&quot;,
+        &quot;errno&quot;: null
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: false,
+        &quot;transport_error&quot;: &quot;ConnectionRefusedError&quot;,
+        &quot;errno&quot;: 111
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: null,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;restart_during_fault_refused_updates&quot;: true,
+      &quot;fault_restart_exit&quot;: 1,
+      &quot;restart_gate&quot;: {
+        &quot;repaired_storage_still_blocks&quot;: true,
+        &quot;journal_byte_identical_after_repair&quot;: true,
+        &quot;no_tls_or_pointer_changes&quot;: true,
+        &quot;root_only_prepare&quot;: true,
+        &quot;stale_and_duplicate_cas_rejected&quot;: true,
+        &quot;second_restart_invalidates_old_cas&quot;: true,
+        &quot;prepared_never_enables_updates&quot;: true,
+        &quot;raw_health_before_repaired_restart&quot;: &quot;HEALTHY&quot;,
+        &quot;wire_preserved&quot;: &quot;baseline&quot;
+      },
+      &quot;verification&quot;: {
+        &quot;mode&quot;: &quot;expired-run&quot;,
+        &quot;root_only&quot;: true,
+        &quot;duplicate_keeps_original_budget&quot;: true,
+        &quot;different_parameters_rejected&quot;: true,
+        &quot;no_replay_of_probe_or_executor&quot;: true,
+        &quot;terminal&quot;: &quot;EXPIRED&quot;,
+        &quot;storage_result&quot;: {
+          &quot;storage_verified&quot;: false,
+          &quot;updates_enabled&quot;: false,
+          &quot;restored&quot;: false,
+          &quot;error&quot;: &quot;Expired&quot;,
+          &quot;reason&quot;: &quot;verification_expired&quot;,
+          &quot;sqlite_error&quot;: null,
+          &quot;errno&quot;: null
+        },
+        &quot;protected_journal_and_tls_unchanged&quot;: true,
+        &quot;updates_enabled&quot;: false,
+        &quot;restored&quot;: false
+      },
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 2,
+      &quot;elapsed_seconds&quot;: 3.460988223000186
+    },
+    {
+      &quot;fault&quot;: &quot;enospc&quot;,
+      &quot;phase&quot;: &quot;pre&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;clean_lifecycle&quot;: {
+        &quot;normal_activation_committed&quot;: true,
+        &quot;graceful_stop_certified&quot;: true,
+        &quot;clean_restart_new_epoch&quot;: true,
+        &quot;competing_writer_rejected_without_gate_mutation&quot;: true
+      },
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;20260 kB&quot;,
+        &quot;VmRSS&quot;: &quot;20260 kB&quot;
+      },
+      &quot;filled_bytes&quot;: 26447872,
+      &quot;observed_errno&quot;: 28,
+      &quot;mount_options&quot;: &quot;rw,relatime&quot;,
+      &quot;initial_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: true,
+        &quot;transport_error&quot;: &quot;EOFError&quot;,
+        &quot;errno&quot;: null
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: false,
+        &quot;transport_error&quot;: &quot;ConnectionRefusedError&quot;,
+        &quot;errno&quot;: 111
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: null,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;restart_during_fault_refused_updates&quot;: true,
+      &quot;fault_restart_exit&quot;: 1,
+      &quot;restart_gate&quot;: {
+        &quot;repaired_storage_still_blocks&quot;: true,
+        &quot;journal_byte_identical_after_repair&quot;: true,
+        &quot;no_tls_or_pointer_changes&quot;: true,
+        &quot;root_only_prepare&quot;: true,
+        &quot;stale_and_duplicate_cas_rejected&quot;: true,
+        &quot;second_restart_invalidates_old_cas&quot;: true,
+        &quot;prepared_never_enables_updates&quot;: true,
+        &quot;raw_health_before_repaired_restart&quot;: &quot;HEALTHY&quot;,
+        &quot;wire_preserved&quot;: &quot;baseline&quot;
+      },
+      &quot;verification&quot;: {
+        &quot;mode&quot;: &quot;expired-finish&quot;,
+        &quot;root_only&quot;: true,
+        &quot;paused_after_result_sql_before_commit&quot;: true,
+        &quot;no_replay_of_probe_or_executor&quot;: true,
+        &quot;terminal&quot;: &quot;EXPIRED&quot;,
+        &quot;storage_result&quot;: {
+          &quot;storage_verified&quot;: false,
+          &quot;updates_enabled&quot;: false,
+          &quot;restored&quot;: false,
+          &quot;error&quot;: &quot;Expired&quot;,
+          &quot;reason&quot;: &quot;verification_expired&quot;,
+          &quot;sqlite_error&quot;: null,
+          &quot;errno&quot;: null
+        },
+        &quot;protected_journal_and_tls_unchanged&quot;: true,
+        &quot;updates_enabled&quot;: false,
+        &quot;restored&quot;: false
+      },
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 2,
+      &quot;elapsed_seconds&quot;: 3.520766268999978
+    },
+    {
+      &quot;fault&quot;: &quot;enospc&quot;,
+      &quot;phase&quot;: &quot;pre&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;clean_lifecycle&quot;: {
+        &quot;normal_activation_committed&quot;: true,
+        &quot;graceful_stop_certified&quot;: true,
+        &quot;clean_restart_new_epoch&quot;: true,
+        &quot;competing_writer_rejected_without_gate_mutation&quot;: true
+      },
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;20252 kB&quot;,
+        &quot;VmRSS&quot;: &quot;20252 kB&quot;
+      },
+      &quot;filled_bytes&quot;: 26447872,
+      &quot;observed_errno&quot;: 28,
+      &quot;mount_options&quot;: &quot;rw,relatime&quot;,
+      &quot;initial_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: true,
+        &quot;transport_error&quot;: &quot;EOFError&quot;,
+        &quot;errno&quot;: null
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: false,
+        &quot;transport_error&quot;: &quot;ConnectionRefusedError&quot;,
+        &quot;errno&quot;: 111
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: null,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;restart_during_fault_refused_updates&quot;: true,
+      &quot;fault_restart_exit&quot;: 1,
+      &quot;restart_gate&quot;: {
+        &quot;repaired_storage_still_blocks&quot;: true,
+        &quot;journal_byte_identical_after_repair&quot;: true,
+        &quot;no_tls_or_pointer_changes&quot;: true,
+        &quot;root_only_prepare&quot;: true,
+        &quot;stale_and_duplicate_cas_rejected&quot;: true,
+        &quot;second_restart_invalidates_old_cas&quot;: true,
+        &quot;prepared_never_enables_updates&quot;: true,
+        &quot;raw_health_before_repaired_restart&quot;: &quot;HEALTHY&quot;,
+        &quot;wire_preserved&quot;: &quot;baseline&quot;
+      },
+      &quot;verification&quot;: {
+        &quot;mode&quot;: &quot;enospc&quot;,
+        &quot;root_only&quot;: true,
+        &quot;duplicate_keeps_original_budget&quot;: true,
+        &quot;different_parameters_rejected&quot;: true,
+        &quot;service_exit&quot;: 75,
+        &quot;no_false_verified_record&quot;: true,
+        &quot;terminal&quot;: &quot;RUNNING&quot;,
+        &quot;storage_result&quot;: null,
+        &quot;protected_journal_and_tls_unchanged&quot;: true,
+        &quot;updates_enabled&quot;: false,
+        &quot;restored&quot;: false
+      },
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 2,
+      &quot;elapsed_seconds&quot;: 2.2393097220001437
+    },
+    {
+      &quot;fault&quot;: &quot;readonly&quot;,
+      &quot;phase&quot;: &quot;pre&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;clean_lifecycle&quot;: {
+        &quot;normal_activation_committed&quot;: true,
+        &quot;graceful_stop_certified&quot;: true,
+        &quot;clean_restart_new_epoch&quot;: true,
+        &quot;competing_writer_rejected_without_gate_mutation&quot;: true
+      },
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;20256 kB&quot;,
+        &quot;VmRSS&quot;: &quot;20256 kB&quot;
+      },
+      &quot;observed_errno&quot;: 30,
+      &quot;mount_options&quot;: &quot;rw,relatime\nro,relatime&quot;,
+      &quot;initial_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: true,
+        &quot;transport_error&quot;: &quot;EOFError&quot;,
+        &quot;errno&quot;: null
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: false,
+        &quot;transport_error&quot;: &quot;ConnectionRefusedError&quot;,
+        &quot;errno&quot;: 111
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: null,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;restart_during_fault_refused_updates&quot;: true,
+      &quot;fault_restart_exit&quot;: 1,
+      &quot;restart_gate&quot;: {
+        &quot;repaired_storage_still_blocks&quot;: true,
+        &quot;journal_byte_identical_after_repair&quot;: true,
+        &quot;no_tls_or_pointer_changes&quot;: true,
+        &quot;root_only_prepare&quot;: true,
+        &quot;stale_and_duplicate_cas_rejected&quot;: true,
+        &quot;second_restart_invalidates_old_cas&quot;: true,
+        &quot;prepared_never_enables_updates&quot;: true,
+        &quot;raw_health_before_repaired_restart&quot;: &quot;HEALTHY&quot;,
+        &quot;wire_preserved&quot;: &quot;baseline&quot;
+      },
+      &quot;verification&quot;: {
+        &quot;mode&quot;: &quot;readonly&quot;,
+        &quot;root_only&quot;: true,
+        &quot;duplicate_keeps_original_budget&quot;: true,
+        &quot;different_parameters_rejected&quot;: true,
+        &quot;service_exit&quot;: 75,
+        &quot;no_false_verified_record&quot;: true,
+        &quot;terminal&quot;: &quot;RUNNING&quot;,
+        &quot;storage_result&quot;: null,
+        &quot;protected_journal_and_tls_unchanged&quot;: true,
+        &quot;updates_enabled&quot;: false,
+        &quot;restored&quot;: false
+      },
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 2,
+      &quot;elapsed_seconds&quot;: 2.2134632000002057
+    },
+    {
+      &quot;fault&quot;: &quot;enospc&quot;,
+      &quot;phase&quot;: &quot;pre&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;clean_lifecycle&quot;: {
+        &quot;normal_activation_committed&quot;: true,
+        &quot;graceful_stop_certified&quot;: true,
+        &quot;clean_restart_new_epoch&quot;: true,
+        &quot;competing_writer_rejected_without_gate_mutation&quot;: true
+      },
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;20248 kB&quot;,
+        &quot;VmRSS&quot;: &quot;20248 kB&quot;
+      },
+      &quot;filled_bytes&quot;: 26447872,
+      &quot;observed_errno&quot;: 28,
+      &quot;mount_options&quot;: &quot;rw,relatime&quot;,
+      &quot;initial_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: true,
+        &quot;transport_error&quot;: &quot;EOFError&quot;,
+        &quot;errno&quot;: null
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: false,
+        &quot;transport_error&quot;: &quot;ConnectionRefusedError&quot;,
+        &quot;errno&quot;: 111
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: null,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;restart_during_fault_refused_updates&quot;: true,
+      &quot;fault_restart_exit&quot;: 1,
+      &quot;restart_gate&quot;: {
+        &quot;repaired_storage_still_blocks&quot;: true,
+        &quot;journal_byte_identical_after_repair&quot;: true,
+        &quot;no_tls_or_pointer_changes&quot;: true,
+        &quot;root_only_prepare&quot;: true,
+        &quot;stale_and_duplicate_cas_rejected&quot;: true,
+        &quot;second_restart_invalidates_old_cas&quot;: true,
+        &quot;prepared_never_enables_updates&quot;: true,
+        &quot;raw_health_before_repaired_restart&quot;: &quot;HEALTHY&quot;,
+        &quot;wire_preserved&quot;: &quot;baseline&quot;
+      },
+      &quot;verification&quot;: {
+        &quot;mode&quot;: &quot;sqlite-full&quot;,
+        &quot;root_only&quot;: true,
+        &quot;duplicate_keeps_original_budget&quot;: true,
+        &quot;different_parameters_rejected&quot;: true,
+        &quot;no_replay_of_probe_or_executor&quot;: true,
+        &quot;terminal&quot;: &quot;FAILED&quot;,
+        &quot;storage_result&quot;: {
+          &quot;storage_verified&quot;: false,
+          &quot;updates_enabled&quot;: false,
+          &quot;restored&quot;: false,
+          &quot;error&quot;: &quot;OperationalError&quot;,
+          &quot;reason&quot;: null,
+          &quot;sqlite_error&quot;: &quot;SQLITE_FULL&quot;,
+          &quot;errno&quot;: null
+        },
+        &quot;protected_journal_and_tls_unchanged&quot;: true,
+        &quot;updates_enabled&quot;: false,
+        &quot;restored&quot;: false
+      },
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 2,
+      &quot;elapsed_seconds&quot;: 2.5003091329999734
+    },
+    {
+      &quot;fault&quot;: &quot;enospc&quot;,
+      &quot;phase&quot;: &quot;pre&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;clean_lifecycle&quot;: {
+        &quot;normal_activation_committed&quot;: true,
+        &quot;graceful_stop_certified&quot;: true,
+        &quot;clean_restart_new_epoch&quot;: true,
+        &quot;competing_writer_rejected_without_gate_mutation&quot;: true
+      },
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;20260 kB&quot;,
+        &quot;VmRSS&quot;: &quot;20260 kB&quot;
+      },
+      &quot;filled_bytes&quot;: 26447872,
+      &quot;observed_errno&quot;: 28,
+      &quot;mount_options&quot;: &quot;rw,relatime&quot;,
+      &quot;initial_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: true,
+        &quot;transport_error&quot;: &quot;EOFError&quot;,
+        &quot;errno&quot;: null
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: false,
+        &quot;transport_error&quot;: &quot;ConnectionRefusedError&quot;,
+        &quot;errno&quot;: 111
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: null,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;restart_during_fault_refused_updates&quot;: true,
+      &quot;fault_restart_exit&quot;: 1,
+      &quot;restart_gate&quot;: {
+        &quot;repaired_storage_still_blocks&quot;: true,
+        &quot;journal_byte_identical_after_repair&quot;: true,
+        &quot;no_tls_or_pointer_changes&quot;: true,
+        &quot;root_only_prepare&quot;: true,
+        &quot;stale_and_duplicate_cas_rejected&quot;: true,
+        &quot;second_restart_invalidates_old_cas&quot;: true,
+        &quot;prepared_never_enables_updates&quot;: true,
+        &quot;raw_health_before_repaired_restart&quot;: &quot;HEALTHY&quot;,
+        &quot;wire_preserved&quot;: &quot;baseline&quot;
+      },
+      &quot;verification&quot;: {
+        &quot;mode&quot;: &quot;bad-schema&quot;,
+        &quot;root_only&quot;: true,
+        &quot;duplicate_keeps_original_budget&quot;: true,
+        &quot;different_parameters_rejected&quot;: true,
+        &quot;no_replay_of_probe_or_executor&quot;: true,
+        &quot;terminal&quot;: &quot;FAILED&quot;,
+        &quot;storage_result&quot;: {
+          &quot;storage_verified&quot;: false,
+          &quot;updates_enabled&quot;: false,
+          &quot;restored&quot;: false,
+          &quot;error&quot;: &quot;Rejected&quot;,
+          &quot;reason&quot;: &quot;journal_schema&quot;,
+          &quot;sqlite_error&quot;: null,
+          &quot;errno&quot;: null
+        },
+        &quot;protected_journal_and_tls_unchanged&quot;: true,
+        &quot;updates_enabled&quot;: false,
+        &quot;restored&quot;: false
+      },
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 2,
+      &quot;elapsed_seconds&quot;: 2.461301761000186
+    },
+    {
+      &quot;fault&quot;: &quot;enospc&quot;,
+      &quot;phase&quot;: &quot;pre&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;clean_lifecycle&quot;: {
+        &quot;normal_activation_committed&quot;: true,
+        &quot;graceful_stop_certified&quot;: true,
+        &quot;clean_restart_new_epoch&quot;: true,
+        &quot;competing_writer_rejected_without_gate_mutation&quot;: true
+      },
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;20260 kB&quot;,
+        &quot;VmRSS&quot;: &quot;20260 kB&quot;
+      },
+      &quot;filled_bytes&quot;: 26447872,
+      &quot;observed_errno&quot;: 28,
+      &quot;mount_options&quot;: &quot;rw,relatime&quot;,
+      &quot;initial_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: true,
+        &quot;transport_error&quot;: &quot;EOFError&quot;,
+        &quot;errno&quot;: null
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: false,
+        &quot;transport_error&quot;: &quot;ConnectionRefusedError&quot;,
+        &quot;errno&quot;: 111
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: null,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;restart_during_fault_refused_updates&quot;: true,
+      &quot;fault_restart_exit&quot;: 1,
+      &quot;restart_gate&quot;: {
+        &quot;repaired_storage_still_blocks&quot;: true,
+        &quot;journal_byte_identical_after_repair&quot;: true,
+        &quot;no_tls_or_pointer_changes&quot;: true,
+        &quot;root_only_prepare&quot;: true,
+        &quot;stale_and_duplicate_cas_rejected&quot;: true,
+        &quot;second_restart_invalidates_old_cas&quot;: true,
+        &quot;prepared_never_enables_updates&quot;: true,
+        &quot;raw_health_before_repaired_restart&quot;: &quot;HEALTHY&quot;,
+        &quot;wire_preserved&quot;: &quot;baseline&quot;
+      },
+      &quot;verification&quot;: {
+        &quot;mode&quot;: &quot;target-drift&quot;,
+        &quot;root_only&quot;: true,
+        &quot;duplicate_keeps_original_budget&quot;: true,
+        &quot;different_parameters_rejected&quot;: true,
+        &quot;no_replay_of_probe_or_executor&quot;: true,
+        &quot;terminal&quot;: &quot;FAILED&quot;,
+        &quot;storage_result&quot;: {
+          &quot;storage_verified&quot;: false,
+          &quot;updates_enabled&quot;: false,
+          &quot;restored&quot;: false,
+          &quot;error&quot;: &quot;Rejected&quot;,
+          &quot;reason&quot;: &quot;target_drift&quot;,
+          &quot;sqlite_error&quot;: null,
+          &quot;errno&quot;: null
+        },
+        &quot;protected_journal_and_tls_unchanged&quot;: true,
+        &quot;updates_enabled&quot;: false,
+        &quot;restored&quot;: false
+      },
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 2,
+      &quot;elapsed_seconds&quot;: 2.477682848000086
+    },
+    {
+      &quot;fault&quot;: &quot;enospc&quot;,
+      &quot;phase&quot;: &quot;pre&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;clean_lifecycle&quot;: {
+        &quot;normal_activation_committed&quot;: true,
+        &quot;graceful_stop_certified&quot;: true,
+        &quot;clean_restart_new_epoch&quot;: true,
+        &quot;competing_writer_rejected_without_gate_mutation&quot;: true
+      },
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;20256 kB&quot;,
+        &quot;VmRSS&quot;: &quot;20256 kB&quot;
+      },
+      &quot;filled_bytes&quot;: 26447872,
+      &quot;observed_errno&quot;: 28,
+      &quot;mount_options&quot;: &quot;rw,relatime&quot;,
+      &quot;initial_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: true,
+        &quot;transport_error&quot;: &quot;EOFError&quot;,
+        &quot;errno&quot;: null
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: false,
+        &quot;transport_error&quot;: &quot;ConnectionRefusedError&quot;,
+        &quot;errno&quot;: 111
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: null,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;restart_during_fault_refused_updates&quot;: true,
+      &quot;fault_restart_exit&quot;: 1,
+      &quot;restart_gate&quot;: {
+        &quot;repaired_storage_still_blocks&quot;: true,
+        &quot;journal_byte_identical_after_repair&quot;: true,
+        &quot;no_tls_or_pointer_changes&quot;: true,
+        &quot;root_only_prepare&quot;: true,
+        &quot;stale_and_duplicate_cas_rejected&quot;: true,
+        &quot;second_restart_invalidates_old_cas&quot;: true,
+        &quot;prepared_never_enables_updates&quot;: true,
+        &quot;raw_health_before_repaired_restart&quot;: &quot;HEALTHY&quot;,
+        &quot;wire_preserved&quot;: &quot;baseline&quot;
+      },
+      &quot;verification&quot;: {
+        &quot;mode&quot;: &quot;unknown-probe&quot;,
+        &quot;root_only&quot;: true,
+        &quot;duplicate_keeps_original_budget&quot;: true,
+        &quot;different_parameters_rejected&quot;: true,
+        &quot;no_replay_of_probe_or_executor&quot;: true,
+        &quot;terminal&quot;: &quot;FAILED&quot;,
+        &quot;storage_result&quot;: {
+          &quot;storage_verified&quot;: false,
+          &quot;updates_enabled&quot;: false,
+          &quot;restored&quot;: false,
+          &quot;error&quot;: &quot;FileExistsError&quot;,
+          &quot;reason&quot;: null,
+          &quot;sqlite_error&quot;: null,
+          &quot;errno&quot;: 17
+        },
+        &quot;protected_journal_and_tls_unchanged&quot;: true,
+        &quot;updates_enabled&quot;: false,
+        &quot;restored&quot;: false
+      },
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 2,
+      &quot;elapsed_seconds&quot;: 2.4984811209999407
+    },
+    {
+      &quot;fault&quot;: &quot;enospc&quot;,
+      &quot;phase&quot;: &quot;pre&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;clean_lifecycle&quot;: {
+        &quot;normal_activation_committed&quot;: true,
+        &quot;graceful_stop_certified&quot;: true,
+        &quot;clean_restart_new_epoch&quot;: true,
+        &quot;competing_writer_rejected_without_gate_mutation&quot;: true
+      },
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;20280 kB&quot;,
+        &quot;VmRSS&quot;: &quot;20280 kB&quot;
+      },
+      &quot;filled_bytes&quot;: 26447872,
+      &quot;observed_errno&quot;: 28,
+      &quot;mount_options&quot;: &quot;rw,relatime&quot;,
+      &quot;initial_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: true,
+        &quot;transport_error&quot;: &quot;EOFError&quot;,
+        &quot;errno&quot;: null
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;transport_unavailable&quot;: true,
+        &quot;request_sent&quot;: false,
+        &quot;transport_error&quot;: &quot;ConnectionRefusedError&quot;,
+        &quot;errno&quot;: 111
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: null,
+      &quot;request_result&quot;: null,
+      &quot;storage_health&quot;: &quot;HEALTHY&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: 75,
+      &quot;restart_during_fault_refused_updates&quot;: true,
+      &quot;fault_restart_exit&quot;: 1,
+      &quot;restart_gate&quot;: {
+        &quot;repaired_storage_still_blocks&quot;: true,
+        &quot;journal_byte_identical_after_repair&quot;: true,
+        &quot;no_tls_or_pointer_changes&quot;: true,
+        &quot;root_only_prepare&quot;: true,
+        &quot;stale_and_duplicate_cas_rejected&quot;: true,
+        &quot;second_restart_invalidates_old_cas&quot;: true,
+        &quot;prepared_never_enables_updates&quot;: true,
+        &quot;raw_health_before_repaired_restart&quot;: &quot;HEALTHY&quot;,
+        &quot;wire_preserved&quot;: &quot;baseline&quot;
+      },
+      &quot;verification&quot;: {
+        &quot;mode&quot;: &quot;history&quot;,
+        &quot;root_only&quot;: true,
+        &quot;duplicate_keeps_original_budget&quot;: true,
+        &quot;different_parameters_rejected&quot;: true,
+        &quot;no_replay_of_probe_or_executor&quot;: true,
+        &quot;normal_history_rows&quot;: 64,
+        &quot;recovery_history_rows&quot;: 16,
+        &quot;independent_capacity_verified&quot;: true,
+        &quot;terminal&quot;: &quot;STORAGE_VERIFIED&quot;,
+        &quot;storage_result&quot;: {
+          &quot;storage_verified&quot;: true,
+          &quot;journal_verified&quot;: true,
+          &quot;prior_health&quot;: &quot;HEALTHY&quot;,
+          &quot;updates_enabled&quot;: false,
+          &quot;restored&quot;: false
+        },
+        &quot;protected_journal_and_tls_unchanged&quot;: true,
+        &quot;updates_enabled&quot;: false,
+        &quot;restored&quot;: false
+      },
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 17,
+      &quot;elapsed_seconds&quot;: 3.438337486999899
+    },
+    {
+      &quot;fault&quot;: &quot;sqlite_full&quot;,
+      &quot;phase&quot;: &quot;post&quot;,
+      &quot;ext4_image_bytes&quot;: 33554432,
+      &quot;pager_max_pages&quot;: 9,
+      &quot;allocation_bytes&quot;: 65536,
+      &quot;service_memory_before_fault&quot;: {
+        &quot;VmHWM&quot;: &quot;20260 kB&quot;,
+        &quot;VmRSS&quot;: &quot;20260 kB&quot;
+      },
+      &quot;candidate_observed_before_fault&quot;: true,
+      &quot;active_executor_fencing&quot;: {
+        &quot;prepare_denied_while_busy&quot;: true,
+        &quot;competing_writer_rejected&quot;: true,
+        &quot;gate_unchanged&quot;: true
+      },
+      &quot;executor_memory_at_checkpoint&quot;: {
+        &quot;VmHWM&quot;: &quot;21544 kB&quot;,
+        &quot;VmRSS&quot;: &quot;21544 kB&quot;
+      },
+      &quot;new_update_reply&quot;: {
+        &quot;ok&quot;: false,
+        &quot;error&quot;: &quot;StorageBlocked&quot;,
+        &quot;sqlite_error&quot;: null,
+        &quot;errno&quot;: null,
+        &quot;reason&quot;: &quot;storage_unavailable&quot;
+      },
+      &quot;core_state&quot;: &quot;READY&quot;,
+      &quot;request_state&quot;: &quot;DEGRADED&quot;,
+      &quot;request_result&quot;: {
+        &quot;error&quot;: &quot;OperationalError&quot;,
+        &quot;expired&quot;: false,
+        &quot;sqlite_error&quot;: &quot;SQLITE_FULL&quot;,
+        &quot;errno&quot;: null
+      },
+      &quot;storage_health&quot;: &quot;STORAGE_FAILED&quot;,
+      &quot;wire_after&quot;: &quot;baseline&quot;,
+      &quot;service_exit&quot;: null,
+      &quot;restart_still_blocks_new_updates&quot;: true,
+      &quot;restart_gate&quot;: {
+        &quot;repaired_storage_still_blocks&quot;: true,
+        &quot;journal_byte_identical_after_repair&quot;: true,
+        &quot;no_tls_or_pointer_changes&quot;: true,
+        &quot;root_only_prepare&quot;: true,
+        &quot;stale_and_duplicate_cas_rejected&quot;: true,
+        &quot;second_restart_invalidates_old_cas&quot;: true,
+        &quot;prepared_never_enables_updates&quot;: true,
+        &quot;raw_health_before_repaired_restart&quot;: &quot;STORAGE_FAILED&quot;,
+        &quot;wire_preserved&quot;: &quot;baseline&quot;
+      },
+      &quot;verification&quot;: {
+        &quot;mode&quot;: &quot;success-latched&quot;,
+        &quot;root_only&quot;: true,
+        &quot;duplicate_keeps_original_budget&quot;: true,
+        &quot;different_parameters_rejected&quot;: true,
+        &quot;no_replay_of_probe_or_executor&quot;: true,
+        &quot;terminal&quot;: &quot;STORAGE_VERIFIED&quot;,
+        &quot;storage_result&quot;: {
+          &quot;storage_verified&quot;: true,
+          &quot;journal_verified&quot;: true,
+          &quot;prior_health&quot;: &quot;STORAGE_FAILED&quot;,
+          &quot;updates_enabled&quot;: false,
+          &quot;restored&quot;: false
+        },
+        &quot;protected_journal_and_tls_unchanged&quot;: true,
+        &quot;updates_enabled&quot;: false,
+        &quot;restored&quot;: false
+      },
+      &quot;passed&quot;: true,
+      &quot;cleanup_verified&quot;: true,
+      &quot;tracked_executors&quot;: 2,
+      &quot;elapsed_seconds&quot;: 2.9323315000001458
+    }
+  ],
+  &quot;scope&quot;: &quot;formal source-run certweft.service + root recovery_executor; isolated Linux VM ext4 loop store; real Nginx fresh TLS observation&quot;,
+  &quot;untested&quot;: [
+    &quot;TLS restoration/unlock&quot;,
+    &quot;persistent systemd deployment&quot;,
+    &quot;VM reboot&quot;,
+    &quot;power loss&quot;,
+    &quot;physical media errors&quot;,
+    &quot;D-state cleanup&quot;,
+    &quot;automatic history/probe recycling&quot;
+  ],
+  &quot;source_sha256&quot;: {
+    &quot;certweft/service.py&quot;: &quot;9156147b11068dcefe6bfd19dec45e48e03cb439b0ba5e442585ad54279e9ed9&quot;,
+    &quot;certweft/deadlines.py&quot;: &quot;e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f&quot;,
+    &quot;certweft/recovery.py&quot;: &quot;563ef436f3c4c81ff74651ceeff30ff5d83827a72bbe0324baf39e57e3b64c0d&quot;,
+    &quot;certweft/recovery_executor.py&quot;: &quot;1e031346ecfd0bd92a0f9e1c407ec6873a1cf381ce566a5e883c203722b0fca0&quot;,
+    &quot;certweft/__init__.py&quot;: &quot;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855&quot;,
+    &quot;certweft/core.py&quot;: &quot;fc63c1d25dda209c19129440b1fec36f20d1fdd9b72ef09acd8ab032872310b1&quot;,
+    &quot;certweft/operations.py&quot;: &quot;81656a79e9d490ae9c6627e1ae5aae42a7ecec57aae8c10261d6a9682ee7291d&quot;,
+    &quot;certweft/gate.py&quot;: &quot;d02c88e70e784e09392d8507548c626a5d289a76612803a64388cd98ce54cec9&quot;,
+    &quot;certweft/storage.py&quot;: &quot;2f431bd3758a8a14b2cb616521f50d638cf3fdbf733278f87a7e7cb99bf1fe3b&quot;,
+    &quot;certweft/ca.py&quot;: &quot;e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c&quot;,
+    &quot;certweft/executor.py&quot;: &quot;052ad6e92b20f8fe2e37fa4e1a72180f627b1be327c3e363fa38b6f14b52cc0a&quot;,
+    &quot;tools/policy_vm.py&quot;: &quot;27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6&quot;,
+    &quot;tools/storage_vm.py&quot;: &quot;4d9011f35aa3411debed3f19db0a11168de9c8e91d5e1eb83c1ac2a9cb4554e7&quot;,
+    &quot;tools/deadline_vm.py&quot;: &quot;cd0d61fb4e1253cdc23b12e3fb38d10ad41fd04f2debd9c23f4574f8fa4e7cf3&quot;,
+    &quot;tools/executor_vm.py&quot;: &quot;73cfc9aafee86b97f450337631caf374e79fad7e6c8c13509a36d5e7b49680a1&quot;,
+    &quot;tools/recovery_vm.py&quot;: &quot;b4deb94ea86fddda38d29777cb01f3c25872630c838156075532f11a6a845d71&quot;,
+    &quot;tools/explore.py&quot;: &quot;0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec&quot;,
+    &quot;tools/credential_probe.py&quot;: &quot;8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46&quot;,
+    &quot;tools/operations_vm.py&quot;: &quot;3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85&quot;,
+    &quot;tools/gate_vm.py&quot;: &quot;66215b4c176fe5ca9db1fda5bd6869213f852fd5cdeb0ee3ea23412197a0fb78&quot;,
+    &quot;tests/test_operations.py&quot;: &quot;f1741fae5ae944fa974e90c418c447da27e49d18051fc8ad50b4ea843041e337&quot;,
+    &quot;tests/test_core.py&quot;: &quot;8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c&quot;,
+    &quot;tests/test_recovery.py&quot;: &quot;1b77217de0e8caff5812582a3736aec2647faf10569d5ac1a7eff78e167a132c&quot;,
+    &quot;tests/test_storage.py&quot;: &quot;07d2de55f10a9a3011db73c9141295b43ff2951f54b6e339d184117cf87af2cf&quot;,
+    &quot;tests/test_gate.py&quot;: &quot;9779bc331efcc46a3fb38155eecdc0b260374e240fa13488ce6e4f230df832e1&quot;,
+    &quot;tests/test_deadlines.py&quot;: &quot;442d8ea3cfa4af88ec62603d84f017fb2b1883e8c05d3d92bedd695811b9dd29&quot;,
+    &quot;policy/server.tpl&quot;: &quot;e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550&quot;
+  },
+  &quot;source_unchanged&quot;: true,
+  &quot;environment&quot;: {
+    &quot;python&quot;: &quot;3.12.3&quot;,
+    &quot;kernel&quot;: &quot;6.8.0-117-generic&quot;,
+    &quot;machine&quot;: &quot;aarch64&quot;
+  }
+}</pre>

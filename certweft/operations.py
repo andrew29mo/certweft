@@ -60,6 +60,8 @@ class Operations:
         with self.transaction() as db:
             db.execute("CREATE TABLE IF NOT EXISTS health (id INTEGER PRIMARY KEY CHECK(id=1), state TEXT NOT NULL, detail TEXT)")
             db.execute("INSERT OR IGNORE INTO health VALUES(1,'HEALTHY',NULL)")
+            db.execute('CREATE TABLE IF NOT EXISTS storage_probe(id INTEGER PRIMARY KEY CHECK(id=1),value BLOB NOT NULL)')
+            db.execute('INSERT OR IGNORE INTO storage_probe VALUES(1,zeroblob(64))')
             db.execute('CREATE TABLE IF NOT EXISTS requests (id TEXT PRIMARY KEY, digest TEXT NOT NULL, state TEXT NOT NULL, result TEXT)')
             if 'timing' not in [row[1] for row in db.execute('PRAGMA table_info(requests)')]:db.execute('ALTER TABLE requests ADD COLUMN timing TEXT')
             db.execute("CREATE UNIQUE INDEX IF NOT EXISTS one_live_request ON requests((1)) WHERE state IN ('ACCEPTED','RUNNING','CANCEL_REQUESTED')")

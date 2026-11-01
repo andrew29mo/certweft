@@ -14,7 +14,7 @@ def alive(pid,start=None):
     try:
         raw=pathlib.Path('/proc',str(pid),'stat').read_text();fields=raw[raw.rfind(')')+2:].split()
         return fields[0]!='Z' and (start is None or fields[19]==start)
-    except FileNotFoundError:return False
+    except (FileNotFoundError,ProcessLookupError):return False
 
 def call(endpoint,body):
     # Only expected socket failures are transport results. Local helper failure
@@ -37,7 +37,7 @@ print(json.dumps(reply))
     if result.returncode:raise RuntimeError('controller_helper_failed')
     return json.loads(result.stdout)
 
-def scenario(kind,phase,check_gate=False,lifecycle_mode=None):
+def scenario(kind,phase,check_gate=False,lifecycle_mode=None,verification_mode=None):
     work=pathlib.Path(tempfile.mkdtemp(prefix='cw-storage-',dir='/var/tmp'));os.chmod(work,0o711)
     image=work/'disk.img';mount=work/'store';mount.mkdir(mode=0o700)
     parent=None;ngpid=None;ngworkers=[];mounted=False;bound=False;child=None;loop=None
@@ -359,6 +359,10 @@ def scenario(kind,phase,check_gate=False,lifecycle_mode=None):
             assert not call(config['socket'],{**job,'request_id':'second-restart-update'})['ok']
             assert wire()==saved_wire and hashlib.sha256((mount/'journal.db').read_bytes()).hexdigest()==before_journal
             result['restart_gate']={'repaired_storage_still_blocks':True,'journal_byte_identical_after_repair':True,'no_tls_or_pointer_changes':True,'root_only_prepare':True,'stale_and_duplicate_cas_rejected':True,'second_restart_invalidates_old_cas':True,'prepared_never_enables_updates':True,'raw_health_before_repaired_restart':raw_health,'wire_preserved':saved_wire}
+        if verification_mode:
+            from tools.recovery_vm import exercise
+            detail,parent=exercise(mount,work,config,parent,call,wire,job,fault,verification_mode)
+            result['verification']=detail
         result['passed']=True
     finally:
         cleanup=True

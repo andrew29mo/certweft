@@ -2,6 +2,7 @@
 import fcntl,json,os,signal,socket,stat,struct,subprocess,sys,threading
 from .operations import Operations,decision
 from .gate import Gate
+from .recovery import RecoveryStore
 from . import storage
 from .core import Rejected,Writer
 from pathlib import Path
@@ -58,7 +59,12 @@ def serve(config_path):
             gate.checkpoint=gate_checkpoint
         with decision(root/'journal.db'):session=gate.start()
         config['gate_authority']=Gate.token(session)
-        operations=Operations(root,config.get('sqlite_max_pages'));operations.initialize()
+        operations=Operations(root,config.get('sqlite_max_pages'))
+        if session['state']=='RUNNING':operations.initialize()
+        recovery=RecoveryStore(root);recovery.initialize()
+        if recovery.reconcile() and session['state']=='RUNNING':
+            with decision(root/'journal.db'):session=gate.block(config['gate_authority'])
+            config['gate_authority']=Gate.token(session)
         active=[None]
         def unrecorded_storage(error):
             # Called while the metadata decision barrier is still held. No
@@ -84,8 +90,8 @@ def serve(config_path):
                 os.kill(os.getpid(),signal.SIGSTOP)
             operations.before_storage_latch=pause_storage_latch
         guard=threading.Lock()
-        def execute(body,uid):
-            child=subprocess.Popen([sys.executable,'-m','certweft.executor',str(fd)],
+        def execute(body,uid,module='certweft.executor'):
+            child=subprocess.Popen([sys.executable,'-m',module,str(fd)],
                 start_new_session=True,pass_fds=(fd,),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
             active[0]=child
             if config.get('executor_inventory'):
@@ -120,6 +126,14 @@ def serve(config_path):
                     operations.finish(body['request_id'],'DEGRADED',{'executor_error':type(error).__name__})
                 except Exception:os._exit(75)
             finally:guard.release()
+        def work_verification(body):
+            try:
+                reply=execute({'op':'run-verification','request_id':body['request_id']},0,'certweft.recovery_executor')
+                if not reply.get('ok'):recovery.finish(body['request_id'],'FAILED',{'storage_verified':False,'updates_enabled':False,'restored':False,'error':reply.get('error'),'sqlite_error':reply.get('sqlite_error'),'errno':reply.get('errno')})
+            except Exception as error:
+                try:recovery.finish(body['request_id'],'FAILED',{'storage_verified':False,'updates_enabled':False,'restored':False,'error':type(error).__name__})
+                except Exception:os._exit(75)
+            finally:guard.release()
         stopping=threading.Event()
         previous={sig:signal.getsignal(sig) for sig in [signal.SIGTERM,signal.SIGINT]}
         for sig in previous:signal.signal(sig,lambda *_:stopping.set())
@@ -144,7 +158,30 @@ def serve(config_path):
                             data+=chunk
                             if len(data)>49152:raise ValueError('budget')
                         body=json.loads(data);op=body.get('op')
-                        if op in {'recovery-status','prepare-recovery','recover'}:
+                        if op in {'verify-storage','recovery-request-status'}:
+                            if uid!=0:raise Rejected('admin_required')
+                            if op=='recovery-request-status':
+                                if set(body)!={'op','request_id'} or type(body['request_id']) is not str:raise Rejected('request_shape')
+                                reply={'ok':True,'result':recovery.get(body['request_id']),'historical':True,'updates_enabled':False,'restored':False}
+                            else:
+                                digest=RecoveryStore.identity(body)
+                                try:existing=recovery.get(body['request_id'])
+                                except Rejected:existing=None
+                                if existing:
+                                    if existing['digest']!=digest:raise Rejected('request_conflict')
+                                    reply={'ok':True,'result':existing,'created':False,'historical':True,'updates_enabled':False,'restored':False}
+                                else:
+                                    if not guard.acquire(False):raise Rejected('busy')
+                                    try:
+                                        result,created=recovery.admit(body,Writer(**config['writer']))
+                                        if not created:guard.release()
+                                        else:
+                                            try:threading.Thread(target=work_verification,args=(body,),daemon=True).start()
+                                            except Exception:
+                                                recovery.finish(body['request_id'],'FAILED',{'storage_verified':False,'updates_enabled':False,'restored':False,'error':'dispatch_failed'});raise
+                                    except Exception:guard.release();raise
+                                    reply={'ok':True,'result':result,'created':created,'updates_enabled':False,'restored':False}
+                        elif op in {'recovery-status','prepare-recovery','recover'}:
                             if uid!=0:raise Rejected('admin_required')
                             if op=='recover':raise Rejected('use_prepare_recovery')
                             fields={'op'} if op=='recovery-status' else {'op','gate_epoch','gate_revision'}

@@ -67,6 +67,14 @@ claims TLS restoration. Abnormal restart no longer automatically restores pendin
 activations. A clean restart requires STOPPED plus a matching completion receipt;
 partial STOPPED publication and missing legacy records remain quarantined.
 
+## Durable storage verification
+
+[Root storage/journal verification](docs/STORAGE_VERIFICATION.md) adds persistent
+request IDs, original deadlines and fixed targets in a separate bounded recovery
+history. Formal filesystem and SQLite write checks can record STORAGE_VERIFIED,
+but never reset health, restore TLS or unlock. Restart interrupts rather than
+replays unfinished verification; old timing is preserved.
+
 ## Evidence
 
 [JSON](evidence/exploration.json) and [HTML](evidence/exploration.html) contain the

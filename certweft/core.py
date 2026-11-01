@@ -186,4 +186,8 @@ class Writer:
     def recover(self):
         with self.locked() as (db,lock):return self.recover_locked(db)
     def status(self):
-        with self.locked() as (db,lock):return self.read(db)
+        # Observation must never create missing schema in a quarantined journal.
+        with open(self.root/'writer.lock','a+b') as lock:
+            fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+            with contextlib.closing(sqlite3.connect((self.root/'journal.db').resolve().as_uri()+'?mode=ro',uri=True,timeout=.2)) as db:
+                return self.read(db)

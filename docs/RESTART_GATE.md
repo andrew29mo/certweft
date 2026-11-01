@@ -1,5 +1,10 @@
 # P0-1 / P0-2: preexisting restart gate and root recovery preparation
 
+**Storage-verification update:** [STORAGE_VERIFICATION.md](STORAGE_VERIFICATION.md)
+adds durable root verification after preparation, without restoration or unlock.
+Current unit counts and source-bound reports are listed there; the original
+47-unit qualification below belongs to the preceding gate revision.
+
 ## Delivered boundary
 
 This milestone implements restart quarantine and the **preparation contract** for
@@ -155,11 +160,13 @@ revised assertion still requires actual refusal and a closed gate, not merely a
 running process. Elapsed times include provisioning/repair/cleanup; sampled RSS
 excludes Nginx/VM and is not a service peak or benchmark.
 
-## Current validation
+## Earlier gate-review validation
 
-The fixed current source passed 47 Linux unit tests
+The 7b7eb2a gate-review revision passed 47 Linux unit tests
 ([JSON](../evidence/gate-units.json), [HTML](../evidence/gate-units.html)), ten
-restart-gate VM fixtures and fourteen storage regression fixtures. Reports require
+restart-gate VM fixtures and fourteen storage regression fixtures. The gate/storage
+reports are now rerun with the recovery-verification source; current unit counts
+are in STORAGE_VERIFICATION.md. Reports require
 exact source fingerprints and verified private-fixture cleanup. Unit coverage
 includes a real SQLite transaction in which gate authority changes after both SQL
 writes but before final COMMIT; neither the request nor core state may commit.

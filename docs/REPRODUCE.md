@@ -1,6 +1,7 @@
 # Reproduce the bounded explorations
 
-For the current startup policy use [RESTART_GATE.md](RESTART_GATE.md).
+For current verification use [STORAGE_VERIFICATION.md](STORAGE_VERIFICATION.md);
+for startup policy use [RESTART_GATE.md](RESTART_GATE.md).
 The original exploration and old VM recovery runners below describe historical
 checkouts; they do not qualify current automatic recovery.
 

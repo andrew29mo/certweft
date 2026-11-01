@@ -144,3 +144,11 @@ publication without successful primary directory sync is insufficient to reopen.
 Active shutdown and primary-sync EIO injection are tested separately from actual
 storage-media/power-loss behavior; the receipt-final-sync ambiguity is documented
 in RESTART_GATE.md rather than claimed as a universal fault latch.
+
+## Durable verification update
+
+[STORAGE_VERIFICATION.md](STORAGE_VERIFICATION.md) adds a separate 16-row root
+operation history with preserved budgets and fixed targets. A lease-fenced
+verifier checks storage/journal and writes only its reserved probe row. It never
+clears health, restores a certificate or opens the gate. Quarantined startup and
+status do not create/migrate missing main-journal schema.

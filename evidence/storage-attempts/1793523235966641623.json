@@ -1,0 +1,619 @@
+{
+  "passed": true,
+  "status": "completed",
+  "cases": [
+    {
+      "fault": "enospc",
+      "phase": "pre",
+      "ext4_image_bytes": 33554432,
+      "service_memory_before_fault": {
+        "VmHWM": "20244 kB",
+        "VmRSS": "20244 kB"
+      },
+      "filled_bytes": 26464256,
+      "observed_errno": 28,
+      "mount_options": "rw,relatime",
+      "initial_reply": {
+        "ok": false,
+        "transport_unavailable": true,
+        "request_sent": true,
+        "transport_error": "EOFError",
+        "errno": null
+      },
+      "new_update_reply": {
+        "ok": false,
+        "transport_unavailable": true,
+        "request_sent": false,
+        "transport_error": "ConnectionRefusedError",
+        "errno": 111
+      },
+      "core_state": "READY",
+      "request_state": null,
+      "request_result": null,
+      "storage_health": "HEALTHY",
+      "wire_after": "baseline",
+      "service_exit": 75,
+      "restart_during_fault_refused_updates": true,
+      "fault_restart_exit": 1,
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 0,
+      "elapsed_seconds": 0.34561669200002143
+    },
+    {
+      "fault": "enospc",
+      "phase": "prepare",
+      "ext4_image_bytes": 33554432,
+      "service_memory_before_fault": {
+        "VmHWM": "20252 kB",
+        "VmRSS": "20252 kB"
+      },
+      "baseline_observed_before_fault": true,
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "20400 kB",
+        "VmRSS": "20400 kB"
+      },
+      "filled_bytes": 26460160,
+      "observed_errno": 28,
+      "mount_options": "rw,relatime",
+      "new_update_reply": {
+        "ok": false,
+        "transport_unavailable": true,
+        "request_sent": false,
+        "transport_error": "ConnectionRefusedError",
+        "errno": 111
+      },
+      "core_state": "READY",
+      "request_state": "RUNNING",
+      "request_result": null,
+      "storage_health": "HEALTHY",
+      "wire_after": "baseline",
+      "service_exit": 75,
+      "fault_restart_update_reply": {
+        "ok": false,
+        "error": "Rejected",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "recovery_required"
+      },
+      "restart_during_fault_refused_updates": true,
+      "fault_restart_exit": null,
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 1,
+      "elapsed_seconds": 0.9308330209998985
+    },
+    {
+      "fault": "enospc",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "service_memory_before_fault": {
+        "VmHWM": "20256 kB",
+        "VmRSS": "20256 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "21532 kB",
+        "VmRSS": "21532 kB"
+      },
+      "filled_bytes": 26443776,
+      "observed_errno": 28,
+      "mount_options": "rw,relatime",
+      "new_update_reply": {
+        "ok": false,
+        "transport_unavailable": true,
+        "request_sent": false,
+        "transport_error": "ConnectionRefusedError",
+        "errno": 111
+      },
+      "core_state": "APPLYING",
+      "request_state": "RUNNING",
+      "request_result": null,
+      "storage_health": "HEALTHY",
+      "wire_after": "candidate",
+      "service_exit": 75,
+      "fault_restart_update_reply": {
+        "ok": false,
+        "error": "Rejected",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "recovery_required"
+      },
+      "restart_during_fault_refused_updates": true,
+      "fault_restart_exit": null,
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 1,
+      "elapsed_seconds": 1.4557606579999174
+    },
+    {
+      "fault": "enospc",
+      "phase": "cancel",
+      "ext4_image_bytes": 33554432,
+      "service_memory_before_fault": {
+        "VmHWM": "20244 kB",
+        "VmRSS": "20244 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "21548 kB",
+        "VmRSS": "21548 kB"
+      },
+      "filled_bytes": 26443776,
+      "observed_errno": 28,
+      "mount_options": "rw,relatime",
+      "cancel_reply": {
+        "ok": false,
+        "transport_unavailable": true,
+        "request_sent": true,
+        "transport_error": "EOFError",
+        "errno": null
+      },
+      "new_update_reply": {
+        "ok": false,
+        "transport_unavailable": true,
+        "request_sent": false,
+        "transport_error": "ConnectionRefusedError",
+        "errno": 111
+      },
+      "core_state": "APPLYING",
+      "request_state": "RUNNING",
+      "request_result": null,
+      "storage_health": "HEALTHY",
+      "wire_after": "candidate",
+      "service_exit": 75,
+      "restart_during_fault_refused_updates": true,
+      "fault_restart_exit": 1,
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 1,
+      "elapsed_seconds": 1.2266844880000463
+    },
+    {
+      "fault": "readonly",
+      "phase": "pre",
+      "ext4_image_bytes": 33554432,
+      "service_memory_before_fault": {
+        "VmHWM": "20252 kB",
+        "VmRSS": "20252 kB"
+      },
+      "observed_errno": 30,
+      "mount_options": "rw,relatime\nro,relatime",
+      "initial_reply": {
+        "ok": false,
+        "transport_unavailable": true,
+        "request_sent": true,
+        "transport_error": "EOFError",
+        "errno": null
+      },
+      "new_update_reply": {
+        "ok": false,
+        "transport_unavailable": true,
+        "request_sent": false,
+        "transport_error": "ConnectionRefusedError",
+        "errno": 111
+      },
+      "core_state": "READY",
+      "request_state": null,
+      "request_result": null,
+      "storage_health": "HEALTHY",
+      "wire_after": "baseline",
+      "service_exit": 75,
+      "restart_during_fault_refused_updates": true,
+      "fault_restart_exit": 1,
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 0,
+      "elapsed_seconds": 0.3255551590000323
+    },
+    {
+      "fault": "readonly",
+      "phase": "prepare",
+      "ext4_image_bytes": 33554432,
+      "service_memory_before_fault": {
+        "VmHWM": "20256 kB",
+        "VmRSS": "20256 kB"
+      },
+      "baseline_observed_before_fault": true,
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "20376 kB",
+        "VmRSS": "20376 kB"
+      },
+      "observed_errno": 30,
+      "mount_options": "rw,relatime\nro,relatime",
+      "new_update_reply": {
+        "ok": false,
+        "transport_unavailable": true,
+        "request_sent": false,
+        "transport_error": "ConnectionRefusedError",
+        "errno": 111
+      },
+      "core_state": "READY",
+      "request_state": "RUNNING",
+      "request_result": null,
+      "storage_health": "HEALTHY",
+      "wire_after": "baseline",
+      "service_exit": 75,
+      "restart_during_fault_refused_updates": true,
+      "fault_restart_exit": 1,
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 1,
+      "elapsed_seconds": 0.39014642200004346
+    },
+    {
+      "fault": "readonly",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "service_memory_before_fault": {
+        "VmHWM": "20244 kB",
+        "VmRSS": "20244 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "21548 kB",
+        "VmRSS": "21548 kB"
+      },
+      "observed_errno": 30,
+      "mount_options": "rw,relatime\nro,relatime",
+      "new_update_reply": {
+        "ok": false,
+        "transport_unavailable": true,
+        "request_sent": false,
+        "transport_error": "ConnectionRefusedError",
+        "errno": 111
+      },
+      "core_state": "APPLYING",
+      "request_state": "RUNNING",
+      "request_result": null,
+      "storage_health": "HEALTHY",
+      "wire_after": "candidate",
+      "service_exit": 75,
+      "restart_during_fault_refused_updates": true,
+      "fault_restart_exit": 1,
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 1,
+      "elapsed_seconds": 1.1468716759998188
+    },
+    {
+      "fault": "readonly",
+      "phase": "cancel",
+      "ext4_image_bytes": 33554432,
+      "service_memory_before_fault": {
+        "VmHWM": "20256 kB",
+        "VmRSS": "20256 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "21544 kB",
+        "VmRSS": "21544 kB"
+      },
+      "observed_errno": 30,
+      "mount_options": "rw,relatime\nro,relatime",
+      "cancel_reply": {
+        "ok": false,
+        "transport_unavailable": true,
+        "request_sent": true,
+        "transport_error": "EOFError",
+        "errno": null
+      },
+      "new_update_reply": {
+        "ok": false,
+        "transport_unavailable": true,
+        "request_sent": false,
+        "transport_error": "ConnectionRefusedError",
+        "errno": 111
+      },
+      "core_state": "APPLYING",
+      "request_state": "RUNNING",
+      "request_result": null,
+      "storage_health": "HEALTHY",
+      "wire_after": "candidate",
+      "service_exit": 75,
+      "restart_during_fault_refused_updates": true,
+      "fault_restart_exit": 1,
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 1,
+      "elapsed_seconds": 1.0192459540000982
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "pre",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "20244 kB",
+        "VmRSS": "20244 kB"
+      },
+      "initial_reply": {
+        "ok": false,
+        "error": "OperationalError",
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": null,
+      "request_result": null,
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 0,
+      "elapsed_seconds": 0.7812305270001616
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "prepare",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "20256 kB",
+        "VmRSS": "20256 kB"
+      },
+      "baseline_observed_before_fault": true,
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "20372 kB",
+        "VmRSS": "20372 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 1,
+      "elapsed_seconds": 1.2023569220000354
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "20268 kB",
+        "VmRSS": "20268 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "21528 kB",
+        "VmRSS": "21528 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 1,
+      "elapsed_seconds": 1.9691904530000102
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "cancel",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "20260 kB",
+        "VmRSS": "20260 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "21552 kB",
+        "VmRSS": "21552 kB"
+      },
+      "cancel_reply": {
+        "ok": false,
+        "error": "OperationalError",
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "StorageBlocked",
+        "expired": false,
+        "sqlite_error": null,
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 1,
+      "elapsed_seconds": 2.4244246830000975
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "cancel_race",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "20256 kB",
+        "VmRSS": "20256 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "21548 kB",
+        "VmRSS": "21548 kB"
+      },
+      "executor_resumed_while_fault_handler_paused": true,
+      "cancel_reply": {
+        "ok": false,
+        "error": "OperationalError",
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "StorageBlocked",
+        "expired": false,
+        "sqlite_error": null,
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 1,
+      "elapsed_seconds": 2.5529159529999106
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "cancel_unrecorded",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "20240 kB",
+        "VmRSS": "20240 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "21548 kB",
+        "VmRSS": "21548 kB"
+      },
+      "cancel_reply": {
+        "ok": false,
+        "transport_unavailable": true,
+        "request_sent": true,
+        "transport_error": "EOFError",
+        "errno": null
+      },
+      "new_update_reply": {
+        "ok": false,
+        "transport_unavailable": true,
+        "request_sent": false,
+        "transport_error": "ConnectionRefusedError",
+        "errno": 111
+      },
+      "core_state": "APPLYING",
+      "request_state": "RUNNING",
+      "request_result": null,
+      "storage_health": "HEALTHY",
+      "wire_after": "candidate",
+      "service_exit": 75,
+      "unrecordable_fault_executor_stopped": true,
+      "unrecorded_fault": {
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "restart_after_unrecordable_fault": "see restart-gate validation; full restoration not qualified",
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 1,
+      "elapsed_seconds": 1.16634595000005
+    }
+  ],
+  "scope": "formal certweft.service + executor; Nginx; ext4 loop filesystem in isolated Linux VM",
+  "untested": [
+    "physical medium failures",
+    "fsync failure injection",
+    "power loss",
+    "VM reboot",
+    "persistent systemd deployment",
+    "controlled DEGRADED repair",
+    "automatic quota/history recycling"
+  ],
+  "environment": {
+    "python": "3.12.3",
+    "sqlite": "3.45.1",
+    "openssl": "OpenSSL 3.0.13 30 Jan 2024",
+    "kernel": "6.8.0-117-generic",
+    "machine": "aarch64"
+  },
+  "source_sha256": {
+    "certweft/service.py": "9156147b11068dcefe6bfd19dec45e48e03cb439b0ba5e442585ad54279e9ed9",
+    "certweft/deadlines.py": "e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f",
+    "certweft/recovery.py": "62611a66806a5203230fc5462d09919cf0d280fc3df88c987f58b2856ca8bc53",
+    "certweft/recovery_executor.py": "1e031346ecfd0bd92a0f9e1c407ec6873a1cf381ce566a5e883c203722b0fca0",
+    "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certweft/core.py": "fc63c1d25dda209c19129440b1fec36f20d1fdd9b72ef09acd8ab032872310b1",
+    "certweft/operations.py": "81656a79e9d490ae9c6627e1ae5aae42a7ecec57aae8c10261d6a9682ee7291d",
+    "certweft/gate.py": "d02c88e70e784e09392d8507548c626a5d289a76612803a64388cd98ce54cec9",
+    "certweft/storage.py": "2f431bd3758a8a14b2cb616521f50d638cf3fdbf733278f87a7e7cb99bf1fe3b",
+    "certweft/ca.py": "e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c",
+    "certweft/executor.py": "052ad6e92b20f8fe2e37fa4e1a72180f627b1be327c3e363fa38b6f14b52cc0a",
+    "tools/policy_vm.py": "27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6",
+    "tools/storage_vm.py": "4d9011f35aa3411debed3f19db0a11168de9c8e91d5e1eb83c1ac2a9cb4554e7",
+    "tools/deadline_vm.py": "cd0d61fb4e1253cdc23b12e3fb38d10ad41fd04f2debd9c23f4574f8fa4e7cf3",
+    "tools/executor_vm.py": "73cfc9aafee86b97f450337631caf374e79fad7e6c8c13509a36d5e7b49680a1",
+    "tools/recovery_vm.py": "b4deb94ea86fddda38d29777cb01f3c25872630c838156075532f11a6a845d71",
+    "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
+    "tools/credential_probe.py": "8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46",
+    "tools/operations_vm.py": "3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85",
+    "tools/gate_vm.py": "66215b4c176fe5ca9db1fda5bd6869213f852fd5cdeb0ee3ea23412197a0fb78",
+    "tests/test_operations.py": "f1741fae5ae944fa974e90c418c447da27e49d18051fc8ad50b4ea843041e337",
+    "tests/test_core.py": "8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c",
+    "tests/test_recovery.py": "5de6c5de1909b211999e811e50ab894b5aa66b694403fed5b424e03d96f10e74",
+    "tests/test_storage.py": "07d2de55f10a9a3011db73c9141295b43ff2951f54b6e339d184117cf87af2cf",
+    "tests/test_gate.py": "9779bc331efcc46a3fb38155eecdc0b260374e240fa13488ce6e4f230df832e1",
+    "tests/test_deadlines.py": "442d8ea3cfa4af88ec62603d84f017fb2b1883e8c05d3d92bedd695811b9dd29",
+    "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
+  },
+  "source_unchanged": true
+}
