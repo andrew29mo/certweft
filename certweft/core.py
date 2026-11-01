@@ -148,6 +148,8 @@ class Writer:
             if db.execute('SELECT 1 FROM state').fetchone():raise Rejected('already_initialized')
             name=self.stage(cert);self.select(name)
             self.save(db,dict(schema=1,state='READY',epoch=uuid.uuid4().hex,revision=0,committed=name,committed_digest=self.digest(name),candidate=None))
+            from .gate import Gate
+            Gate(self.root).provision()
     def activate(self,cert,epoch,revision,checkpoint=lambda x:None):
         with self.locked() as (db,lock):
             s=self.read(db)

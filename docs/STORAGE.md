@@ -1,5 +1,10 @@
 # P0-3b-2, first round: storage failures before and after publication
 
+**Startup-policy update:** [RESTART_GATE.md](RESTART_GATE.md) supersedes the
+earlier automatic process-recovery/reopening descriptions below. Old report
+counts and source hashes are historical. Current source validation uses the
+gate and storage runners plus Linux unit tests.
+
 ## Contract
 
 The source-run `certweft.service` and its privileged executor now classify
@@ -26,15 +31,12 @@ core APPLYING while Nginx still serves the candidate. Do not infer the live
 certificate from the committed journal identity alone. No automatic repair or
 rollback guarantee is made for an unwritable store.
 
-Restart protection has two distinct scopes. A persisted STORAGE_FAILED latch
-remains after a normal service restart. With ENOSPC/EROFS still active, an attempted
-restart either fails startup or rejects an actual new submission and exits; it
-need not fail before binding a socket because no-op initialization can succeed.
-If the latch could not be written, the journal can still say HEALTHY. **Restoring
-storage and restarting can then admit new updates.** This round does not provide
-a durable uncertainty marker or a controlled post-repair restart gate. It must
-not be described as general restart-proof storage quarantine. Stop the service
-and retain evidence for operator review; do not rely on restart as safe repair.
+Restart protection is now extended by the preexisting execution record in
+[RESTART_GATE.md](RESTART_GATE.md). Persisted STORAGE_FAILED still survives restart;
+when that latch could not be written, the execution record quarantines the repaired
+store on restart even if the journal says HEALTHY. Root preparation does not clear
+quarantine or prove TLS restoration. Earlier storage reports alone did not cover
+this gate; current restart-gate evidence does.
 
 A short cross-process decision lock now serializes metadata decisions (including
 rollback followed by fault recording) with final COMMIT. Lock contention is
@@ -71,7 +73,7 @@ plus two SQLite cancellation/fault-recording race cases.
 |---|---|---|---|
 | ENOSPC | Fill a dedicated 32 MiB ext4 loop filesystem; independently require errno 28 on a new write | Baseline pointer and fresh TLS remain unchanged; no successful admission on failed insert | No COMMITTED/ROLLED_BACK claim; service stops accepting; candidate can remain live |
 | EROFS | Read-only bind mount over that store; independently require errno 30 | Baseline remains live | No successful outcome or cancel acceptance; service exits 75; candidate can remain live |
-| SQLITE_FULL | Root-configured max_page_count on formal metadata and executor write connections, SQL allocation trigger requires a 64 KiB pager allocation | No publication; durable STORAGE_FAILED when possible | With persisted latch: previous TLS restored, request DEGRADED, restart still blocks new IDs. If latch also fails: executor stops and service exits 75; candidate may remain live, post-repair restart unqualified |
+| SQLITE_FULL | Root-configured max_page_count on formal metadata and executor write connections, SQL allocation trigger requires a 64 KiB pager allocation | No publication; durable STORAGE_FAILED when possible | With persisted latch: previous TLS restored, request DEGRADED, restart still blocks new IDs. If latch also fails: executor stops and service exits 75; candidate may remain live, restart quarantined, full restoration unqualified |
 
 The allocation trigger uses `zeroblob`, not `RAISE(ABORT)` or a fabricated error.
 It forces the pager to hit a real quota at a chosen SQL boundary. The SQLite
@@ -138,18 +140,18 @@ a total-service peak, a native-host comparison or a sustained-load benchmark.
 This Linux-only runtime uses BOOTTIME/pidfd; the macOS system Python/LibreSSL run
 fails platform requirements and is not claimed as passing validation.
 
-## Current validation
+## Previous storage-review validation (historical)
 
-The reviewed source passed 34 Linux unit tests ([JSON](../evidence/storage-units.json),
+The f40b3d6 source passed 34 Linux unit tests ([JSON](../evidence/storage-units.json),
 [HTML](../evidence/storage-units.html)), fourteen storage VM cases, nine deadline
-cases, twelve operation cases and twelve executor cases. Each current report
-checks source hashes and its own cleanup. Earlier CA and exploratory reports
+cases, twelve operation cases and twelve executor cases. Those reports checked their own source hashes and cleanup. Current storage.json
+is rerun under the restart-gate policy; current unit/gate counts are in RESTART_GATE.md. Earlier CA and exploratory reports
 remain historical and were not rerun as part of this storage milestone.
 
 ## Still open
 
-Controlled DEGRADED repair and safe recovery after restoring storage are a later
-milestone. So are persistent systemd deployment, VM reboot qualification, actual
+Root recovery preparation is now implemented, but full DEGRADED repair and safe
+restoration/reopening after storage repair remain a later milestone. So are persistent systemd deployment, VM reboot qualification, actual
 power loss, filesystem/fsync corruption and hard realtime bounds. This round
 exercises ENOSPC on a virtual ext4 image, EROFS on a bind path, and SQLite pager
 FULL; it does not qualify physical-media loss, arbitrary IOERR/CORRUPT variants,

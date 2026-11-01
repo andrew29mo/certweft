@@ -1,14 +1,21 @@
 # Results and provenance
 
-## Current storage milestone
+## Current restart gate milestone
+
+See [RESTART_GATE.md](RESTART_GATE.md), evidence/restart-gate.json and its HTML
+for five repaired-storage real-service gate fixtures and 44 passing Linux unit
+tests. Fourteen current storage regressions are separately source-bound.
+No full restoration/unlock or VM reboot/power-loss claim is made.
+
+## Previous reviewed storage milestone (historical)
 
 See [STORAGE.md](STORAGE.md) and evidence/storage.json for fourteen actual-service
 storage-fault cases. Faults are virtual ext4 ENOSPC, read-only bind path EROFS,
 and SQLite pager FULL. Candidate TLS may remain live after filesystem-path write
 failure; no successful rollback is claimed. Elapsed fixture times and sampled
 process memory are not an availability SLA or a comparative benchmark.
-The current source passed 34 Linux unit tests and 47 VM cases across the storage,
-deadline, operation and executor suites; see [current validation](STORAGE.md#current-validation). earlier reports below retain their historical source hashes and scope.
+That source passed 34 Linux unit tests and 47 VM cases across the storage,
+deadline, operation and executor suites; see [historical validation](STORAGE.md#current-validation). earlier reports below retain their historical source hashes and scope.
 
 
 ## Earlier activation/recovery regression (historical)

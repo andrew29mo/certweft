@@ -128,4 +128,13 @@ Controlled repair, installed systemd lifecycle and power-loss testing remain ope
 The P0-3b-2 independent review adds a bounded decision barrier and active-executor
 stop-before-release on unrecordable metadata faults. Persisted quarantine survives
 restart; an unpersistable fault does not provide a post-repair restart gate.
-The latter remains a necessary controlled-recovery design gap, not a passing claim.
+That was the reviewed first-round gap; the restart-gate update below now closes
+quarantine after repair, while full restoration/reopening remains unqualified.
+
+## Restart gate / root preparation update
+
+[RESTART_GATE.md](RESTART_GATE.md) replaces automatic startup recovery with
+preexisting execution uncertainty and a conservative recovery-only mode. Root
+preparation is CAS-bound and persists VERIFY_REQUIRED without TLS/journal repair
+or unlock. The unpersistable-latch post-repair restart gap is now gated; actual
+safe restoration/reopening remains a later milestone.

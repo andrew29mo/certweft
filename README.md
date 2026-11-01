@@ -54,9 +54,17 @@ read-only bind-mount EROFS and SQLite pager FULL through the formal local servic
 Failed persistence cannot acknowledge cancellation or falsely commit/restore.
 A durable storage latch blocks new updates; if even that write fails, the service
 stops accepting requests. A candidate may remain live on an unwritable store.
-Only a persisted latch survives restart. If it could not be written, restoring
-storage and restarting can admit updates; safe post-repair restart is not qualified.
+The restart gate below now quarantines abnormal exits even when the fault latch
+could not be written. Full safe restoration/reopening remains pending.
 Controlled repair and persistent systemd deployment are still pending.
+
+## Restart gate and recovery preparation
+
+[Restart gate / root contract](docs/RESTART_GATE.md) persists execution uncertainty
+before accepting work. Repairing storage and restarting leaves the service closed
+to updates; UID-0 preparation is bound to gate epoch/revision and never unlocks or
+claims TLS restoration. Abnormal restart no longer automatically restores pending
+activations. Missing legacy records also remain quarantined.
 
 ## Evidence
 
@@ -71,3 +79,7 @@ counted as passing evidence.
 
 See [architecture and remaining acceptance gates](docs/ARCHITECTURE.md) and
 [reproduction](docs/REPRODUCE.md). No keys, CA databases or raw logs are uploaded.
+
+Current gate/source validation is in [RESTART_GATE.md](docs/RESTART_GATE.md).
+Earlier operation/deadline/executor reports retain their historical source and
+restart semantics; they are not qualification for the current startup policy.

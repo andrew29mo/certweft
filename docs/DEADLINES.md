@@ -1,5 +1,10 @@
 # P0-3b-1: persistent activation and independent recovery budgets
 
+**Startup-policy update:** [RESTART_GATE.md](RESTART_GATE.md) supersedes the
+earlier automatic process-recovery/reopening descriptions below. Old report
+counts and source hashes are historical. Current source validation uses the
+gate and storage runners plus Linux unit tests.
+
 ## Fixed contract
 
 The normal submit API optionally accepts timeout_seconds, an integer 1–10;

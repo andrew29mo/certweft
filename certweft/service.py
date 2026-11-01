@@ -1,6 +1,7 @@
 """Fixed local privileged writer. One bounded request/executor at a time."""
-import fcntl,json,os,socket,stat,struct,subprocess,sys,threading
-from .operations import Operations
+import fcntl,json,os,signal,socket,stat,struct,subprocess,sys,threading
+from .operations import Operations,decision
+from .gate import Gate
 from . import storage
 from .core import Rejected,Writer
 from pathlib import Path
@@ -46,6 +47,10 @@ def serve(config_path):
         if not stat.S_ISDIR(store.st_mode) or store.st_uid!=0 or store.st_mode & 0o077:raise PermissionError('store_permissions')
         journal=(root/'journal.db').lstat()
         if not stat.S_ISREG(journal.st_mode) or journal.st_uid!=0 or journal.st_mode & 0o077:raise PermissionError('journal_permissions')
+        # Persist uncertainty before metadata writes or exposing any endpoint.
+        gate=Gate(root)
+        with decision(root/'journal.db'):session=gate.start()
+        config['gate_authority']=Gate.token(session)
         operations=Operations(root,config.get('sqlite_max_pages'));operations.initialize()
         active=[None]
         def unrecorded_storage(error):
@@ -92,19 +97,11 @@ def serve(config_path):
             if active[0] is child:active[0]=None
             if child.returncode!=0 or len(out)>16384:raise RuntimeError('executor_failure')
             return json.loads(out)
-        # Lease excludes old executors before reconciling unfinished requests.
-        pending=operations.pending()
-        if pending:
-            state=Writer(**config['writer']).status()
-            if state['state']=='DEGRADED':
-                for identity in pending:operations.finish(identity,'DEGRADED',{'recovered':False,'replayed':False,'error':'startup_degraded'})
-            else:
-                for identity in pending:
-                    recovered=execute({'op':'recover-request','request_id':identity},0)
-                    if not recovered['ok']:
-                        if Writer(**config['writer']).status()['state']!='DEGRADED':raise RuntimeError('startup_recovery_failed')
-                        operations.finish(identity,'DEGRADED',{'recovered':False,'replayed':False})
-                    else:operations.finish(identity,'INTERRUPTED',{'recovered':True,'replayed':False})
+        # A dirty session is never automatically repaired or replayed at startup.
+        # Preserve pending/core evidence for the future verification backend.
+        if session['state']=='RUNNING' and operations.pending():
+            with decision(root/'journal.db'):session=gate.block(config['gate_authority'])
+            config['gate_authority']=Gate.token(session)
         def work(body):
             try:
                 reply=execute({'op':'execute',**{k:v for k,v in body.items() if k!='op'}},0)
@@ -116,13 +113,17 @@ def serve(config_path):
                     operations.finish(body['request_id'],'DEGRADED',{'executor_error':type(error).__name__})
                 except Exception:os._exit(75)
             finally:guard.release()
+        stopping=threading.Event()
+        previous={sig:signal.getsignal(sig) for sig in [signal.SIGTERM,signal.SIGINT]}
+        for sig in previous:signal.signal(sig,lambda *_:stopping.set())
         endpoint=Path(config['socket'])
         if endpoint.exists():endpoint.unlink()
         with socket.socket(socket.AF_UNIX) as server:
             server.bind(str(endpoint));os.chown(endpoint,config['controller_uid'],-1);os.chmod(endpoint,0o600)
-            server.listen(4)
-            while True:
-                conn,_=server.accept()
+            server.listen(4);server.settimeout(.2)
+            while not stopping.is_set():
+                try:conn,_=server.accept()
+                except socket.timeout:continue
                 with conn:
                     conn.settimeout(2)
                     _,uid,_=struct.unpack('3i',conn.getsockopt(socket.SOL_SOCKET,socket.SO_PEERCRED,12))
@@ -136,7 +137,23 @@ def serve(config_path):
                             data+=chunk
                             if len(data)>49152:raise ValueError('budget')
                         body=json.loads(data);op=body.get('op')
-                        if op in {'cancel','request-status'}:
+                        if op in {'recovery-status','prepare-recovery','recover'}:
+                            if uid!=0:raise Rejected('admin_required')
+                            if op=='recover':raise Rejected('use_prepare_recovery')
+                            fields={'op'} if op=='recovery-status' else {'op','gate_epoch','gate_revision'}
+                            if set(body)!=fields:raise Rejected('request_shape')
+                            if op=='prepare-recovery':
+                                if type(body['gate_epoch']) is not str or type(body['gate_revision']) is not int:raise Rejected('authority_shape')
+                                if not guard.acquire(False):raise Rejected('busy')
+                                try:
+                                    with decision(root/'journal.db'):
+                                        current=gate.prepare({k:body[k] for k in ['gate_epoch','gate_revision']})
+                                finally:guard.release()
+                                reply={'ok':True,'prepared':True,'updates_enabled':False,'restored':False,'gate':current}
+                            else:
+                                current=gate.read()
+                                reply={'ok':True,'gate':current,'executor_busy':guard.locked(),'gate_allows_updates':current['state']=='RUNNING','storage_health_not_verified':True}
+                        elif op in {'cancel','request-status'}:
                             if set(body)!={'op','request_id'} or type(body['request_id']) is not str:raise Rejected('request_shape')
                             result=operations.cancel(body['request_id']) if op=='cancel' else operations.get(body['request_id'])
                             reply={'ok':True,'result':result}
@@ -153,6 +170,7 @@ def serve(config_path):
                             else:
                                 if not guard.acquire(False):raise Rejected('busy')
                                 try:
+                                    gate.require(config['gate_authority'])
                                     result,created=operations.admit(body)
                                     if created:start_work(operations,body,work,config.get('fail_dispatch',False))
                                     else:guard.release()
@@ -161,7 +179,10 @@ def serve(config_path):
                         else:
                             if op in {'execute','recover-request'} or op=='activate' and not config.get('legacy_api',False):raise Rejected('use_submit')
                             if not guard.acquire(False):raise Rejected('busy')
-                            try:reply=execute(body,uid)
+                            try:
+                                if op!='status':gate.require(config['gate_authority'])
+                                reply=execute(body,uid)
+                                if op=='status':reply['admission_gate']=gate.read()['state']
                             finally:guard.release()
                     except Exception as error:
                         if storage.failed(error):
@@ -171,6 +192,17 @@ def serve(config_path):
                         if isinstance(error,Rejected):reply['reason']=str(error)
                     try:conn.sendall(json.dumps(reply).encode()+b'\n')
                     except OSError:pass
+        for sig,handler in previous.items():signal.signal(sig,handler)
+        if active[0] is not None or guard.locked():
+            child=active[0]
+            if child is not None and child.poll() is None:
+                try:os.killpg(child.pid,signal.SIGKILL)
+                except ProcessLookupError:pass
+                child.wait(timeout=3)
+            # Never certify an exit that interrupted work.
+        elif stopping.is_set() and session['state']=='RUNNING':
+            if operations.clean_shutdown_allowed() and Writer(**config['writer']).status()['state']=='READY':
+                with decision(root/'journal.db'):gate.stop(config['gate_authority'])
     finally:os.close(fd)
 
 if __name__=='__main__':serve(sys.argv[1])

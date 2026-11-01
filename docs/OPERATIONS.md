@@ -1,5 +1,10 @@
 # P0-3a: durable requests and cancellation/commit boundary
 
+**Startup-policy update:** [RESTART_GATE.md](RESTART_GATE.md) supersedes the
+earlier automatic process-recovery/reopening descriptions below. Old report
+counts and source hashes are historical. Current source validation uses the
+gate and storage runners plus Linux unit tests.
+
 P0-3b-1 now adds optional timeout_seconds and persistent activation/recovery
 budgets; see [DEADLINES.md](DEADLINES.md). Earlier deadline-pending statements
 below describe the original P0-3a scope. CA signing remains separate.

@@ -1,5 +1,10 @@
 # P0-2: privileged writer and executor takeover
 
+**Startup-policy update:** [RESTART_GATE.md](RESTART_GATE.md) supersedes the
+earlier automatic process-recovery/reopening descriptions below. Old report
+counts and source hashes are historical. Current source validation uses the
+gate and storage runners plus Linux unit tests.
+
 The current normal activation API is submit/request-status/cancel as specified in
 [OPERATIONS.md](OPERATIONS.md). The synchronous activate examples below describe
 the explicitly enabled legacy regression fixture, not the current default API.

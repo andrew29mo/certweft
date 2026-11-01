@@ -37,7 +37,7 @@ print(json.dumps(reply))
     if result.returncode:raise RuntimeError('controller_helper_failed')
     return json.loads(result.stdout)
 
-def scenario(kind,phase):
+def scenario(kind,phase,check_gate=False):
     work=pathlib.Path(tempfile.mkdtemp(prefix='cw-storage-',dir='/var/tmp'));os.chmod(work,0o711)
     image=work/'disk.img';mount=work/'store';mount.mkdir(mode=0o700)
     parent=None;ngpid=None;ngworkers=[];mounted=False;bound=False;child=None;loop=None
@@ -116,6 +116,31 @@ def scenario(kind,phase):
                 result['mount_options']=run(['findmnt','-n','-o','OPTIONS','--target',mount]).decode().strip()
         def memory(pid):
             return {line.split(':')[0]:line.split(':')[1].strip() for line in pathlib.Path('/proc',str(pid),'status').read_text().splitlines() if line.startswith(('VmRSS:','VmHWM:'))}
+        if check_gate and phase=='pre':
+            from certweft.gate import Gate
+            from tools.executor_vm import request
+            gate_before=Gate(mount).read()
+            competing=subprocess.run([sys.executable,'-m','certweft.service',str(cfg)],cwd=P,capture_output=True,timeout=4)
+            assert competing.returncode==73 and Gate(mount).read()==gate_before
+            running_prepare=request(config['socket'],{'op':'prepare-recovery',**Gate.token(gate_before)})
+            assert not running_prepare['ok'] and running_prepare['reason']=='not_recovery_required'
+            committed=call(config['socket'],{**job,'request_id':'healthy-smoke','certificate':old.read_text()});assert committed['created']
+            for _ in range(150):
+                terminal=call(config['socket'],{'op':'request-status','request_id':'healthy-smoke'})
+                if terminal.get('ok') and terminal['result']['state']=='COMMITTED' and not request(config['socket'],{'op':'recovery-status'})['executor_busy']:break
+                time.sleep(.025)
+            else:raise AssertionError('healthy_activation_not_committed')
+            assert wire()=='baseline'
+            parent.terminate();parent.wait(3);assert parent.returncode==0 and Gate(mount).read()['state']=='STOPPED'
+            pathlib.Path(config['socket']).unlink(missing_ok=True)
+            log=(work/'healthy-restart.log').open('wb');parent=subprocess.Popen([sys.executable,'-m','certweft.service',str(cfg)],cwd=P,stdout=log,stderr=subprocess.STDOUT);log.close()
+            for _ in range(120):
+                if parent.poll() is not None:raise AssertionError('clean_restart_failed')
+                if pathlib.Path(config['socket']).exists():break
+                time.sleep(.025)
+            now=Gate(mount).read();assert now['state']=='RUNNING' and now['epoch']!=gate_before['epoch']
+            baseline=w.status();pointer=os.readlink(mount/'active.conf');job.update(epoch=baseline['epoch'],revision=baseline['revision'])
+            result['clean_lifecycle']={'normal_activation_committed':True,'graceful_stop_certified':True,'clean_restart_new_epoch':True,'competing_writer_rejected_without_gate_mutation':True}
         result['service_memory_before_fault']=memory(parent.pid)
         if phase=='pre':
             fault();reply=call(config['socket'],job);result['initial_reply']=reply
@@ -132,6 +157,15 @@ def scenario(kind,phase):
                 result['baseline_observed_before_fault']=True
             else:
                 assert wire()=='candidate';result['candidate_observed_before_fault']=True
+            if check_gate:
+                from certweft.gate import Gate
+                from tools.executor_vm import request
+                snapshot=Gate(mount).read()
+                busy=request(config['socket'],{'op':'prepare-recovery',**Gate.token(snapshot)})
+                assert not busy['ok'] and busy['reason']=='busy'
+                competing=subprocess.run([sys.executable,'-m','certweft.service',str(cfg)],cwd=P,capture_output=True,timeout=4)
+                assert competing.returncode==73 and Gate(mount).read()==snapshot
+                result['active_executor_fencing']={'prepare_denied_while_busy':True,'competing_writer_rejected':True,'gate_unchanged':True}
             result['executor_memory_at_checkpoint']=memory(child)
             fault()
             cancellation=None;answers=[];errors=[]
@@ -190,7 +224,7 @@ def scenario(kind,phase):
             for _ in range(120):
                 if parent.poll() is not None:raise AssertionError('latched_restart_failed')
                 response=call(config['socket'],{**job,'request_id':'after-restart'})
-                if response.get('reason')=='storage_unavailable':break
+                if response.get('reason')=='recovery_required':break
                 time.sleep(.025)
             else:raise AssertionError('restart_lost_storage_latch')
             result['restart_still_blocks_new_updates']=True
@@ -202,7 +236,7 @@ def scenario(kind,phase):
                 result['unrecordable_fault_executor_stopped']=True
                 result['unrecorded_fault']=json.loads((work/'unrecorded.json').read_text())
                 assert result['unrecorded_fault']['sqlite_error']=='SQLITE_FULL'
-                result['restart_after_unrecordable_fault']='not qualified; no durable latch'
+                result['restart_after_unrecordable_fault']='see restart-gate validation; full restoration not qualified'
             else:
                 # Fault is still active. Startup may bind on no-op metadata;
                 # either startup fails, or an actual new submission must fail.
@@ -216,9 +250,68 @@ def scenario(kind,phase):
                         assert not response.get('ok') and not response.get('created')
                         result['fault_restart_update_reply']=response;break
                     time.sleep(.025)
-                parent.wait(4);assert parent.returncode!=0
+                if parent.poll() is None:
+                    from certweft.gate import Gate
+                    assert Gate(mount).read()['state']=='RECOVERY_REQUIRED'
+                    assert result['fault_restart_update_reply'].get('reason')=='recovery_required'
+                else:assert parent.returncode!=0
                 result['restart_during_fault_refused_updates']=True
                 result['fault_restart_exit']=parent.returncode
+        if check_gate:
+            from certweft.gate import Gate
+            from tools.executor_vm import request
+            # Repair only the private fault mechanism, without changing journal,
+            # active pointer, request rows or execution record.
+            if parent.poll() is None:parent.terminate();parent.wait(3)
+            saved_gate=Gate(mount).read();saved_wire=wire()
+            if bound:run(['umount',mount]);bound=False
+            for name in ['filler','last-blocks','fault-probe']:(mount/name).unlink(missing_ok=True)
+            with contextlib.closing(sqlite3.connect(mount/'journal.db')) as db, db:
+                db.execute('DROP TRIGGER IF EXISTS allocate_quota');db.execute('DROP TRIGGER IF EXISTS fail_health')
+                raw_health=db.execute('SELECT state FROM health').fetchone()[0]
+            before_journal=hashlib.sha256((mount/'journal.db').read_bytes()).hexdigest()
+            # No fixture checkpoint should stop an attempted normal submission.
+            cfg.write_text(json.dumps({k:v for k,v in config.items() if k not in {'pause_at','storage_latch_marker','unrecorded_storage_marker'}}))
+            log=(work/'repaired-restart.log').open('wb');parent=subprocess.Popen([sys.executable,'-m','certweft.service',str(cfg)],cwd=P,stdout=log,stderr=subprocess.STDOUT);log.close()
+            for _ in range(120):
+                if parent.poll() is not None:raise AssertionError('repaired_gate_startup')
+                try:
+                    status=request(config['socket'],{'op':'recovery-status'})
+                    if status.get('ok'):break
+                except (OSError,EOFError):pass
+                time.sleep(.025)
+            else:raise AssertionError('no_recovery_endpoint')
+            current=status['gate'];assert current['state']=='RECOVERY_REQUIRED' and not status['gate_allows_updates']
+            assert hashlib.sha256((mount/'journal.db').read_bytes()).hexdigest()==before_journal
+            before_pointer=os.readlink(mount/'active.conf');before_count=len(list(mount.glob('v-*')))
+            update=call(config['socket'],{**job,'request_id':'repaired-restart-update'});assert not update.get('ok') and update.get('reason')=='recovery_required'
+            authority=lambda value:{'gate_epoch':value['epoch'],'gate_revision':value['revision']}
+            stale={'op':'prepare-recovery',**authority(saved_gate)}
+            response=request(config['socket'],stale);assert not response['ok'] and response['reason']=='stale_gate_authority'
+            denied=call(config['socket'],{'op':'prepare-recovery',**authority(current)});assert not denied['ok'] and denied['reason']=='admin_required'
+            assert not call(config['socket'],{'op':'recovery-status'})['ok']
+            old_recover=request(config['socket'],{'op':'recover'});assert not old_recover['ok'] and old_recover['reason']=='use_prepare_recovery'
+            invalid=request(config['socket'],{'op':'prepare-recovery',**authority(current),'clear_storage':True});assert not invalid['ok']
+            prepared=request(config['socket'],{'op':'prepare-recovery',**authority(current)})
+            assert prepared['ok'] and prepared['prepared'] and not prepared['updates_enabled'] and not prepared['restored'] and prepared['gate']['state']=='VERIFY_REQUIRED'
+            repeated=request(config['socket'],{'op':'prepare-recovery',**authority(current)});assert not repeated['ok'] and repeated['reason']=='stale_gate_authority'
+            assert Gate(mount).read()==prepared['gate']
+            assert os.readlink(mount/'active.conf')==before_pointer and len(list(mount.glob('v-*')))==before_count and wire()==saved_wire
+            assert hashlib.sha256((mount/'journal.db').read_bytes()).hexdigest()==before_journal
+            parent.terminate();parent.wait(3)
+            assert Gate(mount).read()['state']=='VERIFY_REQUIRED'
+            # A second recovery-only restart invalidates the former root CAS.
+            pathlib.Path(config['socket']).unlink(missing_ok=True)
+            log=(work/'prepared-restart.log').open('wb');parent=subprocess.Popen([sys.executable,'-m','certweft.service',str(cfg)],cwd=P,stdout=log,stderr=subprocess.STDOUT);log.close()
+            for _ in range(120):
+                if parent.poll() is not None:raise AssertionError('prepared_restart_failed')
+                if pathlib.Path(config['socket']).exists():break
+                time.sleep(.025)
+            now=request(config['socket'],{'op':'recovery-status'})['gate'];assert now['state']=='RECOVERY_REQUIRED'
+            response=request(config['socket'],{'op':'prepare-recovery',**authority(prepared['gate'])});assert not response['ok'] and response['reason']=='stale_gate_authority'
+            assert not call(config['socket'],{**job,'request_id':'second-restart-update'})['ok']
+            assert wire()==saved_wire and hashlib.sha256((mount/'journal.db').read_bytes()).hexdigest()==before_journal
+            result['restart_gate']={'repaired_storage_still_blocks':True,'journal_byte_identical_after_repair':True,'no_tls_or_pointer_changes':True,'root_only_prepare':True,'stale_and_duplicate_cas_rejected':True,'second_restart_invalidates_old_cas':True,'prepared_never_enables_updates':True,'raw_health_before_repaired_restart':raw_health,'wire_preserved':saved_wire}
         result['passed']=True
     finally:
         cleanup=True

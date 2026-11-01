@@ -136,11 +136,16 @@ class Operations:
             return self.row(db,identity)
     def pending(self):
         with self.transaction() as db:return [r[0] for r in db.execute("SELECT id FROM requests WHERE state IN ('ACCEPTED','RUNNING','CANCEL_REQUESTED')")]
+    def clean_shutdown_allowed(self):
+        with self.transaction() as db:
+            return self.healthy(db) and not db.execute("SELECT 1 FROM requests WHERE state IN ('ACCEPTED','RUNNING','CANCEL_REQUESTED','DEGRADED')").fetchone()
     @staticmethod
-    def commit(db,identity,state,checkpoint=lambda:None):
+    def commit(db,identity,state,checkpoint=lambda:None,gate_authority=None):
         path=db.execute('PRAGMA database_list').fetchone()[2]
         if not path:raise Rejected('file_journal_required')
         with decision(path):
+            from .gate import Gate
+            if gate_authority is not None:Gate(Path(path).parent).require(gate_authority)
             # Same SQLite transaction commits the selected version and request outcome.
             db.execute('BEGIN IMMEDIATE')
             row=db.execute('SELECT state,timing FROM requests WHERE id=?',(identity,)).fetchone()
@@ -151,5 +156,6 @@ class Operations:
             db.execute('INSERT OR REPLACE INTO state VALUES(1,?)',(json.dumps(state),))
             db.execute("UPDATE requests SET state='COMMITTED',result=? WHERE id=?",(json.dumps({'committed':state['committed']}),identity))
             checkpoint()
+            if gate_authority is not None:Gate(Path(path).parent).require(gate_authority)
             if timing:deadlines.remaining(timing['activation'])
             db.commit()

@@ -1,5 +1,9 @@
 # Reproduce the bounded explorations
 
+For the current startup policy use [RESTART_GATE.md](RESTART_GATE.md).
+The original exploration and old VM recovery runners below describe historical
+checkouts; they do not qualify current automatic recovery.
+
 Use a disposable isolated Ubuntu 24.04 ARM64 VM, Python 3.12, real systemd,
 OpenSSL 3, Nginx, root, mount support, and unused loopback ports 19090/19443.
 This is an existing VM with fresh private application fixture paths, not a clean

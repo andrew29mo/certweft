@@ -1,0 +1,109 @@
+{
+  "passed": false,
+  "status": "failed",
+  "cases": [
+    {
+      "fault": "enospc",
+      "phase": "pre",
+      "ext4_image_bytes": 33554432,
+      "clean_lifecycle": {
+        "normal_activation_committed": true,
+        "graceful_stop_certified": true,
+        "clean_restart_new_epoch": true,
+        "competing_writer_rejected_without_gate_mutation": true
+      },
+      "service_memory_before_fault": {
+        "VmHWM": "19288 kB",
+        "VmRSS": "19288 kB"
+      },
+      "filled_bytes": 26476544,
+      "observed_errno": 28,
+      "mount_options": "rw,relatime",
+      "initial_reply": {
+        "ok": false,
+        "transport_unavailable": true,
+        "request_sent": true,
+        "transport_error": "EOFError",
+        "errno": null
+      },
+      "new_update_reply": {
+        "ok": false,
+        "transport_unavailable": true,
+        "request_sent": false,
+        "transport_error": "ConnectionRefusedError",
+        "errno": 111
+      },
+      "core_state": "READY",
+      "request_state": null,
+      "request_result": null,
+      "storage_health": "HEALTHY",
+      "wire_after": "baseline",
+      "service_exit": 75,
+      "restart_during_fault_refused_updates": true,
+      "fault_restart_exit": 1,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "HEALTHY",
+        "wire_preserved": "baseline"
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 1,
+      "elapsed_seconds": 2.1951883870000017
+    },
+    {
+      "fault": "enospc",
+      "phase": "post",
+      "passed": false,
+      "error": "TimeoutExpired: Command '['/usr/bin/python3', '-m', 'certweft.service', '/var/tmp/cw-storage-lkj986ry/config']' timed out after 4 seconds"
+    }
+  ],
+  "scope": "source-run root certweft.service/executor; real Nginx; repaired private ext4 loop store in isolated Linux VM",
+  "untested": [
+    "full safe recovery/unlock backend",
+    "persistent systemd deployment",
+    "VM reboot",
+    "power loss",
+    "physical media loss",
+    "D-state executor",
+    "trusted root tampering"
+  ],
+  "error": "TimeoutExpired: Command '['/usr/bin/python3', '-m', 'certweft.service', '/var/tmp/cw-storage-lkj986ry/config']' timed out after 4 seconds",
+  "source_sha256": {
+    "certweft/service.py": "3f2b4f806a8490fc567bb48e48ef43da9abcb42ea9a953c878093ba403f2b2c3",
+    "certweft/deadlines.py": "e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f",
+    "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certweft/core.py": "ca87ab6776e0ea69f1b19da08f3f37e39be6dd91f74622e277d3747b09603fb8",
+    "certweft/operations.py": "2f5c9040e351c4dd0856fe82a24cf66d68bd8806e7e7ef72ccc9a36482ebfa86",
+    "certweft/gate.py": "1f48ea190674e04b035ef5cedd4250c63b9901f204e805911e188c355aaa6e19",
+    "certweft/storage.py": "2f431bd3758a8a14b2cb616521f50d638cf3fdbf733278f87a7e7cb99bf1fe3b",
+    "certweft/ca.py": "e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c",
+    "certweft/executor.py": "052ad6e92b20f8fe2e37fa4e1a72180f627b1be327c3e363fa38b6f14b52cc0a",
+    "tools/policy_vm.py": "27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6",
+    "tools/storage_vm.py": "d77bff39d9e6c50b7936771435892b708a2545e95f43cce1718ecdb23b0427d3",
+    "tools/deadline_vm.py": "cd0d61fb4e1253cdc23b12e3fb38d10ad41fd04f2debd9c23f4574f8fa4e7cf3",
+    "tools/executor_vm.py": "73cfc9aafee86b97f450337631caf374e79fad7e6c8c13509a36d5e7b49680a1",
+    "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
+    "tools/credential_probe.py": "8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46",
+    "tools/operations_vm.py": "3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85",
+    "tools/gate_vm.py": "5c5024dd8bc2bff11a1fb9f6e10ac1e9722e039315d76ab8fcdfcecc6f6fc775",
+    "tests/test_operations.py": "f1741fae5ae944fa974e90c418c447da27e49d18051fc8ad50b4ea843041e337",
+    "tests/test_core.py": "8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c",
+    "tests/test_storage.py": "07d2de55f10a9a3011db73c9141295b43ff2951f54b6e339d184117cf87af2cf",
+    "tests/test_gate.py": "e9b858dcd170d8fdf031612d71c7f6add0c5c4ab2b7c095247c6ec928bf560e1",
+    "tests/test_deadlines.py": "442d8ea3cfa4af88ec62603d84f017fb2b1883e8c05d3d92bedd695811b9dd29",
+    "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
+  },
+  "source_unchanged": true,
+  "environment": {
+    "python": "3.12.3",
+    "kernel": "6.8.0-117-generic",
+    "machine": "aarch64"
+  }
+}

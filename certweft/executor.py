@@ -5,10 +5,12 @@ from pathlib import Path
 from .core import Writer,Rejected,run
 from .operations import Operations,Cancelled,StorageBlocked
 from . import deadlines,storage
+from .gate import Gate
 
 class FixedWriter(Writer):
     operation_id=None
     sqlite_max_pages=None
+    gate_authority=None
     @contextmanager
     def locked(self):
         with super().locked() as (db,lock):
@@ -31,7 +33,7 @@ class FixedWriter(Writer):
             super().save(db,state)
             raise
     def commit_state(self,db,state):
-        if self.operation_id:Operations.commit(db,self.operation_id,state,lambda:getattr(self,'commit_checkpoint',lambda _:None)('commit-decision'))
+        if self.operation_id:Operations.commit(db,self.operation_id,state,lambda:getattr(self,'commit_checkpoint',lambda _:None)('commit-decision'),self.gate_authority)
         else:super().commit_state(db,state)
     def reload(self):
         # Validation subprocess cannot publish or signal a delayed reload.
@@ -59,9 +61,10 @@ def dispatch(config,request,peer_uid,checkpoint=lambda _:None):
         if not stat.S_ISREG(st.st_mode) or st.st_uid!=0 or st.st_mode & 0o022:raise Rejected('target_permissions')
     w=FixedWriter(**config['writer']);w.master=config['master'];w.recovery_checkpoint=checkpoint;w.commit_checkpoint=checkpoint;w.sqlite_max_pages=config.get('sqlite_max_pages')
     if op=='status':return w.status()
-    if op=='recover':return w.recover()
+    if op=='recover':raise Rejected('use_prepare_recovery')
     if op=='recover-request':
         w.operation_id=request['request_id'];return w.recover()
+    Gate(root).require(config['gate_authority']);w.gate_authority=config['gate_authority']
     if type(request['certificate']) is not str or len(request['certificate'].encode())>32768:raise Rejected('certificate_budget')
     if type(request['epoch']) is not str or type(request['revision']) is not int:raise Rejected('authority_shape')
     operations=Operations(root,config.get('sqlite_max_pages'))
