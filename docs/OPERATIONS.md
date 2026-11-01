@@ -35,7 +35,10 @@ Each short metadata transaction uses synchronous FULL and BEGIN IMMEDIATE. Ingre
 never changes the Nginx pointer or sends reload. SQLite serializes metadata writes
 against the executor's final transaction; it does not authorize a second system
 mutation executor. Store/journal ownership and permissions are checked before
-metadata initialization. The inherited lifetime lease still excludes takeover.
+metadata initialization. The inherited lifetime lease still excludes takeover. If a work thread cannot
+start after durable admission, the request is durably FAILED/executed=false. If
+that result cannot be persisted, the service fail-stops. A retry returns that
+terminal result rather than silently dispatching the same request again.
 
 ACCEPTED -> RUNNING -> COMMITTED
 
@@ -57,7 +60,9 @@ transaction result, not a promise of perpetual certificate validity or current
 service health. Parent failure after
 admission does not trigger re-execution: after acquiring the lease, startup
 reconciles unfinished work through the formal recovery backend and records
-INTERRUPTED/recovered/not-replayed. COMMITTED requests are preserved rather than
+INTERRUPTED/recovered/not-replayed. If the core is already DEGRADED, startup
+records the pending request as DEGRADED without reload, authority reset or automatic
+repair. COMMITTED requests are preserved rather than
 rolled back. This is process-restart evidence with Nginx still running; it is not
 VM reboot or power-loss qualification.
 
@@ -107,3 +112,30 @@ incomplete reports, failed cases, nonzero exit, timeout or cleanup failure are
 not passing evidence. Private fixture keys/config/logs remain only in the VM.
 Earlier P0-1 reports retain their old source-bound scope; the separate executor
 report is rerun as a regression, not represented as a new installed deployment.
+
+## Independent P0-3a review
+
+Two read-only reviewers examined the actual service, transactions, tests and
+reports. The review fixed a stranded ACCEPTED row after thread-start failure and
+closed startup's automatic-repair path for core DEGRADED with an unfinished
+request. Neither root-injected fixture scenario is a real resource-exhaustion
+or physical storage test. The dispatch fixture raises before Thread.start; a
+separate unit patches Thread.start itself. Both use the same durable failure path.
+
+The reviewed run has 12 operation VM cases and 21 separate unit tests, including
+20 bounded two-connection race iterations. Added formal API cases inject an
+admission INSERT abort and a COMMITTED-update abort after the core state write.
+Both require errors/no false success and verify durable and wire state. The SQL
+triggers are intentional injected failures, not SQLITE_FULL or filesystem ENOSPC.
+
+A separate root-provisioned capacity fixture admits 64 real stale-authority
+requests, which fail before generation staging. It verifies the 65th rejection,
+matching-ID replay, different-parameter conflict and capacity preservation after
+process restart. This proves history admission limits, not 64 successful rotations.
+Root provisioning of that fixture is not a supported store rollover feature.
+
+All executor PID/start identities are observed by a root-only fixture inventory
+and checked at cleanup, including children not paused at a checkpoint. An earlier
+review run failed by reading a stale checkpoint marker; it remains in attempts.
+The runner now clears the marker for each new checkpointed request. No failed
+run is counted as qualification. JSON/HTML and final source fingerprints must agree.

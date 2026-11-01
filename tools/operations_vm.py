@@ -30,8 +30,8 @@ def main():
         conf.write_text(f'pid {work}/nginx.pid; error_log {work}/nginx.log; events {{}} http {{ access_log off; server {{ listen 127.0.0.1:19445 ssl; server_name localhost; include {work}/store/active.conf; location = /health {{ return 200 "ok"; }} }} }}')
         run(['/usr/sbin/nginx','-c',conf]);ngpid=int((work/'nginx.pid').read_text());raw=pathlib.Path('/proc',str(ngpid),'stat').read_text()
         config={'writer':{'root':str(w.root),'nginx':w.nginx,'conf':str(conf),'ca':str(trust),'key':str(key),'host':'localhost','ip':'127.0.0.1','port':19445},'controller_uid':uid,'socket':str(work/'writer.sock'),'lease':str(work/'lifetime.lock'),'master':{'pid':ngpid,'start':raw[raw.rfind(')')+2:].split()[19]}}
-        def start(pause=False):
-            cfg={**config}
+        def start(pause=False,fail_dispatch=False):
+            cfg={**config,'executor_inventory':str(work/'executors.jsonl'),'fail_dispatch':fail_dispatch}
             if pause:
                 (work/'marker.json').unlink(missing_ok=True);cfg.update(pause_at='confirmed',marker=str(work/'marker.json'))
             path=work/('config-'+str(len(servers)));path.write_text(json.dumps(cfg))
@@ -47,6 +47,7 @@ def main():
             code='import json,sys;from tools.executor_vm import request;print(json.dumps(request(sys.argv[1],json.loads(sys.argv[2]))))'
             return json.loads(run(['runuser','-u','nobody','--',sys.executable,'-c',code,config['socket'],json.dumps(body)]))
         def body(identity,cert):
+            (work/'marker.json').unlink(missing_ok=True)
             s=w.status();return {'op':'submit','request_id':identity,'certificate':cert.read_text(),'epoch':s['epoch'],'revision':s['revision']}
         def paused():
             for _ in range(100):
@@ -66,7 +67,15 @@ def main():
                 with ctx.wrap_socket(raw,server_hostname='localhost') as tls:
                     assert not tls.session_reused and hashlib.sha256(tls.getpeercert(True)).hexdigest()==fingerprint(cert)
                     tls.sendall(b'GET /health HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n');assert tls.recv(1024).startswith(b'HTTP/1.1 200 ')
-        parent=start(True);a=body('cancel-first',new)
+        parent=start(fail_dispatch=True)
+        def dispatch_failure():
+            job=body('dispatch-failure',new);count=len(list(w.root.glob('v-*')))
+            result=call(job);assert not result['ok']
+            terminal=poll(job['request_id']);assert terminal['state']=='FAILED' and terminal['result']['executed'] is False
+            assert not call(job)['created'] and len(list(w.root.glob('v-*')))==count
+            return 'root-fixture injected worker start failure persists FAILED and never leaves a live slot'
+        case('formal_dispatch_failure_not_stuck',dispatch_failure)
+        parent.terminate();parent.wait(3);parent=start(True);a=body('cancel-first',new)
         def replay():
             assert call(a)['created'];pid=paused();before=len(list(w.root.glob('v-*')))
             duplicate=call(a);assert duplicate['ok'] and not duplicate['created']
@@ -122,6 +131,33 @@ def main():
             os.kill(pid,signal.SIGCONT);assert poll(d['request_id'])['state']=='ROLLED_BACK';wire(new)
             return 'injected cancellation persistence failure returns error, not acknowledgement; repaired retry rolls back'
         case('cancel_write_failure_no_false_ack',write_failure)
+        def admission_failure():
+            before=w.status();count=len(list(w.root.glob('v-*')))
+            with sqlite3.connect(w.root/'journal.db') as db:
+                rows=db.execute('SELECT count(*) FROM requests').fetchone()[0]
+                db.execute("CREATE TRIGGER reject_admission BEFORE INSERT ON requests BEGIN SELECT RAISE(ABORT,'injected'); END")
+            job=body('admission-write-failure',new);result=call(job)
+            assert not result['ok'] and 'created' not in result
+            with sqlite3.connect(w.root/'journal.db') as db:
+                assert db.execute('SELECT count(*) FROM requests').fetchone()[0]==rows
+                db.execute('DROP TRIGGER reject_admission')
+            assert w.status()==before and len(list(w.root.glob('v-*')))==count
+            retry={**job,'epoch':'stale'};assert call(retry)['created'];assert poll(retry['request_id'])['state']=='FAILED'
+            return 'injected admission INSERT failure creates no row/generation or acknowledgement; repaired retry is new'
+        case('admission_write_failure_no_false_ack',admission_failure)
+        def commit_failure():
+            before=w.status();job=body('commit-write-failure',old)
+            assert call(job)['created'];pid=paused()
+            with sqlite3.connect(w.root/'journal.db') as db:db.execute("CREATE TRIGGER reject_commit BEFORE UPDATE ON requests WHEN NEW.state='COMMITTED' BEGIN SELECT RAISE(ABORT,'injected'); END")
+            os.kill(pid,signal.SIGCONT);result=poll(job['request_id']);assert result['state']=='FAILED'
+            with sqlite3.connect(w.root/'journal.db') as db:
+                state=json.loads(db.execute('SELECT data FROM state').fetchone()[0])
+                assert state['committed']==before['committed'] and state['state']=='READY'
+                assert db.execute('SELECT state FROM requests WHERE id=?',(job['request_id'],)).fetchone()[0]!='COMMITTED'
+                db.execute('DROP TRIGGER reject_commit')
+            wire(new);assert not call(job)['created']
+            return 'injected failure between core state write and COMMITTED update rolls back both; prior wire baseline restored'
+        case('commit_write_failure_atomic_rollback',commit_failure)
         def no_implicit_repair():
             with w.locked() as (db,_):
                 state=w.read(db);state['state']='DEGRADED';w.save(db,state)
@@ -132,6 +168,38 @@ def main():
             assert not result['ok'] and result['reason']=='degraded'
             return 'root-injected preexisting DEGRADED cannot be repaired by controller submit; new IDs refused'
         case('controller_cannot_implicitly_repair_degraded',no_implicit_repair)
+        def degraded_restart():
+            servers[-1].terminate();servers[-1].wait(3);before=w.status();assert before['state']=='DEGRADED'
+            with sqlite3.connect(w.root/'journal.db') as db:db.execute("UPDATE requests SET state='RUNNING',result=NULL WHERE id='no-implicit-repair'")
+            start();assert w.status()==before
+            result=poll('no-implicit-repair');assert result['state']=='DEGRADED' and result['result']['recovered'] is False
+            blocked=call({'op':'submit','request_id':'no-restart-bypass','certificate':old.read_text(),'epoch':before['epoch'],'revision':before['revision']})
+            assert not blocked['ok'] and blocked['reason']=='degraded';wire(new)
+            return 'root-injected live request plus core DEGRADED remains degraded across restart; no reload or authority reset'
+        case('degraded_pending_restart_not_repaired',degraded_restart)
+        def full_history():
+            servers[-1].terminate();servers[-1].wait(3)
+            # Separate root-provisioned fixture, not a product rollover operation.
+            second=Writer(work/'capacity-store','/usr/sbin/nginx',conf,trust,key,'localhost','127.0.0.1',19445);second.initialize(new)
+            conf.write_text(conf.read_text().replace(str(w.root/'active.conf'),str(second.root/'active.conf')))
+            run(['/usr/sbin/nginx','-t','-c',conf]);run(['/usr/sbin/nginx','-s','reload','-c',conf])
+            config['writer']['root']=str(second.root);start();jobs=[]
+            for i in range(64):
+                state=second.status();job={'op':'submit','request_id':'capacity-'+str(i),'certificate':new.read_text(),'epoch':'stale','revision':state['revision']}
+                jobs.append(job);assert call(job)['created'];assert poll(job['request_id'])['state']=='FAILED'
+            with sqlite3.connect(second.root/'journal.db') as db:assert db.execute('SELECT count(*) FROM requests').fetchone()[0]==64
+            extra={**jobs[0],'request_id':'overflow'};response=call(extra);assert not response['ok'] and response['reason']=='history_full'
+            assert not call(jobs[0])['created']
+            conflict=call({**jobs[0],'revision':-123});assert not conflict['ok'] and conflict['reason']=='request_conflict'
+            servers[-1].terminate();servers[-1].wait(3);start()
+            assert not call(jobs[0])['created']
+            response=call(extra);assert not response['ok'] and response['reason']=='history_full'
+            with sqlite3.connect(second.root/'journal.db') as db:
+                assert db.execute('SELECT count(*) FROM requests').fetchone()[0]==64
+                assert db.execute("SELECT count(*) FROM requests WHERE id='overflow'").fetchone()[0]==0
+            assert len(list(second.root.glob('v-*')))==1;wire(new)
+            return '64 real service admissions with stale authority fail before staging; 65th rejected; duplicate/conflict ordering and restart retain all history'
+        case('formal_service_64_history_capacity',full_history)
         report['passed']=True
     except Exception as error:
         import traceback;traceback.print_exc();report['error']=type(error).__name__
@@ -143,6 +211,10 @@ def main():
             if proc.poll() is None:proc.terminate()
             try:proc.wait(3)
             except subprocess.TimeoutExpired:proc.kill();proc.wait();report['cleanup_error']='server'
+        tracked=[]
+        if (work/'executors.jsonl').exists():
+            tracked=[json.loads(line) for line in (work/'executors.jsonl').read_text().splitlines()]
+        report['tracked_executors']=len(tracked)
         if ngpid:
             try:
                 workers=run(['pgrep','-P',str(ngpid)]).decode().split();run(['/usr/sbin/nginx','-s','quit','-c',work/'nginx.conf'])
@@ -151,6 +223,11 @@ def main():
                     for pid in [ngpid,*map(int,workers),*children]:
                         st=pathlib.Path('/proc',str(pid),'stat')
                         if st.exists() and st.read_text().split()[2]!='Z':live.append(pid)
+                    for entry in tracked:
+                        path=pathlib.Path('/proc',str(entry['pid']),'stat')
+                        if path.exists():
+                            raw=path.read_text();fields=raw[raw.rfind(')')+2:].split()
+                            if fields[19]==entry['start'] and fields[0]!='Z':live.append(entry['pid'])
                     if not live:break
                     time.sleep(.03)
                 else:raise AssertionError('cleanup')

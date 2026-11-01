@@ -1,7 +1,7 @@
 """Fixed local privileged writer. One bounded request/executor at a time."""
 import fcntl,json,os,socket,stat,struct,subprocess,sys,threading
 from .operations import Operations
-from .core import Rejected
+from .core import Rejected,Writer
 from pathlib import Path
 
 def secure_parents(path):
@@ -22,6 +22,15 @@ def load_config(path):
     if not stat.S_ISREG(binary.st_mode) or binary.st_uid!=0 or binary.st_mode & 0o022:raise PermissionError('untrusted binary')
     return config
 
+def start_work(operations,body,target,fail_start=False):
+    try:
+        if fail_start:raise RuntimeError('injected_dispatch_failure')
+        threading.Thread(target=target,args=(body,),daemon=True).start()
+    except Exception:
+        try:operations.finish(body['request_id'],'FAILED',{'error':'dispatch_failed','executed':False})
+        except Exception:os._exit(75)
+        raise
+
 def serve(config_path):
     if os.geteuid()!=0:raise PermissionError('root writer required')
     config=load_config(config_path);lease_path=Path(config['lease'])
@@ -41,6 +50,12 @@ def serve(config_path):
         def execute(body,uid):
             child=subprocess.Popen([sys.executable,'-m','certweft.executor',str(fd)],
                 start_new_session=True,pass_fds=(fd,),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+            if config.get('executor_inventory'):
+                raw=Path('/proc',str(child.pid),'stat').read_text()
+                record=json.dumps({'pid':child.pid,'start':raw[raw.rfind(')')+2:].split()[19]})+'\n'
+                inventory=os.open(config['executor_inventory'],os.O_WRONLY|os.O_CREAT|os.O_APPEND|os.O_NOFOLLOW,0o600)
+                try:os.write(inventory,record.encode())
+                finally:os.close(inventory)
             try:out,err=child.communicate(json.dumps({'body':body,'peer_uid':uid,'config':config}).encode(),timeout=20)
             except subprocess.TimeoutExpired:
                 import signal
@@ -53,9 +68,13 @@ def serve(config_path):
         # Lease excludes old executors before reconciling unfinished requests.
         pending=operations.pending()
         if pending:
-            recovered=execute({'op':'recover'},0)
-            if not recovered['ok']:raise RuntimeError('startup_recovery_failed')
-            for identity in pending:operations.finish(identity,'INTERRUPTED',{'recovered':True,'replayed':False})
+            state=Writer(**config['writer']).status()
+            if state['state']=='DEGRADED':
+                for identity in pending:operations.finish(identity,'DEGRADED',{'recovered':False,'replayed':False,'error':'startup_degraded'})
+            else:
+                recovered=execute({'op':'recover'},0)
+                if not recovered['ok']:raise RuntimeError('startup_recovery_failed')
+                for identity in pending:operations.finish(identity,'INTERRUPTED',{'recovered':True,'replayed':False})
         def work(body):
             try:
                 reply=execute({'op':'execute',**{k:v for k,v in body.items() if k!='op'}},0)
@@ -102,7 +121,7 @@ def serve(config_path):
                                 if not guard.acquire(False):raise Rejected('busy')
                                 try:
                                     result,created=operations.admit(body)
-                                    if created:threading.Thread(target=work,args=(body,),daemon=True).start()
+                                    if created:start_work(operations,body,work,config.get('fail_dispatch',False))
                                     else:guard.release()
                                 except Exception:guard.release();raise
                                 reply={'ok':True,'result':result,'created':created}

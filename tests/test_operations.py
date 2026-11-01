@@ -38,6 +38,17 @@ class DurableContracts(unittest.TestCase):
         self.assertFalse(self.ops.admit({**self.body,'request_id':'item-0'})[1])
         with self.assertRaisesRegex(Rejected,'history_full'):self.ops.admit(self.body)
 
+    def test_dispatch_thread_failure_is_durable_terminal(self):
+        from unittest.mock import patch
+        from certweft.service import start_work
+        self.ops.admit(self.body)
+        with patch('certweft.service.threading.Thread.start',side_effect=RuntimeError('injected')):
+            with self.assertRaises(RuntimeError):start_work(self.ops,self.body,lambda body:None)
+        reopened=Operations(self.root)
+        self.assertEqual(reopened.get('one')['state'],'FAILED')
+        self.assertEqual(reopened.pending(),[])
+        self.assertFalse(reopened.admit(self.body)[1])
+
 class ConcurrentBoundary(unittest.TestCase):
     setUp=DurableContracts.setUp
     tearDown=DurableContracts.tearDown

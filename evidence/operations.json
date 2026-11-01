@@ -2,46 +2,76 @@
   "passed": true,
   "cases": [
     {
+      "name": "formal_dispatch_failure_not_stuck",
+      "passed": true,
+      "seconds": 0.06770760500000961,
+      "detail": "root-fixture injected worker start failure persists FAILED and never leaves a live slot"
+    },
+    {
       "name": "inflight_replay_and_conflict",
       "passed": true,
-      "seconds": 0.7497039040000004,
+      "seconds": 0.7019233060000261,
       "detail": "duplicate while executing returns same durable request; different parameters rejected without new generation"
     },
     {
       "name": "cancel_before_commit_wins",
       "passed": true,
-      "seconds": 0.5050697219999734,
+      "seconds": 0.4897967729999664,
       "detail": "cancel persisted after new wire confirmation, before COMMIT; rollback independently observed"
     },
     {
       "name": "restart_terminal_no_replay",
       "passed": true,
-      "seconds": 0.020506344000011723,
+      "seconds": 0.024933760999999777,
       "detail": "restart preserves terminal result; old request not rerun"
     },
     {
       "name": "commit_before_cancel_wins",
       "passed": true,
-      "seconds": 0.8929386770000178,
+      "seconds": 0.9955787650000048,
       "detail": "COMMIT atomically wins; later cancel reports COMMITTED; restart replay does not execute"
     },
     {
       "name": "pending_restart_no_replay",
       "passed": true,
-      "seconds": 1.2320174370000245,
+      "seconds": 1.2489050340000176,
       "detail": "SIGKILL preserves pending journal; startup recovers baseline and marks INTERRUPTED without replay"
     },
     {
       "name": "cancel_write_failure_no_false_ack",
       "passed": true,
-      "seconds": 1.2415359199999898,
+      "seconds": 1.2809195220000333,
       "detail": "injected cancellation persistence failure returns error, not acknowledgement; repaired retry rolls back"
+    },
+    {
+      "name": "admission_write_failure_no_false_ack",
+      "passed": true,
+      "seconds": 0.07171977000001561,
+      "detail": "injected admission INSERT failure creates no row/generation or acknowledgement; repaired retry is new"
+    },
+    {
+      "name": "commit_write_failure_atomic_rollback",
+      "passed": true,
+      "seconds": 1.0931355470000312,
+      "detail": "injected failure between core state write and COMMITTED update rolls back both; prior wire baseline restored"
     },
     {
       "name": "controller_cannot_implicitly_repair_degraded",
       "passed": true,
-      "seconds": 0.0761353080000049,
+      "seconds": 0.08114800700002434,
       "detail": "root-injected preexisting DEGRADED cannot be repaired by controller submit; new IDs refused"
+    },
+    {
+      "name": "degraded_pending_restart_not_repaired",
+      "passed": true,
+      "seconds": 0.10741232300000547,
+      "detail": "root-injected live request plus core DEGRADED remains degraded across restart; no reload or authority reset"
+    },
+    {
+      "name": "formal_service_64_history_capacity",
+      "passed": true,
+      "seconds": 4.003751874999978,
+      "detail": "64 real service admissions with stale authority fail before staging; 65th rejected; duplicate/conflict ordering and restart retain all history"
     }
   ],
   "untested": [
@@ -52,9 +82,10 @@
     "physical storage faults",
     "automatic history recycling"
   ],
+  "tracked_executors": 82,
   "owned_processes_exited": true,
   "source_sha256": {
-    "certweft/service.py": "313014315fc9d787c13b98dd0fe2b6f9bab3ffd64efd44167640697ed29440b7",
+    "certweft/service.py": "6c07a7de4e2fcb46888fd4b91f59ae9f52dafcef5070b40059406989b14acfb1",
     "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "certweft/core.py": "e5ad7a56575e19152cb8dbf631896e2569e19c55235bebcf374c137672146fa6",
     "certweft/operations.py": "2e67b2ac3edbb3b6dedbdf8d48d96f4c4f786731801c711f3d157c8e28ceaab4",
@@ -64,8 +95,8 @@
     "tools/executor_vm.py": "1e8f42862c3cffa640a2320cd5c95666c94fa2b8bcdda3cdc0339e7b6f648852",
     "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
     "tools/credential_probe.py": "8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46",
-    "tools/operations_vm.py": "c3b8680c4aa405eedbb33f8d629a0a2680a706e474a744098691e8b0882e8450",
-    "tests/test_operations.py": "71b474179f28e3cf804a7d16784c02b6734661661d156cc3130b4c26c9ec9b10",
+    "tools/operations_vm.py": "3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85",
+    "tests/test_operations.py": "f1741fae5ae944fa974e90c418c447da27e49d18051fc8ad50b4ea843041e337",
     "tests/test_core.py": "8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c",
     "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
   },
