@@ -4,73 +4,73 @@
     {
       "name": "formal_dispatch_failure_not_stuck",
       "passed": true,
-      "seconds": 0.08469752199994218,
+      "seconds": 0.09440451699992991,
       "detail": "root-fixture injected worker start failure persists FAILED and never leaves a live slot"
     },
     {
       "name": "inflight_replay_and_conflict",
       "passed": true,
-      "seconds": 0.776540399000055,
+      "seconds": 0.7721652190000441,
       "detail": "duplicate while executing returns same durable request; different parameters rejected without new generation"
     },
     {
       "name": "cancel_before_commit_wins",
       "passed": true,
-      "seconds": 0.5073979310000141,
+      "seconds": 0.5059527899999239,
       "detail": "cancel persisted after new wire confirmation, before COMMIT; rollback independently observed"
     },
     {
       "name": "restart_terminal_no_replay",
       "passed": true,
-      "seconds": 0.027564853000058065,
+      "seconds": 0.027910336999980245,
       "detail": "restart preserves terminal result; old request not rerun"
     },
     {
       "name": "commit_before_cancel_wins",
       "passed": true,
-      "seconds": 1.042895739999949,
+      "seconds": 0.9065697099999852,
       "detail": "COMMIT atomically wins; later cancel reports COMMITTED; restart replay does not execute"
     },
     {
       "name": "pending_restart_no_replay",
       "passed": true,
-      "seconds": 1.3796349859999282,
+      "seconds": 1.3768088280000939,
       "detail": "SIGKILL preserves pending journal; startup recovers baseline and marks INTERRUPTED without replay"
     },
     {
       "name": "cancel_write_failure_no_false_ack",
       "passed": true,
-      "seconds": 1.2807896049999954,
+      "seconds": 1.4060544940000455,
       "detail": "injected cancellation persistence failure returns error, not acknowledgement; repaired retry rolls back"
     },
     {
       "name": "admission_write_failure_no_false_ack",
       "passed": true,
-      "seconds": 0.08978113800003484,
+      "seconds": 0.09007520599993768,
       "detail": "injected admission INSERT failure creates no row/generation or acknowledgement; repaired retry is new"
     },
     {
       "name": "commit_write_failure_atomic_rollback",
       "passed": true,
-      "seconds": 1.2875646659999802,
+      "seconds": 1.4056418259999646,
       "detail": "injected failure between core state write and COMMITTED update rolls back both; prior wire baseline restored"
     },
     {
       "name": "controller_cannot_implicitly_repair_degraded",
       "passed": true,
-      "seconds": 0.10020865300009518,
+      "seconds": 0.09692020700003923,
       "detail": "root-injected preexisting DEGRADED cannot be repaired by controller submit; new IDs refused"
     },
     {
       "name": "degraded_pending_restart_not_repaired",
       "passed": true,
-      "seconds": 0.12345886399998562,
+      "seconds": 0.12480984000001172,
       "detail": "root-injected live request plus core DEGRADED remains degraded across restart; no reload or authority reset"
     },
     {
       "name": "formal_service_64_history_capacity",
       "passed": true,
-      "seconds": 4.3639021180000555,
+      "seconds": 5.3642004649999535,
       "detail": "64 real service admissions with stale authority fail before staging; 65th rejected; duplicate/conflict ordering and restart retain all history"
     }
   ],
@@ -85,16 +85,16 @@
   "tracked_executors": 82,
   "owned_processes_exited": true,
   "source_sha256": {
-    "certweft/service.py": "738bb13f26dda6c4db1eade4ad82471643a19d560f36d0324e71f4e1f2682392",
+    "certweft/service.py": "b9819797778dac3ad375bfc241df9033d97afa3e71447fd48ac5c31b1a81684c",
     "certweft/deadlines.py": "e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f",
     "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "certweft/core.py": "fcd88d4940249cee3c2b05b472447bb61a0e91ae3f718bbd40f6699efd1d223c",
-    "certweft/operations.py": "87b21be6b4fbd8760679e3f3e6e41466b25a7ac8566b389b1fb6db8e79935a46",
+    "certweft/operations.py": "95763b74ac6a702917858b02c267545741c2fd7129d7e2eb2d4cfa5b50c9aaf2",
     "certweft/storage.py": "2f431bd3758a8a14b2cb616521f50d638cf3fdbf733278f87a7e7cb99bf1fe3b",
     "certweft/ca.py": "e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c",
     "certweft/executor.py": "8f12da00340cd673133eaf732cf901fbad2f5ad63762be548c3022ad5255dfc7",
     "tools/policy_vm.py": "27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6",
-    "tools/storage_vm.py": "b769f98918fe558f5c1ab6eab3fb57d51475bf1e90feaaa6393bab747c82d830",
+    "tools/storage_vm.py": "8cf0e3600ddcab7edb3c2cf51187c303c63758089d432c2517f64e8bf9af383e",
     "tools/deadline_vm.py": "cd0d61fb4e1253cdc23b12e3fb38d10ad41fd04f2debd9c23f4574f8fa4e7cf3",
     "tools/executor_vm.py": "73cfc9aafee86b97f450337631caf374e79fad7e6c8c13509a36d5e7b49680a1",
     "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
@@ -102,7 +102,7 @@
     "tools/operations_vm.py": "3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85",
     "tests/test_operations.py": "f1741fae5ae944fa974e90c418c447da27e49d18051fc8ad50b4ea843041e337",
     "tests/test_core.py": "8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c",
-    "tests/test_storage.py": "d35a99ae869742d01e59c3e8bb94eebbe39997875ceacb9373f15fabcf4734aa",
+    "tests/test_storage.py": "07d2de55f10a9a3011db73c9141295b43ff2951f54b6e339d184117cf87af2cf",
     "tests/test_deadlines.py": "442d8ea3cfa4af88ec62603d84f017fb2b1883e8c05d3d92bedd695811b9dd29",
     "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
   },

@@ -2,12 +2,12 @@
 
 ## Current storage milestone
 
-See [STORAGE.md](STORAGE.md) and evidence/storage.json for twelve actual-service
+See [STORAGE.md](STORAGE.md) and evidence/storage.json for fourteen actual-service
 storage-fault cases. Faults are virtual ext4 ENOSPC, read-only bind path EROFS,
 and SQLite pager FULL. Candidate TLS may remain live after filesystem-path write
 failure; no successful rollback is claimed. Elapsed fixture times and sampled
 process memory are not an availability SLA or a comparative benchmark.
-The current source passed 31 Linux unit tests and 45 VM cases across the storage,
+The current source passed 34 Linux unit tests and 47 VM cases across the storage,
 deadline, operation and executor suites; see [current validation](STORAGE.md#current-validation). earlier reports below retain their historical source hashes and scope.
 
 

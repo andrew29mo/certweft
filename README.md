@@ -54,6 +54,8 @@ read-only bind-mount EROFS and SQLite pager FULL through the formal local servic
 Failed persistence cannot acknowledge cancellation or falsely commit/restore.
 A durable storage latch blocks new updates; if even that write fails, the service
 stops accepting requests. A candidate may remain live on an unwritable store.
+Only a persisted latch survives restart. If it could not be written, restoring
+storage and restarting can admit updates; safe post-repair restart is not qualified.
 Controlled repair and persistent systemd deployment are still pending.
 
 ## Evidence

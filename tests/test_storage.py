@@ -56,3 +56,57 @@ class StorageSafety(unittest.TestCase):
                 except FileNotFoundError:continue
                 self.assertNotEqual(target,str(self.root/'journal.db'))
         finally:gc.enable()
+
+    def test_fault_latch_and_commit_are_one_serialized_decision(self):
+        import threading
+        self.ops.admit(self.body);self.ops.begin('one');quota=self.quota("BEFORE UPDATE ON requests WHEN NEW.state='CANCEL_REQUESTED'")
+        rolled_back=threading.Event();release=threading.Event();commit_started=threading.Event();answers=[]
+        class DelayedLatch(Operations):
+            def _latch(self,db,error):
+                rolled_back.set()
+                if not release.wait(2):raise AssertionError('test_latch_wait')
+                super()._latch(db,error)
+        ops=DelayedLatch(self.root,quota.max_pages)
+        def cancel():
+            try:ops.cancel('one');answers.append('bad_cancel_success')
+            except sqlite3.OperationalError as error:answers.append(error.sqlite_errorname)
+        def commit():
+            db=sqlite3.connect(self.root/'journal.db')
+            try:
+                commit_started.set()
+                try:Operations.commit(db,'one',{'committed':'new'});answers.append('bad_commit')
+                except StorageBlocked:db.rollback();answers.append('commit_blocked')
+            finally:db.close()
+        a=threading.Thread(target=cancel);b=threading.Thread(target=commit)
+        try:
+            a.start();self.assertTrue(rolled_back.wait(2));b.start();self.assertTrue(commit_started.wait(2))
+            b.join(.05);self.assertTrue(b.is_alive(),'commit bypassed fault handler barrier')
+        finally:
+            release.set();a.join(3)
+            if b.ident is not None:b.join(3)
+        self.assertFalse(a.is_alive());self.assertFalse(b.is_alive());self.assertCountEqual(answers,['SQLITE_FULL','commit_blocked'])
+        self.assertEqual(ops.get('one')['state'],'RUNNING')
+
+    def test_unrecordable_fault_callback_runs_before_barrier_release(self):
+        import fcntl
+        from certweft.operations import StorageUnrecorded
+        self.ops.admit(self.body);self.ops.begin('one')
+        ops=self.quota("BEFORE UPDATE ON requests WHEN NEW.state='CANCEL_REQUESTED'")
+        with contextlib.closing(sqlite3.connect(self.root/'journal.db')) as db, db:
+            db.execute('CREATE TRIGGER health_pressure BEFORE UPDATE ON health BEGIN INSERT INTO pressure VALUES(zeroblob(65536)); END')
+        observed=[]
+        def stop(error):
+            observed.append(error.sqlite_errorname)
+            with open(self.root/'decision.lock','a+b') as lock:
+                with self.assertRaises(BlockingIOError):fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        ops.unrecorded_storage=stop
+        with self.assertRaises(StorageUnrecorded):ops.cancel('one')
+        self.assertEqual(observed,['SQLITE_FULL'])
+
+class FixtureTransport(unittest.TestCase):
+    def test_local_helper_failure_cannot_be_counted_as_transport_eof(self):
+        from unittest.mock import patch
+        from subprocess import CompletedProcess
+        from tools.storage_vm import call
+        with patch('tools.storage_vm.subprocess.run',return_value=CompletedProcess([],1,b'',b'ImportError')):
+            with self.assertRaisesRegex(RuntimeError,'controller_helper_failed'):call('/unused',{'op':'cancel'})

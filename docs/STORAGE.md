@@ -26,6 +26,28 @@ core APPLYING while Nginx still serves the candidate. Do not infer the live
 certificate from the committed journal identity alone. No automatic repair or
 rollback guarantee is made for an unwritable store.
 
+Restart protection has two distinct scopes. A persisted STORAGE_FAILED latch
+remains after a normal service restart. With ENOSPC/EROFS still active, an attempted
+restart either fails startup or rejects an actual new submission and exits; it
+need not fail before binding a socket because no-op initialization can succeed.
+If the latch could not be written, the journal can still say HEALTHY. **Restoring
+storage and restarting can then admit new updates.** This round does not provide
+a durable uncertainty marker or a controlled post-repair restart gate. It must
+not be described as general restart-proof storage quarantine. Stop the service
+and retain evidence for operator review; do not rely on restart as safe repair.
+
+A short cross-process decision lock now serializes metadata decisions (including
+rollback followed by fault recording) with final COMMIT. Lock contention is
+bounded at 0.5 seconds and returns decision_busy instead of waiting indefinitely.
+The lock does not span long activation or TLS work. Phase checks also reject a
+latched storage fault; required recovery still bypasses that admission check.
+If a metadata storage error cannot itself be latched, the formal ingress kills
+its active executor process group and waits up to three seconds **before**
+releasing the decision barrier and exiting 75. This prevents a live executor from
+winning a late COMMIT in the tested unrecordable-fault case. A nonexiting/D-state
+child is not qualified; the timeout remains fail-stop rather than proof of cleanup.
+Library-only callers receive StorageUnrecorded and must not treat it as success.
+
 Cancellation is accepted only after its transaction commits. If that write fails,
 `cancel_accepted=true` is never returned. When a SQLite FULL cancellation failure
 can be durably latched, that latch also prevents the already-running executor from
@@ -40,15 +62,16 @@ collection. SQL transaction rollback behavior is preserved.
 
 [JSON](../evidence/storage.json) and [HTML](../evidence/storage.html) contain the
 same result, source hashes, fault codes, durable state summaries, fresh TLS
-observations and cleanup checks. Twelve cases cross three fault types with four
+observations and cleanup checks. Fourteen cases cover three fault types at four
 boundaries: admission, running preparation before intent/publication, after new
-TLS confirmation before COMMIT, and cancellation at that same confirmed boundary.
+TLS confirmation before COMMIT, and cancellation at that same confirmed boundary,
+plus two SQLite cancellation/fault-recording race cases.
 
 | Fault | Actual mechanism | Before publication | After publication / cancel |
 |---|---|---|---|
 | ENOSPC | Fill a dedicated 32 MiB ext4 loop filesystem; independently require errno 28 on a new write | Baseline pointer and fresh TLS remain unchanged; no successful admission on failed insert | No COMMITTED/ROLLED_BACK claim; service stops accepting; candidate can remain live |
 | EROFS | Read-only bind mount over that store; independently require errno 30 | Baseline remains live | No successful outcome or cancel acceptance; service exits 75; candidate can remain live |
-| SQLITE_FULL | Root-configured max_page_count on formal metadata and executor write connections, SQL allocation trigger requires a 64 KiB pager allocation | No publication; durable STORAGE_FAILED when possible | Transaction rolls back; previous fresh TLS restored, request DEGRADED; new IDs blocked even after service restart |
+| SQLITE_FULL | Root-configured max_page_count on formal metadata and executor write connections, SQL allocation trigger requires a 64 KiB pager allocation | No publication; durable STORAGE_FAILED when possible | With persisted latch: previous TLS restored, request DEGRADED, restart still blocks new IDs. If latch also fails: executor stops and service exits 75; candidate may remain live, post-repair restart unqualified |
 
 The allocation trigger uses `zeroblob`, not `RAISE(ABORT)` or a fabricated error.
 It forces the pager to hit a real quota at a chosen SQL boundary. The SQLite
@@ -71,6 +94,14 @@ unprivileged controller UID, dedicated Nginx and fresh root-verified TLS + HTTP
 200. OpenSSL creates short-lived fixture leaves for the existing activation path;
 this round does not rerun CA signing or qualify a complete CA-to-activation flow.
 Root-only pause checkpoints locate boundaries; they do not replace the backend.
+The two additional cases deliberately (a) pause the parent after cancellation
+rollback while resuming the executor, and (b) force actual pager FULL on both
+cancellation and health-latch writes, requiring executor exit before service exit.
+The first VM case shows overlapping execution and no commit; it does not separately
+instrument arrival at COMMIT. A deterministic concurrent SQLite unit test directly
+challenges that final COMMIT against the paused fault latch. Root-only diagnostic
+markers record sanitized fault codes outside the failed store; they are test
+evidence, not a product repair journal.
 Read-only journal inspection independently checks the old committed identity and
 absence of a new request ID, without calling an alternate recovery implementation.
 
@@ -109,8 +140,8 @@ fails platform requirements and is not claimed as passing validation.
 
 ## Current validation
 
-The current source passed 31 Linux unit tests ([JSON](../evidence/storage-units.json),
-[HTML](../evidence/storage-units.html)), twelve storage VM cases, nine deadline
+The reviewed source passed 34 Linux unit tests ([JSON](../evidence/storage-units.json),
+[HTML](../evidence/storage-units.html)), fourteen storage VM cases, nine deadline
 cases, twelve operation cases and twelve executor cases. Each current report
 checks source hashes and its own cleanup. Earlier CA and exploratory reports
 remain historical and were not rerun as part of this storage milestone.
@@ -124,3 +155,19 @@ exercises ENOSPC on a virtual ext4 image, EROFS on a bind path, and SQLite pager
 FULL; it does not qualify physical-media loss, arbitrary IOERR/CORRUPT variants,
 long-term rotation or automatic quota/history recycling. History/generations
 remain bounded at 64/16. Private repository, no license selected.
+
+## Independent review corrections
+
+Two read-only reviews found a real rollback-to-latch race and a test-helper false
+positive. Previously a failed cancellation transaction released SQLite ownership
+before the service started the health-latch transaction, allowing a small COMMIT
+in that interval. An initial barrier-only fix still had a gap when the health
+write itself failed; the stop/wait callback above closes that formal-service path.
+The concurrent pager test, failed-latch callback lock test, and two real-service
+VM cases challenge these boundaries rather than merely check error formatting.
+
+The old helper treated any failed runuser/Python invocation as transport loss.
+It now fails the fixture on such errors; expected socket EOF/OSError is structured
+separately and cancellation requires completed sendall. SQLite cases require
+exact READY/DEGRADED states, not just absence of COMMITTED. Old reports remain
+historical; only the current source-bound reports qualify the revised checks.

@@ -47,10 +47,35 @@ def serve(config_path):
         journal=(root/'journal.db').lstat()
         if not stat.S_ISREG(journal.st_mode) or journal.st_uid!=0 or journal.st_mode & 0o077:raise PermissionError('journal_permissions')
         operations=Operations(root,config.get('sqlite_max_pages'));operations.initialize()
+        active=[None]
+        def unrecorded_storage(error):
+            # Called while the metadata decision barrier is still held. No
+            # orphaned executor may race COMMIT after an unrecordable fault.
+            import signal
+            if config.get('unrecorded_storage_marker'):
+                try:Path(config['unrecorded_storage_marker']).write_text(json.dumps(storage.detail(error)))
+                except OSError:pass
+            child=active[0]
+            if child is not None:
+                if child.poll() is None:
+                    try:os.killpg(child.pid,signal.SIGKILL)
+                    except ProcessLookupError:pass
+                try:child.wait(timeout=3)
+                except subprocess.TimeoutExpired:os._exit(75)
+            os._exit(75)
+        operations.unrecorded_storage=unrecorded_storage
+        if config.get('storage_latch_marker'):
+            def pause_storage_latch():
+                import signal
+                marker=Path(config['storage_latch_marker']);pending=marker.with_suffix('.pending')
+                pending.write_text(json.dumps({'pid':os.getpid(),'point':'before-storage-latch'}));os.replace(pending,marker)
+                os.kill(os.getpid(),signal.SIGSTOP)
+            operations.before_storage_latch=pause_storage_latch
         guard=threading.Lock()
         def execute(body,uid):
             child=subprocess.Popen([sys.executable,'-m','certweft.executor',str(fd)],
                 start_new_session=True,pass_fds=(fd,),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+            active[0]=child
             if config.get('executor_inventory'):
                 raw=Path('/proc',str(child.pid),'stat').read_text()
                 record=json.dumps({'pid':child.pid,'start':raw[raw.rfind(')')+2:].split()[19]})+'\n'
@@ -64,6 +89,7 @@ def serve(config_path):
                 try:child.communicate(timeout=3)
                 except subprocess.TimeoutExpired:os._exit(75)
                 raise TimeoutError('executor_timeout')
+            if active[0] is child:active[0]=None
             if child.returncode!=0 or len(out)>16384:raise RuntimeError('executor_failure')
             return json.loads(out)
         # Lease excludes old executors before reconciling unfinished requests.

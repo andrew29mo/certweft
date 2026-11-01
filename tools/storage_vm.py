@@ -3,7 +3,7 @@
 Run as root only. Never fills/remounts the host root filesystem. Root-only SQL
 allocation triggers force actual SQLITE_FULL under pager quota, not RAISE().
 """
-import contextlib,errno,hashlib,html,json,os,pathlib,pwd,shutil,signal,socket,sqlite3,ssl,subprocess,sys,tempfile,time
+import threading,contextlib,errno,hashlib,html,json,os,pathlib,pwd,shutil,signal,socket,sqlite3,ssl,subprocess,sys,tempfile,time
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]))
 from certweft.core import Writer,run,fingerprint
 from certweft.operations import Operations
@@ -17,10 +17,24 @@ def alive(pid,start=None):
     except FileNotFoundError:return False
 
 def call(endpoint,body):
-    # Exercise the real socket from the configured unprivileged controller UID.
-    code='import json,sys;from tools.executor_vm import request;print(json.dumps(request(sys.argv[1],json.loads(sys.argv[2]))))'
+    # Only expected socket failures are transport results. Local helper failure
+    # (imports/runuser/JSON/etc.) must fail the fixture, never stand in for EOF.
+    code="""import json,socket,sys
+sent=False
+try:
+ with socket.socket(socket.AF_UNIX) as s:
+  s.settimeout(3);s.connect(sys.argv[1]);s.sendall(sys.argv[2].encode()+b'\\n');sent=True;out=b''
+  while not out.endswith(b'\\n'):
+   part=s.recv(4096)
+   if not part:raise EOFError('closed')
+   out+=part
+  reply=json.loads(out)
+except (OSError,EOFError) as error:
+ reply={'ok':False,'transport_unavailable':True,'request_sent':sent,'transport_error':type(error).__name__,'errno':getattr(error,'errno',None)}
+print(json.dumps(reply))
+"""
     result=subprocess.run(['runuser','-u','nobody','--',sys.executable,'-c',code,str(endpoint),json.dumps(body)],cwd=P,capture_output=True,timeout=4)
-    if result.returncode:return {'ok':False,'transport_unavailable':True}
+    if result.returncode:raise RuntimeError('controller_helper_failed')
     return json.loads(result.stdout)
 
 def scenario(kind,phase):
@@ -45,11 +59,14 @@ def scenario(kind,phase):
         run(['/usr/sbin/nginx','-c',conf]);ngpid=int((work/'nginx.pid').read_text());raw=pathlib.Path('/proc',str(ngpid),'stat').read_text()
         config={'writer':{'root':str(mount),'nginx':'/usr/sbin/nginx','conf':str(conf),'ca':str(ca),'key':str(key),'host':'localhost','ip':'127.0.0.1','port':port},'controller_uid':pwd.getpwnam('nobody').pw_uid,'socket':str(work/'writer.sock'),'lease':str(work/'lifetime.lock'),'master':{'pid':ngpid,'start':raw[raw.rfind(')')+2:].split()[19]},'executor_inventory':str(work/'executors.jsonl')}
         if phase!='pre':config.update(pause_at='preparing' if phase=='prepare' else 'confirmed',marker=str(work/'marker.json'))
+        if phase=='cancel_race':config['storage_latch_marker']=str(work/'latch.json')
+        if phase=='cancel_unrecorded':config['unrecorded_storage_marker']=str(work/'unrecorded.json')
         if kind=='sqlite_full':
             with contextlib.closing(sqlite3.connect(mount/'journal.db')) as db, db:
                 db.execute('CREATE TABLE quota_probe(data BLOB)')
-                when={'pre':"BEFORE INSERT ON requests",'prepare':"BEFORE INSERT ON state WHEN json_extract(NEW.data,'$.state')='APPLYING'",'post':"BEFORE UPDATE ON requests WHEN NEW.state='COMMITTED'",'cancel':"BEFORE UPDATE ON requests WHEN NEW.state='CANCEL_REQUESTED'"}[phase]
+                when={'pre':"BEFORE INSERT ON requests",'prepare':"BEFORE INSERT ON state WHEN json_extract(NEW.data,'$.state')='APPLYING'",'post':"BEFORE UPDATE ON requests WHEN NEW.state='COMMITTED'",'cancel':"BEFORE UPDATE ON requests WHEN NEW.state='CANCEL_REQUESTED'",'cancel_race':"BEFORE UPDATE ON requests WHEN NEW.state='CANCEL_REQUESTED'",'cancel_unrecorded':"BEFORE UPDATE ON requests WHEN NEW.state='CANCEL_REQUESTED'"}[phase]
                 db.execute('CREATE TRIGGER allocate_quota '+when+' BEGIN INSERT INTO quota_probe VALUES(zeroblob(65536)); END')
+                if phase=='cancel_unrecorded':db.execute('CREATE TRIGGER fail_health BEFORE UPDATE ON health BEGIN INSERT INTO quota_probe VALUES(zeroblob(65536)); END')
                 config['sqlite_max_pages']=db.execute('PRAGMA page_count').fetchone()[0]+1
             result['pager_max_pages']=config['sqlite_max_pages'];result['allocation_bytes']=65536
         cfg=work/'config';cfg.write_text(json.dumps(config))
@@ -117,10 +134,30 @@ def scenario(kind,phase):
                 assert wire()=='candidate';result['candidate_observed_before_fault']=True
             result['executor_memory_at_checkpoint']=memory(child)
             fault()
-            if phase=='cancel':
-                reply=call(config['socket'],{'op':'cancel','request_id':job['request_id']});result['cancel_reply']=reply
+            cancellation=None;answers=[];errors=[]
+            if phase=='cancel_race':
+                def cancel_in_parallel():
+                    try:answers.append(call(config['socket'],{'op':'cancel','request_id':job['request_id']}))
+                    except Exception as error:errors.append(type(error).__name__)
+                cancellation=threading.Thread(target=cancel_in_parallel);cancellation.start()
+                for _ in range(120):
+                    if (work/'latch.json').exists():break
+                    time.sleep(.01)
+                else:raise AssertionError('fault_latch_checkpoint_missing')
+                assert json.loads((work/'latch.json').read_text())['pid']==parent.pid
+                os.kill(child,signal.SIGCONT);time.sleep(.1)
+                with contextlib.closing(sqlite3.connect('file:'+str(mount/'journal.db')+'?mode=ro',uri=True)) as observer:
+                    assert observer.execute('SELECT state FROM requests WHERE id=?',(job['request_id'],)).fetchone()[0]=='RUNNING'
+                    assert observer.execute('SELECT state FROM health').fetchone()[0]=='HEALTHY'
+                assert alive(child);result['executor_resumed_while_fault_handler_paused']=True
+                os.kill(parent.pid,signal.SIGCONT);cancellation.join(3);assert not cancellation.is_alive() and not errors and answers
+                reply=answers[0]
+            elif phase in {'cancel','cancel_unrecorded'}:reply=call(config['socket'],{'op':'cancel','request_id':job['request_id']})
+            if phase in {'cancel','cancel_race','cancel_unrecorded'}:
+                result['cancel_reply']=reply
                 assert not reply.get('ok') and not reply.get('cancel_accepted') and not reply.get('cancel_complete')
-            os.kill(child,signal.SIGCONT)
+                if reply.get('transport_unavailable'):assert reply['request_sent'], 'cancel_not_sent'
+            if phase!='cancel_race' and alive(child):os.kill(child,signal.SIGCONT)
             for _ in range(300):
                 if not alive(child):break
                 time.sleep(.025)
@@ -139,10 +176,12 @@ def scenario(kind,phase):
             if phase=='prepare':assert os.readlink(mount/'active.conf')==pointer
             result.update(core_state=state['state'],request_state=row[0] if row else None,request_result=json.loads(row[1]) if row and row[1] else None,storage_health=health)
         result['wire_after']=wire();result['service_exit']=parent.poll()
-        if kind=='sqlite_full':
+        if kind=='sqlite_full' and phase!='cancel_unrecorded':
             assert health=='STORAGE_FAILED'
+            assert state['state']=='READY'
+            if phase!='pre':assert row[0]=='DEGRADED'
             codes=[(result.get('initial_reply') or {}).get('sqlite_error'),(result.get('cancel_reply') or {}).get('sqlite_error'),(result.get('request_result') or {}).get('sqlite_error')]
-            if phase!='cancel':assert 'SQLITE_FULL' in codes
+            if phase not in {'cancel','cancel_race'}:assert 'SQLITE_FULL' in codes
             else:assert result['cancel_reply'].get('sqlite_error')=='SQLITE_FULL'
             assert result['wire_after']=='baseline'
             parent.terminate();parent.wait(3)
@@ -158,11 +197,34 @@ def scenario(kind,phase):
         else:
             # The service cannot persist its health latch on a broken filesystem.
             parent.wait(3);assert parent.returncode==75;result['service_exit']=75
+            if phase=='cancel_unrecorded':
+                assert not alive(child) and health=='HEALTHY' and row[0]=='RUNNING'
+                result['unrecordable_fault_executor_stopped']=True
+                result['unrecorded_fault']=json.loads((work/'unrecorded.json').read_text())
+                assert result['unrecorded_fault']['sqlite_error']=='SQLITE_FULL'
+                result['restart_after_unrecordable_fault']='not qualified; no durable latch'
+            else:
+                # Fault is still active. Startup may bind on no-op metadata;
+                # either startup fails, or an actual new submission must fail.
+                pathlib.Path(config['socket']).unlink(missing_ok=True)
+                log=(work/'fault-restart.log').open('wb')
+                parent=subprocess.Popen([sys.executable,'-m','certweft.service',str(cfg)],cwd=P,stdout=log,stderr=subprocess.STDOUT);log.close()
+                for _ in range(120):
+                    if parent.poll() is not None:break
+                    if pathlib.Path(config['socket']).exists():
+                        response=call(config['socket'],{**job,'request_id':'fault-restart-update'})
+                        assert not response.get('ok') and not response.get('created')
+                        result['fault_restart_update_reply']=response;break
+                    time.sleep(.025)
+                parent.wait(4);assert parent.returncode!=0
+                result['restart_during_fault_refused_updates']=True
+                result['fault_restart_exit']=parent.returncode
         result['passed']=True
     finally:
         cleanup=True
         if child and alive(child):os.kill(child,signal.SIGKILL)
-        if parent and parent.poll() is None:parent.terminate()
+        if parent and parent.poll() is None:
+            os.kill(parent.pid,signal.SIGCONT);parent.terminate()
         if parent:
             try:parent.wait(3)
             except subprocess.TimeoutExpired:parent.kill();parent.wait();cleanup=False
@@ -202,7 +264,7 @@ def main():
     report={'passed':False,'status':'in_progress','cases':[],'scope':'formal certweft.service + executor; Nginx; ext4 loop filesystem in isolated Linux VM','untested':['physical medium failures','fsync failure injection','power loss','VM reboot','persistent systemd deployment','controlled DEGRADED repair','automatic quota/history recycling']};publish(report)
     try:
         for kind in ['enospc','readonly','sqlite_full']:
-            for phase in ['pre','prepare','post','cancel']:
+            for phase in ['pre','prepare','post','cancel']+(['cancel_race','cancel_unrecorded'] if kind=='sqlite_full' else []):
                 try:result=scenario(kind,phase)
                 except Exception as error:
                     report['cases'].append({'fault':kind,'phase':phase,'passed':False,'error':type(error).__name__+': '+str(error)});raise

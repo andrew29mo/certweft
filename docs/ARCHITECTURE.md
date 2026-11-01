@@ -119,8 +119,13 @@ semantics, clock assumptions, schema compatibility and remaining limitations.
 ## P0-3b-2 first-round update
 
 [Storage failure contract](STORAGE.md) adds an independent durable storage-health
-latch and fail-stop when even failure recording cannot persist. Twelve real-service
+latch and fail-stop when even failure recording cannot persist. Fourteen real-service
 VM cases cover ext4 ENOSPC, path-level read-only EROFS and actual SQLite pager FULL
 at admission, preparation, confirmed publication and cancel boundaries. Required
 recovery remains permitted; restored TLS does not clear the storage fault.
 Controlled repair, installed systemd lifecycle and power-loss testing remain open.
+
+The P0-3b-2 independent review adds a bounded decision barrier and active-executor
+stop-before-release on unrecordable metadata faults. Persisted quarantine survives
+restart; an unpersistable fault does not provide a post-repair restart gate.
+The latter remains a necessary controlled-recovery design gap, not a passing claim.

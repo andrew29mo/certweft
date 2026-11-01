@@ -1,5 +1,6 @@
 """Short durable transactions shared by ingress, cancellation and final commit."""
-import hashlib,json,re,sqlite3
+import fcntl,hashlib,json,os,re,sqlite3,time
+from pathlib import Path
 from contextlib import contextmanager
 from .core import Rejected
 from . import deadlines,storage
@@ -7,6 +8,21 @@ LIVE=('ACCEPTED','RUNNING','CANCEL_REQUESTED')
 
 class Cancelled(Rejected):pass
 class StorageBlocked(Rejected):pass
+class StorageUnrecorded(Rejected):pass
+
+@contextmanager
+def decision(path):
+    # Short cross-process barrier: rollback + fault latch must precede COMMIT.
+    fd=os.open(Path(path).parent/'decision.lock',os.O_CREAT|os.O_RDWR|os.O_NOFOLLOW,0o600)
+    try:
+        end=time.monotonic()+.5
+        while True:
+            try:fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB);break
+            except BlockingIOError:
+                if time.monotonic()>=end:raise Rejected('decision_busy')
+                time.sleep(.005)
+        yield
+    finally:os.close(fd)
 
 class Operations:
     def __init__(self,root,max_pages=None):
@@ -14,16 +30,32 @@ class Operations:
         self.path=str(root/'journal.db');self.max_pages=max_pages
     @contextmanager
     def transaction(self):
-        db=sqlite3.connect(self.path,timeout=.5)
-        try:
-            db.execute('PRAGMA synchronous=FULL')
-            if self.max_pages is not None:
-                actual=db.execute('PRAGMA max_page_count='+str(self.max_pages)).fetchone()[0]
-                if actual!=self.max_pages:raise Rejected('sqlite_quota_below_size')
-            db.execute('BEGIN IMMEDIATE')
-            yield db;db.commit()
-        except Exception:db.rollback();raise
-        finally:db.close()
+        with decision(self.path):
+            db=sqlite3.connect(self.path,timeout=.5)
+            try:
+                db.execute('PRAGMA synchronous=FULL')
+                if self.max_pages is not None:
+                    actual=db.execute('PRAGMA max_page_count='+str(self.max_pages)).fetchone()[0]
+                    if actual!=self.max_pages:raise Rejected('sqlite_quota_below_size')
+                db.execute('BEGIN IMMEDIATE')
+                yield db;db.commit()
+            except Exception as error:
+                db.rollback()
+                if storage.failed(error):
+                    # The barrier stays held between rollback and this second tx.
+                    try:
+                        getattr(self,'before_storage_latch',lambda:None)()
+                        self._latch(db,error)
+                    except Exception:
+                        # Formal ingress kills/waits its active executor before
+                        # dropping this barrier. Library callers get uncertainty.
+                        getattr(self,'unrecorded_storage',lambda error:None)(error)
+                        raise StorageUnrecorded('storage_fault_unrecorded') from error
+                raise
+            finally:db.close()
+    @staticmethod
+    def _latch(db,error):
+        db.execute("UPDATE health SET state='STORAGE_FAILED',detail=? WHERE id=1",(json.dumps(storage.detail(error)),));db.commit()
     def initialize(self):
         with self.transaction() as db:
             db.execute("CREATE TABLE IF NOT EXISTS health (id INTEGER PRIMARY KEY CHECK(id=1), state TEXT NOT NULL, detail TEXT)")
@@ -32,8 +64,7 @@ class Operations:
             if 'timing' not in [row[1] for row in db.execute('PRAGMA table_info(requests)')]:db.execute('ALTER TABLE requests ADD COLUMN timing TEXT')
             db.execute("CREATE UNIQUE INDEX IF NOT EXISTS one_live_request ON requests((1)) WHERE state IN ('ACCEPTED','RUNNING','CANCEL_REQUESTED')")
     def latch_storage(self,error):
-        with self.transaction() as db:
-            db.execute("UPDATE health SET state='STORAGE_FAILED',detail=? WHERE id=1",(json.dumps(storage.detail(error)),))
+        with self.transaction() as db:self._latch(db,error)
     @staticmethod
     def healthy(db):
         row=db.execute('SELECT state FROM health WHERE id=1').fetchone()
@@ -94,7 +125,9 @@ class Operations:
                 db.execute('UPDATE requests SET timing=? WHERE id=?',(json.dumps(timing),identity))
             return timing['recovery']
     def check_cancel(self,identity):
-        if self.get(identity)['state']=='CANCEL_REQUESTED':raise Cancelled('cancel_requested')
+        with self.transaction() as db:
+            if not self.healthy(db):raise StorageBlocked('storage_unavailable')
+            if self.row(db,identity)['state']=='CANCEL_REQUESTED':raise Cancelled('cancel_requested')
     def finish(self,identity,state,result):
         with self.transaction() as db:
             current=self.row(db,identity)
@@ -105,15 +138,18 @@ class Operations:
         with self.transaction() as db:return [r[0] for r in db.execute("SELECT id FROM requests WHERE state IN ('ACCEPTED','RUNNING','CANCEL_REQUESTED')")]
     @staticmethod
     def commit(db,identity,state,checkpoint=lambda:None):
-        # Same SQLite transaction commits the selected version and request outcome.
-        db.execute('BEGIN IMMEDIATE')
-        row=db.execute('SELECT state,timing FROM requests WHERE id=?',(identity,)).fetchone()
-        if row is None or row[0]!='RUNNING':raise Cancelled('commit_not_authorized')
-        if not Operations.healthy(db):raise StorageBlocked('storage_unavailable')
-        timing=json.loads(row[1]) if row[1] else None
-        if timing:deadlines.remaining(timing['activation'])
-        db.execute('INSERT OR REPLACE INTO state VALUES(1,?)',(json.dumps(state),))
-        db.execute("UPDATE requests SET state='COMMITTED',result=? WHERE id=?",(json.dumps({'committed':state['committed']}),identity))
-        checkpoint()
-        if timing:deadlines.remaining(timing['activation'])
-        db.commit()
+        path=db.execute('PRAGMA database_list').fetchone()[2]
+        if not path:raise Rejected('file_journal_required')
+        with decision(path):
+            # Same SQLite transaction commits the selected version and request outcome.
+            db.execute('BEGIN IMMEDIATE')
+            row=db.execute('SELECT state,timing FROM requests WHERE id=?',(identity,)).fetchone()
+            if row is None or row[0]!='RUNNING':raise Cancelled('commit_not_authorized')
+            if not Operations.healthy(db):raise StorageBlocked('storage_unavailable')
+            timing=json.loads(row[1]) if row[1] else None
+            if timing:deadlines.remaining(timing['activation'])
+            db.execute('INSERT OR REPLACE INTO state VALUES(1,?)',(json.dumps(state),))
+            db.execute("UPDATE requests SET state='COMMITTED',result=? WHERE id=?",(json.dumps({'committed':state['committed']}),identity))
+            checkpoint()
+            if timing:deadlines.remaining(timing['activation'])
+            db.commit()

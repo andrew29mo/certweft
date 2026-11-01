@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "tests_run": 31,
+  "failures": [],
+  "errors": [],
+  "skipped": [],
+  "elapsed_seconds": 0.7968050670000366,
+  "python": "3.12.3",
+  "platform": "linux",
+  "source_sha256": {
+    "certweft/service.py": "738bb13f26dda6c4db1eade4ad82471643a19d560f36d0324e71f4e1f2682392",
+    "certweft/deadlines.py": "e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f",
+    "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certweft/core.py": "fcd88d4940249cee3c2b05b472447bb61a0e91ae3f718bbd40f6699efd1d223c",
+    "certweft/operations.py": "87b21be6b4fbd8760679e3f3e6e41466b25a7ac8566b389b1fb6db8e79935a46",
+    "certweft/storage.py": "2f431bd3758a8a14b2cb616521f50d638cf3fdbf733278f87a7e7cb99bf1fe3b",
+    "certweft/ca.py": "e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c",
+    "certweft/executor.py": "8f12da00340cd673133eaf732cf901fbad2f5ad63762be548c3022ad5255dfc7",
+    "tools/policy_vm.py": "27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6",
+    "tools/storage_vm.py": "b769f98918fe558f5c1ab6eab3fb57d51475bf1e90feaaa6393bab747c82d830",
+    "tools/deadline_vm.py": "cd0d61fb4e1253cdc23b12e3fb38d10ad41fd04f2debd9c23f4574f8fa4e7cf3",
+    "tools/executor_vm.py": "73cfc9aafee86b97f450337631caf374e79fad7e6c8c13509a36d5e7b49680a1",
+    "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
+    "tools/credential_probe.py": "8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46",
+    "tools/operations_vm.py": "3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85",
+    "tests/test_operations.py": "f1741fae5ae944fa974e90c418c447da27e49d18051fc8ad50b4ea843041e337",
+    "tests/test_core.py": "8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c",
+    "tests/test_storage.py": "d35a99ae869742d01e59c3e8bb94eebbe39997875ceacb9373f15fabcf4734aa",
+    "tests/test_deadlines.py": "442d8ea3cfa4af88ec62603d84f017fb2b1883e8c05d3d92bedd695811b9dd29",
+    "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
+  },
+  "source_unchanged": true
+}

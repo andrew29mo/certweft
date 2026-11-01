@@ -5,73 +5,73 @@
       &quot;name&quot;: &quot;writable_configuration_hierarchy_rejected&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;root-owned config in writable directory rejected&quot;,
-      &quot;seconds&quot;: 0.03702076799993392
+      &quot;seconds&quot;: 0.025873305999994045
     },
     {
       &quot;name&quot;: &quot;mutable_executable_symlink_rejected&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;final executable symlink rejected before lease or execution&quot;,
-      &quot;seconds&quot;: 0.0299667460000137
+      &quot;seconds&quot;: 0.028078181999944718
     },
     {
       &quot;name&quot;: &quot;configuration_snapshot_pinned&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;child uses verified parent snapshot despite pathname replacement&quot;,
-      &quot;seconds&quot;: 0.026770430000055967
+      &quot;seconds&quot;: 0.0283931339999981
     },
     {
       &quot;name&quot;: &quot;unprivileged_direct_mutation_denied&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;actual file writes and direct nginx reload denied&quot;,
-      &quot;seconds&quot;: 0.029147229999921365
+      &quot;seconds&quot;: 0.02855536000004122
     },
     {
       &quot;name&quot;: &quot;controller_status&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;READY&quot;,
-      &quot;seconds&quot;: 0.053591486999948756
+      &quot;seconds&quot;: 0.0702108269999826
     },
     {
       &quot;name&quot;: &quot;fixed_api_rejects_escalation&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;admin recovery, injected path and arbitrary op rejected&quot;,
-      &quot;seconds&quot;: 0.1683897430000343
+      &quot;seconds&quot;: 0.1670693849999907
     },
     {
       &quot;name&quot;: &quot;root_revalidates_untrusted_candidate&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;invalid bytes independently rejected; durable state unchanged&quot;,
-      &quot;seconds&quot;: 0.3467329489999429
+      &quot;seconds&quot;: 0.3473829960000785
     },
     {
       &quot;name&quot;: &quot;unconfigured_peer_denied&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;unconfigured UID cannot connect to management socket&quot;,
-      &quot;seconds&quot;: 0.03888127099992289
+      &quot;seconds&quot;: 0.039804595000077825
     },
     {
       &quot;name&quot;: &quot;formal_controller_activation&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;unprivileged certificate bytes revalidated by root executor; fresh TLS confirms new generation&quot;,
-      &quot;seconds&quot;: 0.8594260660000828
+      &quot;seconds&quot;: 0.9751597089999677
     },
     {
       &quot;name&quot;: &quot;orphan_executor_prevents_takeover&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;root exec child remains stopped with inherited lease; replacement exits without mutation&quot;,
-      &quot;seconds&quot;: 0.0330713639999658
+      &quot;seconds&quot;: 0.03415861099995254
     },
     {
       &quot;name&quot;: &quot;delayed_old_completion_then_fenced_new_generation&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;old child exits before replacement acquires lease; recovery/new activation passes; old authority rejected&quot;,
-      &quot;seconds&quot;: 1.8313221110000768
+      &quot;seconds&quot;: 1.8702175409999882
     },
     {
       &quot;name&quot;: &quot;timeout_group_cleanup_and_takeover&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;real 20s timeout kills paused executor and pipe holder; replacement recovery/new activation succeeds; stale authority denied&quot;,
-      &quot;seconds&quot;: 21.347655136999947
+      &quot;seconds&quot;: 21.301590293000004
     }
   ],
   &quot;untested&quot;: [
@@ -89,16 +89,16 @@
     &quot;openssl&quot;: &quot;OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)&quot;
   },
   &quot;source_sha256&quot;: {
-    &quot;certweft/service.py&quot;: &quot;738bb13f26dda6c4db1eade4ad82471643a19d560f36d0324e71f4e1f2682392&quot;,
+    &quot;certweft/service.py&quot;: &quot;b9819797778dac3ad375bfc241df9033d97afa3e71447fd48ac5c31b1a81684c&quot;,
     &quot;certweft/deadlines.py&quot;: &quot;e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f&quot;,
     &quot;certweft/__init__.py&quot;: &quot;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855&quot;,
     &quot;certweft/core.py&quot;: &quot;fcd88d4940249cee3c2b05b472447bb61a0e91ae3f718bbd40f6699efd1d223c&quot;,
-    &quot;certweft/operations.py&quot;: &quot;87b21be6b4fbd8760679e3f3e6e41466b25a7ac8566b389b1fb6db8e79935a46&quot;,
+    &quot;certweft/operations.py&quot;: &quot;95763b74ac6a702917858b02c267545741c2fd7129d7e2eb2d4cfa5b50c9aaf2&quot;,
     &quot;certweft/storage.py&quot;: &quot;2f431bd3758a8a14b2cb616521f50d638cf3fdbf733278f87a7e7cb99bf1fe3b&quot;,
     &quot;certweft/ca.py&quot;: &quot;e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c&quot;,
     &quot;certweft/executor.py&quot;: &quot;8f12da00340cd673133eaf732cf901fbad2f5ad63762be548c3022ad5255dfc7&quot;,
     &quot;tools/policy_vm.py&quot;: &quot;27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6&quot;,
-    &quot;tools/storage_vm.py&quot;: &quot;b769f98918fe558f5c1ab6eab3fb57d51475bf1e90feaaa6393bab747c82d830&quot;,
+    &quot;tools/storage_vm.py&quot;: &quot;8cf0e3600ddcab7edb3c2cf51187c303c63758089d432c2517f64e8bf9af383e&quot;,
     &quot;tools/deadline_vm.py&quot;: &quot;cd0d61fb4e1253cdc23b12e3fb38d10ad41fd04f2debd9c23f4574f8fa4e7cf3&quot;,
     &quot;tools/executor_vm.py&quot;: &quot;73cfc9aafee86b97f450337631caf374e79fad7e6c8c13509a36d5e7b49680a1&quot;,
     &quot;tools/explore.py&quot;: &quot;0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec&quot;,
@@ -106,7 +106,7 @@
     &quot;tools/operations_vm.py&quot;: &quot;3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85&quot;,
     &quot;tests/test_operations.py&quot;: &quot;f1741fae5ae944fa974e90c418c447da27e49d18051fc8ad50b4ea843041e337&quot;,
     &quot;tests/test_core.py&quot;: &quot;8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c&quot;,
-    &quot;tests/test_storage.py&quot;: &quot;d35a99ae869742d01e59c3e8bb94eebbe39997875ceacb9373f15fabcf4734aa&quot;,
+    &quot;tests/test_storage.py&quot;: &quot;07d2de55f10a9a3011db73c9141295b43ff2951f54b6e339d184117cf87af2cf&quot;,
     &quot;tests/test_deadlines.py&quot;: &quot;442d8ea3cfa4af88ec62603d84f017fb2b1883e8c05d3d92bedd695811b9dd29&quot;,
     &quot;policy/server.tpl&quot;: &quot;e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550&quot;
   },
