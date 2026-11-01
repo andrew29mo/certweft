@@ -1,5 +1,5 @@
 """Fixed local privileged writer. One bounded request/executor at a time."""
-import fcntl,json,os,signal,socket,stat,struct,subprocess,sys,threading
+import fcntl,json,os,signal,socket,stat,struct,subprocess,sys,threading,time
 from .operations import Operations,decision
 from .gate import Gate
 from .recovery import RecoveryStore
@@ -135,6 +135,14 @@ def serve(config_path):
                 try:recovery.finish(body['request_id'],'FAILED',{'storage_verified':False,'updates_enabled':False,'restored':False,'error':type(error).__name__})
                 except Exception:os._exit(75)
             finally:guard.release()
+        def readiness_checkpoint(budget):
+            # Root-owned VM fault configuration only; never a request field.
+            target=config.get('opening_readiness_expiry_marker')
+            if target and not Path(target).exists():
+                from . import deadlines
+                left=(budget['expires_boot_ns']-deadlines.now_ns())/1e9
+                if left>0:time.sleep(left+.02)
+                Path(target).write_text(json.dumps({'point':'after-pair-validation','expiry_crossed':deadlines.now_ns()>budget['expires_boot_ns']}))
         stopping=threading.Event()
         previous={sig:signal.getsignal(sig) for sig in [signal.SIGTERM,signal.SIGINT]}
         for sig in previous:signal.signal(sig,lambda *_:stopping.set())
@@ -200,7 +208,7 @@ def serve(config_path):
                                 from .reconciliation import completion_recorded
                                 journal_ready=not guard.locked() and completion_recorded(root,current,recovery)
                                 from .opening import ready_closed
-                                opening_ready=not guard.locked() and ready_closed(root,current,recovery)
+                                opening_ready=not guard.locked() and ready_closed(root,current,recovery,readiness_checkpoint)
                                 updates_allowed=False
                                 if current['state']=='RUNNING':
                                     try:require_updates(root,config['gate_authority']);updates_allowed=True

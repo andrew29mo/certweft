@@ -5,7 +5,9 @@
 See [OPENING_INTENT.md](OPENING_INTENT.md) for persistent intentions, exact
 Gate/journal/DEGRADED pairing and the shared admission guard. This stage never
 releases updates. Previous unit records are historical; current unit evidence
-is opening-units.json/html.
+is opening-units.json/html. The follow-up review adds a final original-budget
+check to readiness, an exact crossing-response test and a formal-service mutation
+control that must detect removal of that check.
 
 ## Closed journal preparation milestone
 

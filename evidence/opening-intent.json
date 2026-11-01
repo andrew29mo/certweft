@@ -9,8 +9,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21064 kB",
-        "VmRSS": "21064 kB"
+        "VmHWM": "21260 kB",
+        "VmRSS": "21260 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -74,14 +74,14 @@
             "journal_reconciled": true,
             "health_verified": true,
             "prior_health": "STORAGE_FAILED",
-            "receipt_digest": "3350ef033d51b4d4f8c722d4d1bcb6f2acadf1ebe473be90b5db080e0a846132",
-            "after_digest": "56467b1e11011009a40617bc81943070fe642ae921db85e0fc773a7b95abd444",
+            "receipt_digest": "331b37934c116efe077dfefde4d6e86c8b5dd4bbf22e6f87b848adc930f5272a",
+            "after_digest": "5816f55cd4abcfb64f4b78bcbe5f5e3b873fb26eafa92f7e96c379b34a2f4f39",
             "closed_gate": {
-              "gate_epoch": "68a947e117a9459e9f19361b922fea43",
+              "gate_epoch": "01e9a3574ce241f99f1d5999d63d91d1",
               "gate_revision": 8
             },
-            "committed": "1fb4f72c268f49f7af7aaa96e696be32",
-            "fingerprint": "21acc5fcb2e8cb1c3e3277fcfb3e8aa4faf9e930cf6e2808fd6ac12ee01768fe",
+            "committed": "ee7db190d4e14739a578a1d964dfc538",
+            "fingerprint": "d17e10b962d7f44d1e2ad27996b0d5086828f0d2decc3483845e080bf318cf40",
             "updates_enabled": false,
             "main_committed": true
           },
@@ -100,7 +100,7 @@
             "pair_verified": true,
             "degraded_references_verified": true,
             "degraded_reference_count": 1,
-            "marker_digest": "807cc9c6a706489e3acd26da81253d41194a4b3b970fe9fdd5553275ffb8a2ed",
+            "marker_digest": "0007c653ce7a4de8a24b8cc0724a56ae12b1421a9956f6f8ad724f0360beda01",
             "updates_enabled": false,
             "release_authorized": false
           },
@@ -116,11 +116,11 @@
           "tls_confirmed": true,
           "restored": true,
           "updates_enabled": false,
-          "committed": "1fb4f72c268f49f7af7aaa96e696be32",
-          "fingerprint": "21acc5fcb2e8cb1c3e3277fcfb3e8aa4faf9e930cf6e2808fd6ac12ee01768fe",
+          "committed": "ee7db190d4e14739a578a1d964dfc538",
+          "fingerprint": "d17e10b962d7f44d1e2ad27996b0d5086828f0d2decc3483845e080bf318cf40",
           "prior_health": "STORAGE_FAILED",
           "closed_gate": {
-            "gate_epoch": "68a947e117a9459e9f19361b922fea43",
+            "gate_epoch": "01e9a3574ce241f99f1d5999d63d91d1",
             "gate_revision": 8
           }
         },
@@ -132,7 +132,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 4,
-      "elapsed_seconds": 4.184794888999932
+      "elapsed_seconds": 4.11594250600001
     },
     {
       "fault": "sqlite_full",
@@ -141,8 +141,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21080 kB",
-        "VmRSS": "21080 kB"
+        "VmHWM": "21248 kB",
+        "VmRSS": "21248 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -151,8 +151,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22876 kB",
-        "VmRSS": "22876 kB"
+        "VmHWM": "22872 kB",
+        "VmRSS": "22872 kB"
       },
       "new_update_reply": {
         "ok": false,
@@ -206,14 +206,14 @@
             "journal_reconciled": true,
             "health_verified": true,
             "prior_health": "STORAGE_FAILED",
-            "receipt_digest": "dd8fb8621ad7680f18b2adc8a3c4e5d01b6520e5c5ae662f89fdb036e052b413",
-            "after_digest": "acf374ecdcf8a123a9bbe7666373ceefc147c1aad4a2c507729788e142f2920d",
+            "receipt_digest": "93b92531ecb187ad3ee29c464521204b02a33934022b400a1e3a731ef1dafe1b",
+            "after_digest": "062fce9da1dbb9fbbcc9a1c4b11644b89c2ccaf1695195be78f8eff0f7beccb8",
             "closed_gate": {
-              "gate_epoch": "80554b6e518040c4a445392bf4bb217e",
+              "gate_epoch": "5a2726c6277143358a77fb4a3a628e15",
               "gate_revision": 8
             },
-            "committed": "e40343f48c2142c9b112b079f8a0ec2f",
-            "fingerprint": "ffc6de8127fab5fdc6bb05712df42c489255f6c0f4b752fd41fc426eb8c003fd",
+            "committed": "ed90445f67d749509bef755ff167f80a",
+            "fingerprint": "4567a055138209538c0cca6914d8b47faa35fbe6629ad7f3c6e9c60fbbfd1688",
             "updates_enabled": false,
             "main_committed": true
           },
@@ -251,11 +251,11 @@
           "tls_confirmed": true,
           "restored": true,
           "updates_enabled": false,
-          "committed": "e40343f48c2142c9b112b079f8a0ec2f",
-          "fingerprint": "ffc6de8127fab5fdc6bb05712df42c489255f6c0f4b752fd41fc426eb8c003fd",
+          "committed": "ed90445f67d749509bef755ff167f80a",
+          "fingerprint": "4567a055138209538c0cca6914d8b47faa35fbe6629ad7f3c6e9c60fbbfd1688",
           "prior_health": "STORAGE_FAILED",
           "closed_gate": {
-            "gate_epoch": "80554b6e518040c4a445392bf4bb217e",
+            "gate_epoch": "5a2726c6277143358a77fb4a3a628e15",
             "gate_revision": 8
           }
         },
@@ -267,7 +267,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 4,
-      "elapsed_seconds": 4.238419114000067
+      "elapsed_seconds": 4.147458330999939
     },
     {
       "fault": "sqlite_full",
@@ -276,8 +276,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21060 kB",
-        "VmRSS": "21060 kB"
+        "VmHWM": "21264 kB",
+        "VmRSS": "21264 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -286,8 +286,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22876 kB",
-        "VmRSS": "22876 kB"
+        "VmHWM": "22880 kB",
+        "VmRSS": "22880 kB"
       },
       "new_update_reply": {
         "ok": false,
@@ -341,14 +341,14 @@
             "journal_reconciled": true,
             "health_verified": true,
             "prior_health": "STORAGE_FAILED",
-            "receipt_digest": "1829a642636f93d289b17c6d9fd5d665b824ef8cb6ceb39aa1bc95ed072d9bde",
-            "after_digest": "e12f579eb41ab3caf6d761a12eab2094050bda4cc1e77ff641f47658fc97e00a",
+            "receipt_digest": "4cd04ec6f9a4313b93fbfa9358485678b3d06fbdeb2d51e491101f476978bf08",
+            "after_digest": "771379511c2f8aa3ac3cca5b7ea24db663ab9b57c2dbb56bf569771b713a16ec",
             "closed_gate": {
-              "gate_epoch": "7cfc1cc14c6a4cfdbf73e9227f3b7e41",
+              "gate_epoch": "99d88360467b42718ef68dd392486706",
               "gate_revision": 8
             },
-            "committed": "c5b23d2396a24b3fae28fc952e4305dd",
-            "fingerprint": "45ecdeadc1d1dceb37a3eaa5b9e5500d8623126bc9de7a8b86bf0ee6870315fc",
+            "committed": "f6f1292960204d699568f294d905f463",
+            "fingerprint": "288a8ab89cffe53f680f8d70f81b9063b8a1fa99622e13f0405a5dbea85e43c6",
             "updates_enabled": false,
             "main_committed": true
           },
@@ -386,11 +386,11 @@
           "tls_confirmed": true,
           "restored": true,
           "updates_enabled": false,
-          "committed": "c5b23d2396a24b3fae28fc952e4305dd",
-          "fingerprint": "45ecdeadc1d1dceb37a3eaa5b9e5500d8623126bc9de7a8b86bf0ee6870315fc",
+          "committed": "f6f1292960204d699568f294d905f463",
+          "fingerprint": "288a8ab89cffe53f680f8d70f81b9063b8a1fa99622e13f0405a5dbea85e43c6",
           "prior_health": "STORAGE_FAILED",
           "closed_gate": {
-            "gate_epoch": "7cfc1cc14c6a4cfdbf73e9227f3b7e41",
+            "gate_epoch": "99d88360467b42718ef68dd392486706",
             "gate_revision": 8
           }
         },
@@ -402,7 +402,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 4,
-      "elapsed_seconds": 4.249014128999988
+      "elapsed_seconds": 4.259001151000007
     },
     {
       "fault": "sqlite_full",
@@ -411,8 +411,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21080 kB",
-        "VmRSS": "21080 kB"
+        "VmHWM": "21256 kB",
+        "VmRSS": "21256 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -421,8 +421,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22876 kB",
-        "VmRSS": "22876 kB"
+        "VmHWM": "22880 kB",
+        "VmRSS": "22880 kB"
       },
       "new_update_reply": {
         "ok": false,
@@ -476,14 +476,14 @@
             "journal_reconciled": true,
             "health_verified": true,
             "prior_health": "STORAGE_FAILED",
-            "receipt_digest": "7472df74c28cb789373ce0c02b635ced7eea10263ff6fdd86a7bf7c1808cad95",
-            "after_digest": "87b256640470d58d5291c987df873d2208d78d42e9f2e1914ec8b44cfd60f51e",
+            "receipt_digest": "1e482f84aff11b0155bcd411c1aed093f3b513c22ddafb138c24b079ffcd95a1",
+            "after_digest": "3c552fe8a26ae87a55a7405f3849da044e471a4176aa109d67a4240e6a3a02cd",
             "closed_gate": {
-              "gate_epoch": "ad79f86350f6486a83b032394d4516b8",
+              "gate_epoch": "b6841a129c6547aa993577c7c4ffc908",
               "gate_revision": 8
             },
-            "committed": "3cbbc27cf0654916a0c5a92ee1037de9",
-            "fingerprint": "6377a75c7ba6b41b4d39ef726956642fbfcde479b15644bf4e0ddcf41202c25c",
+            "committed": "996865c8438d4b55a0a81fb7af046859",
+            "fingerprint": "d870a80909ac33937f755ad11c649794bacf6e6b5b8a20ae5af506a05a8b309b",
             "updates_enabled": false,
             "main_committed": true
           },
@@ -521,11 +521,11 @@
           "tls_confirmed": true,
           "restored": true,
           "updates_enabled": false,
-          "committed": "3cbbc27cf0654916a0c5a92ee1037de9",
-          "fingerprint": "6377a75c7ba6b41b4d39ef726956642fbfcde479b15644bf4e0ddcf41202c25c",
+          "committed": "996865c8438d4b55a0a81fb7af046859",
+          "fingerprint": "d870a80909ac33937f755ad11c649794bacf6e6b5b8a20ae5af506a05a8b309b",
           "prior_health": "STORAGE_FAILED",
           "closed_gate": {
-            "gate_epoch": "ad79f86350f6486a83b032394d4516b8",
+            "gate_epoch": "b6841a129c6547aa993577c7c4ffc908",
             "gate_revision": 8
           }
         },
@@ -537,7 +537,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 4,
-      "elapsed_seconds": 4.227403101999926
+      "elapsed_seconds": 4.167460341999913
     },
     {
       "fault": "sqlite_full",
@@ -546,8 +546,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21080 kB",
-        "VmRSS": "21080 kB"
+        "VmHWM": "21260 kB",
+        "VmRSS": "21260 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -611,14 +611,14 @@
             "journal_reconciled": true,
             "health_verified": true,
             "prior_health": "STORAGE_FAILED",
-            "receipt_digest": "d4a045bd1113c937a9713c99312c9be9ef43965cfed9156669551fcc3a3790b9",
-            "after_digest": "9337281d31e067061c43c4bb30086ccec7ba3f2387072b6632235235eb2e33f4",
+            "receipt_digest": "e0b36fcf22621aa5b2858a0b0982f3f430bb1372df7d8da703f31826efeae79e",
+            "after_digest": "4a6f9da79dab2a017e54f08a25a9bd01d8ea09d1d20ca6f1c0fdc010f21f117f",
             "closed_gate": {
-              "gate_epoch": "8df8d027729541da8331a31ac5067f61",
+              "gate_epoch": "ae11271a4c3542ba90cedf2b40f2b818",
               "gate_revision": 8
             },
-            "committed": "49b2f71510a242e2a93099cb1fbf26bc",
-            "fingerprint": "e396fc76ff22e724e60c87720e913f924ecb8d89fa23fa31f7f6f3b161d80118",
+            "committed": "e324fc47cfa54c6f960e2e8b5fbe098b",
+            "fingerprint": "a4b6ef366f827e7b39b509e33b1bd615ab761972c3d623298ac2b146ee9cae4a",
             "updates_enabled": false,
             "main_committed": true
           },
@@ -656,11 +656,11 @@
           "tls_confirmed": true,
           "restored": true,
           "updates_enabled": false,
-          "committed": "49b2f71510a242e2a93099cb1fbf26bc",
-          "fingerprint": "e396fc76ff22e724e60c87720e913f924ecb8d89fa23fa31f7f6f3b161d80118",
+          "committed": "e324fc47cfa54c6f960e2e8b5fbe098b",
+          "fingerprint": "a4b6ef366f827e7b39b509e33b1bd615ab761972c3d623298ac2b146ee9cae4a",
           "prior_health": "STORAGE_FAILED",
           "closed_gate": {
-            "gate_epoch": "8df8d027729541da8331a31ac5067f61",
+            "gate_epoch": "ae11271a4c3542ba90cedf2b40f2b818",
             "gate_revision": 8
           }
         },
@@ -672,7 +672,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 4,
-      "elapsed_seconds": 4.1762982279999505
+      "elapsed_seconds": 4.229202773999987
     },
     {
       "fault": "sqlite_full",
@@ -681,8 +681,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21076 kB",
-        "VmRSS": "21076 kB"
+        "VmHWM": "21260 kB",
+        "VmRSS": "21260 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -746,14 +746,14 @@
             "journal_reconciled": true,
             "health_verified": true,
             "prior_health": "STORAGE_FAILED",
-            "receipt_digest": "adf7bd4998dfee530a0dc7a13d0817557923e104647a4f260ebea07d43adcae9",
-            "after_digest": "5e8b349de2e3442482827bd5306ea778a58d459cf1c46aedb91719da364b4e08",
+            "receipt_digest": "e31d1ded0d3819b12ca70e0709172c32c218d2d42ae3afa36ee30a39518c22c2",
+            "after_digest": "14d9ba467600f8a1ea0205439d84cfbee8562e5e5fbe1cb19d51d007e4b5826a",
             "closed_gate": {
-              "gate_epoch": "f8665a110a294cb18397f0b669cf00d1",
+              "gate_epoch": "8f1ac83b8a514b3297711eef7129e9cc",
               "gate_revision": 8
             },
-            "committed": "6126645abd2740d3a16954d021423d25",
-            "fingerprint": "4e5c0ab6e10579d4eda5e6fb928aa9e904dcc6bd732d339799fb20f738cffe7e",
+            "committed": "30758eb5129a4846acf80914b955f415",
+            "fingerprint": "03c4b8bada003998ec977a2081afc3319f64bd4a074b48bdcf7a01c2ae69e21c",
             "updates_enabled": false,
             "main_committed": true
           },
@@ -791,11 +791,11 @@
           "tls_confirmed": true,
           "restored": true,
           "updates_enabled": false,
-          "committed": "6126645abd2740d3a16954d021423d25",
-          "fingerprint": "4e5c0ab6e10579d4eda5e6fb928aa9e904dcc6bd732d339799fb20f738cffe7e",
+          "committed": "30758eb5129a4846acf80914b955f415",
+          "fingerprint": "03c4b8bada003998ec977a2081afc3319f64bd4a074b48bdcf7a01c2ae69e21c",
           "prior_health": "STORAGE_FAILED",
           "closed_gate": {
-            "gate_epoch": "f8665a110a294cb18397f0b669cf00d1",
+            "gate_epoch": "8f1ac83b8a514b3297711eef7129e9cc",
             "gate_revision": 8
           }
         },
@@ -807,7 +807,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 4,
-      "elapsed_seconds": 4.262850960000037
+      "elapsed_seconds": 4.096777910000014
     },
     {
       "fault": "sqlite_full",
@@ -816,8 +816,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21080 kB",
-        "VmRSS": "21080 kB"
+        "VmHWM": "21260 kB",
+        "VmRSS": "21260 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -826,8 +826,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22876 kB",
-        "VmRSS": "22876 kB"
+        "VmHWM": "22864 kB",
+        "VmRSS": "22864 kB"
       },
       "new_update_reply": {
         "ok": false,
@@ -881,14 +881,14 @@
             "journal_reconciled": true,
             "health_verified": true,
             "prior_health": "STORAGE_FAILED",
-            "receipt_digest": "9c663a0c0ae02b277d54588c1aeb3eea29df016af3735e581f67d117ece68a29",
-            "after_digest": "d90fccfc1c294b1c0b995771cd233d1b1c4f4e5931dcf5cc15dc49c319e956d7",
+            "receipt_digest": "ada28ed1e5bcc6b809084f3b96ab859e2e5219f0786f79cc011df72caebd2614",
+            "after_digest": "f18b4df76aa48d0ae544482152bc9298f9bf68c1b1fa600a9ab60c1aaf796f6f",
             "closed_gate": {
-              "gate_epoch": "9907d9deb439478fa1345c7342fbd5a7",
+              "gate_epoch": "fd88645b7d9140cb8b2b635a0a1f789c",
               "gate_revision": 8
             },
-            "committed": "84dc651e41ad4c9894d49b899eec74c6",
-            "fingerprint": "6c3ca2a5bfb5bfb906cdbb4d46ef6ae42d5694bc539af03f89378727cb1c4283",
+            "committed": "dfeb0d5c65474d06a33367080fd4e7c9",
+            "fingerprint": "867da254e809ae83d8d3567a08f16a426af1cebe6f9bb999d70d55205257db9b",
             "updates_enabled": false,
             "main_committed": true
           },
@@ -926,11 +926,11 @@
           "tls_confirmed": true,
           "restored": true,
           "updates_enabled": false,
-          "committed": "84dc651e41ad4c9894d49b899eec74c6",
-          "fingerprint": "6c3ca2a5bfb5bfb906cdbb4d46ef6ae42d5694bc539af03f89378727cb1c4283",
+          "committed": "dfeb0d5c65474d06a33367080fd4e7c9",
+          "fingerprint": "867da254e809ae83d8d3567a08f16a426af1cebe6f9bb999d70d55205257db9b",
           "prior_health": "STORAGE_FAILED",
           "closed_gate": {
-            "gate_epoch": "9907d9deb439478fa1345c7342fbd5a7",
+            "gate_epoch": "fd88645b7d9140cb8b2b635a0a1f789c",
             "gate_revision": 8
           }
         },
@@ -942,7 +942,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 4,
-      "elapsed_seconds": 4.217556239000032
+      "elapsed_seconds": 4.194854418999967
     },
     {
       "fault": "sqlite_full",
@@ -951,8 +951,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21080 kB",
-        "VmRSS": "21080 kB"
+        "VmHWM": "21264 kB",
+        "VmRSS": "21264 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -961,8 +961,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22876 kB",
-        "VmRSS": "22876 kB"
+        "VmHWM": "22880 kB",
+        "VmRSS": "22880 kB"
       },
       "new_update_reply": {
         "ok": false,
@@ -1016,14 +1016,14 @@
             "journal_reconciled": true,
             "health_verified": true,
             "prior_health": "STORAGE_FAILED",
-            "receipt_digest": "f4905ecff9a288586ac19813375966543d00f32b66d3a1a3d04236380fd90418",
-            "after_digest": "520b3258f837c394c9db978824946e9371548059f6e59e2e4b722d6fb05e92c5",
+            "receipt_digest": "9b4ec01ba683cfdda090e9260b608375d9f555c7f0f965a7abcead6323906a67",
+            "after_digest": "d08852fd4114f22ca813d441e68368a1a4d519d871edb996bfbaa7d34484bac4",
             "closed_gate": {
-              "gate_epoch": "628fe44c67f24967b3f3f8f2b723e01a",
+              "gate_epoch": "f7aade141bf14035a58b95836577b11d",
               "gate_revision": 8
             },
-            "committed": "26d2cec7f5b044b4aa290182fe01c6c5",
-            "fingerprint": "a3af7038ce6a36678ae57f9379373e77254a7937f7c3893ea2e751cde4a59e8e",
+            "committed": "5fa0811c73784bc5a5028e8ea5bc67cf",
+            "fingerprint": "8c444018ea3fe166cdfbc10c9c475a636d79dead94bc42edc7a4446ed497139e",
             "updates_enabled": false,
             "main_committed": true
           },
@@ -1060,11 +1060,11 @@
           "tls_confirmed": true,
           "restored": true,
           "updates_enabled": false,
-          "committed": "26d2cec7f5b044b4aa290182fe01c6c5",
-          "fingerprint": "a3af7038ce6a36678ae57f9379373e77254a7937f7c3893ea2e751cde4a59e8e",
+          "committed": "5fa0811c73784bc5a5028e8ea5bc67cf",
+          "fingerprint": "8c444018ea3fe166cdfbc10c9c475a636d79dead94bc42edc7a4446ed497139e",
           "prior_health": "STORAGE_FAILED",
           "closed_gate": {
-            "gate_epoch": "628fe44c67f24967b3f3f8f2b723e01a",
+            "gate_epoch": "f7aade141bf14035a58b95836577b11d",
             "gate_revision": 8
           }
         },
@@ -1076,7 +1076,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 4,
-      "elapsed_seconds": 5.212259751000033
+      "elapsed_seconds": 5.117590779000011
     },
     {
       "fault": "sqlite_full",
@@ -1085,8 +1085,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21076 kB",
-        "VmRSS": "21076 kB"
+        "VmHWM": "21260 kB",
+        "VmRSS": "21260 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -1095,8 +1095,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22880 kB",
-        "VmRSS": "22880 kB"
+        "VmHWM": "22872 kB",
+        "VmRSS": "22872 kB"
       },
       "new_update_reply": {
         "ok": false,
@@ -1150,14 +1150,14 @@
             "journal_reconciled": true,
             "health_verified": true,
             "prior_health": "STORAGE_FAILED",
-            "receipt_digest": "85d9850070df356b211a894b5a5f85d192cad30d5bd1c0a973ec0300359cd42e",
-            "after_digest": "d55b789d872acbcb875a09373ff6522a51129ee422767eb5c8c96dddade68205",
+            "receipt_digest": "5865d7da33e9390639b1e4cb3b284de3186a01f7d57a9526113d9c63f7b134ac",
+            "after_digest": "20d404ac555e8d1c788b0d4de447abc6616d22d9cefdd0c35e197834fc00813f",
             "closed_gate": {
-              "gate_epoch": "2a9eb9e7df984488ba7101acddee3615",
+              "gate_epoch": "ffc7190d72dc4e8abfc74f895b5ea078",
               "gate_revision": 8
             },
-            "committed": "a57f9eeb8dcd4c4c88b1c48106db071b",
-            "fingerprint": "d3c2fbc439b26246eb5f0d9143ee99739af1d5740b97878d7287c007b7169b6b",
+            "committed": "7f890e8c22584185a5dbf94a6c434a9f",
+            "fingerprint": "40c53b3508164143fbff0b37e0d2f82ee9b4f8b8adf26c792066765d4671058b",
             "updates_enabled": false,
             "main_committed": true
           },
@@ -1195,11 +1195,11 @@
           "tls_confirmed": true,
           "restored": true,
           "updates_enabled": false,
-          "committed": "a57f9eeb8dcd4c4c88b1c48106db071b",
-          "fingerprint": "d3c2fbc439b26246eb5f0d9143ee99739af1d5740b97878d7287c007b7169b6b",
+          "committed": "7f890e8c22584185a5dbf94a6c434a9f",
+          "fingerprint": "40c53b3508164143fbff0b37e0d2f82ee9b4f8b8adf26c792066765d4671058b",
           "prior_health": "STORAGE_FAILED",
           "closed_gate": {
-            "gate_epoch": "2a9eb9e7df984488ba7101acddee3615",
+            "gate_epoch": "ffc7190d72dc4e8abfc74f895b5ea078",
             "gate_revision": 8
           }
         },
@@ -1211,7 +1211,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 4,
-      "elapsed_seconds": 5.414955246999966
+      "elapsed_seconds": 5.358248991999972
     },
     {
       "fault": "sqlite_full",
@@ -1220,8 +1220,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21080 kB",
-        "VmRSS": "21080 kB"
+        "VmHWM": "21292 kB",
+        "VmRSS": "21292 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -1230,8 +1230,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22880 kB",
-        "VmRSS": "22880 kB"
+        "VmHWM": "22864 kB",
+        "VmRSS": "22864 kB"
       },
       "new_update_reply": {
         "ok": false,
@@ -1285,14 +1285,14 @@
             "journal_reconciled": true,
             "health_verified": true,
             "prior_health": "STORAGE_FAILED",
-            "receipt_digest": "c770feacff787b60bae6f6b042975439e5ade1ea5f7306adc73999d7a8e8cbcc",
-            "after_digest": "7857b542dff414046ac2343b5ccba59f7f5a6f49b477ca5c4c891e3e4d4b511f",
+            "receipt_digest": "2b8fba1915da6bb227e1a02d0296db4bd6f381279e9d67145b5088ad3cb6e681",
+            "after_digest": "d54a60333f3247e7bdf821b4ecdbb329ce80f2bc834e17ac080659c423442d53",
             "closed_gate": {
-              "gate_epoch": "cdf5867a456e498aa70f6f9cc24b6a1c",
+              "gate_epoch": "bb320ce514cc4d53a43ed08f3488e0b5",
               "gate_revision": 8
             },
-            "committed": "3f9611eca018474c8096af792771bbe9",
-            "fingerprint": "ce19778607a46609cd32169abe13a2b92bab82b047b94ac089cb1a4339833439",
+            "committed": "9688290cef3942db8eb52d372fd447d9",
+            "fingerprint": "8f7febfc05b1b5127294f42ff669ca8a2b4460793f93500c062f739bd236f6ba",
             "updates_enabled": false,
             "main_committed": true
           },
@@ -1329,11 +1329,11 @@
           "tls_confirmed": true,
           "restored": true,
           "updates_enabled": false,
-          "committed": "3f9611eca018474c8096af792771bbe9",
-          "fingerprint": "ce19778607a46609cd32169abe13a2b92bab82b047b94ac089cb1a4339833439",
+          "committed": "9688290cef3942db8eb52d372fd447d9",
+          "fingerprint": "8f7febfc05b1b5127294f42ff669ca8a2b4460793f93500c062f739bd236f6ba",
           "prior_health": "STORAGE_FAILED",
           "closed_gate": {
-            "gate_epoch": "cdf5867a456e498aa70f6f9cc24b6a1c",
+            "gate_epoch": "bb320ce514cc4d53a43ed08f3488e0b5",
             "gate_revision": 8
           }
         },
@@ -1345,7 +1345,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 4,
-      "elapsed_seconds": 5.25657524199994
+      "elapsed_seconds": 5.21954283599996
     },
     {
       "fault": "sqlite_full",
@@ -1354,8 +1354,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21080 kB",
-        "VmRSS": "21080 kB"
+        "VmHWM": "21264 kB",
+        "VmRSS": "21264 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -1364,8 +1364,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22880 kB",
-        "VmRSS": "22880 kB"
+        "VmHWM": "22876 kB",
+        "VmRSS": "22876 kB"
       },
       "new_update_reply": {
         "ok": false,
@@ -1419,14 +1419,14 @@
             "journal_reconciled": true,
             "health_verified": true,
             "prior_health": "STORAGE_FAILED",
-            "receipt_digest": "f4879e70739ab14edac0c599ae36b01a8b84f9ac18ff05454d0e6cdc4f60193e",
-            "after_digest": "b2ad5994c725b07d38100feb95d3caa6df789e6095fcae6b721240f5e7b89c81",
+            "receipt_digest": "c4a7119868df30a0f0c6d1ce32cf45f2b0b0afcc51737ce94110a99a99b28956",
+            "after_digest": "53ad6ec1ea5c2366294adbbb568409d8f86cfa45e3454986f6c864c86384fe84",
             "closed_gate": {
-              "gate_epoch": "46e427ad2f914fefa3de3cd5891b9bba",
+              "gate_epoch": "6309cab7b4de45348f7140b84d157cd7",
               "gate_revision": 8
             },
-            "committed": "45c829a28f884eff8d4d8752f5f5dd8f",
-            "fingerprint": "028075cae5feb14a074d490d4937ee058c4a6adda0e4656db01a7119646ea7bc",
+            "committed": "77c8f14f25c7442dbcea177ff8430293",
+            "fingerprint": "48dad4cf5a99b6d6daaf0133785e94d098cd40669a847a2b0b49089ec8dc243e",
             "updates_enabled": false,
             "main_committed": true
           },
@@ -1446,7 +1446,7 @@
             "pair_verified": true,
             "degraded_references_verified": true,
             "degraded_reference_count": 1,
-            "marker_digest": "ce6a441f08c2ed7c6aa2004f439d287e72e0a8ae91942d72c8b6896285265410",
+            "marker_digest": "91cd4b0fdcd6c14991fac2d89c4e433776c1076cea42104e65f810a8ac841bb4",
             "updates_enabled": false,
             "release_authorized": false
           },
@@ -1462,11 +1462,11 @@
           "tls_confirmed": true,
           "restored": true,
           "updates_enabled": false,
-          "committed": "45c829a28f884eff8d4d8752f5f5dd8f",
-          "fingerprint": "028075cae5feb14a074d490d4937ee058c4a6adda0e4656db01a7119646ea7bc",
+          "committed": "77c8f14f25c7442dbcea177ff8430293",
+          "fingerprint": "48dad4cf5a99b6d6daaf0133785e94d098cd40669a847a2b0b49089ec8dc243e",
           "prior_health": "STORAGE_FAILED",
           "closed_gate": {
-            "gate_epoch": "46e427ad2f914fefa3de3cd5891b9bba",
+            "gate_epoch": "6309cab7b4de45348f7140b84d157cd7",
             "gate_revision": 8
           }
         },
@@ -1478,7 +1478,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 4,
-      "elapsed_seconds": 5.30862291599999
+      "elapsed_seconds": 5.134259145999977
     },
     {
       "fault": "sqlite_full",
@@ -1487,8 +1487,142 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21076 kB",
-        "VmRSS": "21076 kB"
+        "VmHWM": "21264 kB",
+        "VmRSS": "21264 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "22876 kB",
+        "VmRSS": "22876 kB"
+      },
+      "new_update_reply": {
+        "ok": false,
+        "error": "StorageBlocked",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "storage_unavailable"
+      },
+      "core_state": "READY",
+      "request_state": "DEGRADED",
+      "request_result": {
+        "error": "OperationalError",
+        "expired": false,
+        "sqlite_error": "SQLITE_FULL",
+        "errno": null
+      },
+      "storage_health": "STORAGE_FAILED",
+      "wire_after": "baseline",
+      "service_exit": null,
+      "restart_still_blocks_new_updates": true,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "STORAGE_FAILED",
+        "wire_preserved": "baseline"
+      },
+      "certificate_recovery": {
+        "mode": "opening-readiness-expiry",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "journal_preparation": {
+          "mode": "latched",
+          "formal_service": true,
+          "root_only": true,
+          "captured_snapshot": true,
+          "inflight_dedup_and_conflict": true,
+          "main_receipt_and_root_proof_match": true,
+          "ready_healthy_but_closed": true,
+          "historical_terminal_rows_preserved": true,
+          "normal_update_with_current_core_rejected_by_gate": "stale_gate_authority",
+          "terminal": "JOURNAL_VERIFIED_CLOSED",
+          "terminal_result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "STORAGE_FAILED",
+            "receipt_digest": "c134a1b3a92857d327de5297c4f804ceeab1aa0ecf7005d6de9a34d8fe2ac67a",
+            "after_digest": "764c5ddcfd3feff50b9911e0953b5a44a8dd6bd7e61d9fab51362d2021189819",
+            "closed_gate": {
+              "gate_epoch": "e437613204c14458a4c0155b88c28bad",
+              "gate_revision": 8
+            },
+            "committed": "b39470ac15b94f70bc9c099bcb8e4fd8",
+            "fingerprint": "1655a02a956f045da3d8c031679e3e3fe1a547e8a3b7e0186bdca9732b76f993",
+            "updates_enabled": false,
+            "main_committed": true
+          },
+          "original_timing_preserved": true,
+          "updates_enabled": false
+        },
+        "opening_intent": {
+          "mode": "readiness-expiry",
+          "root_only": true,
+          "formal_service": true,
+          "invalid_bindings_rejected": true,
+          "inflight_dedup_and_conflict": true,
+          "exact_degraded_rows_referenced_without_rewrite": true,
+          "crossing_status_response_readiness": false,
+          "readiness_crossed_original_expiry_rejected": true,
+          "terminal": "OPENING_VERIFIED_CLOSED",
+          "terminal_result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 1,
+            "marker_digest": "3212323915d2c55502cf17dd140b34dbc69e6426852a7b64b0de442c65c8f921",
+            "updates_enabled": false,
+            "release_authorized": false
+          },
+          "original_budget_preserved": true,
+          "main_history_and_health_unchanged": true,
+          "gate_unchanged_except_explicit_fixture": true,
+          "entry_executor_commit_reject_unpaired_running": true,
+          "updates_enabled": false
+        },
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "b39470ac15b94f70bc9c099bcb8e4fd8",
+          "fingerprint": "1655a02a956f045da3d8c031679e3e3fe1a547e8a3b7e0186bdca9732b76f993",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "e437613204c14458a4c0155b88c28bad",
+            "gate_revision": 8
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "logical_journal_unchanged": true,
+        "immutable_generations_unchanged": true,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 4,
+      "elapsed_seconds": 5.059584926999946
+    },
+    {
+      "fault": "sqlite_full",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "pager_max_pages": 9,
+      "allocation_bytes": 65536,
+      "service_memory_before_fault": {
+        "VmHWM": "21252 kB",
+        "VmRSS": "21252 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -1552,14 +1686,14 @@
             "journal_reconciled": true,
             "health_verified": true,
             "prior_health": "STORAGE_FAILED",
-            "receipt_digest": "f523a058326ebca0099fddaad1b923b0f582af4afda6c03dac30f544432f5a89",
-            "after_digest": "4aa1e6a4a8b51fedddbcdf6b26b4a4a3928d67bb4b91bd0eb1dc319f7b811025",
+            "receipt_digest": "6aa349334a2eac8c3ab33d632a1d5c955ce48ac6899e2d5b2849bd5370fb742d",
+            "after_digest": "58617eda1e82912c13eacbf282c37c1a3c2f669260555e8ba75ac7193ee6fbdc",
             "closed_gate": {
-              "gate_epoch": "9dbc7d8fe56c4a1dbf4e50cf9ed4274c",
+              "gate_epoch": "15414274109d46fc917da6f7bbf5cb78",
               "gate_revision": 8
             },
-            "committed": "435ad05edc574101a6e7269e6fecf12e",
-            "fingerprint": "35f8eb2f6e54362e0ff0310885d7c87c92d23f124108a736b15f5d4e267be84e",
+            "committed": "a0290af89f1d4d198b9465ba4428caac",
+            "fingerprint": "87c4b138e51fe7e7ff9f74c36045dc762d3673b028455a78b813b6ab0610948d",
             "updates_enabled": false,
             "main_committed": true
           },
@@ -1593,11 +1727,11 @@
           "tls_confirmed": true,
           "restored": true,
           "updates_enabled": false,
-          "committed": "435ad05edc574101a6e7269e6fecf12e",
-          "fingerprint": "35f8eb2f6e54362e0ff0310885d7c87c92d23f124108a736b15f5d4e267be84e",
+          "committed": "a0290af89f1d4d198b9465ba4428caac",
+          "fingerprint": "87c4b138e51fe7e7ff9f74c36045dc762d3673b028455a78b813b6ab0610948d",
           "prior_health": "STORAGE_FAILED",
           "closed_gate": {
-            "gate_epoch": "9dbc7d8fe56c4a1dbf4e50cf9ed4274c",
+            "gate_epoch": "15414274109d46fc917da6f7bbf5cb78",
             "gate_revision": 8
           }
         },
@@ -1609,7 +1743,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 4,
-      "elapsed_seconds": 4.384792071999982
+      "elapsed_seconds": 4.2978484650000155
     },
     {
       "fault": "sqlite_full",
@@ -1618,8 +1752,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21076 kB",
-        "VmRSS": "21076 kB"
+        "VmHWM": "21264 kB",
+        "VmRSS": "21264 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -1628,8 +1762,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22876 kB",
-        "VmRSS": "22876 kB"
+        "VmHWM": "22880 kB",
+        "VmRSS": "22880 kB"
       },
       "new_update_reply": {
         "ok": false,
@@ -1683,14 +1817,14 @@
             "journal_reconciled": true,
             "health_verified": true,
             "prior_health": "STORAGE_FAILED",
-            "receipt_digest": "307bf7b816ba07162fc08f51f8d2a7ec3f9ed5db47d1fef5be09cfd11bed8633",
-            "after_digest": "4480b6844456143d1888725deee98f956497f7e4d61c76aa9a2cb1495b0b7ae1",
+            "receipt_digest": "34f66f9c456d8b8e463b77fa83ba6d6da3398a1d9f3e6cf229bdc1f10828cc12",
+            "after_digest": "0786394e47bc13a077254f47a55b43f06b6081d5d29cdb07070fb445be30e9cd",
             "closed_gate": {
-              "gate_epoch": "76d026111c1245d6a86c825bbd797b39",
+              "gate_epoch": "4f66714e6d3b421792b86e6cb61a3907",
               "gate_revision": 8
             },
-            "committed": "c65d316952034beca9fb0f8f39cbb460",
-            "fingerprint": "69a4e57bd018d5df8010e1edbba8c287d15dc6841cc059e752685c57bd06c8e7",
+            "committed": "cfb0930b466b4594befa5b67842740ac",
+            "fingerprint": "e11a81906848cb4a109391d283115e687b95c3c0d14ed2db7e52c00fea98a276",
             "updates_enabled": false,
             "main_committed": true
           },
@@ -1725,11 +1859,11 @@
           "tls_confirmed": true,
           "restored": true,
           "updates_enabled": false,
-          "committed": "c65d316952034beca9fb0f8f39cbb460",
-          "fingerprint": "69a4e57bd018d5df8010e1edbba8c287d15dc6841cc059e752685c57bd06c8e7",
+          "committed": "cfb0930b466b4594befa5b67842740ac",
+          "fingerprint": "e11a81906848cb4a109391d283115e687b95c3c0d14ed2db7e52c00fea98a276",
           "prior_health": "STORAGE_FAILED",
           "closed_gate": {
-            "gate_epoch": "76d026111c1245d6a86c825bbd797b39",
+            "gate_epoch": "4f66714e6d3b421792b86e6cb61a3907",
             "gate_revision": 8
           }
         },
@@ -1741,7 +1875,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 4,
-      "elapsed_seconds": 4.385161213999936
+      "elapsed_seconds": 4.338378676000048
     },
     {
       "fault": "sqlite_full",
@@ -1750,8 +1884,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21076 kB",
-        "VmRSS": "21076 kB"
+        "VmHWM": "21264 kB",
+        "VmRSS": "21264 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -1760,8 +1894,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22880 kB",
-        "VmRSS": "22880 kB"
+        "VmHWM": "22872 kB",
+        "VmRSS": "22872 kB"
       },
       "new_update_reply": {
         "ok": false,
@@ -1815,14 +1949,14 @@
             "journal_reconciled": true,
             "health_verified": true,
             "prior_health": "STORAGE_FAILED",
-            "receipt_digest": "d2392856b756801efeb4e68ef711207cc1016d500fb5d4e809e5c8d4f44267ad",
-            "after_digest": "f187412976da80746163645949d7a154a49a30749b71422d3929f716086ccb5c",
+            "receipt_digest": "f9e15355abbfecf06e189ccb165272a3f6f6ed00afff657cb22e942b25f80c0f",
+            "after_digest": "614a7108e781a607e5d0981663dd6309e375488f91a2e8992d22a51037db049e",
             "closed_gate": {
-              "gate_epoch": "4374a0ab2d134252a888922ef96c03e4",
+              "gate_epoch": "6293164c4a134ba1af38d168a003224d",
               "gate_revision": 8
             },
-            "committed": "f59544bb4f7a47a691c7e8afb32201ab",
-            "fingerprint": "ec19c1ba61d9af5e5dafef9ee8c59f8c19a9d7624c220aca670abb0b20efcd6b",
+            "committed": "bcf5a7d3f82a4d40bf9f010ad25c8dcf",
+            "fingerprint": "e96ab8ccfb1fcbf390269c73afb8c58ade0745f8a17243660c972061c557cb83",
             "updates_enabled": false,
             "main_committed": true
           },
@@ -1856,11 +1990,11 @@
           "tls_confirmed": true,
           "restored": true,
           "updates_enabled": false,
-          "committed": "f59544bb4f7a47a691c7e8afb32201ab",
-          "fingerprint": "ec19c1ba61d9af5e5dafef9ee8c59f8c19a9d7624c220aca670abb0b20efcd6b",
+          "committed": "bcf5a7d3f82a4d40bf9f010ad25c8dcf",
+          "fingerprint": "e96ab8ccfb1fcbf390269c73afb8c58ade0745f8a17243660c972061c557cb83",
           "prior_health": "STORAGE_FAILED",
           "closed_gate": {
-            "gate_epoch": "4374a0ab2d134252a888922ef96c03e4",
+            "gate_epoch": "6293164c4a134ba1af38d168a003224d",
             "gate_revision": 8
           }
         },
@@ -1872,7 +2006,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 4,
-      "elapsed_seconds": 4.411152838000021
+      "elapsed_seconds": 4.3103256899999
     },
     {
       "fault": "sqlite_full",
@@ -1881,8 +2015,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21076 kB",
-        "VmRSS": "21076 kB"
+        "VmHWM": "21244 kB",
+        "VmRSS": "21244 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -1891,8 +2025,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22880 kB",
-        "VmRSS": "22880 kB"
+        "VmHWM": "22876 kB",
+        "VmRSS": "22876 kB"
       },
       "new_update_reply": {
         "ok": false,
@@ -1946,14 +2080,14 @@
             "journal_reconciled": true,
             "health_verified": true,
             "prior_health": "STORAGE_FAILED",
-            "receipt_digest": "3117ee988c18bd7d562a49612689a17cd238e6c06f410b9b5a3660b2c5530e43",
-            "after_digest": "5fa2ed6619b9827f03ac3c339e2181c9dfd74125ff2610eeabe0b5d52394036d",
+            "receipt_digest": "7390563c4b4a07869f1be991d97e8a182fa4734168289a363ab76f78e11c5eb9",
+            "after_digest": "934f89a536dbfd955c0804d77fafbd52bc625169053e0b0d0ef39da5493e79b4",
             "closed_gate": {
-              "gate_epoch": "305412655e03484f884272fc03893ffe",
+              "gate_epoch": "3da27e4850154e5399d3349f9983ca63",
               "gate_revision": 8
             },
-            "committed": "f8cc74a9c8ea4150a74d038cd371ba3e",
-            "fingerprint": "23bcf478893338e16a5027a8a49cfd97e054afce57635197e2829659d6a5b47e",
+            "committed": "ec0c97d9fc564070bbf6dd46397e8d1b",
+            "fingerprint": "2147ce860ce1450236753ad4ac02363245775a65af815da0162a7c066659d385",
             "updates_enabled": false,
             "main_committed": true
           },
@@ -1990,11 +2124,11 @@
           "tls_confirmed": true,
           "restored": true,
           "updates_enabled": false,
-          "committed": "f8cc74a9c8ea4150a74d038cd371ba3e",
-          "fingerprint": "23bcf478893338e16a5027a8a49cfd97e054afce57635197e2829659d6a5b47e",
+          "committed": "ec0c97d9fc564070bbf6dd46397e8d1b",
+          "fingerprint": "2147ce860ce1450236753ad4ac02363245775a65af815da0162a7c066659d385",
           "prior_health": "STORAGE_FAILED",
           "closed_gate": {
-            "gate_epoch": "305412655e03484f884272fc03893ffe",
+            "gate_epoch": "3da27e4850154e5399d3349f9983ca63",
             "gate_revision": 8
           }
         },
@@ -2006,7 +2140,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 4,
-      "elapsed_seconds": 4.487541927000052
+      "elapsed_seconds": 4.07582210999999
     },
     {
       "fault": "sqlite_full",
@@ -2015,8 +2149,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21076 kB",
-        "VmRSS": "21076 kB"
+        "VmHWM": "21260 kB",
+        "VmRSS": "21260 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -2025,8 +2159,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22880 kB",
-        "VmRSS": "22880 kB"
+        "VmHWM": "22876 kB",
+        "VmRSS": "22876 kB"
       },
       "new_update_reply": {
         "ok": false,
@@ -2080,14 +2214,14 @@
             "journal_reconciled": true,
             "health_verified": true,
             "prior_health": "STORAGE_FAILED",
-            "receipt_digest": "e1600e03d7fe53aabfb57d80596104ea3a5a8bbb8653cd18faf0452173c081bf",
-            "after_digest": "42347b2f2bb7ffaaf66386f0823a962ff0ad8f68576bb7f423900e6ba3f4c60c",
+            "receipt_digest": "a11af92ffdae6b4fbc8896e66da0956ee49a23b61dee7c02f13a7f44113fae11",
+            "after_digest": "482aee09970a40ba2d8de318dae8da69779e77a53d3c70e0917209bdec3fb648",
             "closed_gate": {
-              "gate_epoch": "2e162744cae348349221cfab3f0bddf8",
+              "gate_epoch": "98650162e879439b892db5a19e23e2ee",
               "gate_revision": 8
             },
-            "committed": "9b7b1640f9304edb9d6ae3ad77e16984",
-            "fingerprint": "d3cae4732eeab5fdd32a3358164038d197a0c1b3da8553b3156d4c3e2e24538c",
+            "committed": "9801890890864f2dbbd1ed4d09d162c0",
+            "fingerprint": "5ef99d647ff43ce0085ae9ec1512f22745e4177c713cf15d8876e00004417084",
             "updates_enabled": false,
             "main_committed": true
           },
@@ -2124,11 +2258,11 @@
           "tls_confirmed": true,
           "restored": true,
           "updates_enabled": false,
-          "committed": "9b7b1640f9304edb9d6ae3ad77e16984",
-          "fingerprint": "d3cae4732eeab5fdd32a3358164038d197a0c1b3da8553b3156d4c3e2e24538c",
+          "committed": "9801890890864f2dbbd1ed4d09d162c0",
+          "fingerprint": "5ef99d647ff43ce0085ae9ec1512f22745e4177c713cf15d8876e00004417084",
           "prior_health": "STORAGE_FAILED",
           "closed_gate": {
-            "gate_epoch": "2e162744cae348349221cfab3f0bddf8",
+            "gate_epoch": "98650162e879439b892db5a19e23e2ee",
             "gate_revision": 8
           }
         },
@@ -2140,7 +2274,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 4,
-      "elapsed_seconds": 4.135341749999952
+      "elapsed_seconds": 4.087977185999989
     },
     {
       "fault": "sqlite_full",
@@ -2149,8 +2283,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21076 kB",
-        "VmRSS": "21076 kB"
+        "VmHWM": "21260 kB",
+        "VmRSS": "21260 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -2159,8 +2293,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22880 kB",
-        "VmRSS": "22880 kB"
+        "VmHWM": "22876 kB",
+        "VmRSS": "22876 kB"
       },
       "new_update_reply": {
         "ok": false,
@@ -2214,14 +2348,14 @@
             "journal_reconciled": true,
             "health_verified": true,
             "prior_health": "STORAGE_FAILED",
-            "receipt_digest": "e3d71dd39712e779d3adf64a8479fa8073551cb844c2a426605ef6b9413adae5",
-            "after_digest": "286287471e4ea2e29402e9f0bba674e0254bf6e9c68506d79ee8d68df8e86958",
+            "receipt_digest": "d34b7acec648a2eba2e728f91305d2cfc073fa8785621ef232b906e0cfeb0b0e",
+            "after_digest": "8b8c96b11f5cf818f24c9475b8fe54aa53e9f352f92d3dc633d64fbda1d72f5f",
             "closed_gate": {
-              "gate_epoch": "64b6dcc2a66d48b3a272811c932ddf19",
+              "gate_epoch": "1f62118713474cce976bc54defe3e8c5",
               "gate_revision": 8
             },
-            "committed": "f3df6c98fb84460db1380e04c1f669ab",
-            "fingerprint": "1b3b3cf4dabda781ecbab02535e631b85b4f6eeef8eaa5cb391d712155111ff0",
+            "committed": "f329ee5661994bd88277841bce2a1a95",
+            "fingerprint": "7b621b44498a319556a0eb1884b71313a13b5de971b7f40dc834a5f64a4dacdc",
             "updates_enabled": false,
             "main_committed": true
           },
@@ -2259,11 +2393,11 @@
           "tls_confirmed": true,
           "restored": true,
           "updates_enabled": false,
-          "committed": "f3df6c98fb84460db1380e04c1f669ab",
-          "fingerprint": "1b3b3cf4dabda781ecbab02535e631b85b4f6eeef8eaa5cb391d712155111ff0",
+          "committed": "f329ee5661994bd88277841bce2a1a95",
+          "fingerprint": "7b621b44498a319556a0eb1884b71313a13b5de971b7f40dc834a5f64a4dacdc",
           "prior_health": "STORAGE_FAILED",
           "closed_gate": {
-            "gate_epoch": "64b6dcc2a66d48b3a272811c932ddf19",
+            "gate_epoch": "1f62118713474cce976bc54defe3e8c5",
             "gate_revision": 8
           }
         },
@@ -2275,7 +2409,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 4,
-      "elapsed_seconds": 4.395455470999991
+      "elapsed_seconds": 4.114201992999938
     },
     {
       "fault": "sqlite_full",
@@ -2284,8 +2418,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21080 kB",
-        "VmRSS": "21080 kB"
+        "VmHWM": "21260 kB",
+        "VmRSS": "21260 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -2294,8 +2428,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22880 kB",
-        "VmRSS": "22880 kB"
+        "VmHWM": "22872 kB",
+        "VmRSS": "22872 kB"
       },
       "new_update_reply": {
         "ok": false,
@@ -2349,14 +2483,14 @@
             "journal_reconciled": true,
             "health_verified": true,
             "prior_health": "STORAGE_FAILED",
-            "receipt_digest": "f8c9a9afe35fcd48c641b7ce517045ba052f022c77aaefabaebe72548a5a4c32",
-            "after_digest": "2036a84fbc4961764f11e2bcee2710ce96d2b5a04e8eb29af1c0067c15fe006d",
+            "receipt_digest": "7c277cce525d5bb0a63eadb4b1dddc0ad5aaa6d4b595e1e7225ceb28d731b5a8",
+            "after_digest": "bae785c59151d73a0ccb3191f481daa3c8887f7da14f673462855e96e2391d60",
             "closed_gate": {
-              "gate_epoch": "e6d2575d96244e0d9ee25cc6de7b4131",
+              "gate_epoch": "f31707f6f0bf4bfca5bc2b3111d0d453",
               "gate_revision": 8
             },
-            "committed": "ea3c0a292245434dbcc6b29b1a45bbcc",
-            "fingerprint": "9bdd9c8412129280db7d1f27810ffa80f6c9c4ec60334a1b849e89a0040f3211",
+            "committed": "ca1698ccd9a54dd79632a6089d9599b5",
+            "fingerprint": "dcfedab6e505fcbac4dd51d1831696f97e85ed2bb2ac4a8851fe06ee43817a2a",
             "updates_enabled": false,
             "main_committed": true
           },
@@ -2394,11 +2528,11 @@
           "tls_confirmed": true,
           "restored": true,
           "updates_enabled": false,
-          "committed": "ea3c0a292245434dbcc6b29b1a45bbcc",
-          "fingerprint": "9bdd9c8412129280db7d1f27810ffa80f6c9c4ec60334a1b849e89a0040f3211",
+          "committed": "ca1698ccd9a54dd79632a6089d9599b5",
+          "fingerprint": "dcfedab6e505fcbac4dd51d1831696f97e85ed2bb2ac4a8851fe06ee43817a2a",
           "prior_health": "STORAGE_FAILED",
           "closed_gate": {
-            "gate_epoch": "e6d2575d96244e0d9ee25cc6de7b4131",
+            "gate_epoch": "f31707f6f0bf4bfca5bc2b3111d0d453",
             "gate_revision": 8
           }
         },
@@ -2410,7 +2544,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 4,
-      "elapsed_seconds": 4.446446067000011
+      "elapsed_seconds": 4.085629541000003
     },
     {
       "fault": "sqlite_full",
@@ -2419,8 +2553,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21072 kB",
-        "VmRSS": "21072 kB"
+        "VmHWM": "21264 kB",
+        "VmRSS": "21264 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -2429,8 +2563,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22876 kB",
-        "VmRSS": "22876 kB"
+        "VmHWM": "22868 kB",
+        "VmRSS": "22868 kB"
       },
       "new_update_reply": {
         "ok": false,
@@ -2484,14 +2618,14 @@
             "journal_reconciled": true,
             "health_verified": true,
             "prior_health": "STORAGE_FAILED",
-            "receipt_digest": "09813b610eb042fca80f63db55ca85f7bb407e7ca10ae58715054ae08986efbb",
-            "after_digest": "991fa4235a302471d1c0a81aab496d058a6bd52edc776fa937376a03beb0285f",
+            "receipt_digest": "1b878f9a13409d7f6dd2bb3c785017ba2d395211ec75dd11cda994d93ce24056",
+            "after_digest": "609be083938054e9184b0dbc7d81ae953b5d578d9dc28d1a38dab69f0d537a00",
             "closed_gate": {
-              "gate_epoch": "12ee9c4868664af2856ffda1dbae76f8",
+              "gate_epoch": "662b0b8c1b2c4e88b97ff6dbfec181f9",
               "gate_revision": 8
             },
-            "committed": "3aadb47a87e94231b07f0c2694c5d563",
-            "fingerprint": "7b28be6571c931404239fc71ef2dbbd78d8c65322341eff526d4218a9f8bf501",
+            "committed": "a3012314658640bd822f9686f18b2a55",
+            "fingerprint": "f4362c3c02b06824c002c9f74bef42e8ce8ad06af50010835d15ba15fe2af9d8",
             "updates_enabled": false,
             "main_committed": true
           },
@@ -2511,7 +2645,7 @@
             "pair_verified": true,
             "degraded_references_verified": true,
             "degraded_reference_count": 1,
-            "marker_digest": "7dc933a8adddffd12bcba76f971bda507859bf10185817469077242e4fd18180",
+            "marker_digest": "f0a6f035d5af92a8aca3bf9dbbec63b2c577b76c4e384b2bebb8f25a77f2a6be",
             "updates_enabled": false,
             "release_authorized": false
           },
@@ -2527,11 +2661,11 @@
           "tls_confirmed": true,
           "restored": true,
           "updates_enabled": false,
-          "committed": "3aadb47a87e94231b07f0c2694c5d563",
-          "fingerprint": "7b28be6571c931404239fc71ef2dbbd78d8c65322341eff526d4218a9f8bf501",
+          "committed": "a3012314658640bd822f9686f18b2a55",
+          "fingerprint": "f4362c3c02b06824c002c9f74bef42e8ce8ad06af50010835d15ba15fe2af9d8",
           "prior_health": "STORAGE_FAILED",
           "closed_gate": {
-            "gate_epoch": "12ee9c4868664af2856ffda1dbae76f8",
+            "gate_epoch": "662b0b8c1b2c4e88b97ff6dbfec181f9",
             "gate_revision": 8
           }
         },
@@ -2543,7 +2677,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 4,
-      "elapsed_seconds": 4.476179330000036
+      "elapsed_seconds": 4.266527255999904
     }
   ],
   "scope": "formal root service and inherited executor, actual journal + closed opening intentions in isolated Linux VM",
@@ -2557,13 +2691,24 @@
     "physical media",
     "zero downtime"
   ],
+  "readiness_mutation": {
+    "passed": true,
+    "mutation": "remove_final_readiness_deadline_check",
+    "expected_failure": "expired_readiness_response",
+    "formal_service_case_rejected": true,
+    "only_opening_source_changed": true,
+    "original_opening_sha256": "5ed4cb939789628cea6452e0bd8c368ae61bbb25ef12ec91a2ed2e6c1eb22c1c",
+    "mutant_opening_sha256": "3e2c62fbfd8f67f2acf0f76ac0ba07824ef64b9b42624c0879b05876917163ac",
+    "working_source_unchanged": true,
+    "cleanup_verified": true
+  },
   "source_sha256": {
-    "certweft/service.py": "6e30fe6f111a07d87ec9cc18b2f4b01f02f57a255df01df3285573da566ab4ab",
+    "certweft/service.py": "c1060dfde7d07f1b37bea7881aff334fbb314ab06b549b7248b6f668281c37ae",
     "certweft/deadlines.py": "e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f",
     "certweft/recovery.py": "ff8c6963ab4ddf4b45eecc12e722d280488b55f7dfb1c1f5a2549740a064c47e",
     "certweft/recovery_executor.py": "5673efd7ed7a635565ea5de63693d65f02372a4812d72fbe155962e9b00233a7",
     "certweft/reconciliation.py": "bb21824e85c89d90639837f8d144eb0e265b9652065104326f9d843584d88f45",
-    "certweft/opening.py": "c58199117bc12c160f596e45272287e1c3e351623e3d786289568c12af39fcc2",
+    "certweft/opening.py": "5ed4cb939789628cea6452e0bd8c368ae61bbb25ef12ec91a2ed2e6c1eb22c1c",
     "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "certweft/core.py": "fc63c1d25dda209c19129440b1fec36f20d1fdd9b72ef09acd8ab032872310b1",
     "certweft/operations.py": "9b639e6ebc04d80b71f661ad860a9ee1c59d867b5157ba2dee8fc1c008b078b4",
@@ -2577,8 +2722,9 @@
     "tools/storage_vm.py": "2d251e4e7de2c10739c2d339f372787b36613f65759a539037b075b6a7e3a14c",
     "tools/deadline_vm.py": "cd0d61fb4e1253cdc23b12e3fb38d10ad41fd04f2debd9c23f4574f8fa4e7cf3",
     "tools/executor_vm.py": "73cfc9aafee86b97f450337631caf374e79fad7e6c8c13509a36d5e7b49680a1",
-    "tools/opening_vm.py": "dde1b9204c65b41be1a9ff36335d0b02fc4b2cf29981e7929a7d1cf0823b0fd2",
+    "tools/opening_vm.py": "0acfe9b540a42eeb456de5b88fe4eb44e507d9f4c342d1f5bf96cceb9c93074a",
     "tools/recovery_vm.py": "104fc1ee43c382f5bb0d4d7c19c3369bb4c656097966e4e05c9008b3a9f285ee",
+    "tools/opening_mutation.py": "46bb7cd1c1795ecf6fe08175fecc762e9aeeb02c4aa7fe529bb9f8a74fbca1de",
     "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
     "tools/credential_probe.py": "8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46",
     "tools/operations_vm.py": "3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85",
@@ -2588,7 +2734,7 @@
     "tests/test_operations.py": "f1741fae5ae944fa974e90c418c447da27e49d18051fc8ad50b4ea843041e337",
     "tests/test_core.py": "8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c",
     "tests/test_recovery.py": "cba9d1c4dd080581bd039f9d3331200a74de221e751d57c008222bdbb8bba830",
-    "tests/test_opening.py": "288c34c58957956fcf06a229fd3cccbd040be216a10bf8ea2b9a790feed444fb",
+    "tests/test_opening.py": "45e4aca1cebd1d44ac9af9ad5fec47908cbc192748f04b3b7ee7ee2e48690963",
     "tests/test_storage.py": "07d2de55f10a9a3011db73c9141295b43ff2951f54b6e339d184117cf87af2cf",
     "tests/test_gate.py": "e1bcd31c414728e0022a3d1f47726bedff559a52f811e536860da60de589c8d0",
     "tests/test_deadlines.py": "442d8ea3cfa4af88ec62603d84f017fb2b1883e8c05d3d92bedd695811b9dd29",

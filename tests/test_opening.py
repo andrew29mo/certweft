@@ -94,3 +94,17 @@ class OpeningLedger(unittest.TestCase):
             db.execute('CREATE TABLE opening_intent(id INTEGER PRIMARY KEY,record TEXT)');db.execute("INSERT INTO opening_intent VALUES(1,'{}')")
         out=prepare_opening(self.config,'opening');self.assertEqual(out['state'],'FAILED');self.assertEqual(out['result']['reason'],'opening_marker_schema')
         with self.db() as db:self.assertEqual(db.execute('SELECT record FROM opening_intent').fetchone()[0],'{}')
+
+    def test_readiness_validation_crossing_actual_expiry_never_reports_ready(self):
+        self.prepared();self.store.admit(dict(self.body_open,timeout_seconds=1),self.writer)
+        out=prepare_opening(self.config,'opening');self.assertEqual(out['state'],'OPENING_VERIFIED_CLOSED')
+        from certweft import opening
+        original=opening.check_pair;ran=[]
+        def slow_validation(*args):
+            while deadlines.now_ns()<=out['timing']['budget']['expires_boot_ns']:time.sleep(.005)
+            original(*args);ran.append(True)
+        with patch('certweft.opening.check_pair',side_effect=slow_validation):
+            self.assertFalse(ready_closed(self.root,self.gate.read(),self.store))
+        self.assertTrue(ran);self.assertGreater(deadlines.now_ns(),out['timing']['budget']['expires_boot_ns'])
+        self.assertEqual(self.store.get('opening'),out)
+        with self.assertRaises(Rejected):require_updates(self.root,Gate.token(self.gate.read()))

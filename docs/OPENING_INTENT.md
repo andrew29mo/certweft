@@ -81,8 +81,10 @@ than proof that no write persisted. Both databases remain closed throughout.
 
 recovery-status.opening_intent_verified_closed is true only for the latest exact
 marker, durable completed root result, current pair and unexpired original budget.
-A completed root record remains historical after expiry, but the readiness flag
-becomes false. Restart changes Gate epoch, preserves journal evidence, interrupts
+Readiness checks the same original budget both before pairing and immediately
+after pairing/checkpoints, before returning true. A completed root record remains
+historical after expiry, but the readiness flag becomes false. This is a snapshot
+at the final check, not a promise that it remains valid until a client receives it. Restart changes Gate epoch, preserves journal evidence, interrupts
 unfinished root work and never replays or automatically releases an intention.
 The old executor's inherited lease still fences takeover until it exits.
 
@@ -157,8 +159,8 @@ configs and logs remain private VM fixtures, not report payloads.
 
 ## Current validation and retained failed attempt
 
-The current source passes 85 Linux unit tests with no failures, errors or skips,
-and 19 opening-intention VM fixtures. The 19 preparation, 17 certificate,
+The current source passes 86 Linux unit tests with no failures, errors or skips,
+and 20 opening-intention VM fixtures, plus one expected-failure mutation control. The 19 preparation, 17 certificate,
 15 storage-verification, ten gate and fourteen storage fixtures are separate
 regressions, not additional opening scenarios. The old 75-unit preparation record
 is historical; current unit qualification is opening-units.json/html.
@@ -172,6 +174,32 @@ timeout. New helper startup uses the same protocol-level criterion. The failed
 attempt is retained in opening-attempts. This corrects an insufficient readiness
 criterion; it does not prove a unique cause for the original transport failure or
 relax any service-exit/non-success assertion.
+
+## Follow-up review: readiness crossing its original deadline
+
+Review and a Linux BOOTTIME experiment found a P2 status defect: ready_closed
+checked remaining time before the full pair validation, but could return true if
+that work crossed the original expiry. Admission stayed closed. It now explicitly
+rechecks that exact persisted budget immediately before returning true; an expired
+snapshot returns false without rewriting the historical successful intent.
+
+A true-clock unit delays validation past the original expiry, still executes the
+original pair validator and checks false plus unchanged history. The added formal
+service readiness-expiry case uses a one-shot, root-configured checkpoint after
+pair validation to wait through expiry. The marker proves that this path ran.
+The first draft of this VM test discarded the crossing reply in poll() and checked
+only a later response; that would not catch the original bug. It now captures and
+asserts the *same* reply that crosses the deadline, not merely a subsequent false.
+The public request schema cannot enable this hook.
+
+The full opening matrix additionally runs tools/opening_mutation.py. It makes a
+private source copy inside the VM, verifies all files unchanged except removal
+of the final readiness deadline check, and runs the same formal-service case.
+Only the precise expired_readiness_response assertion is accepted as the expected
+failure; unrelated failure, surviving the test, timeout or failed owned cleanup
+fails the control. Original/mutant source hashes and cleanup are recorded in the
+opening report. The working source is never mutated or uploaded as the variant.
+This demonstrates detection of this particular bug, not general mutation coverage.
 
 ## Not qualified
 

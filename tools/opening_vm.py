@@ -8,14 +8,16 @@ from certweft.reconciliation import receipt,snapshot,digest
 from certweft.opening import marker
 from tools.executor_vm import hashes,request
 P=pathlib.Path(__file__).resolve().parents[1]
-MATRIX=['success','degraded-added','degraded-changed','receipt-missing','receipt-mismatch','core-drift','incomplete-preparation','expired-before','expired-after','expired-result','expired-ready','crash-before','crash-after','crash-result','stale-before','stale-result','newer-marker','malformed-marker','completed-restart']
+MATRIX=['success','degraded-added','degraded-changed','receipt-missing','receipt-mismatch','core-drift','incomplete-preparation','expired-before','expired-after','expired-result','expired-ready','readiness-expiry','crash-before','crash-after','crash-result','stale-before','stale-result','newer-marker','malformed-marker','completed-restart']
 
 def settings(work,mode):
     point='opening-main-commit' if mode in {'expired-before','crash-before','stale-before'} else 'opening-main-committed' if mode in {'expired-after','crash-after','newer-marker'} else 'opening-result-commit' if mode in {'expired-result','crash-result','stale-result'} else 'opening-start'
-    return {'opening_pause_at':point,'opening_marker':str(work/'opening.json'),'opening_pause_once':True}
+    result={'opening_pause_at':point,'opening_marker':str(work/'opening.json'),'opening_pause_once':True}
+    if mode=='readiness-expiry':result['opening_readiness_expiry_marker']=str(work/'readiness-expiry.json')
+    return result
 
 def exercise(root,work,config,parent,call,normal_job,prepared,mode):
-    child=None;cfg=work/'opening-config'
+    child=None;cfg=work/'opening-config';crossing_responses=[]
     def db():return contextlib.closing(sqlite3.connect('file:'+str(root/'journal.db')+'?mode=ro',uri=True,timeout=.2))
     def state():
         with db() as d:return snapshot(d)
@@ -28,7 +30,11 @@ def exercise(root,work,config,parent,call,normal_job,prepared,mode):
         for _ in range(360):
             if parent.poll() is not None:raise AssertionError('opening_service_exited')
             row=rootcall({'op':'recovery-request-status','request_id':identity})['result']
-            if row['state'] not in {'ACCEPTED','RUNNING'} and not rootcall({'op':'recovery-status'})['executor_busy']:return row
+            if row['state'] not in {'ACCEPTED','RUNNING'}:
+                existed=(work/'readiness-expiry.json').exists()
+                status=rootcall({'op':'recovery-status'})
+                if mode=='readiness-expiry' and not existed and (work/'readiness-expiry.json').exists():crossing_responses.append(status)
+                if not status['executor_busy']:return row
             time.sleep(.025)
         raise AssertionError('opening_operation_stuck')
     def start():
@@ -57,7 +63,7 @@ def exercise(root,work,config,parent,call,normal_job,prepared,mode):
         assert [r for r in before['requests'] if r[2]=='DEGRADED'],'real fault must leave referenced DEGRADED history'
         with db() as d:saved_receipt=receipt(d)
         pointer=os.readlink(root/'active.conf');versions={str(p.relative_to(root)):digest(p.read_bytes().hex()) for v in root.glob('v-*') for p in v.iterdir() if p.is_file()}
-        body={'op':'prepare-opening','request_id':'opening-one','preparation_request_id':prepared['request_id'],'receipt_digest':digest(saved_receipt),'core_epoch':core['epoch'],'core_revision':core['revision'],'timeout_seconds':1 if mode.startswith('expired') else 10,**Gate.token(old_gate)}
+        body={'op':'prepare-opening','request_id':'opening-one','preparation_request_id':prepared['request_id'],'receipt_digest':digest(saved_receipt),'core_epoch':core['epoch'],'core_revision':core['revision'],'timeout_seconds':1 if mode.startswith('expired') or mode=='readiness-expiry' else 10,**Gate.token(old_gate)}
         denied=call(config['socket'],body);assert not denied['ok'] and denied['reason']=='admin_required'
         for change in [{'receipt_digest':'0'*64},{'core_revision':core['revision']+1}]:
             bad=rootcall({**body,**change,'request_id':'invalid-binding'});assert not bad['ok'] and bad['reason'] in {'preparation_binding_mismatch','core_pair_mismatch'}
@@ -117,13 +123,22 @@ def exercise(root,work,config,parent,call,normal_job,prepared,mode):
             if mode in reasons:assert out['result']['reason']==reasons[mode],out
             count=inventory();assert rootcall(body)['result']==out and not rootcall(body)['created'] and inventory()==count
             current=rootcall({'op':'recovery-status'})
-            assert current['opening_intent_verified_closed']==(expected=='OPENING_VERIFIED_CLOSED')
+            assert current['opening_intent_verified_closed']==(expected=='OPENING_VERIFIED_CLOSED' and mode!='readiness-expiry')
             if expected=='OPENING_VERIFIED_CLOSED':
                 with db() as d:stored=marker(d)
                 assert out['result']['marker_digest']==digest(stored) and out['result']['degraded_reference_count']>=1
                 assert out['target']['degraded_references']=={r[0]:digest(r) for r in before['requests'] if r[2]=='DEGRADED'}
                 assert out['result']['release_authorized'] is False and out['result']['updates_enabled'] is False
                 detail['exact_degraded_rows_referenced_without_rewrite']=True
+                if mode=='readiness-expiry':
+                    observed=json.loads((work/'readiness-expiry.json').read_text())
+                    assert observed=={'point':'after-pair-validation','expiry_crossed':True}
+                    assert len(crossing_responses)==1
+                    assert crossing_responses[0]['opening_intent_verified_closed'] is False,'expired_readiness_response'
+                    detail['crossing_status_response_readiness']=crossing_responses[0]['opening_intent_verified_closed']
+                    assert deadlines.now_ns()>out['timing']['budget']['expires_boot_ns']
+                    assert rootcall(body)['result']==out and not rootcall(body)['created']
+                    detail['readiness_crossed_original_expiry_rejected']=True
                 if mode=='expired-ready':
                     left=(out['timing']['budget']['expires_boot_ns']-deadlines.now_ns())/1e9
                     if left>0:time.sleep(left+.04)
@@ -180,6 +195,9 @@ def main():
             try:detail=scenario('sqlite_full','post',check_gate=True,certificate_mode='opening-'+mode)
             except Exception as e:report['cases'].append({'mode':mode,'passed':False,'error':type(e).__name__+': '+str(e)});raise
             report['cases'].append(detail);publish(report)
+        from tools.opening_mutation import check_readiness_mutation
+        report['readiness_mutation']=check_readiness_mutation()
+        assert report['readiness_mutation']['passed'] and report['readiness_mutation']['cleanup_verified']
         report.update(passed=True,status='completed')
     except Exception as e:traceback.print_exc();report.update(error=type(e).__name__+': '+str(e),status='failed')
     report.update(source_sha256=source,source_unchanged=source==hashes(),environment={'python':sys.version.split()[0],'kernel':os.uname().release,'machine':os.uname().machine});report['passed']=report['passed'] and report['source_unchanged'];publish(report)

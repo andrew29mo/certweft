@@ -96,7 +96,7 @@ def check_pair(main,writer,catalog,row):
     current=capture_pair(main,writer,catalog,gate,{k:target[k] for k in ['preparation_request_id','receipt_digest','core_epoch','core_revision']})
     if current!=target:raise Rejected('opening_target_drift')
 
-def ready_closed(root,gate,store):
+def ready_closed(root,gate,store,checkpoint=lambda budget:None):
     if gate['state']!='VERIFIED_CLOSED':return False
     try:
         with readonly(Path(root)/'journal.db') as main,readonly(Path(root)/'recovery.db') as catalog:
@@ -108,6 +108,10 @@ def ready_closed(root,gate,store):
             proof=row['result']
             if type(proof) is not dict or proof.get('marker_digest')!=digest(current) or proof.get('pair_verified') is not True or proof.get('degraded_references_verified') is not True or proof.get('degraded_reference_count')!=len(row['target']['degraded_references']) or proof.get('release_authorized') is not False or proof.get('updates_enabled') is not False:return False
             check_pair(main,Writer(root,'unused','unused','unused','unused','localhost','127.0.0.1',1),catalog,row)
+            checkpoint(row['timing']['budget'])
+            # Pair validation can consume the remaining budget. This function
+            # has no CURRENT deadline context, so check this exact budget again.
+            deadlines.remaining(row['timing']['budget'])
             return True
     except (Rejected,deadlines.Expired,sqlite3.Error,ValueError,KeyError,OSError):return False
 
