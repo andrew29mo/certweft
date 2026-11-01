@@ -69,8 +69,8 @@ sudo timeout 180 python3 tools/operations_vm.py
 sudo timeout 150 python3 tools/executor_vm.py
 ```
 
-The deadline runner starts the actual service/executor and real Nginx. Its eight
-cases cover replay/timeout-parameter conflict, expiry after candidate handshake,
+The deadline runner starts the actual service/executor and real Nginx. Its nine
+cases cover replay/timeout-parameter conflict, expiry after candidate handshake and after both transactional SQL writes,
 expiry before selection, delayed preparation, process restart before/after expiry,
 and interrupted recovery with remaining/exhausted original budgets. Independent
 fresh TLS observes restored baseline. Delay/stop checkpoints are root-only test
@@ -91,3 +91,28 @@ CA signing integration, installed package/systemd lifecycle, actual VM reboot,
 power loss and hard realtime behavior remain unqualified. History/generation
 limits stay 64/16 without automatic recycling. No new rollback guarantee is made
 when the old certificate is invalid or storage cannot persist the result.
+
+## Independent P0-3b-1 review
+
+Two read-only reviewers found no confirmed budget reset or expiry logic defect,
+but identified a missing regression for the last COMMIT guard. A new SQLite
+trigger/UDF test enters before expiry, delays the COMMITTED update across expiry,
+and requires rollback of both state and request. This uses actual SQLite and
+elapsed time, not physical storage failure. The setup transaction is committed
+before opening a separate metadata reader to avoid a fixture-only self-lock.
+
+The formal VM now pauses the executor after both SQL writes and before the final
+check. An independent reader still sees durable APPLYING/RUNNING; after expiry,
+resume must restore the baseline rather than commit. The root-only checkpoint
+is not part of caller input. Confirmed/recovery checkpoints also independently
+observe the candidate leaf before SIGKILL/rollback, and the before-expiry restart
+case explicitly asserts its time premise.
+
+The completed run has nine deadline VM cases and 26 separate unit tests, plus
+12 operation and 12 executor regression cases. A targeted isolated-copy mutant
+removing only the final expiry guard is detected by the new unit test:
+[mutation result](../evidence/deadline-guard-mutation.json). Original source stays
+unchanged. This is one targeted mutation, not broad mutation coverage.
+
+Actual VM reboot, wall-clock jumps, suspend, fsync hard deadlines and power loss
+remain unqualified. The unit boot/clock simulations do not change that boundary.

@@ -22,7 +22,7 @@ class FixedWriter(Writer):
             super().save(db,state)
             raise
     def commit_state(self,db,state):
-        if self.operation_id:Operations.commit(db,self.operation_id,state)
+        if self.operation_id:Operations.commit(db,self.operation_id,state,lambda:getattr(self,'commit_checkpoint',lambda _:None)('commit-decision'))
         else:super().commit_state(db,state)
     def reload(self):
         # Validation subprocess cannot publish or signal a delayed reload.
@@ -48,7 +48,7 @@ def dispatch(config,request,peer_uid,checkpoint=lambda _:None):
     for field in ['key','conf','ca']:
         st=Path(config['writer'][field]).lstat()
         if not stat.S_ISREG(st.st_mode) or st.st_uid!=0 or st.st_mode & 0o022:raise Rejected('target_permissions')
-    w=FixedWriter(**config['writer']);w.master=config['master'];w.recovery_checkpoint=checkpoint
+    w=FixedWriter(**config['writer']);w.master=config['master'];w.recovery_checkpoint=checkpoint;w.commit_checkpoint=checkpoint
     if op=='status':return w.status()
     if op=='recover':return w.recover()
     if op=='recover-request':

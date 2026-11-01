@@ -85,7 +85,7 @@ class Operations:
     def pending(self):
         with self.transaction() as db:return [r[0] for r in db.execute("SELECT id FROM requests WHERE state IN ('ACCEPTED','RUNNING','CANCEL_REQUESTED')")]
     @staticmethod
-    def commit(db,identity,state):
+    def commit(db,identity,state,checkpoint=lambda:None):
         # Same SQLite transaction commits the selected version and request outcome.
         db.execute('BEGIN IMMEDIATE')
         row=db.execute('SELECT state,timing FROM requests WHERE id=?',(identity,)).fetchone()
@@ -94,5 +94,6 @@ class Operations:
         if timing:deadlines.remaining(timing['activation'])
         db.execute('INSERT OR REPLACE INTO state VALUES(1,?)',(json.dumps(state),))
         db.execute("UPDATE requests SET state='COMMITTED',result=? WHERE id=?",(json.dumps({'committed':state['committed']}),identity))
+        checkpoint()
         if timing:deadlines.remaining(timing['activation'])
         db.commit()

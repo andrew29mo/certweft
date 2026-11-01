@@ -80,7 +80,7 @@ sudo timeout 150 python3 tools/executor_vm.py
 ```
 
 The runner starts the actual module service and actual subprocess executor. It
-currently requires twelve VM cases and twenty-five separate unit tests (the earlier
+currently requires twelve VM cases and twenty-six separate unit tests (the earlier
 P0-2-only suite had thirteen) at this stage. Current
 [JSON](../evidence/executor.json) and [HTML](../evidence/executor.html) contain the
 same result and source hashes. Source changes, errors, nonzero exit, timeout or

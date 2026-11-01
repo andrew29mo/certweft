@@ -1,0 +1,13 @@
+{
+  "detected": true,
+  "mutation": "remove only final expiry guard after SQL writes",
+  "test": "test_sql_write_delay_crosses_deadline_before_commit",
+  "mutant_test_exit": 1,
+  "failure_summary": "Expired not raised",
+  "original_repository_unchanged": true,
+  "source_sha256": {
+    "certweft/operations.py": "410e0ee71dd9e30edb655693b9240382faf859600eb7cbf22a8e075014672ff7",
+    "tests/test_deadlines.py": "442d8ea3cfa4af88ec62603d84f017fb2b1883e8c05d3d92bedd695811b9dd29"
+  },
+  "scope": "one targeted mutant in isolated VM source copy; not general mutation coverage"
+}

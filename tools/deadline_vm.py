@@ -73,19 +73,35 @@ def main():
             left=(record['expires_boot_ns']-deadlines.now_ns())/1e9
             if left>0:time.sleep(left+.05)
         parent=start(True);job={**body('expiry-after-confirm',new),'timeout_seconds':2}
-        assert call(job)['created'];pid=paused();original=call({'op':'request-status','request_id':job['request_id']})['result']['timing']
+        assert call(job)['created'];pid=paused();wire(new);original=call({'op':'request-status','request_id':job['request_id']})['result']['timing']
         def replay():
             duplicate=call(job);assert not duplicate['created'] and duplicate['result']['timing']==original
             conflict=call({**job,'timeout_seconds':3});assert not conflict['ok'] and conflict['reason']=='request_conflict'
             return 'same timing returned; timeout extension under same ID rejected'
         case('replay_does_not_extend_budget',replay)
         def after_confirm():
+            wire(new)
             until(original['activation']);os.kill(pid,signal.SIGCONT)
             result=poll(job['request_id']);assert result['state']=='ROLLED_BACK' and result['result']['expired'];wire(old)
             timing=result['timing'];assert timing['activation']==original['activation']
             assert timing['recovery']['seconds']==5 and timing['recovery']['accepted_boot_ns']>=timing['activation']['expires_boot_ns']
             return 'expired after fresh candidate TLS; COMMIT denied; independent persisted recovery budget restores baseline'
         case('expiry_after_confirmation_rollback',after_confirm)
+        parent.terminate();parent.wait(3);parent=start(True,pause_at='commit-decision')
+        job={**body('expiry-after-sql-writes',new),'timeout_seconds':1}
+        def after_sql_writes():
+            accepted=call(job);assert accepted['created'];original=accepted['result']['timing']['activation']
+            pid=paused();wire(new)
+            # Independent reader still sees the old durable state while writer transaction is paused.
+            with sqlite3.connect('file:'+str(w.root/'journal.db')+'?mode=ro',uri=True) as db:
+                state=json.loads(db.execute('SELECT data FROM state').fetchone()[0])
+                assert state['state']=='APPLYING'
+                assert db.execute('SELECT state FROM requests WHERE id=?',(job['request_id'],)).fetchone()[0]=='RUNNING'
+            until(original);os.kill(pid,signal.SIGCONT)
+            result=poll(job['request_id']);assert result['state']=='ROLLED_BACK' and result['result']['expired']
+            assert result['timing']['activation']==original;wire(old)
+            return 'actual executor paused after both SQL writes; final expiry guard rejects commit and restores baseline'
+        case('expiry_after_sql_writes_before_commit',after_sql_writes)
         parent.terminate();parent.wait(3);parent=start(True,pause_at='intent')
         job={**body('expiry-before-publication',new),'timeout_seconds':1};baseline=os.readlink(w.root/'active.conf')
         def before_publish():
@@ -107,7 +123,7 @@ def main():
         parent.terminate();parent.wait(3);parent=start(True)
         job={**body('restart-before-expiry',new),'timeout_seconds':10}
         def restart(expired):
-            assert call(job)['created'];pid=paused();original=call({'op':'request-status','request_id':job['request_id']})['result']['timing']
+            assert call(job)['created'];pid=paused();wire(new);original=call({'op':'request-status','request_id':job['request_id']})['result']['timing']
             os.kill(parent.pid,signal.SIGKILL);parent.wait(3)
             with sqlite3.connect('file:'+str(w.root/'journal.db')+'?mode=ro',uri=True) as db:
                 assert json.loads(db.execute('SELECT data FROM state').fetchone()[0])['state']=='APPLYING'
@@ -117,6 +133,7 @@ def main():
                 if not path.exists() or path.read_text().split()[2]=='Z':break
                 time.sleep(.02)
             if expired:until(original['activation'])
+            else:assert deadlines.now_ns()<original['activation']['expires_boot_ns']
             start();result=poll(job['request_id']);assert result['state']=='INTERRUPTED'
             assert result['timing']['activation']==original['activation'];assert result['timing']['recovery']['seconds']==5
             duplicate=call(job);assert not duplicate['created'] and duplicate['result']['timing']==result['timing'];wire(old)
@@ -129,7 +146,7 @@ def main():
         parent=start(True,pause_at='recovery',delay_at='confirmed',delay_seconds=1.2)
         job={**body('interrupted-recovery',new),'timeout_seconds':1}
         def recovery_restart(exhausted):
-            assert call(job)['created'];pid=paused();row=call({'op':'request-status','request_id':job['request_id']})['result'];recovery=row['timing']['recovery'];assert recovery is not None
+            assert call(job)['created'];pid=paused();wire(new);row=call({'op':'request-status','request_id':job['request_id']})['result'];recovery=row['timing']['recovery'];assert recovery is not None
             os.kill(parent.pid,signal.SIGKILL);parent.wait(3);os.kill(pid,signal.SIGKILL)
             for _ in range(100):
                 path=pathlib.Path('/proc',str(pid),'stat')
@@ -139,7 +156,7 @@ def main():
             start();result=poll(job['request_id']);assert result['timing']['recovery']==recovery
             if exhausted:
                 assert result['state']=='DEGRADED' and result['result']['recovered'] is False
-                assert w.status()['state']=='DEGRADED'
+                assert w.status()['state']=='DEGRADED';wire(new)
                 blocked=call({**job,'request_id':'blocked'});assert not blocked['ok'] and blocked['reason']=='degraded'
             else:
                 assert result['state']=='INTERRUPTED' and result['result']['recovered'] is True;wire(old)

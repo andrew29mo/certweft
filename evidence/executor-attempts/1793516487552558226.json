@@ -1,0 +1,111 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "name": "writable_configuration_hierarchy_rejected",
+      "passed": true,
+      "detail": "root-owned config in writable directory rejected",
+      "seconds": 0.017702176000000236
+    },
+    {
+      "name": "mutable_executable_symlink_rejected",
+      "passed": true,
+      "detail": "final executable symlink rejected before lease or execution",
+      "seconds": 0.01849745599997732
+    },
+    {
+      "name": "configuration_snapshot_pinned",
+      "passed": true,
+      "detail": "child uses verified parent snapshot despite pathname replacement",
+      "seconds": 0.022689275000004727
+    },
+    {
+      "name": "unprivileged_direct_mutation_denied",
+      "passed": true,
+      "detail": "actual file writes and direct nginx reload denied",
+      "seconds": 0.027191130000005614
+    },
+    {
+      "name": "controller_status",
+      "passed": true,
+      "detail": "READY",
+      "seconds": 0.039768417000004774
+    },
+    {
+      "name": "fixed_api_rejects_escalation",
+      "passed": true,
+      "detail": "admin recovery, injected path and arbitrary op rejected",
+      "seconds": 0.11543689199999108
+    },
+    {
+      "name": "root_revalidates_untrusted_candidate",
+      "passed": true,
+      "detail": "invalid bytes independently rejected; durable state unchanged",
+      "seconds": 0.3272746040000243
+    },
+    {
+      "name": "unconfigured_peer_denied",
+      "passed": true,
+      "detail": "unconfigured UID cannot connect to management socket",
+      "seconds": 0.030703136999989056
+    },
+    {
+      "name": "formal_controller_activation",
+      "passed": true,
+      "detail": "unprivileged certificate bytes revalidated by root executor; fresh TLS confirms new generation",
+      "seconds": 0.9777671770000325
+    },
+    {
+      "name": "orphan_executor_prevents_takeover",
+      "passed": true,
+      "detail": "root exec child remains stopped with inherited lease; replacement exits without mutation",
+      "seconds": 0.03439951899997595
+    },
+    {
+      "name": "delayed_old_completion_then_fenced_new_generation",
+      "passed": true,
+      "detail": "old child exits before replacement acquires lease; recovery/new activation passes; old authority rejected",
+      "seconds": 1.6531137930000455
+    },
+    {
+      "name": "timeout_group_cleanup_and_takeover",
+      "passed": true,
+      "detail": "real 20s timeout kills paused executor and pipe holder; replacement recovery/new activation succeeds; stale authority denied",
+      "seconds": 21.346964919000015
+    }
+  ],
+  "untested": [
+    "persistent systemd installation",
+    "D-state processes",
+    "power loss",
+    "VM reboot recovery",
+    "request dedup and durable deadlines",
+    "root compromise"
+  ],
+  "owned_processes_exited": true,
+  "versions": {
+    "python": "3.12.3",
+    "nginx": "nginx version: nginx/1.24.0 (Ubuntu)",
+    "openssl": "OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)"
+  },
+  "source_sha256": {
+    "certweft/service.py": "6c53aba8c1d06a02be274231ed1a127001797e943e0e7568297cf74344e33112",
+    "certweft/deadlines.py": "e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f",
+    "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certweft/core.py": "4a2a7382cfb55c47238d0d5530898164e6c9aa60b213bb8241edbf9e50706945",
+    "certweft/operations.py": "5440b7ad14ab621085889d1dce2c747eb16546f15b07147f6b66f35a17658fdb",
+    "certweft/ca.py": "e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c",
+    "certweft/executor.py": "28e75974de4e30da2f90bdd4225c380542c1d2fb5aa63a0015f9b00b87c5850c",
+    "tools/policy_vm.py": "27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6",
+    "tools/deadline_vm.py": "5d352131ad578f5daf2e2e15fd51d127d13576c7fcc44b329c7376a3df468707",
+    "tools/executor_vm.py": "1e8f42862c3cffa640a2320cd5c95666c94fa2b8bcdda3cdc0339e7b6f648852",
+    "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
+    "tools/credential_probe.py": "8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46",
+    "tools/operations_vm.py": "3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85",
+    "tests/test_operations.py": "f1741fae5ae944fa974e90c418c447da27e49d18051fc8ad50b4ea843041e337",
+    "tests/test_core.py": "8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c",
+    "tests/test_deadlines.py": "aca8483f12b01e45f6eed9ef935540e845b02b5f02e8765b87f853edf6004073",
+    "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
+  },
+  "source_unchanged": true
+}
