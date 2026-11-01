@@ -3,7 +3,11 @@
 ## Implemented boundary
 
 The production modules are certweft.service and certweft.executor. The Linux-only
-root writer loads a root-owned, non-group/world-writable configuration. It exposes
+root writer opens configuration with O_NOFOLLOW, checks the opened inode and
+loads one immutable in-memory snapshot. Parent path components must be root-owned
+and not writable by others, except root-owned sticky directories. The configured
+Nginx executable must be a root-owned, non-writable regular file, not a final symlink.
+Children receive the verified snapshot through stdin and do not reopen its pathname. It exposes
 one Unix socket owned by a configured controller UID (0600), verifies SO_PEERCRED,
 and accepts only status, activate and administrator-only recover. Activation
 contains PEM bytes, epoch and revision, never a caller path, key, Nginx command,
@@ -28,13 +32,16 @@ or recreating the lock. The core journal lock remains a second, inner lock.
 
 Only the executor selects a version and sends reload. The fixed backend runs
 nginx -t, then checks the configured master PID start time and executable before
-sending SIGHUP directly. It does not launch a potentially delayed nginx -s reload
+sending SIGHUP through an opened pidfd. It does not launch a potentially delayed nginx -s reload
 helper. Validation subprocesses do not publish or send signals. Master replacement
 requires trusted administrator reconfiguration; PID reuse is not accepted.
 
-A normal request allows 20 seconds for the executor. On timeout the parent kills
-and reaps it before processing further work. This timeout path has not yet been
-fault-injected in the VM; D-state termination is not qualified. If a process does
+A normal request allows 20 seconds for the executor, which runs in a separate
+process group. On timeout the parent kills the whole group and allows 3 seconds
+for communicate/reap. If that cannot finish, it exits fail-stop rather than
+accepting more work; a still-living executor retains the lease. A real VM case
+pauses the executor with a pipe-holding descendant and verifies group termination,
+replacement recovery and new activation. D-state termination is not qualified. If a process does
 not exit, no successful takeover should be promised. A sent HUP cannot be undone;
 recovery still reconciles the committed version and requires fresh TLS evidence.
 SIGTERM/SIGKILL of the parent is not graceful systemd shutdown; a surviving child
@@ -69,7 +76,7 @@ sudo timeout 150 python3 tools/executor_vm.py
 ```
 
 The runner starts the actual module service and actual subprocess executor. It
-requires eight VM cases and twelve separate unit tests at this stage. Current
+requires twelve VM cases and thirteen separate unit tests at this stage. Current
 [JSON](../evidence/executor.json) and [HTML](../evidence/executor.html) contain the
 same result and source hashes. Source changes, errors, nonzero exit, timeout or
 cleanup failure are not passing evidence. Prior reports are retained separately.
@@ -93,3 +100,22 @@ under /var/tmp/cw-executor-*. Do not upload those directories.
 
 P0-1 and earlier activation reports retain their source-bound historical scope;
 this new report does not requalify all their cases under a persistent deployment.
+
+## Independent P0-2 review
+
+Two read-only reviewers identified configuration pathname substitution, an integer
+PID signal race, unbounded timeout pipe cleanup, a generic nonzero-exit lease
+assertion and a disk-only activation oracle. Corrections pin configuration bytes,
+reject unsafe hierarchies/executable symlinks, use pidfd signalling, kill/reap the
+executor group, require lease_busy/exit 73 plus inherited FD inode identity, and
+check new TLS fingerprint/HTTP through an independent probe.
+
+VM cases challenge root-owned configuration in a writable directory, replacement
+of its pathname after service start, and an executable symlink. The latter is
+rejected before any execution. These are boundary tests, not a claim of having
+executed a root exploit or forced actual kernel PID reuse. The pidfd call path
+has a unit regression and is used by actual VM reloads. The timeout uses the
+real 20-second production setting, not a shortened test constant.
+
+Earlier eight-case reports remain historical under executor-attempts. P0-1 reports
+also retain their original source-bound scope; they are not new deployment tests.

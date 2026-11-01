@@ -97,3 +97,12 @@ class ExecutorContract(unittest.TestCase):
         from certweft.executor import dispatch
         with self.assertRaisesRegex(Rejected,'peer_denied'):
             dispatch({'controller_uid':123},{'op':'status'},456)
+
+class MasterSignal(unittest.TestCase):
+    def test_reload_uses_pidfd_and_closes_it(self):
+        from certweft.executor import FixedWriter
+        from unittest.mock import patch
+        w=FixedWriter.__new__(FixedWriter);w.master={'pid':123,'start':'456'};w.nginx='/usr/sbin/nginx';w.conf='/config'
+        text='123 (nginx) '+' '.join(['S']+['0']*18+['456'])
+        with patch('certweft.executor.run'),patch('certweft.executor.os.pidfd_open',return_value=99) as opened,patch('certweft.executor.Path.read_text',return_value=text),patch('certweft.executor.os.path.realpath',return_value='/usr/sbin/nginx'),patch('certweft.executor.signal.pidfd_send_signal') as sent,patch('certweft.executor.os.close') as closed:
+            w.reload();opened.assert_called_once_with(123);sent.assert_called_once();self.assertEqual(sent.call_args.args[0],99);closed.assert_called_once_with(99)

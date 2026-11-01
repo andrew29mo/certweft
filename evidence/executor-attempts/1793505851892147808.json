@@ -1,0 +1,81 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "name": "unprivileged_direct_mutation_denied",
+      "passed": true,
+      "detail": "actual file writes and direct nginx reload denied",
+      "seconds": 0.026083572999993976
+    },
+    {
+      "name": "controller_status",
+      "passed": true,
+      "detail": "READY",
+      "seconds": 0.042671675000008236
+    },
+    {
+      "name": "fixed_api_rejects_escalation",
+      "passed": true,
+      "detail": "admin recovery, injected path and arbitrary op rejected",
+      "seconds": 0.11331038500000545
+    },
+    {
+      "name": "root_revalidates_untrusted_candidate",
+      "passed": true,
+      "detail": "invalid bytes independently rejected; durable state unchanged",
+      "seconds": 0.32172579799998857
+    },
+    {
+      "name": "unconfigured_peer_denied",
+      "passed": true,
+      "detail": "unconfigured UID cannot connect to management socket",
+      "seconds": 0.029359368000001496
+    },
+    {
+      "name": "formal_controller_activation",
+      "passed": true,
+      "detail": "unprivileged certificate bytes revalidated by root executor; fresh TLS confirms new generation",
+      "seconds": 0.8151195479999842
+    },
+    {
+      "name": "orphan_executor_prevents_takeover",
+      "passed": true,
+      "detail": "root exec child remains stopped with inherited lease; replacement exits without mutation",
+      "seconds": 0.03442666600000166
+    },
+    {
+      "name": "delayed_old_completion_then_fenced_new_generation",
+      "passed": true,
+      "detail": "old child exits before replacement acquires lease; recovery/new activation passes; old authority rejected",
+      "seconds": 2.0183154059999993
+    }
+  ],
+  "untested": [
+    "persistent systemd installation",
+    "D-state processes",
+    "power loss",
+    "VM reboot recovery",
+    "request dedup and durable deadlines",
+    "root compromise"
+  ],
+  "owned_processes_exited": true,
+  "versions": {
+    "python": "3.12.3",
+    "nginx": "nginx version: nginx/1.24.0 (Ubuntu)",
+    "openssl": "OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)"
+  },
+  "source_sha256": {
+    "certweft/service.py": "09fa56f5b9e42fcde5be01d895ee6308512afca6939c2189c91d2fe3347040d2",
+    "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certweft/core.py": "fe51b8ffcb8a4445e7c3dfc86e66fff803e9863e661ea4c050f8b53e25d6cdcf",
+    "certweft/ca.py": "e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c",
+    "certweft/executor.py": "4d2cb0b06c6cc4e40e9352b0c78db45c8bf19b845a407fed14377402dbba9078",
+    "tools/policy_vm.py": "27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6",
+    "tools/executor_vm.py": "1d6a367845d2611361ddd1f8332f95ace3903a63b8c5bb39622bdea5dbe9f123",
+    "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
+    "tools/credential_probe.py": "8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46",
+    "tests/test_core.py": "e3fe89df0075449c43a3c8ffefa9b73c8d0f35247241d027f6d8a7e4e4028b0b",
+    "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
+  },
+  "source_unchanged": true
+}

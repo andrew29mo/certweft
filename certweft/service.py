@@ -2,16 +2,34 @@
 import fcntl,json,os,socket,stat,struct,subprocess,sys
 from pathlib import Path
 
+def secure_parents(path):
+    for parent in Path(path).absolute().parents:
+        st=parent.lstat()
+        if not stat.S_ISDIR(st.st_mode) or st.st_uid!=0:raise PermissionError('untrusted parent')
+        if st.st_mode & 0o022 and not (st.st_mode & stat.S_ISVTX):raise PermissionError('writable parent')
+
+def load_config(path):
+    secure_parents(path)
+    fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW)
+    with os.fdopen(fd) as stream:
+        st=os.fstat(stream.fileno())
+        if not stat.S_ISREG(st.st_mode) or st.st_uid!=0 or st.st_mode & 0o022:raise PermissionError('untrusted configuration')
+        config=json.load(stream)
+    for target in [config['lease'],config['socket'],*map(config['writer'].get,['root','key','conf','ca','nginx'])]:secure_parents(target)
+    binary=Path(config['writer']['nginx']).lstat()
+    if not stat.S_ISREG(binary.st_mode) or binary.st_uid!=0 or binary.st_mode & 0o022:raise PermissionError('untrusted binary')
+    return config
+
 def serve(config_path):
     if os.geteuid()!=0:raise PermissionError('root writer required')
-    config_path=Path(config_path);st=config_path.lstat()
-    if not stat.S_ISREG(st.st_mode) or st.st_uid!=0 or st.st_mode & 0o022:raise PermissionError('untrusted configuration')
-    config=json.loads(config_path.read_text());lease_path=Path(config['lease'])
+    config=load_config(config_path);lease_path=Path(config['lease'])
     fd=os.open(lease_path,os.O_CREAT|os.O_RDWR|os.O_NOFOLLOW,0o600)
     try:
         st=os.fstat(fd)
         if st.st_uid!=0 or st.st_mode & 0o077:raise PermissionError('lease_permissions')
-        fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        try:fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        except BlockingIOError:
+            print('lease_busy',flush=True);raise SystemExit(73)
         # Socket replacement is allowed only after acquiring the lifetime lease.
         endpoint=Path(config['socket'])
         if endpoint.exists():endpoint.unlink()
@@ -33,11 +51,15 @@ def serve(config_path):
                             data+=chunk
                             if len(data)>49152:raise ValueError('budget')
                         request=json.loads(data)
-                        child=subprocess.Popen([sys.executable,'-m','certweft.executor',str(fd),str(config_path)],
-                            pass_fds=(fd,),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-                        try:out,err=child.communicate(json.dumps({'body':request,'peer_uid':uid}).encode(),timeout=20)
+                        child=subprocess.Popen([sys.executable,'-m','certweft.executor',str(fd)],
+                            start_new_session=True,pass_fds=(fd,),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+                        try:out,err=child.communicate(json.dumps({'body':request,'peer_uid':uid,'config':config}).encode(),timeout=20)
                         except subprocess.TimeoutExpired:
-                            child.kill();child.communicate();raise TimeoutError('executor_timeout')
+                            import signal
+                            os.killpg(child.pid,signal.SIGKILL)
+                            try:child.communicate(timeout=3)
+                            except subprocess.TimeoutExpired:os._exit(75)
+                            raise TimeoutError('executor_timeout')
                         if child.returncode!=0 or len(out)>16384:raise RuntimeError('executor_failure')
                         reply=json.loads(out)
                     except Exception as e:reply={'ok':False,'error':type(e).__name__}

@@ -7,12 +7,14 @@ class FixedWriter(Writer):
     def reload(self):
         # Validation subprocess cannot publish or signal a delayed reload.
         run([self.nginx,'-t','-c',self.conf])
-        pid=self.master['pid']
-        raw=Path('/proc',str(pid),'stat').read_text()
-        start=raw[raw.rfind(')')+2:].split()[19]
-        if start!=self.master['start']:raise Rejected('master_identity')
-        if os.path.realpath('/proc/'+str(pid)+'/exe')!=os.path.realpath(self.nginx):raise Rejected('master_binary')
-        os.kill(pid,signal.SIGHUP)
+        pid=self.master['pid'];handle=os.pidfd_open(pid)
+        try:
+            raw=Path('/proc',str(pid),'stat').read_text()
+            start=raw[raw.rfind(')')+2:].split()[19]
+            if start!=self.master['start']:raise Rejected('master_identity')
+            if os.path.realpath('/proc/'+str(pid)+'/exe')!=os.path.realpath(self.nginx):raise Rejected('master_binary')
+            signal.pidfd_send_signal(handle,signal.SIGHUP)
+        finally:os.close(handle)
 
 def dispatch(config,request,peer_uid,checkpoint=lambda _:None):
     op=request.get('op')
@@ -39,15 +41,20 @@ def dispatch(config,request,peer_uid,checkpoint=lambda _:None):
 
 def main():
     if os.geteuid()!=0:raise PermissionError('root executor required')
-    lease=int(sys.argv[1]);config=json.loads(Path(sys.argv[2]).read_text())
+    lease=int(sys.argv[1]);request=json.load(sys.stdin);config=request['config']
     # Parent keeps the same open-file-description. No LOCK_UN anywhere.
     actual=os.fstat(lease);expected=os.stat(config['lease'])
     if (actual.st_dev,actual.st_ino)!=(expected.st_dev,expected.st_ino):raise Rejected('lease_identity')
-    request=json.load(sys.stdin)
     def checkpoint(point):
         # Root-owned VM fixture configuration only, never part of request API.
         if config.get('pause_at')==point:
-            Path(config['marker']).write_text(json.dumps({'pid':os.getpid(),'point':point}))
+            descendants=[]
+            if config.get('pipe_holder'):
+                import subprocess
+                descendants.append(subprocess.Popen([sys.executable,'-c','import time;time.sleep(120)']).pid)
+            marker=Path(config['marker']);pending=marker.with_suffix('.pending')
+            pending.write_text(json.dumps({'pid':os.getpid(),'point':point,'descendants':descendants}))
+            os.replace(pending,marker)
             os.kill(os.getpid(),signal.SIGSTOP)
     try:result={'ok':True,'result':dispatch(config,request['body'],request['peer_uid'],checkpoint)}
     except Exception as e:
