@@ -7,8 +7,8 @@
       "phase": "post",
       "ext4_image_bytes": 33554432,
       "service_memory_before_fault": {
-        "VmHWM": "20716 kB",
-        "VmRSS": "20716 kB"
+        "VmHWM": "20700 kB",
+        "VmRSS": "20700 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -17,8 +17,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "21544 kB",
-        "VmRSS": "21544 kB"
+        "VmHWM": "21536 kB",
+        "VmRSS": "21536 kB"
       },
       "filled_bytes": 26443776,
       "observed_errno": 28,
@@ -63,6 +63,20 @@
         "inflight_replay_and_kind_conflict_verified": true,
         "committed_pointer_and_new_tls_verified": true,
         "paired_completion_recorded": true,
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "78cbc83d32724912b8195eb35e81cd22",
+          "fingerprint": "1ab19a68b643d69fd4708c90e6a68e74be5118d909dfc88d9bc156dc67fbe041",
+          "prior_health": "HEALTHY",
+          "closed_gate": {
+            "gate_epoch": "39fa666becd341bd9178058068abee5a",
+            "gate_revision": 8
+          }
+        },
         "terminal": "VERIFIED_CLOSED",
         "logical_journal_unchanged": true,
         "immutable_generations_unchanged": true,
@@ -71,15 +85,15 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 2,
-      "elapsed_seconds": 3.1070151989999886
+      "elapsed_seconds": 2.9888992509999994
     },
     {
       "fault": "enospc",
       "phase": "post",
       "ext4_image_bytes": 33554432,
       "service_memory_before_fault": {
-        "VmHWM": "20704 kB",
-        "VmRSS": "20704 kB"
+        "VmHWM": "20712 kB",
+        "VmRSS": "20712 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -136,6 +150,20 @@
         "paired_completion_recorded": true,
         "completed_history_preserved_without_replay": true,
         "restart_never_opens_even_after_completed_restoration": true,
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "b17a4da155104e7d8664a51d826b893b",
+          "fingerprint": "9faef866921d8be4b2f7dffe78d938f45e98aad5542228bf6a34c3443e173bbd",
+          "prior_health": "HEALTHY",
+          "closed_gate": {
+            "gate_epoch": "844edeb327904f708cf925949bdb1136",
+            "gate_revision": 8
+          }
+        },
         "terminal": "VERIFIED_CLOSED",
         "logical_journal_unchanged": true,
         "immutable_generations_unchanged": true,
@@ -144,7 +172,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 2,
-      "elapsed_seconds": 3.2408937919999516
+      "elapsed_seconds": 2.9701382930000015
     },
     {
       "fault": "sqlite_full",
@@ -153,8 +181,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "20700 kB",
-        "VmRSS": "20700 kB"
+        "VmHWM": "20716 kB",
+        "VmRSS": "20716 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -163,8 +191,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "21544 kB",
-        "VmRSS": "21544 kB"
+        "VmHWM": "21524 kB",
+        "VmRSS": "21524 kB"
       },
       "new_update_reply": {
         "ok": false,
@@ -204,6 +232,20 @@
         "committed_pointer_and_new_tls_verified": true,
         "paired_completion_recorded": true,
         "storage_failure_latch_preserved": true,
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "b28b89193c8947939a08beacecb6536b",
+          "fingerprint": "33159bb4ff2697e10054c04a8c69baa865d10cb14f05d871d5a5dbd3174ce991",
+          "prior_health": "STORAGE_FAILED",
+          "closed_gate": {
+            "gate_epoch": "e4b51750d6d74ba2a6c0c4d8da1e1012",
+            "gate_revision": 8
+          }
+        },
         "terminal": "VERIFIED_CLOSED",
         "logical_journal_unchanged": true,
         "immutable_generations_unchanged": true,
@@ -212,7 +254,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 2,
-      "elapsed_seconds": 3.430206044999977
+      "elapsed_seconds": 3.480204335
     },
     {
       "fault": "enospc",
@@ -225,8 +267,8 @@
         "competing_writer_rejected_without_gate_mutation": true
       },
       "service_memory_before_fault": {
-        "VmHWM": "20700 kB",
-        "VmRSS": "20700 kB"
+        "VmHWM": "20708 kB",
+        "VmRSS": "20708 kB"
       },
       "filled_bytes": 26447872,
       "observed_errno": 28,
@@ -272,6 +314,20 @@
         "committed_pointer_and_new_tls_verified": true,
         "paired_completion_recorded": true,
         "new_committed_leaf_not_rolled_back_to_older_generation": true,
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "e78ee42799aa4b34a87b1f9d79379b14",
+          "fingerprint": "a50d4a3dbe53ec64e3379ae1b25cc9687c892b796a372464b9f49118dde70b04",
+          "prior_health": "HEALTHY",
+          "closed_gate": {
+            "gate_epoch": "b557fdd3063c4358ac89a1745337f424",
+            "gate_revision": 9
+          }
+        },
         "terminal": "VERIFIED_CLOSED",
         "logical_journal_unchanged": true,
         "immutable_generations_unchanged": true,
@@ -280,15 +336,15 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 2,
-      "elapsed_seconds": 3.096755069999972
+      "elapsed_seconds": 2.9853950850000004
     },
     {
       "fault": "enospc",
       "phase": "post",
       "ext4_image_bytes": 33554432,
       "service_memory_before_fault": {
-        "VmHWM": "20712 kB",
-        "VmRSS": "20712 kB"
+        "VmHWM": "20708 kB",
+        "VmRSS": "20708 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -297,8 +353,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "21544 kB",
-        "VmRSS": "21544 kB"
+        "VmHWM": "21540 kB",
+        "VmRSS": "21540 kB"
       },
       "filled_bytes": 26443776,
       "observed_errno": 28,
@@ -342,6 +398,17 @@
         "fixed_committed_target": true,
         "inflight_replay_and_kind_conflict_verified": true,
         "invalid_but_digest_consistent_certificate_rejected_before_select": true,
+        "terminal_result": {
+          "failure_stage": "certificate_validation",
+          "restored": false,
+          "updates_enabled": false,
+          "may_have_changed_service": false,
+          "tls_observed_before_failure": false,
+          "error": "CalledProcessError",
+          "reason": null,
+          "sqlite_error": null,
+          "errno": null
+        },
         "terminal": "FAILED",
         "logical_journal_unchanged": true,
         "immutable_generations_unchanged": true,
@@ -350,15 +417,15 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 2,
-      "elapsed_seconds": 2.5561898880000626
+      "elapsed_seconds": 2.5125810850000008
     },
     {
       "fault": "enospc",
       "phase": "post",
       "ext4_image_bytes": 33554432,
       "service_memory_before_fault": {
-        "VmHWM": "20716 kB",
-        "VmRSS": "20716 kB"
+        "VmHWM": "20712 kB",
+        "VmRSS": "20712 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -412,6 +479,17 @@
         "fixed_committed_target": true,
         "inflight_replay_and_kind_conflict_verified": true,
         "invalid_but_digest_consistent_certificate_rejected_before_select": true,
+        "terminal_result": {
+          "failure_stage": "certificate_validation",
+          "restored": false,
+          "updates_enabled": false,
+          "may_have_changed_service": false,
+          "tls_observed_before_failure": false,
+          "error": "CalledProcessError",
+          "reason": null,
+          "sqlite_error": null,
+          "errno": null
+        },
         "terminal": "FAILED",
         "logical_journal_unchanged": true,
         "immutable_generations_unchanged": true,
@@ -420,15 +498,15 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 2,
-      "elapsed_seconds": 2.5678215640000417
+      "elapsed_seconds": 2.5768521429999964
     },
     {
       "fault": "enospc",
       "phase": "post",
       "ext4_image_bytes": 33554432,
       "service_memory_before_fault": {
-        "VmHWM": "20704 kB",
-        "VmRSS": "20704 kB"
+        "VmHWM": "20708 kB",
+        "VmRSS": "20708 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -482,6 +560,17 @@
         "fixed_committed_target": true,
         "inflight_replay_and_kind_conflict_verified": true,
         "invalid_but_digest_consistent_certificate_rejected_before_select": true,
+        "terminal_result": {
+          "failure_stage": "certificate_validation",
+          "restored": false,
+          "updates_enabled": false,
+          "may_have_changed_service": false,
+          "tls_observed_before_failure": false,
+          "error": "CalledProcessError",
+          "reason": null,
+          "sqlite_error": null,
+          "errno": null
+        },
         "terminal": "FAILED",
         "logical_journal_unchanged": true,
         "immutable_generations_unchanged": true,
@@ -490,15 +579,15 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 2,
-      "elapsed_seconds": 2.7132830419999436
+      "elapsed_seconds": 2.4728168179999983
     },
     {
       "fault": "enospc",
       "phase": "post",
       "ext4_image_bytes": 33554432,
       "service_memory_before_fault": {
-        "VmHWM": "20712 kB",
-        "VmRSS": "20712 kB"
+        "VmHWM": "20716 kB",
+        "VmRSS": "20716 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -507,8 +596,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "21520 kB",
-        "VmRSS": "21520 kB"
+        "VmHWM": "21528 kB",
+        "VmRSS": "21528 kB"
       },
       "filled_bytes": 26443776,
       "observed_errno": 28,
@@ -552,6 +641,17 @@
         "fixed_committed_target": true,
         "inflight_replay_and_kind_conflict_verified": true,
         "invalid_but_digest_consistent_certificate_rejected_before_select": true,
+        "terminal_result": {
+          "failure_stage": "certificate_validation",
+          "restored": false,
+          "updates_enabled": false,
+          "may_have_changed_service": false,
+          "tls_observed_before_failure": false,
+          "error": "Rejected",
+          "reason": "key_mismatch",
+          "sqlite_error": null,
+          "errno": null
+        },
         "terminal": "FAILED",
         "logical_journal_unchanged": true,
         "immutable_generations_unchanged": true,
@@ -560,15 +660,96 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 2,
-      "elapsed_seconds": 2.6159899440000345
+      "elapsed_seconds": 2.657329683999997
     },
     {
       "fault": "enospc",
       "phase": "post",
       "ext4_image_bytes": 33554432,
       "service_memory_before_fault": {
-        "VmHWM": "20740 kB",
-        "VmRSS": "20740 kB"
+        "VmHWM": "20708 kB",
+        "VmRSS": "20708 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "21544 kB",
+        "VmRSS": "21544 kB"
+      },
+      "filled_bytes": 26443776,
+      "observed_errno": 28,
+      "mount_options": "rw,relatime",
+      "new_update_reply": {
+        "ok": false,
+        "transport_unavailable": true,
+        "request_sent": false,
+        "transport_error": "ConnectionRefusedError",
+        "errno": 111
+      },
+      "core_state": "APPLYING",
+      "request_state": "RUNNING",
+      "request_result": null,
+      "storage_health": "HEALTHY",
+      "wire_after": "candidate",
+      "service_exit": 75,
+      "fault_restart_update_reply": {
+        "ok": false,
+        "error": "Rejected",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "recovery_required"
+      },
+      "restart_during_fault_refused_updates": true,
+      "fault_restart_exit": null,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "HEALTHY",
+        "wire_preserved": "candidate"
+      },
+      "certificate_recovery": {
+        "mode": "wrong-leaf",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "fresh_tls_or_http_confirmation_rejected": true,
+        "terminal_result": {
+          "failure_stage": "tls_confirmation",
+          "restored": false,
+          "updates_enabled": false,
+          "may_have_changed_service": true,
+          "tls_observed_before_failure": false,
+          "error": "Rejected",
+          "reason": "confirmation_timeout",
+          "sqlite_error": null,
+          "errno": null
+        },
+        "terminal": "FAILED",
+        "logical_journal_unchanged": true,
+        "immutable_generations_unchanged": true,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 2,
+      "elapsed_seconds": 7.773760144999997
+    },
+    {
+      "fault": "enospc",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "service_memory_before_fault": {
+        "VmHWM": "20712 kB",
+        "VmRSS": "20712 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -617,81 +798,22 @@
         "wire_preserved": "candidate"
       },
       "certificate_recovery": {
-        "mode": "wrong-leaf",
-        "root_only": true,
-        "fixed_committed_target": true,
-        "inflight_replay_and_kind_conflict_verified": true,
-        "fresh_tls_or_http_confirmation_rejected": true,
-        "terminal": "FAILED",
-        "logical_journal_unchanged": true,
-        "immutable_generations_unchanged": true,
-        "updates_enabled": false
-      },
-      "passed": true,
-      "cleanup_verified": true,
-      "tracked_executors": 2,
-      "elapsed_seconds": 7.855830324999943
-    },
-    {
-      "fault": "enospc",
-      "phase": "post",
-      "ext4_image_bytes": 33554432,
-      "service_memory_before_fault": {
-        "VmHWM": "20700 kB",
-        "VmRSS": "20700 kB"
-      },
-      "candidate_observed_before_fault": true,
-      "active_executor_fencing": {
-        "prepare_denied_while_busy": true,
-        "competing_writer_rejected": true,
-        "gate_unchanged": true
-      },
-      "executor_memory_at_checkpoint": {
-        "VmHWM": "21548 kB",
-        "VmRSS": "21548 kB"
-      },
-      "filled_bytes": 26443776,
-      "observed_errno": 28,
-      "mount_options": "rw,relatime",
-      "new_update_reply": {
-        "ok": false,
-        "transport_unavailable": true,
-        "request_sent": false,
-        "transport_error": "ConnectionRefusedError",
-        "errno": 111
-      },
-      "core_state": "APPLYING",
-      "request_state": "RUNNING",
-      "request_result": null,
-      "storage_health": "HEALTHY",
-      "wire_after": "candidate",
-      "service_exit": 75,
-      "fault_restart_update_reply": {
-        "ok": false,
-        "error": "Rejected",
-        "sqlite_error": null,
-        "errno": null,
-        "reason": "recovery_required"
-      },
-      "restart_during_fault_refused_updates": true,
-      "fault_restart_exit": null,
-      "restart_gate": {
-        "repaired_storage_still_blocks": true,
-        "journal_byte_identical_after_repair": true,
-        "no_tls_or_pointer_changes": true,
-        "root_only_prepare": true,
-        "stale_and_duplicate_cas_rejected": true,
-        "second_restart_invalidates_old_cas": true,
-        "prepared_never_enables_updates": true,
-        "raw_health_before_repaired_restart": "HEALTHY",
-        "wire_preserved": "candidate"
-      },
-      "certificate_recovery": {
         "mode": "bad-http",
         "root_only": true,
         "fixed_committed_target": true,
         "inflight_replay_and_kind_conflict_verified": true,
         "fresh_tls_or_http_confirmation_rejected": true,
+        "terminal_result": {
+          "failure_stage": "tls_confirmation",
+          "restored": false,
+          "updates_enabled": false,
+          "may_have_changed_service": true,
+          "tls_observed_before_failure": false,
+          "error": "Rejected",
+          "reason": "confirmation_timeout",
+          "sqlite_error": null,
+          "errno": null
+        },
         "terminal": "FAILED",
         "logical_journal_unchanged": true,
         "immutable_generations_unchanged": true,
@@ -700,85 +822,15 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 2,
-      "elapsed_seconds": 7.800451705
+      "elapsed_seconds": 7.866131506999999
     },
     {
       "fault": "enospc",
       "phase": "post",
       "ext4_image_bytes": 33554432,
       "service_memory_before_fault": {
-        "VmHWM": "20716 kB",
-        "VmRSS": "20716 kB"
-      },
-      "candidate_observed_before_fault": true,
-      "active_executor_fencing": {
-        "prepare_denied_while_busy": true,
-        "competing_writer_rejected": true,
-        "gate_unchanged": true
-      },
-      "executor_memory_at_checkpoint": {
-        "VmHWM": "21532 kB",
-        "VmRSS": "21532 kB"
-      },
-      "filled_bytes": 26443776,
-      "observed_errno": 28,
-      "mount_options": "rw,relatime",
-      "new_update_reply": {
-        "ok": false,
-        "transport_unavailable": true,
-        "request_sent": false,
-        "transport_error": "ConnectionRefusedError",
-        "errno": 111
-      },
-      "core_state": "APPLYING",
-      "request_state": "RUNNING",
-      "request_result": null,
-      "storage_health": "HEALTHY",
-      "wire_after": "candidate",
-      "service_exit": 75,
-      "fault_restart_update_reply": {
-        "ok": false,
-        "error": "Rejected",
-        "sqlite_error": null,
-        "errno": null,
-        "reason": "recovery_required"
-      },
-      "restart_during_fault_refused_updates": true,
-      "fault_restart_exit": null,
-      "restart_gate": {
-        "repaired_storage_still_blocks": true,
-        "journal_byte_identical_after_repair": true,
-        "no_tls_or_pointer_changes": true,
-        "root_only_prepare": true,
-        "stale_and_duplicate_cas_rejected": true,
-        "second_restart_invalidates_old_cas": true,
-        "prepared_never_enables_updates": true,
-        "raw_health_before_repaired_restart": "HEALTHY",
-        "wire_preserved": "candidate"
-      },
-      "certificate_recovery": {
-        "mode": "expired-tls",
-        "root_only": true,
-        "fixed_committed_target": true,
-        "inflight_replay_and_kind_conflict_verified": true,
-        "expiry_never_commits_completion": true,
-        "terminal": "EXPIRED",
-        "logical_journal_unchanged": true,
-        "immutable_generations_unchanged": true,
-        "updates_enabled": false
-      },
-      "passed": true,
-      "cleanup_verified": true,
-      "tracked_executors": 2,
-      "elapsed_seconds": 3.5696019109999497
-    },
-    {
-      "fault": "enospc",
-      "phase": "post",
-      "ext4_image_bytes": 33554432,
-      "service_memory_before_fault": {
-        "VmHWM": "20696 kB",
-        "VmRSS": "20696 kB"
+        "VmHWM": "20712 kB",
+        "VmRSS": "20712 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -827,11 +879,22 @@
         "wire_preserved": "candidate"
       },
       "certificate_recovery": {
-        "mode": "expired-commit",
+        "mode": "expired-tls",
         "root_only": true,
         "fixed_committed_target": true,
-        "partial_publication_not_durable_completion": true,
+        "inflight_replay_and_kind_conflict_verified": true,
         "expiry_never_commits_completion": true,
+        "terminal_result": {
+          "failure_stage": "final_validation",
+          "restored": false,
+          "updates_enabled": false,
+          "may_have_changed_service": true,
+          "tls_observed_before_failure": true,
+          "error": "Expired",
+          "reason": "recovery_expired",
+          "sqlite_error": null,
+          "errno": null
+        },
         "terminal": "EXPIRED",
         "logical_journal_unchanged": true,
         "immutable_generations_unchanged": true,
@@ -840,15 +903,15 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 2,
-      "elapsed_seconds": 3.526067469000054
+      "elapsed_seconds": 3.371549403000003
     },
     {
       "fault": "enospc",
       "phase": "post",
       "ext4_image_bytes": 33554432,
       "service_memory_before_fault": {
-        "VmHWM": "20712 kB",
-        "VmRSS": "20712 kB"
+        "VmHWM": "20716 kB",
+        "VmRSS": "20716 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -897,6 +960,87 @@
         "wire_preserved": "candidate"
       },
       "certificate_recovery": {
+        "mode": "expired-commit",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "partial_publication_not_durable_completion": true,
+        "expiry_never_commits_completion": true,
+        "terminal_result": {
+          "failure_stage": "closed_publication",
+          "restored": false,
+          "updates_enabled": false,
+          "may_have_changed_service": true,
+          "tls_observed_before_failure": true,
+          "error": "Expired",
+          "reason": "recovery_expired",
+          "sqlite_error": null,
+          "errno": null
+        },
+        "terminal": "EXPIRED",
+        "logical_journal_unchanged": true,
+        "immutable_generations_unchanged": true,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 2,
+      "elapsed_seconds": 3.4302402940000007
+    },
+    {
+      "fault": "enospc",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "service_memory_before_fault": {
+        "VmHWM": "20712 kB",
+        "VmRSS": "20712 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "21568 kB",
+        "VmRSS": "21568 kB"
+      },
+      "filled_bytes": 26443776,
+      "observed_errno": 28,
+      "mount_options": "rw,relatime",
+      "new_update_reply": {
+        "ok": false,
+        "transport_unavailable": true,
+        "request_sent": false,
+        "transport_error": "ConnectionRefusedError",
+        "errno": 111
+      },
+      "core_state": "APPLYING",
+      "request_state": "RUNNING",
+      "request_result": null,
+      "storage_health": "HEALTHY",
+      "wire_after": "candidate",
+      "service_exit": 75,
+      "fault_restart_update_reply": {
+        "ok": false,
+        "error": "Rejected",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "recovery_required"
+      },
+      "restart_during_fault_refused_updates": true,
+      "fault_restart_exit": null,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "HEALTHY",
+        "wire_preserved": "candidate"
+      },
+      "certificate_recovery": {
         "mode": "crash-selected",
         "root_only": true,
         "fixed_committed_target": true,
@@ -907,6 +1051,20 @@
         "explicit_fresh_intent_restores": true,
         "committed_pointer_and_new_tls_verified": true,
         "paired_completion_recorded": true,
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "e7fc84ff6b1c43eb9ce13de4f982c0d6",
+          "fingerprint": "8211e7211ad280b34cf09e2fd44bce7f8a7ab19b62ed5ed5d39c138980c743db",
+          "prior_health": "HEALTHY",
+          "closed_gate": {
+            "gate_epoch": "15a027d502744de39fe372681dcec53e",
+            "gate_revision": 10
+          }
+        },
         "terminal": "VERIFIED_CLOSED",
         "logical_journal_unchanged": true,
         "immutable_generations_unchanged": true,
@@ -915,15 +1073,15 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 3,
-      "elapsed_seconds": 3.205824968999991
+      "elapsed_seconds": 3.157725468999999
     },
     {
       "fault": "enospc",
       "phase": "post",
       "ext4_image_bytes": 33554432,
       "service_memory_before_fault": {
-        "VmHWM": "20708 kB",
-        "VmRSS": "20708 kB"
+        "VmHWM": "20712 kB",
+        "VmRSS": "20712 kB"
       },
       "candidate_observed_before_fault": true,
       "active_executor_fencing": {
@@ -932,8 +1090,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "21520 kB",
-        "VmRSS": "21520 kB"
+        "VmHWM": "21536 kB",
+        "VmRSS": "21536 kB"
       },
       "filled_bytes": 26443776,
       "observed_errno": 28,
@@ -982,6 +1140,20 @@
         "explicit_fresh_intent_restores": true,
         "committed_pointer_and_new_tls_verified": true,
         "paired_completion_recorded": true,
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "302bc4f7cea644beab077f5fb44c7545",
+          "fingerprint": "6152cacbb70c8f46fd6ad8269e3083431e6e640d2ff0c6016b1712907ca61c16",
+          "prior_health": "HEALTHY",
+          "closed_gate": {
+            "gate_epoch": "efc1865d7b994a08976d80326f473969",
+            "gate_revision": 10
+          }
+        },
         "terminal": "VERIFIED_CLOSED",
         "logical_journal_unchanged": true,
         "immutable_generations_unchanged": true,
@@ -990,7 +1162,96 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 3,
-      "elapsed_seconds": 3.0603448250000156
+      "elapsed_seconds": 3.0562528219999905
+    },
+    {
+      "fault": "enospc",
+      "phase": "post",
+      "ext4_image_bytes": 33554432,
+      "service_memory_before_fault": {
+        "VmHWM": "20708 kB",
+        "VmRSS": "20708 kB"
+      },
+      "candidate_observed_before_fault": true,
+      "active_executor_fencing": {
+        "prepare_denied_while_busy": true,
+        "competing_writer_rejected": true,
+        "gate_unchanged": true
+      },
+      "executor_memory_at_checkpoint": {
+        "VmHWM": "21528 kB",
+        "VmRSS": "21528 kB"
+      },
+      "filled_bytes": 26443776,
+      "observed_errno": 28,
+      "mount_options": "rw,relatime",
+      "new_update_reply": {
+        "ok": false,
+        "transport_unavailable": true,
+        "request_sent": false,
+        "transport_error": "ConnectionRefusedError",
+        "errno": 111
+      },
+      "core_state": "APPLYING",
+      "request_state": "RUNNING",
+      "request_result": null,
+      "storage_health": "HEALTHY",
+      "wire_after": "candidate",
+      "service_exit": 75,
+      "fault_restart_update_reply": {
+        "ok": false,
+        "error": "Rejected",
+        "sqlite_error": null,
+        "errno": null,
+        "reason": "recovery_required"
+      },
+      "restart_during_fault_refused_updates": true,
+      "fault_restart_exit": null,
+      "restart_gate": {
+        "repaired_storage_still_blocks": true,
+        "journal_byte_identical_after_repair": true,
+        "no_tls_or_pointer_changes": true,
+        "root_only_prepare": true,
+        "stale_and_duplicate_cas_rejected": true,
+        "second_restart_invalidates_old_cas": true,
+        "prepared_never_enables_updates": true,
+        "raw_health_before_repaired_restart": "HEALTHY",
+        "wire_preserved": "candidate"
+      },
+      "certificate_recovery": {
+        "mode": "crash-confirmed",
+        "root_only": true,
+        "fixed_committed_target": true,
+        "inflight_replay_and_kind_conflict_verified": true,
+        "unfinished_control_observed_before_restart": true,
+        "old_executor_fences_takeover": true,
+        "no_replay_or_budget_reset": true,
+        "explicit_fresh_intent_restores": true,
+        "committed_pointer_and_new_tls_verified": true,
+        "paired_completion_recorded": true,
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "80bd8ff8edfb45bbac08cdc824050eca",
+          "fingerprint": "dcc0a52fa90e40112f0531bb119d3915e2cc7a8a816b67b348ed3e2542688188",
+          "prior_health": "HEALTHY",
+          "closed_gate": {
+            "gate_epoch": "2b0a7c0e37ae4dffade318273ce49e3b",
+            "gate_revision": 10
+          }
+        },
+        "terminal": "VERIFIED_CLOSED",
+        "logical_journal_unchanged": true,
+        "immutable_generations_unchanged": true,
+        "updates_enabled": false
+      },
+      "passed": true,
+      "cleanup_verified": true,
+      "tracked_executors": 3,
+      "elapsed_seconds": 3.4151008010000083
     },
     {
       "fault": "enospc",
@@ -1047,81 +1308,6 @@
         "wire_preserved": "candidate"
       },
       "certificate_recovery": {
-        "mode": "crash-confirmed",
-        "root_only": true,
-        "fixed_committed_target": true,
-        "inflight_replay_and_kind_conflict_verified": true,
-        "unfinished_control_observed_before_restart": true,
-        "old_executor_fences_takeover": true,
-        "no_replay_or_budget_reset": true,
-        "explicit_fresh_intent_restores": true,
-        "committed_pointer_and_new_tls_verified": true,
-        "paired_completion_recorded": true,
-        "terminal": "VERIFIED_CLOSED",
-        "logical_journal_unchanged": true,
-        "immutable_generations_unchanged": true,
-        "updates_enabled": false
-      },
-      "passed": true,
-      "cleanup_verified": true,
-      "tracked_executors": 3,
-      "elapsed_seconds": 3.646516876000078
-    },
-    {
-      "fault": "enospc",
-      "phase": "post",
-      "ext4_image_bytes": 33554432,
-      "service_memory_before_fault": {
-        "VmHWM": "20704 kB",
-        "VmRSS": "20704 kB"
-      },
-      "candidate_observed_before_fault": true,
-      "active_executor_fencing": {
-        "prepare_denied_while_busy": true,
-        "competing_writer_rejected": true,
-        "gate_unchanged": true
-      },
-      "executor_memory_at_checkpoint": {
-        "VmHWM": "21540 kB",
-        "VmRSS": "21540 kB"
-      },
-      "filled_bytes": 26443776,
-      "observed_errno": 28,
-      "mount_options": "rw,relatime",
-      "new_update_reply": {
-        "ok": false,
-        "transport_unavailable": true,
-        "request_sent": false,
-        "transport_error": "ConnectionRefusedError",
-        "errno": 111
-      },
-      "core_state": "APPLYING",
-      "request_state": "RUNNING",
-      "request_result": null,
-      "storage_health": "HEALTHY",
-      "wire_after": "candidate",
-      "service_exit": 75,
-      "fault_restart_update_reply": {
-        "ok": false,
-        "error": "Rejected",
-        "sqlite_error": null,
-        "errno": null,
-        "reason": "recovery_required"
-      },
-      "restart_during_fault_refused_updates": true,
-      "fault_restart_exit": null,
-      "restart_gate": {
-        "repaired_storage_still_blocks": true,
-        "journal_byte_identical_after_repair": true,
-        "no_tls_or_pointer_changes": true,
-        "root_only_prepare": true,
-        "stale_and_duplicate_cas_rejected": true,
-        "second_restart_invalidates_old_cas": true,
-        "prepared_never_enables_updates": true,
-        "raw_health_before_repaired_restart": "HEALTHY",
-        "wire_preserved": "candidate"
-      },
-      "certificate_recovery": {
         "mode": "crash-proof",
         "root_only": true,
         "fixed_committed_target": true,
@@ -1132,6 +1318,20 @@
         "explicit_fresh_intent_restores": true,
         "committed_pointer_and_new_tls_verified": true,
         "paired_completion_recorded": true,
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "fe70b4ce255544dba6f620796d5327d2",
+          "fingerprint": "44425221959d30cb26222bee92b460c56215116986abe8e56cc40cbfcdc9e0fe",
+          "prior_health": "HEALTHY",
+          "closed_gate": {
+            "gate_epoch": "5e4105370c3b4482bcdea7f6d1154fd2",
+            "gate_revision": 10
+          }
+        },
         "terminal": "VERIFIED_CLOSED",
         "logical_journal_unchanged": true,
         "immutable_generations_unchanged": true,
@@ -1140,7 +1340,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 3,
-      "elapsed_seconds": 3.5448497600000337
+      "elapsed_seconds": 3.622176373000002
     },
     {
       "fault": "enospc",
@@ -1157,8 +1357,8 @@
         "gate_unchanged": true
       },
       "executor_memory_at_checkpoint": {
-        "VmHWM": "21540 kB",
-        "VmRSS": "21540 kB"
+        "VmHWM": "21532 kB",
+        "VmRSS": "21532 kB"
       },
       "filled_bytes": 26443776,
       "observed_errno": 28,
@@ -1207,6 +1407,20 @@
         "explicit_fresh_intent_restores": true,
         "committed_pointer_and_new_tls_verified": true,
         "paired_completion_recorded": true,
+        "terminal_result": {
+          "storage_verified": true,
+          "certificate_verified": true,
+          "tls_confirmed": true,
+          "restored": true,
+          "updates_enabled": false,
+          "committed": "0ce93e48bd194966b524c123f694c52e",
+          "fingerprint": "312fd6d8e52f017228f148725d0cde85db1bd5877176df53cbd581854cf52b27",
+          "prior_health": "HEALTHY",
+          "closed_gate": {
+            "gate_epoch": "877851cd78024669a9391e6eae7fafe1",
+            "gate_revision": 11
+          }
+        },
         "terminal": "VERIFIED_CLOSED",
         "logical_journal_unchanged": true,
         "immutable_generations_unchanged": true,
@@ -1215,7 +1429,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 3,
-      "elapsed_seconds": 3.5438963379999677
+      "elapsed_seconds": 3.54536315
     }
   ],
   "scope": "formal source-run service + lease-fenced certificate recovery executor; actual Nginx pidfd reload and new TLS in isolated Linux VM",
@@ -1238,11 +1452,11 @@
     "certweft/operations.py": "81656a79e9d490ae9c6627e1ae5aae42a7ecec57aae8c10261d6a9682ee7291d",
     "certweft/gate.py": "e71b41cf5bc2e411e2daa5181998f010823a4f175f77d64841ee3d2565426524",
     "certweft/storage.py": "2f431bd3758a8a14b2cb616521f50d638cf3fdbf733278f87a7e7cb99bf1fe3b",
-    "certweft/certificate_recovery.py": "c4d82f07bd11f1cf5f2a396b7ca3fa8fbda2e09a955a2e5f789a6e968bc14518",
+    "certweft/certificate_recovery.py": "8e12ac749a8124444e1b70d2c365f74e3ba396656a530adb2f0281a481b0694e",
     "certweft/ca.py": "e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c",
     "certweft/executor.py": "052ad6e92b20f8fe2e37fa4e1a72180f627b1be327c3e363fa38b6f14b52cc0a",
     "tools/policy_vm.py": "27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6",
-    "tools/certificate_vm.py": "d275aa7f38878c2e73e2585cd3e08f56dfc4a58dab06ddd10c7b02d032961050",
+    "tools/certificate_vm.py": "656d0f0cc0f051bdb86d349b9f39b406ba809fce1bf3e42f36392cf4c165bb79",
     "tools/storage_vm.py": "ed63d6a4d3f83f65cc47421ed1060f909909b88edb744bf0142d5bdd5c1385eb",
     "tools/deadline_vm.py": "cd0d61fb4e1253cdc23b12e3fb38d10ad41fd04f2debd9c23f4574f8fa4e7cf3",
     "tools/executor_vm.py": "73cfc9aafee86b97f450337631caf374e79fad7e6c8c13509a36d5e7b49680a1",

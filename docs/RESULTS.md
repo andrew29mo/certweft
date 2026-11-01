@@ -6,6 +6,9 @@ See [CERTIFICATE_RECOVERY.md](CERTIFICATE_RECOVERY.md) and its source-bound
 JSON/HTML for committed restoration, fresh TLS and crash/expiry cases. All normal
 admission stays closed. Storage, gate and journal verification regressions are
 rerun against the same source; prior unit records retain their historical scope.
+The review hardened negative VM cases to require the formal validator/confirmer
+failure stage and expected error, rather than accepting any FAILED result.
+Sanitized terminal results are retained; raw OpenSSL stderr is not published.
 
 ## Durable storage verification milestone
 

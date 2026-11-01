@@ -124,9 +124,14 @@ def exercise(root,work,config,parent,call,normal_job,mode):
             if mode.startswith('invalid-'):
                 assert observe()==before_wire and os.readlink(root/'active.conf')==before_pointer
                 assert not row['result']['may_have_changed_service']
+                assert row['result']['failure_stage']=='certificate_validation'
+                assert (row['result']['error'],row['result']['reason'])==(('Rejected','key_mismatch') if mode=='invalid-key' else ('CalledProcessError',None))
                 detail['invalid_but_digest_consistent_certificate_rejected_before_select']=True
             if mode in {'wrong-leaf','bad-http'}:
-                assert not row['result']['restored'];detail['fresh_tls_or_http_confirmation_rejected']=True
+                assert not row['result']['restored']
+                assert row['result']['failure_stage']=='tls_confirmation'
+                assert (row['result']['error'],row['result']['reason'])==('Rejected','confirmation_timeout')
+                detail['fresh_tls_or_http_confirmation_rejected']=True
             if mode.startswith('expired'):
                 assert not row['result']['restored'] and not root_call({'op':'recovery-status'})['completion_recorded'];detail['expiry_never_commits_completion']=True
         if row['state']=='VERIFIED_CLOSED':
@@ -150,6 +155,7 @@ def exercise(root,work,config,parent,call,normal_job,mode):
         assert logical()==protected and generations()==version_bytes
         refused=call(config['socket'],{**normal_job,'request_id':'still-isolated'});assert not refused['ok']
         assert Gate(root).read()['state'] in {'VERIFY_REQUIRED','VERIFIED_CLOSED','RECOVERY_REQUIRED'}
+        detail['terminal_result']=row['result']
         detail.update(terminal=row['state'],logical_journal_unchanged=True,immutable_generations_unchanged=True,updates_enabled=False)
         return detail,parent
     except Exception:

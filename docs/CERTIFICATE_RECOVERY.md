@@ -114,8 +114,13 @@ with actual Nginx, OpenSSL and new TLS in the isolated Linux VM. The matrix cove
 - Expired certificate, wrong SAN, wrong EKU and mismatched private key. The root
   fixture deliberately updates the structural digest to match invalid material,
   so crypto rejection cannot pass solely because a stale digest was detected.
+  Each case also requires the formal certificate-validation failure stage and
+  expected OpenSSL rejection or key-mismatch reason, after storage checks.
 - Wrong live leaf and HTTP 503 via explicit root fixture interference while the
-  real executor is paused; neither earns TLS confirmation or completion.
+  real executor is paused; both must reach the formal TLS confirmer and fail
+  with confirmation_timeout, rather than pass because of an earlier failure.
+  Sanitized terminal results are retained in the report; neither earns TLS
+  confirmation or completion.
 - Expiry after observed TLS and after tentative final-result SQL writes. An
   independent SQLite reader still sees the intermediate durable proof, not
   uncommitted success.
@@ -163,6 +168,7 @@ A dedicated success case also preserves a preexisting STORAGE_FAILED latch.
 
 Normal admission reopening, health reset and normal-request reconciliation require
 a separate verified handoff. Installed package/systemd lifecycle, actual VM reboot,
-abrupt power loss, physical-media corruption, general fsync failure recovery,
+abrupt power loss, physical-media corruption, general fsync failure recovery (including recovery-gate directory fsync and
+control-catalog COMMIT I/O failures),
 D-state cleanup and long-term rotation remain unqualified. Repository remains
 Private and no license has been selected.
