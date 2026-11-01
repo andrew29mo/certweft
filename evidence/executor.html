@@ -5,73 +5,73 @@
       &quot;name&quot;: &quot;writable_configuration_hierarchy_rejected&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;root-owned config in writable directory rejected&quot;,
-      &quot;seconds&quot;: 0.014766774000008809
+      &quot;seconds&quot;: 0.01949944900002265
     },
     {
       &quot;name&quot;: &quot;mutable_executable_symlink_rejected&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;final executable symlink rejected before lease or execution&quot;,
-      &quot;seconds&quot;: 0.014339994000010847
+      &quot;seconds&quot;: 0.018618685999967965
     },
     {
       &quot;name&quot;: &quot;configuration_snapshot_pinned&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;child uses verified parent snapshot despite pathname replacement&quot;,
-      &quot;seconds&quot;: 0.018130727999988494
+      &quot;seconds&quot;: 0.01851114199996573
     },
     {
       &quot;name&quot;: &quot;unprivileged_direct_mutation_denied&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;actual file writes and direct nginx reload denied&quot;,
-      &quot;seconds&quot;: 0.025305619999983264
+      &quot;seconds&quot;: 0.02546199300002172
     },
     {
       &quot;name&quot;: &quot;controller_status&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;READY&quot;,
-      &quot;seconds&quot;: 0.04112157500000535
+      &quot;seconds&quot;: 0.039086648000022706
     },
     {
       &quot;name&quot;: &quot;fixed_api_rejects_escalation&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;admin recovery, injected path and arbitrary op rejected&quot;,
-      &quot;seconds&quot;: 0.11418580299999803
+      &quot;seconds&quot;: 0.11402843899998061
     },
     {
       &quot;name&quot;: &quot;root_revalidates_untrusted_candidate&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;invalid bytes independently rejected; durable state unchanged&quot;,
-      &quot;seconds&quot;: 0.3314928279999947
+      &quot;seconds&quot;: 0.3283331540000063
     },
     {
       &quot;name&quot;: &quot;unconfigured_peer_denied&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;unconfigured UID cannot connect to management socket&quot;,
-      &quot;seconds&quot;: 0.031274878000004946
+      &quot;seconds&quot;: 0.029140127000005123
     },
     {
       &quot;name&quot;: &quot;formal_controller_activation&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;unprivileged certificate bytes revalidated by root executor; fresh TLS confirms new generation&quot;,
-      &quot;seconds&quot;: 0.8305524700000149
+      &quot;seconds&quot;: 0.9385398680000208
     },
     {
       &quot;name&quot;: &quot;orphan_executor_prevents_takeover&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;root exec child remains stopped with inherited lease; replacement exits without mutation&quot;,
-      &quot;seconds&quot;: 0.01655560800000444
+      &quot;seconds&quot;: 0.033624357000007876
     },
     {
       &quot;name&quot;: &quot;delayed_old_completion_then_fenced_new_generation&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;old child exits before replacement acquires lease; recovery/new activation passes; old authority rejected&quot;,
-      &quot;seconds&quot;: 1.7444271800000024
+      &quot;seconds&quot;: 1.6106708980000235
     },
     {
       &quot;name&quot;: &quot;timeout_group_cleanup_and_takeover&quot;,
       &quot;passed&quot;: true,
       &quot;detail&quot;: &quot;real 20s timeout kills paused executor and pipe holder; replacement recovery/new activation succeeds; stale authority denied&quot;,
-      &quot;seconds&quot;: 21.291203620000005
+      &quot;seconds&quot;: 21.320115140999974
     }
   ],
   &quot;untested&quot;: [
@@ -89,15 +89,18 @@
     &quot;openssl&quot;: &quot;OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)&quot;
   },
   &quot;source_sha256&quot;: {
-    &quot;certweft/service.py&quot;: &quot;74765533fb5a584b1e33422f75424ce13dde1b2b5654fa655c17856f8a97eb32&quot;,
+    &quot;certweft/service.py&quot;: &quot;313014315fc9d787c13b98dd0fe2b6f9bab3ffd64efd44167640697ed29440b7&quot;,
     &quot;certweft/__init__.py&quot;: &quot;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855&quot;,
-    &quot;certweft/core.py&quot;: &quot;fe51b8ffcb8a4445e7c3dfc86e66fff803e9863e661ea4c050f8b53e25d6cdcf&quot;,
+    &quot;certweft/core.py&quot;: &quot;e5ad7a56575e19152cb8dbf631896e2569e19c55235bebcf374c137672146fa6&quot;,
+    &quot;certweft/operations.py&quot;: &quot;2e67b2ac3edbb3b6dedbdf8d48d96f4c4f786731801c711f3d157c8e28ceaab4&quot;,
     &quot;certweft/ca.py&quot;: &quot;e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c&quot;,
-    &quot;certweft/executor.py&quot;: &quot;20eedf2076991b1a678571981c799ec12ed8a95313356ffd125fb555821e7a6e&quot;,
+    &quot;certweft/executor.py&quot;: &quot;b04ce1ecf301185c089fd1d70c20ed419323d84faaa5fccc5ff7da0e691ee260&quot;,
     &quot;tools/policy_vm.py&quot;: &quot;27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6&quot;,
-    &quot;tools/executor_vm.py&quot;: &quot;41a9247486999bc5ff3e89da7d0c19fd10a259f8d62a2a4773bbf8391e847e5b&quot;,
+    &quot;tools/executor_vm.py&quot;: &quot;1e8f42862c3cffa640a2320cd5c95666c94fa2b8bcdda3cdc0339e7b6f648852&quot;,
     &quot;tools/explore.py&quot;: &quot;0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec&quot;,
     &quot;tools/credential_probe.py&quot;: &quot;8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46&quot;,
+    &quot;tools/operations_vm.py&quot;: &quot;c3b8680c4aa405eedbb33f8d629a0a2680a706e474a744098691e8b0882e8450&quot;,
+    &quot;tests/test_operations.py&quot;: &quot;71b474179f28e3cf804a7d16784c02b6734661661d156cc3130b4c26c9ec9b10&quot;,
     &quot;tests/test_core.py&quot;: &quot;8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c&quot;,
     &quot;policy/server.tpl&quot;: &quot;e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550&quot;
   },

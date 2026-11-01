@@ -1,0 +1,73 @@
+<!doctype html><meta charset="utf-8"><pre>{
+  &quot;passed&quot;: true,
+  &quot;cases&quot;: [
+    {
+      &quot;name&quot;: &quot;inflight_replay_and_conflict&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.7497039040000004,
+      &quot;detail&quot;: &quot;duplicate while executing returns same durable request; different parameters rejected without new generation&quot;
+    },
+    {
+      &quot;name&quot;: &quot;cancel_before_commit_wins&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.5050697219999734,
+      &quot;detail&quot;: &quot;cancel persisted after new wire confirmation, before COMMIT; rollback independently observed&quot;
+    },
+    {
+      &quot;name&quot;: &quot;restart_terminal_no_replay&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.020506344000011723,
+      &quot;detail&quot;: &quot;restart preserves terminal result; old request not rerun&quot;
+    },
+    {
+      &quot;name&quot;: &quot;commit_before_cancel_wins&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.8929386770000178,
+      &quot;detail&quot;: &quot;COMMIT atomically wins; later cancel reports COMMITTED; restart replay does not execute&quot;
+    },
+    {
+      &quot;name&quot;: &quot;pending_restart_no_replay&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 1.2320174370000245,
+      &quot;detail&quot;: &quot;SIGKILL preserves pending journal; startup recovers baseline and marks INTERRUPTED without replay&quot;
+    },
+    {
+      &quot;name&quot;: &quot;cancel_write_failure_no_false_ack&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 1.2415359199999898,
+      &quot;detail&quot;: &quot;injected cancellation persistence failure returns error, not acknowledgement; repaired retry rolls back&quot;
+    },
+    {
+      &quot;name&quot;: &quot;controller_cannot_implicitly_repair_degraded&quot;,
+      &quot;passed&quot;: true,
+      &quot;seconds&quot;: 0.0761353080000049,
+      &quot;detail&quot;: &quot;root-injected preexisting DEGRADED cannot be repaired by controller submit; new IDs refused&quot;
+    }
+  ],
+  &quot;untested&quot;: [
+    &quot;persistent systemd deployment&quot;,
+    &quot;VM reboot&quot;,
+    &quot;power loss&quot;,
+    &quot;durable whole-operation deadlines&quot;,
+    &quot;physical storage faults&quot;,
+    &quot;automatic history recycling&quot;
+  ],
+  &quot;owned_processes_exited&quot;: true,
+  &quot;source_sha256&quot;: {
+    &quot;certweft/service.py&quot;: &quot;313014315fc9d787c13b98dd0fe2b6f9bab3ffd64efd44167640697ed29440b7&quot;,
+    &quot;certweft/__init__.py&quot;: &quot;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855&quot;,
+    &quot;certweft/core.py&quot;: &quot;e5ad7a56575e19152cb8dbf631896e2569e19c55235bebcf374c137672146fa6&quot;,
+    &quot;certweft/operations.py&quot;: &quot;2e67b2ac3edbb3b6dedbdf8d48d96f4c4f786731801c711f3d157c8e28ceaab4&quot;,
+    &quot;certweft/ca.py&quot;: &quot;e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c&quot;,
+    &quot;certweft/executor.py&quot;: &quot;b04ce1ecf301185c089fd1d70c20ed419323d84faaa5fccc5ff7da0e691ee260&quot;,
+    &quot;tools/policy_vm.py&quot;: &quot;27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6&quot;,
+    &quot;tools/executor_vm.py&quot;: &quot;1e8f42862c3cffa640a2320cd5c95666c94fa2b8bcdda3cdc0339e7b6f648852&quot;,
+    &quot;tools/explore.py&quot;: &quot;0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec&quot;,
+    &quot;tools/credential_probe.py&quot;: &quot;8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46&quot;,
+    &quot;tools/operations_vm.py&quot;: &quot;c3b8680c4aa405eedbb33f8d629a0a2680a706e474a744098691e8b0882e8450&quot;,
+    &quot;tests/test_operations.py&quot;: &quot;71b474179f28e3cf804a7d16784c02b6734661661d156cc3130b4c26c9ec9b10&quot;,
+    &quot;tests/test_core.py&quot;: &quot;8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c&quot;,
+    &quot;policy/server.tpl&quot;: &quot;e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550&quot;
+  },
+  &quot;source_unchanged&quot;: true
+}</pre>

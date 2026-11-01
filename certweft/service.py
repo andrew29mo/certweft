@@ -1,5 +1,7 @@
 """Fixed local privileged writer. One bounded request/executor at a time."""
-import fcntl,json,os,socket,stat,struct,subprocess,sys
+import fcntl,json,os,socket,stat,struct,subprocess,sys,threading
+from .operations import Operations
+from .core import Rejected
 from pathlib import Path
 
 def secure_parents(path):
@@ -30,7 +32,38 @@ def serve(config_path):
         try:fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
         except BlockingIOError:
             print('lease_busy',flush=True);raise SystemExit(73)
-        # Socket replacement is allowed only after acquiring the lifetime lease.
+        root=Path(config['writer']['root']);store=root.lstat()
+        if not stat.S_ISDIR(store.st_mode) or store.st_uid!=0 or store.st_mode & 0o077:raise PermissionError('store_permissions')
+        journal=(root/'journal.db').lstat()
+        if not stat.S_ISREG(journal.st_mode) or journal.st_uid!=0 or journal.st_mode & 0o077:raise PermissionError('journal_permissions')
+        operations=Operations(root);operations.initialize()
+        guard=threading.Lock()
+        def execute(body,uid):
+            child=subprocess.Popen([sys.executable,'-m','certweft.executor',str(fd)],
+                start_new_session=True,pass_fds=(fd,),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+            try:out,err=child.communicate(json.dumps({'body':body,'peer_uid':uid,'config':config}).encode(),timeout=20)
+            except subprocess.TimeoutExpired:
+                import signal
+                os.killpg(child.pid,signal.SIGKILL)
+                try:child.communicate(timeout=3)
+                except subprocess.TimeoutExpired:os._exit(75)
+                raise TimeoutError('executor_timeout')
+            if child.returncode!=0 or len(out)>16384:raise RuntimeError('executor_failure')
+            return json.loads(out)
+        # Lease excludes old executors before reconciling unfinished requests.
+        pending=operations.pending()
+        if pending:
+            recovered=execute({'op':'recover'},0)
+            if not recovered['ok']:raise RuntimeError('startup_recovery_failed')
+            for identity in pending:operations.finish(identity,'INTERRUPTED',{'recovered':True,'replayed':False})
+        def work(body):
+            try:
+                reply=execute({'op':'execute',**{k:v for k,v in body.items() if k!='op'}},0)
+                if not reply.get('ok'):operations.finish(body['request_id'],'DEGRADED',{'executor_error':reply.get('error')})
+            except Exception as error:
+                try:operations.finish(body['request_id'],'DEGRADED',{'executor_error':type(error).__name__})
+                except Exception:os._exit(75)
+            finally:guard.release()
         endpoint=Path(config['socket'])
         if endpoint.exists():endpoint.unlink()
         with socket.socket(socket.AF_UNIX) as server:
@@ -50,19 +83,37 @@ def serve(config_path):
                             if not chunk:raise ValueError('incomplete')
                             data+=chunk
                             if len(data)>49152:raise ValueError('budget')
-                        request=json.loads(data)
-                        child=subprocess.Popen([sys.executable,'-m','certweft.executor',str(fd)],
-                            start_new_session=True,pass_fds=(fd,),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-                        try:out,err=child.communicate(json.dumps({'body':request,'peer_uid':uid,'config':config}).encode(),timeout=20)
-                        except subprocess.TimeoutExpired:
-                            import signal
-                            os.killpg(child.pid,signal.SIGKILL)
-                            try:child.communicate(timeout=3)
-                            except subprocess.TimeoutExpired:os._exit(75)
-                            raise TimeoutError('executor_timeout')
-                        if child.returncode!=0 or len(out)>16384:raise RuntimeError('executor_failure')
-                        reply=json.loads(out)
-                    except Exception as e:reply={'ok':False,'error':type(e).__name__}
+                        body=json.loads(data);op=body.get('op')
+                        if op in {'cancel','request-status'}:
+                            if set(body)!={'op','request_id'} or type(body['request_id']) is not str:raise Rejected('request_shape')
+                            result=operations.cancel(body['request_id']) if op=='cancel' else operations.get(body['request_id'])
+                            reply={'ok':True,'result':result}
+                            if op=='cancel':
+                                reply.update(cancel_accepted=result['state']=='CANCEL_REQUESTED',cancel_complete=result['state'] in {'CANCELLED','ROLLED_BACK'})
+                        elif op=='submit':
+                            Operations.identity(body)
+                            # Deduplicated requests remain readable while the executor is busy.
+                            try:existing=operations.get(body['request_id'])
+                            except Rejected:existing=None
+                            if existing:
+                                if existing['digest']!=Operations.identity(body):raise Rejected('request_conflict')
+                                reply={'ok':True,'result':existing,'created':False}
+                            else:
+                                if not guard.acquire(False):raise Rejected('busy')
+                                try:
+                                    result,created=operations.admit(body)
+                                    if created:threading.Thread(target=work,args=(body,),daemon=True).start()
+                                    else:guard.release()
+                                except Exception:guard.release();raise
+                                reply={'ok':True,'result':result,'created':created}
+                        else:
+                            if op=='execute' or op=='activate' and not config.get('legacy_api',False):raise Rejected('use_submit')
+                            if not guard.acquire(False):raise Rejected('busy')
+                            try:reply=execute(body,uid)
+                            finally:guard.release()
+                    except Exception as error:
+                        reply={'ok':False,'error':type(error).__name__}
+                        if isinstance(error,Rejected):reply['reason']=str(error)
                     try:conn.sendall(json.dumps(reply).encode()+b'\n')
                     except OSError:pass
     finally:os.close(fd)

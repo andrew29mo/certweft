@@ -97,3 +97,11 @@ privilege and takeover evidence; see [EXECUTOR.md](EXECUTOR.md). Nginx reload
 is signalled directly after master identity checks, removing the delayed reload
 helper path. Durable operation contracts and installed systemd deployment remain
 open; the earlier descriptions of unqualified executor inheritance are historical.
+
+## P0-3a update
+
+Persistent activation request IDs and parameter digests now share the formal
+journal with atomic COMMIT results. Cancellation is a durable tentative state,
+not an immediate stop claim. See [OPERATIONS.md](OPERATIONS.md) for state,
+replay/restart behavior and the fixed 64-row history bound. P0-3b deadlines,
+controlled repair and formal deployment remain open.

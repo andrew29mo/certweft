@@ -2,8 +2,13 @@
 import json,os,sys,signal,tempfile,stat
 from pathlib import Path
 from .core import Writer,Rejected,run
+from .operations import Operations,Cancelled
 
 class FixedWriter(Writer):
+    operation_id=None
+    def commit_state(self,db,state):
+        if self.operation_id:Operations.commit(db,self.operation_id,state)
+        else:super().commit_state(db,state)
     def reload(self):
         # Validation subprocess cannot publish or signal a delayed reload.
         run([self.nginx,'-t','-c',self.conf])
@@ -18,9 +23,9 @@ class FixedWriter(Writer):
 
 def dispatch(config,request,peer_uid,checkpoint=lambda _:None):
     op=request.get('op')
-    fields={'status':{'op'},'recover':{'op'},'activate':{'op','certificate','epoch','revision'}}
+    fields={'status':{'op'},'recover':{'op'},'activate':{'op','certificate','epoch','revision'},'execute':{'op','request_id','certificate','epoch','revision'}}
     if op not in fields or set(request)!=fields[op]:raise Rejected('request_shape')
-    if op=='recover' and peer_uid!=0:raise Rejected('admin_required')
+    if op in {'recover','execute'} and peer_uid!=0:raise Rejected('admin_required')
     if peer_uid not in {0,config['controller_uid']}:raise Rejected('peer_denied')
     root=Path(config['writer']['root']);st=root.lstat()
     if not stat.S_ISDIR(st.st_mode) or st.st_uid!=0 or st.st_mode & 0o077:raise Rejected('store_permissions')
@@ -32,11 +37,33 @@ def dispatch(config,request,peer_uid,checkpoint=lambda _:None):
     if op=='recover':return w.recover()
     if type(request['certificate']) is not str or len(request['certificate'].encode())>32768:raise Rejected('certificate_budget')
     if type(request['epoch']) is not str or type(request['revision']) is not int:raise Rejected('authority_shape')
+    operations=Operations(root)
+    if op=='execute':
+        w.operation_id=request['request_id']
+        if not operations.begin(w.operation_id):return operations.get(w.operation_id)
     # Copy bytes, never accept a caller-controlled file path or key/config.
     fd,path=tempfile.mkstemp(prefix='candidate-',dir=w.root)
     try:
         with os.fdopen(fd,'w') as f:f.write(request['certificate']);f.flush();os.fsync(f.fileno())
-        return w.activate(path,request['epoch'],request['revision'],checkpoint)
+        owned_intent=[False]
+        def boundary(point):
+            if point=='intent':owned_intent[0]=True
+            checkpoint(point)
+            if w.operation_id:operations.check_cancel(w.operation_id)
+        try:
+            result=w.activate(path,request['epoch'],request['revision'],boundary)
+            return operations.get(w.operation_id) if w.operation_id else result
+        except Exception as error:
+            if not w.operation_id:raise
+            # An exception before core's try block may leave durable APPLYING.
+            try:
+                state=w.status()
+                if state['state']=='APPLYING' and owned_intent[0]:
+                    w.recover();state=w.status()
+                if state['state']!='READY':terminal='DEGRADED'
+                else:terminal='ROLLED_BACK' if isinstance(error,Cancelled) else 'FAILED'
+            except Exception:terminal='DEGRADED'
+            return operations.finish(w.operation_id,terminal,{'error':type(error).__name__})
     finally:Path(path).unlink(missing_ok=True)
 
 def main():

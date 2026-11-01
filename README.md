@@ -33,6 +33,13 @@ socket service, root validation, inherited executor lease and real orphan-proces
 VM evidence. Formal systemd deployment and complete operation contracts remain
 pending.
 
+## Durable activation requests
+
+[P0-3a operation contract](docs/OPERATIONS.md) adds persistent request deduplication,
+responsive request-status/cancel handling and an atomic cancellation/COMMIT
+boundary. CA signing is still a separate step; whole-operation deadlines and
+controlled DEGRADED repair remain pending.
+
 ## Evidence
 
 [JSON](evidence/exploration.json) and [HTML](evidence/exploration.html) contain the

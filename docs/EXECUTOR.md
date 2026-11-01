@@ -1,5 +1,9 @@
 # P0-2: privileged writer and executor takeover
 
+The current normal activation API is submit/request-status/cancel as specified in
+[OPERATIONS.md](OPERATIONS.md). The synchronous activate examples below describe
+the explicitly enabled legacy regression fixture, not the current default API.
+
 ## Implemented boundary
 
 The production modules are certweft.service and certweft.executor. The Linux-only
@@ -76,7 +80,8 @@ sudo timeout 150 python3 tools/executor_vm.py
 ```
 
 The runner starts the actual module service and actual subprocess executor. It
-requires twelve VM cases and thirteen separate unit tests at this stage. Current
+currently requires twelve VM cases and twenty separate unit tests (the earlier
+P0-2-only suite had thirteen) at this stage. Current
 [JSON](../evidence/executor.json) and [HTML](../evidence/executor.html) contain the
 same result and source hashes. Source changes, errors, nonzero exit, timeout or
 cleanup failure are not passing evidence. Prior reports are retained separately.

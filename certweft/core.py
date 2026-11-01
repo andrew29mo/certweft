@@ -100,6 +100,8 @@ class Writer:
         except Exception:
             db.rollback()
             raise
+    def commit_state(self,db,state):
+        self.save(db,state)
     def stage(self,cert):
         data=Path(cert).read_bytes()
         if len(data)>32768:raise Rejected('certificate_budget')
@@ -154,7 +156,7 @@ class Writer:
                 if time.monotonic()>=end:raise Rejected('expired')
                 self.check(name)
                 if time.monotonic()>=end:raise Rejected('expired')
-                s.update(committed=name,committed_digest=self.digest(name),candidate=None,state='READY');self.save(db,s)
+                s.update(committed=name,committed_digest=self.digest(name),candidate=None,state='READY');self.commit_state(db,s)
             except Exception:
                 db.rollback()
                 # Recover uses durable state, never an in-memory partially committed object.

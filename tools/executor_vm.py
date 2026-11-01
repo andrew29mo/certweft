@@ -60,7 +60,7 @@ def main():
         conf.write_text(f'pid {work}/nginx.pid; error_log {work}/nginx.log; events {{}} http {{ access_log off; server {{ listen 127.0.0.1:19444 ssl; server_name localhost; include {work}/store/active.conf; location = /health {{ return 200 "ok"; }} }} }}')
         run(['/usr/sbin/nginx','-c',conf]);ngpid=int((work/'nginx.pid').read_text())
         raw=pathlib.Path('/proc',str(ngpid),'stat').read_text();master={'pid':ngpid,'start':raw[raw.rfind(')')+2:].split()[19]}
-        config={'writer':{'root':str(w.root),'nginx':w.nginx,'conf':str(conf),'ca':str(trust),'key':str(key),'host':'localhost','ip':'127.0.0.1','port':19444},'controller_uid':uid,'socket':str(work/'writer.sock'),'lease':str(work/'lifetime.lock'),'master':master}
+        config={'legacy_api':True,'writer':{'root':str(w.root),'nginx':w.nginx,'conf':str(conf),'ca':str(trust),'key':str(key),'host':'localhost','ip':'127.0.0.1','port':19444},'controller_uid':uid,'socket':str(work/'writer.sock'),'lease':str(work/'lifetime.lock'),'master':master}
         parent=start(config)
         def wire(expected):
             context=ssl.create_default_context(cafile=str(trust))
