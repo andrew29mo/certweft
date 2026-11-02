@@ -1,0 +1,198 @@
+{
+  "passed": false,
+  "status": "in_progress",
+  "cases": [
+    {
+      "name": "wheel_install_and_payload",
+      "passed": true,
+      "seconds": 1.140584366999974,
+      "detail": {
+        "version": "0.0.2",
+        "module": "/opt/certweft/lib/python3.12/site-packages/certweft/__init__.py",
+        "wheel_sha256": "bbfeecbf21741222c28f4c7d58c7c83b8396bf08e01378f04c005efe805d6173",
+        "payload_files": 22
+      }
+    },
+    {
+      "name": "documented_install_and_start",
+      "passed": true,
+      "seconds": 0.4100902640000186,
+      "detail": {
+        "systemd": {
+          "Restart": "on-failure",
+          "RestartPreventExitStatus": "73",
+          "MainPID": "7379",
+          "Result": "success",
+          "NRestarts": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "/system.slice/certweft.service",
+          "CapabilityBoundingSet": "cap_chown",
+          "User": "root",
+          "KillMode": "mixed",
+          "ActiveState": "active",
+          "SubState": "running",
+          "StartLimitIntervalUSec": "1min",
+          "StartLimitBurst": "3",
+          "InvocationID": "1245cb54f1d8474fb24894261fefe76f"
+        },
+        "service_memory": {
+          "Uid": "0\t0\t0\t0",
+          "Gid": "0\t0\t0\t0",
+          "VmHWM": "21816 kB",
+          "VmRSS": "21816 kB",
+          "CapEff": "0000000000000001",
+          "NoNewPrivs": "1"
+        },
+        "initial_updates_enabled": true,
+        "operator_private_reads_denied": true
+      }
+    },
+    {
+      "name": "credential_delivery_and_real_ca_issuance",
+      "passed": true,
+      "seconds": 0.1870199310001226,
+      "detail": {
+        "certificate": "/var/lib/certweft-candidates/first/cert.pem",
+        "observed": {
+          "Uid": "995\t995\t995\t995",
+          "Gid": "989\t989\t989\t989",
+          "VmHWM": "21032 kB",
+          "VmRSS": "21032 kB",
+          "CapEff": "0000000000000000",
+          "NoNewPrivs": "1"
+        },
+        "cleanup": {
+          "main_pid_zero": true,
+          "cgroup_empty_or_removed": true
+        }
+      }
+    },
+    {
+      "name": "installed_controller_real_activation",
+      "passed": true,
+      "seconds": 0.8005419910000455,
+      "detail": {
+        "request_state": "COMMITTED",
+        "old_leaf_sha256": "96b0d8d6280335b409ca431782552334381e7598822595acb2dab3bc07f3054a",
+        "new_leaf_sha256": "b88ac82e843af025f6681b70d6245a7d5ed7dd05fa9b7f22916991bd2faf495b",
+        "expected_leaf_sha256": "b88ac82e843af025f6681b70d6245a7d5ed7dd05fa9b7f22916991bd2faf495b",
+        "activation_cli_seconds": 0.7614882660000148
+      }
+    },
+    {
+      "name": "storage_failure_repair_reopen_and_update",
+      "passed": true,
+      "seconds": 5.041238741999905,
+      "detail": {
+        "actual_sqlite_full": true,
+        "failure_state": "DEGRADED",
+        "repair_restart_still_closed": true,
+        "explicit_root_recovery_opened": true,
+        "follow_up_activation": {
+          "request_state": "COMMITTED",
+          "old_leaf_sha256": "b88ac82e843af025f6681b70d6245a7d5ed7dd05fa9b7f22916991bd2faf495b",
+          "new_leaf_sha256": "8a423cba80b12ee4c590a2b8e7b8d8c2e71f002d13f73cb3d8c60a3b3ddfe5f6",
+          "expected_leaf_sha256": "8a423cba80b12ee4c590a2b8e7b8d8c2e71f002d13f73cb3d8c60a3b3ddfe5f6",
+          "activation_cli_seconds": 0.7591602459999649
+        }
+      }
+    },
+    {
+      "name": "systemd_sigkill_takeover_and_stale_request",
+      "passed": true,
+      "seconds": 6.819938356999955,
+      "detail": {
+        "post_recovery_stale_activation_rejected_without_wire_change": true,
+        "old_executor_dead_before_new_ready": true,
+        "new_invocation": true,
+        "closed_after_crash": true,
+        "old_operation_denied": true,
+        "sigkill_to_observed_new_ready_seconds": 1.1045530270000654,
+        "executor_memory_before_kill": {
+          "Uid": "0\t0\t0\t0",
+          "Gid": "0\t0\t0\t0",
+          "VmHWM": "23368 kB",
+          "VmRSS": "23368 kB",
+          "CapEff": "0000000000000001",
+          "NoNewPrivs": "1"
+        },
+        "systemd": {
+          "Restart": "on-failure",
+          "RestartPreventExitStatus": "73",
+          "MainPID": "7981",
+          "Result": "success",
+          "NRestarts": "1",
+          "ExecMainStatus": "0",
+          "ControlGroup": "/system.slice/certweft.service",
+          "CapabilityBoundingSet": "cap_chown",
+          "User": "root",
+          "KillMode": "mixed",
+          "ActiveState": "active",
+          "SubState": "running",
+          "StartLimitIntervalUSec": "1min",
+          "StartLimitBurst": "3",
+          "InvocationID": "fe620ee2d40243b1bd7c541bb7dc9526"
+        }
+      }
+    },
+    {
+      "name": "outside_cgroup_executor_blocks_takeover",
+      "passed": true,
+      "seconds": 0.17809330299996873,
+      "detail": {
+        "real_installed_executor_holds_lease": true,
+        "unit_exit_status": 73,
+        "automatic_restarts_while_occupied": 0,
+        "takeover_only_after_executor_exit": true,
+        "new_session_closed": true
+      }
+    }
+  ],
+  "scope": "wheel-installed fixed systemd services in a newly created, provisioned Ubuntu VM; application reset between development attempts",
+  "untested": [
+    "VM reboot recovery",
+    "power loss",
+    "boot zero-gap",
+    "D-state termination",
+    "remote CA network",
+    "production PKI enrollment",
+    "multi-instance deployment",
+    "unbounded operation"
+  ],
+  "baseline": {
+    "managed_paths_absent": true,
+    "units_absent": true
+  },
+  "environment": {
+    "python": "3.12.3",
+    "kernel": "6.8.0-117-generic",
+    "architecture": "aarch64",
+    "systemd": "systemd 255 (255.4-1ubuntu8.15)"
+  },
+  "installed_payload": {
+    "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certweft/admission.py": "0f2a589836afaf9abd4a2ca18a548fa268ec01e70e41028d9191e4927291bf29",
+    "certweft/ca.py": "e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c",
+    "certweft/certificate_recovery.py": "8e12ac749a8124444e1b70d2c365f74e3ba396656a530adb2f0281a481b0694e",
+    "certweft/cli.py": "d31316ceaa8b58273cb5fc4fe26b6205f6dcb168e17cc893221b1605625d6724",
+    "certweft/core.py": "fc63c1d25dda209c19129440b1fec36f20d1fdd9b72ef09acd8ab032872310b1",
+    "certweft/deadlines.py": "e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f",
+    "certweft/deployment.py": "3d91969f7c2b9bba7765dbde03667eb6e456fe2ec6a190c4643f4bca3f13193d",
+    "certweft/executor.py": "b11ef0c91cd65a5fa013f6733feda22d6fabcecc46c0aca92a471c0fc48a87c6",
+    "certweft/gate.py": "60854ad11c20eca05609032c75a0fe163292c3d6bdf79427ca495576c3b80c1a",
+    "certweft/opening.py": "514191731118b9cfbf834367104b5f5ab3d7973d5fef91854c9f13ffbae5434e",
+    "certweft/operations.py": "46da1610efd2b5bc25414f07d04a3556a3b57be7870c8af6751fa5c347ca7385",
+    "certweft/reconciliation.py": "bb21824e85c89d90639837f8d144eb0e265b9652065104326f9d843584d88f45",
+    "certweft/recovery.py": "88a3bc08906771eb27e3ef4a57d25439522f363929b9645eb91e72a8145ac791",
+    "certweft/recovery_executor.py": "1a6a1fc983d14f132d374679f8676a09882e0918ac4fd332caaceef240a39531",
+    "certweft/release.py": "604a1d770f47c375989ef8d274dbd8616d3e487152f3abe6965ea1085391d44a",
+    "certweft/service.py": "70199d02b38034399637c4c8adcfb674ce847e4061dab9b280e6e73094074ed0",
+    "certweft/storage.py": "2f431bd3758a8a14b2cb616521f50d638cf3fdbf733278f87a7e7cb99bf1fe3b",
+    "certweft/assets/certweft-issue@.service": "5cdbd5aed7a98d402ea3bdc3e38f26f1e37f0e26d3cd00c20b861b5b79be4744",
+    "certweft/assets/certweft-nginx.service": "f907853efe6c7bff0e99fb5f3386bffa6ed674e19e12329fc09e455bea945321",
+    "certweft/assets/certweft.service": "7e4d52e8ad2a703b6d944df57321a14e9f034e7d13afa830d90a9cb5e07aefc0",
+    "certweft/assets/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
+  },
+  "installed_root": "/opt/certweft/lib/python3.12/site-packages",
+  "wheel_sha256": "bbfeecbf21741222c28f4c7d58c7c83b8396bf08e01378f04c005efe805d6173"
+}

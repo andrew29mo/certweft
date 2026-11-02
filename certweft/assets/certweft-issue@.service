@@ -1,0 +1,25 @@
+[Unit]
+Description=Certweft bounded CSR issuance %i
+After=network.target
+
+[Service]
+Type=oneshot
+User=certweft-signer
+Group=certweft-signer
+SupplementaryGroups=certweft-operator
+UMask=0077
+WorkingDirectory=/
+ExecStart=/opt/certweft/bin/python -I -m certweft.cli issue --config /etc/certweft/issuer.json --request-id %i
+LoadCredential=provisioner-password:/etc/certweft/provisioner-password
+NoNewPrivileges=yes
+CapabilityBoundingSet=
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ReadWritePaths=/var/lib/certweft-candidates
+InaccessiblePaths=/var/lib/certweft /etc/certweft/provisioner-password
+TimeoutStartSec=30
+KillMode=control-group
+Environment=PYTHONDONTWRITEBYTECODE=1
+Environment=PYTHONPATH=
+Environment=STEPPATH=/var/lib/certweft-candidates/.step

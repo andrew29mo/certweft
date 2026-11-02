@@ -9,11 +9,12 @@ def check_readiness_mutation():
     try:
         for name in ['certweft','tools','tests','policy']:
             shutil.copytree(P/name,directory/name,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
+        shutil.copyfile(P/'pyproject.toml',directory/'pyproject.toml')
         changed=directory/'certweft/opening.py';text=changed.read_text()
         needle="            deadlines.remaining(row['timing']['budget'])\n            return True\n"
         if text.count(needle)!=1:raise AssertionError('mutation_target_not_unique')
         changed.write_text(text.replace(needle,'            return True\n',1))
-        copied={str(p.relative_to(directory)):hashlib.sha256(p.read_bytes()).hexdigest() for name in ['certweft','tools','tests','policy'] for p in (directory/name).glob('*') if p.is_file()}
+        copied={str(p.relative_to(directory)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [directory/'pyproject.toml',*(f for name in ['certweft','tools','tests','policy'] for f in (directory/name).rglob('*') if f.is_file() and '__pycache__' not in f.parts and f.suffix!='.pyc')]}
         different=[name for name in original if copied.get(name)!=original[name]]
         if different!=['certweft/opening.py'] or set(copied)!=set(original):raise AssertionError('mutation_changed_other_source')
         script="""import json,os

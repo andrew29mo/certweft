@@ -1,3 +1,7 @@
+Current installed-package qualification is documented separately in
+[INSTALL.md](INSTALL.md) and [DEPLOYMENT_VALIDATION.md](DEPLOYMENT_VALIDATION.md).
+The source-run/transient milestones below retain their recorded scope.
+
 # Reopening review and corrections
 
 Scope: the source-run `open-updates` service introduced at ea281ef, its SQL

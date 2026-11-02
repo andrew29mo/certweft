@@ -24,6 +24,9 @@ def load_config(path):
     for target in [config['lease'],config['socket'],*map(config['writer'].get,['root','key','conf','ca','nginx'])]:secure_parents(target)
     binary=Path(config['writer']['nginx']).lstat()
     if not stat.S_ISREG(binary.st_mode) or binary.st_uid!=0 or binary.st_mode & 0o022:raise PermissionError('untrusted binary')
+    if 'master_pid_file' in config:
+        from .deployment import master_identity
+        config['master']=master_identity(config['master_pid_file'],config['writer']['nginx'],config.get('master_unit'))
     return config
 
 def start_work(operations,body,target,fail_start=False):
@@ -107,7 +110,7 @@ def serve(config_path):
                 with process_lock:
                     if launch_stopped[0]:raise Rejected('service_stopping')
                     if active[0] is not None:raise Rejected('executor_still_registered')
-                    child=subprocess.Popen([sys.executable,'-m',module,str(fd)],
+                    child=subprocess.Popen([sys.executable,*(['-I'] if config.get('isolated_executors') else []),'-m',module,str(fd)],
                         start_new_session=True,pass_fds=(fd,),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
                     active[0]=child
                 if config.get('executor_inventory'):
@@ -176,7 +179,7 @@ def serve(config_path):
         endpoint=Path(config['socket'])
         if endpoint.exists():endpoint.unlink()
         with socket.socket(socket.AF_UNIX) as server:
-            server.bind(str(endpoint));os.chown(endpoint,config['controller_uid'],-1);os.chmod(endpoint,0o600)
+            server.bind(str(endpoint));os.chmod(endpoint,0o600);os.chown(endpoint,config['controller_uid'],-1)
             server.listen(4);server.settimeout(.2)
             while not stopping.is_set():
                 try:conn,_=server.accept()

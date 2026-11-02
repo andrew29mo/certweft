@@ -10,11 +10,12 @@ def check_commit_mutations():
         directory=pathlib.Path(tempfile.mkdtemp(prefix='cw-admission-mutation-',dir='/var/tmp'));outcome={}
         try:
             for name in ['certweft','tools','tests','policy']:shutil.copytree(P/name,directory/name,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
+            shutil.copyfile(P/'pyproject.toml',directory/'pyproject.toml')
             changed=directory/'certweft/operations.py';text=changed.read_text()
             if text.count(needle)!=2:raise AssertionError('mutation_target_not_unique')
             start=text.find(needle) if index==0 else text.rfind(needle)
             changed.write_text(text[:start]+text[start:].replace(needle,'            # Deliberately removed guard for negative control.\n',1))
-            copied={str(p.relative_to(directory)):hashlib.sha256(p.read_bytes()).hexdigest() for name in ['certweft','tools','tests','policy'] for p in (directory/name).glob('*') if p.is_file()}
+            copied={str(p.relative_to(directory)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [directory/'pyproject.toml',*(f for name in ['certweft','tools','tests','policy'] for f in (directory/name).rglob('*') if f.is_file() and '__pycache__' not in f.parts and f.suffix!='.pyc')]}
             if set(copied)!=set(original) or [k for k in original if copied[k]!=original[k]]!=['certweft/operations.py']:raise AssertionError('mutation_changed_other_source')
             script="""import io,json,os,sys,unittest
 os.umask(0o077);sys.path.insert(0,'tests')
@@ -40,11 +41,12 @@ def check_inventory_mutation():
     original=hashes();directory=pathlib.Path(tempfile.mkdtemp(prefix='cw-admission-mutation-',dir='/var/tmp'));outcome={}
     try:
         for name in ['certweft','tools','tests','policy']:shutil.copytree(P/name,directory/name,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
+        shutil.copyfile(P/'pyproject.toml',directory/'pyproject.toml')
         changed=directory/'certweft/service.py';text=changed.read_text()
         needle='            finally:\n                if child is not None:\n                    with process_lock:\n'
         if text.count(needle)!=1:raise AssertionError('inventory_mutation_target')
         changed.write_text(text.replace(needle,'            finally:\n                if child is not None and child.stdin.closed:\n                    with process_lock:\n',1))
-        copied={str(p.relative_to(directory)):hashlib.sha256(p.read_bytes()).hexdigest() for name in ['certweft','tools','tests','policy'] for p in (directory/name).glob('*') if p.is_file()}
+        copied={str(p.relative_to(directory)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [directory/'pyproject.toml',*(f for name in ['certweft','tools','tests','policy'] for f in (directory/name).rglob('*') if f.is_file() and '__pycache__' not in f.parts and f.suffix!='.pyc')]}
         if set(copied)!=set(original) or [k for k in original if copied[k]!=original[k]]!=['certweft/service.py']:raise AssertionError('inventory_mutation_changed_other_source')
         script="""import json,os
 os.umask(0o077)
@@ -69,10 +71,11 @@ def check_group_reap_mutation():
     original=hashes();directory=pathlib.Path(tempfile.mkdtemp(prefix='cw-admission-mutation-',dir='/var/tmp'));outcome={}
     try:
         for name in ['certweft','tools','tests','policy']:shutil.copytree(P/name,directory/name,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
+        shutil.copyfile(P/'pyproject.toml',directory/'pyproject.toml')
         changed=directory/'certweft/service.py';text=changed.read_text();needle='    if terminate:\n'
         if text.count(needle)!=1:raise AssertionError('group_mutation_target')
         changed.write_text(text.replace(needle,'    if terminate and child.poll() is None:\n',1))
-        copied={str(p.relative_to(directory)):hashlib.sha256(p.read_bytes()).hexdigest() for name in ['certweft','tools','tests','policy'] for p in (directory/name).glob('*') if p.is_file()}
+        copied={str(p.relative_to(directory)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [directory/'pyproject.toml',*(f for name in ['certweft','tools','tests','policy'] for f in (directory/name).rglob('*') if f.is_file() and '__pycache__' not in f.parts and f.suffix!='.pyc')]}
         if set(copied)!=set(original) or [k for k in original if copied[k]!=original[k]]!=['certweft/service.py']:raise AssertionError('group_mutation_changed_other_source')
         script="""import io,json,sys,unittest
 sys.path.insert(0,'tests')

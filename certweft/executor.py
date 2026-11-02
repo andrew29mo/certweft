@@ -43,7 +43,10 @@ class FixedWriter(Writer):
             raw=Path('/proc',str(pid),'stat').read_text()
             start=raw[raw.rfind(')')+2:].split()[19]
             if start!=self.master['start']:raise Rejected('master_identity')
-            if os.path.realpath('/proc/'+str(pid)+'/exe')!=os.path.realpath(self.nginx):raise Rejected('master_binary')
+            if self.master.get('binding')=='systemd':
+                from .deployment import verify_unit_master
+                verify_unit_master(self.master,self.nginx)
+            elif os.path.realpath('/proc/'+str(pid)+'/exe')!=os.path.realpath(self.nginx):raise Rejected('master_binary')
             deadlines.check();signal.pidfd_send_signal(handle,signal.SIGHUP)
         finally:os.close(handle)
 

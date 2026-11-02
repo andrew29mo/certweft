@@ -1,7 +1,12 @@
 # Certweft
 
 Exploratory single-host Nginx certificate activation and recovery backend.
-Private project; no license has been selected. This is not the operational MVP.
+Private project; no license has been selected. This is a bounded evaluation release;
+boot/reboot and long-running lifecycle qualification remain incomplete.
+
+Current installed operation: [installation/CLI guide](docs/INSTALL.md) and
+[systemd deployment evidence](docs/DEPLOYMENT_VALIDATION.md). Earlier source-run
+milestones below retain their individual scope.
 
 The minimum implementation validates a candidate, persists activation intent,
 selects an immutable configuration fragment, tests/reloads a dedicated Nginx,
@@ -30,8 +35,8 @@ and exploration reports retain their recorded scope.
 
 [P0-2 writer boundary and takeover](docs/EXECUTOR.md) adds a fixed local Unix
 socket service, root validation, inherited executor lease and real orphan-process
-VM evidence. Formal systemd deployment and complete operation contracts remain
-pending.
+VM evidence. Installed systemd deployment is now covered by the separate current milestone;
+this section describes the earlier source-run boundary.
 
 ## Durable activation requests
 
@@ -55,7 +60,7 @@ Failed persistence cannot acknowledge cancellation or falsely commit/restore.
 A durable storage latch blocks new updates; if even that write fails, the service
 stops accepting requests. A candidate may remain live on an unwritable store.
 The restart gate below now quarantines abnormal exits even when the fault latch
-could not be written. Safe restoration and explicit reopening are covered below; persistent systemd deployment remains pending.
+could not be written. Safe restoration and explicit reopening are covered below; installed deployment is qualified separately below.
 
 ## Restart gate and recovery preparation
 
@@ -106,8 +111,8 @@ restart semantics; they are not qualification for the current startup policy.
 root-only reconcile-closed contract, fresh storage/certificate/TLS checks and
 atomic main-journal reconciliation. Paired completion remains closed; it does
 not reopen updates, rewrite terminal history or automatically resume after a
-process restart. Installed deployment and VM reboot/power-loss qualification
-remain pending.
+process restart. Installed deployment is qualified separately; VM reboot/power-loss qualification
+remains pending.
 
 ## Closed opening intentions
 
@@ -132,11 +137,21 @@ does not authorize updates. Exact references resolve prior DEGRADED history
 without rewriting it; new failures remain blocking. Formal VM scenarios reopen
 and actually activate a different certificate through the controller path.
 Service restart closes a recovered store again; there is no automatic replay.
-Installed deployment, this path's VM reboot, power-loss and arbitrary storage-I/O
-qualification remain pending. See the source-bound [JSON](evidence/admission.json)
+Installed deployment is qualified separately; this path's VM reboot, power-loss
+and arbitrary storage-I/O qualification remain pending. See the source-bound [JSON](evidence/admission.json)
 and [HTML](evidence/admission.html), including fault/cleanup evidence and separate
 VM process memory snapshots.
 
 The [reopening review](docs/REOPENING_REVIEW.md) corrects a COMMIT-test false
 positive and a root-diagnostic inventory failure cleanup gap, with targeted
 negative controls and source-bound Linux evidence.
+
+## Installed package and systemd lifecycle
+
+Version 0.0.2 adds the fixed installer, operator CLI, isolated writer/executors and
+a separate credential-delivered signer. Real installed services exercise normal
+activation, SQLite FULL repair/reopening, SIGKILL takeover, old-lease exclusion
+and bounded restart limiting. The wheel payload is verified independently of the
+checkout. See [the installation guide](docs/INSTALL.md) and
+[deployment results](evidence/deployment.json) / [HTML](evidence/deployment.html).
+No automatic boot or VM reboot recovery claim is made.

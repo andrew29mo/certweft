@@ -3,8 +3,13 @@ requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 [project]
 name = "certweft"
-version = "0.0.1"
+version = "0.0.2"
 requires-python = ">=3.12"
 dependencies = []
 [tool.setuptools.packages.find]
 include = ["certweft*"]
+
+[project.scripts]
+certweft = "certweft.cli:main"
+[tool.setuptools.package-data]
+certweft = ["assets/*"]

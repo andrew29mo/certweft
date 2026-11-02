@@ -6,7 +6,10 @@ sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]))
 from certweft.core import Writer,run,fingerprint
 P=pathlib.Path(__file__).resolve().parents[1]
 def hashes():
-    return {str(f.relative_to(P)):hashlib.sha256(f.read_bytes()).hexdigest() for d in ['certweft','tools','tests','policy'] for f in (P/d).glob('*') if f.is_file()}
+    files=[P/'pyproject.toml']
+    for d in ['certweft','tools','tests','policy']:
+        files.extend(f for f in (P/d).rglob('*') if f.is_file() and '__pycache__' not in f.parts and f.suffix!='.pyc')
+    return {str(f.relative_to(P)):hashlib.sha256(f.read_bytes()).hexdigest() for f in files}
 def request(endpoint,body):
     with socket.socket(socket.AF_UNIX) as s:
         s.settimeout(25);s.connect(str(endpoint));s.sendall(json.dumps(body).encode()+b'\n');out=b''

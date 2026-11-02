@@ -1,3 +1,7 @@
+Current installed-package qualification is documented separately in
+[INSTALL.md](INSTALL.md) and [DEPLOYMENT_VALIDATION.md](DEPLOYMENT_VALIDATION.md).
+The source-run/transient milestones below retain their recorded scope.
+
 # P0-2: privileged writer and executor takeover
 
 Current [opening-intention rules](OPENING_INTENT.md) add a shared admission guard

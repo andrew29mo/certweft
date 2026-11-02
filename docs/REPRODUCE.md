@@ -1,9 +1,17 @@
+# Current installed deployment milestone
+
+See [INSTALL.md](INSTALL.md) and [DEPLOYMENT_VALIDATION.md](DEPLOYMENT_VALIDATION.md)
+for the installed wheel/CLI/systemd scope, real Smallstep credential delivery,
+process takeover, measurement limits and remaining gates. Current unit evidence
+is deployment-units.json/html; older unit reports retain their historical source.
+Earlier sections below describe their own milestones.
+
 # Current explicit reopening stage
 
 See [REOPENING.md](REOPENING.md) for root contract, three-record admission,
 original deadline intersection, failure/restart closure and real follow-up TLS
 activation. Earlier closed milestones below retain their narrower stage scope.
-Current unit evidence is admission-units.json/html; older unit reports are historical.
+At the reopening stage unit evidence was admission-units.json/html; older unit reports are historical.
 
 # Reproduce the bounded explorations
 

@@ -1,19 +1,35 @@
+# Current installed deployment milestone
+
+See [INSTALL.md](INSTALL.md) and [DEPLOYMENT_VALIDATION.md](DEPLOYMENT_VALIDATION.md)
+for the installed wheel/CLI/systemd scope, real Smallstep credential delivery,
+process takeover, measurement limits and remaining gates. Current unit evidence
+is deployment-units.json/html; older unit reports retain their historical source.
+Earlier sections below describe their own milestones.
+
+Current fixed-source validation passed 120 Linux unit tests, eight installed
+wheel/systemd scenarios and 148 source-run VM regression scenarios (156 regular
+VM scenarios total). Ten current JSON/HTML pairs have identical payloads and
+complete matching 54-file source manifests, including package resources and
+pyproject.toml. Installed payload hashes also match those same source bytes.
+Expected-failure mutation controls are separate and are not counted as additional
+passing VM scenarios. The installed package version is 0.0.2.
+
 # Current explicit reopening stage
 
 See [REOPENING.md](REOPENING.md) for root contract, three-record admission,
 original deadline intersection, failure/restart closure and real follow-up TLS
 activation. Earlier closed milestones below retain their narrower stage scope.
-Current unit evidence is admission-units.json/html (113 Linux tests). The new
+At the reopening stage unit evidence was admission-units.json/html (113 Linux tests). The new
 reopening matrix has 27 formal-service VM cases, including real follow-up
 activation and fatal-exit executor cleanup. Earlier unit reports are historical.
 
-Current fixed-source validation: 113 Linux unit tests, 27 reopening VM cases and
+The prior reopening-stage fixed-source validation was: 113 Linux unit tests, 27 reopening VM cases and
 121 VM regressions (release 26, opening 20, reconciliation 19, certificate 17,
 storage verification 15, gate 10, storage faults 14). The opening readiness
 mutation and four new admission/cleanup controls are separate expected-failure
 controls, not additional passing scenarios. See REOPENING_REVIEW.md for findings
 and the distinctions between SQL, real-process and formal-service tests.
-All nine current JSON/HTML pairs have identical rendered payloads, exact current
+At that stage the nine JSON/HTML pairs have identical rendered payloads, exact current
 source hashes and passing cleanup checks. No earlier failed/source-changed
 attempt is counted; archived attempts remain available. This is bounded isolated
 Linux VM/process evidence, not installed deployment or machine-reboot qualification.

@@ -1,0 +1,20 @@
+[Unit]
+Description=Dedicated Certweft loopback Nginx target
+
+[Service]
+Type=forking
+PIDFile=/run/certweft-nginx/master.pid
+ExecStart=/usr/sbin/nginx -c /etc/certweft/nginx.conf
+ExecStop=/bin/kill -QUIT $MAINPID
+KillMode=mixed
+TimeoutStopSec=8
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ReadWritePaths=/run/certweft-nginx /var/log/certweft-nginx
+RuntimeDirectory=certweft-nginx
+RuntimeDirectoryMode=0755
+
+[Install]
+WantedBy=multi-user.target

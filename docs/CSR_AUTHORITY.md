@@ -1,3 +1,7 @@
+Current installed-package qualification is documented separately in
+[INSTALL.md](INSTALL.md) and [DEPLOYMENT_VALIDATION.md](DEPLOYMENT_VALIDATION.md).
+The source-run/transient milestones below retain their recorded scope.
+
 # P0-1: CA-enforced CSR authority and credential delivery
 
 ## Contract
