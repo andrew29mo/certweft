@@ -4,7 +4,7 @@ Qualified target: provisioned Ubuntu 24.04 ARM64, Python 3.12, systemd 255,
 Nginx 1.24, Smallstep CLI 0.31.0 / CA 0.30.2. This stage tests installed
 services and process restart. Preserved-state VM boot recovery is qualified separately
 in [REBOOT_VALIDATION.md](REBOOT_VALIDATION.md).
-The project remains Private and is licensed under [MIT](../LICENSE).
+The project is Public and is licensed under [MIT](../LICENSE).
 See [third-party licensing](LICENSING.md) for separately installed tools.
 
 ## Fixed scope and prerequisites

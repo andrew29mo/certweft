@@ -6,7 +6,7 @@ three new trusted TLS connections with the intended leaf and HTTP 200 before
 COMMIT. An abnormal writer restart closes admission; trusted root recovery is
 explicit, persisted and checked before updates can reopen.
 
-**Status:** Private, version 0.0.2, MIT licensed. Feature scope is frozen.
+**Status:** Public, version 0.0.2, MIT licensed. Feature scope is frozen.
 This is an isolated-VM evaluation MVP, not a production-readiness guarantee.
 
 ## What is implemented
@@ -100,4 +100,4 @@ VM images, wheels or personal working agreements are committed.
 
 Certweft code and documentation are licensed under the [MIT License](LICENSE).
 External tools retain their own licenses; see [third-party scope](docs/LICENSING.md).
-Repository visibility remains Private until a separate publication decision.
+The repository is Public. See [publication checks](docs/PUBLICATION.md).

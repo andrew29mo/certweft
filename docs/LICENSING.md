@@ -2,7 +2,7 @@
 
 Certweft-owned source, tests, scripts, service templates, documentation and
 selected validation reports are licensed under the [MIT License](../LICENSE),
-copyright 2026 Andrew Yuan. Repository visibility remains Private. Earlier
+copyright 2026 Andrew Yuan. Repository visibility is Public. Earlier
 milestone descriptions of an unselected license are historical, not current terms.
 
 ## Dependency inventory

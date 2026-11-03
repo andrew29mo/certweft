@@ -1,8 +1,8 @@
 # Pre-publication review
 
-## Current decision
+## Review-time decision
 
-The repository remains **Private**, version 0.0.2, under the **MIT License**.
+At review time the repository remained **Private**, version 0.0.2, under the **MIT License**.
 The maintainer authorized MIT after this review; LICENSE and SPDX package
 metadata now agree. Publishing visibility remains a separate decision. No new functionality,
 third-party source bundle or runtime dependency was introduced by this review.
@@ -89,3 +89,9 @@ changes licensing, packaging metadata and documentation only. Recorded test and
 performance manifests describe the pre-license source; they are not relabeled
 as reruns of the modified pyproject.toml. Application, test and tool bytes are
 unchanged. Package license inclusion is checked separately from runtime evidence.
+
+## Publication follow-up
+
+The maintainer subsequently authorized Public visibility. Current access and
+security inspection is recorded in [PUBLICATION.md](PUBLICATION.md). The
+review-time setting observations above remain historical.
