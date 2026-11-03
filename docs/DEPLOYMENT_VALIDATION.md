@@ -2,7 +2,7 @@
 > three preserved-state normal VM poweroff/start cases. This document describes
 > the process/deployment matrix; its original full-regression counts below are
 > historical. The eight deployment cases are rerun at the current
-> [storage-fault reboot stage](STORAGE_REBOOT.md) source.
+> [capacity/resource closeout](CLOSEOUT.md) source.
 
 # Installed deployment validation
 
@@ -104,13 +104,13 @@ separate source-run reports.
 
 | Observation | Result |
 |---|---:|
-| Installed operator submit → COMMITTED and independently checked new TLS leaf | 0.79 s |
+| Installed operator submit → COMMITTED and independently checked new TLS leaf | 0.77 s |
 | Main SIGKILL → observed new management socket, admission still closed | 1.11 s |
-| Writer RSS at initial-ready sample | 21,752 KiB |
-| Signer Python RSS during credential observation | 21,016 KiB |
-| Paused executor RSS before crash | 23,356 KiB |
+| Writer RSS at initial-ready sample | 21,748 KiB |
+| Signer Python RSS during credential observation | 6,248 KiB |
+| Paused executor RSS before crash | 23,380 KiB |
 | End-state unique regular files | 24 |
-| End-state logical / allocated regular-file bytes | 102,241 / 176,128 |
+| End-state logical / allocated regular-file bytes | 102,242 / 176,128 |
 
 The role, timing and storage scope restrictions above apply to every row. In
 particular, 1.11 seconds is not a certificate-restoration time or recovery upper
@@ -144,8 +144,8 @@ Root-owned installation and private diagnostic CA files remain inside the stoppe
 VM for review; they are not uploaded. The explicit marker protects reset
 ownership. Preserved-state boot/reboot recovery is now a separate qualified stage;
 storage faults across reboot are now separately qualified for ENOSPC, read-only
-and SQLite FULL. Capacity rollover/GC and bounded sustained-operation closeout
-remain outstanding.
+and SQLite FULL. Finite-capacity and one bounded resource window are separately qualified in
+CLOSEOUT.md; automatic rollover/GC and long-term stability remain unqualified.
 
 ## Original deployment qualification record
 

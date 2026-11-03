@@ -2,7 +2,11 @@
 
 Exploratory single-host Nginx certificate activation and recovery backend.
 Private project; no license has been selected. This is a bounded evaluation release;
-capacity closeout and long-running lifecycle qualification remain incomplete.
+finite-capacity and 20-minute resource checks are qualified; long-term stability
+and automatic history rollover remain unqualified.
+
+[Capacity limits, bounded resource results and exhaustion runbook](docs/CLOSEOUT.md)
+cover the final closeout. Feature scope is frozen.
 
 Current installed operation: [installation/CLI guide](docs/INSTALL.md) and
 [systemd deployment evidence](docs/DEPLOYMENT_VALIDATION.md), plus

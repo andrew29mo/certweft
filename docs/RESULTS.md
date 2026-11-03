@@ -1,4 +1,48 @@
-# Current storage-fault reboot stage
+# Current capacity and bounded-operation closeout
+
+[CLOSEOUT.md](CLOSEOUT.md) defines the finite workload, predeclared thresholds,
+independent limits, partial-recovery behavior and exhaustion procedure.
+
+Nine installed-service cases passed: separate 64-normal/16-generation/16-root
+boundaries and all six remaining-root allowances from 0 through 5. No SQL history
+or fake generation directories were seeded in the VM fixtures. Normal-history
+full still permits an independent five-step root recovery. At 0–4 root slots the
+helper fails when full, preserves completed steps and keeps admission closed;
+with 5 slots it fully opens and a genuine subsequent activation succeeds.
+Service restart retains counts/history and closes recovered sessions again by design.
+
+The resource run completed **1200.178 seconds, 121 samples**, using one writer
+and one Nginx master invocation without restarts. It performed eight successful
+updates, two real running cancellations/rollbacks and four stale-core failures,
+then fixed-history query/replay/terminal-cancel/server-rejection cycles. The 103
+samples after 180 seconds satisfy all predeclared checks: writer RSS
+21,860–21,932 KiB (72 KiB span), fitted stable-window growth 11.76 KiB and
+first/last-six median difference 14 KiB; writer FD is always 5. Nginx sampled
+cgroup RSS is 13,424 KiB and aggregate FD 15 throughout the stable window; its
+worker PID set also remains constant after warmup. Summed RSS can double-count
+shared pages and is not host/VM physical memory or a full lifetime peak.
+State stays at 81,967 logical / 212,992 allocated bytes and 43 unique regular
+files after warmup, with 15 normal rows, zero root rows and 12 generations.
+
+These are bounded control-plane observations, not a saturation benchmark,
+indefinite certificate rotation or proof of no leaks. Ordinary Nginx worker
+replacement occurs during actual warmup reloads; the steady window contains
+no such replacements. The wider 4 MiB span / 1 MiB growth bounds were declared
+before collecting samples and were not adjusted to fit the result.
+
+Current Linux evidence has **133 tests, zero failures/errors/skips**, plus nine
+capacity cases, the completed 1200-second resource run, eight installed deployment
+regressions and fourteen source-service runtime storage-fault cases. The seven
+current JSON/HTML pairs (capacity, soak, closeout-host, closeout-units,
+boot-bootstrap, deployment, storage) share one 62-file source manifest; host
+digests bind the final capacity/resource JSON. Older source manifests retain
+historical scope. Capacity restart checks are service restarts, not additional
+VM poweroff cycles at those limits. No
+application module, packaged unit, privilege allowance or license changed.
+Power loss, boot zero-gap, long-term stability, automatic history reset/rollover
+and production migration remain unqualified. Feature scope is frozen.
+
+# Earlier storage-fault reboot stage
 
 [STORAGE_REBOOT.md](STORAGE_REBOOT.md) covers three installed-service fault/reboot/
 repair cases with paired host evidence. All preserve the preboot journals and
@@ -8,10 +52,10 @@ fails without restoration. After repair, explicit root recovery is still require
 old pending work becomes INTERRUPTED, old core authority is refused and fresh
 core authority really activates the same candidate with the exact expected leaf.
 
-Current results: **129 Linux tests** with zero failures/errors/skips; three
+At that stage: **129 Linux tests** with zero failures/errors/skips; three
 installed storage-fault VM reboot/repair cases; eight installed deployment
 regressions; and 14 source-service runtime storage-fault scenarios all passed.
-The six current JSON/HTML pairs are storage-reboot, storage-reboot-host,
+The six then-current JSON/HTML pairs are storage-reboot, storage-reboot-host,
 storage-reboot-units, boot-bootstrap, deployment and storage. All bind the same
 59-file source manifest; bootstrap overlaps deployment and is not counted as an
 independent performance trial. Old reboot-stage reports retain their recorded
@@ -19,7 +63,7 @@ source. Host post-SSH check/repair observations were 3.983 / 4.260 / 4.406 secon
 not boot time or recovery guarantees. Writer samples after repair were
 21,652 / 21,656 / 21,656 KiB, not a stability or cross-mode memory comparison.
 
-The current source includes 59 manifest files. The [storage reboot review](STORAGE_REBOOT_REVIEW.md) adds old-root closed-state
+That stage recorded 59 manifest files. The [storage reboot review](STORAGE_REBOOT_REVIEW.md) adds old-root closed-state
 controls, full immutable/terminal history checks and current-invocation errno
 evidence, plus a genuine post-repair valid-request denial. No application module, packaged
 unit, privilege allowance or license changes were made. The harness explicitly

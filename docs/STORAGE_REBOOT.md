@@ -1,3 +1,7 @@
+> Historical storage-reboot stage at f8a798e (59-file source manifest).
+> [CLOSEOUT.md](CLOSEOUT.md) records the later capacity/resource qualification;
+> these prior boot observations are not relabeled as current reruns.
+
 # Installed storage faults across normal VM restart
 
 This stage extends the preserved-state reboot evidence with three persistent

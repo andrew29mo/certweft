@@ -180,8 +180,12 @@ filesystem-repair or deployment feature.
 Limits remain 64 permanent normal requests, 16 combined root recovery requests,
 and 16 immutable generation directories. A full recovery helper uses five root
 rows. There is no automatic history or certificate GC/rollover; repeated recovery
-is intentionally finite. Capacity exhaustion/rollover operational qualification
-and long-running stability belong to the next bounded closeout, not this stage.
+is intentionally finite. [CLOSEOUT.md](CLOSEOUT.md) qualifies the independent
+capacity boundaries, 0–5 remaining root slots and one 1200-second resource run.
+There is no five-row reservation: an insufficient recovery can partially complete
+and remain closed. Automatic rollover and long-term stability are unqualified.
+Use the read-only count checks and stop-and-preserve runbook before planning
+repeated recovery; a disposable fixture reset is not a production migration.
 
 See [DEPLOYMENT_VALIDATION.md](DEPLOYMENT_VALIDATION.md) for the reproducible
 isolated VM workflow, measurements, failures encountered and current source-bound

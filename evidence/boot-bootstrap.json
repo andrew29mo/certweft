@@ -5,23 +5,23 @@
     {
       "name": "wheel_install_and_payload",
       "passed": true,
-      "seconds": 1.2155259999999988,
+      "seconds": 1.2357638890000544,
       "detail": {
         "version": "0.0.2",
         "module": "/opt/certweft/lib/python3.12/site-packages/certweft/__init__.py",
-        "wheel_sha256": "9e123fa5beee80669eca30b6c0655c64c29184208e22ac6af82324d3b1df602c",
+        "wheel_sha256": "e63d99b4337349a5bc10743010ea340e3d502153073aace14c73b36ed3c82ffd",
         "payload_files": 22
       }
     },
     {
       "name": "documented_install_and_start",
       "passed": true,
-      "seconds": 0.43469137599999996,
+      "seconds": 0.4575842770000236,
       "detail": {
         "systemd": {
           "Restart": "on-failure",
           "RestartPreventExitStatus": "73",
-          "MainPID": "2191",
+          "MainPID": "8106",
           "Result": "success",
           "NRestarts": "0",
           "ExecMainStatus": "0",
@@ -33,7 +33,7 @@
           "SubState": "running",
           "StartLimitIntervalUSec": "1min",
           "StartLimitBurst": "3",
-          "InvocationID": "60b68ab4547e4421bbd2d73698338f6a"
+          "InvocationID": "f3ea3799344a4b39a33b768cdf1fd604"
         },
         "service_memory": {
           "Uid": "0\t0\t0\t0",
@@ -50,14 +50,14 @@
     {
       "name": "credential_delivery_and_real_ca_issuance",
       "passed": true,
-      "seconds": 0.21858612499999985,
+      "seconds": 0.2140869490000341,
       "detail": {
         "certificate": "/var/lib/certweft-candidates/first/cert.pem",
         "observed": {
           "Uid": "995\t995\t995\t995",
           "Gid": "989\t989\t989\t989",
-          "VmHWM": "7500 kB",
-          "VmRSS": "7500 kB",
+          "VmHWM": "4120 kB",
+          "VmRSS": "4120 kB",
           "CapEff": "0000000000000000",
           "NoNewPrivs": "1"
         },
@@ -70,13 +70,13 @@
     {
       "name": "installed_controller_real_activation",
       "passed": true,
-      "seconds": 0.7972557919999996,
+      "seconds": 0.8362093580000192,
       "detail": {
         "request_state": "COMMITTED",
-        "old_leaf_sha256": "32ca811adde4d83b23626c1ce134bd5a0d664af6add77db54be25c4672e620a5",
-        "new_leaf_sha256": "07fcb689ec6692ba200eaae4cc28fbe094b3bcce34c8ee5f88687d292bb26f81",
-        "expected_leaf_sha256": "07fcb689ec6692ba200eaae4cc28fbe094b3bcce34c8ee5f88687d292bb26f81",
-        "activation_cli_seconds": 0.7590411670000012
+        "old_leaf_sha256": "b0863bcd5a09131054afae1896cb67ff52c6a444769d839b45ab2bfc2c0986bb",
+        "new_leaf_sha256": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938",
+        "expected_leaf_sha256": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938",
+        "activation_cli_seconds": 0.7970332859999871
       }
     }
   ],
@@ -132,7 +132,7 @@
     "certweft/assets/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
   },
   "installed_root": "/opt/certweft/lib/python3.12/site-packages",
-  "wheel_sha256": "9e123fa5beee80669eca30b6c0655c64c29184208e22ac6af82324d3b1df602c",
+  "wheel_sha256": "e63d99b4337349a5bc10743010ea340e3d502153073aace14c73b36ed3c82ffd",
   "state_disk": {
     "scope": "unique regular file inodes after scenarios; excludes symlink targets, directories and filesystem metadata",
     "logical_bytes": 53485,
@@ -178,11 +178,13 @@
     "tools/policy_vm.py": "27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6",
     "tools/admission_vm.py": "42bc276dae22dafa5d20db4e9b09054399a4bde61baf4dee34036af2fd76d86a",
     "tools/certificate_vm.py": "4435c71a031b395d06270dc38bbfd48a3db890cfa3bdadb53e4880295294ee09",
+    "tools/closeout_vm.py": "2f632267c1908361a1e46a5d07546b28aab4a36c99f8c14e4e14806e24d9179d",
     "tools/storage_reboot_host.py": "1909d9edc945a34a06a4cedc9cf17045281dffebf97482be9e9e5257b499c258",
     "tools/storage_vm.py": "2d251e4e7de2c10739c2d339f372787b36613f65759a539037b075b6a7e3a14c",
     "tools/deployment_vm.py": "4a3a5a534887893906b55c2a596a271f3ed9ca7d9d983b631bfad3c1168b89f5",
     "tools/deadline_vm.py": "cd0d61fb4e1253cdc23b12e3fb38d10ad41fd04f2debd9c23f4574f8fa4e7cf3",
     "tools/executor_vm.py": "643565d4130bbf08daa619623b72a566e847e04c4f3504ee15ad3a6c493a656d",
+    "tools/closeout_host.py": "731dabac07a4f57be48e7ff72afee358bf2d7789fa937efcc47aac6248d388b9",
     "tools/opening_vm.py": "656b8d1f7c461cd2657eeb3e8db1af2e50516435032c40788496916372522b04",
     "tools/recovery_vm.py": "104fc1ee43c382f5bb0d4d7c19c3369bb4c656097966e4e05c9008b3a9f285ee",
     "tools/opening_mutation.py": "41370aa7417e65830048b0e4c984cf8c3de5a1602fb51410f7268a6e8b2868c1",
@@ -210,6 +212,7 @@
     "tests/test_deployment.py": "11d3612e6ac18ac4967168437ef03cfc6eab58afe0dbcbe3fbf1378d6270ecc7",
     "tests/test_reconciliation.py": "91d301f53893145dd6400efc00c67204441a80b15428c0e9032629137db3cac9",
     "tests/test_reboot_evidence.py": "da5cfb3528d91750eeefb44f4a6fb7e7857fb7b438df96682150d0e80d2fb973",
+    "tests/test_closeout.py": "c9cbdc0782475f577bb3b0107009a6cc5b99377e61d7d195bb2bdefe75ffeeab",
     "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
   },
   "source_unchanged": true
