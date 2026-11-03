@@ -1,4 +1,7 @@
 Current installed-package qualification is documented separately in
+
+> Historical milestone: license status below describes that stage. The current
+> project is [MIT licensed](../LICENSE); see [licensing scope](LICENSING.md).
 [INSTALL.md](INSTALL.md) and [DEPLOYMENT_VALIDATION.md](DEPLOYMENT_VALIDATION.md).
 The source-run/transient milestones below retain their recorded scope.
 

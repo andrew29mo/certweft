@@ -1,4 +1,7 @@
 > Scope update: [REBOOT_VALIDATION.md](REBOOT_VALIDATION.md) separately qualifies
+
+> Historical milestone: license status below describes that stage. The current
+> project is [MIT licensed](../LICENSE); see [licensing scope](LICENSING.md).
 > three preserved-state normal VM poweroff/start cases. This document describes
 > the process/deployment matrix; its original full-regression counts below are
 > historical. The eight deployment cases are rerun at the current

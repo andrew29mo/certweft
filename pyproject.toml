@@ -6,6 +6,9 @@ name = "certweft"
 version = "0.0.2"
 requires-python = ">=3.12"
 dependencies = []
+license = "MIT"
+license-files = ["LICENSE"]
+readme = "README.md"
 [tool.setuptools.packages.find]
 include = ["certweft*"]
 

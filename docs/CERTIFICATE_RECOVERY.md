@@ -1,5 +1,8 @@
 # Committed certificate recovery to VERIFIED_CLOSED
 
+> Historical milestone: license status below describes that stage. The current
+> project is [MIT licensed](../LICENSE); see [licensing scope](LICENSING.md).
+
 The next [closed preparation stage](CLOSED_PREPARATION.md) adds a separate explicit
 operation for main-journal/health reconciliation; certificate recovery itself
 still has the unchanged boundaries below.

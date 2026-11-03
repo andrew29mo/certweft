@@ -1,4 +1,7 @@
 The separate [explicit reopening stage](REOPENING.md) now consumes these closed
+
+> Historical milestone: license status below describes that stage. The current
+> project is [MIT licensed](../LICENSE); see [licensing scope](LICENSING.md).
 proofs. This document describes the preparation stage only; it does not itself
 authorize updates.
 

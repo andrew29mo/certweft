@@ -6,7 +6,7 @@ three new trusted TLS connections with the intended leaf and HTTP 200 before
 COMMIT. An abnormal writer restart closes admission; trusted root recovery is
 explicit, persisted and checked before updates can reopen.
 
-**Status:** Private, version 0.0.2, no license selected. Feature scope is frozen.
+**Status:** Private, version 0.0.2, MIT licensed. Feature scope is frozen.
 This is an isolated-VM evaluation MVP, not a production-readiness guarantee.
 
 ## What is implemented
@@ -30,6 +30,9 @@ The [results ledger](docs/RESULTS.md) and [closeout guide](docs/CLOSEOUT.md) bin
 current JSON/HTML to the same 62-file implementation/test/tool manifest. Package
 payloads are verified against the installed wheel; historical reports retain
 their original source and are not counted as current reruns.
+The subsequent MIT adoption changes packaging metadata and documentation only;
+recorded manifests retain their pre-license pyproject.toml. Runtime/test/tool
+bytes are unchanged; license packaging was verified separately.
 
 | Qualification | Observed result |
 | --- | --- |
@@ -92,3 +95,9 @@ No hardware recovery or full-service availability guarantee is made.
 Original exploration and incremental contracts remain under docs/ and evidence/.
 Their earlier claims apply to their own stage; no keys, CA databases, raw logs,
 VM images, wheels or personal working agreements are committed.
+
+## License
+
+Certweft code and documentation are licensed under the [MIT License](LICENSE).
+External tools retain their own licenses; see [third-party scope](docs/LICENSING.md).
+Repository visibility remains Private until a separate publication decision.

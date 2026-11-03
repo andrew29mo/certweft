@@ -4,7 +4,7 @@ Version 0.0.2 is an installed single-host evaluation service. Current source-bou
 qualification is indexed by RESULTS.md and CLOSEOUT.md; older milestones below
 retain their original scope and unresolved items **at that time**. Start with
 INSTALL.md for the actual supported deployment, not the original exploration.
-No license is selected; visibility remains Private.
+The project is [MIT licensed](../LICENSE); visibility remains Private.
 
 ```mermaid
 flowchart LR

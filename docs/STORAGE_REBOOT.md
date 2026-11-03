@@ -1,4 +1,7 @@
 > Historical storage-reboot stage at f8a798e (59-file source manifest).
+
+> Historical milestone: license status below describes that stage. The current
+> project is [MIT licensed](../LICENSE); see [licensing scope](LICENSING.md).
 > [CLOSEOUT.md](CLOSEOUT.md) records the later capacity/resource qualification;
 > these prior boot observations are not relabeled as current reruns.
 

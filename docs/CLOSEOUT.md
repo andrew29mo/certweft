@@ -1,5 +1,8 @@
 # Finite-capacity and bounded-operation closeout
 
+> Historical milestone: license status below describes that stage. The current
+> project is [MIT licensed](../LICENSE); see [licensing scope](LICENSING.md).
+
 Scope: one installed Certweft wheel, the fixed local Nginx/writer systemd units,
 real fixture-CA certificates and operator/root CLI. The VM is isolated. This
 adds qualification and an exhaustion runbook, not GC, history reset, rollout,

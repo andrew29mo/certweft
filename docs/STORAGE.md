@@ -1,5 +1,8 @@
 # P0-3b-2, first round: storage failures before and after publication
 
+> Historical milestone: license status below describes that stage. The current
+> project is [MIT licensed](../LICENSE); see [licensing scope](LICENSING.md).
+
 **Startup-policy update:** [RESTART_GATE.md](RESTART_GATE.md) supersedes the
 earlier automatic process-recovery/reopening descriptions below. Old report
 counts and source hashes are historical. Current source validation uses the

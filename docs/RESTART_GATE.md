@@ -1,5 +1,8 @@
 # P0-1 / P0-2: preexisting restart gate and root recovery preparation
 
+> Historical milestone: license status below describes that stage. The current
+> project is [MIT licensed](../LICENSE); see [licensing scope](LICENSING.md).
+
 **Closed certificate completion:** [CERTIFICATE_RECOVERY.md](CERTIFICATE_RECOVERY.md)
 adds VERIFIED_CLOSED without admission authority; restart still quarantines it.
 

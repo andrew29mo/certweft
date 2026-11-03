@@ -1,5 +1,8 @@
 # Closed journal and health preparation
 
+> Historical milestone: license status below describes that stage. The current
+> project is [MIT licensed](../LICENSE); see [licensing scope](LICENSING.md).
+
 The next [opening-intention stage](OPENING_INTENT.md) assesses exact references
 without opening updates. The 75-unit record below is historical after that stage;
 current unit evidence is linked there. VM preparation regressions are rerun.

@@ -1,5 +1,8 @@
 # Durable root storage/journal verification (P0-1 / P0-2)
 
+> Historical milestone: license status below describes that stage. The current
+> project is [MIT licensed](../LICENSE); see [licensing scope](LICENSING.md).
+
 **Certificate recovery update:** [CERTIFICATE_RECOVERY.md](CERTIFICATE_RECOVERY.md)
 adds a distinct full recovery kind with explicit v1-to-v2 catalog migration.
 Storage-only operations still never restore or unlock; the 59-unit/fifteen-case

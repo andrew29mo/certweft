@@ -2,9 +2,9 @@
 
 ## Current decision
 
-The repository remains **Private**, version 0.0.2, with **no selected license**.
-No LICENSE/SPDX permission grant has been added. Publishing visibility and
-choosing a license are separate maintainer decisions. No new functionality,
+The repository remains **Private**, version 0.0.2, under the **MIT License**.
+The maintainer authorized MIT after this review; LICENSE and SPDX package
+metadata now agree. Publishing visibility remains a separate decision. No new functionality,
 third-party source bundle or runtime dependency was introduced by this review.
 
 The current README now describes implemented behavior and explicit boundaries;
@@ -80,3 +80,12 @@ authorized or performed here.
 - No sudden power-loss, boot zero-gap, arbitrary physical-media/fsync/returned-
   COMMIT fault coverage, WAN reachability, all-client continuity or indefinite
   resource/rotation guarantee.
+
+## License adoption follow-up
+
+The MIT grant covers Certweft-owned code and documentation. The dependency and
+external-tool scope is recorded in [LICENSING.md](LICENSING.md). This follow-up
+changes licensing, packaging metadata and documentation only. Recorded test and
+performance manifests describe the pre-license source; they are not relabeled
+as reruns of the modified pyproject.toml. Application, test and tool bytes are
+unchanged. Package license inclusion is checked separately from runtime evidence.
