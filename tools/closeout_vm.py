@@ -85,13 +85,13 @@ def normal_capacity():
     full=submit('history-over',cert,core,False,False);assert full['reason']=='history_full';assert stable()==before
     dup=submit('history-0',cert,stale,False);assert not dup['created'] and dup['result']==first
     conflict=submit('history-0',cert,core,False,False);assert conflict['reason']=='request_conflict';assert stable()==before
-    stop();gate,p=start();assert counts()['normal']==64
+    first_restart=retained_restart();gate=first_restart['gate_after'];p=props('certweft.service');assert counts()['normal']==64
     again=submit('history-after-restart',cert,core,False,False);assert again['reason']=='history_full'
     kill_main(p);gate,_=wait_ready(p['InvocationID']);assert not gate['gate_allows_updates']
     reopened,_=cli('recover','--prefix','normal-full-repair',timeout=65);assert reopened['updates_enabled'] and counts()['normal']==64
     assert submit('history-after-recovery',cert,cli('status')[0]['result'],False,False)['reason']=='history_full'
     preserve_history(before['catalogs'],catalogs())
-    return {'actual_requests_to_64':True,'independent_counts_before':before['counts'],'overflow':full,'same_body_replay':dup,'changed_body':conflict,'restart_overflow':again,'root_recovery_despite_normal_full':reopened,'final_counts':counts()}
+    return {'actual_requests_to_64':True,'independent_counts_before':before['counts'],'overflow':full,'same_body_replay':dup,'changed_body':conflict,'first_restart':first_restart,'restart_overflow':again,'root_recovery_despite_normal_full':reopened,'final_counts':counts()}
 
 def generation_capacity():
     gate,p=start();assert gate['gate_allows_updates'];updates=[]
@@ -100,17 +100,17 @@ def generation_capacity():
     before=stable();assert before['counts']=={'normal':15,'root':0,'generations':16}
     core=before['core'];cert,target=public_alternative('version-over',core['committed']);r=submit('version-over',cert,core,ok=False);assert r['reason']=='activation_FAILED';row=wait_job('version-over');assert row['state']=='FAILED' and row['result']['error']=='Rejected'
     assert counts()['generations']==16 and wire()==before['leaf'] and cli('status')[0]['result']==core;preserve_history(before['catalogs'],catalogs())
-    stop();start();assert counts()['generations']==16
+    first_restart=retained_restart();assert counts()['generations']==16
     after=submit('version-after-restart',cert,core,ok=False);assert after['reason']=='activation_FAILED' and wire()==before['leaf'] and counts()['generations']==16
-    return {'actual_successful_updates':updates,'independent_counts_before':before['counts'],'overflow_response':r,'overflow_history':row,'restart_response':after,'core_and_leaf_preserved':True,'final_counts':counts(),'diagnostic_limit':'executor API exposes Rejected class, not a version_capacity reason; exact backend branch additionally unit-tested'}
+    return {'actual_successful_updates':updates,'independent_counts_before':before['counts'],'overflow_response':r,'overflow_history':row,'first_restart':first_restart,'restart_response':after,'core_and_leaf_preserved':True,'final_counts':counts(),'diagnostic_limit':'executor API exposes Rejected class, not a version_capacity reason; exact backend branch additionally unit-tested'}
 
 def root_capacity():
     gate,p=start();kill_main(p);wait_ready(p['InvocationID']);prepare_root();filled=fill_root(16);before=stable();assert before['counts']=={'normal':1,'root':16,'generations':2}
     full=root_call(verify_body('root-over'));assert full=={'ok':False,'reason':'recovery_history_full'};assert stable()==before
     duplicate=root_call(filled[0]['body']);assert duplicate['ok'] and not duplicate['created'] and duplicate['historical'] and duplicate['result']==filled[0]['row']
     bad=root_call({**filled[0]['body'],'timeout_seconds':9});assert bad['reason']=='request_conflict';assert stable()==before
-    stop();start();prepare_root();again=root_call(verify_body('root-after-restart'));assert again['reason']=='recovery_history_full';assert counts()['root']==16;preserve_history(before['catalogs'],catalogs())
-    return {'actual_verifications_to_16':filled,'independent_counts_before':before['counts'],'overflow':full,'replay':duplicate,'conflict':bad,'restart_overflow':again,'final_counts':counts(),'gate_still_closed':not cli('gate')[0]['gate_allows_updates']}
+    first_restart=retained_restart();prepare_root();again=root_call(verify_body('root-after-restart'));assert again['reason']=='recovery_history_full';assert counts()['root']==16;preserve_history(before['catalogs'],catalogs())
+    return {'actual_verifications_to_16':filled,'independent_counts_before':before['counts'],'overflow':full,'replay':duplicate,'conflict':bad,'first_restart':first_restart,'restart_overflow':again,'final_counts':counts(),'gate_still_closed':not cli('gate')[0]['gate_allows_updates']}
 
 def limited_root(remaining):
     cert,old,candidate=dirty_pending('remaining-'+str(remaining));filled=fill_root(16-remaining);before=catalogs();r,rc=cli('recover','--prefix','limited',ok=remaining==5,timeout=65)
@@ -124,8 +124,14 @@ def limited_root(remaining):
     else:
         assert r['updates_enabled'] and gate['gate_allows_updates'];assert wire()==expected(old['committed'])
         active=submit('after-limited-full',cert,core);assert active['result']['state']=='COMMITTED' and wire()==candidate;denied=None
-    preserve_history(before,catalogs());saved=counts();stop();start();assert counts()==saved and not cli('gate')[0]['gate_allows_updates'];preserve_history(before,catalogs())
-    return {'remaining_before':remaining,'fill_count':len(filled),'recover_response':r,'completed_steps':actual,'post_operation_gate':gate,'denied_while_partial':denied,'root_rows_after':16,'restart_closed_and_counts_preserved':True,'partial_progress_not_rolled_back':True}
+    preserve_history(before,catalogs());saved=counts();first_restart=retained_restart();assert counts()==saved and not cli('gate')[0]['gate_allows_updates'];preserve_history(before,catalogs())
+    return {'remaining_before':remaining,'fill_count':len(filled),'recover_response':r,'completed_steps':actual,'post_operation_gate':gate,'denied_while_partial':denied,'root_rows_after':16,'first_restart':first_restart,'restart_closed_and_counts_preserved':True,'partial_progress_not_rolled_back':True}
+
+def retained_restart():
+    before=stable();old=props('certweft.service');stop();gate,new=start();after=stable()
+    assert old['InvocationID']!=new['InvocationID'],'service_not_restarted'
+    assert before==after,'full_state_or_history_changed_on_restart'
+    return {'before':before,'after':after,'old_invocation':old['InvocationID'],'new_invocation':new['InvocationID'],'gate_after':gate,'full_catalog_core_wire_counts_equal':True}
 
 def capacity(case):
     out=P/'evidence/capacity.json'
@@ -139,6 +145,7 @@ def capacity(case):
         elif case=='generations':detail=generation_capacity()
         elif case=='root':detail=root_capacity()
         else:detail=limited_root(int(case.split('-')[1]))
+        detail['full_catalog_restart']=retained_restart()
         cleanup=stop();report['cases'].append({'name':case,'passed':True,'elapsed_seconds':time.monotonic()-start_time,'detail':detail,'cleanup':cleanup})
         names=['normal','generations','root']+['remaining-'+str(n) for n in range(6)]
         report['passed']=[c['name'] for c in report['cases']]==names and report['source_sha256']==hashes();report['status']='completed' if report['passed'] else 'in_progress'
@@ -169,16 +176,17 @@ def resource_checks(samples):
     fds=[s['writer']['fds'] for s in stable_samples];assert max(fds)-min(fds)<=2 and max(fds)<=stable_samples[0]['writer']['fds']+2,'writer_fd_growth'
     assert all(len(s['writer']['cgroup_pids'])==1 and s['writer']['nrestarts']==0 for s in samples),'writer_process_leak_or_restart'
     assert all(s['disk']==stable_samples[0]['disk'] for s in stable_samples),'persistent_state_grew_after_warmup'
+    assert len({tuple(sorted(s['nginx']['cgroup_pids'])) for s in stable_samples})==1,'nginx_worker_replaced_after_warmup'
     ng=[s['nginx']['cgroup_rss_kib'] for s in stable_samples];ngfds=[s['nginx']['cgroup_fds'] for s in stable_samples]
     assert all(len(s['nginx']['cgroup_pids'])==2 and len(s['nginx']['cgroup_samples'])==2 and s['nginx']['nrestarts']==0 for s in stable_samples),'nginx_process_leak_or_restart'
     assert max(ng)-min(ng)<=4096 and statistics.median(ng[-6:])-statistics.median(ng[:6])<=1024 and max(ngfds)-min(ngfds)<=2,'nginx_resource_growth'
-    return {'nginx_rss_span_kib':max(ng)-min(ng),'nginx_fd_min':min(ngfds),'nginx_fd_max':max(ngfds),'stable_samples':len(stable_samples),'rss_span_kib':max(rss)-min(rss),'rss_fitted_growth_kib':growth,'rss_first_last_median_delta_kib':delta,'fd_min':min(fds),'fd_max':max(fds),'persistent_state_constant_after_180_seconds':True}
+    return {'stable_nginx_pid_sets':1,'nginx_rss_span_kib':max(ng)-min(ng),'nginx_fd_min':min(ngfds),'nginx_fd_max':max(ngfds),'stable_samples':len(stable_samples),'rss_span_kib':max(rss)-min(rss),'rss_fitted_growth_kib':growth,'rss_first_last_median_delta_kib':delta,'fd_min':min(fds),'fd_max':max(fds),'persistent_state_constant_after_180_seconds':True}
 
 def soak():
     out=P/'evidence/soak.json'
     if out.exists():
         d=P/'evidence/closeout-attempts';d.mkdir(exist_ok=True);(d/(str(time.time_ns())+'-soak.json')).write_bytes(out.read_bytes())
-    r={'passed':False,'status':'in_progress','source_sha256':hashes(),'duration_seconds':1200,'warmup_seconds':180,'sample_interval_seconds':10,'thresholds_predeclared':{'writer_rss_span_kib':4096,'writer_rss_fitted_growth_kib':1024,'writer_rss_median_growth_kib':1024,'writer_fd_span':2,'quiescent_writer_processes':1,'restarts':0,'stable_disk_growth_bytes':0,'stable_nginx_processes':2,'nginx_cgroup_rss_span_kib':4096,'nginx_cgroup_rss_median_growth_kib':1024,'nginx_cgroup_fd_span':2},'samples':[],'events':[],'scope':'single installed writer invocation for 1200 seconds, bounded scripted load; no unbounded stability or leak-free claim'};save(out,r)
+    r={'passed':False,'status':'in_progress','source_sha256':hashes(),'duration_seconds':1200,'warmup_seconds':180,'sample_interval_seconds':10,'thresholds_predeclared':{'writer_rss_span_kib':4096,'writer_rss_fitted_growth_kib':1024,'writer_rss_median_growth_kib':1024,'writer_fd_span':2,'quiescent_writer_processes':1,'restarts':0,'stable_disk_growth_bytes':0,'stable_nginx_processes':2,'stable_nginx_pid_sets':1,'nginx_cgroup_rss_span_kib':4096,'nginx_cgroup_rss_median_growth_kib':1024,'nginx_cgroup_fd_span':2},'samples':[],'events':[],'steady_cycles':[],'scope':'single installed writer invocation for 1200 seconds, bounded scripted load; no unbounded stability or leak-free claim'};save(out,r)
     config=pathlib.Path('/etc/certweft/writer.json');original=json.loads(config.read_text());config.write_text(json.dumps({**original,'delay_at':'confirmed','delay_seconds':1.0}));gate,p=start();assert gate['gate_allows_updates'];initial=p;old_ng=props('certweft-nginx.service');replays=[];begin=time.monotonic()
     try:
         for tick in range(121):
@@ -196,19 +204,32 @@ def soak():
                 else:
                     bodycore={**core,'revision':core['revision']-1};response=submit(identity,cert,bodycore,ok=False);assert response['reason']=='activation_FAILED';row=wait_job(identity);assert row['state']=='FAILED';state='FAILED'
                 replays.append((identity,cert,bodycore,state));r['events'].append({'tick':tick,'id':identity,'expected_state':state,'response':response})
+                if tick==13:r['history_after_creation']=catalogs()
             elif replays:
                 identity,cert,bodycore,state=replays[(tick-14)%len(replays)];duplicate=submit(identity,cert,bodycore,False);assert not duplicate['created'] and duplicate['result']['state']==state
                 terminal=cli('request-status','--request-id',identity,user='certweft-operator')[0]['result'];assert terminal['state']==state
                 cancel,_=cli('cancel','--request-id',identity,user='certweft-operator');assert not cancel.get('cancel_accepted')
                 core=cli('status')[0]['result'];bad=submit('x'*65,cert,core,False,False);assert bad['reason']=='request_id'
+                assert catalogs()==r['history_after_creation'],'fixed_history_rewritten_during_soak'
+                r['steady_cycles'].append({'tick':tick,'request_id':identity,'duplicate_created':duplicate['created'],'terminal_state':terminal['state'],'terminal_cancel_accepted':cancel.get('cancel_accepted',False),'invalid_new_id_reason':bad['reason'],'full_history_equal':True})
             gate=cli('gate')[0];assert gate['gate_allows_updates'] and not gate['executor_busy'];current=props('certweft.service');ng=props('certweft-nginx.service')
             assert current['MainPID']==initial['MainPID'] and current['InvocationID']==initial['InvocationID'] and ng['MainPID']==old_ng['MainPID'] and ng['InvocationID']==old_ng['InvocationID'],'service_changed_during_soak'
             r['samples'].append({'elapsed_seconds':time.monotonic()-begin,'writer':proc_metrics(current),'nginx':proc_metrics(ng),'disk':disk_metrics(),'wire_leaf':wire()});save(out,r)
         assert r['samples'][-1]['elapsed_seconds']>=1200
-        r['checks']=resource_checks(r['samples']);r.update(passed=True,status='completed',observed_seconds=r['samples'][-1]['elapsed_seconds'],final_counts=counts(),same_writer_invocation=True,same_nginx_master_invocation=True)
+        r['history_final']=catalogs();assert r['history_final']==r['history_after_creation'],'fixed_history_rewritten_at_end'
+        r['checks']=resource_checks(r['samples']);r['checks']['full_history_constant_after_creation']=True;r.update(passed=True,status='completed',observed_seconds=r['samples'][-1]['elapsed_seconds'],final_counts=counts(),same_writer_invocation=True,same_nginx_master_invocation=True)
     except Exception as e:r.update(passed=False,status='failed',error=type(e).__name__+':'+str(e));raise
     finally:
-        r['cleanup']=stop();config.write_text(json.dumps(original));r['source_unchanged']=r['source_sha256']==hashes();r['passed']=r['passed'] and r['source_unchanged'];save(out,r)
+        try:
+            r['cleanup']=stop();r['history_after_stop']=catalogs()
+            if 'history_final' in r:assert r['history_after_stop']==r['history_final'],'cleanup_rewrote_history'
+        except Exception as e:r.update(passed=False,status='failed',cleanup_error=type(e).__name__+':'+str(e))
+        try:config.write_text(json.dumps(original))
+        except Exception as e:r.update(passed=False,status='failed',config_restore_error=type(e).__name__+':'+str(e))
+        r['source_unchanged']=r['source_sha256']==hashes();r['passed']=r['passed'] and r['source_unchanged']
+        if not r['passed']:r['status']='failed'
+        save(out,r)
+    if not r['passed']:raise AssertionError('soak_failed')
     print(json.dumps({'passed':r['passed'],'samples':len(r['samples']),'observed_seconds':r.get('observed_seconds')}))
 
 if __name__=='__main__':

@@ -11,15 +11,17 @@ helper fails when full, preserves completed steps and keeps admission closed;
 with 5 slots it fully opens and a genuine subsequent activation succeeds.
 Service restart retains counts/history and closes recovered sessions again by design.
 
-The resource run completed **1200.178 seconds, 121 samples**, using one writer
+The resource run completed **1200.182 seconds, 121 samples**, using one writer
 and one Nginx master invocation without restarts. It performed eight successful
 updates, two real running cancellations/rollbacks and four stale-core failures,
 then fixed-history query/replay/terminal-cancel/server-rejection cycles. The 103
 samples after 180 seconds satisfy all predeclared checks: writer RSS
-21,860–21,932 KiB (72 KiB span), fitted stable-window growth 11.76 KiB and
-first/last-six median difference 14 KiB; writer FD is always 5. Nginx sampled
-cgroup RSS is 13,424 KiB and aggregate FD 15 throughout the stable window; its
-worker PID set also remains constant after warmup. Summed RSS can double-count
+21,840–21,932 KiB (92 KiB span), fitted stable-window growth 26.41 KiB and
+first/last-six median difference 32 KiB; writer FD is always 5. Nginx sampled
+cgroup RSS is 13,432 KiB and aggregate FD 15 throughout the stable window; its
+worker PID set also remains constant after warmup. This is now an enforced
+criterion. Every steady cycle and the final/post-stop snapshots preserve the
+complete catalog; every capacity restart includes its newly completed rows. Summed RSS can double-count
 shared pages and is not host/VM physical memory or a full lifetime peak.
 State stays at 81,967 logical / 212,992 allocated bytes and 43 unique regular
 files after warmup, with 15 normal rows, zero root rows and 12 generations.
@@ -30,7 +32,7 @@ replacement occurs during actual warmup reloads; the steady window contains
 no such replacements. The wider 4 MiB span / 1 MiB growth bounds were declared
 before collecting samples and were not adjusted to fit the result.
 
-Current Linux evidence has **133 tests, zero failures/errors/skips**, plus nine
+Current Linux evidence has **136 tests, zero failures/errors/skips**, plus nine
 capacity cases, the completed 1200-second resource run, eight installed deployment
 regressions and fourteen source-service runtime storage-fault cases. The seven
 current JSON/HTML pairs (capacity, soak, closeout-host, closeout-units,

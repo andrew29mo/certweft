@@ -6,7 +6,8 @@ finite-capacity and 20-minute resource checks are qualified; long-term stability
 and automatic history rollover remain unqualified.
 
 [Capacity limits, bounded resource results and exhaustion runbook](docs/CLOSEOUT.md)
-cover the final closeout. Feature scope is frozen.
+cover the final closeout; [review corrections](docs/CLOSEOUT_REVIEW.md) enforce
+first-restart history retention and stable worker identity. Feature scope is frozen.
 
 Current installed operation: [installation/CLI guide](docs/INSTALL.md) and
 [systemd deployment evidence](docs/DEPLOYMENT_VALIDATION.md), plus

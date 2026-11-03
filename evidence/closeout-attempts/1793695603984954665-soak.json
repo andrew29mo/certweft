@@ -1,0 +1,7752 @@
+{
+  "passed": true,
+  "status": "completed",
+  "source_sha256": {
+    "pyproject.toml": "c9e02c232567397360e119e7cd31325b80873ad64bc45b63b4ddbd3c1e961461",
+    "certweft/service.py": "70199d02b38034399637c4c8adcfb674ce847e4061dab9b280e6e73094074ed0",
+    "certweft/deadlines.py": "e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f",
+    "certweft/release.py": "604a1d770f47c375989ef8d274dbd8616d3e487152f3abe6965ea1085391d44a",
+    "certweft/recovery.py": "88a3bc08906771eb27e3ef4a57d25439522f363929b9645eb91e72a8145ac791",
+    "certweft/recovery_executor.py": "1a6a1fc983d14f132d374679f8676a09882e0918ac4fd332caaceef240a39531",
+    "certweft/deployment.py": "a9f7688a19c3b64edfc051c7058aa5aff32fc19d5ed947f07c826b6f2caca1b4",
+    "certweft/reconciliation.py": "bb21824e85c89d90639837f8d144eb0e265b9652065104326f9d843584d88f45",
+    "certweft/opening.py": "514191731118b9cfbf834367104b5f5ab3d7973d5fef91854c9f13ffbae5434e",
+    "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certweft/core.py": "fc63c1d25dda209c19129440b1fec36f20d1fdd9b72ef09acd8ab032872310b1",
+    "certweft/operations.py": "46da1610efd2b5bc25414f07d04a3556a3b57be7870c8af6751fa5c347ca7385",
+    "certweft/cli.py": "d31316ceaa8b58273cb5fc4fe26b6205f6dcb168e17cc893221b1605625d6724",
+    "certweft/gate.py": "60854ad11c20eca05609032c75a0fe163292c3d6bdf79427ca495576c3b80c1a",
+    "certweft/storage.py": "2f431bd3758a8a14b2cb616521f50d638cf3fdbf733278f87a7e7cb99bf1fe3b",
+    "certweft/certificate_recovery.py": "8e12ac749a8124444e1b70d2c365f74e3ba396656a530adb2f0281a481b0694e",
+    "certweft/admission.py": "0f2a589836afaf9abd4a2ca18a548fa268ec01e70e41028d9191e4927291bf29",
+    "certweft/ca.py": "e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c",
+    "certweft/executor.py": "b11ef0c91cd65a5fa013f6733feda22d6fabcecc46c0aca92a471c0fc48a87c6",
+    "certweft/assets/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550",
+    "certweft/assets/certweft.service": "7e4d52e8ad2a703b6d944df57321a14e9f034e7d13afa830d90a9cb5e07aefc0",
+    "certweft/assets/certweft-issue@.service": "5cdbd5aed7a98d402ea3bdc3e38f26f1e37f0e26d3cd00c20b861b5b79be4744",
+    "certweft/assets/certweft-nginx.service": "f907853efe6c7bff0e99fb5f3386bffa6ed674e19e12329fc09e455bea945321",
+    "tools/policy_vm.py": "27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6",
+    "tools/admission_vm.py": "42bc276dae22dafa5d20db4e9b09054399a4bde61baf4dee34036af2fd76d86a",
+    "tools/certificate_vm.py": "4435c71a031b395d06270dc38bbfd48a3db890cfa3bdadb53e4880295294ee09",
+    "tools/closeout_vm.py": "2f632267c1908361a1e46a5d07546b28aab4a36c99f8c14e4e14806e24d9179d",
+    "tools/storage_reboot_host.py": "1909d9edc945a34a06a4cedc9cf17045281dffebf97482be9e9e5257b499c258",
+    "tools/storage_vm.py": "2d251e4e7de2c10739c2d339f372787b36613f65759a539037b075b6a7e3a14c",
+    "tools/deployment_vm.py": "4a3a5a534887893906b55c2a596a271f3ed9ca7d9d983b631bfad3c1168b89f5",
+    "tools/deadline_vm.py": "cd0d61fb4e1253cdc23b12e3fb38d10ad41fd04f2debd9c23f4574f8fa4e7cf3",
+    "tools/executor_vm.py": "643565d4130bbf08daa619623b72a566e847e04c4f3504ee15ad3a6c493a656d",
+    "tools/closeout_host.py": "731dabac07a4f57be48e7ff72afee358bf2d7789fa937efcc47aac6248d388b9",
+    "tools/opening_vm.py": "656b8d1f7c461cd2657eeb3e8db1af2e50516435032c40788496916372522b04",
+    "tools/recovery_vm.py": "104fc1ee43c382f5bb0d4d7c19c3369bb4c656097966e4e05c9008b3a9f285ee",
+    "tools/opening_mutation.py": "41370aa7417e65830048b0e4c984cf8c3de5a1602fb51410f7268a6e8b2868c1",
+    "tools/storage_reboot_vm.py": "dd5ed1f816f2a0135cff1aa4445919470d1d11b1579a1bbedd45d46c1973e12e",
+    "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
+    "tools/credential_probe.py": "8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46",
+    "tools/operations_vm.py": "3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85",
+    "tools/admission_mutation.py": "cd0754f335cf80bd162396954eeab0d6edecfabc0d1c0b8e0e61a19cc8a1f749",
+    "tools/reboot_host.py": "0f344717224e4bd705154bf493850e6bed6a0e8f91e8cc72c2d940bac0029157",
+    "tools/reconcile_vm.py": "70172e146542bd3f564128fac997709f1ba7692289c681b4ae81109c5aeb3e8b",
+    "tools/gate_vm.py": "66215b4c176fe5ca9db1fda5bd6869213f852fd5cdeb0ee3ea23412197a0fb78",
+    "tools/reboot_vm.py": "0bb91b7d73c1ea968e2d290a99ca6074e4a9f83b4b263b29789fbb379a60c259",
+    "tools/release_vm.py": "e82059f514f166d81740a004d707dc78d5e62b14c06b6a08fc8ae0ad5f338812",
+    "tests/test_release.py": "08e1031f443b3ef89afbd05044d007f56facb056ac366af55fd35c3882d3f7d9",
+    "tests/test_certificate_recovery.py": "7dedc3df699699665d7c21e9b2d62592f8d648eaa9cf5dc973c31453622fdcb0",
+    "tests/test_operations.py": "f1741fae5ae944fa974e90c418c447da27e49d18051fc8ad50b4ea843041e337",
+    "tests/test_core.py": "8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c",
+    "tests/test_recovery.py": "cba9d1c4dd080581bd039f9d3331200a74de221e751d57c008222bdbb8bba830",
+    "tests/test_admission.py": "129aadb4a9ffd1b1dac3471d64117dd6daf41dbb2eadda43cdb94a67316d2418",
+    "tests/test_opening.py": "45e4aca1cebd1d44ac9af9ad5fec47908cbc192748f04b3b7ee7ee2e48690963",
+    "tests/test_storage.py": "07d2de55f10a9a3011db73c9141295b43ff2951f54b6e339d184117cf87af2cf",
+    "tests/test_gate.py": "e1bcd31c414728e0022a3d1f47726bedff559a52f811e536860da60de589c8d0",
+    "tests/test_deadlines.py": "442d8ea3cfa4af88ec62603d84f017fb2b1883e8c05d3d92bedd695811b9dd29",
+    "tests/test_service_process.py": "db7bccfa6248f8a9281cd380f5db317f71116b06711f195100f86a7f5a70e9b9",
+    "tests/test_deployment.py": "11d3612e6ac18ac4967168437ef03cfc6eab58afe0dbcbe3fbf1378d6270ecc7",
+    "tests/test_reconciliation.py": "91d301f53893145dd6400efc00c67204441a80b15428c0e9032629137db3cac9",
+    "tests/test_reboot_evidence.py": "da5cfb3528d91750eeefb44f4a6fb7e7857fb7b438df96682150d0e80d2fb973",
+    "tests/test_closeout.py": "c9cbdc0782475f577bb3b0107009a6cc5b99377e61d7d195bb2bdefe75ffeeab",
+    "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
+  },
+  "duration_seconds": 1200,
+  "warmup_seconds": 180,
+  "sample_interval_seconds": 10,
+  "thresholds_predeclared": {
+    "writer_rss_span_kib": 4096,
+    "writer_rss_fitted_growth_kib": 1024,
+    "writer_rss_median_growth_kib": 1024,
+    "writer_fd_span": 2,
+    "quiescent_writer_processes": 1,
+    "restarts": 0,
+    "stable_disk_growth_bytes": 0,
+    "stable_nginx_processes": 2,
+    "nginx_cgroup_rss_span_kib": 4096,
+    "nginx_cgroup_rss_median_growth_kib": 1024,
+    "nginx_cgroup_fd_span": 2
+  },
+  "samples": [
+    {
+      "elapsed_seconds": 1.8945780919999606,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21884,
+        "hwm_kib": 22016,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21884,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21884,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6688,
+        "hwm_kib": 6688,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8268
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6688,
+            "fds": 7
+          },
+          {
+            "pid": 8268,
+            "rss_kib": 6620,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13308,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 55514,
+        "allocated_bytes": 94208,
+        "files": 16,
+        "counts": {
+          "normal": 2,
+          "root": 0,
+          "generations": 3
+        }
+      },
+      "wire_leaf": "b0863bcd5a09131054afae1896cb67ff52c6a444769d839b45ab2bfc2c0986bb"
+    },
+    {
+      "elapsed_seconds": 11.925090511000008,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21884,
+        "hwm_kib": 22016,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21884,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21884,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6700,
+        "hwm_kib": 6700,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8316
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6700,
+            "fds": 7
+          },
+          {
+            "pid": 8316,
+            "rss_kib": 6636,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13336,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 57543,
+        "allocated_bytes": 106496,
+        "files": 19,
+        "counts": {
+          "normal": 3,
+          "root": 0,
+          "generations": 4
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 21.902571647999935,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21884,
+        "hwm_kib": 22016,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21884,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21884,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6712,
+        "hwm_kib": 6712,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8364
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6712,
+            "fds": 7
+          },
+          {
+            "pid": 8364,
+            "rss_kib": 6644,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13356,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 59572,
+        "allocated_bytes": 118784,
+        "files": 22,
+        "counts": {
+          "normal": 4,
+          "root": 0,
+          "generations": 5
+        }
+      },
+      "wire_leaf": "b0863bcd5a09131054afae1896cb67ff52c6a444769d839b45ab2bfc2c0986bb"
+    },
+    {
+      "elapsed_seconds": 31.92428428400001,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21888,
+        "hwm_kib": 22052,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21888,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21888,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6720,
+        "hwm_kib": 6720,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8412
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6720,
+            "fds": 7
+          },
+          {
+            "pid": 8412,
+            "rss_kib": 6696,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13416,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 61601,
+        "allocated_bytes": 131072,
+        "files": 25,
+        "counts": {
+          "normal": 5,
+          "root": 0,
+          "generations": 6
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 42.035369436999986,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21892,
+        "hwm_kib": 22052,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21892,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21892,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6720,
+        "hwm_kib": 6720,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8459
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6720,
+            "fds": 7
+          },
+          {
+            "pid": 8459,
+            "rss_kib": 6692,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13412,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 63630,
+        "allocated_bytes": 143360,
+        "files": 28,
+        "counts": {
+          "normal": 6,
+          "root": 0,
+          "generations": 7
+        }
+      },
+      "wire_leaf": "b0863bcd5a09131054afae1896cb67ff52c6a444769d839b45ab2bfc2c0986bb"
+    },
+    {
+      "elapsed_seconds": 51.93942942399997,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21892,
+        "hwm_kib": 22052,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21892,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21892,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8508
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8508,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 65659,
+        "allocated_bytes": 155648,
+        "files": 31,
+        "counts": {
+          "normal": 7,
+          "root": 0,
+          "generations": 8
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 61.91515847699998,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21892,
+        "hwm_kib": 22052,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21892,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21892,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8555
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8555,
+            "rss_kib": 6696,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13420,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 67688,
+        "allocated_bytes": 167936,
+        "files": 34,
+        "counts": {
+          "normal": 8,
+          "root": 0,
+          "generations": 9
+        }
+      },
+      "wire_leaf": "b0863bcd5a09131054afae1896cb67ff52c6a444769d839b45ab2bfc2c0986bb"
+    },
+    {
+      "elapsed_seconds": 71.89890265999998,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21896,
+        "hwm_kib": 22052,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21896,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21896,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8604
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8604,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 69717,
+        "allocated_bytes": 180224,
+        "files": 37,
+        "counts": {
+          "normal": 9,
+          "root": 0,
+          "generations": 10
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 80.87844022900003,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21848,
+        "hwm_kib": 22052,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21848,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21848,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8670
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8670,
+            "rss_kib": 6628,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13352,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 71746,
+        "allocated_bytes": 192512,
+        "files": 40,
+        "counts": {
+          "normal": 10,
+          "root": 0,
+          "generations": 11
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 90.93111102800003,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21848,
+        "hwm_kib": 22088,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21848,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21848,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 11,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 100.28387236200001,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21848,
+        "hwm_kib": 22096,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21848,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21848,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 12,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 110.21663590899993,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21848,
+        "hwm_kib": 22096,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21848,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21848,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 13,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 120.23056555100004,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21848,
+        "hwm_kib": 22096,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21848,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21848,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 14,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 130.22067971,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21852,
+        "hwm_kib": 22096,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21852,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21852,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 140.16775229199993,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21896,
+        "hwm_kib": 22096,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21896,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21896,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 150.16936387099997,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21848,
+        "hwm_kib": 22096,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21848,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21848,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 160.23238727699993,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21904,
+        "hwm_kib": 22096,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21904,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21904,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 170.18014724,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21856,
+        "hwm_kib": 22100,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21856,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21856,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 180.168581916,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21908,
+        "hwm_kib": 22100,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21908,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21908,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 190.17119933799995,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21860,
+        "hwm_kib": 22100,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21860,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21860,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 200.172266594,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21916,
+        "hwm_kib": 22100,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21916,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21916,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 210.16847834099997,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21860,
+        "hwm_kib": 22100,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21860,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21860,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 220.18268309100006,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21916,
+        "hwm_kib": 22100,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21916,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21916,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 230.18326144900004,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21868,
+        "hwm_kib": 22100,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21868,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21868,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 240.17207659200005,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21920,
+        "hwm_kib": 22100,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21920,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21920,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 250.17482121499995,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21864,
+        "hwm_kib": 22100,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21864,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21864,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 260.17428751499995,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21920,
+        "hwm_kib": 22112,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21920,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21920,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 270.1624118619999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21864,
+        "hwm_kib": 22112,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21864,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21864,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 280.18873268899995,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21920,
+        "hwm_kib": 22112,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21920,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21920,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 290.16519157000005,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21864,
+        "hwm_kib": 22112,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21864,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21864,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 300.17705594899996,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21920,
+        "hwm_kib": 22112,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21920,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21920,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 310.16882797200003,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21864,
+        "hwm_kib": 22112,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21864,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21864,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 320.1697803819999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21920,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21920,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21920,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 330.17584845399995,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21864,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21864,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21864,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 340.177960332,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21920,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21920,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21920,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 350.163807671,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21864,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21864,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21864,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 360.164338036,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21920,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21920,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21920,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 370.17469764200007,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 380.20356122500004,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21920,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21920,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21920,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 390.188726643,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 400.18234440799995,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21920,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21920,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21920,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 410.1963036819999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21880,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21880,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21880,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 420.2028502940001,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21920,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21920,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21920,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 430.19591525399994,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 440.16507929600004,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21920,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21920,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21920,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 450.16446951599994,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 460.26389968599995,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21920,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21920,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21920,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 470.17452263100006,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 480.18091470799993,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21920,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21920,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21920,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 490.16384420199995,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 500.17023579299996,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21924,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21924,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21924,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 510.18257753,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 520.1959158349999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21928,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21928,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21928,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 530.1749401599999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 540.180825322,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21928,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21928,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21928,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 550.179991957,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 560.159469496,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21924,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21924,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21924,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 570.1725178529999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 580.2292359249999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21924,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21924,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21924,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 590.1886644099999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 600.191374807,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21924,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21924,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21924,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 610.1788057560001,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 620.192525633,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21924,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21924,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21924,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 630.178543444,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 640.188229539,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21924,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21924,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21924,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 650.2118503400001,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 660.205863689,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21928,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21928,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21928,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 670.182004339,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21876,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21876,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21876,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 680.1915576529999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21928,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21928,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21928,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 690.1929000429999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 700.194112492,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21924,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21924,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21924,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 710.1805146410001,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 720.192296973,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21924,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21924,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21924,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 730.2159008120001,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 740.1795064419999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21924,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21924,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21924,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 750.198586459,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 760.236773229,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21924,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21924,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21924,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 770.1892523309999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 780.2223510990001,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21924,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21924,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21924,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 790.192888486,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 800.172889653,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21928,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21928,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21928,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 810.2868042240001,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 820.1545252889999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21928,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21928,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21928,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 830.164738991,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 840.1501272229999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21924,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21924,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21924,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 850.153873308,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 860.170948977,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21924,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21924,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21924,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 870.156866549,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 880.1786550850001,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21924,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21924,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21924,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 890.1614992359999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 900.19310263,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21924,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21924,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21924,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 910.1719661440001,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 920.169944185,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21924,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21924,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21924,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 930.214579887,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 940.2200848859999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21928,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21928,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21928,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 950.1757674659999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21872,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21872,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21872,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 960.1914782489999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21928,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21928,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21928,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 970.173854773,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21880,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21880,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21880,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 980.1729104289999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21924,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21924,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21924,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 990.1712434919999,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21876,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21876,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21876,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1000.172330474,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21928,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21928,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21928,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1010.191172875,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21876,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21876,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21876,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1020.2004014620001,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21924,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21924,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21924,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1030.186243099,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21876,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21876,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21876,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1040.180318757,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21924,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21924,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21924,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1050.1967707990002,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21876,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21876,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21876,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1060.2019353229998,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21928,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21928,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21928,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1070.172531193,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21880,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21880,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21880,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1080.1776706669998,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21928,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21928,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21928,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1090.170775382,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21876,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21876,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21876,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1100.160011036,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21928,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21928,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21928,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1110.16174839,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21880,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21880,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21880,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1120.176997381,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21928,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21928,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21928,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1130.174274847,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21876,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21876,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21876,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1140.17351393,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21928,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21928,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21928,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1150.162400058,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21876,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21876,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21876,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1160.1707822100002,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21928,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21928,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21928,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1170.1936647829998,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21876,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21876,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21876,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1180.2148172329998,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21928,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21928,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21928,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1190.174323526,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21876,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21876,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21876,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    },
+    {
+      "elapsed_seconds": 1200.177706306,
+      "writer": {
+        "pid": 8232,
+        "invocation": "7109aa2613dd4b6f851b13e405b92b4f",
+        "rss_kib": 21932,
+        "hwm_kib": 22172,
+        "fds": 5,
+        "cgroup_pids": [
+          8232
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8232,
+            "rss_kib": 21932,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21932,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8229,
+        "invocation": "a9d5fa58695e48548e7e6259fbf13083",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8229,
+          8734
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8229,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8734,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 81967,
+        "allocated_bytes": 212992,
+        "files": 43,
+        "counts": {
+          "normal": 15,
+          "root": 0,
+          "generations": 12
+        }
+      },
+      "wire_leaf": "c34b1ad7f214475be0295fddd9becb2fa7a311882564bef739267a36c94d2938"
+    }
+  ],
+  "events": [
+    {
+      "tick": 0,
+      "id": "soak-0",
+      "expected_state": "COMMITTED",
+      "response": {
+        "ok": true,
+        "result": {
+          "request_id": "soak-0",
+          "digest": "547bee5361865c54fc0139bc6ac3fc9898d0fbc5978bae807cef8cc3f83dc7c4",
+          "state": "COMMITTED",
+          "result": {
+            "committed": "5e475376d0334c1aa19711c13ce39fd2"
+          },
+          "timing": {
+            "activation": {
+              "version": 1,
+              "boot_id": "da99a04f-018e-4d6b-b240-f3b91a85691a",
+              "accepted_boot_ns": 807106231379,
+              "expires_boot_ns": 817106231379,
+              "accepted_wall_ns": 1793692837186447835,
+              "seconds": 10
+            },
+            "recovery": null
+          }
+        }
+      }
+    },
+    {
+      "tick": 1,
+      "id": "soak-1",
+      "expected_state": "COMMITTED",
+      "response": {
+        "ok": true,
+        "result": {
+          "request_id": "soak-1",
+          "digest": "b80f0fc0dd12929ef84e4b9ddbadc7c7d65bd50549afeebf85d1cdad4ea76609",
+          "state": "COMMITTED",
+          "result": {
+            "committed": "5b6122b4a4dc4e3cafcf4591e5ab1227"
+          },
+          "timing": {
+            "activation": {
+              "version": 1,
+              "boot_id": "da99a04f-018e-4d6b-b240-f3b91a85691a",
+              "accepted_boot_ns": 817139733292,
+              "expires_boot_ns": 827139733292,
+              "accepted_wall_ns": 1793692847219980998,
+              "seconds": 10
+            },
+            "recovery": null
+          }
+        }
+      }
+    },
+    {
+      "tick": 2,
+      "id": "soak-2",
+      "expected_state": "COMMITTED",
+      "response": {
+        "ok": true,
+        "result": {
+          "request_id": "soak-2",
+          "digest": "d00f71f9029fd8d47e8175c6d15f19aa25bf563958c61fa6aff74d261e5c9167",
+          "state": "COMMITTED",
+          "result": {
+            "committed": "0792482f73ec41999f641708779a1482"
+          },
+          "timing": {
+            "activation": {
+              "version": 1,
+              "boot_id": "da99a04f-018e-4d6b-b240-f3b91a85691a",
+              "accepted_boot_ns": 827142047340,
+              "expires_boot_ns": 837142047340,
+              "accepted_wall_ns": 1793692857222304504,
+              "seconds": 10
+            },
+            "recovery": null
+          }
+        }
+      }
+    },
+    {
+      "tick": 3,
+      "id": "soak-3",
+      "expected_state": "COMMITTED",
+      "response": {
+        "ok": true,
+        "result": {
+          "request_id": "soak-3",
+          "digest": "2c3b59eb49554b5822c268975f0c6eaa9b17556d37f74c162909e414af80f2c6",
+          "state": "COMMITTED",
+          "result": {
+            "committed": "c8150d5efcd4493b9c41ff647f5c9f6d"
+          },
+          "timing": {
+            "activation": {
+              "version": 1,
+              "boot_id": "da99a04f-018e-4d6b-b240-f3b91a85691a",
+              "accepted_boot_ns": 837152374680,
+              "expires_boot_ns": 847152374680,
+              "accepted_wall_ns": 1793692867232628052,
+              "seconds": 10
+            },
+            "recovery": null
+          }
+        }
+      }
+    },
+    {
+      "tick": 4,
+      "id": "soak-4",
+      "expected_state": "COMMITTED",
+      "response": {
+        "ok": true,
+        "result": {
+          "request_id": "soak-4",
+          "digest": "6b39597dc95b17632d6feffa99ccf6c3b586c30cdf829fe7792eca401fa886cd",
+          "state": "COMMITTED",
+          "result": {
+            "committed": "06ac3fd1e1fc43b1b9b00def89594cde"
+          },
+          "timing": {
+            "activation": {
+              "version": 1,
+              "boot_id": "da99a04f-018e-4d6b-b240-f3b91a85691a",
+              "accepted_boot_ns": 847127976284,
+              "expires_boot_ns": 857127976284,
+              "accepted_wall_ns": 1793692877208235198,
+              "seconds": 10
+            },
+            "recovery": null
+          }
+        }
+      }
+    },
+    {
+      "tick": 5,
+      "id": "soak-5",
+      "expected_state": "COMMITTED",
+      "response": {
+        "ok": true,
+        "result": {
+          "request_id": "soak-5",
+          "digest": "43370053d99f53230c7292b5af54e1a2080edb9b7ba45242f0d8e95505c82fea",
+          "state": "COMMITTED",
+          "result": {
+            "committed": "cd34d29bfe0d452c8da7a08527d2ec14"
+          },
+          "timing": {
+            "activation": {
+              "version": 1,
+              "boot_id": "da99a04f-018e-4d6b-b240-f3b91a85691a",
+              "accepted_boot_ns": 857165427173,
+              "expires_boot_ns": 867165427173,
+              "accepted_wall_ns": 1793692887245701462,
+              "seconds": 10
+            },
+            "recovery": null
+          }
+        }
+      }
+    },
+    {
+      "tick": 6,
+      "id": "soak-6",
+      "expected_state": "COMMITTED",
+      "response": {
+        "ok": true,
+        "result": {
+          "request_id": "soak-6",
+          "digest": "beb8063a68ba1e2178bb9d3269c810fe34fbc4e35ff26b9fa710bf985e6baa79",
+          "state": "COMMITTED",
+          "result": {
+            "committed": "82f7ac20678247c2945f4fcdf6e11ce0"
+          },
+          "timing": {
+            "activation": {
+              "version": 1,
+              "boot_id": "da99a04f-018e-4d6b-b240-f3b91a85691a",
+              "accepted_boot_ns": 867138724490,
+              "expires_boot_ns": 877138724490,
+              "accepted_wall_ns": 1793692897219003571,
+              "seconds": 10
+            },
+            "recovery": null
+          }
+        }
+      }
+    },
+    {
+      "tick": 7,
+      "id": "soak-7",
+      "expected_state": "COMMITTED",
+      "response": {
+        "ok": true,
+        "result": {
+          "request_id": "soak-7",
+          "digest": "aed9777598e92032fdd162d416c8a41f7830e9a512ab0a51df94030843d9c593",
+          "state": "COMMITTED",
+          "result": {
+            "committed": "a0d81350d20e47c8bde59e22ecbe3060"
+          },
+          "timing": {
+            "activation": {
+              "version": 1,
+              "boot_id": "da99a04f-018e-4d6b-b240-f3b91a85691a",
+              "accepted_boot_ns": 877147357708,
+              "expires_boot_ns": 887147357708,
+              "accepted_wall_ns": 1793692907227578913,
+              "seconds": 10
+            },
+            "recovery": null
+          }
+        }
+      }
+    },
+    {
+      "tick": 8,
+      "id": "soak-8",
+      "expected_state": "ROLLED_BACK",
+      "response": {
+        "cancel": {
+          "ok": true,
+          "result": {
+            "request_id": "soak-8",
+            "digest": "877f51d49b81a03db75f29ce33a88b95ed6394bf8b12975f1a686661d2dd7878",
+            "state": "CANCEL_REQUESTED",
+            "result": null,
+            "timing": {
+              "activation": {
+                "version": 1,
+                "boot_id": "da99a04f-018e-4d6b-b240-f3b91a85691a",
+                "accepted_boot_ns": 887129928750,
+                "expires_boot_ns": 897129928750,
+                "accepted_wall_ns": 1793692917210142663,
+                "seconds": 10
+              },
+              "recovery": null
+            }
+          },
+          "cancel_accepted": true,
+          "cancel_complete": false
+        },
+        "row": {
+          "request_id": "soak-8",
+          "digest": "877f51d49b81a03db75f29ce33a88b95ed6394bf8b12975f1a686661d2dd7878",
+          "state": "ROLLED_BACK",
+          "result": {
+            "error": "Cancelled",
+            "expired": false,
+            "sqlite_error": null,
+            "errno": null
+          },
+          "timing": {
+            "activation": {
+              "version": 1,
+              "boot_id": "da99a04f-018e-4d6b-b240-f3b91a85691a",
+              "accepted_boot_ns": 887129928750,
+              "expires_boot_ns": 897129928750,
+              "accepted_wall_ns": 1793692917210142663,
+              "seconds": 10
+            },
+            "recovery": {
+              "version": 1,
+              "boot_id": "da99a04f-018e-4d6b-b240-f3b91a85691a",
+              "accepted_boot_ns": 887489956700,
+              "expires_boot_ns": 892489956700,
+              "accepted_wall_ns": 1793692917570148822,
+              "seconds": 5
+            }
+          }
+        }
+      }
+    },
+    {
+      "tick": 9,
+      "id": "soak-9",
+      "expected_state": "ROLLED_BACK",
+      "response": {
+        "cancel": {
+          "ok": true,
+          "result": {
+            "request_id": "soak-9",
+            "digest": "8a422efc1961b1ff386aae2ae689a964a2632a32dd3e82cef12e458c41cf2946",
+            "state": "CANCEL_REQUESTED",
+            "result": null,
+            "timing": {
+              "activation": {
+                "version": 1,
+                "boot_id": "da99a04f-018e-4d6b-b240-f3b91a85691a",
+                "accepted_boot_ns": 897132020553,
+                "expires_boot_ns": 907132020553,
+                "accepted_wall_ns": 1793692927212235925,
+                "seconds": 10
+              },
+              "recovery": null
+            }
+          },
+          "cancel_accepted": true,
+          "cancel_complete": false
+        },
+        "row": {
+          "request_id": "soak-9",
+          "digest": "8a422efc1961b1ff386aae2ae689a964a2632a32dd3e82cef12e458c41cf2946",
+          "state": "ROLLED_BACK",
+          "result": {
+            "error": "Cancelled",
+            "expired": false,
+            "sqlite_error": null,
+            "errno": null
+          },
+          "timing": {
+            "activation": {
+              "version": 1,
+              "boot_id": "da99a04f-018e-4d6b-b240-f3b91a85691a",
+              "accepted_boot_ns": 897132020553,
+              "expires_boot_ns": 907132020553,
+              "accepted_wall_ns": 1793692927212235925,
+              "seconds": 10
+            },
+            "recovery": {
+              "version": 1,
+              "boot_id": "da99a04f-018e-4d6b-b240-f3b91a85691a",
+              "accepted_boot_ns": 897497763902,
+              "expires_boot_ns": 902497763902,
+              "accepted_wall_ns": 1793692927577956441,
+              "seconds": 5
+            }
+          }
+        }
+      }
+    },
+    {
+      "tick": 10,
+      "id": "soak-10",
+      "expected_state": "FAILED",
+      "response": {
+        "ok": false,
+        "error": "Rejected",
+        "reason": "activation_FAILED"
+      }
+    },
+    {
+      "tick": 11,
+      "id": "soak-11",
+      "expected_state": "FAILED",
+      "response": {
+        "ok": false,
+        "error": "Rejected",
+        "reason": "activation_FAILED"
+      }
+    },
+    {
+      "tick": 12,
+      "id": "soak-12",
+      "expected_state": "FAILED",
+      "response": {
+        "ok": false,
+        "error": "Rejected",
+        "reason": "activation_FAILED"
+      }
+    },
+    {
+      "tick": 13,
+      "id": "soak-13",
+      "expected_state": "FAILED",
+      "response": {
+        "ok": false,
+        "error": "Rejected",
+        "reason": "activation_FAILED"
+      }
+    }
+  ],
+  "scope": "single installed writer invocation for 1200 seconds, bounded scripted load; no unbounded stability or leak-free claim",
+  "checks": {
+    "nginx_rss_span_kib": 0,
+    "nginx_fd_min": 15,
+    "nginx_fd_max": 15,
+    "stable_samples": 103,
+    "rss_span_kib": 72,
+    "rss_fitted_growth_kib": 11.76335229341048,
+    "rss_first_last_median_delta_kib": 14.0,
+    "fd_min": 5,
+    "fd_max": 5,
+    "persistent_state_constant_after_180_seconds": true
+  },
+  "observed_seconds": 1200.177706306,
+  "final_counts": {
+    "normal": 15,
+    "root": 0,
+    "generations": 12
+  },
+  "same_writer_invocation": true,
+  "same_nginx_master_invocation": true,
+  "cleanup": {
+    "certweft.service": {
+      "main_pid_zero": true,
+      "cgroup_empty_or_removed": true
+    },
+    "certweft-nginx.service": {
+      "main_pid_zero": true,
+      "cgroup_empty_or_removed": true
+    }
+  },
+  "source_unchanged": true
+}

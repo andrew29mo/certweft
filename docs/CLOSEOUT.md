@@ -50,8 +50,9 @@ complete some steps and then return recovery_history_full; those completed
 steps are not rolled back. This is reported as partial progress, never whole
 workflow success. Every partial case must refuse a real valid normal submit;
 a stale runtime Gate authority can be its precise rejection after preparation.
-The reported Gate remains closed. Each case restarts the services afterwards and verifies
-counts/history persist and admission is closed again, including the recovered
+The reported Gate remains closed. Each case snapshots the complete state before
+its first service restart and verifies counts/history persist and admission is
+closed again, including the recovered
 session's existing conservative restart contract.
 
 ## Exhaustion runbook
@@ -139,28 +140,36 @@ Thresholds are fixed in the source and initial report before measurement:
   last-six minus first-six median RSS <= 1024 KiB. These allow bounded Python
   allocator variation but must reject a sustained observed trend above that bound.
 - Writer FD span <= 2, one quiescent writer cgroup process, zero restarts.
-- Nginx stable cgroup has exactly master + one worker; aggregate sampled RSS span
+- Nginx stable cgroup has exactly master + one worker with a fixed PID set;
+  aggregate sampled RSS span
   <= 4096 KiB, median growth <= 1024 KiB and aggregate FD span <= 2, zero restarts.
 - Unique-inode state logical/allocated bytes, file count and normal/root/generation
   counts must remain constant after warmup. Symlink targets are not double-counted.
 
 The evaluator has counterexamples for growing RSS, FD growth, residual children,
-restarts and continued persistent-state growth. Thresholds do not imply a zero
+restarts, repeatedly replaced workers and continued persistent-state growth.
+Complete fixed-history catalogs are compared every steady cycle, at the end and
+after stop; equal-size history rewrites must not pass. Thresholds do not imply a
+zero
 leak rate or long-term stability; a slower leak can remain below this window's
 resolution. Main-process HWM and sampled cgroup totals are different observations,
 not a measured complete process-tree lifetime peak. Summed per-process RSS can
 double-count shared pages; it is not physical memory consumption. Controller, interpreter,
-logs, private CA and the VM/host disk allocation are outside the state-disk count.
+logs, issuer candidate-output directory, private CA and the VM/host disk
+allocation are outside the state-disk count.
 
 ## Observed closeout result
 
 All nine independent capacity cases passed. The resource observation completed
-1200.178 seconds with 121 samples, 103 after warmup, without writer/master restart.
-Writer RSS was 21,860–21,932 KiB in the stable window (72 KiB span), with fitted
-growth 11.76 KiB and first/last-six median growth 14 KiB; FD stayed at 5. Nginx
-cgroup RSS stayed at 13,424 KiB and total FD at 15, with the same two PID set after
+1200.182 seconds with 121 samples, 103 after warmup, without writer/master restart.
+Writer RSS was 21,840–21,932 KiB in the stable window (92 KiB span), with fitted
+growth 26.41 KiB and first/last-six median growth 32 KiB; FD stayed at 5. Nginx
+cgroup RSS stayed at 13,432 KiB and total FD at 15, with the same two PID set after
 warmup. State logical/allocated bytes stayed at 81,967/212,992 (43 regular-file
-inodes); normal/root/generation counts stayed 15/0/12. These values passed the
+inodes); normal/root/generation counts stayed 15/0/12. Creation, final and
+post-stop full catalogs were identical, and all 107 steady-cycle history checks
+passed. First and final restart snapshots in all nine capacity cases also
+preserve every new recovery/activation record. These values passed the
 original thresholds and are not a zero-growth or leak-free claim.
 
 The actual workload contains eight COMMITTED updates, two ROLLED_BACK running
@@ -170,6 +179,9 @@ post-warmup PID set did not change. After that finite creation phase, 107 cycles
 reuse fixed history through queries, duplicate bodies, terminal cancellation and
 server rejection of invalid new IDs. This is a modest scripted control-plane
 workload, not continuous rotations, a load benchmark or a long-term soak.
+
+See [CLOSEOUT_REVIEW.md](CLOSEOUT_REVIEW.md) for the corrected first-restart
+history snapshots, worker identity and full-catalog controls.
 
 ## Reproduction and evidence
 
@@ -190,7 +202,7 @@ digests and restores its prior Docker context. Failed/historical attempts retain
 their own source. Report completion is required; sample count alone is not success.
 
 Reports are capacity.json/html, soak.json/html and closeout-host.json/html, plus
-current unit/deployment records. Current Linux unit evidence is closeout-units.json/html: 133 tests with zero
+current unit/deployment records. Current Linux unit evidence is closeout-units.json/html: 136 tests with zero
 failures, errors or skips. The eight installed deployment and fourteen runtime
 storage-fault regressions were also rerun after the resource window, so they did
 not perturb those samples. The seven current report pairs bind one complete

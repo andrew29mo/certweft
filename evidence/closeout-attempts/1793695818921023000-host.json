@@ -1,0 +1,132 @@
+{
+  "passed": false,
+  "status": "failed",
+  "capacity_phases": [
+    {
+      "name": "normal",
+      "bootstrap": {
+        "passed": true,
+        "cases": 4,
+        "error": null
+      },
+      "result": {
+        "case": "normal",
+        "passed": true,
+        "all_completed": false
+      }
+    },
+    {
+      "name": "generations",
+      "bootstrap": {
+        "passed": true,
+        "cases": 4,
+        "error": null
+      },
+      "result": {
+        "case": "generations",
+        "passed": true,
+        "all_completed": false
+      }
+    },
+    {
+      "name": "root",
+      "bootstrap": {
+        "passed": true,
+        "cases": 4,
+        "error": null
+      },
+      "result": {
+        "case": "root",
+        "passed": true,
+        "all_completed": false
+      }
+    },
+    {
+      "name": "remaining-0",
+      "bootstrap": {
+        "passed": true,
+        "cases": 4,
+        "error": null
+      },
+      "result": {
+        "case": "remaining-0",
+        "passed": true,
+        "all_completed": false
+      }
+    },
+    {
+      "name": "remaining-1",
+      "bootstrap": {
+        "passed": true,
+        "cases": 4,
+        "error": null
+      },
+      "result": {
+        "case": "remaining-1",
+        "passed": true,
+        "all_completed": false
+      }
+    },
+    {
+      "name": "remaining-2",
+      "bootstrap": {
+        "passed": true,
+        "cases": 4,
+        "error": null
+      },
+      "result": {
+        "case": "remaining-2",
+        "passed": true,
+        "all_completed": false
+      }
+    },
+    {
+      "name": "remaining-3",
+      "bootstrap": {
+        "passed": true,
+        "cases": 4,
+        "error": null
+      },
+      "result": {
+        "case": "remaining-3",
+        "passed": true,
+        "all_completed": false
+      }
+    },
+    {
+      "name": "remaining-4",
+      "bootstrap": {
+        "passed": true,
+        "cases": 4,
+        "error": null
+      },
+      "result": {
+        "case": "remaining-4",
+        "passed": true,
+        "all_completed": false
+      }
+    },
+    {
+      "name": "remaining-5",
+      "bootstrap": {
+        "passed": true,
+        "cases": 4,
+        "error": null
+      },
+      "result": {
+        "case": "remaining-5",
+        "passed": true,
+        "all_completed": true
+      }
+    }
+  ],
+  "profile": "certweft-deploy",
+  "scope": "fresh marked application installation per capacity case; separate single 1200-second service invocation for resources",
+  "soak_bootstrap": {
+    "passed": true,
+    "cases": 4,
+    "error": null
+  },
+  "error": "RuntimeError:command_failed:colima:1",
+  "docker_context_restored": true
+}

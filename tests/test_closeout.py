@@ -29,3 +29,36 @@ class CloseoutChecks(unittest.TestCase):
             w=Writer(d,'nginx','conf','ca','key','localhost','127.0.0.1',19443)
             with self.assertRaisesRegex(Rejected,'version_capacity'):w.stage(candidate)
             self.assertEqual(len(list(pathlib.Path(d).glob('v-*'))),16)
+
+    def test_nginx_worker_recreation_cannot_reset_memory_between_samples(self):
+        s=self.samples()
+        for i,row in enumerate(s):row['nginx']['cgroup_pids']=[20,100+i]
+        with self.assertRaisesRegex(AssertionError,'nginx_worker_replaced_after_warmup'):resource_checks(s)
+    def test_restart_must_preserve_newly_completed_history(self):
+        from unittest.mock import patch
+        from tools.closeout_vm import retained_restart
+        before={'core':{'state':'READY'},'leaf':'leaf','catalogs':{'root':[{'id':'limited-cert','state':'VERIFIED_CLOSED','result':'restoration-receipt'}]},'counts':{'root':16}}
+        after=copy.deepcopy(before);after['catalogs']['root'][0].update(state='FAILED',result='rewritten')
+        with patch('tools.closeout_vm.stable',side_effect=[before,after]),patch('tools.closeout_vm.props',return_value={'InvocationID':'old'}),patch('tools.closeout_vm.stop'),patch('tools.closeout_vm.start',return_value=({'gate_allows_updates':False},{'InvocationID':'new'})):
+            with self.assertRaisesRegex(AssertionError,'full_state_or_history_changed_on_restart'):retained_restart()
+
+    def test_first_partial_recovery_restart_cannot_rebaseline_corruption(self):
+        from contextlib import ExitStack
+        from types import SimpleNamespace
+        from unittest.mock import patch
+        from tools import closeout_vm as m
+        state={'catalogs':{'normal':[],'root':[{'id':'fill-0','state':'STORAGE_VERIFIED','result':'old'}]}}
+        def cli(command,*args,**kwargs):
+            if command=='recover':
+                state['catalogs']['root'].append({'id':'limited-cert','state':'VERIFIED_CLOSED','result':'receipt'})
+                return {'reason':'recovery_history_full'},SimpleNamespace(returncode=1)
+            if command=='recovery-request-status':return {'result':copy.deepcopy(state['catalogs']['root'][-1])},None
+            if command=='gate':return {'gate_allows_updates':False},None
+            if command=='status':return {'result':{'state':'APPLYING'}},None
+            raise AssertionError(command)
+        def stop():state['catalogs']['root'][-1].update(state='FAILED',result='corrupted-on-first-stop')
+        def stable():return {'catalogs':copy.deepcopy(state['catalogs']),'core':{'state':'APPLYING'},'leaf':'leaf','counts':{'root':16}}
+        replacements={'dirty_pending':lambda _:('cert',{'committed':'base'},'candidate'),'fill_root':lambda n:[None]*n,'catalogs':lambda:copy.deepcopy(state['catalogs']),'counts':lambda:{'root':16},'cli':cli,'submit':lambda *a,**k:{'reason':'stale_gate_authority'},'wire':lambda:'leaf','expected':lambda _:'leaf','props':lambda _:{'InvocationID':'old'},'stop':stop,'start':lambda:({'gate_allows_updates':False},{'InvocationID':'new'}),'stable':stable}
+        with ExitStack() as stack:
+            for name,value in replacements.items():stack.enter_context(patch.object(m,name,side_effect=value))
+            with self.assertRaisesRegex(AssertionError,'full_state_or_history_changed_on_restart'):m.limited_root(1)

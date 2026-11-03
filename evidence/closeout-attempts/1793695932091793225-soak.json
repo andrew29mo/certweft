@@ -1,0 +1,867 @@
+{
+  "passed": false,
+  "status": "failed",
+  "source_sha256": {
+    "pyproject.toml": "c9e02c232567397360e119e7cd31325b80873ad64bc45b63b4ddbd3c1e961461",
+    "certweft/service.py": "70199d02b38034399637c4c8adcfb674ce847e4061dab9b280e6e73094074ed0",
+    "certweft/deadlines.py": "e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f",
+    "certweft/release.py": "604a1d770f47c375989ef8d274dbd8616d3e487152f3abe6965ea1085391d44a",
+    "certweft/recovery.py": "88a3bc08906771eb27e3ef4a57d25439522f363929b9645eb91e72a8145ac791",
+    "certweft/recovery_executor.py": "1a6a1fc983d14f132d374679f8676a09882e0918ac4fd332caaceef240a39531",
+    "certweft/deployment.py": "a9f7688a19c3b64edfc051c7058aa5aff32fc19d5ed947f07c826b6f2caca1b4",
+    "certweft/reconciliation.py": "bb21824e85c89d90639837f8d144eb0e265b9652065104326f9d843584d88f45",
+    "certweft/opening.py": "514191731118b9cfbf834367104b5f5ab3d7973d5fef91854c9f13ffbae5434e",
+    "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certweft/core.py": "fc63c1d25dda209c19129440b1fec36f20d1fdd9b72ef09acd8ab032872310b1",
+    "certweft/operations.py": "46da1610efd2b5bc25414f07d04a3556a3b57be7870c8af6751fa5c347ca7385",
+    "certweft/cli.py": "d31316ceaa8b58273cb5fc4fe26b6205f6dcb168e17cc893221b1605625d6724",
+    "certweft/gate.py": "60854ad11c20eca05609032c75a0fe163292c3d6bdf79427ca495576c3b80c1a",
+    "certweft/storage.py": "2f431bd3758a8a14b2cb616521f50d638cf3fdbf733278f87a7e7cb99bf1fe3b",
+    "certweft/certificate_recovery.py": "8e12ac749a8124444e1b70d2c365f74e3ba396656a530adb2f0281a481b0694e",
+    "certweft/admission.py": "0f2a589836afaf9abd4a2ca18a548fa268ec01e70e41028d9191e4927291bf29",
+    "certweft/ca.py": "e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c",
+    "certweft/executor.py": "b11ef0c91cd65a5fa013f6733feda22d6fabcecc46c0aca92a471c0fc48a87c6",
+    "certweft/assets/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550",
+    "certweft/assets/certweft.service": "7e4d52e8ad2a703b6d944df57321a14e9f034e7d13afa830d90a9cb5e07aefc0",
+    "certweft/assets/certweft-issue@.service": "5cdbd5aed7a98d402ea3bdc3e38f26f1e37f0e26d3cd00c20b861b5b79be4744",
+    "certweft/assets/certweft-nginx.service": "f907853efe6c7bff0e99fb5f3386bffa6ed674e19e12329fc09e455bea945321",
+    "tools/policy_vm.py": "27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6",
+    "tools/admission_vm.py": "42bc276dae22dafa5d20db4e9b09054399a4bde61baf4dee34036af2fd76d86a",
+    "tools/certificate_vm.py": "4435c71a031b395d06270dc38bbfd48a3db890cfa3bdadb53e4880295294ee09",
+    "tools/closeout_vm.py": "c24701aa7928d4162c0f45f2cc7820ecd5226d9937c057727c75cbc5f8cb5d48",
+    "tools/storage_reboot_host.py": "1909d9edc945a34a06a4cedc9cf17045281dffebf97482be9e9e5257b499c258",
+    "tools/storage_vm.py": "2d251e4e7de2c10739c2d339f372787b36613f65759a539037b075b6a7e3a14c",
+    "tools/deployment_vm.py": "4a3a5a534887893906b55c2a596a271f3ed9ca7d9d983b631bfad3c1168b89f5",
+    "tools/deadline_vm.py": "cd0d61fb4e1253cdc23b12e3fb38d10ad41fd04f2debd9c23f4574f8fa4e7cf3",
+    "tools/executor_vm.py": "643565d4130bbf08daa619623b72a566e847e04c4f3504ee15ad3a6c493a656d",
+    "tools/closeout_host.py": "731dabac07a4f57be48e7ff72afee358bf2d7789fa937efcc47aac6248d388b9",
+    "tools/opening_vm.py": "656b8d1f7c461cd2657eeb3e8db1af2e50516435032c40788496916372522b04",
+    "tools/recovery_vm.py": "104fc1ee43c382f5bb0d4d7c19c3369bb4c656097966e4e05c9008b3a9f285ee",
+    "tools/opening_mutation.py": "41370aa7417e65830048b0e4c984cf8c3de5a1602fb51410f7268a6e8b2868c1",
+    "tools/storage_reboot_vm.py": "dd5ed1f816f2a0135cff1aa4445919470d1d11b1579a1bbedd45d46c1973e12e",
+    "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
+    "tools/credential_probe.py": "8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46",
+    "tools/operations_vm.py": "3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85",
+    "tools/admission_mutation.py": "cd0754f335cf80bd162396954eeab0d6edecfabc0d1c0b8e0e61a19cc8a1f749",
+    "tools/reboot_host.py": "0f344717224e4bd705154bf493850e6bed6a0e8f91e8cc72c2d940bac0029157",
+    "tools/reconcile_vm.py": "70172e146542bd3f564128fac997709f1ba7692289c681b4ae81109c5aeb3e8b",
+    "tools/gate_vm.py": "66215b4c176fe5ca9db1fda5bd6869213f852fd5cdeb0ee3ea23412197a0fb78",
+    "tools/reboot_vm.py": "0bb91b7d73c1ea968e2d290a99ca6074e4a9f83b4b263b29789fbb379a60c259",
+    "tools/release_vm.py": "e82059f514f166d81740a004d707dc78d5e62b14c06b6a08fc8ae0ad5f338812",
+    "tests/test_release.py": "08e1031f443b3ef89afbd05044d007f56facb056ac366af55fd35c3882d3f7d9",
+    "tests/test_certificate_recovery.py": "7dedc3df699699665d7c21e9b2d62592f8d648eaa9cf5dc973c31453622fdcb0",
+    "tests/test_operations.py": "f1741fae5ae944fa974e90c418c447da27e49d18051fc8ad50b4ea843041e337",
+    "tests/test_core.py": "8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c",
+    "tests/test_recovery.py": "cba9d1c4dd080581bd039f9d3331200a74de221e751d57c008222bdbb8bba830",
+    "tests/test_admission.py": "129aadb4a9ffd1b1dac3471d64117dd6daf41dbb2eadda43cdb94a67316d2418",
+    "tests/test_opening.py": "45e4aca1cebd1d44ac9af9ad5fec47908cbc192748f04b3b7ee7ee2e48690963",
+    "tests/test_storage.py": "07d2de55f10a9a3011db73c9141295b43ff2951f54b6e339d184117cf87af2cf",
+    "tests/test_gate.py": "e1bcd31c414728e0022a3d1f47726bedff559a52f811e536860da60de589c8d0",
+    "tests/test_deadlines.py": "442d8ea3cfa4af88ec62603d84f017fb2b1883e8c05d3d92bedd695811b9dd29",
+    "tests/test_service_process.py": "db7bccfa6248f8a9281cd380f5db317f71116b06711f195100f86a7f5a70e9b9",
+    "tests/test_deployment.py": "11d3612e6ac18ac4967168437ef03cfc6eab58afe0dbcbe3fbf1378d6270ecc7",
+    "tests/test_reconciliation.py": "91d301f53893145dd6400efc00c67204441a80b15428c0e9032629137db3cac9",
+    "tests/test_reboot_evidence.py": "da5cfb3528d91750eeefb44f4a6fb7e7857fb7b438df96682150d0e80d2fb973",
+    "tests/test_closeout.py": "b6dc46e35d0bb4b3ed43505e8c47c832af1072e267d59ce3db6df95ce8be1ea5",
+    "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
+  },
+  "duration_seconds": 1200,
+  "warmup_seconds": 180,
+  "sample_interval_seconds": 10,
+  "thresholds_predeclared": {
+    "writer_rss_span_kib": 4096,
+    "writer_rss_fitted_growth_kib": 1024,
+    "writer_rss_median_growth_kib": 1024,
+    "writer_fd_span": 2,
+    "quiescent_writer_processes": 1,
+    "restarts": 0,
+    "stable_disk_growth_bytes": 0,
+    "stable_nginx_processes": 2,
+    "stable_nginx_pid_sets": 1,
+    "nginx_cgroup_rss_span_kib": 4096,
+    "nginx_cgroup_rss_median_growth_kib": 1024,
+    "nginx_cgroup_fd_span": 2
+  },
+  "samples": [
+    {
+      "elapsed_seconds": 1.8821954519999053,
+      "writer": {
+        "pid": 8486,
+        "invocation": "a0526dd496154e12ac0048cebe5e1381",
+        "rss_kib": 21888,
+        "hwm_kib": 21968,
+        "fds": 5,
+        "cgroup_pids": [
+          8486
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8486,
+            "rss_kib": 21888,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21888,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8483,
+        "invocation": "000aefd48c8c4a069731fb14953160e4",
+        "rss_kib": 6692,
+        "hwm_kib": 6692,
+        "fds": 7,
+        "cgroup_pids": [
+          8483,
+          8521
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8483,
+            "rss_kib": 6692,
+            "fds": 7
+          },
+          {
+            "pid": 8521,
+            "rss_kib": 6620,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13312,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 55514,
+        "allocated_bytes": 94208,
+        "files": 16,
+        "counts": {
+          "normal": 2,
+          "root": 0,
+          "generations": 3
+        }
+      },
+      "wire_leaf": "c1d9f6f441115e1cafe88085c2cf113cf183d36c525b94f56837202b531be2db"
+    },
+    {
+      "elapsed_seconds": 11.917208871999946,
+      "writer": {
+        "pid": 8486,
+        "invocation": "a0526dd496154e12ac0048cebe5e1381",
+        "rss_kib": 21888,
+        "hwm_kib": 22096,
+        "fds": 5,
+        "cgroup_pids": [
+          8486
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8486,
+            "rss_kib": 21888,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21888,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8483,
+        "invocation": "000aefd48c8c4a069731fb14953160e4",
+        "rss_kib": 6704,
+        "hwm_kib": 6704,
+        "fds": 7,
+        "cgroup_pids": [
+          8483,
+          8570
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8483,
+            "rss_kib": 6704,
+            "fds": 7
+          },
+          {
+            "pid": 8570,
+            "rss_kib": 6636,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13340,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 57543,
+        "allocated_bytes": 106496,
+        "files": 19,
+        "counts": {
+          "normal": 3,
+          "root": 0,
+          "generations": 4
+        }
+      },
+      "wire_leaf": "5a165fc3c5bba8e0be2ccc05dfca80e9722cbdf008a86eee2a7a8e01cbe1b122"
+    },
+    {
+      "elapsed_seconds": 21.870495549999987,
+      "writer": {
+        "pid": 8486,
+        "invocation": "a0526dd496154e12ac0048cebe5e1381",
+        "rss_kib": 21888,
+        "hwm_kib": 22096,
+        "fds": 5,
+        "cgroup_pids": [
+          8486
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8486,
+            "rss_kib": 21888,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21888,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8483,
+        "invocation": "000aefd48c8c4a069731fb14953160e4",
+        "rss_kib": 6716,
+        "hwm_kib": 6716,
+        "fds": 7,
+        "cgroup_pids": [
+          8483,
+          8617
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8483,
+            "rss_kib": 6716,
+            "fds": 7
+          },
+          {
+            "pid": 8617,
+            "rss_kib": 6644,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13360,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 59572,
+        "allocated_bytes": 118784,
+        "files": 22,
+        "counts": {
+          "normal": 4,
+          "root": 0,
+          "generations": 5
+        }
+      },
+      "wire_leaf": "c1d9f6f441115e1cafe88085c2cf113cf183d36c525b94f56837202b531be2db"
+    },
+    {
+      "elapsed_seconds": 31.888940170999945,
+      "writer": {
+        "pid": 8486,
+        "invocation": "a0526dd496154e12ac0048cebe5e1381",
+        "rss_kib": 21892,
+        "hwm_kib": 22096,
+        "fds": 5,
+        "cgroup_pids": [
+          8486
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8486,
+            "rss_kib": 21892,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21892,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8483,
+        "invocation": "000aefd48c8c4a069731fb14953160e4",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8483,
+          8667
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8483,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8667,
+            "rss_kib": 6696,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13420,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 61601,
+        "allocated_bytes": 131072,
+        "files": 25,
+        "counts": {
+          "normal": 5,
+          "root": 0,
+          "generations": 6
+        }
+      },
+      "wire_leaf": "5a165fc3c5bba8e0be2ccc05dfca80e9722cbdf008a86eee2a7a8e01cbe1b122"
+    },
+    {
+      "elapsed_seconds": 41.84912279199989,
+      "writer": {
+        "pid": 8486,
+        "invocation": "a0526dd496154e12ac0048cebe5e1381",
+        "rss_kib": 21896,
+        "hwm_kib": 22096,
+        "fds": 5,
+        "cgroup_pids": [
+          8486
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8486,
+            "rss_kib": 21896,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21896,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8483,
+        "invocation": "000aefd48c8c4a069731fb14953160e4",
+        "rss_kib": 6724,
+        "hwm_kib": 6724,
+        "fds": 7,
+        "cgroup_pids": [
+          8483,
+          8714
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8483,
+            "rss_kib": 6724,
+            "fds": 7
+          },
+          {
+            "pid": 8714,
+            "rss_kib": 6692,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13416,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 63630,
+        "allocated_bytes": 143360,
+        "files": 28,
+        "counts": {
+          "normal": 6,
+          "root": 0,
+          "generations": 7
+        }
+      },
+      "wire_leaf": "c1d9f6f441115e1cafe88085c2cf113cf183d36c525b94f56837202b531be2db"
+    },
+    {
+      "elapsed_seconds": 51.95335161899993,
+      "writer": {
+        "pid": 8486,
+        "invocation": "a0526dd496154e12ac0048cebe5e1381",
+        "rss_kib": 21896,
+        "hwm_kib": 22096,
+        "fds": 5,
+        "cgroup_pids": [
+          8486
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8486,
+            "rss_kib": 21896,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21896,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8483,
+        "invocation": "000aefd48c8c4a069731fb14953160e4",
+        "rss_kib": 6728,
+        "hwm_kib": 6728,
+        "fds": 7,
+        "cgroup_pids": [
+          8483,
+          8765
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8483,
+            "rss_kib": 6728,
+            "fds": 7
+          },
+          {
+            "pid": 8765,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13428,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 65659,
+        "allocated_bytes": 155648,
+        "files": 31,
+        "counts": {
+          "normal": 7,
+          "root": 0,
+          "generations": 8
+        }
+      },
+      "wire_leaf": "5a165fc3c5bba8e0be2ccc05dfca80e9722cbdf008a86eee2a7a8e01cbe1b122"
+    },
+    {
+      "elapsed_seconds": 61.873949907999986,
+      "writer": {
+        "pid": 8486,
+        "invocation": "a0526dd496154e12ac0048cebe5e1381",
+        "rss_kib": 21896,
+        "hwm_kib": 22096,
+        "fds": 5,
+        "cgroup_pids": [
+          8486
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8486,
+            "rss_kib": 21896,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21896,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8483,
+        "invocation": "000aefd48c8c4a069731fb14953160e4",
+        "rss_kib": 6728,
+        "hwm_kib": 6728,
+        "fds": 7,
+        "cgroup_pids": [
+          8483,
+          8813
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8483,
+            "rss_kib": 6728,
+            "fds": 7
+          },
+          {
+            "pid": 8813,
+            "rss_kib": 6696,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13424,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 67688,
+        "allocated_bytes": 167936,
+        "files": 34,
+        "counts": {
+          "normal": 8,
+          "root": 0,
+          "generations": 9
+        }
+      },
+      "wire_leaf": "c1d9f6f441115e1cafe88085c2cf113cf183d36c525b94f56837202b531be2db"
+    },
+    {
+      "elapsed_seconds": 71.89025170899993,
+      "writer": {
+        "pid": 8486,
+        "invocation": "a0526dd496154e12ac0048cebe5e1381",
+        "rss_kib": 21900,
+        "hwm_kib": 22096,
+        "fds": 5,
+        "cgroup_pids": [
+          8486
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8486,
+            "rss_kib": 21900,
+            "fds": 5
+          }
+        ],
+        "cgroup_rss_kib": 21900,
+        "cgroup_fds": 5,
+        "nrestarts": 0
+      },
+      "nginx": {
+        "pid": 8483,
+        "invocation": "000aefd48c8c4a069731fb14953160e4",
+        "rss_kib": 6728,
+        "hwm_kib": 6728,
+        "fds": 7,
+        "cgroup_pids": [
+          8483,
+          8860
+        ],
+        "cgroup_samples": [
+          {
+            "pid": 8483,
+            "rss_kib": 6728,
+            "fds": 7
+          },
+          {
+            "pid": 8860,
+            "rss_kib": 6700,
+            "fds": 8
+          }
+        ],
+        "cgroup_rss_kib": 13428,
+        "cgroup_fds": 15,
+        "nrestarts": 0
+      },
+      "disk": {
+        "logical_bytes": 69717,
+        "allocated_bytes": 180224,
+        "files": 37,
+        "counts": {
+          "normal": 9,
+          "root": 0,
+          "generations": 10
+        }
+      },
+      "wire_leaf": "5a165fc3c5bba8e0be2ccc05dfca80e9722cbdf008a86eee2a7a8e01cbe1b122"
+    }
+  ],
+  "events": [
+    {
+      "tick": 0,
+      "id": "soak-0",
+      "expected_state": "COMMITTED",
+      "response": {
+        "ok": true,
+        "result": {
+          "request_id": "soak-0",
+          "digest": "5a6dd99517b26d613e4cb18e3a0defdfc69b453ea36b5d2b0b3e4650f8fc6df6",
+          "state": "COMMITTED",
+          "result": {
+            "committed": "27dc2d51c23c43e48c0ab2976c68b19c"
+          },
+          "timing": {
+            "activation": {
+              "version": 1,
+              "boot_id": "c8d93c5b-9a83-4dbc-a144-4ae8c9dd95b1",
+              "accepted_boot_ns": 524001330748,
+              "expires_boot_ns": 534001330748,
+              "accepted_wall_ns": 1793695604236926743,
+              "seconds": 10
+            },
+            "recovery": null
+          }
+        }
+      }
+    },
+    {
+      "tick": 1,
+      "id": "soak-1",
+      "expected_state": "COMMITTED",
+      "response": {
+        "ok": true,
+        "result": {
+          "request_id": "soak-1",
+          "digest": "be93da789e4908efd63049b6af3ef18a3ce2b0f0daa2d9a46431fd6413e81524",
+          "state": "COMMITTED",
+          "result": {
+            "committed": "d995c0ac3075492ba4714ce0d03dea86"
+          },
+          "timing": {
+            "activation": {
+              "version": 1,
+              "boot_id": "c8d93c5b-9a83-4dbc-a144-4ae8c9dd95b1",
+              "accepted_boot_ns": 534060920075,
+              "expires_boot_ns": 544060920075,
+              "accepted_wall_ns": 1793695614296542944,
+              "seconds": 10
+            },
+            "recovery": null
+          }
+        }
+      }
+    },
+    {
+      "tick": 2,
+      "id": "soak-2",
+      "expected_state": "COMMITTED",
+      "response": {
+        "ok": true,
+        "result": {
+          "request_id": "soak-2",
+          "digest": "8903e02b80974330c7596d33dac28e34aae035c5cdc7414bc2e2a6ce87002df3",
+          "state": "COMMITTED",
+          "result": {
+            "committed": "b5e82572bb7441b1a25865fd09b08d5a"
+          },
+          "timing": {
+            "activation": {
+              "version": 1,
+              "boot_id": "c8d93c5b-9a83-4dbc-a144-4ae8c9dd95b1",
+              "accepted_boot_ns": 544019793756,
+              "expires_boot_ns": 554019793756,
+              "accepted_wall_ns": 1793695624255407043,
+              "seconds": 10
+            },
+            "recovery": null
+          }
+        }
+      }
+    },
+    {
+      "tick": 3,
+      "id": "soak-3",
+      "expected_state": "COMMITTED",
+      "response": {
+        "ok": true,
+        "result": {
+          "request_id": "soak-3",
+          "digest": "ad99b79de56e67efe24fb3e644a572f2c85a0156dfba528c7868fcc3fca047c8",
+          "state": "COMMITTED",
+          "result": {
+            "committed": "c8cb69eccc6047beb8fd15ceadd0e556"
+          },
+          "timing": {
+            "activation": {
+              "version": 1,
+              "boot_id": "c8d93c5b-9a83-4dbc-a144-4ae8c9dd95b1",
+              "accepted_boot_ns": 554045092526,
+              "expires_boot_ns": 564045092526,
+              "accepted_wall_ns": 1793695634280704604,
+              "seconds": 10
+            },
+            "recovery": null
+          }
+        }
+      }
+    },
+    {
+      "tick": 4,
+      "id": "soak-4",
+      "expected_state": "COMMITTED",
+      "response": {
+        "ok": true,
+        "result": {
+          "request_id": "soak-4",
+          "digest": "f058d9d531124f412042385e0a09b5626285ee061e0dcdd22c2b661012517496",
+          "state": "COMMITTED",
+          "result": {
+            "committed": "5138ff07f47c4978855ea95316eb8af8"
+          },
+          "timing": {
+            "activation": {
+              "version": 1,
+              "boot_id": "c8d93c5b-9a83-4dbc-a144-4ae8c9dd95b1",
+              "accepted_boot_ns": 564021195718,
+              "expires_boot_ns": 574021195718,
+              "accepted_wall_ns": 1793695644256814672,
+              "seconds": 10
+            },
+            "recovery": null
+          }
+        }
+      }
+    },
+    {
+      "tick": 5,
+      "id": "soak-5",
+      "expected_state": "COMMITTED",
+      "response": {
+        "ok": true,
+        "result": {
+          "request_id": "soak-5",
+          "digest": "b759fd318e5b814fe4ace3285b3e47c55d6cef18d3933b102e7a41876e021c56",
+          "state": "COMMITTED",
+          "result": {
+            "committed": "16f2a990c31a4771bc92a2d338b2d1c4"
+          },
+          "timing": {
+            "activation": {
+              "version": 1,
+              "boot_id": "c8d93c5b-9a83-4dbc-a144-4ae8c9dd95b1",
+              "accepted_boot_ns": 574094473265,
+              "expires_boot_ns": 584094473265,
+              "accepted_wall_ns": 1793695654330220801,
+              "seconds": 10
+            },
+            "recovery": null
+          }
+        }
+      }
+    },
+    {
+      "tick": 6,
+      "id": "soak-6",
+      "expected_state": "COMMITTED",
+      "response": {
+        "ok": true,
+        "result": {
+          "request_id": "soak-6",
+          "digest": "bc14415979fa964d58b3ba98a9e784bfcbe09e134a47b383fdba6b657badeebb",
+          "state": "COMMITTED",
+          "result": {
+            "committed": "528b001d031049ebb263273ab066730a"
+          },
+          "timing": {
+            "activation": {
+              "version": 1,
+              "boot_id": "c8d93c5b-9a83-4dbc-a144-4ae8c9dd95b1",
+              "accepted_boot_ns": 584025575958,
+              "expires_boot_ns": 594025575958,
+              "accepted_wall_ns": 1793695664261207911,
+              "seconds": 10
+            },
+            "recovery": null
+          }
+        }
+      }
+    },
+    {
+      "tick": 7,
+      "id": "soak-7",
+      "expected_state": "COMMITTED",
+      "response": {
+        "ok": true,
+        "result": {
+          "request_id": "soak-7",
+          "digest": "4ef8d010ee3dca6e2a388e779495f244b98b2b147f153c9f94090443ac09e917",
+          "state": "COMMITTED",
+          "result": {
+            "committed": "0dc820c621704e2e936bd8bc679a7dba"
+          },
+          "timing": {
+            "activation": {
+              "version": 1,
+              "boot_id": "c8d93c5b-9a83-4dbc-a144-4ae8c9dd95b1",
+              "accepted_boot_ns": 594034011344,
+              "expires_boot_ns": 604034011344,
+              "accepted_wall_ns": 1793695674269660255,
+              "seconds": 10
+            },
+            "recovery": null
+          }
+        }
+      }
+    }
+  ],
+  "steady_cycles": [],
+  "scope": "single installed writer invocation for 1200 seconds, bounded scripted load; no unbounded stability or leak-free claim",
+  "error": "AssertionError:cli_failed:status:{\"ok\": false, \"error\": \"FileNotFoundError\", \"reason\": null}\n",
+  "cleanup": {
+    "certweft.service": {
+      "main_pid_zero": true,
+      "cgroup_empty_or_removed": true
+    },
+    "certweft-nginx.service": {
+      "main_pid_zero": true,
+      "cgroup_empty_or_removed": true
+    }
+  },
+  "history_after_stop": {
+    "normal": [
+      {
+        "id": "installed-first",
+        "digest": "fdee31e08975573b166e95317ce42c7ee7d8e1b3a684b8ef1047d8c6e791e587",
+        "state": "COMMITTED",
+        "result": "{\"committed\": \"cdd5aa5fef1e4e568563b5554df381ad\"}",
+        "timing": "{\"activation\": {\"version\": 1, \"boot_id\": \"c8d93c5b-9a83-4dbc-a144-4ae8c9dd95b1\", \"accepted_boot_ns\": 522432280258, \"expires_boot_ns\": 532432280258, \"accepted_wall_ns\": 1793695602667875753, \"seconds\": 10}, \"recovery\": null}"
+      },
+      {
+        "id": "soak-0",
+        "digest": "5a6dd99517b26d613e4cb18e3a0defdfc69b453ea36b5d2b0b3e4650f8fc6df6",
+        "state": "COMMITTED",
+        "result": "{\"committed\": \"27dc2d51c23c43e48c0ab2976c68b19c\"}",
+        "timing": "{\"activation\": {\"version\": 1, \"boot_id\": \"c8d93c5b-9a83-4dbc-a144-4ae8c9dd95b1\", \"accepted_boot_ns\": 524001330748, \"expires_boot_ns\": 534001330748, \"accepted_wall_ns\": 1793695604236926743, \"seconds\": 10}, \"recovery\": null}"
+      },
+      {
+        "id": "soak-1",
+        "digest": "be93da789e4908efd63049b6af3ef18a3ce2b0f0daa2d9a46431fd6413e81524",
+        "state": "COMMITTED",
+        "result": "{\"committed\": \"d995c0ac3075492ba4714ce0d03dea86\"}",
+        "timing": "{\"activation\": {\"version\": 1, \"boot_id\": \"c8d93c5b-9a83-4dbc-a144-4ae8c9dd95b1\", \"accepted_boot_ns\": 534060920075, \"expires_boot_ns\": 544060920075, \"accepted_wall_ns\": 1793695614296542944, \"seconds\": 10}, \"recovery\": null}"
+      },
+      {
+        "id": "soak-2",
+        "digest": "8903e02b80974330c7596d33dac28e34aae035c5cdc7414bc2e2a6ce87002df3",
+        "state": "COMMITTED",
+        "result": "{\"committed\": \"b5e82572bb7441b1a25865fd09b08d5a\"}",
+        "timing": "{\"activation\": {\"version\": 1, \"boot_id\": \"c8d93c5b-9a83-4dbc-a144-4ae8c9dd95b1\", \"accepted_boot_ns\": 544019793756, \"expires_boot_ns\": 554019793756, \"accepted_wall_ns\": 1793695624255407043, \"seconds\": 10}, \"recovery\": null}"
+      },
+      {
+        "id": "soak-3",
+        "digest": "ad99b79de56e67efe24fb3e644a572f2c85a0156dfba528c7868fcc3fca047c8",
+        "state": "COMMITTED",
+        "result": "{\"committed\": \"c8cb69eccc6047beb8fd15ceadd0e556\"}",
+        "timing": "{\"activation\": {\"version\": 1, \"boot_id\": \"c8d93c5b-9a83-4dbc-a144-4ae8c9dd95b1\", \"accepted_boot_ns\": 554045092526, \"expires_boot_ns\": 564045092526, \"accepted_wall_ns\": 1793695634280704604, \"seconds\": 10}, \"recovery\": null}"
+      },
+      {
+        "id": "soak-4",
+        "digest": "f058d9d531124f412042385e0a09b5626285ee061e0dcdd22c2b661012517496",
+        "state": "COMMITTED",
+        "result": "{\"committed\": \"5138ff07f47c4978855ea95316eb8af8\"}",
+        "timing": "{\"activation\": {\"version\": 1, \"boot_id\": \"c8d93c5b-9a83-4dbc-a144-4ae8c9dd95b1\", \"accepted_boot_ns\": 564021195718, \"expires_boot_ns\": 574021195718, \"accepted_wall_ns\": 1793695644256814672, \"seconds\": 10}, \"recovery\": null}"
+      },
+      {
+        "id": "soak-5",
+        "digest": "b759fd318e5b814fe4ace3285b3e47c55d6cef18d3933b102e7a41876e021c56",
+        "state": "COMMITTED",
+        "result": "{\"committed\": \"16f2a990c31a4771bc92a2d338b2d1c4\"}",
+        "timing": "{\"activation\": {\"version\": 1, \"boot_id\": \"c8d93c5b-9a83-4dbc-a144-4ae8c9dd95b1\", \"accepted_boot_ns\": 574094473265, \"expires_boot_ns\": 584094473265, \"accepted_wall_ns\": 1793695654330220801, \"seconds\": 10}, \"recovery\": null}"
+      },
+      {
+        "id": "soak-6",
+        "digest": "bc14415979fa964d58b3ba98a9e784bfcbe09e134a47b383fdba6b657badeebb",
+        "state": "COMMITTED",
+        "result": "{\"committed\": \"528b001d031049ebb263273ab066730a\"}",
+        "timing": "{\"activation\": {\"version\": 1, \"boot_id\": \"c8d93c5b-9a83-4dbc-a144-4ae8c9dd95b1\", \"accepted_boot_ns\": 584025575958, \"expires_boot_ns\": 594025575958, \"accepted_wall_ns\": 1793695664261207911, \"seconds\": 10}, \"recovery\": null}"
+      },
+      {
+        "id": "soak-7",
+        "digest": "4ef8d010ee3dca6e2a388e779495f244b98b2b147f153c9f94090443ac09e917",
+        "state": "COMMITTED",
+        "result": "{\"committed\": \"0dc820c621704e2e936bd8bc679a7dba\"}",
+        "timing": "{\"activation\": {\"version\": 1, \"boot_id\": \"c8d93c5b-9a83-4dbc-a144-4ae8c9dd95b1\", \"accepted_boot_ns\": 594034011344, \"expires_boot_ns\": 604034011344, \"accepted_wall_ns\": 1793695674269660255, \"seconds\": 10}, \"recovery\": null}"
+      }
+    ],
+    "root": []
+  },
+  "source_unchanged": false
+}
