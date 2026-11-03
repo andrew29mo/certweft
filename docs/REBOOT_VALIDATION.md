@@ -1,3 +1,9 @@
+> Historical scope: these normal preserved-state reboot observations were recorded
+> at f0ee181 with their original 57-file manifest. The later
+> [storage-fault reboot stage](STORAGE_REBOOT.md) has its own current source-bound
+> evidence and an observer/SQLite descriptor-cleanup correction; these older
+> timing/RSS observations are not silently relabeled as reruns.
+
 # Installed-service boot and preserved-state recovery
 
 This stage qualifies one installed Certweft 0.0.2 wheel on the provisioned

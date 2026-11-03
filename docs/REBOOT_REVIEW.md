@@ -1,3 +1,7 @@
+> Historical review at f0ee181. The later [storage-fault reboot stage](STORAGE_REBOOT.md)
+> adds separate evidence and fixes the observer's SQLite descriptor lifetime.
+> This review's original untested list describes its own stage, not a new rerun.
+
 # Preserved-state reboot review and corrections
 
 The review checked the installed-service recovery stage against the actual

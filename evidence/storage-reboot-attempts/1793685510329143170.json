@@ -1,0 +1,598 @@
+{
+  "passed": false,
+  "status": "failed",
+  "source_sha256": {
+    "pyproject.toml": "c9e02c232567397360e119e7cd31325b80873ad64bc45b63b4ddbd3c1e961461",
+    "certweft/service.py": "70199d02b38034399637c4c8adcfb674ce847e4061dab9b280e6e73094074ed0",
+    "certweft/deadlines.py": "e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f",
+    "certweft/release.py": "604a1d770f47c375989ef8d274dbd8616d3e487152f3abe6965ea1085391d44a",
+    "certweft/recovery.py": "88a3bc08906771eb27e3ef4a57d25439522f363929b9645eb91e72a8145ac791",
+    "certweft/recovery_executor.py": "1a6a1fc983d14f132d374679f8676a09882e0918ac4fd332caaceef240a39531",
+    "certweft/deployment.py": "a9f7688a19c3b64edfc051c7058aa5aff32fc19d5ed947f07c826b6f2caca1b4",
+    "certweft/reconciliation.py": "bb21824e85c89d90639837f8d144eb0e265b9652065104326f9d843584d88f45",
+    "certweft/opening.py": "514191731118b9cfbf834367104b5f5ab3d7973d5fef91854c9f13ffbae5434e",
+    "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certweft/core.py": "fc63c1d25dda209c19129440b1fec36f20d1fdd9b72ef09acd8ab032872310b1",
+    "certweft/operations.py": "46da1610efd2b5bc25414f07d04a3556a3b57be7870c8af6751fa5c347ca7385",
+    "certweft/cli.py": "d31316ceaa8b58273cb5fc4fe26b6205f6dcb168e17cc893221b1605625d6724",
+    "certweft/gate.py": "60854ad11c20eca05609032c75a0fe163292c3d6bdf79427ca495576c3b80c1a",
+    "certweft/storage.py": "2f431bd3758a8a14b2cb616521f50d638cf3fdbf733278f87a7e7cb99bf1fe3b",
+    "certweft/certificate_recovery.py": "8e12ac749a8124444e1b70d2c365f74e3ba396656a530adb2f0281a481b0694e",
+    "certweft/admission.py": "0f2a589836afaf9abd4a2ca18a548fa268ec01e70e41028d9191e4927291bf29",
+    "certweft/ca.py": "e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c",
+    "certweft/executor.py": "b11ef0c91cd65a5fa013f6733feda22d6fabcecc46c0aca92a471c0fc48a87c6",
+    "certweft/assets/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550",
+    "certweft/assets/certweft.service": "7e4d52e8ad2a703b6d944df57321a14e9f034e7d13afa830d90a9cb5e07aefc0",
+    "certweft/assets/certweft-issue@.service": "5cdbd5aed7a98d402ea3bdc3e38f26f1e37f0e26d3cd00c20b861b5b79be4744",
+    "certweft/assets/certweft-nginx.service": "f907853efe6c7bff0e99fb5f3386bffa6ed674e19e12329fc09e455bea945321",
+    "tools/policy_vm.py": "27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6",
+    "tools/admission_vm.py": "42bc276dae22dafa5d20db4e9b09054399a4bde61baf4dee34036af2fd76d86a",
+    "tools/certificate_vm.py": "4435c71a031b395d06270dc38bbfd48a3db890cfa3bdadb53e4880295294ee09",
+    "tools/storage_reboot_host.py": "1909d9edc945a34a06a4cedc9cf17045281dffebf97482be9e9e5257b499c258",
+    "tools/storage_vm.py": "2d251e4e7de2c10739c2d339f372787b36613f65759a539037b075b6a7e3a14c",
+    "tools/deployment_vm.py": "4a3a5a534887893906b55c2a596a271f3ed9ca7d9d983b631bfad3c1168b89f5",
+    "tools/deadline_vm.py": "cd0d61fb4e1253cdc23b12e3fb38d10ad41fd04f2debd9c23f4574f8fa4e7cf3",
+    "tools/executor_vm.py": "643565d4130bbf08daa619623b72a566e847e04c4f3504ee15ad3a6c493a656d",
+    "tools/opening_vm.py": "656b8d1f7c461cd2657eeb3e8db1af2e50516435032c40788496916372522b04",
+    "tools/recovery_vm.py": "104fc1ee43c382f5bb0d4d7c19c3369bb4c656097966e4e05c9008b3a9f285ee",
+    "tools/opening_mutation.py": "41370aa7417e65830048b0e4c984cf8c3de5a1602fb51410f7268a6e8b2868c1",
+    "tools/storage_reboot_vm.py": "27d1579af3baa6a185c9b8255cf85e5982b64298c97b77aa9d4f721eff72bbec",
+    "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
+    "tools/credential_probe.py": "8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46",
+    "tools/operations_vm.py": "3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85",
+    "tools/admission_mutation.py": "cd0754f335cf80bd162396954eeab0d6edecfabc0d1c0b8e0e61a19cc8a1f749",
+    "tools/reboot_host.py": "0f344717224e4bd705154bf493850e6bed6a0e8f91e8cc72c2d940bac0029157",
+    "tools/reconcile_vm.py": "70172e146542bd3f564128fac997709f1ba7692289c681b4ae81109c5aeb3e8b",
+    "tools/gate_vm.py": "66215b4c176fe5ca9db1fda5bd6869213f852fd5cdeb0ee3ea23412197a0fb78",
+    "tools/reboot_vm.py": "754c0af8bc90ac9994d22ac5f09fcf64e3b2ae774181e179f3bbe48126ac3245",
+    "tools/release_vm.py": "e82059f514f166d81740a004d707dc78d5e62b14c06b6a08fc8ae0ad5f338812",
+    "tests/test_release.py": "08e1031f443b3ef89afbd05044d007f56facb056ac366af55fd35c3882d3f7d9",
+    "tests/test_certificate_recovery.py": "7dedc3df699699665d7c21e9b2d62592f8d648eaa9cf5dc973c31453622fdcb0",
+    "tests/test_operations.py": "f1741fae5ae944fa974e90c418c447da27e49d18051fc8ad50b4ea843041e337",
+    "tests/test_core.py": "8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c",
+    "tests/test_recovery.py": "cba9d1c4dd080581bd039f9d3331200a74de221e751d57c008222bdbb8bba830",
+    "tests/test_admission.py": "129aadb4a9ffd1b1dac3471d64117dd6daf41dbb2eadda43cdb94a67316d2418",
+    "tests/test_opening.py": "45e4aca1cebd1d44ac9af9ad5fec47908cbc192748f04b3b7ee7ee2e48690963",
+    "tests/test_storage.py": "07d2de55f10a9a3011db73c9141295b43ff2951f54b6e339d184117cf87af2cf",
+    "tests/test_gate.py": "e1bcd31c414728e0022a3d1f47726bedff559a52f811e536860da60de589c8d0",
+    "tests/test_deadlines.py": "442d8ea3cfa4af88ec62603d84f017fb2b1883e8c05d3d92bedd695811b9dd29",
+    "tests/test_service_process.py": "db7bccfa6248f8a9281cd380f5db317f71116b06711f195100f86a7f5a70e9b9",
+    "tests/test_deployment.py": "11d3612e6ac18ac4967168437ef03cfc6eab58afe0dbcbe3fbf1378d6270ecc7",
+    "tests/test_reconciliation.py": "91d301f53893145dd6400efc00c67204441a80b15428c0e9032629137db3cac9",
+    "tests/test_reboot_evidence.py": "940f49aea788760adca0cfc22c9edd8183ae03f05850b6d3a6b6270adf95a18f",
+    "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
+  },
+  "cases": [
+    {
+      "name": "enospc",
+      "passed": true,
+      "old_boot_id": "a3ed263e-9d31-4a3f-9b9f-6b42a8bee2c0",
+      "current_boot_id": "36f34a14-628a-4d52-9f68-53ab73895af9",
+      "before_shutdown": {
+        "journal_sha256": "cc581e8f0ef32d202422daea016a5efa76b630681348bf40832ae5c55b1a699f",
+        "recovery_sha256": "126e1af3e87a5ac7bde9a4b4c254dab5c3a79602477eba7ef8ef4ddf383198a2",
+        "gate_sha256": "345f33cb773b9dba28c633ece351b3a4612c49739aade4b4907d3c565d0bfd55",
+        "state": {
+          "schema": 1,
+          "state": "APPLYING",
+          "epoch": "2bd3eb4c0f5a4186ada1b0433fa8ba22",
+          "revision": 2,
+          "committed": "bd38363f56af4f4eaafeff751d8bbe1c",
+          "committed_digest": "988b0aa0a39966fc1a24d0c874c553ff6346e368a618a6d1e06105eda70cf2ff",
+          "candidate": "30cfae6346704af4afe0075c8c82798c"
+        },
+        "requests": [
+          [
+            "installed-first",
+            "COMMITTED",
+            "{\"committed\": \"bd38363f56af4f4eaafeff751d8bbe1c\"}"
+          ],
+          [
+            "pending-enospc",
+            "RUNNING",
+            null
+          ]
+        ],
+        "recovery": [],
+        "active": "v-30cfae6346704af4afe0075c8c82798c/tls.conf"
+      },
+      "before_writer_on_new_boot": {
+        "boot_id": "36f34a14-628a-4d52-9f68-53ab73895af9",
+        "uptime_seconds": 2.29,
+        "journal_sha256": "cc581e8f0ef32d202422daea016a5efa76b630681348bf40832ae5c55b1a699f",
+        "recovery_sha256": "126e1af3e87a5ac7bde9a4b4c254dab5c3a79602477eba7ef8ef4ddf383198a2",
+        "gate_sha256": "345f33cb773b9dba28c633ece351b3a4612c49739aade4b4907d3c565d0bfd55",
+        "state": {
+          "schema": 1,
+          "state": "APPLYING",
+          "epoch": "2bd3eb4c0f5a4186ada1b0433fa8ba22",
+          "revision": 2,
+          "committed": "bd38363f56af4f4eaafeff751d8bbe1c",
+          "committed_digest": "988b0aa0a39966fc1a24d0c874c553ff6346e368a618a6d1e06105eda70cf2ff",
+          "candidate": "30cfae6346704af4afe0075c8c82798c"
+        },
+        "requests": [
+          [
+            "installed-first",
+            "COMMITTED",
+            "{\"committed\": \"bd38363f56af4f4eaafeff751d8bbe1c\"}"
+          ],
+          [
+            "pending-enospc",
+            "RUNNING",
+            null
+          ]
+        ],
+        "recovery": [],
+        "active": "v-30cfae6346704af4afe0075c8c82798c/tls.conf",
+        "writer_main_pid": "0"
+      },
+      "mount_before_uuid": "1262bdb8-174f-4a8b-8a37-075fca273b15",
+      "mount_after": {
+        "target": "/var/lib/certweft",
+        "source": "/dev/loop0",
+        "fstype": "ext4",
+        "options": "rw,relatime",
+        "uuid": "1262bdb8-174f-4a8b-8a37-075fca273b15"
+      },
+      "fault_before": {
+        "errno": 28,
+        "real_filesystem_probe_failed": true
+      },
+      "fault_after": {
+        "errno": 28,
+        "real_filesystem_probe_failed": true
+      },
+      "failed_start_before_reboot": {
+        "mode": "management_unavailable",
+        "systemd": {
+          "Restart": "on-failure",
+          "RestartPreventExitStatus": "73",
+          "MainPID": "0",
+          "Result": "exit-code",
+          "NRestarts": "3",
+          "ExecMainStatus": "1",
+          "ControlGroup": "",
+          "CapabilityBoundingSet": "cap_chown",
+          "User": "root",
+          "KillMode": "mixed",
+          "ActiveState": "failed",
+          "SubState": "failed",
+          "StartLimitIntervalUSec": "1min",
+          "StartLimitBurst": "3",
+          "InvocationID": "467533880b03455485030212cba9d362"
+        },
+        "gate_cli": {
+          "ok": false,
+          "error": "FileNotFoundError",
+          "reason": null
+        },
+        "root_cli": {
+          "ok": false,
+          "error": "FileNotFoundError",
+          "reason": null
+        },
+        "gate_write_not_claimed": true
+      },
+      "blocked_after_reboot": {
+        "mode": "management_unavailable",
+        "systemd": {
+          "Restart": "on-failure",
+          "RestartPreventExitStatus": "73",
+          "MainPID": "0",
+          "Result": "exit-code",
+          "NRestarts": "3",
+          "ExecMainStatus": "1",
+          "ControlGroup": "",
+          "CapabilityBoundingSet": "cap_chown",
+          "User": "root",
+          "KillMode": "mixed",
+          "ActiveState": "failed",
+          "SubState": "failed",
+          "StartLimitIntervalUSec": "1min",
+          "StartLimitBurst": "3",
+          "InvocationID": "b62af4e873674c10a9679e0a66a4a1e4"
+        },
+        "gate_cli": {
+          "ok": false,
+          "error": "FileNotFoundError",
+          "reason": null
+        },
+        "root_cli": {
+          "ok": false,
+          "error": "FileNotFoundError",
+          "reason": null
+        },
+        "gate_write_not_claimed": true
+      },
+      "candidate_leaf_while_faulted": "47d8b5ba2402012c806a77c2387929911de21a7f7bc2b264cc497a3ebbc218c7",
+      "closed_after_storage_repair": {
+        "ok": true,
+        "gate": {
+          "epoch": "246f45ae479a43a2bcec31b2eb9f5bfd",
+          "reason": "unclean_or_blocked",
+          "revision": 4,
+          "state": "RECOVERY_REQUIRED",
+          "version": 1
+        },
+        "executor_busy": false,
+        "gate_allows_updates": false,
+        "opening_intent_verified_closed": false,
+        "release_prepared_closed": false,
+        "storage_health_not_verified": true,
+        "journal_prepared_closed": false,
+        "completion_recorded": false
+      },
+      "writer_runtime_after_repair": {
+        "main_pid": 1554,
+        "invocation_id": "502dcd1726e549a584eac2bfe200884e",
+        "cmdline": [
+          "/opt/certweft/bin/python",
+          "-I",
+          "-m",
+          "certweft.service",
+          "/etc/certweft/writer.json"
+        ],
+        "cwd": "/",
+        "unit": {
+          "ExecStart": "{ path=/opt/certweft/bin/python ; argv[]=/opt/certweft/bin/python -I -m certweft.service /etc/certweft/writer.json ; ignore_errors=no ; start_time=[Tue 2026-11-03 13:55:27 CST] ; stop_time=[n/a] ; pid=1554 ; code=(null) ; status=0/0 }",
+          "FragmentPath": "/etc/systemd/system/certweft.service",
+          "DropInPaths": "/etc/systemd/system/certweft.service.d/reboot-evidence.conf"
+        },
+        "unit_sha256": "7e4d52e8ad2a703b6d944df57321a14e9f034e7d13afa830d90a9cb5e07aefc0",
+        "memory": {
+          "Uid": "0\t0\t0\t0",
+          "Gid": "0\t0\t0\t0",
+          "VmHWM": "21648 kB",
+          "VmRSS": "21648 kB",
+          "CapEff": "0000000000000001",
+          "NoNewPrivs": "1"
+        }
+      },
+      "root_recovery": {
+        "ok": true,
+        "updates_enabled": true,
+        "requests": [
+          "fixed-enospc-cert",
+          "fixed-enospc-journal",
+          "fixed-enospc-intent",
+          "fixed-enospc-release",
+          "fixed-enospc-open"
+        ],
+        "gate": {
+          "epoch": "246f45ae479a43a2bcec31b2eb9f5bfd",
+          "reason": "operator_opened",
+          "revision": 7,
+          "state": "RUNNING",
+          "version": 1
+        }
+      },
+      "root_history": [
+        {
+          "kind": "recover-certificate",
+          "request_id": "fixed-enospc-cert",
+          "digest": "ea7df3a257630ea9c84e40972f3f9c750a3b99e68f75f1b1332516cb1ecd727d",
+          "state": "VERIFIED_CLOSED",
+          "timing": {
+            "budget": {
+              "version": 1,
+              "boot_id": "36f34a14-628a-4d52-9f68-53ab73895af9",
+              "accepted_boot_ns": 6923988919,
+              "expires_boot_ns": 16923988919,
+              "accepted_wall_ns": 1793685327367750419,
+              "seconds": 10
+            },
+            "authority": {
+              "gate_epoch": "246f45ae479a43a2bcec31b2eb9f5bfd",
+              "gate_revision": 5
+            }
+          },
+          "target": {
+            "schema": 1,
+            "state": "APPLYING",
+            "epoch": "2bd3eb4c0f5a4186ada1b0433fa8ba22",
+            "revision": 2,
+            "committed": "bd38363f56af4f4eaafeff751d8bbe1c",
+            "committed_digest": "988b0aa0a39966fc1a24d0c874c553ff6346e368a618a6d1e06105eda70cf2ff",
+            "candidate": "30cfae6346704af4afe0075c8c82798c"
+          },
+          "probe": "3e1834fa3da5431b848e8448fe29f44d",
+          "result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "restored": true,
+            "updates_enabled": false,
+            "committed": "bd38363f56af4f4eaafeff751d8bbe1c",
+            "fingerprint": "23e7312cb9503bb66522d3a53929081d1f6131cbc745eb38c6dd894f0d3ccb3a",
+            "prior_health": "HEALTHY",
+            "closed_gate": {
+              "gate_epoch": "246f45ae479a43a2bcec31b2eb9f5bfd",
+              "gate_revision": 6
+            }
+          }
+        },
+        {
+          "kind": "reconcile-closed",
+          "request_id": "fixed-enospc-journal",
+          "digest": "6eadfc6da3cac19373d33319670eb697912530e106fb2115b40195a3afb8399c",
+          "state": "JOURNAL_VERIFIED_CLOSED",
+          "timing": {
+            "budget": {
+              "version": 1,
+              "boot_id": "36f34a14-628a-4d52-9f68-53ab73895af9",
+              "accepted_boot_ns": 7398853586,
+              "expires_boot_ns": 17398853586,
+              "accepted_wall_ns": 1793685327842595836,
+              "seconds": 10
+            },
+            "authority": {
+              "gate_epoch": "246f45ae479a43a2bcec31b2eb9f5bfd",
+              "gate_revision": 6
+            }
+          },
+          "target": {
+            "core": {
+              "schema": 1,
+              "state": "APPLYING",
+              "epoch": "2bd3eb4c0f5a4186ada1b0433fa8ba22",
+              "revision": 2,
+              "committed": "bd38363f56af4f4eaafeff751d8bbe1c",
+              "committed_digest": "988b0aa0a39966fc1a24d0c874c553ff6346e368a618a6d1e06105eda70cf2ff",
+              "candidate": "30cfae6346704af4afe0075c8c82798c"
+            },
+            "journal_digest": "7233aba8ea1bb20384cf83bd55f76852e0afb1c64a677aff1c0f4d617f15bd39",
+            "certificate_request_id": "fixed-enospc-cert"
+          },
+          "probe": "952cfeba3351407e999463d050cd35c1",
+          "result": {
+            "journal_reconciled": true,
+            "health_verified": true,
+            "prior_health": "HEALTHY",
+            "receipt_digest": "86d299d60145bf957e08ef544c8465762f5255c0e6b30e1522614677de9c95bf",
+            "after_digest": "c73a63553c5a8f0b685f0e8710e96f7f3ad46384491efaed2595cd64a29cfe20",
+            "closed_gate": {
+              "gate_epoch": "246f45ae479a43a2bcec31b2eb9f5bfd",
+              "gate_revision": 6
+            },
+            "committed": "bd38363f56af4f4eaafeff751d8bbe1c",
+            "fingerprint": "23e7312cb9503bb66522d3a53929081d1f6131cbc745eb38c6dd894f0d3ccb3a",
+            "updates_enabled": false,
+            "main_committed": true
+          }
+        },
+        {
+          "kind": "prepare-opening",
+          "request_id": "fixed-enospc-intent",
+          "digest": "94906fb477b691124a1944705efdc6efbe71ed5919a5718c5349dadca754852d",
+          "state": "OPENING_VERIFIED_CLOSED",
+          "timing": {
+            "budget": {
+              "version": 1,
+              "boot_id": "36f34a14-628a-4d52-9f68-53ab73895af9",
+              "accepted_boot_ns": 7874660878,
+              "expires_boot_ns": 17874660878,
+              "accepted_wall_ns": 1793685328318403962,
+              "seconds": 10
+            },
+            "authority": {
+              "gate_epoch": "246f45ae479a43a2bcec31b2eb9f5bfd",
+              "gate_revision": 6
+            }
+          },
+          "target": {
+            "preparation_request_id": "fixed-enospc-journal",
+            "receipt_digest": "86d299d60145bf957e08ef544c8465762f5255c0e6b30e1522614677de9c95bf",
+            "core_epoch": "f3cbf2bb414d42a7b40c6c90c01c5836",
+            "core_revision": 3,
+            "journal_digest": "c73a63553c5a8f0b685f0e8710e96f7f3ad46384491efaed2595cd64a29cfe20",
+            "degraded_references": {}
+          },
+          "probe": "836763f1f2aa47dc8199003d4772058c",
+          "result": {
+            "pair_verified": true,
+            "degraded_references_verified": true,
+            "degraded_reference_count": 0,
+            "marker_digest": "870c588ade53a4931651e0a4ab376aa21f6b3e517ee4cee6c4c8243b41700077",
+            "updates_enabled": false,
+            "release_authorized": false
+          }
+        },
+        {
+          "kind": "prepare-release",
+          "request_id": "fixed-enospc-release",
+          "digest": "acc808e8ba549bbe1ba99dade7c83d1af1dd3b428bab7336759ac9cca21980e4",
+          "state": "RELEASE_VERIFIED_CLOSED",
+          "timing": {
+            "budget": {
+              "version": 1,
+              "boot_id": "36f34a14-628a-4d52-9f68-53ab73895af9",
+              "accepted_boot_ns": 7910649003,
+              "expires_boot_ns": 17910649003,
+              "accepted_wall_ns": 1793685328354373712,
+              "seconds": 10
+            },
+            "authority": {
+              "gate_epoch": "246f45ae479a43a2bcec31b2eb9f5bfd",
+              "gate_revision": 6
+            }
+          },
+          "target": {
+            "opening_request_id": "fixed-enospc-intent",
+            "opening_marker_digest": "870c588ade53a4931651e0a4ab376aa21f6b3e517ee4cee6c4c8243b41700077",
+            "source_request_digest": "94906fb477b691124a1944705efdc6efbe71ed5919a5718c5349dadca754852d",
+            "source_budget": {
+              "version": 1,
+              "boot_id": "36f34a14-628a-4d52-9f68-53ab73895af9",
+              "accepted_boot_ns": 7874660878,
+              "expires_boot_ns": 17874660878,
+              "accepted_wall_ns": 1793685328318403962,
+              "seconds": 10
+            },
+            "opening_target": {
+              "preparation_request_id": "fixed-enospc-journal",
+              "receipt_digest": "86d299d60145bf957e08ef544c8465762f5255c0e6b30e1522614677de9c95bf",
+              "core_epoch": "f3cbf2bb414d42a7b40c6c90c01c5836",
+              "core_revision": 3,
+              "journal_digest": "c73a63553c5a8f0b685f0e8710e96f7f3ad46384491efaed2595cd64a29cfe20",
+              "degraded_references": {}
+            }
+          },
+          "probe": "28056f904f3f49d5a3b2333d92691eb1",
+          "result": {
+            "storage_verified": true,
+            "certificate_verified": true,
+            "tls_confirmed": true,
+            "committed": "bd38363f56af4f4eaafeff751d8bbe1c",
+            "fingerprint": "23e7312cb9503bb66522d3a53929081d1f6131cbc745eb38c6dd894f0d3ccb3a",
+            "receipt_digest": "ab1e13aba7d2e72bf50b41827057200283bc1ac32467a0dbb7e30fd1f70c0977",
+            "updates_enabled": false,
+            "release_authorized": false
+          }
+        },
+        {
+          "kind": "open-updates",
+          "request_id": "fixed-enospc-open",
+          "digest": "c6311c1eb210ecfac786e6e2fb3c7be61f0476cc541dbe53f86aa06fe9108f0d",
+          "state": "OPENED",
+          "timing": {
+            "budget": {
+              "version": 1,
+              "boot_id": "36f34a14-628a-4d52-9f68-53ab73895af9",
+              "accepted_boot_ns": 8462565669,
+              "expires_boot_ns": 18462565669,
+              "accepted_wall_ns": 1793685328565309458,
+              "seconds": 10
+            },
+            "authority": {
+              "gate_epoch": "246f45ae479a43a2bcec31b2eb9f5bfd",
+              "gate_revision": 6
+            }
+          },
+          "target": {
+            "release_request_id": "fixed-enospc-release",
+            "release_receipt_digest": "ab1e13aba7d2e72bf50b41827057200283bc1ac32467a0dbb7e30fd1f70c0977",
+            "release_digest": "acc808e8ba549bbe1ba99dade7c83d1af1dd3b428bab7336759ac9cca21980e4",
+            "release_budget": {
+              "version": 1,
+              "boot_id": "36f34a14-628a-4d52-9f68-53ab73895af9",
+              "accepted_boot_ns": 7910649003,
+              "expires_boot_ns": 17910649003,
+              "accepted_wall_ns": 1793685328354373712,
+              "seconds": 10
+            },
+            "release_target": {
+              "opening_request_id": "fixed-enospc-intent",
+              "opening_marker_digest": "870c588ade53a4931651e0a4ab376aa21f6b3e517ee4cee6c4c8243b41700077",
+              "source_request_digest": "94906fb477b691124a1944705efdc6efbe71ed5919a5718c5349dadca754852d",
+              "source_budget": {
+                "version": 1,
+                "boot_id": "36f34a14-628a-4d52-9f68-53ab73895af9",
+                "accepted_boot_ns": 7874660878,
+                "expires_boot_ns": 17874660878,
+                "accepted_wall_ns": 1793685328318403962,
+                "seconds": 10
+              },
+              "opening_target": {
+                "preparation_request_id": "fixed-enospc-journal",
+                "receipt_digest": "86d299d60145bf957e08ef544c8465762f5255c0e6b30e1522614677de9c95bf",
+                "core_epoch": "f3cbf2bb414d42a7b40c6c90c01c5836",
+                "core_revision": 3,
+                "journal_digest": "c73a63553c5a8f0b685f0e8710e96f7f3ad46384491efaed2595cd64a29cfe20",
+                "degraded_references": {}
+              }
+            }
+          },
+          "probe": "42a3ab3f9c014e43a949df70fe6bee51",
+          "result": {
+            "storage_verified": true,
+            "tls_confirmed": true,
+            "committed": "bd38363f56af4f4eaafeff751d8bbe1c",
+            "fingerprint": "23e7312cb9503bb66522d3a53929081d1f6131cbc745eb38c6dd894f0d3ccb3a",
+            "admission_digest": "663e2c76f590460fdd866bc393d7a093956b1ddca796dc0a95e53e2d1bfe7a29",
+            "opened_gate": {
+              "gate_epoch": "246f45ae479a43a2bcec31b2eb9f5bfd",
+              "gate_revision": 7
+            },
+            "updates_enabled": true
+          }
+        }
+      ],
+      "restored_committed_leaf": "23e7312cb9503bb66522d3a53929081d1f6131cbc745eb38c6dd894f0d3ccb3a",
+      "stale_response": {
+        "ok": false,
+        "error": "Rejected",
+        "reason": "activation_FAILED"
+      },
+      "stale_history": {
+        "request_id": "stale-enospc",
+        "digest": "48ae7cb963e486854ac764746767d9ecc20ec33f80ba5f866130cae0a8cac377",
+        "state": "FAILED",
+        "result": {
+          "error": "Rejected",
+          "expired": false,
+          "sqlite_error": null,
+          "errno": null
+        },
+        "timing": {
+          "activation": {
+            "version": 1,
+            "boot_id": "36f34a14-628a-4d52-9f68-53ab73895af9",
+            "accepted_boot_ns": 9165566628,
+            "expires_boot_ns": 19165566628,
+            "accepted_wall_ns": 1793685329268325167,
+            "seconds": 10
+          },
+          "recovery": null
+        }
+      },
+      "fresh_activation": {
+        "ok": true,
+        "result": {
+          "request_id": "fresh-enospc",
+          "digest": "dbf0151985f5dd1fa5b7c7a54f93499a3ed9f8b2c17fddc0acfa7611f385c190",
+          "state": "COMMITTED",
+          "result": {
+            "committed": "1d0af83506384f32b207852c5b3f6a3e"
+          },
+          "timing": {
+            "activation": {
+              "version": 1,
+              "boot_id": "36f34a14-628a-4d52-9f68-53ab73895af9",
+              "accepted_boot_ns": 9237222669,
+              "expires_boot_ns": 19237222669,
+              "accepted_wall_ns": 1793685329339990792,
+              "seconds": 10
+            },
+            "recovery": null
+          }
+        }
+      },
+      "fresh_wire_leaf": "47d8b5ba2402012c806a77c2387929911de21a7f7bc2b264cc497a3ebbc218c7",
+      "cleanup": {
+        "services_empty": {
+          "certweft.service": {
+            "main_pid_zero": true,
+            "cgroup_empty_or_removed": true
+          },
+          "certweft-nginx.service": {
+            "main_pid_zero": true,
+            "cgroup_empty_or_removed": true
+          }
+        },
+        "image_unmounted_loop_detached": true,
+        "temporary_units_removed": true,
+        "original_state_restored_for_fixture_reset": true
+      }
+    }
+  ],
+  "scope": "installed services; dedicated ext4 image; normal guest poweroff/start; explicit root repair/recovery",
+  "untested": [
+    "physical medium failures",
+    "sudden power loss",
+    "boot zero-gap",
+    "unbounded stability"
+  ],
+  "source_unchanged": true,
+  "error": "RuntimeError:command_failed:systemctl:1"
+}

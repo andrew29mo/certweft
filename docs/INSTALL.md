@@ -162,6 +162,19 @@ Stopping the unit must empty its cgroup. A sent signal is not evidence of proces
 exit. Uninterruptible D-state processes, hard realtime stop/recovery bounds and
 machine/power failures are not qualified here.
 
+## Storage unavailable across restart
+
+With a full or read-only state filesystem, startup can fail before creating a
+management endpoint or persisting a new Gate. An old RUNNING Gate file is not
+live authorization. The still-running Nginx may serve the candidate; do not infer
+restoration from a CLI error. Repair storage with the writer stopped, then use
+the explicit root recovery procedure above. Storage repair and systemd restart
+alone do not reopen an uncertain store. SQLite FULL may instead leave management
+available but closed; failed root validation must not be treated as restoration.
+The reproducible isolated fault matrix is in STORAGE_REBOOT.md. Its temporary
+loop-image/mount/observer units are test fixtures, not an automatic production
+filesystem-repair or deployment feature.
+
 ## Bounds and evidence
 
 Limits remain 64 permanent normal requests, 16 combined root recovery requests,
@@ -173,5 +186,7 @@ and long-running stability belong to the next bounded closeout, not this stage.
 See [DEPLOYMENT_VALIDATION.md](DEPLOYMENT_VALIDATION.md) for the reproducible
 isolated VM workflow, measurements, failures encountered and current source-bound
 JSON/HTML. The separate reboot stage covers three preserved-state application faults within
-normal VM shutdown/start cycles. Storage faults across reboot, power loss, boot
-zero-gap, all-client continuity and general production readiness remain unqualified.
+normal VM shutdown/start cycles. [STORAGE_REBOOT.md](STORAGE_REBOOT.md) separately
+qualifies ENOSPC, read-only and SQLite FULL across reboot and explicit repair.
+Power loss, boot zero-gap, all-client continuity, arbitrary media failure and
+general production readiness remain unqualified.

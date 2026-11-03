@@ -2,12 +2,15 @@
 
 Exploratory single-host Nginx certificate activation and recovery backend.
 Private project; no license has been selected. This is a bounded evaluation release;
-storage faults across reboot and long-running lifecycle qualification remain incomplete.
+capacity closeout and long-running lifecycle qualification remain incomplete.
 
 Current installed operation: [installation/CLI guide](docs/INSTALL.md) and
 [systemd deployment evidence](docs/DEPLOYMENT_VALIDATION.md), plus
 [preserved-state VM boot recovery](docs/REBOOT_VALIDATION.md) and its
-[review corrections](docs/REBOOT_REVIEW.md). Earlier source-run
+[review corrections](docs/REBOOT_REVIEW.md).
+[Storage faults across reboot and explicit repair](docs/STORAGE_REBOOT.md) cover
+ENOSPC, read-only storage and SQLite FULL; unavailable management is distinguished
+from a persisted closed Gate. Earlier source-run
 milestones below retain their individual scope.
 
 The minimum implementation validates a candidate, persists activation intent,

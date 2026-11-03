@@ -4,19 +4,19 @@ Host drives: deployment_vm.py --bootstrap-only; prepare pending; normal VM stop/
 check pending; prepare committed; stop/start; check committed; prepare reopened;
 stop/start; check reopened; finish. Every phase is bounded externally by timeout.
 """
-import hashlib,html,json,os,pathlib,signal,sqlite3,ssl,socket,sys,time,grp,select
+import hashlib,html,json,os,pathlib,signal,sqlite3,ssl,socket,sys,time,grp,select,contextlib
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]))
 from tools.deployment_vm import run,cli,props,wait_ready,memory,assert_empty,P,PY
 from tools.executor_vm import hashes
 LAB=pathlib.Path('/var/lib/certweft-reboot-lab');STATE=pathlib.Path('/var/lib/certweft')
 OUT=P/'evidence/reboot.json';PLAN=LAB/'plan.json'
-OBSERVER='''import hashlib,json,os,pathlib,sqlite3,time
+OBSERVER='''import contextlib,hashlib,json,os,pathlib,sqlite3,time
 lab=pathlib.Path('/var/lib/certweft-reboot-lab');root=pathlib.Path('/var/lib/certweft')
 plan=json.loads((lab/'plan.json').read_text())
-with sqlite3.connect('file:'+str(root/'journal.db')+'?mode=ro',uri=True) as db:
+with contextlib.closing(sqlite3.connect('file:'+str(root/'journal.db')+'?mode=ro',uri=True)) as db:
  state=json.loads(db.execute('SELECT data FROM state WHERE id=1').fetchone()[0])
  requests=list(db.execute('SELECT id,state,result FROM requests ORDER BY id'))
-with sqlite3.connect('file:'+str(root/'recovery.db')+'?mode=ro',uri=True) as db:
+with contextlib.closing(sqlite3.connect('file:'+str(root/'recovery.db')+'?mode=ro',uri=True)) as db:
  recovery=list(db.execute('SELECT id,state,result FROM recovery_requests ORDER BY id'))
 value={'boot_id':pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip(),'uptime_seconds':float(pathlib.Path('/proc/uptime').read_text().split()[0]),'journal_sha256':hashlib.sha256((root/'journal.db').read_bytes()).hexdigest(),'recovery_sha256':hashlib.sha256((root/'recovery.db').read_bytes()).hexdigest(),'gate_sha256':hashlib.sha256((root/'execution.json').read_bytes()).hexdigest(),'state':state,'requests':requests,'recovery':recovery,'active':os.readlink(root/'active.conf'),'writer_main_pid':os.popen('systemctl show certweft.service -p MainPID --value').read().strip()}
 value=json.loads(json.dumps(value)) # normalize SQLite tuples to persisted JSON arrays
@@ -53,9 +53,9 @@ def wire():
             return hashlib.sha256(tls.getpeercert(True)).hexdigest()
 
 def snapshot():
-    with sqlite3.connect('file:'+str(STATE/'journal.db')+'?mode=ro',uri=True) as db:
+    with contextlib.closing(sqlite3.connect('file:'+str(STATE/'journal.db')+'?mode=ro',uri=True)) as db:
         state=json.loads(db.execute('SELECT data FROM state WHERE id=1').fetchone()[0]);requests=list(db.execute('SELECT id,state,result FROM requests ORDER BY id'))
-    with sqlite3.connect('file:'+str(STATE/'recovery.db')+'?mode=ro',uri=True) as db:
+    with contextlib.closing(sqlite3.connect('file:'+str(STATE/'recovery.db')+'?mode=ro',uri=True)) as db:
         recovery=list(db.execute('SELECT id,state,result FROM recovery_requests ORDER BY id'))
     return {'journal_sha256':hashlib.sha256((STATE/'journal.db').read_bytes()).hexdigest(),'recovery_sha256':hashlib.sha256((STATE/'recovery.db').read_bytes()).hexdigest(),'gate_sha256':hashlib.sha256((STATE/'execution.json').read_bytes()).hexdigest(),'state':state,'requests':requests,'recovery':recovery,'active':os.readlink(STATE/'active.conf')}
 
@@ -69,7 +69,7 @@ def boot_pair(plan,obs,current_boot):
         assert obs[key]==plan['before'][key],key
     assert obs['writer_main_pid']=='0'
 
-def runtime_identity(p):
+def runtime_identity(p,drop=DROP):
     # Inspect the live unit again on every boot, not just an old bootstrap report.
     pid=int(p['MainPID']);assert pid>1 and p['ActiveState']=='active'
     fd=os.pidfd_open(pid)
@@ -83,7 +83,7 @@ def runtime_identity(p):
         assert unit['ExecStart'].split(' ; ')[1]=='argv[]='+' '.join(expected_args),'loaded_writer_command'
         package=pathlib.Path(payload()['installed_root'])/'certweft/assets/certweft.service'
         assert pathlib.Path(unit['FragmentPath']).read_bytes()==package.read_bytes(),'writer_unit_drift'
-        assert pathlib.Path(unit['DropInPaths']).read_text()==DROP,'writer_dropin_drift'
+        assert pathlib.Path(unit['DropInPaths']).read_text()==drop,'writer_dropin_drift'
         proc=pathlib.Path('/proc',str(pid));args=proc.joinpath('cmdline').read_bytes().rstrip(b'\0').decode().split('\0')
         assert args==expected_args and os.readlink(proc/'cwd')=='/','live_writer_command'
         mem=memory(pid);assert int(mem['CapEff'],16)==1 and mem['NoNewPrivs']=='1' and mem['Uid'].split()==['0']*4

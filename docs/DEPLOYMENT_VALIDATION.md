@@ -1,7 +1,8 @@
 > Scope update: [REBOOT_VALIDATION.md](REBOOT_VALIDATION.md) separately qualifies
 > three preserved-state normal VM poweroff/start cases. This document describes
 > the process/deployment matrix; its original full-regression counts below are
-> historical. The eight deployment cases are rerun at the reboot-stage source.
+> historical. The eight deployment cases are rerun at the current
+> [storage-fault reboot stage](STORAGE_REBOOT.md) source.
 
 # Installed deployment validation
 
@@ -103,16 +104,16 @@ separate source-run reports.
 
 | Observation | Result |
 |---|---:|
-| Installed operator submit → COMMITTED and independently checked new TLS leaf | 0.87 s |
-| Main SIGKILL → observed new management socket, admission still closed | 1.11 s |
-| Writer RSS at initial-ready sample | 21,748 KiB |
-| Signer Python RSS during credential observation | 6,236 KiB |
-| Paused executor RSS before crash | 23,364 KiB |
+| Installed operator submit → COMMITTED and independently checked new TLS leaf | 0.80 s |
+| Main SIGKILL → observed new management socket, admission still closed | 1.10 s |
+| Writer RSS at initial-ready sample | 21,744 KiB |
+| Signer Python RSS during credential observation | 5,504 KiB |
+| Paused executor RSS before crash | 23,360 KiB |
 | End-state unique regular files | 24 |
-| End-state logical / allocated regular-file bytes | 102,241 / 176,128 |
+| End-state logical / allocated regular-file bytes | 102,237 / 176,128 |
 
 The role, timing and storage scope restrictions above apply to every row. In
-particular, 1.11 seconds is not a certificate-restoration time or recovery upper
+particular, 1.10 seconds is not a certificate-restoration time or recovery upper
 bound. These are separate process snapshots and must not be summed into a total
 service memory claim.
 
@@ -142,8 +143,9 @@ The fixture stops its units and private CA and verifies cgroup/MainPID cleanup.
 Root-owned installation and private diagnostic CA files remain inside the stopped
 VM for review; they are not uploaded. The explicit marker protects reset
 ownership. Preserved-state boot/reboot recovery is now a separate qualified stage;
-storage faults across reboot, capacity rollover/GC and bounded sustained-operation
-closeout remain outstanding.
+storage faults across reboot are now separately qualified for ENOSPC, read-only
+and SQLite FULL. Capacity rollover/GC and bounded sustained-operation closeout
+remain outstanding.
 
 ## Original deployment qualification record
 

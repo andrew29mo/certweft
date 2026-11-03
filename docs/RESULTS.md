@@ -1,12 +1,41 @@
-# Current preserved-state VM reboot stage
+# Current storage-fault reboot stage
+
+[STORAGE_REBOOT.md](STORAGE_REBOOT.md) covers three installed-service fault/reboot/
+repair cases with paired host evidence. All preserve the preboot journals and
+uncommitted candidate; ENOSPC and read-only storage leave management unavailable,
+while SQLite FULL leaves management closed and the formal root storage verifier
+fails without restoration. After repair, explicit root recovery is still required;
+old pending work becomes INTERRUPTED, old core authority is refused and fresh
+core authority really activates the same candidate with the exact expected leaf.
+
+Current results: **126 Linux tests** with zero failures/errors/skips; three
+installed storage-fault VM reboot/repair cases; eight installed deployment
+regressions; and 14 source-service runtime storage-fault scenarios all passed.
+The six current JSON/HTML pairs are storage-reboot, storage-reboot-host,
+storage-reboot-units, boot-bootstrap, deployment and storage. All bind the same
+59-file source manifest; bootstrap overlaps deployment and is not counted as an
+independent performance trial. Old reboot-stage reports retain their recorded
+source. Host post-SSH check/repair observations were 3.667 / 3.882 / 3.921 seconds,
+not boot time or recovery guarantees. Writer samples after repair were
+21,656 / 21,648 / 21,660 KiB, not a stability or cross-mode memory comparison.
+
+The current source includes 59 manifest files. No application module, packaged
+unit, privilege allowance or license changes were made. The harness explicitly
+closes SQLite read connections; the new descriptor regression checks this without
+relying on garbage collection. The initial busy-mount attempt and later one-shot
+observer dependency failure remain failed records, not passing reboot evidence.
+Capacity closeout, bounded sustained operation, power loss, boot zero-gap and
+arbitrary media/EIO failures remain unqualified.
+
+# Earlier preserved-state VM reboot stage
 
 See [REBOOT_VALIDATION.md](REBOOT_VALIDATION.md) for boot enablement, the exact
-preserved-state contract, root recovery and limits. Current Linux unit evidence
-is reboot-units.json/html: **125 tests, no failures/errors/skips**. Three actual
+preserved-state contract, root recovery and limits. At that stage Linux unit evidence
+was reboot-units.json/html: **125 tests, no failures/errors/skips**. Three actual
 normal guest poweroff/start cases passed (pending, committed, reopened), alongside
 four installed bootstrap cases. The eight installed deployment cases were also
 rerun. These fixtures overlap; their counts are not independent workload trials.
-The five current report pairs (reboot, reboot-host, reboot-units, boot-bootstrap,
+The five then-current report pairs (reboot, reboot-host, reboot-units, boot-bootstrap,
 deployment)
 bind the same complete 57-file source manifest. The three installed fixtures also
 verify package payloads against the wheel and source.

@@ -1,5 +1,5 @@
 """Challenge the exact read-only boot observer used in the VM, not a replica."""
-import io,json,pathlib,sqlite3,tempfile,unittest
+import contextlib,io,json,pathlib,sqlite3,tempfile,unittest
 from unittest.mock import patch
 from tools.reboot_vm import OBSERVER
 
@@ -7,7 +7,7 @@ class BootObserver(unittest.TestCase):
     def fixture(self,folder):
         base=pathlib.Path(folder);root=base/'state';root.mkdir();lab=base/'lab';lab.mkdir()
         for name,sql in [('journal.db',"CREATE TABLE state(id,data); INSERT INTO state VALUES(1,'{\"state\":\"APPLYING\"}'); CREATE TABLE requests(id,state,result); INSERT INTO requests VALUES('old','RUNNING',NULL);"),('recovery.db',"CREATE TABLE recovery_requests(id,state,result);")]:
-            with sqlite3.connect(root/name) as db:db.executescript(sql)
+            with contextlib.closing(sqlite3.connect(root/name)) as db, db:db.executescript(sql)
         (root/'execution.json').write_text('{}');(root/'active.conf').symlink_to('v-test/tls.conf')
         (base/'boot').write_text('new');(base/'uptime').write_text('2.5 0')
         code=OBSERVER.replace('/var/lib/certweft-reboot-lab',str(lab)).replace('/var/lib/certweft',str(root)).replace('/proc/sys/kernel/random/boot_id',str(base/'boot')).replace('/proc/uptime',str(base/'uptime'))
@@ -30,7 +30,7 @@ class BootObserver(unittest.TestCase):
     def test_shutdown_changes_are_not_accepted_as_reboot_evidence(self):
         with tempfile.TemporaryDirectory() as folder:
             root,lab,code=self.fixture(folder)
-            with sqlite3.connect(root/'journal.db') as db:db.execute("UPDATE state SET data='{\"state\":\"READY\"}'")
+            with contextlib.closing(sqlite3.connect(root/'journal.db')) as db, db:db.execute("UPDATE state SET data='{\"state\":\"READY\"}'")
             with patch('os.popen',return_value=io.StringIO('0')):
                 with self.assertRaisesRegex(AssertionError,'changed_before_writer'):exec(code,{})
             self.assertFalse((lab/'observed-pending.json').exists())
@@ -57,3 +57,20 @@ class RebootControls(unittest.TestCase):
         with self.assertRaisesRegex(AssertionError,'fresh_activation_not_observed'):
             activation_control(stale,{'result':{'state':'COMMITTED'}},'old','old','target')
         activation_control(stale,{'result':{'state':'COMMITTED'}},'old','target','target')
+
+class SnapshotLifetime(unittest.TestCase):
+    @unittest.skipUnless(pathlib.Path('/proc/self/fd').exists(),'Linux descriptor inventory')
+    def test_snapshot_closes_both_database_descriptors_without_gc(self):
+        import gc,os
+        from tools import reboot_vm
+        with tempfile.TemporaryDirectory() as folder:
+            root,_,_=BootObserver().fixture(folder);enabled=gc.isenabled();gc.disable()
+            try:
+                with patch.object(reboot_vm,'STATE',root):reboot_vm.snapshot()
+                targets=[]
+                for fd in pathlib.Path('/proc/self/fd').iterdir():
+                    try:targets.append(os.readlink(fd))
+                    except FileNotFoundError:pass
+                self.assertFalse(any(str(root/'journal.db')==p or str(root/'recovery.db')==p for p in targets),targets)
+            finally:
+                if enabled:gc.enable()

@@ -1,0 +1,39 @@
+{
+  "passed": false,
+  "status": "failed",
+  "profile": "certweft-deploy",
+  "cycles": [
+    {
+      "fault": "enospc",
+      "bootstrap": {
+        "passed": true,
+        "cases": 4,
+        "error": null
+      },
+      "old_boot_id": "a3ed263e-9d31-4a3f-9b9f-6b42a8bee2c0",
+      "poweroff_command": [
+        "sudo",
+        "systemctl",
+        "poweroff"
+      ],
+      "poweroff_transport_returncode": 0,
+      "manager_status_after_poweroff": "Stopped",
+      "poweroff_to_stopped_observed_seconds": 0.5257139590000008,
+      "new_boot_id": "36f34a14-628a-4d52-9f68-53ab73895af9",
+      "manager_status_after_start": "Running",
+      "post_ssh_check_and_repair_seconds": 3.7500996250000007,
+      "vm_check_and_cleanup_passed": true
+    },
+    {
+      "fault": "readonly",
+      "bootstrap": {
+        "passed": true,
+        "cases": 4,
+        "error": null
+      }
+    }
+  ],
+  "scope": "guest poweroff/start while dedicated state image remains full/RO/SQLite-quota limited; no physical power loss",
+  "error": "RuntimeError:command_failed:colima:1",
+  "docker_context_restored": true
+}

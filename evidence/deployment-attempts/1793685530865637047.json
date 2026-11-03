@@ -1,0 +1,216 @@
+{
+  "passed": true,
+  "status": "completed",
+  "cases": [
+    {
+      "name": "wheel_install_and_payload",
+      "passed": true,
+      "seconds": 1.1534622679999984,
+      "detail": {
+        "version": "0.0.2",
+        "module": "/opt/certweft/lib/python3.12/site-packages/certweft/__init__.py",
+        "wheel_sha256": "76d1cc40fdd22083ff8daba89df52614d9e80d08fe75f029b93fabaa4d706d96",
+        "payload_files": 22
+      }
+    },
+    {
+      "name": "documented_install_and_start",
+      "passed": true,
+      "seconds": 0.425293742000008,
+      "detail": {
+        "systemd": {
+          "Restart": "on-failure",
+          "RestartPreventExitStatus": "73",
+          "MainPID": "2715",
+          "Result": "success",
+          "NRestarts": "0",
+          "ExecMainStatus": "0",
+          "ControlGroup": "/system.slice/certweft.service",
+          "CapabilityBoundingSet": "cap_chown",
+          "User": "root",
+          "KillMode": "mixed",
+          "ActiveState": "active",
+          "SubState": "running",
+          "StartLimitIntervalUSec": "1min",
+          "StartLimitBurst": "3",
+          "InvocationID": "f28c24836efc42b3b592ab44d4ab4c02"
+        },
+        "service_memory": {
+          "Uid": "0\t0\t0\t0",
+          "Gid": "0\t0\t0\t0",
+          "VmHWM": "21760 kB",
+          "VmRSS": "21752 kB",
+          "CapEff": "0000000000000001",
+          "NoNewPrivs": "1"
+        },
+        "initial_updates_enabled": true,
+        "operator_private_reads_denied": true
+      }
+    },
+    {
+      "name": "credential_delivery_and_real_ca_issuance",
+      "passed": true,
+      "seconds": 0.20088744800000313,
+      "detail": {
+        "certificate": "/var/lib/certweft-candidates/first/cert.pem",
+        "observed": {
+          "Uid": "995\t995\t995\t995",
+          "Gid": "989\t989\t989\t989",
+          "VmHWM": "3188 kB",
+          "VmRSS": "3188 kB",
+          "CapEff": "0000000000000000",
+          "NoNewPrivs": "1"
+        },
+        "cleanup": {
+          "main_pid_zero": true,
+          "cgroup_empty_or_removed": true
+        }
+      }
+    },
+    {
+      "name": "installed_controller_real_activation",
+      "passed": true,
+      "seconds": 0.8066072510000026,
+      "detail": {
+        "request_state": "COMMITTED",
+        "old_leaf_sha256": "6b07b7def64ca1270afdb81e84499b275f74c18d8e145a9c06d116eb039cf425",
+        "new_leaf_sha256": "6458175fdf9465eb0e5a1f47fdb7412e54758b2804736da6b4c7f78ce034f16a",
+        "expected_leaf_sha256": "6458175fdf9465eb0e5a1f47fdb7412e54758b2804736da6b4c7f78ce034f16a",
+        "activation_cli_seconds": 0.7678718269999933
+      }
+    }
+  ],
+  "scope": "wheel-installed fixed systemd services in a newly created, provisioned Ubuntu VM; application reset between development attempts",
+  "untested": [
+    "VM reboot recovery",
+    "power loss",
+    "boot zero-gap",
+    "D-state termination",
+    "remote CA network",
+    "production PKI enrollment",
+    "multi-instance deployment",
+    "unbounded operation"
+  ],
+  "baseline": {
+    "managed_paths_absent": true,
+    "units_absent": true,
+    "accounts_and_groups_absent": true
+  },
+  "environment": {
+    "python": "3.12.3",
+    "kernel": "6.8.0-117-generic",
+    "architecture": "aarch64",
+    "systemd": "systemd 255 (255.4-1ubuntu8.15)",
+    "step_version": "Smallstep CLI/0.31.0 (linux/arm64)",
+    "ca_version": "Smallstep CA/0.30.2 (linux/arm64)",
+    "nginx_version": "nginx version: nginx/1.24.0 (Ubuntu)",
+    "step_sha256": "637a1ba78c81796a5a30135e9170b8f00c66d9718001937783d2dc00d5bd4e6e",
+    "ca_sha256": "e6d7159215fd482ea76ef23df40540706eb5fcb2cf063259a9fbc660d63ad502"
+  },
+  "installed_payload": {
+    "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certweft/admission.py": "0f2a589836afaf9abd4a2ca18a548fa268ec01e70e41028d9191e4927291bf29",
+    "certweft/ca.py": "e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c",
+    "certweft/certificate_recovery.py": "8e12ac749a8124444e1b70d2c365f74e3ba396656a530adb2f0281a481b0694e",
+    "certweft/cli.py": "d31316ceaa8b58273cb5fc4fe26b6205f6dcb168e17cc893221b1605625d6724",
+    "certweft/core.py": "fc63c1d25dda209c19129440b1fec36f20d1fdd9b72ef09acd8ab032872310b1",
+    "certweft/deadlines.py": "e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f",
+    "certweft/deployment.py": "a9f7688a19c3b64edfc051c7058aa5aff32fc19d5ed947f07c826b6f2caca1b4",
+    "certweft/executor.py": "b11ef0c91cd65a5fa013f6733feda22d6fabcecc46c0aca92a471c0fc48a87c6",
+    "certweft/gate.py": "60854ad11c20eca05609032c75a0fe163292c3d6bdf79427ca495576c3b80c1a",
+    "certweft/opening.py": "514191731118b9cfbf834367104b5f5ab3d7973d5fef91854c9f13ffbae5434e",
+    "certweft/operations.py": "46da1610efd2b5bc25414f07d04a3556a3b57be7870c8af6751fa5c347ca7385",
+    "certweft/reconciliation.py": "bb21824e85c89d90639837f8d144eb0e265b9652065104326f9d843584d88f45",
+    "certweft/recovery.py": "88a3bc08906771eb27e3ef4a57d25439522f363929b9645eb91e72a8145ac791",
+    "certweft/recovery_executor.py": "1a6a1fc983d14f132d374679f8676a09882e0918ac4fd332caaceef240a39531",
+    "certweft/release.py": "604a1d770f47c375989ef8d274dbd8616d3e487152f3abe6965ea1085391d44a",
+    "certweft/service.py": "70199d02b38034399637c4c8adcfb674ce847e4061dab9b280e6e73094074ed0",
+    "certweft/storage.py": "2f431bd3758a8a14b2cb616521f50d638cf3fdbf733278f87a7e7cb99bf1fe3b",
+    "certweft/assets/certweft-issue@.service": "5cdbd5aed7a98d402ea3bdc3e38f26f1e37f0e26d3cd00c20b861b5b79be4744",
+    "certweft/assets/certweft-nginx.service": "f907853efe6c7bff0e99fb5f3386bffa6ed674e19e12329fc09e455bea945321",
+    "certweft/assets/certweft.service": "7e4d52e8ad2a703b6d944df57321a14e9f034e7d13afa830d90a9cb5e07aefc0",
+    "certweft/assets/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
+  },
+  "installed_root": "/opt/certweft/lib/python3.12/site-packages",
+  "wheel_sha256": "76d1cc40fdd22083ff8daba89df52614d9e80d08fe75f029b93fabaa4d706d96",
+  "state_disk": {
+    "scope": "unique regular file inodes after scenarios; excludes symlink targets, directories and filesystem metadata",
+    "logical_bytes": 53485,
+    "allocated_bytes": 81920,
+    "files": 13
+  },
+  "stop_cleanup": {
+    "certweft.service": {
+      "main_pid_zero": true,
+      "cgroup_empty_or_removed": true
+    },
+    "certweft-nginx.service": {
+      "main_pid_zero": true,
+      "cgroup_empty_or_removed": true
+    }
+  },
+  "cleanup_verified": true,
+  "private_fixture_retained_inside_vm": true,
+  "source_sha256": {
+    "pyproject.toml": "c9e02c232567397360e119e7cd31325b80873ad64bc45b63b4ddbd3c1e961461",
+    "certweft/service.py": "70199d02b38034399637c4c8adcfb674ce847e4061dab9b280e6e73094074ed0",
+    "certweft/deadlines.py": "e714a7bb3ccd28f0e5e21b7321bda9082842c33c0ebe4befd0401a1ede0f854f",
+    "certweft/release.py": "604a1d770f47c375989ef8d274dbd8616d3e487152f3abe6965ea1085391d44a",
+    "certweft/recovery.py": "88a3bc08906771eb27e3ef4a57d25439522f363929b9645eb91e72a8145ac791",
+    "certweft/recovery_executor.py": "1a6a1fc983d14f132d374679f8676a09882e0918ac4fd332caaceef240a39531",
+    "certweft/deployment.py": "a9f7688a19c3b64edfc051c7058aa5aff32fc19d5ed947f07c826b6f2caca1b4",
+    "certweft/reconciliation.py": "bb21824e85c89d90639837f8d144eb0e265b9652065104326f9d843584d88f45",
+    "certweft/opening.py": "514191731118b9cfbf834367104b5f5ab3d7973d5fef91854c9f13ffbae5434e",
+    "certweft/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "certweft/core.py": "fc63c1d25dda209c19129440b1fec36f20d1fdd9b72ef09acd8ab032872310b1",
+    "certweft/operations.py": "46da1610efd2b5bc25414f07d04a3556a3b57be7870c8af6751fa5c347ca7385",
+    "certweft/cli.py": "d31316ceaa8b58273cb5fc4fe26b6205f6dcb168e17cc893221b1605625d6724",
+    "certweft/gate.py": "60854ad11c20eca05609032c75a0fe163292c3d6bdf79427ca495576c3b80c1a",
+    "certweft/storage.py": "2f431bd3758a8a14b2cb616521f50d638cf3fdbf733278f87a7e7cb99bf1fe3b",
+    "certweft/certificate_recovery.py": "8e12ac749a8124444e1b70d2c365f74e3ba396656a530adb2f0281a481b0694e",
+    "certweft/admission.py": "0f2a589836afaf9abd4a2ca18a548fa268ec01e70e41028d9191e4927291bf29",
+    "certweft/ca.py": "e44fd50e9a2d6650eae8ff9806eeabfc8f5cbc36b945ddbbe7e30d8dfccb015c",
+    "certweft/executor.py": "b11ef0c91cd65a5fa013f6733feda22d6fabcecc46c0aca92a471c0fc48a87c6",
+    "certweft/assets/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550",
+    "certweft/assets/certweft.service": "7e4d52e8ad2a703b6d944df57321a14e9f034e7d13afa830d90a9cb5e07aefc0",
+    "certweft/assets/certweft-issue@.service": "5cdbd5aed7a98d402ea3bdc3e38f26f1e37f0e26d3cd00c20b861b5b79be4744",
+    "certweft/assets/certweft-nginx.service": "f907853efe6c7bff0e99fb5f3386bffa6ed674e19e12329fc09e455bea945321",
+    "tools/policy_vm.py": "27abd11384403246c3ac2eafb85d590da2503e70f10b7477ae895c26a80bc8f6",
+    "tools/admission_vm.py": "42bc276dae22dafa5d20db4e9b09054399a4bde61baf4dee34036af2fd76d86a",
+    "tools/certificate_vm.py": "4435c71a031b395d06270dc38bbfd48a3db890cfa3bdadb53e4880295294ee09",
+    "tools/storage_reboot_host.py": "1909d9edc945a34a06a4cedc9cf17045281dffebf97482be9e9e5257b499c258",
+    "tools/storage_vm.py": "2d251e4e7de2c10739c2d339f372787b36613f65759a539037b075b6a7e3a14c",
+    "tools/deployment_vm.py": "4a3a5a534887893906b55c2a596a271f3ed9ca7d9d983b631bfad3c1168b89f5",
+    "tools/deadline_vm.py": "cd0d61fb4e1253cdc23b12e3fb38d10ad41fd04f2debd9c23f4574f8fa4e7cf3",
+    "tools/executor_vm.py": "643565d4130bbf08daa619623b72a566e847e04c4f3504ee15ad3a6c493a656d",
+    "tools/opening_vm.py": "656b8d1f7c461cd2657eeb3e8db1af2e50516435032c40788496916372522b04",
+    "tools/recovery_vm.py": "104fc1ee43c382f5bb0d4d7c19c3369bb4c656097966e4e05c9008b3a9f285ee",
+    "tools/opening_mutation.py": "41370aa7417e65830048b0e4c984cf8c3de5a1602fb51410f7268a6e8b2868c1",
+    "tools/storage_reboot_vm.py": "4df2c587c231504df48bf1148dc5d9d980c54f2d9d891fbc644955df6ec72f61",
+    "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
+    "tools/credential_probe.py": "8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46",
+    "tools/operations_vm.py": "3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85",
+    "tools/admission_mutation.py": "cd0754f335cf80bd162396954eeab0d6edecfabc0d1c0b8e0e61a19cc8a1f749",
+    "tools/reboot_host.py": "0f344717224e4bd705154bf493850e6bed6a0e8f91e8cc72c2d940bac0029157",
+    "tools/reconcile_vm.py": "70172e146542bd3f564128fac997709f1ba7692289c681b4ae81109c5aeb3e8b",
+    "tools/gate_vm.py": "66215b4c176fe5ca9db1fda5bd6869213f852fd5cdeb0ee3ea23412197a0fb78",
+    "tools/reboot_vm.py": "0bb91b7d73c1ea968e2d290a99ca6074e4a9f83b4b263b29789fbb379a60c259",
+    "tools/release_vm.py": "e82059f514f166d81740a004d707dc78d5e62b14c06b6a08fc8ae0ad5f338812",
+    "tests/test_release.py": "08e1031f443b3ef89afbd05044d007f56facb056ac366af55fd35c3882d3f7d9",
+    "tests/test_certificate_recovery.py": "7dedc3df699699665d7c21e9b2d62592f8d648eaa9cf5dc973c31453622fdcb0",
+    "tests/test_operations.py": "f1741fae5ae944fa974e90c418c447da27e49d18051fc8ad50b4ea843041e337",
+    "tests/test_core.py": "8b660e867018a6219ec4d86c86acab35be46f759f92c06a12e41f83923c62d2c",
+    "tests/test_recovery.py": "cba9d1c4dd080581bd039f9d3331200a74de221e751d57c008222bdbb8bba830",
+    "tests/test_admission.py": "129aadb4a9ffd1b1dac3471d64117dd6daf41dbb2eadda43cdb94a67316d2418",
+    "tests/test_opening.py": "45e4aca1cebd1d44ac9af9ad5fec47908cbc192748f04b3b7ee7ee2e48690963",
+    "tests/test_storage.py": "07d2de55f10a9a3011db73c9141295b43ff2951f54b6e339d184117cf87af2cf",
+    "tests/test_gate.py": "e1bcd31c414728e0022a3d1f47726bedff559a52f811e536860da60de589c8d0",
+    "tests/test_deadlines.py": "442d8ea3cfa4af88ec62603d84f017fb2b1883e8c05d3d92bedd695811b9dd29",
+    "tests/test_service_process.py": "db7bccfa6248f8a9281cd380f5db317f71116b06711f195100f86a7f5a70e9b9",
+    "tests/test_deployment.py": "11d3612e6ac18ac4967168437ef03cfc6eab58afe0dbcbe3fbf1378d6270ecc7",
+    "tests/test_reconciliation.py": "91d301f53893145dd6400efc00c67204441a80b15428c0e9032629137db3cac9",
+    "tests/test_reboot_evidence.py": "2b7cf36aa9a3502638a17df62b7599eb85620a760d0248dd434ab05b2857a030",
+    "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
+  },
+  "source_unchanged": true
+}
