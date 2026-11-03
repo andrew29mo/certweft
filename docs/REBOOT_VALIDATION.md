@@ -25,7 +25,13 @@ request history before proceeding with the documented root recovery workflow.
 A certified clean STOPPED Gate has its existing clean-start semantics. The three
 fault-recovery cases below intentionally preserve a RUNNING Gate instead: they
 must start RECOVERY_REQUIRED and refuse new updates. They do not redefine every
-ordinary idle shutdown as an unclean application failure.
+ordinary idle shutdown as an unclean application failure. A session that started
+closed and was explicitly reopened still cannot obtain a clean STOPPED receipt
+on later normal stop: restarting that recovered session intentionally requires
+root recovery again. This consumes five of the finite 16 root rows each time;
+three complete recoveries use 15 rows. There is no qualified root-history rollover
+or automatic allowance reset. Inspect capacity before planning repeated recovery;
+do not erase Gate/history or promise indefinite service restarts.
 
 ## Three preserved-state cases
 
@@ -48,7 +54,8 @@ and ordered before Nginx, runs at the next boot. It records and compares:
 
 - a different kernel boot ID and writer MainPID=0;
 - exact main journal, recovery journal and Gate SHA-256;
-- main state, normal/root request histories and active configuration symlink.
+- main state, normal/root request histories and active configuration symlink. The later checker also requires the observer
+boot ID to equal the currently running kernel boot ID.
 
 The observer opens both databases read-only, publishes its result with O_EXCL,
 and fails startup on mismatch. It is not a second recovery implementation. Both
@@ -63,7 +70,13 @@ root `certweft recover` restores the committed leaf, verifies new TLS connection
 reconciles the journal and explicitly reopens updates. The independent TLS probe
 requires trusted localhost identity, the expected leaf and HTTP 200 on the same
 new connection. Old core authority is then submitted through the real operator
-CLI and must fail without changing the wire certificate. Previously COMMITTED
+CLI and must fail as Rejected without changing core state or the wire certificate.
+The **same valid candidate** then receives a fresh request ID/current CAS token
+through the same CLI, must become COMMITTED and present the exact different leaf
+on a new trusted TLS connection. A blanket executor failure cannot satisfy both
+controls. The normal request result exposes the error class, not a specific
+stale-reason string; these paired controls isolate the authority change without
+claiming an unavailable error detail. Previously COMMITTED
 request history must remain byte-for-byte equivalent.
 
 The existing finite bounds apply: 64 normal requests, 16 combined root requests,
@@ -71,6 +84,24 @@ The existing finite bounds apply: 64 normal requests, 16 combined root requests,
 unbounded recovery loop and must not be reused as one.
 
 ## Reproduction
+
+The reproducible host driver records guest poweroff command status, manager
+Stopped/Running observations and old/new kernel boot IDs, and cross-checks them
+against each VM report. It restores the previous Docker context even on failure.
+For an already running **explicitly disposable**, provisioned profile with the
+checkout mounted at the same path, no existing reboot lab, and Colima/Docker on
+PATH, run from the checkout:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 tools/reboot_host.py --profile <disposable-profile>
+```
+
+It runs the bootstrap and three cycles below. It does not create/provision a VM,
+stop unrelated profiles or erase an existing diagnostic lab. A failed driver or
+phase is not a passing run even if an older report exists. Report fields retain
+sanitized decisions/IDs rather than raw host logs that may contain private paths.
+
+The equivalent manual phases are:
 
 Use a disposable VM provisioned per INSTALL.md, with the same checkout mounted.
 Do not run against an existing production installation. `deployment_vm.py` owns
@@ -114,16 +145,17 @@ and reset of known owned test paths, not blind deletion of unknown data.
 
 ## Observed result
 
-All three preserved-state reboot cases passed. The installed bootstrap’s four
-cases, all 123 Linux unit tests (zero skipped), and eight installed deployment
-regressions also passed at the same 56-file source manifest. Bootstrap overlaps
+All three preserved-state reboot cases passed. The host transcript also records all three manager-confirmed shutdown/start
+cycles with matching boot IDs. The installed bootstrap’s four
+cases, all 125 Linux unit tests (zero skipped), and eight installed deployment
+regressions also passed at the same 57-file source manifest. Bootstrap overlaps
 the deployment fixture and is not an independent performance trial.
 
-| Preserved state | State seen before writer | Check/root-recovery elapsed | Writer RSS after recovery |
+| Preserved state | State seen before writer | Check/root-recovery/controls elapsed | Writer RSS after controls |
 | --- | --- | --- | --- |
-| Pending update | APPLYING | 2.261 s | 22,480 KiB |
-| Committed update | READY | 2.257 s | 22,496 KiB |
-| Reopened | READY | 2.259 s | 22,500 KiB |
+| Pending update | APPLYING | 3.097 s | 22,468 KiB |
+| Committed update | READY | 3.244 s | 22,480 KiB |
+| Reopened | READY | 3.233 s | 22,496 KiB |
 
 These are single controlled observations with the scope below, not a benchmark
 comparison or statistical bounds. Archived preparation failures included an
@@ -136,14 +168,21 @@ different next-boot ID, not accepted as proof by itself.
 
 ## Evidence, measurements and limits
 
-`evidence/reboot.json` and `.html` share an identical payload. The final report
+`evidence/reboot.json` and `.html` share an identical payload. The host driver
+records its own JSON/HTML pair, final VM-report digest and matching source manifest.
+The VM report now retains each boot’s actual loaded writer unit/command, live
+cmdline/cwd, UID/capabilities, old/new boot and service IDs, closed-Gate rejection,
+root step history, stale result and successful fresh-authority control. Writer
+unit/drop-in bytes and package payload are checked again on every boot. The final report
 binds source hashes and installed package payload hashes to the bootstrap wheel.
 Archived failed/invalidated attempts are not passing scenarios. Negative observer
 unit tests run the exact observer string and challenge changed shutdown state,
-an already-started writer and duplicate evidence publication.
+an already-started writer, duplicate evidence publication, wrong current boot,
+and blanket activation failures/fake success without a changed TLS leaf.
 
 The per-case elapsed value begins **after host SSH is available**, includes the
-root recovery/check sequence, and is not boot duration, failover latency or an SLA.
+root recovery/check sequence and paired activation controls, and is not boot
+duration, failover latency or an SLA.
 The observer uptime is one early boot sample. RSS/VmHWM values are snapshots of
 the writer in a VM, not host memory, process-tree peak or a memory-leak test. No
 power-loss, filesystem durability under power removal, uninterrupted serving,

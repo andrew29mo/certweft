@@ -2,12 +2,13 @@
 
 See [REBOOT_VALIDATION.md](REBOOT_VALIDATION.md) for boot enablement, the exact
 preserved-state contract, root recovery and limits. Current Linux unit evidence
-is reboot-units.json/html: **123 tests, no failures/errors/skips**. Three actual
+is reboot-units.json/html: **125 tests, no failures/errors/skips**. Three actual
 normal guest poweroff/start cases passed (pending, committed, reopened), alongside
 four installed bootstrap cases. The eight installed deployment cases were also
 rerun. These fixtures overlap; their counts are not independent workload trials.
-The four current report pairs (reboot, reboot-units, boot-bootstrap, deployment)
-bind the same complete 56-file source manifest. The three installed fixtures also
+The five current report pairs (reboot, reboot-host, reboot-units, boot-bootstrap,
+deployment)
+bind the same complete 57-file source manifest. The three installed fixtures also
 verify package payloads against the wheel and source.
 The earlier 148 source-run regression scenarios below were not rerun for this
 harness/documentation-only stage and retain their historical source manifests.
@@ -17,10 +18,13 @@ All three reboot cases preserve the old main/recovery journals, Gate and active
 pointer before writer startup. Gate remains closed, explicit root recovery
 restores/verifies committed TLS, and stale core authority fails after reopening.
 In the pending case a candidate remains online until that explicit recovery.
-This is not automatic rollback on boot. The measured approximately 2.26 seconds
-per case starts after SSH is available and includes checks/root recovery; it is
-not machine boot time or an SLA. Writer post-recovery RSS snapshots were
-22,480 / 22,496 / 22,500 KiB inside the VM, not a sustained-memory qualification.
+This is not automatic rollback on boot. Each old-CAS rejection is now paired with
+an actual COMMITTED fresh-CAS activation of the same valid candidate and exact
+new TLS leaf. Host Stopped/Running and boot IDs match the VM evidence; each boot
+also verifies live installed writer identity. Measured check/recovery/control
+sequences were 3.097 / 3.244 / 3.233 seconds after SSH was available, not machine
+boot time or an SLA. Writer RSS after controls was 22,468 / 22,480 / 22,496 KiB
+inside the VM, not a sustained-memory qualification.
 Power loss, boot zero-gap and storage-fault-across-reboot remain untested.
 
 # Earlier installed deployment milestone

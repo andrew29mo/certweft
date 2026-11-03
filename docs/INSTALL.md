@@ -129,7 +129,10 @@ for individual `<prefix>-cert/journal/intent/release/open` outcomes.
 
 Then issue another certificate, read a fresh core CAS token and submit it as above.
 A repaired filesystem alone or restarting the service never reopens a recovered
-store. Service restart closes such a store again by design. Do not manually clear
+store. Service restart closes such a store again by design, including a normal
+stop/start after explicit reopening; that recovered session does not receive a
+clean-stop receipt. Each repeated full recovery uses another five of the finite
+16 root rows. There is no qualified history rollover/reset path. Do not manually clear
 health rows, edit Gate files or unlink the lifetime lease to force admission.
 
 ## Supervisor boundaries

@@ -4,7 +4,7 @@ Host drives: deployment_vm.py --bootstrap-only; prepare pending; normal VM stop/
 check pending; prepare committed; stop/start; check committed; prepare reopened;
 stop/start; check reopened; finish. Every phase is bounded externally by timeout.
 """
-import hashlib,html,json,os,pathlib,signal,sqlite3,ssl,socket,sys,time,grp
+import hashlib,html,json,os,pathlib,signal,sqlite3,ssl,socket,sys,time,grp,select
 sys.path.insert(0,str(pathlib.Path(__file__).resolve().parents[1]))
 from tools.deployment_vm import run,cli,props,wait_ready,memory,assert_empty,P,PY
 from tools.executor_vm import hashes
@@ -62,6 +62,50 @@ def snapshot():
 def expected(name):
     return hashlib.sha256(run(['openssl','x509','-in',STATE/('v-'+name)/'cert.pem','-outform','DER']).stdout).hexdigest()
 
+def boot_pair(plan,obs,current_boot):
+    assert obs['boot_id']==current_boot,'observer_not_current_boot'
+    assert current_boot!=plan['boot_id'],'same_boot'
+    for key in ['journal_sha256','recovery_sha256','gate_sha256','state','requests','recovery','active']:
+        assert obs[key]==plan['before'][key],key
+    assert obs['writer_main_pid']=='0'
+
+def runtime_identity(p):
+    # Inspect the live unit again on every boot, not just an old bootstrap report.
+    pid=int(p['MainPID']);assert pid>1 and p['ActiveState']=='active'
+    fd=os.pidfd_open(pid)
+    try:
+        poll=select.poll();poll.register(fd,select.POLLIN);assert not poll.poll(0)
+        raw=run(['systemctl','show','certweft.service','-p','FragmentPath','-p','DropInPaths','-p','ExecStart']).stdout.decode()
+        unit=dict(line.split('=',1) for line in raw.splitlines() if '=' in line)
+        assert unit['FragmentPath']=='/etc/systemd/system/certweft.service'
+        assert unit['DropInPaths']=='/etc/systemd/system/certweft.service.d/reboot-evidence.conf'
+        expected_args=[PY,'-I','-m','certweft.service','/etc/certweft/writer.json']
+        assert unit['ExecStart'].split(' ; ')[1]=='argv[]='+' '.join(expected_args),'loaded_writer_command'
+        package=pathlib.Path(payload()['installed_root'])/'certweft/assets/certweft.service'
+        assert pathlib.Path(unit['FragmentPath']).read_bytes()==package.read_bytes(),'writer_unit_drift'
+        assert pathlib.Path(unit['DropInPaths']).read_text()==DROP,'writer_dropin_drift'
+        proc=pathlib.Path('/proc',str(pid));args=proc.joinpath('cmdline').read_bytes().rstrip(b'\0').decode().split('\0')
+        assert args==expected_args and os.readlink(proc/'cwd')=='/','live_writer_command'
+        mem=memory(pid);assert int(mem['CapEff'],16)==1 and mem['NoNewPrivs']=='1' and mem['Uid'].split()==['0']*4
+        current=props('certweft.service');assert current['InvocationID']==p['InvocationID'] and current['MainPID']==str(pid) and not poll.poll(0),'writer_changed_during_observation'
+        return {'main_pid':pid,'invocation_id':p['InvocationID'],'cmdline':args,'cwd':'/','unit':unit,'unit_sha256':hashlib.sha256(package.read_bytes()).hexdigest(),'memory':mem}
+    finally:os.close(fd)
+
+def public_alternative(case,committed):
+    current=expected(committed)
+    source_cert=next(c for c in sorted(STATE.glob('v-*/cert.pem')) if hashlib.sha256(run(['openssl','x509','-in',c,'-outform','DER']).stdout).hexdigest()!=current)
+    path=pathlib.Path('/var/lib/certweft-candidates')/('reboot-control-'+case+'.pem')
+    fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o640)
+    with os.fdopen(fd,'wb') as stream:
+        stream.write(source_cert.read_bytes());stream.flush();os.fsync(stream.fileno())
+    os.chown(path,0,grp.getgrnam('certweft-operator').gr_gid);path.chmod(0o640)
+    return path,hashlib.sha256(run(['openssl','x509','-in',path,'-outform','DER']).stdout).hexdigest()
+
+def activation_control(stale_history,fresh,before_leaf,after_leaf,target_leaf):
+    assert stale_history['state']=='FAILED' and stale_history['result']['error']=='Rejected' and not stale_history['result']['expired'],'stale_not_rejected'
+    assert fresh['result']['state']=='COMMITTED','fresh_authority_cannot_activate'
+    assert after_leaf==target_leaf and after_leaf!=before_leaf,'fresh_activation_not_observed'
+
 def payload():
     bootstrap=json.loads((P/'evidence/boot-bootstrap.json').read_text());assert bootstrap['passed']
     for name,digest in bootstrap['installed_payload'].items():
@@ -98,7 +142,7 @@ def prepare(case):
         gate,p=wait_ready();assert gate['gate_allows_updates']
         core=cli('status')[0]['result']
         if case=='committed':
-            cert=pathlib.Path((LAB/'candidate-path').read_text())
+            cert,_=public_alternative('prepare-committed',core['committed'])
             v,_=cli('submit','--certificate',cert,'--request-id','reboot-committed','--epoch',core['epoch'],'--revision',core['revision'],'--wait',user='certweft-operator');assert v['result']['state']=='COMMITTED'
             assert wire()==expected(cli('status')[0]['result']['committed'])
     else:raise AssertionError('unknown_case')
@@ -110,7 +154,7 @@ def prepare(case):
         try:signal.pidfd_send_signal(fd,signal.SIGSTOP)
         finally:os.close(fd)
     before=snapshot()
-    plan={'case':case,'boot_id':pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip(),'before':before,'stale_core':{'epoch':core['epoch'],'revision':core['revision']},'expected_leaf':expected(before['state']['committed']),'pre_shutdown_memory':memory(int(p['MainPID'])),'old_invocation':p['InvocationID']}
+    plan={'case':case,'boot_id':pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip(),'before':before,'stale_core':{'epoch':core['epoch'],'revision':core['revision']},'expected_leaf':expected(before['state']['committed']),'candidate_leaf':expected(before['state']['candidate']) if before['state'].get('candidate') else None,'pre_shutdown_memory':memory(int(p['MainPID'])),'old_invocation':p['InvocationID']}
     PLAN.write_text(json.dumps(plan));os.chmod(PLAN,0o600)
     pathlib.Path('/etc/systemd/system/certweft-reboot-observe.service').write_text(UNIT)
     for unit in ['certweft.service']:
@@ -124,27 +168,32 @@ def check(case):
     r=json.loads(OUT.read_text());assert r['source_sha256']==hashes();plan=json.loads(PLAN.read_text());assert plan['case']==case
     try:
         start=time.monotonic();gate,p=wait_ready();obs=json.loads((LAB/('observed-'+case+'.json')).read_text())
-        assert obs['boot_id']!=plan['boot_id'] and p['InvocationID']!=plan['old_invocation']
-        for key in ['journal_sha256','recovery_sha256','gate_sha256','state','requests','recovery','active']:assert obs[key]==plan['before'][key],key
-        assert obs['writer_main_pid']=='0';assert not gate['gate_allows_updates'] and gate['gate']['state']=='RECOVERY_REQUIRED',gate
-        # A genuinely valid new request is refused by the recovered Gate, before
-        # recovery, rather than only rejecting a malformed/stale request.
+        current_boot=pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip();boot_pair(plan,obs,current_boot)
+        assert p['InvocationID']!=plan['old_invocation']
+        runtime=runtime_identity(p)
+        assert not gate['gate_allows_updates'] and gate['gate']['state']=='RECOVERY_REQUIRED',gate
         core=cli('status')[0]['result'];cert=pathlib.Path((LAB/'candidate-path').read_text())
         denied,_=cli('submit','--certificate',cert,'--request-id','closed-'+case,'--epoch',core['epoch'],'--revision',core['revision'],user='certweft-operator',ok=False)
-        assert not denied['ok'] and denied['reason'] in {'recovery_required','gate_required','updates_closed'},denied
+        assert not denied['ok'] and denied['reason']=='recovery_required',denied
         closed_leaf=wire()
-        if case=='pending':assert obs['state']['state']=='APPLYING' and closed_leaf!=plan['expected_leaf']
+        if case=='pending':assert obs['state']['state']=='APPLYING' and closed_leaf==plan['candidate_leaf'] and closed_leaf!=plan['expected_leaf']
         else:assert obs['state']['state']=='READY' and closed_leaf==plan['expected_leaf']
-        # Stop evidence unit before changing plan; it only runs once on each boot.
-        opened,_=cli('recover','--prefix','boot-'+case,timeout=65);assert opened['updates_enabled'];assert wire()==plan['expected_leaf']
+        opened,_=cli('recover','--prefix','boot-'+case,timeout=65);assert opened['updates_enabled']
+        restored_leaf=wire();assert restored_leaf==plan['expected_leaf']
+        root_history=[cli('recovery-request-status','--request-id',identity)[0]['result'] for identity in opened['requests']]
         now=cli('status')[0]['result'];assert now['state']=='READY' and now['epoch']!=plan['stale_core']['epoch']
-        stale,_=cli('submit','--certificate',cert,'--request-id','stale-'+case,'--epoch',plan['stale_core']['epoch'],'--revision',plan['stale_core']['revision'],'--wait',user='certweft-operator',ok=False)
-        assert stale['reason']=='activation_FAILED',stale;assert wire()==plan['expected_leaf']
-        assert snapshot()['state']['committed']==plan['before']['state']['committed']
-        # Existing completed request is historical, never replayed or rewritten.
+        # Same valid certificate, same timeout and operator; only fresh request ID
+        # and epoch/revision differ between the negative and positive controls.
+        control_cert,target_leaf=public_alternative(case,now['committed'])
+        stale,_=cli('submit','--certificate',control_cert,'--request-id','stale-'+case,'--epoch',plan['stale_core']['epoch'],'--revision',plan['stale_core']['revision'],'--wait',user='certweft-operator',ok=False)
+        assert stale['reason']=='activation_FAILED',stale
+        stale_history=cli('request-status','--request-id','stale-'+case)[0]['result']
+        assert wire()==restored_leaf and snapshot()['state']==now,'stale_changed_core_or_wire'
+        fresh,_=cli('submit','--certificate',control_cert,'--request-id','fresh-'+case,'--epoch',now['epoch'],'--revision',now['revision'],'--wait',user='certweft-operator')
+        fresh_leaf=wire();activation_control(stale_history,fresh,restored_leaf,fresh_leaf,target_leaf)
         if case in {'committed','reopened'}:
             old=next(row for row in obs['requests'] if row[0]=='reboot-committed');new=next(row for row in snapshot()['requests'] if row[0]=='reboot-committed');assert old==list(new) and new[1]=='COMMITTED'
-        payload();entry={'name':case,'passed':True,'before_shutdown':plan['before'],'before_writer_on_new_boot':obs,'new_service_invocation':True,'closed_before_explicit_root_recovery':True,'observed_leaf_before_root_recovery':closed_leaf,'committed_leaf_after_explicit_recovery':wire(),'old_core_rejected_after_reopening':True,'post_ready_check_and_root_recovery_seconds':time.monotonic()-start,'pre_shutdown_writer_memory':plan['pre_shutdown_memory'],'post_recovery_writer_memory':memory(int(p['MainPID']))}
+        payload();entry={'name':case,'passed':True,'old_boot_id':plan['boot_id'],'current_boot_id':current_boot,'old_invocation_id':plan['old_invocation'],'writer_runtime':runtime,'before_shutdown':plan['before'],'before_writer_on_new_boot':obs,'new_service_invocation':True,'closed_gate_response':gate,'closed_valid_request_response':denied,'closed_before_explicit_root_recovery':True,'expected_candidate_leaf':plan['candidate_leaf'],'observed_leaf_before_root_recovery':closed_leaf,'committed_leaf_after_explicit_recovery':restored_leaf,'root_recovery_response':opened,'root_recovery_history':root_history,'stale_cli_response':stale,'stale_request_history':stale_history,'old_core_rejected_after_reopening':True,'fresh_activation_after_reopening':{'response':fresh,'prior_core':now,'old_leaf':restored_leaf,'expected_leaf':target_leaf,'wire_leaf':fresh_leaf},'post_ready_check_recovery_and_control_seconds':time.monotonic()-start,'pre_shutdown_writer_memory':plan['pre_shutdown_memory'],'post_control_writer_memory':memory(int(p['MainPID']))}
         r['cases'].append(entry);r.pop('pending_case',None);publish(r);print(json.dumps({'checked':case,'passed':True}))
     except Exception as e:
         r.update(passed=False,status='failed',error=type(e).__name__+': '+str(e));publish(r);raise

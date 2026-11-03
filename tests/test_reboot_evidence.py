@@ -40,3 +40,20 @@ class BootObserver(unittest.TestCase):
             with patch('os.popen',return_value=io.StringIO('42')):
                 with self.assertRaisesRegex(AssertionError,'writer_started_before_observation'):exec(code,{})
             self.assertFalse((lab/'observed-pending.json').exists())
+
+class RebootControls(unittest.TestCase):
+    def test_observation_must_be_from_current_boot(self):
+        from tools.reboot_vm import boot_pair
+        before={k:None for k in ['journal_sha256','recovery_sha256','gate_sha256','state','requests','recovery','active']}
+        plan={'boot_id':'old','before':before};obs={**before,'boot_id':'new','writer_main_pid':'0'}
+        boot_pair(plan,obs,'new')
+        with self.assertRaisesRegex(AssertionError,'observer_not_current_boot'):boot_pair(plan,obs,'another')
+        with self.assertRaisesRegex(AssertionError,'same_boot'):boot_pair({**plan,'boot_id':'new'},obs,'new')
+    def test_blanket_executor_failure_cannot_pass_stale_control(self):
+        from tools.reboot_vm import activation_control
+        stale={'state':'FAILED','result':{'error':'Rejected','expired':False}}
+        with self.assertRaisesRegex(AssertionError,'fresh_authority_cannot_activate'):
+            activation_control(stale,{'result':{'state':'FAILED'}},'old','old','target')
+        with self.assertRaisesRegex(AssertionError,'fresh_activation_not_observed'):
+            activation_control(stale,{'result':{'state':'COMMITTED'}},'old','old','target')
+        activation_control(stale,{'result':{'state':'COMMITTED'}},'old','target','target')

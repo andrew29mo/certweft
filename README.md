@@ -6,7 +6,8 @@ storage faults across reboot and long-running lifecycle qualification remain inc
 
 Current installed operation: [installation/CLI guide](docs/INSTALL.md) and
 [systemd deployment evidence](docs/DEPLOYMENT_VALIDATION.md), plus
-[preserved-state VM boot recovery](docs/REBOOT_VALIDATION.md). Earlier source-run
+[preserved-state VM boot recovery](docs/REBOOT_VALIDATION.md) and its
+[review corrections](docs/REBOOT_REVIEW.md). Earlier source-run
 milestones below retain their individual scope.
 
 The minimum implementation validates a candidate, persists activation intent,

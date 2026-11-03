@@ -1,10 +1,10 @@
 {
   "passed": true,
-  "tests_run": 123,
+  "tests_run": 125,
   "failures": [],
   "errors": [],
   "skipped": [],
-  "elapsed_seconds": 16.150490221,
+  "elapsed_seconds": 16.303804150000005,
   "python": "3.12.3",
   "platform": "linux",
   "source_sha256": {
@@ -45,9 +45,10 @@
     "tools/credential_probe.py": "8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46",
     "tools/operations_vm.py": "3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85",
     "tools/admission_mutation.py": "cd0754f335cf80bd162396954eeab0d6edecfabc0d1c0b8e0e61a19cc8a1f749",
+    "tools/reboot_host.py": "0f344717224e4bd705154bf493850e6bed6a0e8f91e8cc72c2d940bac0029157",
     "tools/reconcile_vm.py": "70172e146542bd3f564128fac997709f1ba7692289c681b4ae81109c5aeb3e8b",
     "tools/gate_vm.py": "66215b4c176fe5ca9db1fda5bd6869213f852fd5cdeb0ee3ea23412197a0fb78",
-    "tools/reboot_vm.py": "ec6fc2410d29cc14f4ad4bea986c89289b2a34a0676f78d898ce545f8e79616f",
+    "tools/reboot_vm.py": "0b07df33a1546013671ed72c25ed39ce1d7ac3ac0543a3e10c50ebd2596f33af",
     "tools/release_vm.py": "e82059f514f166d81740a004d707dc78d5e62b14c06b6a08fc8ae0ad5f338812",
     "tests/test_release.py": "08e1031f443b3ef89afbd05044d007f56facb056ac366af55fd35c3882d3f7d9",
     "tests/test_certificate_recovery.py": "7dedc3df699699665d7c21e9b2d62592f8d648eaa9cf5dc973c31453622fdcb0",
@@ -62,7 +63,7 @@
     "tests/test_service_process.py": "db7bccfa6248f8a9281cd380f5db317f71116b06711f195100f86a7f5a70e9b9",
     "tests/test_deployment.py": "11d3612e6ac18ac4967168437ef03cfc6eab58afe0dbcbe3fbf1378d6270ecc7",
     "tests/test_reconciliation.py": "91d301f53893145dd6400efc00c67204441a80b15428c0e9032629137db3cac9",
-    "tests/test_reboot_evidence.py": "58d1153e4da1727bc7cb005ebe8c1e201fb6eaf40f347f2c7a5fe9aa29897b30",
+    "tests/test_reboot_evidence.py": "940f49aea788760adca0cfc22c9edd8183ae03f05850b6d3a6b6270adf95a18f",
     "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
   },
   "source_unchanged": true

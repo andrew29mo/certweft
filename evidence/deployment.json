@@ -5,23 +5,23 @@
     {
       "name": "wheel_install_and_payload",
       "passed": true,
-      "seconds": 1.2524994250000105,
+      "seconds": 1.2340654999999998,
       "detail": {
         "version": "0.0.2",
         "module": "/opt/certweft/lib/python3.12/site-packages/certweft/__init__.py",
-        "wheel_sha256": "6408b328125cfa328a847899f5ddfbd83b1948dab97ea110c6a3455d86e5a2cf",
+        "wheel_sha256": "6e6e24eee81fa4d149c0ba87a44a5d9a318dd5582d5335a76e36f85267834202",
         "payload_files": 22
       }
     },
     {
       "name": "documented_install_and_start",
       "passed": true,
-      "seconds": 0.4520003159999959,
+      "seconds": 0.400107883000004,
       "detail": {
         "systemd": {
           "Restart": "on-failure",
           "RestartPreventExitStatus": "73",
-          "MainPID": "2030",
+          "MainPID": "2046",
           "Result": "success",
           "NRestarts": "0",
           "ExecMainStatus": "0",
@@ -33,13 +33,13 @@
           "SubState": "running",
           "StartLimitIntervalUSec": "1min",
           "StartLimitBurst": "3",
-          "InvocationID": "39e41977c2cd4e86b70c82695d92458f"
+          "InvocationID": "adc8b48850804e6c8e7ae356b792a92c"
         },
         "service_memory": {
           "Uid": "0\t0\t0\t0",
           "Gid": "0\t0\t0\t0",
-          "VmHWM": "21752 kB",
-          "VmRSS": "21752 kB",
+          "VmHWM": "21760 kB",
+          "VmRSS": "21748 kB",
           "CapEff": "0000000000000001",
           "NoNewPrivs": "1"
         },
@@ -50,14 +50,14 @@
     {
       "name": "credential_delivery_and_real_ca_issuance",
       "passed": true,
-      "seconds": 0.2000624519999974,
+      "seconds": 0.206903932000003,
       "detail": {
         "certificate": "/var/lib/certweft-candidates/first/cert.pem",
         "observed": {
           "Uid": "995\t995\t995\t995",
           "Gid": "989\t989\t989\t989",
-          "VmHWM": "20984 kB",
-          "VmRSS": "20984 kB",
+          "VmHWM": "6236 kB",
+          "VmRSS": "6236 kB",
           "CapEff": "0000000000000000",
           "NoNewPrivs": "1"
         },
@@ -70,19 +70,19 @@
     {
       "name": "installed_controller_real_activation",
       "passed": true,
-      "seconds": 0.8070643350000068,
+      "seconds": 0.9091417220000011,
       "detail": {
         "request_state": "COMMITTED",
-        "old_leaf_sha256": "b5763c4d627d18d1a0d756508cf2f1862d69be52108151ff2524c7ea84e24e5d",
-        "new_leaf_sha256": "094b60269d0ff25d5a3ed1c85ddfaa372a6b82ac7f1f48a78f56eb0e1deca3fe",
-        "expected_leaf_sha256": "094b60269d0ff25d5a3ed1c85ddfaa372a6b82ac7f1f48a78f56eb0e1deca3fe",
-        "activation_cli_seconds": 0.7640640500000018
+        "old_leaf_sha256": "830db8b1012f179f5f54dc0d6aec8e599a2685e9e6118203a29dea2b2fcc62d5",
+        "new_leaf_sha256": "4d2c2007934d364b16b22f24f8242091ed305e13141174b4b200bf526f4d29f3",
+        "expected_leaf_sha256": "4d2c2007934d364b16b22f24f8242091ed305e13141174b4b200bf526f4d29f3",
+        "activation_cli_seconds": 0.8720142030000062
       }
     },
     {
       "name": "storage_failure_repair_reopen_and_update",
       "passed": true,
-      "seconds": 5.114244223,
+      "seconds": 5.114806496,
       "detail": {
         "actual_sqlite_full": true,
         "failure_state": "DEGRADED",
@@ -90,36 +90,36 @@
         "explicit_root_recovery_opened": true,
         "follow_up_activation": {
           "request_state": "COMMITTED",
-          "old_leaf_sha256": "094b60269d0ff25d5a3ed1c85ddfaa372a6b82ac7f1f48a78f56eb0e1deca3fe",
-          "new_leaf_sha256": "b6cc32ab28a295148fa0a639ee0f86fe3133fb0d9e4a50bdabcd92663c1e7a7a",
-          "expected_leaf_sha256": "b6cc32ab28a295148fa0a639ee0f86fe3133fb0d9e4a50bdabcd92663c1e7a7a",
-          "activation_cli_seconds": 0.7592706189999916
+          "old_leaf_sha256": "4d2c2007934d364b16b22f24f8242091ed305e13141174b4b200bf526f4d29f3",
+          "new_leaf_sha256": "51066bb362e66375c69ceea275ca7c3ea65c08e1e20efb600a52e1751e5388da",
+          "expected_leaf_sha256": "51066bb362e66375c69ceea275ca7c3ea65c08e1e20efb600a52e1751e5388da",
+          "activation_cli_seconds": 0.7755263999999897
         }
       }
     },
     {
       "name": "systemd_sigkill_takeover_and_stale_request",
       "passed": true,
-      "seconds": 6.932856581999999,
+      "seconds": 7.117490418000003,
       "detail": {
         "post_recovery_stale_activation_rejected_without_wire_change": true,
         "old_executor_dead_before_new_ready": true,
         "new_invocation": true,
         "closed_after_crash": true,
         "old_operation_denied": true,
-        "sigkill_to_observed_new_ready_seconds": 1.100968617999996,
+        "sigkill_to_observed_new_ready_seconds": 1.1136539209999938,
         "executor_memory_before_kill": {
           "Uid": "0\t0\t0\t0",
           "Gid": "0\t0\t0\t0",
-          "VmHWM": "23356 kB",
-          "VmRSS": "23356 kB",
+          "VmHWM": "23364 kB",
+          "VmRSS": "23364 kB",
           "CapEff": "0000000000000001",
           "NoNewPrivs": "1"
         },
         "systemd": {
           "Restart": "on-failure",
           "RestartPreventExitStatus": "73",
-          "MainPID": "2635",
+          "MainPID": "2696",
           "Result": "success",
           "NRestarts": "1",
           "ExecMainStatus": "0",
@@ -131,14 +131,14 @@
           "SubState": "running",
           "StartLimitIntervalUSec": "1min",
           "StartLimitBurst": "3",
-          "InvocationID": "5f936fa082ec4c3c83d4ced289542167"
+          "InvocationID": "89306b4cd3a64856afcb6b9a82ef06a8"
         }
       }
     },
     {
       "name": "outside_cgroup_executor_blocks_takeover",
       "passed": true,
-      "seconds": 0.1704340309999992,
+      "seconds": 0.17173001399999066,
       "detail": {
         "real_installed_executor_holds_lease": true,
         "unit_exit_status": 73,
@@ -150,7 +150,7 @@
     {
       "name": "restart_limit_and_explicit_reset",
       "passed": true,
-      "seconds": 3.695391248000007,
+      "seconds": 3.737227470999997,
       "detail": {
         "configured_burst": 3,
         "configured_interval_seconds": 60,
@@ -230,10 +230,10 @@
     "certweft/assets/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
   },
   "installed_root": "/opt/certweft/lib/python3.12/site-packages",
-  "wheel_sha256": "6408b328125cfa328a847899f5ddfbd83b1948dab97ea110c6a3455d86e5a2cf",
+  "wheel_sha256": "6e6e24eee81fa4d149c0ba87a44a5d9a318dd5582d5335a76e36f85267834202",
   "state_disk": {
     "scope": "unique regular file inodes after scenarios; excludes symlink targets, directories and filesystem metadata",
-    "logical_bytes": 102213,
+    "logical_bytes": 102241,
     "allocated_bytes": 176128,
     "files": 24
   },
@@ -287,9 +287,10 @@
     "tools/credential_probe.py": "8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46",
     "tools/operations_vm.py": "3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85",
     "tools/admission_mutation.py": "cd0754f335cf80bd162396954eeab0d6edecfabc0d1c0b8e0e61a19cc8a1f749",
+    "tools/reboot_host.py": "0f344717224e4bd705154bf493850e6bed6a0e8f91e8cc72c2d940bac0029157",
     "tools/reconcile_vm.py": "70172e146542bd3f564128fac997709f1ba7692289c681b4ae81109c5aeb3e8b",
     "tools/gate_vm.py": "66215b4c176fe5ca9db1fda5bd6869213f852fd5cdeb0ee3ea23412197a0fb78",
-    "tools/reboot_vm.py": "ec6fc2410d29cc14f4ad4bea986c89289b2a34a0676f78d898ce545f8e79616f",
+    "tools/reboot_vm.py": "0b07df33a1546013671ed72c25ed39ce1d7ac3ac0543a3e10c50ebd2596f33af",
     "tools/release_vm.py": "e82059f514f166d81740a004d707dc78d5e62b14c06b6a08fc8ae0ad5f338812",
     "tests/test_release.py": "08e1031f443b3ef89afbd05044d007f56facb056ac366af55fd35c3882d3f7d9",
     "tests/test_certificate_recovery.py": "7dedc3df699699665d7c21e9b2d62592f8d648eaa9cf5dc973c31453622fdcb0",
@@ -304,7 +305,7 @@
     "tests/test_service_process.py": "db7bccfa6248f8a9281cd380f5db317f71116b06711f195100f86a7f5a70e9b9",
     "tests/test_deployment.py": "11d3612e6ac18ac4967168437ef03cfc6eab58afe0dbcbe3fbf1378d6270ecc7",
     "tests/test_reconciliation.py": "91d301f53893145dd6400efc00c67204441a80b15428c0e9032629137db3cac9",
-    "tests/test_reboot_evidence.py": "58d1153e4da1727bc7cb005ebe8c1e201fb6eaf40f347f2c7a5fe9aa29897b30",
+    "tests/test_reboot_evidence.py": "940f49aea788760adca0cfc22c9edd8183ae03f05850b6d3a6b6270adf95a18f",
     "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
   },
   "source_unchanged": true
