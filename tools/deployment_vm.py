@@ -82,7 +82,8 @@ def owned_reset():
 
 def main():
     if os.geteuid()!=0 or os.environ.get('CERTWEFT_DEPLOYMENT_VM')!='1':raise PermissionError('explicit disposable Linux VM required')
-    os.umask(0o077);source=hashes();out=P/'evidence/deployment.json';archive=P/'evidence/deployment-attempts';archive.mkdir(exist_ok=True)
+    bootstrap='--bootstrap-only' in sys.argv
+    os.umask(0o077);source=hashes();out=P/('evidence/boot-bootstrap.json' if bootstrap else 'evidence/deployment.json');archive=P/'evidence/deployment-attempts';archive.mkdir(exist_ok=True)
     if out.exists():shutil.copyfile(out,archive/(str(time.time_ns())+'.json'))
     report={'passed':False,'status':'in_progress','cases':[],'scope':'wheel-installed fixed systemd services in a newly created, provisioned Ubuntu VM; application reset between development attempts','untested':['VM reboot recovery','power loss','boot zero-gap','D-state termination','remote CA network','production PKI enrollment','multi-instance deployment','unbounded operation']}
     def publish():
@@ -191,78 +192,79 @@ def main():
         case('documented_install_and_start',install)
         first=case('credential_delivery_and_real_ca_issuance',lambda:{k:str(v) if isinstance(v,pathlib.Path) else v for k,v in issue('first',True).items()})
         case('installed_controller_real_activation',lambda:activate('installed-first',pathlib.Path(first['certificate'])))
-        def fail_recover():
-            # Real SQLite pager capacity failure on normal COMMIT, not RAISE().
-            state=pathlib.Path('/var/lib/certweft');config=pathlib.Path('/etc/certweft/writer.json');original=json.loads(config.read_text());run(['systemctl','stop','certweft.service'])
-            with sqlite3.connect(state/'journal.db') as db:
-                db.execute('CREATE TABLE deploy_pressure(data BLOB)');db.execute("CREATE TRIGGER deploy_full BEFORE UPDATE ON requests WHEN NEW.state='COMMITTED' BEGIN INSERT INTO deploy_pressure VALUES(zeroblob(1048576)); END");limit=db.execute('PRAGMA page_count').fetchone()[0]+1
-            config.write_text(json.dumps({**original,'sqlite_max_pages':limit}));run(['systemctl','start','certweft.service']);wait_ready()
-            second=issue('second')['certificate'];st,_=cli('status',user='certweft-operator');core=st['result']
-            value,_=cli('submit','--certificate',second,'--request-id','disk-failure','--epoch',core['epoch'],'--revision',core['revision'],'--wait',user='certweft-operator',ok=False);assert value['reason']=='activation_DEGRADED',value
-            history,_=cli('request-status','--request-id','disk-failure');assert history['result']['result']['sqlite_error']=='SQLITE_FULL',history
-            run(['systemctl','stop','certweft.service'])
-            with sqlite3.connect(state/'journal.db') as db:db.execute('DROP TRIGGER deploy_full');db.execute('DROP TABLE deploy_pressure')
-            config.write_text(json.dumps(original));run(['systemctl','start','certweft.service']);gate,_=wait_ready();assert not gate['gate_allows_updates']
-            restored,_=cli('recover','--prefix','repair-one',timeout=60);assert restored['updates_enabled']
-            third=issue('after')['certificate'];actual=activate('after-repair',third)
-            return {'actual_sqlite_full':True,'failure_state':'DEGRADED','repair_restart_still_closed':True,'explicit_root_recovery_opened':True,'follow_up_activation':actual}
-        case('storage_failure_repair_reopen_and_update',fail_recover)
-        def crash_takeover():
-            config=pathlib.Path('/etc/certweft/writer.json');original=json.loads(config.read_text());run(['systemctl','stop','certweft.service']);reset()
-            marker=pathlib.Path('/var/lib/certweft/crash-marker.json');config.write_text(json.dumps({**original,'pause_at':'confirmed','marker':str(marker)}));run(['systemctl','start','certweft.service']);gate,p=wait_ready();assert not gate['gate_allows_updates']
-            cli('recover','--prefix','crash-ready',timeout=60)
-            st,_=cli('status',user='certweft-operator');core=st['result'];cli('submit','--certificate',first['certificate'],'--request-id','crash-pending','--epoch',core['epoch'],'--revision',core['revision'],user='certweft-operator')
-            for _ in range(100):
-                if marker.exists():break
-                time.sleep(.03)
-            else:raise AssertionError('formal_executor_checkpoint_missing')
-            child=json.loads(marker.read_text())['pid'];old=p['InvocationID'];oldpid=int(p['MainPID']);before=memory(child);start=time.monotonic();kill_main(p)
-            gate,new=wait_ready(old);elapsed=time.monotonic()-start;assert not alive(child) and not alive(oldpid)
-            assert not gate['gate_allows_updates'];assert pathlib.Path('/var/lib/certweft/lifetime.lock').exists()
-            stale,_=cli('submit','--certificate',first['certificate'],'--request-id','old-after-crash','--epoch',core['epoch'],'--revision',core['revision'],user='certweft-operator',ok=False);assert not stale['ok']
-            run(['systemctl','stop','certweft.service']);assert_empty('certweft.service');config.write_text(json.dumps(original))
-            run(['systemctl','start','certweft.service']);wait_ready();cli('recover','--prefix','crash-after',timeout=60);preserved=wire()
-            old,_=cli('submit','--certificate',first['certificate'],'--request-id','stale-after-recovery','--epoch',core['epoch'],'--revision',core['revision'],'--wait',user='certweft-operator',ok=False)
-            assert old['reason']=='activation_FAILED' and wire()==preserved,old
-            run(['systemctl','stop','certweft.service']);assert_empty('certweft.service')
-            return {'post_recovery_stale_activation_rejected_without_wire_change':True,'old_executor_dead_before_new_ready':True,'new_invocation':new['InvocationID']!=old,'closed_after_crash':True,'old_operation_denied':True,'sigkill_to_observed_new_ready_seconds':elapsed,'executor_memory_before_kill':before,'systemd':new}
-        case('systemd_sigkill_takeover_and_stale_request',crash_takeover)
-        def external_executor():
-            nonlocal external
-            lease='/var/lib/certweft/lifetime.lock';fd=os.open(lease,os.O_RDWR);import fcntl;fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
-            # Real installed executor waits for its message, retaining the same
-            # lifetime lease. It is deliberately outside the writer unit cgroup.
-            external=subprocess.Popen([PY,'-I','-m','certweft.executor',str(fd)],pass_fds=(fd,),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,cwd='/');os.close(fd)
-            reset();r=run(['systemctl','start','certweft.service'],ok=False)
-            for _ in range(60):
-                p=props('certweft.service')
-                if p['ActiveState']=='failed':break
-                time.sleep(.03)
-            assert p['ExecMainStatus']=='73' and p['NRestarts']=='0' and external.poll() is None,p
-            external.kill();external.communicate(timeout=3);reset();run(['systemctl','start','certweft.service']);gate,_=wait_ready();assert not gate['gate_allows_updates']
-            return {'real_installed_executor_holds_lease':True,'unit_exit_status':73,'automatic_restarts_while_occupied':0,'takeover_only_after_executor_exit':True,'new_session_closed':True}
-        case('outside_cgroup_executor_blocks_takeover',external_executor)
-        def limits():
-            run(['systemctl','stop','certweft.service']);reset();run(['systemctl','start','certweft.service']);gate,p=wait_ready();observed=[]
-            cursor=run(['journalctl','-u','certweft.service','-n','0','--show-cursor','--no-pager']).stdout.decode().strip().split('-- cursor: ')[-1]
-            for _ in range(4):
-                old=p['InvocationID'];kill_main(p)
-                until=time.monotonic()+8
-                while time.monotonic()<until:
-                    p=props('certweft.service')
-                    if p['ActiveState']=='failed' and p['MainPID']=='0':break
-                    if p['ActiveState']=='active' and p['InvocationID']!=old and int(p['MainPID'])>1:
-                        _,p=wait_ready(old);break
+        if not bootstrap:
+            def fail_recover():
+                # Real SQLite pager capacity failure on normal COMMIT, not RAISE().
+                state=pathlib.Path('/var/lib/certweft');config=pathlib.Path('/etc/certweft/writer.json');original=json.loads(config.read_text());run(['systemctl','stop','certweft.service'])
+                with sqlite3.connect(state/'journal.db') as db:
+                    db.execute('CREATE TABLE deploy_pressure(data BLOB)');db.execute("CREATE TRIGGER deploy_full BEFORE UPDATE ON requests WHEN NEW.state='COMMITTED' BEGIN INSERT INTO deploy_pressure VALUES(zeroblob(1048576)); END");limit=db.execute('PRAGMA page_count').fetchone()[0]+1
+                config.write_text(json.dumps({**original,'sqlite_max_pages':limit}));run(['systemctl','start','certweft.service']);wait_ready()
+                second=issue('second')['certificate'];st,_=cli('status',user='certweft-operator');core=st['result']
+                value,_=cli('submit','--certificate',second,'--request-id','disk-failure','--epoch',core['epoch'],'--revision',core['revision'],'--wait',user='certweft-operator',ok=False);assert value['reason']=='activation_DEGRADED',value
+                history,_=cli('request-status','--request-id','disk-failure');assert history['result']['result']['sqlite_error']=='SQLITE_FULL',history
+                run(['systemctl','stop','certweft.service'])
+                with sqlite3.connect(state/'journal.db') as db:db.execute('DROP TRIGGER deploy_full');db.execute('DROP TABLE deploy_pressure')
+                config.write_text(json.dumps(original));run(['systemctl','start','certweft.service']);gate,_=wait_ready();assert not gate['gate_allows_updates']
+                restored,_=cli('recover','--prefix','repair-one',timeout=60);assert restored['updates_enabled']
+                third=issue('after')['certificate'];actual=activate('after-repair',third)
+                return {'actual_sqlite_full':True,'failure_state':'DEGRADED','repair_restart_still_closed':True,'explicit_root_recovery_opened':True,'follow_up_activation':actual}
+            case('storage_failure_repair_reopen_and_update',fail_recover)
+            def crash_takeover():
+                config=pathlib.Path('/etc/certweft/writer.json');original=json.loads(config.read_text());run(['systemctl','stop','certweft.service']);reset()
+                marker=pathlib.Path('/var/lib/certweft/crash-marker.json');config.write_text(json.dumps({**original,'pause_at':'confirmed','marker':str(marker)}));run(['systemctl','start','certweft.service']);gate,p=wait_ready();assert not gate['gate_allows_updates']
+                cli('recover','--prefix','crash-ready',timeout=60)
+                st,_=cli('status',user='certweft-operator');core=st['result'];cli('submit','--certificate',first['certificate'],'--request-id','crash-pending','--epoch',core['epoch'],'--revision',core['revision'],user='certweft-operator')
+                for _ in range(100):
+                    if marker.exists():break
                     time.sleep(.03)
-                observed.append({'active':p['ActiveState'],'result':p['Result'],'nrestarts':p['NRestarts']})
-                if p['ActiveState']=='failed' and p['MainPID']=='0':break
-            journal=run(['journalctl','-u','certweft.service','--after-cursor',cursor,'--no-pager','-o','cat']).stdout
-            assert p['ActiveState']=='failed' and p['MainPID']=='0' and p['NRestarts']=='3',p
-            assert b'Start request repeated too quickly' in journal,'rate_limit_not_observed'
-            refused=run(['systemctl','start','certweft.service'],ok=False);assert refused.returncode!=0 and props('certweft.service')['MainPID']=='0'
-            assert_empty('certweft.service');reset();run(['systemctl','start','certweft.service']);gate,_=wait_ready();assert not gate['gate_allows_updates']
-            return {'configured_burst':3,'configured_interval_seconds':60,'observed':observed,'this_run_rate_limit_journal_observed':True,'explicit_start_rejected_before_reset':True,'bounded_restart_stop':True,'operator_reset_still_closed':True}
-        case('restart_limit_and_explicit_reset',limits)
+                else:raise AssertionError('formal_executor_checkpoint_missing')
+                child=json.loads(marker.read_text())['pid'];old=p['InvocationID'];oldpid=int(p['MainPID']);before=memory(child);start=time.monotonic();kill_main(p)
+                gate,new=wait_ready(old);elapsed=time.monotonic()-start;assert not alive(child) and not alive(oldpid)
+                assert not gate['gate_allows_updates'];assert pathlib.Path('/var/lib/certweft/lifetime.lock').exists()
+                stale,_=cli('submit','--certificate',first['certificate'],'--request-id','old-after-crash','--epoch',core['epoch'],'--revision',core['revision'],user='certweft-operator',ok=False);assert not stale['ok']
+                run(['systemctl','stop','certweft.service']);assert_empty('certweft.service');config.write_text(json.dumps(original))
+                run(['systemctl','start','certweft.service']);wait_ready();cli('recover','--prefix','crash-after',timeout=60);preserved=wire()
+                old,_=cli('submit','--certificate',first['certificate'],'--request-id','stale-after-recovery','--epoch',core['epoch'],'--revision',core['revision'],'--wait',user='certweft-operator',ok=False)
+                assert old['reason']=='activation_FAILED' and wire()==preserved,old
+                run(['systemctl','stop','certweft.service']);assert_empty('certweft.service')
+                return {'post_recovery_stale_activation_rejected_without_wire_change':True,'old_executor_dead_before_new_ready':True,'new_invocation':new['InvocationID']!=old,'closed_after_crash':True,'old_operation_denied':True,'sigkill_to_observed_new_ready_seconds':elapsed,'executor_memory_before_kill':before,'systemd':new}
+            case('systemd_sigkill_takeover_and_stale_request',crash_takeover)
+            def external_executor():
+                nonlocal external
+                lease='/var/lib/certweft/lifetime.lock';fd=os.open(lease,os.O_RDWR);import fcntl;fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+                # Real installed executor waits for its message, retaining the same
+                # lifetime lease. It is deliberately outside the writer unit cgroup.
+                external=subprocess.Popen([PY,'-I','-m','certweft.executor',str(fd)],pass_fds=(fd,),stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,cwd='/');os.close(fd)
+                reset();r=run(['systemctl','start','certweft.service'],ok=False)
+                for _ in range(60):
+                    p=props('certweft.service')
+                    if p['ActiveState']=='failed':break
+                    time.sleep(.03)
+                assert p['ExecMainStatus']=='73' and p['NRestarts']=='0' and external.poll() is None,p
+                external.kill();external.communicate(timeout=3);reset();run(['systemctl','start','certweft.service']);gate,_=wait_ready();assert not gate['gate_allows_updates']
+                return {'real_installed_executor_holds_lease':True,'unit_exit_status':73,'automatic_restarts_while_occupied':0,'takeover_only_after_executor_exit':True,'new_session_closed':True}
+            case('outside_cgroup_executor_blocks_takeover',external_executor)
+            def limits():
+                run(['systemctl','stop','certweft.service']);reset();run(['systemctl','start','certweft.service']);gate,p=wait_ready();observed=[]
+                cursor=run(['journalctl','-u','certweft.service','-n','0','--show-cursor','--no-pager']).stdout.decode().strip().split('-- cursor: ')[-1]
+                for _ in range(4):
+                    old=p['InvocationID'];kill_main(p)
+                    until=time.monotonic()+8
+                    while time.monotonic()<until:
+                        p=props('certweft.service')
+                        if p['ActiveState']=='failed' and p['MainPID']=='0':break
+                        if p['ActiveState']=='active' and p['InvocationID']!=old and int(p['MainPID'])>1:
+                            _,p=wait_ready(old);break
+                        time.sleep(.03)
+                    observed.append({'active':p['ActiveState'],'result':p['Result'],'nrestarts':p['NRestarts']})
+                    if p['ActiveState']=='failed' and p['MainPID']=='0':break
+                journal=run(['journalctl','-u','certweft.service','--after-cursor',cursor,'--no-pager','-o','cat']).stdout
+                assert p['ActiveState']=='failed' and p['MainPID']=='0' and p['NRestarts']=='3',p
+                assert b'Start request repeated too quickly' in journal,'rate_limit_not_observed'
+                refused=run(['systemctl','start','certweft.service'],ok=False);assert refused.returncode!=0 and props('certweft.service')['MainPID']=='0'
+                assert_empty('certweft.service');reset();run(['systemctl','start','certweft.service']);gate,_=wait_ready();assert not gate['gate_allows_updates']
+                return {'configured_burst':3,'configured_interval_seconds':60,'observed':observed,'this_run_rate_limit_journal_observed':True,'explicit_start_rejected_before_reset':True,'bounded_restart_stop':True,'operator_reset_still_closed':True}
+            case('restart_limit_and_explicit_reset',limits)
         # Inspect installed bytes again after all systemd operations.
         for name,sha in report['installed_payload'].items():assert hashlib.sha256((pathlib.Path(report['installed_root'])/name).read_bytes()).hexdigest()==sha
         for unit in UNITS:

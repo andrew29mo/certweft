@@ -1,20 +1,45 @@
-# Current installed deployment milestone
+# Current preserved-state VM reboot stage
+
+See [REBOOT_VALIDATION.md](REBOOT_VALIDATION.md) for boot enablement, the exact
+preserved-state contract, root recovery and limits. Current Linux unit evidence
+is reboot-units.json/html: **123 tests, no failures/errors/skips**. Three actual
+normal guest poweroff/start cases passed (pending, committed, reopened), alongside
+four installed bootstrap cases. The eight installed deployment cases were also
+rerun. These fixtures overlap; their counts are not independent workload trials.
+The four current report pairs (reboot, reboot-units, boot-bootstrap, deployment)
+bind the same complete 56-file source manifest. The three installed fixtures also
+verify package payloads against the wheel and source.
+The earlier 148 source-run regression scenarios below were not rerun for this
+harness/documentation-only stage and retain their historical source manifests.
+No application module, unit template, privilege allowance or license changed.
+
+All three reboot cases preserve the old main/recovery journals, Gate and active
+pointer before writer startup. Gate remains closed, explicit root recovery
+restores/verifies committed TLS, and stale core authority fails after reopening.
+In the pending case a candidate remains online until that explicit recovery.
+This is not automatic rollback on boot. The measured approximately 2.26 seconds
+per case starts after SSH is available and includes checks/root recovery; it is
+not machine boot time or an SLA. Writer post-recovery RSS snapshots were
+22,480 / 22,496 / 22,500 KiB inside the VM, not a sustained-memory qualification.
+Power loss, boot zero-gap and storage-fault-across-reboot remain untested.
+
+# Earlier installed deployment milestone
 
 See [INSTALL.md](INSTALL.md) and [DEPLOYMENT_VALIDATION.md](DEPLOYMENT_VALIDATION.md)
 for the installed wheel/CLI/systemd scope, real Smallstep credential delivery,
-process takeover, measurement limits and remaining gates. Current unit evidence
+process takeover, measurement limits and remaining gates. That milestone’s unit evidence
 is deployment-units.json/html; older unit reports retain their historical source.
 Earlier sections below describe their own milestones.
 
-Current fixed-source validation passed 120 Linux unit tests, eight installed
+At that milestone fixed-source validation passed 120 Linux unit tests, eight installed
 wheel/systemd scenarios and 148 source-run VM regression scenarios (156 regular
-VM scenarios total). Ten current JSON/HTML pairs have identical payloads and
+VM scenarios total). The ten then-current JSON/HTML pairs have identical payloads and
 complete matching 54-file source manifests, including package resources and
 pyproject.toml. Installed payload hashes also match those same source bytes.
 Expected-failure mutation controls are separate and are not counted as additional
 passing VM scenarios. The installed package version is 0.0.2.
 
-# Current explicit reopening stage
+# Earlier explicit reopening stage
 
 See [REOPENING.md](REOPENING.md) for root contract, three-record admission,
 original deadline intersection, failure/restart closure and real follow-up TLS

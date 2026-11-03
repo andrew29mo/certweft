@@ -2,7 +2,8 @@
 
 Qualified target: provisioned Ubuntu 24.04 ARM64, Python 3.12, systemd 255,
 Nginx 1.24, Smallstep CLI 0.31.0 / CA 0.30.2. This stage tests installed
-services and process restart, **not machine reboot or automatic boot recovery**.
+services and process restart. Preserved-state VM boot recovery is qualified separately
+in [REBOOT_VALIDATION.md](REBOOT_VALIDATION.md).
 The project is Private and has no selected license.
 
 ## Fixed scope and prerequisites
@@ -65,7 +66,9 @@ sudo /opt/certweft/bin/python -I -m certweft.cli gate
 Installation creates the fixed `certweft-operator` and `certweft-signer` non-login
 accounts. It starts nothing until explicitly requested. Starting the writer also
 starts its dedicated `certweft-nginx.service`; other Nginx units/configurations
-are not modified. This guide does not enable boot startup yet.
+are not modified. After validating the installation, explicitly enable boot startup
+with `sudo systemctl enable certweft.service`. See REBOOT_VALIDATION.md for the
+closed-Gate recovery contract and tested boundaries.
 
 ## Issue and activate
 
@@ -166,5 +169,6 @@ and long-running stability belong to the next bounded closeout, not this stage.
 
 See [DEPLOYMENT_VALIDATION.md](DEPLOYMENT_VALIDATION.md) for the reproducible
 isolated VM workflow, measurements, failures encountered and current source-bound
-JSON/HTML. No VM reboot, power-loss, boot zero-gap, all-client continuity or general
-production-readiness claim follows from these process/service tests.
+JSON/HTML. The separate reboot stage covers three preserved-state application faults within
+normal VM shutdown/start cycles. Storage faults across reboot, power loss, boot
+zero-gap, all-client continuity and general production readiness remain unqualified.

@@ -1,3 +1,8 @@
+> Scope update: [REBOOT_VALIDATION.md](REBOOT_VALIDATION.md) separately qualifies
+> three preserved-state normal VM poweroff/start cases. This document describes
+> the process/deployment matrix; its original full-regression counts below are
+> historical. The eight deployment cases are rerun at the reboot-stage source.
+
 # Installed deployment validation
 
 This milestone qualifies manual installation/start/stop, real issuer credentials,
@@ -72,8 +77,9 @@ The external lease case does not claim a mutating stale executor coexists with a
 new writer; it demonstrates that coexistence is refused. The SIGKILL case tests
 the real installed executing worker and cgroup cleanup. No VM shutdown/reboot is
 performed. The fixed helper's five root requests preserve the existing contracts
-and original deadlines; prior guard, cancel, stale-authority and failure matrices
-are rerun separately against the same source.
+and original deadlines. Prior guard, cancel, stale-authority and failure matrices
+were rerun at the original deployment milestone; they remain historical source-run
+reports rather than new reboot-stage runs.
 
 ## Measurements and interpretation
 
@@ -93,20 +99,20 @@ coverage. The storage-failure scenario is SQLite FULL, not a newly qualified
 installed-service physical disk-full/read-only matrix; those faults remain in
 separate source-run reports.
 
-## One bounded run (observations, not guarantees)
+## Latest deployment rerun (observations, not guarantees)
 
 | Observation | Result |
 |---|---:|
-| Installed operator submit → COMMITTED and independently checked new TLS leaf | 0.78 s |
-| Main SIGKILL → observed new management socket, admission still closed | 1.13 s |
-| Writer RSS at initial-ready sample | 21,800 KiB |
-| Signer Python RSS during credential observation | 21,036 KiB |
-| Paused executor RSS before crash | 23,416 KiB |
+| Installed operator submit → COMMITTED and independently checked new TLS leaf | 0.76 s |
+| Main SIGKILL → observed new management socket, admission still closed | 1.10 s |
+| Writer RSS at initial-ready sample | 21,752 KiB |
+| Signer Python RSS during credential observation | 20,984 KiB |
+| Paused executor RSS before crash | 23,356 KiB |
 | End-state unique regular files | 24 |
-| End-state logical / allocated regular-file bytes | 102,242 / 176,128 |
+| End-state logical / allocated regular-file bytes | 102,213 / 176,128 |
 
 The role, timing and storage scope restrictions above apply to every row. In
-particular, 1.13 seconds is not a certificate-restoration time or recovery upper
+particular, 1.10 seconds is not a certificate-restoration time or recovery upper
 bound. These are separate process snapshots and must not be summed into a total
 service memory claim.
 
@@ -135,15 +141,16 @@ Retained failed/incomplete attempts include:
 The fixture stops its units and private CA and verifies cgroup/MainPID cleanup.
 Root-owned installation and private diagnostic CA files remain inside the stopped
 VM for review; they are not uploaded. The explicit marker protects reset
-ownership. Capacity rollover/GC, boot enablement/reboot recovery and bounded
-sustained-operation closeout are remaining milestones.
+ownership. Preserved-state boot/reboot recovery is now a separate qualified stage;
+storage faults across reboot, capacity rollover/GC and bounded sustained-operation
+closeout remain outstanding.
 
-## Current qualification record
+## Original deployment qualification record
 
 The fixed version passed all eight scenarios plus 120 Linux units and 148
-separately rerun source-service VM regressions. Ten current JSON/HTML reports
+separately rerun source-service VM regressions. Ten then-current JSON/HTML reports
 match the complete 54-file source manifest; installed package payloads match the
-wheel and current source. Those counts do not include expected-failure controls
+wheel and that milestone’s source. Those counts do not include expected-failure controls
 as extra passing VM scenarios. All required unit/cgroup, CA-process and temporary
 regression cleanup checks passed. Private installed state/diagnostic CA files are
 retained only inside the stopped evaluation VM.
