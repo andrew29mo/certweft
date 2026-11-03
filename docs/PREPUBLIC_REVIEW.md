@@ -49,15 +49,14 @@ bytecode, virtual environments or personal AGENTS/settings were found. Ignore
 rules now also exclude common credential/data/log/build artifact formats; this
 does not replace reviewing staged files.
 
-Git metadata is a separate finding: one initial commit uses a machine-local
-email identity; later commits use GitHub noreply. It is not a receiving mailbox
-or credential, but includes local account/host attribution. A maintainer decision
-is required before publication: retain that historical attribution intentionally,
-or authorize a metadata-only history rewrite. Rewriting remote history changes
-descendant commit IDs and is not performed under this review's routine-edit
-permission. Existing code/source evidence must remain byte-identical in any
-metadata-only candidate. A rewrite does not itself certify removal from remote
-object caches. This unresolved decision is not called a clean publication pass.
+Git metadata was checked separately. With explicit maintainer authorization,
+a metadata-only rewrite replaced the initial machine-local author/committer
+email with GitHub noreply. All 33 corresponding commit trees, messages, names
+and dates were verified unchanged; descendant IDs changed. A local-only backup
+was retained and is not uploaded. Current main history uses noreply identities.
+Historical evidence references may retain original measured commit IDs; their
+recorded source manifests remain byte-identical. This rewrite does not certify
+removal of old objects from GitHub caches or existing clones.
 
 Private CA/state fixtures remain only inside the stopped evaluation VM; report
 content is selected diagnostic data, not raw host execution logs. Remote inspection found the sole collaborator to be the owner and zero
