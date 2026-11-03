@@ -1,12 +1,69 @@
-# Current installed deployment milestone
+# Current bounded architecture
+
+Version 0.0.2 is an installed single-host evaluation service. Current source-bound
+qualification is indexed by RESULTS.md and CLOSEOUT.md; older milestones below
+retain their original scope and unresolved items **at that time**. Start with
+INSTALL.md for the actual supported deployment, not the original exploration.
+No license is selected; visibility remains Private.
+
+```mermaid
+flowchart LR
+    O[Operator CLI / fixed peer UID] --> S[Root writer / Unix socket]
+    R[Root recovery CLI] --> S
+    S --> E[Isolated executor / inherited lifetime lease]
+    E --> J[Main journal / immutable generations]
+    E --> N[Fixed Nginx unit / pidfd reload]
+    N --> T[New trusted TLS + same-connection HTTP 200]
+    S --> G[Execution Gate + clean receipt]
+    S --> Q[Separate bounded root journal]
+    C[Credential-delivered signer] --> CA[Restricted Smallstep CA]
+    CA --> P[Public signed candidate]
+    P --> O
+```
+
+The main core has READY, APPLYING and DEGRADED states. Normal operations have
+persisted admission/execution/cancellation/terminal records and original deadlines.
+The independent Gate has STOPPED/RUNNING/RECOVERY_REQUIRED/VERIFY_REQUIRED/
+VERIFIED_CLOSED; a RUNNING label alone cannot authorize a recovered store without
+matching journal/release/root completion records. The two journals and Gate are
+not one atomic database transaction. Partial publication/commit is uncertain;
+paired receipts and conservative closed admission handle that boundary.
+
+The lifetime flock is inherited by executors. A replacement writer cannot take
+ownership while an old executor retains it; root may not bypass that by deleting
+the lease. The normal decision lock orders admission, cancellation, storage
+latching and final COMMIT. Installed reload binds the fixed unit bytes/command,
+MainPID/InvocationID and pidfd. Host root/systemd remain trusted, not sandboxed
+against compromise.
+
+Root recovery verifies storage, restores the durable committed leaf with fresh
+TLS confirmation, reconciles health/live requests without rewriting terminal
+history, prepares opening and release proofs, then commits a matched reopening.
+There are five separate bounded root operations, not an all-or-nothing five-row
+reservation. A partial workflow stays closed; a recovered session's later
+restart closes again. No abnormal startup automatically replays pending work.
+A candidate can remain online until explicit restoration, even while management
+cannot start on full/read-only storage.
+
+Limits: 64 normal rows, 16 combined root rows, 16 real generation directories,
+32 KiB candidate input, fixed localhost identity/listener and one CA. Whole
+activation/recovery deadlines are cooperative authorization bounds, not hard
+realtime storage-completion guarantees. No GC/rollover, automatic scheduling,
+production migration or key/trust rotation is added. A dedicated state image and
+observer are **test fixtures**, not a second recovery backend or production boot
+firewall. Normal VM poweroff/start is not sudden power-loss or boot zero-gap.
+
+## Historical design evolution
+
+# Historical installed deployment milestone
 
 See [INSTALL.md](INSTALL.md) and [DEPLOYMENT_VALIDATION.md](DEPLOYMENT_VALIDATION.md)
 for the installed wheel/CLI/systemd scope, real Smallstep credential delivery,
-process takeover, measurement limits and remaining gates. Current unit evidence
+process takeover, measurement limits and remaining gates. That stage’s unit evidence
 is deployment-units.json/html; older unit reports retain their historical source.
 Earlier sections below describe their own milestones.
 
-# Current explicit reopening stage
+# Historical explicit reopening stage
 
 See [REOPENING.md](REOPENING.md) for root contract, three-record admission,
 original deadline intersection, failure/restart closure and real follow-up TLS

@@ -1,12 +1,54 @@
-# Current installed deployment milestone
+# Current validation entry points
+
+Use an explicitly disposable, already provisioned Linux VM and the actual wheel
+per INSTALL.md. The measured target is Ubuntu 24.04 ARM64 / Python 3.12 / systemd
+255 / Nginx 1.24 with the pinned Smallstep binaries. This is a provisioned VM with
+fresh marked application installations, not a fresh OS image for every retry.
+There is no current native-macOS firewall/service qualification or remote-CI pass
+claim. The host-side scripts run on macOS and control the isolated Linux VM.
+
+From the checkout inside that VM, run the full unit suite:
+
+```sh
+sudo env PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -v
+```
+
+From the macOS host with Colima/Docker on PATH, a mounted checkout at the same
+path, and the chosen nondefault evaluation profile already Running:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python3 tools/closeout_host.py --profile <disposable-profile>
+```
+
+This resets only a previously marked fixture installation, runs nine independent
+capacity cases and a separate full 1200-second single-invocation resource run.
+It never qualifies production store replacement. Duration/thresholds are not
+shortened after failures. Do not run VM-wide tests concurrently with resource
+measurement. CLOSEOUT.md defines the exact workload, scope, counters and runbook.
+
+Other reproducible matrices are DEPLOYMENT_VALIDATION.md (installed service),
+REBOOT_VALIDATION.md (normal preserved-state boot) and STORAGE_REBOOT.md (persistent
+fault/repair across boot). Those reboot guides require no existing diagnostic lab;
+inspect any previous failed run rather than deleting unknown data.
+
+RESULTS.md distinguishes current source-bound pairs from archived historical
+reports. A manifest match alone is not proof of adequate coverage: require the
+listed scenario results, original counters/time series, matching JSON/HTML/host
+digests, source unchanged, successful cleanup and a zero command exit. An old
+passing file does not override a new command failure or incomplete run.
+No secret/key/database/image/log/interpreter artifact belongs in Git.
+
+## Historical source-run commands
+
+# Historical installed deployment milestone
 
 See [INSTALL.md](INSTALL.md) and [DEPLOYMENT_VALIDATION.md](DEPLOYMENT_VALIDATION.md)
 for the installed wheel/CLI/systemd scope, real Smallstep credential delivery,
-process takeover, measurement limits and remaining gates. Current unit evidence
+process takeover, measurement limits and remaining gates. That stage’s unit evidence
 is deployment-units.json/html; older unit reports retain their historical source.
 Earlier sections below describe their own milestones.
 
-# Current explicit reopening stage
+# Historical explicit reopening stage
 
 See [REOPENING.md](REOPENING.md) for root contract, three-record admission,
 original deadline intersection, failure/restart closure and real follow-up TLS

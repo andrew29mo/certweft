@@ -7,3 +7,19 @@ AGENTS.md
 build/
 dist/
 *.egg-info/
+# Runtime credentials, data and build/test artifacts stay outside Git.
+*.pem
+*.p12
+*.pfx
+*.db
+*.sqlite
+*.sqlite3
+*.img
+*.log
+*.whl
+.env
+.env.*
+.DS_Store
+.pytest_cache/
+.coverage
+htmlcov/
