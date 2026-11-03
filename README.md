@@ -10,7 +10,9 @@ Current installed operation: [installation/CLI guide](docs/INSTALL.md) and
 [review corrections](docs/REBOOT_REVIEW.md).
 [Storage faults across reboot and explicit repair](docs/STORAGE_REBOOT.md) cover
 ENOSPC, read-only storage and SQLite FULL; unavailable management is distinguished
-from a persisted closed Gate. Earlier source-run
+from a persisted closed Gate. [Review corrections](docs/STORAGE_REBOOT_REVIEW.md)
+cover old-root retries, terminal histories and current-startup failure evidence.
+Earlier source-run
 milestones below retain their individual scope.
 
 The minimum implementation validates a candidate, persists activation intent,

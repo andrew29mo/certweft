@@ -10,7 +10,7 @@
         "cases": 4,
         "error": null
       },
-      "old_boot_id": "f8ceb3de-5b61-4c16-bd52-c75629c47858",
+      "old_boot_id": "d7e5603d-d534-4d4f-8426-82a140644f4d",
       "poweroff_command": [
         "sudo",
         "systemctl",
@@ -18,10 +18,10 @@
       ],
       "poweroff_transport_returncode": 1,
       "manager_status_after_poweroff": "Stopped",
-      "poweroff_to_stopped_observed_seconds": 0.5019053329999998,
-      "new_boot_id": "3c15999b-8231-455e-8cc5-106e2e08470d",
+      "poweroff_to_stopped_observed_seconds": 1.199201917,
+      "new_boot_id": "f4e211e9-097d-4749-a601-cee74493b66a",
       "manager_status_after_start": "Running",
-      "post_ssh_check_and_repair_seconds": 3.6666771249999996,
+      "post_ssh_check_and_repair_seconds": 3.9826697499999995,
       "vm_check_and_cleanup_passed": true
     },
     {
@@ -31,7 +31,7 @@
         "cases": 4,
         "error": null
       },
-      "old_boot_id": "3c15999b-8231-455e-8cc5-106e2e08470d",
+      "old_boot_id": "f4e211e9-097d-4749-a601-cee74493b66a",
       "poweroff_command": [
         "sudo",
         "systemctl",
@@ -39,10 +39,10 @@
       ],
       "poweroff_transport_returncode": 0,
       "manager_status_after_poweroff": "Stopped",
-      "poweroff_to_stopped_observed_seconds": 1.186670915999997,
-      "new_boot_id": "d0a53642-1f1b-4c75-83e0-1090cf361847",
+      "poweroff_to_stopped_observed_seconds": 1.2624469590000018,
+      "new_boot_id": "94624a50-8274-4988-8379-b7e45207f05d",
       "manager_status_after_start": "Running",
-      "post_ssh_check_and_repair_seconds": 3.881991292000002,
+      "post_ssh_check_and_repair_seconds": 4.259974,
       "vm_check_and_cleanup_passed": true
     },
     {
@@ -52,7 +52,7 @@
         "cases": 4,
         "error": null
       },
-      "old_boot_id": "d0a53642-1f1b-4c75-83e0-1090cf361847",
+      "old_boot_id": "94624a50-8274-4988-8379-b7e45207f05d",
       "poweroff_command": [
         "sudo",
         "systemctl",
@@ -60,10 +60,10 @@
       ],
       "poweroff_transport_returncode": 1,
       "manager_status_after_poweroff": "Stopped",
-      "poweroff_to_stopped_observed_seconds": 0.4388173329999958,
-      "new_boot_id": "194dbf37-a1bf-41d1-a26b-bd9247e5cd43",
+      "poweroff_to_stopped_observed_seconds": 0.4905447080000016,
+      "new_boot_id": "88e8e3e4-c024-43db-a6a3-f0d500ee34fa",
       "manager_status_after_start": "Running",
-      "post_ssh_check_and_repair_seconds": 3.92137575000001,
+      "post_ssh_check_and_repair_seconds": 4.405807416000002,
       "vm_check_and_cleanup_passed": true
     }
   ],
@@ -103,7 +103,7 @@
     "tools/opening_vm.py": "656b8d1f7c461cd2657eeb3e8db1af2e50516435032c40788496916372522b04",
     "tools/recovery_vm.py": "104fc1ee43c382f5bb0d4d7c19c3369bb4c656097966e4e05c9008b3a9f285ee",
     "tools/opening_mutation.py": "41370aa7417e65830048b0e4c984cf8c3de5a1602fb51410f7268a6e8b2868c1",
-    "tools/storage_reboot_vm.py": "0eb9d584d528ced66482ac043f4cf35642185d7b7a9ab79320b195fab9f652a4",
+    "tools/storage_reboot_vm.py": "dd5ed1f816f2a0135cff1aa4445919470d1d11b1579a1bbedd45d46c1973e12e",
     "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
     "tools/credential_probe.py": "8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46",
     "tools/operations_vm.py": "3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85",
@@ -126,9 +126,9 @@
     "tests/test_service_process.py": "db7bccfa6248f8a9281cd380f5db317f71116b06711f195100f86a7f5a70e9b9",
     "tests/test_deployment.py": "11d3612e6ac18ac4967168437ef03cfc6eab58afe0dbcbe3fbf1378d6270ecc7",
     "tests/test_reconciliation.py": "91d301f53893145dd6400efc00c67204441a80b15428c0e9032629137db3cac9",
-    "tests/test_reboot_evidence.py": "2b7cf36aa9a3502638a17df62b7599eb85620a760d0248dd434ab05b2857a030",
+    "tests/test_reboot_evidence.py": "da5cfb3528d91750eeefb44f4a6fb7e7857fb7b438df96682150d0e80d2fb973",
     "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
   },
-  "vm_report_sha256": "c850fb7410b6e77e7624e897f1e25c0444f17b47a41c735ba1bef3ceb584c385",
+  "vm_report_sha256": "abc6fe2f1cab4fab0aa1cb37b2137e699ac2dfd8f1ed02d6cef410b67e41db73",
   "docker_context_restored": true
 }

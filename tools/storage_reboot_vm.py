@@ -56,6 +56,17 @@ def probe(kind):
 def stop():
     run(['systemctl','stop','certweft.service']);assert_empty('certweft.service');run(['systemctl','stop','certweft-nginx.service']);assert_empty('certweft-nginx.service')
 
+def failure_cause(kind,p,rows,boot):
+    current=[row for row in rows if row.get('_BOOT_ID')==boot.replace('-','') and row.get('_SYSTEMD_INVOCATION_ID')==p['InvocationID'] and row.get('_SYSTEMD_UNIT')=='certweft.service']
+    text='\n'.join(row.get('MESSAGE','') for row in current)
+    code={'enospc':errno.ENOSPC,'readonly':errno.EROFS}[kind]
+    assert p['ExecMainStatus']=='1' and p['NRestarts']=='3','not_bounded_writer_failure'
+    exceptions=[r for r in current if 'OSError: [Errno '+str(code)+']' in r.get('MESSAGE','')]
+    assert exceptions,'expected_writer_storage_errno_not_observed'
+    stage='gate_start_persistence' if kind=='enospc' else 'lifetime_lease_open'
+    assert ('/certweft/gate.py' in text if kind=='enospc' else 'lifetime.lock' in text),'expected_writer_storage_stage_not_observed'
+    return {'stage':stage,'errno':code,'boot_id':boot,'invocation_id':p['InvocationID'],'exec_status':p['ExecMainStatus'],'nrestarts':p['NRestarts'],'exception_records':[{k:r.get(k) for k in ['MESSAGE','_PID','_BOOT_ID','_SYSTEMD_INVOCATION_ID','_SYSTEMD_UNIT','_EXE']} for r in exceptions]}
+
 def unavailable_or_closed(kind,identity):
     # A full/RO filesystem can prevent lease/Gate startup before any socket exists.
     # Do not manufacture a successful Gate transition from service unavailability.
@@ -63,12 +74,15 @@ def unavailable_or_closed(kind,identity):
         end=time.monotonic()+12
         while time.monotonic()<end:
             p=props('certweft.service')
-            if p['ActiveState']=='failed' and p['MainPID']=='0':break
+            if p['ActiveState']=='failed' and p['MainPID']=='0' and p['NRestarts']=='3':break
             time.sleep(.05)
         assert p['ActiveState']=='failed' and p['MainPID']=='0',p
+        boot=pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip()
+        raw=run(['journalctl','-b','-o','json','--no-pager','_SYSTEMD_UNIT=certweft.service','_SYSTEMD_INVOCATION_ID='+p['InvocationID']]).stdout.decode()
+        cause=failure_cause(kind,p,[json.loads(line) for line in raw.splitlines() if line.strip()],boot)
         result,r=cli('gate',ok=False);assert r.returncode and not result['ok']
         root,rr=cli('recover','--prefix',identity,ok=False);assert rr.returncode and not root['ok']
-        return {'mode':'management_unavailable','systemd':p,'gate_cli':result,'root_cli':root,'gate_write_not_claimed':True}
+        return {'mode':'management_unavailable','systemd':p,'writer_failure_cause':cause,'gate_cli':result,'root_cli':root,'gate_write_not_claimed':True}
     gate,p=wait_ready();assert not gate['gate_allows_updates']
     current=cli('status')[0]['result'];cert=pathlib.Path((LAB/'candidate-path').read_text())
     denied,r=cli('submit','--certificate',cert,'--request-id','closed-'+identity,'--epoch',current['epoch'],'--revision',current['revision'],user='certweft-operator',ok=False)
@@ -78,6 +92,34 @@ def unavailable_or_closed(kind,identity):
     assert history['state']=='FAILED' and history['result']['sqlite_error']=='SQLITE_FULL' and not history['result'].get('restored') and not history['result'].get('updates_enabled'),history
     after=cli('gate')[0];assert not after['gate_allows_updates']
     return {'mode':'closed_management','before':gate,'new_update_denied':denied,'root_cli':failed,'root_failed_history':history,'after':after,'runtime':runtime_identity(p,DROP)}
+
+def catalogs():
+    result={}
+    for label,file,table in [('normal','journal.db','requests'),('root','recovery.db','recovery_requests')]:
+        with contextlib.closing(sqlite3.connect('file:'+str(STATE/file)+'?mode=ro',uri=True)) as db:
+            cursor=db.execute('SELECT * FROM '+table+' ORDER BY id');columns=[c[0] for c in cursor.description]
+            result[label]=[dict(zip(columns,row)) for row in cursor]
+    return result
+
+def preserve_history(before,after):
+    for kind,rows in before.items():
+        current={r['id']:r for r in after[kind]}
+        live={'ACCEPTED','RUNNING','CANCEL_REQUESTED'} if kind=='normal' else {'ACCEPTED','RUNNING','CERTIFICATE_VERIFIED'}
+        for old in rows:
+            assert old['id'] in current,'history_deleted'
+            new=current[old['id']]
+            assert {k:v for k,v in old.items() if k not in {'state','result'}}=={k:v for k,v in new.items() if k not in {'state','result'}},'history_identity_or_timing_changed'
+            if old['state'] not in live:assert old==new,'terminal_history_rewritten'
+
+def root_call(body):
+    # Transport from the installed package, with real root peer credentials.
+    script="""import json,sys
+from certweft.cli import call
+from certweft.core import Rejected
+try:print(json.dumps(call('/run/certweft/control.sock',json.loads(sys.argv[1]))))
+except Rejected as error:print(json.dumps({'ok':False,'reason':str(error)}))
+"""
+    return json.loads(run(['/opt/certweft/bin/python','-I','-c',script,json.dumps(body)]).stdout)
 
 def prepare(kind):
     assert kind in {'enospc','readonly','sqlite_full'} and not LAB.exists(),'existing_lab_requires_inspection'
@@ -148,7 +190,7 @@ def prepare(kind):
     stop();run(['systemctl','stop',OBUNIT]);(LAB/('observed-'+kind+'.json')).unlink()
     before=json.loads(json.dumps(snapshot()));assert before['state']['committed']==core['committed']
     assert not any(row[0]=='pending-'+kind and row[1]=='COMMITTED' for row in before['requests'])
-    plan={'case':kind,'boot_id':pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip(),'before':before,'old_core':core,'candidate_leaf':candidate_leaf,'committed_leaf':expected(core['committed']),'mount_uuid':mounted['uuid'],'fault_before':fault,'failed_start_before_reboot':pre}
+    plan={'case':kind,'boot_id':pathlib.Path('/proc/sys/kernel/random/boot_id').read_text().strip(),'before':before,'old_core':core,'candidate_leaf':candidate_leaf,'committed_leaf':expected(core['committed']),'mount_uuid':mounted['uuid'],'fault_before':fault,'failed_start_before_reboot':pre,'old_gate':json.loads((STATE/'execution.json').read_text()),'catalogs':catalogs()}
     (LAB/'plan.json').write_text(json.dumps(plan));run(['systemctl','enable','certweft.service']);report['pending_case']=kind;publish(report)
     print(json.dumps({'prepared':kind,'passed':True}))
 
@@ -177,6 +219,27 @@ def check(kind):
         config=pathlib.Path('/etc/certweft/writer.json');cfg=json.loads(config.read_text());cfg.pop('sqlite_max_pages');config.write_text(json.dumps(cfg))
     reset();run(['systemctl','start','certweft.service']);closed,p=wait_ready();assert not closed['gate_allows_updates'] and wire()==plan['candidate_leaf']
     runtime=runtime_identity(p,REPAIR_DROP)
+    closed_core=cli('status')[0]['result'];closed_gate=cli('gate')[0]
+    cert=pathlib.Path((LAB/'candidate-path').read_text())
+    repaired_denied,rd=cli('submit','--certificate',cert,'--request-id','repair-still-closed-'+kind,'--epoch',closed_core['epoch'],'--revision',closed_core['revision'],user='certweft-operator',ok=False)
+    assert rd.returncode and repaired_denied['reason']=='recovery_required',repaired_denied
+    stale_root=root_call({'op':'prepare-recovery','gate_epoch':plan['old_gate']['epoch'],'gate_revision':plan['old_gate']['revision']})
+    assert stale_root=={'ok':False,'reason':'stale_gate_authority'},stale_root
+    assert cli('gate')[0]==closed_gate and snapshot()['state']==closed_core and wire()==plan['candidate_leaf']
+    # Establish the legitimate current closed preparation before retrying the old
+    # failed prefix. Otherwise RUNNING/RECOVERY_REQUIRED early exits can hide
+    # whether the old persisted request is actually read.
+    prepared=root_call({'op':'prepare-recovery','gate_epoch':closed_gate['gate']['epoch'],'gate_revision':closed_gate['gate']['revision']})
+    assert prepared['ok'] and cli('gate')[0]['gate']['state']=='VERIFY_REQUIRED'
+    old_prefix_control=None
+    if kind=='sqlite_full':
+        before_retry=cli('gate')[0];before_catalog=catalogs();before_core=snapshot()['state'];before_wire=wire()
+        old_root,rr=cli('recover','--prefix','blocked-before-'+kind,ok=False)
+        assert rr.returncode and old_root['reason']=='recovery_step_FAILED',old_root
+        old_history=cli('recovery-request-status','--request-id','blocked-before-'+kind+'-cert')[0]['result']
+        assert old_history==plan['failed_start_before_reboot']['root_failed_history']
+        assert cli('gate')[0]==before_retry and catalogs()==before_catalog and snapshot()['state']==before_core and wire()==before_wire,'old_root_retry_changed_state'
+        old_prefix_control={'gate_before':before_retry,'gate_after':cli('gate')[0],'response':old_root,'history':old_history,'catalog_core_wire_unchanged':True}
     opened,_=cli('recover','--prefix','fixed-'+kind,timeout=65);assert opened['updates_enabled'];restored=wire();assert restored==plan['committed_leaf']
     root_rows=[cli('recovery-request-status','--request-id',i)[0]['result'] for i in opened['requests']]
     pending_history=cli('request-status','--request-id','pending-'+kind)[0]['result'];assert pending_history['state']=='INTERRUPTED'
@@ -184,9 +247,8 @@ def check(kind):
     old,_=cli('submit','--certificate',cert,'--request-id','stale-'+kind,'--epoch',plan['old_core']['epoch'],'--revision',plan['old_core']['revision'],'--wait',user='certweft-operator',ok=False)
     assert old['reason']=='activation_FAILED';history=cli('request-status','--request-id','stale-'+kind)[0]['result'];assert snapshot()['state']==core and wire()==restored
     fresh,_=cli('submit','--certificate',cert,'--request-id','fresh-'+kind,'--epoch',core['epoch'],'--revision',core['revision'],'--wait',user='certweft-operator');changed=wire();activation_control(history,fresh,restored,changed,plan['candidate_leaf'])
-    if kind=='sqlite_full':
-        old_root,rr=cli('recover','--prefix','blocked-before-'+kind,ok=False);assert rr.returncode and not old_root['ok']
-    detail={'name':kind,'passed':True,'old_boot_id':plan['boot_id'],'current_boot_id':boot,'before_shutdown':plan['before'],'before_writer_on_new_boot':obs,'mount_before_uuid':plan['mount_uuid'],'mount_after':mount,'fault_before':plan['fault_before'],'fault_after':actual_fault,'failed_start_before_reboot':plan['failed_start_before_reboot'],'blocked_after_reboot':blocked,'candidate_leaf_while_faulted':plan['candidate_leaf'],'observer_detached_only_after_boot_evidence_verified':True,'closed_after_storage_repair':closed,'writer_runtime_after_repair':runtime,'root_recovery':opened,'root_history':root_rows,'old_pending_history_after_reconciliation':pending_history,'restored_committed_leaf':restored,'stale_response':old,'stale_history':history,'fresh_activation':fresh,'fresh_wire_leaf':changed}
+    after_catalog=catalogs();preserve_history(plan['catalogs'],after_catalog)
+    detail={'name':kind,'passed':True,'old_boot_id':plan['boot_id'],'current_boot_id':boot,'before_shutdown':plan['before'],'before_writer_on_new_boot':obs,'mount_before_uuid':plan['mount_uuid'],'mount_after':mount,'fault_before':plan['fault_before'],'fault_after':actual_fault,'failed_start_before_reboot':plan['failed_start_before_reboot'],'blocked_after_reboot':blocked,'candidate_leaf_while_faulted':plan['candidate_leaf'],'observer_detached_only_after_boot_evidence_verified':True,'closed_after_storage_repair':closed,'writer_runtime_after_repair':runtime,'root_recovery':opened,'root_history':root_rows,'old_pending_history_after_reconciliation':pending_history,'restored_committed_leaf':restored,'closed_after_repair_valid_request_response':repaired_denied,'root_stale_authority_response':stale_root,'current_root_prepare_response':prepared,'old_failed_prefix_control':old_prefix_control,'catalogs_before':plan['catalogs'],'catalogs_after':after_catalog,'terminal_history_preserved':True,'stale_response':old,'stale_history':history,'fresh_activation':fresh,'fresh_wire_leaf':changed}
     report['cases'].append(detail);report.pop('pending_case',None);publish(report)
     print(json.dumps({'checked':kind,'passed':True}))
 

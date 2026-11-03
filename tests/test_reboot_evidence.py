@@ -74,3 +74,37 @@ class SnapshotLifetime(unittest.TestCase):
                 self.assertFalse(any(str(root/'journal.db')==p or str(root/'recovery.db')==p for p in targets),targets)
             finally:
                 if enabled:gc.enable()
+
+class StorageRecoveryControls(unittest.TestCase):
+    def test_old_failed_root_prefix_is_read_when_gate_is_closed(self):
+        from certweft.cli import recover
+        from certweft.core import Rejected
+        seen=[]
+        def call(endpoint,body):
+            seen.append(body)
+            if body['op']=='recovery-status':return {'gate':{'state':'VERIFY_REQUIRED'},'executor_busy':False}
+            self.assertEqual(body['op'],'recovery-request-status')
+            return {'result':{'request_id':'old-cert','kind':'recover-certificate','state':'FAILED'}}
+        with patch('certweft.cli.os.geteuid',return_value=0),patch('certweft.cli.call',side_effect=call):
+            with self.assertRaisesRegex(Rejected,'recovery_step_FAILED'):recover('unused','old',10)
+        self.assertTrue(any(v['op']=='recovery-request-status' and v['request_id']=='old-cert' for v in seen))
+        self.assertTrue(all(v['op'] in {'recovery-status','recovery-request-status'} for v in seen))
+    def test_repair_cannot_rewrite_old_terminal_or_request_authority(self):
+        import copy
+        from tools.storage_reboot_vm import preserve_history
+        before={'normal':[{'id':'old','state':'COMMITTED','result':'old-result','digest':'d','timing':'old-budget'},{'id':'pending','state':'RUNNING','result':None,'digest':'p','timing':'pending-budget'}],'root':[{'id':'root-old','state':'FAILED','result':'failure','timing':'old-root-budget','target':'old-target'}]}
+        after=copy.deepcopy(before);after['normal'][1].update(state='INTERRUPTED',result='reconciled');preserve_history(before,after)
+        for group,key,value,message in [('normal','result','rewritten','terminal_history_rewritten'),('root','result','rewritten','terminal_history_rewritten'),('normal','timing','extended','history_identity_or_timing_changed')]:
+            bad=copy.deepcopy(after);bad[group][0][key]=value
+            with self.assertRaisesRegex(AssertionError,message):preserve_history(before,bad)
+
+class StorageFailureProvenance(unittest.TestCase):
+    def test_unrelated_or_old_startup_failure_cannot_count_as_storage_fault(self):
+        from tools.storage_reboot_vm import failure_cause
+        p={'InvocationID':'inv','ExecMainStatus':'1','NRestarts':'3'}
+        row={'_BOOT_ID':'newboot','_SYSTEMD_INVOCATION_ID':'inv','_SYSTEMD_UNIT':'certweft.service','MESSAGE':'File /opt/certweft/lib/python3.12/site-packages/certweft/gate.py\nOSError: [Errno 28] No space left on device'}
+        failure_cause('enospc',p,[row],'new-boot')
+        for other in [{**row,'_BOOT_ID':'oldboot'},{**row,'_SYSTEMD_INVOCATION_ID':'old'},{**row,'MESSAGE':'ModuleNotFoundError: certweft'}]:
+            with self.assertRaisesRegex(AssertionError,'expected_writer_storage_errno_not_observed'):failure_cause('enospc',p,[other],'new-boot')
+        with self.assertRaisesRegex(AssertionError,'expected_writer_storage_stage_not_observed'):
+            failure_cause('enospc',p,[{**row,'MESSAGE':'OSError: [Errno 28] unrelated file'}],'new-boot')

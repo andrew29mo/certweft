@@ -36,7 +36,7 @@
     &quot;tools/opening_vm.py&quot;: &quot;656b8d1f7c461cd2657eeb3e8db1af2e50516435032c40788496916372522b04&quot;,
     &quot;tools/recovery_vm.py&quot;: &quot;104fc1ee43c382f5bb0d4d7c19c3369bb4c656097966e4e05c9008b3a9f285ee&quot;,
     &quot;tools/opening_mutation.py&quot;: &quot;41370aa7417e65830048b0e4c984cf8c3de5a1602fb51410f7268a6e8b2868c1&quot;,
-    &quot;tools/storage_reboot_vm.py&quot;: &quot;0eb9d584d528ced66482ac043f4cf35642185d7b7a9ab79320b195fab9f652a4&quot;,
+    &quot;tools/storage_reboot_vm.py&quot;: &quot;dd5ed1f816f2a0135cff1aa4445919470d1d11b1579a1bbedd45d46c1973e12e&quot;,
     &quot;tools/explore.py&quot;: &quot;0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec&quot;,
     &quot;tools/credential_probe.py&quot;: &quot;8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46&quot;,
     &quot;tools/operations_vm.py&quot;: &quot;3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85&quot;,
@@ -59,33 +59,33 @@
     &quot;tests/test_service_process.py&quot;: &quot;db7bccfa6248f8a9281cd380f5db317f71116b06711f195100f86a7f5a70e9b9&quot;,
     &quot;tests/test_deployment.py&quot;: &quot;11d3612e6ac18ac4967168437ef03cfc6eab58afe0dbcbe3fbf1378d6270ecc7&quot;,
     &quot;tests/test_reconciliation.py&quot;: &quot;91d301f53893145dd6400efc00c67204441a80b15428c0e9032629137db3cac9&quot;,
-    &quot;tests/test_reboot_evidence.py&quot;: &quot;2b7cf36aa9a3502638a17df62b7599eb85620a760d0248dd434ab05b2857a030&quot;,
+    &quot;tests/test_reboot_evidence.py&quot;: &quot;da5cfb3528d91750eeefb44f4a6fb7e7857fb7b438df96682150d0e80d2fb973&quot;,
     &quot;policy/server.tpl&quot;: &quot;e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550&quot;
   },
   &quot;cases&quot;: [
     {
       &quot;name&quot;: &quot;enospc&quot;,
       &quot;passed&quot;: true,
-      &quot;old_boot_id&quot;: &quot;f8ceb3de-5b61-4c16-bd52-c75629c47858&quot;,
-      &quot;current_boot_id&quot;: &quot;3c15999b-8231-455e-8cc5-106e2e08470d&quot;,
+      &quot;old_boot_id&quot;: &quot;d7e5603d-d534-4d4f-8426-82a140644f4d&quot;,
+      &quot;current_boot_id&quot;: &quot;f4e211e9-097d-4749-a601-cee74493b66a&quot;,
       &quot;before_shutdown&quot;: {
-        &quot;journal_sha256&quot;: &quot;a6406caeb14bbd90d5b1dc74d5a01bccc711ba954de9560a4811966fab658c42&quot;,
+        &quot;journal_sha256&quot;: &quot;85709e3b97573befdde9eb3dd44e6f1bfce0530594233857ba77641379a95230&quot;,
         &quot;recovery_sha256&quot;: &quot;126e1af3e87a5ac7bde9a4b4c254dab5c3a79602477eba7ef8ef4ddf383198a2&quot;,
-        &quot;gate_sha256&quot;: &quot;1078ac226de8aaf546f8f24a775ac3a57620a7ddf965e3efd57a0a0584bb3dc5&quot;,
+        &quot;gate_sha256&quot;: &quot;a198775ad3b056d121bd15a3a848b5176abde6c801676c11eca9becc1fdef9bf&quot;,
         &quot;state&quot;: {
           &quot;schema&quot;: 1,
           &quot;state&quot;: &quot;APPLYING&quot;,
-          &quot;epoch&quot;: &quot;53682031108041fc8ee046562689b2b4&quot;,
+          &quot;epoch&quot;: &quot;79925b62dbb54c1681fca320d3892b85&quot;,
           &quot;revision&quot;: 2,
-          &quot;committed&quot;: &quot;499f1f752ae54d44ba6319d45dc15bb6&quot;,
-          &quot;committed_digest&quot;: &quot;b2940372cccf304264d4d93a28491f9f5efa70e9a45157d9cd95911a75277785&quot;,
-          &quot;candidate&quot;: &quot;99f87a7549664ded8801f762e080f01c&quot;
+          &quot;committed&quot;: &quot;f92192e0a9cb4dfb86a24f40534d7305&quot;,
+          &quot;committed_digest&quot;: &quot;8f632500db59bc02204bdf5b0f180897ef0e54b60b0d17821dae34d44d632c7d&quot;,
+          &quot;candidate&quot;: &quot;b5d6100b12ca446988a581396f9295fb&quot;
         },
         &quot;requests&quot;: [
           [
             &quot;installed-first&quot;,
             &quot;COMMITTED&quot;,
-            &quot;{\&quot;committed\&quot;: \&quot;499f1f752ae54d44ba6319d45dc15bb6\&quot;}&quot;
+            &quot;{\&quot;committed\&quot;: \&quot;f92192e0a9cb4dfb86a24f40534d7305\&quot;}&quot;
           ],
           [
             &quot;pending-enospc&quot;,
@@ -94,28 +94,28 @@
           ]
         ],
         &quot;recovery&quot;: [],
-        &quot;active&quot;: &quot;v-99f87a7549664ded8801f762e080f01c/tls.conf&quot;
+        &quot;active&quot;: &quot;v-b5d6100b12ca446988a581396f9295fb/tls.conf&quot;
       },
       &quot;before_writer_on_new_boot&quot;: {
-        &quot;boot_id&quot;: &quot;3c15999b-8231-455e-8cc5-106e2e08470d&quot;,
-        &quot;uptime_seconds&quot;: 2.72,
-        &quot;journal_sha256&quot;: &quot;a6406caeb14bbd90d5b1dc74d5a01bccc711ba954de9560a4811966fab658c42&quot;,
+        &quot;boot_id&quot;: &quot;f4e211e9-097d-4749-a601-cee74493b66a&quot;,
+        &quot;uptime_seconds&quot;: 3.13,
+        &quot;journal_sha256&quot;: &quot;85709e3b97573befdde9eb3dd44e6f1bfce0530594233857ba77641379a95230&quot;,
         &quot;recovery_sha256&quot;: &quot;126e1af3e87a5ac7bde9a4b4c254dab5c3a79602477eba7ef8ef4ddf383198a2&quot;,
-        &quot;gate_sha256&quot;: &quot;1078ac226de8aaf546f8f24a775ac3a57620a7ddf965e3efd57a0a0584bb3dc5&quot;,
+        &quot;gate_sha256&quot;: &quot;a198775ad3b056d121bd15a3a848b5176abde6c801676c11eca9becc1fdef9bf&quot;,
         &quot;state&quot;: {
           &quot;schema&quot;: 1,
           &quot;state&quot;: &quot;APPLYING&quot;,
-          &quot;epoch&quot;: &quot;53682031108041fc8ee046562689b2b4&quot;,
+          &quot;epoch&quot;: &quot;79925b62dbb54c1681fca320d3892b85&quot;,
           &quot;revision&quot;: 2,
-          &quot;committed&quot;: &quot;499f1f752ae54d44ba6319d45dc15bb6&quot;,
-          &quot;committed_digest&quot;: &quot;b2940372cccf304264d4d93a28491f9f5efa70e9a45157d9cd95911a75277785&quot;,
-          &quot;candidate&quot;: &quot;99f87a7549664ded8801f762e080f01c&quot;
+          &quot;committed&quot;: &quot;f92192e0a9cb4dfb86a24f40534d7305&quot;,
+          &quot;committed_digest&quot;: &quot;8f632500db59bc02204bdf5b0f180897ef0e54b60b0d17821dae34d44d632c7d&quot;,
+          &quot;candidate&quot;: &quot;b5d6100b12ca446988a581396f9295fb&quot;
         },
         &quot;requests&quot;: [
           [
             &quot;installed-first&quot;,
             &quot;COMMITTED&quot;,
-            &quot;{\&quot;committed\&quot;: \&quot;499f1f752ae54d44ba6319d45dc15bb6\&quot;}&quot;
+            &quot;{\&quot;committed\&quot;: \&quot;f92192e0a9cb4dfb86a24f40534d7305\&quot;}&quot;
           ],
           [
             &quot;pending-enospc&quot;,
@@ -124,16 +124,16 @@
           ]
         ],
         &quot;recovery&quot;: [],
-        &quot;active&quot;: &quot;v-99f87a7549664ded8801f762e080f01c/tls.conf&quot;,
+        &quot;active&quot;: &quot;v-b5d6100b12ca446988a581396f9295fb/tls.conf&quot;,
         &quot;writer_main_pid&quot;: &quot;0&quot;
       },
-      &quot;mount_before_uuid&quot;: &quot;55c26de6-e1e0-45b3-8d12-af1eed464343&quot;,
+      &quot;mount_before_uuid&quot;: &quot;0f044bad-5287-4107-b269-9af943c42c67&quot;,
       &quot;mount_after&quot;: {
         &quot;target&quot;: &quot;/var/lib/certweft&quot;,
         &quot;source&quot;: &quot;/dev/loop0&quot;,
         &quot;fstype&quot;: &quot;ext4&quot;,
         &quot;options&quot;: &quot;rw,relatime&quot;,
-        &quot;uuid&quot;: &quot;55c26de6-e1e0-45b3-8d12-af1eed464343&quot;
+        &quot;uuid&quot;: &quot;0f044bad-5287-4107-b269-9af943c42c67&quot;
       },
       &quot;fault_before&quot;: {
         &quot;errno&quot;: 28,
@@ -160,7 +160,33 @@
           &quot;SubState&quot;: &quot;failed&quot;,
           &quot;StartLimitIntervalUSec&quot;: &quot;1min&quot;,
           &quot;StartLimitBurst&quot;: &quot;3&quot;,
-          &quot;InvocationID&quot;: &quot;92aa95cf73674ede9835d923113a68b2&quot;
+          &quot;InvocationID&quot;: &quot;5b2b81183f754e6d9563aabb5ef1208d&quot;
+        },
+        &quot;writer_failure_cause&quot;: {
+          &quot;stage&quot;: &quot;gate_start_persistence&quot;,
+          &quot;errno&quot;: 28,
+          &quot;boot_id&quot;: &quot;d7e5603d-d534-4d4f-8426-82a140644f4d&quot;,
+          &quot;invocation_id&quot;: &quot;5b2b81183f754e6d9563aabb5ef1208d&quot;,
+          &quot;exec_status&quot;: &quot;1&quot;,
+          &quot;nrestarts&quot;: &quot;3&quot;,
+          &quot;exception_records&quot;: [
+            {
+              &quot;MESSAGE&quot;: &quot;OSError: [Errno 28] No space left on device&quot;,
+              &quot;_PID&quot;: &quot;2082&quot;,
+              &quot;_BOOT_ID&quot;: &quot;d7e5603dd5344d4f842682a140644f4d&quot;,
+              &quot;_SYSTEMD_INVOCATION_ID&quot;: &quot;5b2b81183f754e6d9563aabb5ef1208d&quot;,
+              &quot;_SYSTEMD_UNIT&quot;: &quot;certweft.service&quot;,
+              &quot;_EXE&quot;: &quot;/usr/bin/python3.12&quot;
+            },
+            {
+              &quot;MESSAGE&quot;: &quot;OSError: [Errno 28] No space left on device&quot;,
+              &quot;_PID&quot;: &quot;2082&quot;,
+              &quot;_BOOT_ID&quot;: &quot;d7e5603dd5344d4f842682a140644f4d&quot;,
+              &quot;_SYSTEMD_INVOCATION_ID&quot;: &quot;5b2b81183f754e6d9563aabb5ef1208d&quot;,
+              &quot;_SYSTEMD_UNIT&quot;: &quot;certweft.service&quot;,
+              &quot;_EXE&quot;: &quot;/usr/bin/python3.12&quot;
+            }
+          ]
         },
         &quot;gate_cli&quot;: {
           &quot;ok&quot;: false,
@@ -191,7 +217,33 @@
           &quot;SubState&quot;: &quot;failed&quot;,
           &quot;StartLimitIntervalUSec&quot;: &quot;1min&quot;,
           &quot;StartLimitBurst&quot;: &quot;3&quot;,
-          &quot;InvocationID&quot;: &quot;0f4976061cd7412da5f53c17f6150689&quot;
+          &quot;InvocationID&quot;: &quot;1813261607544997a0be97fd34c3c352&quot;
+        },
+        &quot;writer_failure_cause&quot;: {
+          &quot;stage&quot;: &quot;gate_start_persistence&quot;,
+          &quot;errno&quot;: 28,
+          &quot;boot_id&quot;: &quot;f4e211e9-097d-4749-a601-cee74493b66a&quot;,
+          &quot;invocation_id&quot;: &quot;1813261607544997a0be97fd34c3c352&quot;,
+          &quot;exec_status&quot;: &quot;1&quot;,
+          &quot;nrestarts&quot;: &quot;3&quot;,
+          &quot;exception_records&quot;: [
+            {
+              &quot;MESSAGE&quot;: &quot;OSError: [Errno 28] No space left on device&quot;,
+              &quot;_PID&quot;: &quot;1123&quot;,
+              &quot;_BOOT_ID&quot;: &quot;f4e211e9097d4749a601cee74493b66a&quot;,
+              &quot;_SYSTEMD_INVOCATION_ID&quot;: &quot;1813261607544997a0be97fd34c3c352&quot;,
+              &quot;_SYSTEMD_UNIT&quot;: &quot;certweft.service&quot;,
+              &quot;_EXE&quot;: &quot;/usr/bin/python3.12&quot;
+            },
+            {
+              &quot;MESSAGE&quot;: &quot;OSError: [Errno 28] No space left on device&quot;,
+              &quot;_PID&quot;: &quot;1123&quot;,
+              &quot;_BOOT_ID&quot;: &quot;f4e211e9097d4749a601cee74493b66a&quot;,
+              &quot;_SYSTEMD_INVOCATION_ID&quot;: &quot;1813261607544997a0be97fd34c3c352&quot;,
+              &quot;_SYSTEMD_UNIT&quot;: &quot;certweft.service&quot;,
+              &quot;_EXE&quot;: &quot;/usr/bin/python3.12&quot;
+            }
+          ]
         },
         &quot;gate_cli&quot;: {
           &quot;ok&quot;: false,
@@ -205,12 +257,12 @@
         },
         &quot;gate_write_not_claimed&quot;: true
       },
-      &quot;candidate_leaf_while_faulted&quot;: &quot;bae28b1d4237fa9448121126bcbaffc276f231c4dc0983fca03c59b5238105fa&quot;,
+      &quot;candidate_leaf_while_faulted&quot;: &quot;612b638e428a80ad2d076846f868062c0c5a8eaf780a7f9bbb0817e9a1474163&quot;,
       &quot;observer_detached_only_after_boot_evidence_verified&quot;: true,
       &quot;closed_after_storage_repair&quot;: {
         &quot;ok&quot;: true,
         &quot;gate&quot;: {
-          &quot;epoch&quot;: &quot;335f5a4148d942d490ab605ecbb02585&quot;,
+          &quot;epoch&quot;: &quot;93830772782a4a499926bc020a866bdf&quot;,
           &quot;reason&quot;: &quot;unclean_or_blocked&quot;,
           &quot;revision&quot;: 4,
           &quot;state&quot;: &quot;RECOVERY_REQUIRED&quot;,
@@ -225,8 +277,8 @@
         &quot;completion_recorded&quot;: false
       },
       &quot;writer_runtime_after_repair&quot;: {
-        &quot;main_pid&quot;: 1590,
-        &quot;invocation_id&quot;: &quot;f523a8378dbc45668996e093afc8e868&quot;,
+        &quot;main_pid&quot;: 1585,
+        &quot;invocation_id&quot;: &quot;51b7d0e1474149249d45e71544852fce&quot;,
         &quot;cmdline&quot;: [
           &quot;/opt/certweft/bin/python&quot;,
           &quot;-I&quot;,
@@ -236,7 +288,7 @@
         ],
         &quot;cwd&quot;: &quot;/&quot;,
         &quot;unit&quot;: {
-          &quot;ExecStart&quot;: &quot;{ path=/opt/certweft/bin/python ; argv[]=/opt/certweft/bin/python -I -m certweft.service /etc/certweft/writer.json ; ignore_errors=no ; start_time=[Tue 2026-11-03 14:00:35 CST] ; stop_time=[n/a] ; pid=1590 ; code=(null) ; status=0/0 }&quot;,
+          &quot;ExecStart&quot;: &quot;{ path=/opt/certweft/bin/python ; argv[]=/opt/certweft/bin/python -I -m certweft.service /etc/certweft/writer.json ; ignore_errors=no ; start_time=[Tue 2026-11-03 14:22:40 CST] ; stop_time=[n/a] ; pid=1585 ; code=(null) ; status=0/0 }&quot;,
           &quot;FragmentPath&quot;: &quot;/etc/systemd/system/certweft.service&quot;,
           &quot;DropInPaths&quot;: &quot;/etc/systemd/system/certweft.service.d/reboot-evidence.conf&quot;
         },
@@ -244,8 +296,8 @@
         &quot;memory&quot;: {
           &quot;Uid&quot;: &quot;0\t0\t0\t0&quot;,
           &quot;Gid&quot;: &quot;0\t0\t0\t0&quot;,
-          &quot;VmHWM&quot;: &quot;21656 kB&quot;,
-          &quot;VmRSS&quot;: &quot;21656 kB&quot;,
+          &quot;VmHWM&quot;: &quot;21652 kB&quot;,
+          &quot;VmRSS&quot;: &quot;21652 kB&quot;,
           &quot;CapEff&quot;: &quot;0000000000000001&quot;,
           &quot;NoNewPrivs&quot;: &quot;1&quot;
         }
@@ -261,7 +313,7 @@
           &quot;fixed-enospc-open&quot;
         ],
         &quot;gate&quot;: {
-          &quot;epoch&quot;: &quot;335f5a4148d942d490ab605ecbb02585&quot;,
+          &quot;epoch&quot;: &quot;93830772782a4a499926bc020a866bdf&quot;,
           &quot;reason&quot;: &quot;operator_opened&quot;,
           &quot;revision&quot;: 7,
           &quot;state&quot;: &quot;RUNNING&quot;,
@@ -272,43 +324,43 @@
         {
           &quot;kind&quot;: &quot;recover-certificate&quot;,
           &quot;request_id&quot;: &quot;fixed-enospc-cert&quot;,
-          &quot;digest&quot;: &quot;253df7b61a66d837be9214ab5aae65101995086ebb96dd7fa89a227b9aee1f70&quot;,
+          &quot;digest&quot;: &quot;3535d05bb1aa00eea1da119f6a9f5c2f968ace032dbbb4ad36e627ec49d8aee2&quot;,
           &quot;state&quot;: &quot;VERIFIED_CLOSED&quot;,
           &quot;timing&quot;: {
             &quot;budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;3c15999b-8231-455e-8cc5-106e2e08470d&quot;,
-              &quot;accepted_boot_ns&quot;: 7663352377,
-              &quot;expires_boot_ns&quot;: 17663352377,
-              &quot;accepted_wall_ns&quot;: 1793685636107495420,
+              &quot;boot_id&quot;: &quot;f4e211e9-097d-4749-a601-cee74493b66a&quot;,
+              &quot;accepted_boot_ns&quot;: 8711444879,
+              &quot;expires_boot_ns&quot;: 18711444879,
+              &quot;accepted_wall_ns&quot;: 1793686961150176670,
               &quot;seconds&quot;: 10
             },
             &quot;authority&quot;: {
-              &quot;gate_epoch&quot;: &quot;335f5a4148d942d490ab605ecbb02585&quot;,
+              &quot;gate_epoch&quot;: &quot;93830772782a4a499926bc020a866bdf&quot;,
               &quot;gate_revision&quot;: 5
             }
           },
           &quot;target&quot;: {
             &quot;schema&quot;: 1,
             &quot;state&quot;: &quot;APPLYING&quot;,
-            &quot;epoch&quot;: &quot;53682031108041fc8ee046562689b2b4&quot;,
+            &quot;epoch&quot;: &quot;79925b62dbb54c1681fca320d3892b85&quot;,
             &quot;revision&quot;: 2,
-            &quot;committed&quot;: &quot;499f1f752ae54d44ba6319d45dc15bb6&quot;,
-            &quot;committed_digest&quot;: &quot;b2940372cccf304264d4d93a28491f9f5efa70e9a45157d9cd95911a75277785&quot;,
-            &quot;candidate&quot;: &quot;99f87a7549664ded8801f762e080f01c&quot;
+            &quot;committed&quot;: &quot;f92192e0a9cb4dfb86a24f40534d7305&quot;,
+            &quot;committed_digest&quot;: &quot;8f632500db59bc02204bdf5b0f180897ef0e54b60b0d17821dae34d44d632c7d&quot;,
+            &quot;candidate&quot;: &quot;b5d6100b12ca446988a581396f9295fb&quot;
           },
-          &quot;probe&quot;: &quot;300cf41efb344d44a706eeac631adeb0&quot;,
+          &quot;probe&quot;: &quot;5dfa8496b1044244863abc19c8872d78&quot;,
           &quot;result&quot;: {
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
             &quot;restored&quot;: true,
             &quot;updates_enabled&quot;: false,
-            &quot;committed&quot;: &quot;499f1f752ae54d44ba6319d45dc15bb6&quot;,
-            &quot;fingerprint&quot;: &quot;0a4d4659ebd7c56bf50a8eb8a8e46c0ff8245f72a9953c3925cc8ae715919183&quot;,
+            &quot;committed&quot;: &quot;f92192e0a9cb4dfb86a24f40534d7305&quot;,
+            &quot;fingerprint&quot;: &quot;2d7d7d275daa2769de8dff3d19b1cf49d90aace1cca4dc9dd6f2b52e8ee51609&quot;,
             &quot;prior_health&quot;: &quot;HEALTHY&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;335f5a4148d942d490ab605ecbb02585&quot;,
+              &quot;gate_epoch&quot;: &quot;93830772782a4a499926bc020a866bdf&quot;,
               &quot;gate_revision&quot;: 6
             }
           }
@@ -316,19 +368,19 @@
         {
           &quot;kind&quot;: &quot;reconcile-closed&quot;,
           &quot;request_id&quot;: &quot;fixed-enospc-journal&quot;,
-          &quot;digest&quot;: &quot;b8061361d55bc55677efe7f834df3f5704506b915bdb7264dc97f526301a5dde&quot;,
+          &quot;digest&quot;: &quot;078c4d758351a12595ea9cca571fbea8d9cdc2784e7b83984829b52251a89713&quot;,
           &quot;state&quot;: &quot;JOURNAL_VERIFIED_CLOSED&quot;,
           &quot;timing&quot;: {
             &quot;budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;3c15999b-8231-455e-8cc5-106e2e08470d&quot;,
-              &quot;accepted_boot_ns&quot;: 8140035878,
-              &quot;expires_boot_ns&quot;: 18140035878,
-              &quot;accepted_wall_ns&quot;: 1793685636584180170,
+              &quot;boot_id&quot;: &quot;f4e211e9-097d-4749-a601-cee74493b66a&quot;,
+              &quot;accepted_boot_ns&quot;: 9299066171,
+              &quot;expires_boot_ns&quot;: 19299066171,
+              &quot;accepted_wall_ns&quot;: 1793686961737807046,
               &quot;seconds&quot;: 10
             },
             &quot;authority&quot;: {
-              &quot;gate_epoch&quot;: &quot;335f5a4148d942d490ab605ecbb02585&quot;,
+              &quot;gate_epoch&quot;: &quot;93830772782a4a499926bc020a866bdf&quot;,
               &quot;gate_revision&quot;: 6
             }
           },
@@ -336,28 +388,28 @@
             &quot;core&quot;: {
               &quot;schema&quot;: 1,
               &quot;state&quot;: &quot;APPLYING&quot;,
-              &quot;epoch&quot;: &quot;53682031108041fc8ee046562689b2b4&quot;,
+              &quot;epoch&quot;: &quot;79925b62dbb54c1681fca320d3892b85&quot;,
               &quot;revision&quot;: 2,
-              &quot;committed&quot;: &quot;499f1f752ae54d44ba6319d45dc15bb6&quot;,
-              &quot;committed_digest&quot;: &quot;b2940372cccf304264d4d93a28491f9f5efa70e9a45157d9cd95911a75277785&quot;,
-              &quot;candidate&quot;: &quot;99f87a7549664ded8801f762e080f01c&quot;
+              &quot;committed&quot;: &quot;f92192e0a9cb4dfb86a24f40534d7305&quot;,
+              &quot;committed_digest&quot;: &quot;8f632500db59bc02204bdf5b0f180897ef0e54b60b0d17821dae34d44d632c7d&quot;,
+              &quot;candidate&quot;: &quot;b5d6100b12ca446988a581396f9295fb&quot;
             },
-            &quot;journal_digest&quot;: &quot;30b9455db5634e4f2bab1ce77b7f45280e3f2c3140a731deb96f5dc2eef461ce&quot;,
+            &quot;journal_digest&quot;: &quot;58e9f1b80af29642745db052d662f53fd6045da9e13fe8c1e3ebdd7cba7ad3d0&quot;,
             &quot;certificate_request_id&quot;: &quot;fixed-enospc-cert&quot;
           },
-          &quot;probe&quot;: &quot;6c78cf26b8f24765a8d91dfc83f369ef&quot;,
+          &quot;probe&quot;: &quot;d6796c28bb63431b984154d0ba68086b&quot;,
           &quot;result&quot;: {
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;HEALTHY&quot;,
-            &quot;receipt_digest&quot;: &quot;d5b4e107250d62a96237303064f4d03d7faff9cc81c238d7bae704815f47b877&quot;,
-            &quot;after_digest&quot;: &quot;331e888efec8ea3357a22fc555aade1bf193ee11f63451ea6c7ff04478a8850e&quot;,
+            &quot;receipt_digest&quot;: &quot;a3b1fcdaf3e0475c0cf989aef3262d9883608fd057c3eb216f23ca7000381563&quot;,
+            &quot;after_digest&quot;: &quot;43f08ab295eaa15e019f9b39a6414eb7986dc080885e1b80fbcdeb8aeee495a7&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;335f5a4148d942d490ab605ecbb02585&quot;,
+              &quot;gate_epoch&quot;: &quot;93830772782a4a499926bc020a866bdf&quot;,
               &quot;gate_revision&quot;: 6
             },
-            &quot;committed&quot;: &quot;499f1f752ae54d44ba6319d45dc15bb6&quot;,
-            &quot;fingerprint&quot;: &quot;0a4d4659ebd7c56bf50a8eb8a8e46c0ff8245f72a9953c3925cc8ae715919183&quot;,
+            &quot;committed&quot;: &quot;f92192e0a9cb4dfb86a24f40534d7305&quot;,
+            &quot;fingerprint&quot;: &quot;2d7d7d275daa2769de8dff3d19b1cf49d90aace1cca4dc9dd6f2b52e8ee51609&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           }
@@ -365,36 +417,36 @@
         {
           &quot;kind&quot;: &quot;prepare-opening&quot;,
           &quot;request_id&quot;: &quot;fixed-enospc-intent&quot;,
-          &quot;digest&quot;: &quot;7a02260578a95ecff4803c0e557ebf26b55f2ea32fc45d866ff4c80e241704b4&quot;,
+          &quot;digest&quot;: &quot;fde510d630f273fce680928366696353396b730f3a40e130d436fd7e4a94aaa9&quot;,
           &quot;state&quot;: &quot;OPENING_VERIFIED_CLOSED&quot;,
           &quot;timing&quot;: {
             &quot;budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;3c15999b-8231-455e-8cc5-106e2e08470d&quot;,
-              &quot;accepted_boot_ns&quot;: 8603729961,
-              &quot;expires_boot_ns&quot;: 18603729961,
-              &quot;accepted_wall_ns&quot;: 1793685637047865420,
+              &quot;boot_id&quot;: &quot;f4e211e9-097d-4749-a601-cee74493b66a&quot;,
+              &quot;accepted_boot_ns&quot;: 9806470254,
+              &quot;expires_boot_ns&quot;: 19806470254,
+              &quot;accepted_wall_ns&quot;: 1793686962742942000,
               &quot;seconds&quot;: 10
             },
             &quot;authority&quot;: {
-              &quot;gate_epoch&quot;: &quot;335f5a4148d942d490ab605ecbb02585&quot;,
+              &quot;gate_epoch&quot;: &quot;93830772782a4a499926bc020a866bdf&quot;,
               &quot;gate_revision&quot;: 6
             }
           },
           &quot;target&quot;: {
             &quot;preparation_request_id&quot;: &quot;fixed-enospc-journal&quot;,
-            &quot;receipt_digest&quot;: &quot;d5b4e107250d62a96237303064f4d03d7faff9cc81c238d7bae704815f47b877&quot;,
-            &quot;core_epoch&quot;: &quot;1da3e4020ef847c395402c7a171f8a91&quot;,
+            &quot;receipt_digest&quot;: &quot;a3b1fcdaf3e0475c0cf989aef3262d9883608fd057c3eb216f23ca7000381563&quot;,
+            &quot;core_epoch&quot;: &quot;4cbd349d2e7241c894df79e8208ca622&quot;,
             &quot;core_revision&quot;: 3,
-            &quot;journal_digest&quot;: &quot;331e888efec8ea3357a22fc555aade1bf193ee11f63451ea6c7ff04478a8850e&quot;,
+            &quot;journal_digest&quot;: &quot;43f08ab295eaa15e019f9b39a6414eb7986dc080885e1b80fbcdeb8aeee495a7&quot;,
             &quot;degraded_references&quot;: {}
           },
-          &quot;probe&quot;: &quot;f291b5eb1d14418eb19e2b29bfca3047&quot;,
+          &quot;probe&quot;: &quot;31c6e98bd89246e0a5286054ee836819&quot;,
           &quot;result&quot;: {
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 0,
-            &quot;marker_digest&quot;: &quot;7adf088b5c34dec3d2729eb43798a7c2202e82dd4253afd5f012fa13fa0b94d1&quot;,
+            &quot;marker_digest&quot;: &quot;b0e2399d051b06d34cf3b8d823551efe73ebbdf220f80ccc17ed085d154355a5&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           }
@@ -402,51 +454,51 @@
         {
           &quot;kind&quot;: &quot;prepare-release&quot;,
           &quot;request_id&quot;: &quot;fixed-enospc-release&quot;,
-          &quot;digest&quot;: &quot;7194c0132ceeb35c49f328ea9fa1876e54d3225375dfc671e27e052e34a92864&quot;,
+          &quot;digest&quot;: &quot;83888438ec63bcc6d3a5e895d5e74cee67be9fe63d19b945e0ba7ce732ff0f09&quot;,
           &quot;state&quot;: &quot;RELEASE_VERIFIED_CLOSED&quot;,
           &quot;timing&quot;: {
             &quot;budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;3c15999b-8231-455e-8cc5-106e2e08470d&quot;,
-              &quot;accepted_boot_ns&quot;: 8639267461,
-              &quot;expires_boot_ns&quot;: 18639267461,
-              &quot;accepted_wall_ns&quot;: 1793685637083390504,
+              &quot;boot_id&quot;: &quot;f4e211e9-097d-4749-a601-cee74493b66a&quot;,
+              &quot;accepted_boot_ns&quot;: 9843747629,
+              &quot;expires_boot_ns&quot;: 19843747629,
+              &quot;accepted_wall_ns&quot;: 1793686962780196666,
               &quot;seconds&quot;: 10
             },
             &quot;authority&quot;: {
-              &quot;gate_epoch&quot;: &quot;335f5a4148d942d490ab605ecbb02585&quot;,
+              &quot;gate_epoch&quot;: &quot;93830772782a4a499926bc020a866bdf&quot;,
               &quot;gate_revision&quot;: 6
             }
           },
           &quot;target&quot;: {
             &quot;opening_request_id&quot;: &quot;fixed-enospc-intent&quot;,
-            &quot;opening_marker_digest&quot;: &quot;7adf088b5c34dec3d2729eb43798a7c2202e82dd4253afd5f012fa13fa0b94d1&quot;,
-            &quot;source_request_digest&quot;: &quot;7a02260578a95ecff4803c0e557ebf26b55f2ea32fc45d866ff4c80e241704b4&quot;,
+            &quot;opening_marker_digest&quot;: &quot;b0e2399d051b06d34cf3b8d823551efe73ebbdf220f80ccc17ed085d154355a5&quot;,
+            &quot;source_request_digest&quot;: &quot;fde510d630f273fce680928366696353396b730f3a40e130d436fd7e4a94aaa9&quot;,
             &quot;source_budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;3c15999b-8231-455e-8cc5-106e2e08470d&quot;,
-              &quot;accepted_boot_ns&quot;: 8603729961,
-              &quot;expires_boot_ns&quot;: 18603729961,
-              &quot;accepted_wall_ns&quot;: 1793685637047865420,
+              &quot;boot_id&quot;: &quot;f4e211e9-097d-4749-a601-cee74493b66a&quot;,
+              &quot;accepted_boot_ns&quot;: 9806470254,
+              &quot;expires_boot_ns&quot;: 19806470254,
+              &quot;accepted_wall_ns&quot;: 1793686962742942000,
               &quot;seconds&quot;: 10
             },
             &quot;opening_target&quot;: {
               &quot;preparation_request_id&quot;: &quot;fixed-enospc-journal&quot;,
-              &quot;receipt_digest&quot;: &quot;d5b4e107250d62a96237303064f4d03d7faff9cc81c238d7bae704815f47b877&quot;,
-              &quot;core_epoch&quot;: &quot;1da3e4020ef847c395402c7a171f8a91&quot;,
+              &quot;receipt_digest&quot;: &quot;a3b1fcdaf3e0475c0cf989aef3262d9883608fd057c3eb216f23ca7000381563&quot;,
+              &quot;core_epoch&quot;: &quot;4cbd349d2e7241c894df79e8208ca622&quot;,
               &quot;core_revision&quot;: 3,
-              &quot;journal_digest&quot;: &quot;331e888efec8ea3357a22fc555aade1bf193ee11f63451ea6c7ff04478a8850e&quot;,
+              &quot;journal_digest&quot;: &quot;43f08ab295eaa15e019f9b39a6414eb7986dc080885e1b80fbcdeb8aeee495a7&quot;,
               &quot;degraded_references&quot;: {}
             }
           },
-          &quot;probe&quot;: &quot;e56af26954be42868ef3dff921c74a53&quot;,
+          &quot;probe&quot;: &quot;5090e1673d394d828e0d99ca1dec6397&quot;,
           &quot;result&quot;: {
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;499f1f752ae54d44ba6319d45dc15bb6&quot;,
-            &quot;fingerprint&quot;: &quot;0a4d4659ebd7c56bf50a8eb8a8e46c0ff8245f72a9953c3925cc8ae715919183&quot;,
-            &quot;receipt_digest&quot;: &quot;a498c9a1beddca70a0927b108846b88c3407f16f178cb484c168bc639876027d&quot;,
+            &quot;committed&quot;: &quot;f92192e0a9cb4dfb86a24f40534d7305&quot;,
+            &quot;fingerprint&quot;: &quot;2d7d7d275daa2769de8dff3d19b1cf49d90aace1cca4dc9dd6f2b52e8ee51609&quot;,
+            &quot;receipt_digest&quot;: &quot;20daa355e2b71da33859fd38d271f26a51bfe419c793b8a1e60fcb8854d9cfb3&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           }
@@ -454,65 +506,65 @@
         {
           &quot;kind&quot;: &quot;open-updates&quot;,
           &quot;request_id&quot;: &quot;fixed-enospc-open&quot;,
-          &quot;digest&quot;: &quot;9584968031ea901f0ee06bab4f0ac5bc7977e60db745569805c0db3d75e303bd&quot;,
+          &quot;digest&quot;: &quot;46cf5559537b8d57335cf2afc95f3453524083f8cc908fb56ce4f09b6df9c2f7&quot;,
           &quot;state&quot;: &quot;OPENED&quot;,
           &quot;timing&quot;: {
             &quot;budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;3c15999b-8231-455e-8cc5-106e2e08470d&quot;,
-              &quot;accepted_boot_ns&quot;: 9159893378,
-              &quot;expires_boot_ns&quot;: 19159893378,
-              &quot;accepted_wall_ns&quot;: 1793685637604015629,
+              &quot;boot_id&quot;: &quot;f4e211e9-097d-4749-a601-cee74493b66a&quot;,
+              &quot;accepted_boot_ns&quot;: 10371675837,
+              &quot;expires_boot_ns&quot;: 20371675837,
+              &quot;accepted_wall_ns&quot;: 1793686963308123625,
               &quot;seconds&quot;: 10
             },
             &quot;authority&quot;: {
-              &quot;gate_epoch&quot;: &quot;335f5a4148d942d490ab605ecbb02585&quot;,
+              &quot;gate_epoch&quot;: &quot;93830772782a4a499926bc020a866bdf&quot;,
               &quot;gate_revision&quot;: 6
             }
           },
           &quot;target&quot;: {
             &quot;release_request_id&quot;: &quot;fixed-enospc-release&quot;,
-            &quot;release_receipt_digest&quot;: &quot;a498c9a1beddca70a0927b108846b88c3407f16f178cb484c168bc639876027d&quot;,
-            &quot;release_digest&quot;: &quot;7194c0132ceeb35c49f328ea9fa1876e54d3225375dfc671e27e052e34a92864&quot;,
+            &quot;release_receipt_digest&quot;: &quot;20daa355e2b71da33859fd38d271f26a51bfe419c793b8a1e60fcb8854d9cfb3&quot;,
+            &quot;release_digest&quot;: &quot;83888438ec63bcc6d3a5e895d5e74cee67be9fe63d19b945e0ba7ce732ff0f09&quot;,
             &quot;release_budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;3c15999b-8231-455e-8cc5-106e2e08470d&quot;,
-              &quot;accepted_boot_ns&quot;: 8639267461,
-              &quot;expires_boot_ns&quot;: 18639267461,
-              &quot;accepted_wall_ns&quot;: 1793685637083390504,
+              &quot;boot_id&quot;: &quot;f4e211e9-097d-4749-a601-cee74493b66a&quot;,
+              &quot;accepted_boot_ns&quot;: 9843747629,
+              &quot;expires_boot_ns&quot;: 19843747629,
+              &quot;accepted_wall_ns&quot;: 1793686962780196666,
               &quot;seconds&quot;: 10
             },
             &quot;release_target&quot;: {
               &quot;opening_request_id&quot;: &quot;fixed-enospc-intent&quot;,
-              &quot;opening_marker_digest&quot;: &quot;7adf088b5c34dec3d2729eb43798a7c2202e82dd4253afd5f012fa13fa0b94d1&quot;,
-              &quot;source_request_digest&quot;: &quot;7a02260578a95ecff4803c0e557ebf26b55f2ea32fc45d866ff4c80e241704b4&quot;,
+              &quot;opening_marker_digest&quot;: &quot;b0e2399d051b06d34cf3b8d823551efe73ebbdf220f80ccc17ed085d154355a5&quot;,
+              &quot;source_request_digest&quot;: &quot;fde510d630f273fce680928366696353396b730f3a40e130d436fd7e4a94aaa9&quot;,
               &quot;source_budget&quot;: {
                 &quot;version&quot;: 1,
-                &quot;boot_id&quot;: &quot;3c15999b-8231-455e-8cc5-106e2e08470d&quot;,
-                &quot;accepted_boot_ns&quot;: 8603729961,
-                &quot;expires_boot_ns&quot;: 18603729961,
-                &quot;accepted_wall_ns&quot;: 1793685637047865420,
+                &quot;boot_id&quot;: &quot;f4e211e9-097d-4749-a601-cee74493b66a&quot;,
+                &quot;accepted_boot_ns&quot;: 9806470254,
+                &quot;expires_boot_ns&quot;: 19806470254,
+                &quot;accepted_wall_ns&quot;: 1793686962742942000,
                 &quot;seconds&quot;: 10
               },
               &quot;opening_target&quot;: {
                 &quot;preparation_request_id&quot;: &quot;fixed-enospc-journal&quot;,
-                &quot;receipt_digest&quot;: &quot;d5b4e107250d62a96237303064f4d03d7faff9cc81c238d7bae704815f47b877&quot;,
-                &quot;core_epoch&quot;: &quot;1da3e4020ef847c395402c7a171f8a91&quot;,
+                &quot;receipt_digest&quot;: &quot;a3b1fcdaf3e0475c0cf989aef3262d9883608fd057c3eb216f23ca7000381563&quot;,
+                &quot;core_epoch&quot;: &quot;4cbd349d2e7241c894df79e8208ca622&quot;,
                 &quot;core_revision&quot;: 3,
-                &quot;journal_digest&quot;: &quot;331e888efec8ea3357a22fc555aade1bf193ee11f63451ea6c7ff04478a8850e&quot;,
+                &quot;journal_digest&quot;: &quot;43f08ab295eaa15e019f9b39a6414eb7986dc080885e1b80fbcdeb8aeee495a7&quot;,
                 &quot;degraded_references&quot;: {}
               }
             }
           },
-          &quot;probe&quot;: &quot;f9be17df67024952aa0b8117f8ffc8c6&quot;,
+          &quot;probe&quot;: &quot;f42eeeafc6bb4f938eff5bbcaf9a86ec&quot;,
           &quot;result&quot;: {
             &quot;storage_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;499f1f752ae54d44ba6319d45dc15bb6&quot;,
-            &quot;fingerprint&quot;: &quot;0a4d4659ebd7c56bf50a8eb8a8e46c0ff8245f72a9953c3925cc8ae715919183&quot;,
-            &quot;admission_digest&quot;: &quot;65c2f4f94450e2b5a74e57d27ca1bc51055889a3c57a565ee8324ca54b8fd3b9&quot;,
+            &quot;committed&quot;: &quot;f92192e0a9cb4dfb86a24f40534d7305&quot;,
+            &quot;fingerprint&quot;: &quot;2d7d7d275daa2769de8dff3d19b1cf49d90aace1cca4dc9dd6f2b52e8ee51609&quot;,
+            &quot;admission_digest&quot;: &quot;f7f820a09f5484e2c8f87992a54f31317cfb7e5d70b282807de44e45b7e5c60a&quot;,
             &quot;opened_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;335f5a4148d942d490ab605ecbb02585&quot;,
+              &quot;gate_epoch&quot;: &quot;93830772782a4a499926bc020a866bdf&quot;,
               &quot;gate_revision&quot;: 7
             },
             &quot;updates_enabled&quot;: true
@@ -521,29 +573,156 @@
       ],
       &quot;old_pending_history_after_reconciliation&quot;: {
         &quot;request_id&quot;: &quot;pending-enospc&quot;,
-        &quot;digest&quot;: &quot;0a0b10e887291e0138eef01f3bc825eb4f58c8379f99173f411be59ea9263fc4&quot;,
+        &quot;digest&quot;: &quot;78b829e4a1a21d2f413d587d12d7e293b87d426b7b0340ccb61f09f5031b73bf&quot;,
         &quot;state&quot;: &quot;INTERRUPTED&quot;,
         &quot;result&quot;: {
           &quot;reconciled_closed&quot;: true,
           &quot;prior_state&quot;: &quot;RUNNING&quot;,
           &quot;execution_outcome&quot;: &quot;unknown&quot;,
-          &quot;committed&quot;: &quot;499f1f752ae54d44ba6319d45dc15bb6&quot;,
+          &quot;committed&quot;: &quot;f92192e0a9cb4dfb86a24f40534d7305&quot;,
           &quot;recovery_request_id&quot;: &quot;fixed-enospc-journal&quot;,
           &quot;updates_enabled&quot;: false
         },
         &quot;timing&quot;: {
           &quot;activation&quot;: {
             &quot;version&quot;: 1,
-            &quot;boot_id&quot;: &quot;f8ceb3de-5b61-4c16-bd52-c75629c47858&quot;,
-            &quot;accepted_boot_ns&quot;: 76825902327,
-            &quot;expires_boot_ns&quot;: 86825902327,
-            &quot;accepted_wall_ns&quot;: 1793685621024215449,
+            &quot;boot_id&quot;: &quot;d7e5603d-d534-4d4f-8426-82a140644f4d&quot;,
+            &quot;accepted_boot_ns&quot;: 328043141848,
+            &quot;expires_boot_ns&quot;: 338043141848,
+            &quot;accepted_wall_ns&quot;: 1793686944042790721,
             &quot;seconds&quot;: 10
           },
           &quot;recovery&quot;: null
         }
       },
-      &quot;restored_committed_leaf&quot;: &quot;0a4d4659ebd7c56bf50a8eb8a8e46c0ff8245f72a9953c3925cc8ae715919183&quot;,
+      &quot;restored_committed_leaf&quot;: &quot;2d7d7d275daa2769de8dff3d19b1cf49d90aace1cca4dc9dd6f2b52e8ee51609&quot;,
+      &quot;closed_after_repair_valid_request_response&quot;: {
+        &quot;ok&quot;: false,
+        &quot;error&quot;: &quot;Rejected&quot;,
+        &quot;reason&quot;: &quot;recovery_required&quot;
+      },
+      &quot;root_stale_authority_response&quot;: {
+        &quot;ok&quot;: false,
+        &quot;reason&quot;: &quot;stale_gate_authority&quot;
+      },
+      &quot;current_root_prepare_response&quot;: {
+        &quot;ok&quot;: true,
+        &quot;prepared&quot;: true,
+        &quot;updates_enabled&quot;: false,
+        &quot;restored&quot;: false,
+        &quot;gate&quot;: {
+          &quot;epoch&quot;: &quot;93830772782a4a499926bc020a866bdf&quot;,
+          &quot;reason&quot;: &quot;operator_prepared&quot;,
+          &quot;revision&quot;: 5,
+          &quot;state&quot;: &quot;VERIFY_REQUIRED&quot;,
+          &quot;version&quot;: 1
+        }
+      },
+      &quot;old_failed_prefix_control&quot;: null,
+      &quot;catalogs_before&quot;: {
+        &quot;normal&quot;: [
+          {
+            &quot;id&quot;: &quot;installed-first&quot;,
+            &quot;digest&quot;: &quot;e704f9bf0b24c32a2b1aaf2f9da63f22ab471cca9d0de293956629008e72f371&quot;,
+            &quot;state&quot;: &quot;COMMITTED&quot;,
+            &quot;result&quot;: &quot;{\&quot;committed\&quot;: \&quot;f92192e0a9cb4dfb86a24f40534d7305\&quot;}&quot;,
+            &quot;timing&quot;: &quot;{\&quot;activation\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;d7e5603d-d534-4d4f-8426-82a140644f4d\&quot;, \&quot;accepted_boot_ns\&quot;: 326232535179, \&quot;expires_boot_ns\&quot;: 336232535179, \&quot;accepted_wall_ns\&quot;: 1793686942232186593, \&quot;seconds\&quot;: 10}, \&quot;recovery\&quot;: null}&quot;
+          },
+          {
+            &quot;id&quot;: &quot;pending-enospc&quot;,
+            &quot;digest&quot;: &quot;78b829e4a1a21d2f413d587d12d7e293b87d426b7b0340ccb61f09f5031b73bf&quot;,
+            &quot;state&quot;: &quot;RUNNING&quot;,
+            &quot;result&quot;: null,
+            &quot;timing&quot;: &quot;{\&quot;activation\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;d7e5603d-d534-4d4f-8426-82a140644f4d\&quot;, \&quot;accepted_boot_ns\&quot;: 328043141848, \&quot;expires_boot_ns\&quot;: 338043141848, \&quot;accepted_wall_ns\&quot;: 1793686944042790721, \&quot;seconds\&quot;: 10}, \&quot;recovery\&quot;: null}&quot;
+          }
+        ],
+        &quot;root&quot;: []
+      },
+      &quot;catalogs_after&quot;: {
+        &quot;normal&quot;: [
+          {
+            &quot;id&quot;: &quot;fresh-enospc&quot;,
+            &quot;digest&quot;: &quot;98897ce73bc5b3baaa51381fbef337cbb415186caaca5969bab2314000fd33ed&quot;,
+            &quot;state&quot;: &quot;COMMITTED&quot;,
+            &quot;result&quot;: &quot;{\&quot;committed\&quot;: \&quot;ed2f18cc88ad43868b15e93648176f87\&quot;}&quot;,
+            &quot;timing&quot;: &quot;{\&quot;activation\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;f4e211e9-097d-4749-a601-cee74493b66a\&quot;, \&quot;accepted_boot_ns\&quot;: 11166356796, \&quot;expires_boot_ns\&quot;: 21166356796, \&quot;accepted_wall_ns\&quot;: 1793686964102821042, \&quot;seconds\&quot;: 10}, \&quot;recovery\&quot;: null}&quot;
+          },
+          {
+            &quot;id&quot;: &quot;installed-first&quot;,
+            &quot;digest&quot;: &quot;e704f9bf0b24c32a2b1aaf2f9da63f22ab471cca9d0de293956629008e72f371&quot;,
+            &quot;state&quot;: &quot;COMMITTED&quot;,
+            &quot;result&quot;: &quot;{\&quot;committed\&quot;: \&quot;f92192e0a9cb4dfb86a24f40534d7305\&quot;}&quot;,
+            &quot;timing&quot;: &quot;{\&quot;activation\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;d7e5603d-d534-4d4f-8426-82a140644f4d\&quot;, \&quot;accepted_boot_ns\&quot;: 326232535179, \&quot;expires_boot_ns\&quot;: 336232535179, \&quot;accepted_wall_ns\&quot;: 1793686942232186593, \&quot;seconds\&quot;: 10}, \&quot;recovery\&quot;: null}&quot;
+          },
+          {
+            &quot;id&quot;: &quot;pending-enospc&quot;,
+            &quot;digest&quot;: &quot;78b829e4a1a21d2f413d587d12d7e293b87d426b7b0340ccb61f09f5031b73bf&quot;,
+            &quot;state&quot;: &quot;INTERRUPTED&quot;,
+            &quot;result&quot;: &quot;{\&quot;reconciled_closed\&quot;: true, \&quot;prior_state\&quot;: \&quot;RUNNING\&quot;, \&quot;execution_outcome\&quot;: \&quot;unknown\&quot;, \&quot;committed\&quot;: \&quot;f92192e0a9cb4dfb86a24f40534d7305\&quot;, \&quot;recovery_request_id\&quot;: \&quot;fixed-enospc-journal\&quot;, \&quot;updates_enabled\&quot;: false}&quot;,
+            &quot;timing&quot;: &quot;{\&quot;activation\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;d7e5603d-d534-4d4f-8426-82a140644f4d\&quot;, \&quot;accepted_boot_ns\&quot;: 328043141848, \&quot;expires_boot_ns\&quot;: 338043141848, \&quot;accepted_wall_ns\&quot;: 1793686944042790721, \&quot;seconds\&quot;: 10}, \&quot;recovery\&quot;: null}&quot;
+          },
+          {
+            &quot;id&quot;: &quot;stale-enospc&quot;,
+            &quot;digest&quot;: &quot;78b829e4a1a21d2f413d587d12d7e293b87d426b7b0340ccb61f09f5031b73bf&quot;,
+            &quot;state&quot;: &quot;FAILED&quot;,
+            &quot;result&quot;: &quot;{\&quot;error\&quot;: \&quot;Rejected\&quot;, \&quot;expired\&quot;: false, \&quot;sqlite_error\&quot;: null, \&quot;errno\&quot;: null}&quot;,
+            &quot;timing&quot;: &quot;{\&quot;activation\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;f4e211e9-097d-4749-a601-cee74493b66a\&quot;, \&quot;accepted_boot_ns\&quot;: 11097010754, \&quot;expires_boot_ns\&quot;: 21097010754, \&quot;accepted_wall_ns\&quot;: 1793686964033478167, \&quot;seconds\&quot;: 10}, \&quot;recovery\&quot;: null}&quot;
+          }
+        ],
+        &quot;root&quot;: [
+          {
+            &quot;id&quot;: &quot;fixed-enospc-cert&quot;,
+            &quot;digest&quot;: &quot;3535d05bb1aa00eea1da119f6a9f5c2f968ace032dbbb4ad36e627ec49d8aee2&quot;,
+            &quot;state&quot;: &quot;VERIFIED_CLOSED&quot;,
+            &quot;timing&quot;: &quot;{\&quot;budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;f4e211e9-097d-4749-a601-cee74493b66a\&quot;, \&quot;accepted_boot_ns\&quot;: 8711444879, \&quot;expires_boot_ns\&quot;: 18711444879, \&quot;accepted_wall_ns\&quot;: 1793686961150176670, \&quot;seconds\&quot;: 10}, \&quot;authority\&quot;: {\&quot;gate_epoch\&quot;: \&quot;93830772782a4a499926bc020a866bdf\&quot;, \&quot;gate_revision\&quot;: 5}}&quot;,
+            &quot;target&quot;: &quot;{\&quot;schema\&quot;: 1, \&quot;state\&quot;: \&quot;APPLYING\&quot;, \&quot;epoch\&quot;: \&quot;79925b62dbb54c1681fca320d3892b85\&quot;, \&quot;revision\&quot;: 2, \&quot;committed\&quot;: \&quot;f92192e0a9cb4dfb86a24f40534d7305\&quot;, \&quot;committed_digest\&quot;: \&quot;8f632500db59bc02204bdf5b0f180897ef0e54b60b0d17821dae34d44d632c7d\&quot;, \&quot;candidate\&quot;: \&quot;b5d6100b12ca446988a581396f9295fb\&quot;}&quot;,
+            &quot;probe&quot;: &quot;5dfa8496b1044244863abc19c8872d78&quot;,
+            &quot;result&quot;: &quot;{\&quot;storage_verified\&quot;: true, \&quot;certificate_verified\&quot;: true, \&quot;tls_confirmed\&quot;: true, \&quot;restored\&quot;: true, \&quot;updates_enabled\&quot;: false, \&quot;committed\&quot;: \&quot;f92192e0a9cb4dfb86a24f40534d7305\&quot;, \&quot;fingerprint\&quot;: \&quot;2d7d7d275daa2769de8dff3d19b1cf49d90aace1cca4dc9dd6f2b52e8ee51609\&quot;, \&quot;prior_health\&quot;: \&quot;HEALTHY\&quot;, \&quot;closed_gate\&quot;: {\&quot;gate_epoch\&quot;: \&quot;93830772782a4a499926bc020a866bdf\&quot;, \&quot;gate_revision\&quot;: 6}}&quot;,
+            &quot;kind&quot;: &quot;recover-certificate&quot;
+          },
+          {
+            &quot;id&quot;: &quot;fixed-enospc-intent&quot;,
+            &quot;digest&quot;: &quot;fde510d630f273fce680928366696353396b730f3a40e130d436fd7e4a94aaa9&quot;,
+            &quot;state&quot;: &quot;OPENING_VERIFIED_CLOSED&quot;,
+            &quot;timing&quot;: &quot;{\&quot;budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;f4e211e9-097d-4749-a601-cee74493b66a\&quot;, \&quot;accepted_boot_ns\&quot;: 9806470254, \&quot;expires_boot_ns\&quot;: 19806470254, \&quot;accepted_wall_ns\&quot;: 1793686962742942000, \&quot;seconds\&quot;: 10}, \&quot;authority\&quot;: {\&quot;gate_epoch\&quot;: \&quot;93830772782a4a499926bc020a866bdf\&quot;, \&quot;gate_revision\&quot;: 6}}&quot;,
+            &quot;target&quot;: &quot;{\&quot;preparation_request_id\&quot;: \&quot;fixed-enospc-journal\&quot;, \&quot;receipt_digest\&quot;: \&quot;a3b1fcdaf3e0475c0cf989aef3262d9883608fd057c3eb216f23ca7000381563\&quot;, \&quot;core_epoch\&quot;: \&quot;4cbd349d2e7241c894df79e8208ca622\&quot;, \&quot;core_revision\&quot;: 3, \&quot;journal_digest\&quot;: \&quot;43f08ab295eaa15e019f9b39a6414eb7986dc080885e1b80fbcdeb8aeee495a7\&quot;, \&quot;degraded_references\&quot;: {}}&quot;,
+            &quot;probe&quot;: &quot;31c6e98bd89246e0a5286054ee836819&quot;,
+            &quot;result&quot;: &quot;{\&quot;pair_verified\&quot;: true, \&quot;degraded_references_verified\&quot;: true, \&quot;degraded_reference_count\&quot;: 0, \&quot;marker_digest\&quot;: \&quot;b0e2399d051b06d34cf3b8d823551efe73ebbdf220f80ccc17ed085d154355a5\&quot;, \&quot;updates_enabled\&quot;: false, \&quot;release_authorized\&quot;: false}&quot;,
+            &quot;kind&quot;: &quot;prepare-opening&quot;
+          },
+          {
+            &quot;id&quot;: &quot;fixed-enospc-journal&quot;,
+            &quot;digest&quot;: &quot;078c4d758351a12595ea9cca571fbea8d9cdc2784e7b83984829b52251a89713&quot;,
+            &quot;state&quot;: &quot;JOURNAL_VERIFIED_CLOSED&quot;,
+            &quot;timing&quot;: &quot;{\&quot;budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;f4e211e9-097d-4749-a601-cee74493b66a\&quot;, \&quot;accepted_boot_ns\&quot;: 9299066171, \&quot;expires_boot_ns\&quot;: 19299066171, \&quot;accepted_wall_ns\&quot;: 1793686961737807046, \&quot;seconds\&quot;: 10}, \&quot;authority\&quot;: {\&quot;gate_epoch\&quot;: \&quot;93830772782a4a499926bc020a866bdf\&quot;, \&quot;gate_revision\&quot;: 6}}&quot;,
+            &quot;target&quot;: &quot;{\&quot;core\&quot;: {\&quot;schema\&quot;: 1, \&quot;state\&quot;: \&quot;APPLYING\&quot;, \&quot;epoch\&quot;: \&quot;79925b62dbb54c1681fca320d3892b85\&quot;, \&quot;revision\&quot;: 2, \&quot;committed\&quot;: \&quot;f92192e0a9cb4dfb86a24f40534d7305\&quot;, \&quot;committed_digest\&quot;: \&quot;8f632500db59bc02204bdf5b0f180897ef0e54b60b0d17821dae34d44d632c7d\&quot;, \&quot;candidate\&quot;: \&quot;b5d6100b12ca446988a581396f9295fb\&quot;}, \&quot;journal_digest\&quot;: \&quot;58e9f1b80af29642745db052d662f53fd6045da9e13fe8c1e3ebdd7cba7ad3d0\&quot;, \&quot;certificate_request_id\&quot;: \&quot;fixed-enospc-cert\&quot;}&quot;,
+            &quot;probe&quot;: &quot;d6796c28bb63431b984154d0ba68086b&quot;,
+            &quot;result&quot;: &quot;{\&quot;journal_reconciled\&quot;: true, \&quot;health_verified\&quot;: true, \&quot;prior_health\&quot;: \&quot;HEALTHY\&quot;, \&quot;receipt_digest\&quot;: \&quot;a3b1fcdaf3e0475c0cf989aef3262d9883608fd057c3eb216f23ca7000381563\&quot;, \&quot;after_digest\&quot;: \&quot;43f08ab295eaa15e019f9b39a6414eb7986dc080885e1b80fbcdeb8aeee495a7\&quot;, \&quot;closed_gate\&quot;: {\&quot;gate_epoch\&quot;: \&quot;93830772782a4a499926bc020a866bdf\&quot;, \&quot;gate_revision\&quot;: 6}, \&quot;committed\&quot;: \&quot;f92192e0a9cb4dfb86a24f40534d7305\&quot;, \&quot;fingerprint\&quot;: \&quot;2d7d7d275daa2769de8dff3d19b1cf49d90aace1cca4dc9dd6f2b52e8ee51609\&quot;, \&quot;updates_enabled\&quot;: false, \&quot;main_committed\&quot;: true}&quot;,
+            &quot;kind&quot;: &quot;reconcile-closed&quot;
+          },
+          {
+            &quot;id&quot;: &quot;fixed-enospc-open&quot;,
+            &quot;digest&quot;: &quot;46cf5559537b8d57335cf2afc95f3453524083f8cc908fb56ce4f09b6df9c2f7&quot;,
+            &quot;state&quot;: &quot;OPENED&quot;,
+            &quot;timing&quot;: &quot;{\&quot;budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;f4e211e9-097d-4749-a601-cee74493b66a\&quot;, \&quot;accepted_boot_ns\&quot;: 10371675837, \&quot;expires_boot_ns\&quot;: 20371675837, \&quot;accepted_wall_ns\&quot;: 1793686963308123625, \&quot;seconds\&quot;: 10}, \&quot;authority\&quot;: {\&quot;gate_epoch\&quot;: \&quot;93830772782a4a499926bc020a866bdf\&quot;, \&quot;gate_revision\&quot;: 6}}&quot;,
+            &quot;target&quot;: &quot;{\&quot;release_request_id\&quot;: \&quot;fixed-enospc-release\&quot;, \&quot;release_receipt_digest\&quot;: \&quot;20daa355e2b71da33859fd38d271f26a51bfe419c793b8a1e60fcb8854d9cfb3\&quot;, \&quot;release_digest\&quot;: \&quot;83888438ec63bcc6d3a5e895d5e74cee67be9fe63d19b945e0ba7ce732ff0f09\&quot;, \&quot;release_budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;f4e211e9-097d-4749-a601-cee74493b66a\&quot;, \&quot;accepted_boot_ns\&quot;: 9843747629, \&quot;expires_boot_ns\&quot;: 19843747629, \&quot;accepted_wall_ns\&quot;: 1793686962780196666, \&quot;seconds\&quot;: 10}, \&quot;release_target\&quot;: {\&quot;opening_request_id\&quot;: \&quot;fixed-enospc-intent\&quot;, \&quot;opening_marker_digest\&quot;: \&quot;b0e2399d051b06d34cf3b8d823551efe73ebbdf220f80ccc17ed085d154355a5\&quot;, \&quot;source_request_digest\&quot;: \&quot;fde510d630f273fce680928366696353396b730f3a40e130d436fd7e4a94aaa9\&quot;, \&quot;source_budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;f4e211e9-097d-4749-a601-cee74493b66a\&quot;, \&quot;accepted_boot_ns\&quot;: 9806470254, \&quot;expires_boot_ns\&quot;: 19806470254, \&quot;accepted_wall_ns\&quot;: 1793686962742942000, \&quot;seconds\&quot;: 10}, \&quot;opening_target\&quot;: {\&quot;preparation_request_id\&quot;: \&quot;fixed-enospc-journal\&quot;, \&quot;receipt_digest\&quot;: \&quot;a3b1fcdaf3e0475c0cf989aef3262d9883608fd057c3eb216f23ca7000381563\&quot;, \&quot;core_epoch\&quot;: \&quot;4cbd349d2e7241c894df79e8208ca622\&quot;, \&quot;core_revision\&quot;: 3, \&quot;journal_digest\&quot;: \&quot;43f08ab295eaa15e019f9b39a6414eb7986dc080885e1b80fbcdeb8aeee495a7\&quot;, \&quot;degraded_references\&quot;: {}}}}&quot;,
+            &quot;probe&quot;: &quot;f42eeeafc6bb4f938eff5bbcaf9a86ec&quot;,
+            &quot;result&quot;: &quot;{\&quot;storage_verified\&quot;: true, \&quot;tls_confirmed\&quot;: true, \&quot;committed\&quot;: \&quot;f92192e0a9cb4dfb86a24f40534d7305\&quot;, \&quot;fingerprint\&quot;: \&quot;2d7d7d275daa2769de8dff3d19b1cf49d90aace1cca4dc9dd6f2b52e8ee51609\&quot;, \&quot;admission_digest\&quot;: \&quot;f7f820a09f5484e2c8f87992a54f31317cfb7e5d70b282807de44e45b7e5c60a\&quot;, \&quot;opened_gate\&quot;: {\&quot;gate_epoch\&quot;: \&quot;93830772782a4a499926bc020a866bdf\&quot;, \&quot;gate_revision\&quot;: 7}, \&quot;updates_enabled\&quot;: true}&quot;,
+            &quot;kind&quot;: &quot;open-updates&quot;
+          },
+          {
+            &quot;id&quot;: &quot;fixed-enospc-release&quot;,
+            &quot;digest&quot;: &quot;83888438ec63bcc6d3a5e895d5e74cee67be9fe63d19b945e0ba7ce732ff0f09&quot;,
+            &quot;state&quot;: &quot;RELEASE_VERIFIED_CLOSED&quot;,
+            &quot;timing&quot;: &quot;{\&quot;budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;f4e211e9-097d-4749-a601-cee74493b66a\&quot;, \&quot;accepted_boot_ns\&quot;: 9843747629, \&quot;expires_boot_ns\&quot;: 19843747629, \&quot;accepted_wall_ns\&quot;: 1793686962780196666, \&quot;seconds\&quot;: 10}, \&quot;authority\&quot;: {\&quot;gate_epoch\&quot;: \&quot;93830772782a4a499926bc020a866bdf\&quot;, \&quot;gate_revision\&quot;: 6}}&quot;,
+            &quot;target&quot;: &quot;{\&quot;opening_request_id\&quot;: \&quot;fixed-enospc-intent\&quot;, \&quot;opening_marker_digest\&quot;: \&quot;b0e2399d051b06d34cf3b8d823551efe73ebbdf220f80ccc17ed085d154355a5\&quot;, \&quot;source_request_digest\&quot;: \&quot;fde510d630f273fce680928366696353396b730f3a40e130d436fd7e4a94aaa9\&quot;, \&quot;source_budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;f4e211e9-097d-4749-a601-cee74493b66a\&quot;, \&quot;accepted_boot_ns\&quot;: 9806470254, \&quot;expires_boot_ns\&quot;: 19806470254, \&quot;accepted_wall_ns\&quot;: 1793686962742942000, \&quot;seconds\&quot;: 10}, \&quot;opening_target\&quot;: {\&quot;preparation_request_id\&quot;: \&quot;fixed-enospc-journal\&quot;, \&quot;receipt_digest\&quot;: \&quot;a3b1fcdaf3e0475c0cf989aef3262d9883608fd057c3eb216f23ca7000381563\&quot;, \&quot;core_epoch\&quot;: \&quot;4cbd349d2e7241c894df79e8208ca622\&quot;, \&quot;core_revision\&quot;: 3, \&quot;journal_digest\&quot;: \&quot;43f08ab295eaa15e019f9b39a6414eb7986dc080885e1b80fbcdeb8aeee495a7\&quot;, \&quot;degraded_references\&quot;: {}}}&quot;,
+            &quot;probe&quot;: &quot;5090e1673d394d828e0d99ca1dec6397&quot;,
+            &quot;result&quot;: &quot;{\&quot;storage_verified\&quot;: true, \&quot;certificate_verified\&quot;: true, \&quot;tls_confirmed\&quot;: true, \&quot;committed\&quot;: \&quot;f92192e0a9cb4dfb86a24f40534d7305\&quot;, \&quot;fingerprint\&quot;: \&quot;2d7d7d275daa2769de8dff3d19b1cf49d90aace1cca4dc9dd6f2b52e8ee51609\&quot;, \&quot;receipt_digest\&quot;: \&quot;20daa355e2b71da33859fd38d271f26a51bfe419c793b8a1e60fcb8854d9cfb3\&quot;, \&quot;updates_enabled\&quot;: false, \&quot;release_authorized\&quot;: false}&quot;,
+            &quot;kind&quot;: &quot;prepare-release&quot;
+          }
+        ]
+      },
+      &quot;terminal_history_preserved&quot;: true,
       &quot;stale_response&quot;: {
         &quot;ok&quot;: false,
         &quot;error&quot;: &quot;Rejected&quot;,
@@ -551,7 +730,7 @@
       },
       &quot;stale_history&quot;: {
         &quot;request_id&quot;: &quot;stale-enospc&quot;,
-        &quot;digest&quot;: &quot;0a0b10e887291e0138eef01f3bc825eb4f58c8379f99173f411be59ea9263fc4&quot;,
+        &quot;digest&quot;: &quot;78b829e4a1a21d2f413d587d12d7e293b87d426b7b0340ccb61f09f5031b73bf&quot;,
         &quot;state&quot;: &quot;FAILED&quot;,
         &quot;result&quot;: {
           &quot;error&quot;: &quot;Rejected&quot;,
@@ -562,10 +741,10 @@
         &quot;timing&quot;: {
           &quot;activation&quot;: {
             &quot;version&quot;: 1,
-            &quot;boot_id&quot;: &quot;3c15999b-8231-455e-8cc5-106e2e08470d&quot;,
-            &quot;accepted_boot_ns&quot;: 9873378211,
-            &quot;expires_boot_ns&quot;: 19873378211,
-            &quot;accepted_wall_ns&quot;: 1793685638769377416,
+            &quot;boot_id&quot;: &quot;f4e211e9-097d-4749-a601-cee74493b66a&quot;,
+            &quot;accepted_boot_ns&quot;: 11097010754,
+            &quot;expires_boot_ns&quot;: 21097010754,
+            &quot;accepted_wall_ns&quot;: 1793686964033478167,
             &quot;seconds&quot;: 10
           },
           &quot;recovery&quot;: null
@@ -575,25 +754,25 @@
         &quot;ok&quot;: true,
         &quot;result&quot;: {
           &quot;request_id&quot;: &quot;fresh-enospc&quot;,
-          &quot;digest&quot;: &quot;9b3e6caf7235656abf9a95074485a4dbb2ed647e463088ad290e911e87020fc5&quot;,
+          &quot;digest&quot;: &quot;98897ce73bc5b3baaa51381fbef337cbb415186caaca5969bab2314000fd33ed&quot;,
           &quot;state&quot;: &quot;COMMITTED&quot;,
           &quot;result&quot;: {
-            &quot;committed&quot;: &quot;cc594b367fba481eba150273935a1a7d&quot;
+            &quot;committed&quot;: &quot;ed2f18cc88ad43868b15e93648176f87&quot;
           },
           &quot;timing&quot;: {
             &quot;activation&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;3c15999b-8231-455e-8cc5-106e2e08470d&quot;,
-              &quot;accepted_boot_ns&quot;: 9943124003,
-              &quot;expires_boot_ns&quot;: 19943124003,
-              &quot;accepted_wall_ns&quot;: 1793685638839126458,
+              &quot;boot_id&quot;: &quot;f4e211e9-097d-4749-a601-cee74493b66a&quot;,
+              &quot;accepted_boot_ns&quot;: 11166356796,
+              &quot;expires_boot_ns&quot;: 21166356796,
+              &quot;accepted_wall_ns&quot;: 1793686964102821042,
               &quot;seconds&quot;: 10
             },
             &quot;recovery&quot;: null
           }
         }
       },
-      &quot;fresh_wire_leaf&quot;: &quot;bae28b1d4237fa9448121126bcbaffc276f231c4dc0983fca03c59b5238105fa&quot;,
+      &quot;fresh_wire_leaf&quot;: &quot;612b638e428a80ad2d076846f868062c0c5a8eaf780a7f9bbb0817e9a1474163&quot;,
       &quot;cleanup&quot;: {
         &quot;services_empty&quot;: {
           &quot;certweft.service&quot;: {
@@ -613,26 +792,26 @@
     {
       &quot;name&quot;: &quot;readonly&quot;,
       &quot;passed&quot;: true,
-      &quot;old_boot_id&quot;: &quot;3c15999b-8231-455e-8cc5-106e2e08470d&quot;,
-      &quot;current_boot_id&quot;: &quot;d0a53642-1f1b-4c75-83e0-1090cf361847&quot;,
+      &quot;old_boot_id&quot;: &quot;f4e211e9-097d-4749-a601-cee74493b66a&quot;,
+      &quot;current_boot_id&quot;: &quot;94624a50-8274-4988-8379-b7e45207f05d&quot;,
       &quot;before_shutdown&quot;: {
-        &quot;journal_sha256&quot;: &quot;d1d0acd4eb9f0e3959648cb2f86175a4d6eef48b8512911d35ee6d86304b0eff&quot;,
+        &quot;journal_sha256&quot;: &quot;20196aca7c4507667d87b03aafbb7d9906131e8cb883706a15782eefd169d312&quot;,
         &quot;recovery_sha256&quot;: &quot;126e1af3e87a5ac7bde9a4b4c254dab5c3a79602477eba7ef8ef4ddf383198a2&quot;,
-        &quot;gate_sha256&quot;: &quot;340081ce474aaa271d0da059eade858dec9ef4cd375899cf406f7f79fa5044d7&quot;,
+        &quot;gate_sha256&quot;: &quot;fa872ae73bfc6db6beae8a97881850976aad46cc16a7fb9ab9df55900a5f77ee&quot;,
         &quot;state&quot;: {
           &quot;schema&quot;: 1,
           &quot;state&quot;: &quot;APPLYING&quot;,
-          &quot;epoch&quot;: &quot;f496ea995e08447283d3d62efc0a6cf3&quot;,
+          &quot;epoch&quot;: &quot;35d2fc56a6fc4149bb316095986d83cc&quot;,
           &quot;revision&quot;: 2,
-          &quot;committed&quot;: &quot;dbb1ded9d6ff4753b43379f93f1667ed&quot;,
-          &quot;committed_digest&quot;: &quot;c6d3cf46f28e79fbce5c3b3fe3d88cf9425ae91576aa7355a1dfd7e94ea2b80d&quot;,
-          &quot;candidate&quot;: &quot;3b748fc3507b4b2dab06201848b78862&quot;
+          &quot;committed&quot;: &quot;93ccfeb122d04af68ce288b10ab24458&quot;,
+          &quot;committed_digest&quot;: &quot;971a15fbeaa21d45460555ccc3ca0325846cc740b1cde0165b2244babed0b1ea&quot;,
+          &quot;candidate&quot;: &quot;3e25467a4b1b44cf891de19aafc26dd0&quot;
         },
         &quot;requests&quot;: [
           [
             &quot;installed-first&quot;,
             &quot;COMMITTED&quot;,
-            &quot;{\&quot;committed\&quot;: \&quot;dbb1ded9d6ff4753b43379f93f1667ed\&quot;}&quot;
+            &quot;{\&quot;committed\&quot;: \&quot;93ccfeb122d04af68ce288b10ab24458\&quot;}&quot;
           ],
           [
             &quot;pending-readonly&quot;,
@@ -641,28 +820,28 @@
           ]
         ],
         &quot;recovery&quot;: [],
-        &quot;active&quot;: &quot;v-3b748fc3507b4b2dab06201848b78862/tls.conf&quot;
+        &quot;active&quot;: &quot;v-3e25467a4b1b44cf891de19aafc26dd0/tls.conf&quot;
       },
       &quot;before_writer_on_new_boot&quot;: {
-        &quot;boot_id&quot;: &quot;d0a53642-1f1b-4c75-83e0-1090cf361847&quot;,
-        &quot;uptime_seconds&quot;: 2.55,
-        &quot;journal_sha256&quot;: &quot;d1d0acd4eb9f0e3959648cb2f86175a4d6eef48b8512911d35ee6d86304b0eff&quot;,
+        &quot;boot_id&quot;: &quot;94624a50-8274-4988-8379-b7e45207f05d&quot;,
+        &quot;uptime_seconds&quot;: 2.02,
+        &quot;journal_sha256&quot;: &quot;20196aca7c4507667d87b03aafbb7d9906131e8cb883706a15782eefd169d312&quot;,
         &quot;recovery_sha256&quot;: &quot;126e1af3e87a5ac7bde9a4b4c254dab5c3a79602477eba7ef8ef4ddf383198a2&quot;,
-        &quot;gate_sha256&quot;: &quot;340081ce474aaa271d0da059eade858dec9ef4cd375899cf406f7f79fa5044d7&quot;,
+        &quot;gate_sha256&quot;: &quot;fa872ae73bfc6db6beae8a97881850976aad46cc16a7fb9ab9df55900a5f77ee&quot;,
         &quot;state&quot;: {
           &quot;schema&quot;: 1,
           &quot;state&quot;: &quot;APPLYING&quot;,
-          &quot;epoch&quot;: &quot;f496ea995e08447283d3d62efc0a6cf3&quot;,
+          &quot;epoch&quot;: &quot;35d2fc56a6fc4149bb316095986d83cc&quot;,
           &quot;revision&quot;: 2,
-          &quot;committed&quot;: &quot;dbb1ded9d6ff4753b43379f93f1667ed&quot;,
-          &quot;committed_digest&quot;: &quot;c6d3cf46f28e79fbce5c3b3fe3d88cf9425ae91576aa7355a1dfd7e94ea2b80d&quot;,
-          &quot;candidate&quot;: &quot;3b748fc3507b4b2dab06201848b78862&quot;
+          &quot;committed&quot;: &quot;93ccfeb122d04af68ce288b10ab24458&quot;,
+          &quot;committed_digest&quot;: &quot;971a15fbeaa21d45460555ccc3ca0325846cc740b1cde0165b2244babed0b1ea&quot;,
+          &quot;candidate&quot;: &quot;3e25467a4b1b44cf891de19aafc26dd0&quot;
         },
         &quot;requests&quot;: [
           [
             &quot;installed-first&quot;,
             &quot;COMMITTED&quot;,
-            &quot;{\&quot;committed\&quot;: \&quot;dbb1ded9d6ff4753b43379f93f1667ed\&quot;}&quot;
+            &quot;{\&quot;committed\&quot;: \&quot;93ccfeb122d04af68ce288b10ab24458\&quot;}&quot;
           ],
           [
             &quot;pending-readonly&quot;,
@@ -671,16 +850,16 @@
           ]
         ],
         &quot;recovery&quot;: [],
-        &quot;active&quot;: &quot;v-3b748fc3507b4b2dab06201848b78862/tls.conf&quot;,
+        &quot;active&quot;: &quot;v-3e25467a4b1b44cf891de19aafc26dd0/tls.conf&quot;,
         &quot;writer_main_pid&quot;: &quot;0&quot;
       },
-      &quot;mount_before_uuid&quot;: &quot;a8fd29e6-3d36-4825-9957-fd78d8f35912&quot;,
+      &quot;mount_before_uuid&quot;: &quot;07a8c453-2241-4cb6-8765-4b7d9a7f17ce&quot;,
       &quot;mount_after&quot;: {
         &quot;target&quot;: &quot;/var/lib/certweft&quot;,
         &quot;source&quot;: &quot;/dev/loop0&quot;,
         &quot;fstype&quot;: &quot;ext4&quot;,
         &quot;options&quot;: &quot;ro,relatime&quot;,
-        &quot;uuid&quot;: &quot;a8fd29e6-3d36-4825-9957-fd78d8f35912&quot;
+        &quot;uuid&quot;: &quot;07a8c453-2241-4cb6-8765-4b7d9a7f17ce&quot;
       },
       &quot;fault_before&quot;: {
         &quot;errno&quot;: 30,
@@ -707,7 +886,25 @@
           &quot;SubState&quot;: &quot;failed&quot;,
           &quot;StartLimitIntervalUSec&quot;: &quot;1min&quot;,
           &quot;StartLimitBurst&quot;: &quot;3&quot;,
-          &quot;InvocationID&quot;: &quot;33cce741ac2b406596860a4b26434506&quot;
+          &quot;InvocationID&quot;: &quot;77637fcd4fdd4860bc963eba71a13452&quot;
+        },
+        &quot;writer_failure_cause&quot;: {
+          &quot;stage&quot;: &quot;lifetime_lease_open&quot;,
+          &quot;errno&quot;: 30,
+          &quot;boot_id&quot;: &quot;f4e211e9-097d-4749-a601-cee74493b66a&quot;,
+          &quot;invocation_id&quot;: &quot;77637fcd4fdd4860bc963eba71a13452&quot;,
+          &quot;exec_status&quot;: &quot;1&quot;,
+          &quot;nrestarts&quot;: &quot;3&quot;,
+          &quot;exception_records&quot;: [
+            {
+              &quot;MESSAGE&quot;: &quot;OSError: [Errno 30] Read-only file system: &#x27;/var/lib/certweft/lifetime.lock&#x27;&quot;,
+              &quot;_PID&quot;: &quot;2544&quot;,
+              &quot;_BOOT_ID&quot;: &quot;f4e211e9097d4749a601cee74493b66a&quot;,
+              &quot;_SYSTEMD_INVOCATION_ID&quot;: &quot;77637fcd4fdd4860bc963eba71a13452&quot;,
+              &quot;_SYSTEMD_UNIT&quot;: &quot;certweft.service&quot;,
+              &quot;_EXE&quot;: &quot;/usr/bin/python3.12&quot;
+            }
+          ]
         },
         &quot;gate_cli&quot;: {
           &quot;ok&quot;: false,
@@ -738,7 +935,25 @@
           &quot;SubState&quot;: &quot;failed&quot;,
           &quot;StartLimitIntervalUSec&quot;: &quot;1min&quot;,
           &quot;StartLimitBurst&quot;: &quot;3&quot;,
-          &quot;InvocationID&quot;: &quot;184ac4461c244abf85292d515d8e5654&quot;
+          &quot;InvocationID&quot;: &quot;4706f03bc45a4a759b03fafd2eaad627&quot;
+        },
+        &quot;writer_failure_cause&quot;: {
+          &quot;stage&quot;: &quot;lifetime_lease_open&quot;,
+          &quot;errno&quot;: 30,
+          &quot;boot_id&quot;: &quot;94624a50-8274-4988-8379-b7e45207f05d&quot;,
+          &quot;invocation_id&quot;: &quot;4706f03bc45a4a759b03fafd2eaad627&quot;,
+          &quot;exec_status&quot;: &quot;1&quot;,
+          &quot;nrestarts&quot;: &quot;3&quot;,
+          &quot;exception_records&quot;: [
+            {
+              &quot;MESSAGE&quot;: &quot;OSError: [Errno 30] Read-only file system: &#x27;/var/lib/certweft/lifetime.lock&#x27;&quot;,
+              &quot;_PID&quot;: &quot;1157&quot;,
+              &quot;_BOOT_ID&quot;: &quot;94624a50827449888379b7e45207f05d&quot;,
+              &quot;_SYSTEMD_INVOCATION_ID&quot;: &quot;4706f03bc45a4a759b03fafd2eaad627&quot;,
+              &quot;_SYSTEMD_UNIT&quot;: &quot;certweft.service&quot;,
+              &quot;_EXE&quot;: &quot;/usr/bin/python3.12&quot;
+            }
+          ]
         },
         &quot;gate_cli&quot;: {
           &quot;ok&quot;: false,
@@ -752,12 +967,12 @@
         },
         &quot;gate_write_not_claimed&quot;: true
       },
-      &quot;candidate_leaf_while_faulted&quot;: &quot;35e6da1ee0c01bc34ff41e4a2eab7a3a3eb0c101405f50f7e0e739beb292a99d&quot;,
+      &quot;candidate_leaf_while_faulted&quot;: &quot;33a804ffa0430fe68bcdeebcbdeece0566def95acaa416cfd65fc04b36e1f779&quot;,
       &quot;observer_detached_only_after_boot_evidence_verified&quot;: true,
       &quot;closed_after_storage_repair&quot;: {
         &quot;ok&quot;: true,
         &quot;gate&quot;: {
-          &quot;epoch&quot;: &quot;d2abece4c5864191a059b4a5c611d934&quot;,
+          &quot;epoch&quot;: &quot;74717273c5fd426da18f0922ffc3807f&quot;,
           &quot;reason&quot;: &quot;unclean_or_blocked&quot;,
           &quot;revision&quot;: 4,
           &quot;state&quot;: &quot;RECOVERY_REQUIRED&quot;,
@@ -772,8 +987,8 @@
         &quot;completion_recorded&quot;: false
       },
       &quot;writer_runtime_after_repair&quot;: {
-        &quot;main_pid&quot;: 1635,
-        &quot;invocation_id&quot;: &quot;8f91907c9b6647fbb4f3e94f25f818b6&quot;,
+        &quot;main_pid&quot;: 1631,
+        &quot;invocation_id&quot;: &quot;8ada739051124a4eacd88e714c33c434&quot;,
         &quot;cmdline&quot;: [
           &quot;/opt/certweft/bin/python&quot;,
           &quot;-I&quot;,
@@ -783,7 +998,7 @@
         ],
         &quot;cwd&quot;: &quot;/&quot;,
         &quot;unit&quot;: {
-          &quot;ExecStart&quot;: &quot;{ path=/opt/certweft/bin/python ; argv[]=/opt/certweft/bin/python -I -m certweft.service /etc/certweft/writer.json ; ignore_errors=no ; start_time=[Tue 2026-11-03 14:01:01 CST] ; stop_time=[n/a] ; pid=1635 ; code=(null) ; status=0/0 }&quot;,
+          &quot;ExecStart&quot;: &quot;{ path=/opt/certweft/bin/python ; argv[]=/opt/certweft/bin/python -I -m certweft.service /etc/certweft/writer.json ; ignore_errors=no ; start_time=[Tue 2026-11-03 14:23:06 CST] ; stop_time=[n/a] ; pid=1631 ; code=(null) ; status=0/0 }&quot;,
           &quot;FragmentPath&quot;: &quot;/etc/systemd/system/certweft.service&quot;,
           &quot;DropInPaths&quot;: &quot;/etc/systemd/system/certweft.service.d/reboot-evidence.conf&quot;
         },
@@ -791,8 +1006,8 @@
         &quot;memory&quot;: {
           &quot;Uid&quot;: &quot;0\t0\t0\t0&quot;,
           &quot;Gid&quot;: &quot;0\t0\t0\t0&quot;,
-          &quot;VmHWM&quot;: &quot;21648 kB&quot;,
-          &quot;VmRSS&quot;: &quot;21648 kB&quot;,
+          &quot;VmHWM&quot;: &quot;21656 kB&quot;,
+          &quot;VmRSS&quot;: &quot;21656 kB&quot;,
           &quot;CapEff&quot;: &quot;0000000000000001&quot;,
           &quot;NoNewPrivs&quot;: &quot;1&quot;
         }
@@ -808,7 +1023,7 @@
           &quot;fixed-readonly-open&quot;
         ],
         &quot;gate&quot;: {
-          &quot;epoch&quot;: &quot;d2abece4c5864191a059b4a5c611d934&quot;,
+          &quot;epoch&quot;: &quot;74717273c5fd426da18f0922ffc3807f&quot;,
           &quot;reason&quot;: &quot;operator_opened&quot;,
           &quot;revision&quot;: 7,
           &quot;state&quot;: &quot;RUNNING&quot;,
@@ -819,43 +1034,43 @@
         {
           &quot;kind&quot;: &quot;recover-certificate&quot;,
           &quot;request_id&quot;: &quot;fixed-readonly-cert&quot;,
-          &quot;digest&quot;: &quot;f24d4760b655c4674aeb42c8a409de15737bc1eb9c86097e30ff6d11f7aa316d&quot;,
+          &quot;digest&quot;: &quot;ac55361a625eca6e1df7f686624b264622bfb57a5cc5768e46b8e1a2a2bbdbb3&quot;,
           &quot;state&quot;: &quot;VERIFIED_CLOSED&quot;,
           &quot;timing&quot;: {
             &quot;budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;d0a53642-1f1b-4c75-83e0-1090cf361847&quot;,
-              &quot;accepted_boot_ns&quot;: 6975357419,
-              &quot;expires_boot_ns&quot;: 16975357419,
-              &quot;accepted_wall_ns&quot;: 1793685661421206169,
+              &quot;boot_id&quot;: &quot;94624a50-8274-4988-8379-b7e45207f05d&quot;,
+              &quot;accepted_boot_ns&quot;: 7444152919,
+              &quot;expires_boot_ns&quot;: 17444152919,
+              &quot;accepted_wall_ns&quot;: 1793686986887999128,
               &quot;seconds&quot;: 10
             },
             &quot;authority&quot;: {
-              &quot;gate_epoch&quot;: &quot;d2abece4c5864191a059b4a5c611d934&quot;,
+              &quot;gate_epoch&quot;: &quot;74717273c5fd426da18f0922ffc3807f&quot;,
               &quot;gate_revision&quot;: 5
             }
           },
           &quot;target&quot;: {
             &quot;schema&quot;: 1,
             &quot;state&quot;: &quot;APPLYING&quot;,
-            &quot;epoch&quot;: &quot;f496ea995e08447283d3d62efc0a6cf3&quot;,
+            &quot;epoch&quot;: &quot;35d2fc56a6fc4149bb316095986d83cc&quot;,
             &quot;revision&quot;: 2,
-            &quot;committed&quot;: &quot;dbb1ded9d6ff4753b43379f93f1667ed&quot;,
-            &quot;committed_digest&quot;: &quot;c6d3cf46f28e79fbce5c3b3fe3d88cf9425ae91576aa7355a1dfd7e94ea2b80d&quot;,
-            &quot;candidate&quot;: &quot;3b748fc3507b4b2dab06201848b78862&quot;
+            &quot;committed&quot;: &quot;93ccfeb122d04af68ce288b10ab24458&quot;,
+            &quot;committed_digest&quot;: &quot;971a15fbeaa21d45460555ccc3ca0325846cc740b1cde0165b2244babed0b1ea&quot;,
+            &quot;candidate&quot;: &quot;3e25467a4b1b44cf891de19aafc26dd0&quot;
           },
-          &quot;probe&quot;: &quot;1b748f5cfb6f48f8b37b1a6ef4a5cbd1&quot;,
+          &quot;probe&quot;: &quot;eadf07205fe1435a9a5316979256af9e&quot;,
           &quot;result&quot;: {
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
             &quot;restored&quot;: true,
             &quot;updates_enabled&quot;: false,
-            &quot;committed&quot;: &quot;dbb1ded9d6ff4753b43379f93f1667ed&quot;,
-            &quot;fingerprint&quot;: &quot;2b860a2f19f9487032d89eff344adb0477d791997d8c9716097ebd3ba0a9703c&quot;,
+            &quot;committed&quot;: &quot;93ccfeb122d04af68ce288b10ab24458&quot;,
+            &quot;fingerprint&quot;: &quot;2b59220465b1423518a93bc4c17cf3840c48ae528d3b65f4cfa3177fa4293c67&quot;,
             &quot;prior_health&quot;: &quot;HEALTHY&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;d2abece4c5864191a059b4a5c611d934&quot;,
+              &quot;gate_epoch&quot;: &quot;74717273c5fd426da18f0922ffc3807f&quot;,
               &quot;gate_revision&quot;: 6
             }
           }
@@ -863,19 +1078,19 @@
         {
           &quot;kind&quot;: &quot;reconcile-closed&quot;,
           &quot;request_id&quot;: &quot;fixed-readonly-journal&quot;,
-          &quot;digest&quot;: &quot;33f0e33a56963b271794c3c6718bdd7ca603f885a389e5abfd59501f36aa39f7&quot;,
+          &quot;digest&quot;: &quot;a0768bbc76418b3aa709c35ca50162b826fd6b445e27d3ec0fd08958cb2de837&quot;,
           &quot;state&quot;: &quot;JOURNAL_VERIFIED_CLOSED&quot;,
           &quot;timing&quot;: {
             &quot;budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;d0a53642-1f1b-4c75-83e0-1090cf361847&quot;,
-              &quot;accepted_boot_ns&quot;: 7496893461,
-              &quot;expires_boot_ns&quot;: 17496893461,
-              &quot;accepted_wall_ns&quot;: 1793685661942753711,
+              &quot;boot_id&quot;: &quot;94624a50-8274-4988-8379-b7e45207f05d&quot;,
+              &quot;accepted_boot_ns&quot;: 8064927461,
+              &quot;expires_boot_ns&quot;: 18064927461,
+              &quot;accepted_wall_ns&quot;: 1793686987508753587,
               &quot;seconds&quot;: 10
             },
             &quot;authority&quot;: {
-              &quot;gate_epoch&quot;: &quot;d2abece4c5864191a059b4a5c611d934&quot;,
+              &quot;gate_epoch&quot;: &quot;74717273c5fd426da18f0922ffc3807f&quot;,
               &quot;gate_revision&quot;: 6
             }
           },
@@ -883,28 +1098,28 @@
             &quot;core&quot;: {
               &quot;schema&quot;: 1,
               &quot;state&quot;: &quot;APPLYING&quot;,
-              &quot;epoch&quot;: &quot;f496ea995e08447283d3d62efc0a6cf3&quot;,
+              &quot;epoch&quot;: &quot;35d2fc56a6fc4149bb316095986d83cc&quot;,
               &quot;revision&quot;: 2,
-              &quot;committed&quot;: &quot;dbb1ded9d6ff4753b43379f93f1667ed&quot;,
-              &quot;committed_digest&quot;: &quot;c6d3cf46f28e79fbce5c3b3fe3d88cf9425ae91576aa7355a1dfd7e94ea2b80d&quot;,
-              &quot;candidate&quot;: &quot;3b748fc3507b4b2dab06201848b78862&quot;
+              &quot;committed&quot;: &quot;93ccfeb122d04af68ce288b10ab24458&quot;,
+              &quot;committed_digest&quot;: &quot;971a15fbeaa21d45460555ccc3ca0325846cc740b1cde0165b2244babed0b1ea&quot;,
+              &quot;candidate&quot;: &quot;3e25467a4b1b44cf891de19aafc26dd0&quot;
             },
-            &quot;journal_digest&quot;: &quot;4f28af1dac8656b2b2e52c87deb141b3e8a382e46d4b4c9e5d80f50d6ee5f440&quot;,
+            &quot;journal_digest&quot;: &quot;c26f191fc4eadcaa86e13df139754f7a18a0335028306f003dfe1954ea262fdb&quot;,
             &quot;certificate_request_id&quot;: &quot;fixed-readonly-cert&quot;
           },
-          &quot;probe&quot;: &quot;1393539150dc440d800947151e3c6b79&quot;,
+          &quot;probe&quot;: &quot;345410617f1e4e41951b41b46f10cf88&quot;,
           &quot;result&quot;: {
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;HEALTHY&quot;,
-            &quot;receipt_digest&quot;: &quot;ecefc006442feff6bb5bca542b62b04a1c3f164b1984d8f54cedbb29b586ca3d&quot;,
-            &quot;after_digest&quot;: &quot;370b5b89cedc5eac93f4951bece5cc6ef03db73f6f861149ce2193da97c224ee&quot;,
+            &quot;receipt_digest&quot;: &quot;851bed749e1f3aeb667baaec5619146106c67461daeeaff16ac3693ca3a7f255&quot;,
+            &quot;after_digest&quot;: &quot;0f6492752d04793b5a60f2905d2e864258df71e6c3447b553ecdb78ea1eca988&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;d2abece4c5864191a059b4a5c611d934&quot;,
+              &quot;gate_epoch&quot;: &quot;74717273c5fd426da18f0922ffc3807f&quot;,
               &quot;gate_revision&quot;: 6
             },
-            &quot;committed&quot;: &quot;dbb1ded9d6ff4753b43379f93f1667ed&quot;,
-            &quot;fingerprint&quot;: &quot;2b860a2f19f9487032d89eff344adb0477d791997d8c9716097ebd3ba0a9703c&quot;,
+            &quot;committed&quot;: &quot;93ccfeb122d04af68ce288b10ab24458&quot;,
+            &quot;fingerprint&quot;: &quot;2b59220465b1423518a93bc4c17cf3840c48ae528d3b65f4cfa3177fa4293c67&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           }
@@ -912,36 +1127,36 @@
         {
           &quot;kind&quot;: &quot;prepare-opening&quot;,
           &quot;request_id&quot;: &quot;fixed-readonly-intent&quot;,
-          &quot;digest&quot;: &quot;dd1c6b91fe506fc17ea35c3cd78a1fac8ef203ea8bd3e8a554044e075c0518e8&quot;,
+          &quot;digest&quot;: &quot;9be9bf145e73bcd2d00152d67821486a536b98697796dabce9d40fdddbe13fa9&quot;,
           &quot;state&quot;: &quot;OPENING_VERIFIED_CLOSED&quot;,
           &quot;timing&quot;: {
             &quot;budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;d0a53642-1f1b-4c75-83e0-1090cf361847&quot;,
-              &quot;accepted_boot_ns&quot;: 7968396170,
-              &quot;expires_boot_ns&quot;: 17968396170,
-              &quot;accepted_wall_ns&quot;: 1793685662414241837,
+              &quot;boot_id&quot;: &quot;94624a50-8274-4988-8379-b7e45207f05d&quot;,
+              &quot;accepted_boot_ns&quot;: 8563555544,
+              &quot;expires_boot_ns&quot;: 18563555544,
+              &quot;accepted_wall_ns&quot;: 1793686988485820166,
               &quot;seconds&quot;: 10
             },
             &quot;authority&quot;: {
-              &quot;gate_epoch&quot;: &quot;d2abece4c5864191a059b4a5c611d934&quot;,
+              &quot;gate_epoch&quot;: &quot;74717273c5fd426da18f0922ffc3807f&quot;,
               &quot;gate_revision&quot;: 6
             }
           },
           &quot;target&quot;: {
             &quot;preparation_request_id&quot;: &quot;fixed-readonly-journal&quot;,
-            &quot;receipt_digest&quot;: &quot;ecefc006442feff6bb5bca542b62b04a1c3f164b1984d8f54cedbb29b586ca3d&quot;,
-            &quot;core_epoch&quot;: &quot;3e897af40b664e63aae94921c38868da&quot;,
+            &quot;receipt_digest&quot;: &quot;851bed749e1f3aeb667baaec5619146106c67461daeeaff16ac3693ca3a7f255&quot;,
+            &quot;core_epoch&quot;: &quot;9829a8fe942e46289cf9f46e751ab12c&quot;,
             &quot;core_revision&quot;: 3,
-            &quot;journal_digest&quot;: &quot;370b5b89cedc5eac93f4951bece5cc6ef03db73f6f861149ce2193da97c224ee&quot;,
+            &quot;journal_digest&quot;: &quot;0f6492752d04793b5a60f2905d2e864258df71e6c3447b553ecdb78ea1eca988&quot;,
             &quot;degraded_references&quot;: {}
           },
-          &quot;probe&quot;: &quot;e59d1165b0d24f6ca8ddb5d6254c5960&quot;,
+          &quot;probe&quot;: &quot;10fc86ddb54b42c499723c005e4c50de&quot;,
           &quot;result&quot;: {
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 0,
-            &quot;marker_digest&quot;: &quot;7d1e6a4b33677e836ca9e5b14bffe602bb63d218a8c0da1166a051586a6a8df1&quot;,
+            &quot;marker_digest&quot;: &quot;2458ba1ef0903d7104ba76102783bb890aaf4556ba2cc5bd3496522940c0cd7b&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           }
@@ -949,51 +1164,51 @@
         {
           &quot;kind&quot;: &quot;prepare-release&quot;,
           &quot;request_id&quot;: &quot;fixed-readonly-release&quot;,
-          &quot;digest&quot;: &quot;ccf83a244a0b70cb520925bfbe618b05c89b9764b283477136035c79f17caa13&quot;,
+          &quot;digest&quot;: &quot;3176c86eb03cee47724442f7df281e496658ab4130d6835874c30e293b2b8028&quot;,
           &quot;state&quot;: &quot;RELEASE_VERIFIED_CLOSED&quot;,
           &quot;timing&quot;: {
             &quot;budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;d0a53642-1f1b-4c75-83e0-1090cf361847&quot;,
-              &quot;accepted_boot_ns&quot;: 8005377003,
-              &quot;expires_boot_ns&quot;: 18005377003,
-              &quot;accepted_wall_ns&quot;: 1793685662451208170,
+              &quot;boot_id&quot;: &quot;94624a50-8274-4988-8379-b7e45207f05d&quot;,
+              &quot;accepted_boot_ns&quot;: 8599438961,
+              &quot;expires_boot_ns&quot;: 18599438961,
+              &quot;accepted_wall_ns&quot;: 1793686988521685166,
               &quot;seconds&quot;: 10
             },
             &quot;authority&quot;: {
-              &quot;gate_epoch&quot;: &quot;d2abece4c5864191a059b4a5c611d934&quot;,
+              &quot;gate_epoch&quot;: &quot;74717273c5fd426da18f0922ffc3807f&quot;,
               &quot;gate_revision&quot;: 6
             }
           },
           &quot;target&quot;: {
             &quot;opening_request_id&quot;: &quot;fixed-readonly-intent&quot;,
-            &quot;opening_marker_digest&quot;: &quot;7d1e6a4b33677e836ca9e5b14bffe602bb63d218a8c0da1166a051586a6a8df1&quot;,
-            &quot;source_request_digest&quot;: &quot;dd1c6b91fe506fc17ea35c3cd78a1fac8ef203ea8bd3e8a554044e075c0518e8&quot;,
+            &quot;opening_marker_digest&quot;: &quot;2458ba1ef0903d7104ba76102783bb890aaf4556ba2cc5bd3496522940c0cd7b&quot;,
+            &quot;source_request_digest&quot;: &quot;9be9bf145e73bcd2d00152d67821486a536b98697796dabce9d40fdddbe13fa9&quot;,
             &quot;source_budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;d0a53642-1f1b-4c75-83e0-1090cf361847&quot;,
-              &quot;accepted_boot_ns&quot;: 7968396170,
-              &quot;expires_boot_ns&quot;: 17968396170,
-              &quot;accepted_wall_ns&quot;: 1793685662414241837,
+              &quot;boot_id&quot;: &quot;94624a50-8274-4988-8379-b7e45207f05d&quot;,
+              &quot;accepted_boot_ns&quot;: 8563555544,
+              &quot;expires_boot_ns&quot;: 18563555544,
+              &quot;accepted_wall_ns&quot;: 1793686988485820166,
               &quot;seconds&quot;: 10
             },
             &quot;opening_target&quot;: {
               &quot;preparation_request_id&quot;: &quot;fixed-readonly-journal&quot;,
-              &quot;receipt_digest&quot;: &quot;ecefc006442feff6bb5bca542b62b04a1c3f164b1984d8f54cedbb29b586ca3d&quot;,
-              &quot;core_epoch&quot;: &quot;3e897af40b664e63aae94921c38868da&quot;,
+              &quot;receipt_digest&quot;: &quot;851bed749e1f3aeb667baaec5619146106c67461daeeaff16ac3693ca3a7f255&quot;,
+              &quot;core_epoch&quot;: &quot;9829a8fe942e46289cf9f46e751ab12c&quot;,
               &quot;core_revision&quot;: 3,
-              &quot;journal_digest&quot;: &quot;370b5b89cedc5eac93f4951bece5cc6ef03db73f6f861149ce2193da97c224ee&quot;,
+              &quot;journal_digest&quot;: &quot;0f6492752d04793b5a60f2905d2e864258df71e6c3447b553ecdb78ea1eca988&quot;,
               &quot;degraded_references&quot;: {}
             }
           },
-          &quot;probe&quot;: &quot;3d2d2e6ba02847c7b0e3ed23ed0eef9d&quot;,
+          &quot;probe&quot;: &quot;9346d5add29947b9bcb34218c72f62f7&quot;,
           &quot;result&quot;: {
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;dbb1ded9d6ff4753b43379f93f1667ed&quot;,
-            &quot;fingerprint&quot;: &quot;2b860a2f19f9487032d89eff344adb0477d791997d8c9716097ebd3ba0a9703c&quot;,
-            &quot;receipt_digest&quot;: &quot;efa90d96ef2904594052aea305691453ab8c261ea71677f830bf1f7dcded4825&quot;,
+            &quot;committed&quot;: &quot;93ccfeb122d04af68ce288b10ab24458&quot;,
+            &quot;fingerprint&quot;: &quot;2b59220465b1423518a93bc4c17cf3840c48ae528d3b65f4cfa3177fa4293c67&quot;,
+            &quot;receipt_digest&quot;: &quot;7992207ca8cad7d79443b1968c1a5de1e3d38dcb3a74da10f9011c55caabca59&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           }
@@ -1001,65 +1216,65 @@
         {
           &quot;kind&quot;: &quot;open-updates&quot;,
           &quot;request_id&quot;: &quot;fixed-readonly-open&quot;,
-          &quot;digest&quot;: &quot;440412303617f53c9e67476c391754b586b996896a5524efb77bb8bce221e2f9&quot;,
+          &quot;digest&quot;: &quot;54545fd360237e89e521678328bf03cbbfdf623d2b0d1d093f00769d65da8869&quot;,
           &quot;state&quot;: &quot;OPENED&quot;,
           &quot;timing&quot;: {
             &quot;budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;d0a53642-1f1b-4c75-83e0-1090cf361847&quot;,
-              &quot;accepted_boot_ns&quot;: 8577076211,
-              &quot;expires_boot_ns&quot;: 18577076211,
-              &quot;accepted_wall_ns&quot;: 1793685663297692291,
+              &quot;boot_id&quot;: &quot;94624a50-8274-4988-8379-b7e45207f05d&quot;,
+              &quot;accepted_boot_ns&quot;: 9122837503,
+              &quot;expires_boot_ns&quot;: 19122837503,
+              &quot;accepted_wall_ns&quot;: 1793686989045081708,
               &quot;seconds&quot;: 10
             },
             &quot;authority&quot;: {
-              &quot;gate_epoch&quot;: &quot;d2abece4c5864191a059b4a5c611d934&quot;,
+              &quot;gate_epoch&quot;: &quot;74717273c5fd426da18f0922ffc3807f&quot;,
               &quot;gate_revision&quot;: 6
             }
           },
           &quot;target&quot;: {
             &quot;release_request_id&quot;: &quot;fixed-readonly-release&quot;,
-            &quot;release_receipt_digest&quot;: &quot;efa90d96ef2904594052aea305691453ab8c261ea71677f830bf1f7dcded4825&quot;,
-            &quot;release_digest&quot;: &quot;ccf83a244a0b70cb520925bfbe618b05c89b9764b283477136035c79f17caa13&quot;,
+            &quot;release_receipt_digest&quot;: &quot;7992207ca8cad7d79443b1968c1a5de1e3d38dcb3a74da10f9011c55caabca59&quot;,
+            &quot;release_digest&quot;: &quot;3176c86eb03cee47724442f7df281e496658ab4130d6835874c30e293b2b8028&quot;,
             &quot;release_budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;d0a53642-1f1b-4c75-83e0-1090cf361847&quot;,
-              &quot;accepted_boot_ns&quot;: 8005377003,
-              &quot;expires_boot_ns&quot;: 18005377003,
-              &quot;accepted_wall_ns&quot;: 1793685662451208170,
+              &quot;boot_id&quot;: &quot;94624a50-8274-4988-8379-b7e45207f05d&quot;,
+              &quot;accepted_boot_ns&quot;: 8599438961,
+              &quot;expires_boot_ns&quot;: 18599438961,
+              &quot;accepted_wall_ns&quot;: 1793686988521685166,
               &quot;seconds&quot;: 10
             },
             &quot;release_target&quot;: {
               &quot;opening_request_id&quot;: &quot;fixed-readonly-intent&quot;,
-              &quot;opening_marker_digest&quot;: &quot;7d1e6a4b33677e836ca9e5b14bffe602bb63d218a8c0da1166a051586a6a8df1&quot;,
-              &quot;source_request_digest&quot;: &quot;dd1c6b91fe506fc17ea35c3cd78a1fac8ef203ea8bd3e8a554044e075c0518e8&quot;,
+              &quot;opening_marker_digest&quot;: &quot;2458ba1ef0903d7104ba76102783bb890aaf4556ba2cc5bd3496522940c0cd7b&quot;,
+              &quot;source_request_digest&quot;: &quot;9be9bf145e73bcd2d00152d67821486a536b98697796dabce9d40fdddbe13fa9&quot;,
               &quot;source_budget&quot;: {
                 &quot;version&quot;: 1,
-                &quot;boot_id&quot;: &quot;d0a53642-1f1b-4c75-83e0-1090cf361847&quot;,
-                &quot;accepted_boot_ns&quot;: 7968396170,
-                &quot;expires_boot_ns&quot;: 17968396170,
-                &quot;accepted_wall_ns&quot;: 1793685662414241837,
+                &quot;boot_id&quot;: &quot;94624a50-8274-4988-8379-b7e45207f05d&quot;,
+                &quot;accepted_boot_ns&quot;: 8563555544,
+                &quot;expires_boot_ns&quot;: 18563555544,
+                &quot;accepted_wall_ns&quot;: 1793686988485820166,
                 &quot;seconds&quot;: 10
               },
               &quot;opening_target&quot;: {
                 &quot;preparation_request_id&quot;: &quot;fixed-readonly-journal&quot;,
-                &quot;receipt_digest&quot;: &quot;ecefc006442feff6bb5bca542b62b04a1c3f164b1984d8f54cedbb29b586ca3d&quot;,
-                &quot;core_epoch&quot;: &quot;3e897af40b664e63aae94921c38868da&quot;,
+                &quot;receipt_digest&quot;: &quot;851bed749e1f3aeb667baaec5619146106c67461daeeaff16ac3693ca3a7f255&quot;,
+                &quot;core_epoch&quot;: &quot;9829a8fe942e46289cf9f46e751ab12c&quot;,
                 &quot;core_revision&quot;: 3,
-                &quot;journal_digest&quot;: &quot;370b5b89cedc5eac93f4951bece5cc6ef03db73f6f861149ce2193da97c224ee&quot;,
+                &quot;journal_digest&quot;: &quot;0f6492752d04793b5a60f2905d2e864258df71e6c3447b553ecdb78ea1eca988&quot;,
                 &quot;degraded_references&quot;: {}
               }
             }
           },
-          &quot;probe&quot;: &quot;fdc3e1f9000c4bd29a64cdc3fbce260f&quot;,
+          &quot;probe&quot;: &quot;0dc5868d8acc4e548a4846536203c020&quot;,
           &quot;result&quot;: {
             &quot;storage_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;dbb1ded9d6ff4753b43379f93f1667ed&quot;,
-            &quot;fingerprint&quot;: &quot;2b860a2f19f9487032d89eff344adb0477d791997d8c9716097ebd3ba0a9703c&quot;,
-            &quot;admission_digest&quot;: &quot;ab66382419987878a54ac4293de0ce143d7346b35ea553471eec6d87d0b6529a&quot;,
+            &quot;committed&quot;: &quot;93ccfeb122d04af68ce288b10ab24458&quot;,
+            &quot;fingerprint&quot;: &quot;2b59220465b1423518a93bc4c17cf3840c48ae528d3b65f4cfa3177fa4293c67&quot;,
+            &quot;admission_digest&quot;: &quot;016f0c13df53873e30098ce4a0ef3bee56dd3d4ad18c16fb3444db40c02150ef&quot;,
             &quot;opened_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;d2abece4c5864191a059b4a5c611d934&quot;,
+              &quot;gate_epoch&quot;: &quot;74717273c5fd426da18f0922ffc3807f&quot;,
               &quot;gate_revision&quot;: 7
             },
             &quot;updates_enabled&quot;: true
@@ -1068,29 +1283,156 @@
       ],
       &quot;old_pending_history_after_reconciliation&quot;: {
         &quot;request_id&quot;: &quot;pending-readonly&quot;,
-        &quot;digest&quot;: &quot;9fb06ba41195291e88ab8d989dc28b933d87b1e6b40bc7c972cfc1880d0a2c57&quot;,
+        &quot;digest&quot;: &quot;318cb7019deecee5e793fd9d7f3863d82423b362d694696d051899c49e9ed695&quot;,
         &quot;state&quot;: &quot;INTERRUPTED&quot;,
         &quot;result&quot;: {
           &quot;reconciled_closed&quot;: true,
           &quot;prior_state&quot;: &quot;RUNNING&quot;,
           &quot;execution_outcome&quot;: &quot;unknown&quot;,
-          &quot;committed&quot;: &quot;dbb1ded9d6ff4753b43379f93f1667ed&quot;,
+          &quot;committed&quot;: &quot;93ccfeb122d04af68ce288b10ab24458&quot;,
           &quot;recovery_request_id&quot;: &quot;fixed-readonly-journal&quot;,
           &quot;updates_enabled&quot;: false
         },
         &quot;timing&quot;: {
           &quot;activation&quot;: {
             &quot;version&quot;: 1,
-            &quot;boot_id&quot;: &quot;3c15999b-8231-455e-8cc5-106e2e08470d&quot;,
-            &quot;accepted_boot_ns&quot;: 16814205214,
-            &quot;expires_boot_ns&quot;: 26814205214,
-            &quot;accepted_wall_ns&quot;: 1793685645710212378,
+            &quot;boot_id&quot;: &quot;f4e211e9-097d-4749-a601-cee74493b66a&quot;,
+            &quot;accepted_boot_ns&quot;: 18157153800,
+            &quot;expires_boot_ns&quot;: 28157153800,
+            &quot;accepted_wall_ns&quot;: 1793686971093620545,
             &quot;seconds&quot;: 10
           },
           &quot;recovery&quot;: null
         }
       },
-      &quot;restored_committed_leaf&quot;: &quot;2b860a2f19f9487032d89eff344adb0477d791997d8c9716097ebd3ba0a9703c&quot;,
+      &quot;restored_committed_leaf&quot;: &quot;2b59220465b1423518a93bc4c17cf3840c48ae528d3b65f4cfa3177fa4293c67&quot;,
+      &quot;closed_after_repair_valid_request_response&quot;: {
+        &quot;ok&quot;: false,
+        &quot;error&quot;: &quot;Rejected&quot;,
+        &quot;reason&quot;: &quot;recovery_required&quot;
+      },
+      &quot;root_stale_authority_response&quot;: {
+        &quot;ok&quot;: false,
+        &quot;reason&quot;: &quot;stale_gate_authority&quot;
+      },
+      &quot;current_root_prepare_response&quot;: {
+        &quot;ok&quot;: true,
+        &quot;prepared&quot;: true,
+        &quot;updates_enabled&quot;: false,
+        &quot;restored&quot;: false,
+        &quot;gate&quot;: {
+          &quot;epoch&quot;: &quot;74717273c5fd426da18f0922ffc3807f&quot;,
+          &quot;reason&quot;: &quot;operator_prepared&quot;,
+          &quot;revision&quot;: 5,
+          &quot;state&quot;: &quot;VERIFY_REQUIRED&quot;,
+          &quot;version&quot;: 1
+        }
+      },
+      &quot;old_failed_prefix_control&quot;: null,
+      &quot;catalogs_before&quot;: {
+        &quot;normal&quot;: [
+          {
+            &quot;id&quot;: &quot;installed-first&quot;,
+            &quot;digest&quot;: &quot;86bd5bd5e06069cceba124fc51fdd5930ae86174573c5f52c66a5845fe118f75&quot;,
+            &quot;state&quot;: &quot;COMMITTED&quot;,
+            &quot;result&quot;: &quot;{\&quot;committed\&quot;: \&quot;93ccfeb122d04af68ce288b10ab24458\&quot;}&quot;,
+            &quot;timing&quot;: &quot;{\&quot;activation\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;f4e211e9-097d-4749-a601-cee74493b66a\&quot;, \&quot;accepted_boot_ns\&quot;: 16404163465, \&quot;expires_boot_ns\&quot;: 26404163465, \&quot;accepted_wall_ns\&quot;: 1793686969340635544, \&quot;seconds\&quot;: 10}, \&quot;recovery\&quot;: null}&quot;
+          },
+          {
+            &quot;id&quot;: &quot;pending-readonly&quot;,
+            &quot;digest&quot;: &quot;318cb7019deecee5e793fd9d7f3863d82423b362d694696d051899c49e9ed695&quot;,
+            &quot;state&quot;: &quot;RUNNING&quot;,
+            &quot;result&quot;: null,
+            &quot;timing&quot;: &quot;{\&quot;activation\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;f4e211e9-097d-4749-a601-cee74493b66a\&quot;, \&quot;accepted_boot_ns\&quot;: 18157153800, \&quot;expires_boot_ns\&quot;: 28157153800, \&quot;accepted_wall_ns\&quot;: 1793686971093620545, \&quot;seconds\&quot;: 10}, \&quot;recovery\&quot;: null}&quot;
+          }
+        ],
+        &quot;root&quot;: []
+      },
+      &quot;catalogs_after&quot;: {
+        &quot;normal&quot;: [
+          {
+            &quot;id&quot;: &quot;fresh-readonly&quot;,
+            &quot;digest&quot;: &quot;42bd9ce3e2e1faf0b7b65141d0ea4e95864bc9d51d0b906f069eff75fdd721cf&quot;,
+            &quot;state&quot;: &quot;COMMITTED&quot;,
+            &quot;result&quot;: &quot;{\&quot;committed\&quot;: \&quot;74030d6b690044069bc365fa77552b43\&quot;}&quot;,
+            &quot;timing&quot;: &quot;{\&quot;activation\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;94624a50-8274-4988-8379-b7e45207f05d\&quot;, \&quot;accepted_boot_ns\&quot;: 9930289128, \&quot;expires_boot_ns\&quot;: 19930289128, \&quot;accepted_wall_ns\&quot;: 1793686989852568042, \&quot;seconds\&quot;: 10}, \&quot;recovery\&quot;: null}&quot;
+          },
+          {
+            &quot;id&quot;: &quot;installed-first&quot;,
+            &quot;digest&quot;: &quot;86bd5bd5e06069cceba124fc51fdd5930ae86174573c5f52c66a5845fe118f75&quot;,
+            &quot;state&quot;: &quot;COMMITTED&quot;,
+            &quot;result&quot;: &quot;{\&quot;committed\&quot;: \&quot;93ccfeb122d04af68ce288b10ab24458\&quot;}&quot;,
+            &quot;timing&quot;: &quot;{\&quot;activation\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;f4e211e9-097d-4749-a601-cee74493b66a\&quot;, \&quot;accepted_boot_ns\&quot;: 16404163465, \&quot;expires_boot_ns\&quot;: 26404163465, \&quot;accepted_wall_ns\&quot;: 1793686969340635544, \&quot;seconds\&quot;: 10}, \&quot;recovery\&quot;: null}&quot;
+          },
+          {
+            &quot;id&quot;: &quot;pending-readonly&quot;,
+            &quot;digest&quot;: &quot;318cb7019deecee5e793fd9d7f3863d82423b362d694696d051899c49e9ed695&quot;,
+            &quot;state&quot;: &quot;INTERRUPTED&quot;,
+            &quot;result&quot;: &quot;{\&quot;reconciled_closed\&quot;: true, \&quot;prior_state\&quot;: \&quot;RUNNING\&quot;, \&quot;execution_outcome\&quot;: \&quot;unknown\&quot;, \&quot;committed\&quot;: \&quot;93ccfeb122d04af68ce288b10ab24458\&quot;, \&quot;recovery_request_id\&quot;: \&quot;fixed-readonly-journal\&quot;, \&quot;updates_enabled\&quot;: false}&quot;,
+            &quot;timing&quot;: &quot;{\&quot;activation\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;f4e211e9-097d-4749-a601-cee74493b66a\&quot;, \&quot;accepted_boot_ns\&quot;: 18157153800, \&quot;expires_boot_ns\&quot;: 28157153800, \&quot;accepted_wall_ns\&quot;: 1793686971093620545, \&quot;seconds\&quot;: 10}, \&quot;recovery\&quot;: null}&quot;
+          },
+          {
+            &quot;id&quot;: &quot;stale-readonly&quot;,
+            &quot;digest&quot;: &quot;318cb7019deecee5e793fd9d7f3863d82423b362d694696d051899c49e9ed695&quot;,
+            &quot;state&quot;: &quot;FAILED&quot;,
+            &quot;result&quot;: &quot;{\&quot;error\&quot;: \&quot;Rejected\&quot;, \&quot;expired\&quot;: false, \&quot;sqlite_error\&quot;: null, \&quot;errno\&quot;: null}&quot;,
+            &quot;timing&quot;: &quot;{\&quot;activation\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;94624a50-8274-4988-8379-b7e45207f05d\&quot;, \&quot;accepted_boot_ns\&quot;: 9837178795, \&quot;expires_boot_ns\&quot;: 19837178795, \&quot;accepted_wall_ns\&quot;: 1793686989759444584, \&quot;seconds\&quot;: 10}, \&quot;recovery\&quot;: null}&quot;
+          }
+        ],
+        &quot;root&quot;: [
+          {
+            &quot;id&quot;: &quot;fixed-readonly-cert&quot;,
+            &quot;digest&quot;: &quot;ac55361a625eca6e1df7f686624b264622bfb57a5cc5768e46b8e1a2a2bbdbb3&quot;,
+            &quot;state&quot;: &quot;VERIFIED_CLOSED&quot;,
+            &quot;timing&quot;: &quot;{\&quot;budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;94624a50-8274-4988-8379-b7e45207f05d\&quot;, \&quot;accepted_boot_ns\&quot;: 7444152919, \&quot;expires_boot_ns\&quot;: 17444152919, \&quot;accepted_wall_ns\&quot;: 1793686986887999128, \&quot;seconds\&quot;: 10}, \&quot;authority\&quot;: {\&quot;gate_epoch\&quot;: \&quot;74717273c5fd426da18f0922ffc3807f\&quot;, \&quot;gate_revision\&quot;: 5}}&quot;,
+            &quot;target&quot;: &quot;{\&quot;schema\&quot;: 1, \&quot;state\&quot;: \&quot;APPLYING\&quot;, \&quot;epoch\&quot;: \&quot;35d2fc56a6fc4149bb316095986d83cc\&quot;, \&quot;revision\&quot;: 2, \&quot;committed\&quot;: \&quot;93ccfeb122d04af68ce288b10ab24458\&quot;, \&quot;committed_digest\&quot;: \&quot;971a15fbeaa21d45460555ccc3ca0325846cc740b1cde0165b2244babed0b1ea\&quot;, \&quot;candidate\&quot;: \&quot;3e25467a4b1b44cf891de19aafc26dd0\&quot;}&quot;,
+            &quot;probe&quot;: &quot;eadf07205fe1435a9a5316979256af9e&quot;,
+            &quot;result&quot;: &quot;{\&quot;storage_verified\&quot;: true, \&quot;certificate_verified\&quot;: true, \&quot;tls_confirmed\&quot;: true, \&quot;restored\&quot;: true, \&quot;updates_enabled\&quot;: false, \&quot;committed\&quot;: \&quot;93ccfeb122d04af68ce288b10ab24458\&quot;, \&quot;fingerprint\&quot;: \&quot;2b59220465b1423518a93bc4c17cf3840c48ae528d3b65f4cfa3177fa4293c67\&quot;, \&quot;prior_health\&quot;: \&quot;HEALTHY\&quot;, \&quot;closed_gate\&quot;: {\&quot;gate_epoch\&quot;: \&quot;74717273c5fd426da18f0922ffc3807f\&quot;, \&quot;gate_revision\&quot;: 6}}&quot;,
+            &quot;kind&quot;: &quot;recover-certificate&quot;
+          },
+          {
+            &quot;id&quot;: &quot;fixed-readonly-intent&quot;,
+            &quot;digest&quot;: &quot;9be9bf145e73bcd2d00152d67821486a536b98697796dabce9d40fdddbe13fa9&quot;,
+            &quot;state&quot;: &quot;OPENING_VERIFIED_CLOSED&quot;,
+            &quot;timing&quot;: &quot;{\&quot;budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;94624a50-8274-4988-8379-b7e45207f05d\&quot;, \&quot;accepted_boot_ns\&quot;: 8563555544, \&quot;expires_boot_ns\&quot;: 18563555544, \&quot;accepted_wall_ns\&quot;: 1793686988485820166, \&quot;seconds\&quot;: 10}, \&quot;authority\&quot;: {\&quot;gate_epoch\&quot;: \&quot;74717273c5fd426da18f0922ffc3807f\&quot;, \&quot;gate_revision\&quot;: 6}}&quot;,
+            &quot;target&quot;: &quot;{\&quot;preparation_request_id\&quot;: \&quot;fixed-readonly-journal\&quot;, \&quot;receipt_digest\&quot;: \&quot;851bed749e1f3aeb667baaec5619146106c67461daeeaff16ac3693ca3a7f255\&quot;, \&quot;core_epoch\&quot;: \&quot;9829a8fe942e46289cf9f46e751ab12c\&quot;, \&quot;core_revision\&quot;: 3, \&quot;journal_digest\&quot;: \&quot;0f6492752d04793b5a60f2905d2e864258df71e6c3447b553ecdb78ea1eca988\&quot;, \&quot;degraded_references\&quot;: {}}&quot;,
+            &quot;probe&quot;: &quot;10fc86ddb54b42c499723c005e4c50de&quot;,
+            &quot;result&quot;: &quot;{\&quot;pair_verified\&quot;: true, \&quot;degraded_references_verified\&quot;: true, \&quot;degraded_reference_count\&quot;: 0, \&quot;marker_digest\&quot;: \&quot;2458ba1ef0903d7104ba76102783bb890aaf4556ba2cc5bd3496522940c0cd7b\&quot;, \&quot;updates_enabled\&quot;: false, \&quot;release_authorized\&quot;: false}&quot;,
+            &quot;kind&quot;: &quot;prepare-opening&quot;
+          },
+          {
+            &quot;id&quot;: &quot;fixed-readonly-journal&quot;,
+            &quot;digest&quot;: &quot;a0768bbc76418b3aa709c35ca50162b826fd6b445e27d3ec0fd08958cb2de837&quot;,
+            &quot;state&quot;: &quot;JOURNAL_VERIFIED_CLOSED&quot;,
+            &quot;timing&quot;: &quot;{\&quot;budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;94624a50-8274-4988-8379-b7e45207f05d\&quot;, \&quot;accepted_boot_ns\&quot;: 8064927461, \&quot;expires_boot_ns\&quot;: 18064927461, \&quot;accepted_wall_ns\&quot;: 1793686987508753587, \&quot;seconds\&quot;: 10}, \&quot;authority\&quot;: {\&quot;gate_epoch\&quot;: \&quot;74717273c5fd426da18f0922ffc3807f\&quot;, \&quot;gate_revision\&quot;: 6}}&quot;,
+            &quot;target&quot;: &quot;{\&quot;core\&quot;: {\&quot;schema\&quot;: 1, \&quot;state\&quot;: \&quot;APPLYING\&quot;, \&quot;epoch\&quot;: \&quot;35d2fc56a6fc4149bb316095986d83cc\&quot;, \&quot;revision\&quot;: 2, \&quot;committed\&quot;: \&quot;93ccfeb122d04af68ce288b10ab24458\&quot;, \&quot;committed_digest\&quot;: \&quot;971a15fbeaa21d45460555ccc3ca0325846cc740b1cde0165b2244babed0b1ea\&quot;, \&quot;candidate\&quot;: \&quot;3e25467a4b1b44cf891de19aafc26dd0\&quot;}, \&quot;journal_digest\&quot;: \&quot;c26f191fc4eadcaa86e13df139754f7a18a0335028306f003dfe1954ea262fdb\&quot;, \&quot;certificate_request_id\&quot;: \&quot;fixed-readonly-cert\&quot;}&quot;,
+            &quot;probe&quot;: &quot;345410617f1e4e41951b41b46f10cf88&quot;,
+            &quot;result&quot;: &quot;{\&quot;journal_reconciled\&quot;: true, \&quot;health_verified\&quot;: true, \&quot;prior_health\&quot;: \&quot;HEALTHY\&quot;, \&quot;receipt_digest\&quot;: \&quot;851bed749e1f3aeb667baaec5619146106c67461daeeaff16ac3693ca3a7f255\&quot;, \&quot;after_digest\&quot;: \&quot;0f6492752d04793b5a60f2905d2e864258df71e6c3447b553ecdb78ea1eca988\&quot;, \&quot;closed_gate\&quot;: {\&quot;gate_epoch\&quot;: \&quot;74717273c5fd426da18f0922ffc3807f\&quot;, \&quot;gate_revision\&quot;: 6}, \&quot;committed\&quot;: \&quot;93ccfeb122d04af68ce288b10ab24458\&quot;, \&quot;fingerprint\&quot;: \&quot;2b59220465b1423518a93bc4c17cf3840c48ae528d3b65f4cfa3177fa4293c67\&quot;, \&quot;updates_enabled\&quot;: false, \&quot;main_committed\&quot;: true}&quot;,
+            &quot;kind&quot;: &quot;reconcile-closed&quot;
+          },
+          {
+            &quot;id&quot;: &quot;fixed-readonly-open&quot;,
+            &quot;digest&quot;: &quot;54545fd360237e89e521678328bf03cbbfdf623d2b0d1d093f00769d65da8869&quot;,
+            &quot;state&quot;: &quot;OPENED&quot;,
+            &quot;timing&quot;: &quot;{\&quot;budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;94624a50-8274-4988-8379-b7e45207f05d\&quot;, \&quot;accepted_boot_ns\&quot;: 9122837503, \&quot;expires_boot_ns\&quot;: 19122837503, \&quot;accepted_wall_ns\&quot;: 1793686989045081708, \&quot;seconds\&quot;: 10}, \&quot;authority\&quot;: {\&quot;gate_epoch\&quot;: \&quot;74717273c5fd426da18f0922ffc3807f\&quot;, \&quot;gate_revision\&quot;: 6}}&quot;,
+            &quot;target&quot;: &quot;{\&quot;release_request_id\&quot;: \&quot;fixed-readonly-release\&quot;, \&quot;release_receipt_digest\&quot;: \&quot;7992207ca8cad7d79443b1968c1a5de1e3d38dcb3a74da10f9011c55caabca59\&quot;, \&quot;release_digest\&quot;: \&quot;3176c86eb03cee47724442f7df281e496658ab4130d6835874c30e293b2b8028\&quot;, \&quot;release_budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;94624a50-8274-4988-8379-b7e45207f05d\&quot;, \&quot;accepted_boot_ns\&quot;: 8599438961, \&quot;expires_boot_ns\&quot;: 18599438961, \&quot;accepted_wall_ns\&quot;: 1793686988521685166, \&quot;seconds\&quot;: 10}, \&quot;release_target\&quot;: {\&quot;opening_request_id\&quot;: \&quot;fixed-readonly-intent\&quot;, \&quot;opening_marker_digest\&quot;: \&quot;2458ba1ef0903d7104ba76102783bb890aaf4556ba2cc5bd3496522940c0cd7b\&quot;, \&quot;source_request_digest\&quot;: \&quot;9be9bf145e73bcd2d00152d67821486a536b98697796dabce9d40fdddbe13fa9\&quot;, \&quot;source_budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;94624a50-8274-4988-8379-b7e45207f05d\&quot;, \&quot;accepted_boot_ns\&quot;: 8563555544, \&quot;expires_boot_ns\&quot;: 18563555544, \&quot;accepted_wall_ns\&quot;: 1793686988485820166, \&quot;seconds\&quot;: 10}, \&quot;opening_target\&quot;: {\&quot;preparation_request_id\&quot;: \&quot;fixed-readonly-journal\&quot;, \&quot;receipt_digest\&quot;: \&quot;851bed749e1f3aeb667baaec5619146106c67461daeeaff16ac3693ca3a7f255\&quot;, \&quot;core_epoch\&quot;: \&quot;9829a8fe942e46289cf9f46e751ab12c\&quot;, \&quot;core_revision\&quot;: 3, \&quot;journal_digest\&quot;: \&quot;0f6492752d04793b5a60f2905d2e864258df71e6c3447b553ecdb78ea1eca988\&quot;, \&quot;degraded_references\&quot;: {}}}}&quot;,
+            &quot;probe&quot;: &quot;0dc5868d8acc4e548a4846536203c020&quot;,
+            &quot;result&quot;: &quot;{\&quot;storage_verified\&quot;: true, \&quot;tls_confirmed\&quot;: true, \&quot;committed\&quot;: \&quot;93ccfeb122d04af68ce288b10ab24458\&quot;, \&quot;fingerprint\&quot;: \&quot;2b59220465b1423518a93bc4c17cf3840c48ae528d3b65f4cfa3177fa4293c67\&quot;, \&quot;admission_digest\&quot;: \&quot;016f0c13df53873e30098ce4a0ef3bee56dd3d4ad18c16fb3444db40c02150ef\&quot;, \&quot;opened_gate\&quot;: {\&quot;gate_epoch\&quot;: \&quot;74717273c5fd426da18f0922ffc3807f\&quot;, \&quot;gate_revision\&quot;: 7}, \&quot;updates_enabled\&quot;: true}&quot;,
+            &quot;kind&quot;: &quot;open-updates&quot;
+          },
+          {
+            &quot;id&quot;: &quot;fixed-readonly-release&quot;,
+            &quot;digest&quot;: &quot;3176c86eb03cee47724442f7df281e496658ab4130d6835874c30e293b2b8028&quot;,
+            &quot;state&quot;: &quot;RELEASE_VERIFIED_CLOSED&quot;,
+            &quot;timing&quot;: &quot;{\&quot;budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;94624a50-8274-4988-8379-b7e45207f05d\&quot;, \&quot;accepted_boot_ns\&quot;: 8599438961, \&quot;expires_boot_ns\&quot;: 18599438961, \&quot;accepted_wall_ns\&quot;: 1793686988521685166, \&quot;seconds\&quot;: 10}, \&quot;authority\&quot;: {\&quot;gate_epoch\&quot;: \&quot;74717273c5fd426da18f0922ffc3807f\&quot;, \&quot;gate_revision\&quot;: 6}}&quot;,
+            &quot;target&quot;: &quot;{\&quot;opening_request_id\&quot;: \&quot;fixed-readonly-intent\&quot;, \&quot;opening_marker_digest\&quot;: \&quot;2458ba1ef0903d7104ba76102783bb890aaf4556ba2cc5bd3496522940c0cd7b\&quot;, \&quot;source_request_digest\&quot;: \&quot;9be9bf145e73bcd2d00152d67821486a536b98697796dabce9d40fdddbe13fa9\&quot;, \&quot;source_budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;94624a50-8274-4988-8379-b7e45207f05d\&quot;, \&quot;accepted_boot_ns\&quot;: 8563555544, \&quot;expires_boot_ns\&quot;: 18563555544, \&quot;accepted_wall_ns\&quot;: 1793686988485820166, \&quot;seconds\&quot;: 10}, \&quot;opening_target\&quot;: {\&quot;preparation_request_id\&quot;: \&quot;fixed-readonly-journal\&quot;, \&quot;receipt_digest\&quot;: \&quot;851bed749e1f3aeb667baaec5619146106c67461daeeaff16ac3693ca3a7f255\&quot;, \&quot;core_epoch\&quot;: \&quot;9829a8fe942e46289cf9f46e751ab12c\&quot;, \&quot;core_revision\&quot;: 3, \&quot;journal_digest\&quot;: \&quot;0f6492752d04793b5a60f2905d2e864258df71e6c3447b553ecdb78ea1eca988\&quot;, \&quot;degraded_references\&quot;: {}}}&quot;,
+            &quot;probe&quot;: &quot;9346d5add29947b9bcb34218c72f62f7&quot;,
+            &quot;result&quot;: &quot;{\&quot;storage_verified\&quot;: true, \&quot;certificate_verified\&quot;: true, \&quot;tls_confirmed\&quot;: true, \&quot;committed\&quot;: \&quot;93ccfeb122d04af68ce288b10ab24458\&quot;, \&quot;fingerprint\&quot;: \&quot;2b59220465b1423518a93bc4c17cf3840c48ae528d3b65f4cfa3177fa4293c67\&quot;, \&quot;receipt_digest\&quot;: \&quot;7992207ca8cad7d79443b1968c1a5de1e3d38dcb3a74da10f9011c55caabca59\&quot;, \&quot;updates_enabled\&quot;: false, \&quot;release_authorized\&quot;: false}&quot;,
+            &quot;kind&quot;: &quot;prepare-release&quot;
+          }
+        ]
+      },
+      &quot;terminal_history_preserved&quot;: true,
       &quot;stale_response&quot;: {
         &quot;ok&quot;: false,
         &quot;error&quot;: &quot;Rejected&quot;,
@@ -1098,7 +1440,7 @@
       },
       &quot;stale_history&quot;: {
         &quot;request_id&quot;: &quot;stale-readonly&quot;,
-        &quot;digest&quot;: &quot;9fb06ba41195291e88ab8d989dc28b933d87b1e6b40bc7c972cfc1880d0a2c57&quot;,
+        &quot;digest&quot;: &quot;318cb7019deecee5e793fd9d7f3863d82423b362d694696d051899c49e9ed695&quot;,
         &quot;state&quot;: &quot;FAILED&quot;,
         &quot;result&quot;: {
           &quot;error&quot;: &quot;Rejected&quot;,
@@ -1109,10 +1451,10 @@
         &quot;timing&quot;: {
           &quot;activation&quot;: {
             &quot;version&quot;: 1,
-            &quot;boot_id&quot;: &quot;d0a53642-1f1b-4c75-83e0-1090cf361847&quot;,
-            &quot;accepted_boot_ns&quot;: 9298794087,
-            &quot;expires_boot_ns&quot;: 19298794087,
-            &quot;accepted_wall_ns&quot;: 1793685664019426458,
+            &quot;boot_id&quot;: &quot;94624a50-8274-4988-8379-b7e45207f05d&quot;,
+            &quot;accepted_boot_ns&quot;: 9837178795,
+            &quot;expires_boot_ns&quot;: 19837178795,
+            &quot;accepted_wall_ns&quot;: 1793686989759444584,
             &quot;seconds&quot;: 10
           },
           &quot;recovery&quot;: null
@@ -1122,25 +1464,25 @@
         &quot;ok&quot;: true,
         &quot;result&quot;: {
           &quot;request_id&quot;: &quot;fresh-readonly&quot;,
-          &quot;digest&quot;: &quot;eb075a2113850a85653fe50c08240b71227495603aa142274277c5f32b11f144&quot;,
+          &quot;digest&quot;: &quot;42bd9ce3e2e1faf0b7b65141d0ea4e95864bc9d51d0b906f069eff75fdd721cf&quot;,
           &quot;state&quot;: &quot;COMMITTED&quot;,
           &quot;result&quot;: {
-            &quot;committed&quot;: &quot;d580066a32c2475d891ce6dc24822122&quot;
+            &quot;committed&quot;: &quot;74030d6b690044069bc365fa77552b43&quot;
           },
           &quot;timing&quot;: {
             &quot;activation&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;d0a53642-1f1b-4c75-83e0-1090cf361847&quot;,
-              &quot;accepted_boot_ns&quot;: 9369610045,
-              &quot;expires_boot_ns&quot;: 19369610045,
-              &quot;accepted_wall_ns&quot;: 1793685664090241958,
+              &quot;boot_id&quot;: &quot;94624a50-8274-4988-8379-b7e45207f05d&quot;,
+              &quot;accepted_boot_ns&quot;: 9930289128,
+              &quot;expires_boot_ns&quot;: 19930289128,
+              &quot;accepted_wall_ns&quot;: 1793686989852568042,
               &quot;seconds&quot;: 10
             },
             &quot;recovery&quot;: null
           }
         }
       },
-      &quot;fresh_wire_leaf&quot;: &quot;35e6da1ee0c01bc34ff41e4a2eab7a3a3eb0c101405f50f7e0e739beb292a99d&quot;,
+      &quot;fresh_wire_leaf&quot;: &quot;33a804ffa0430fe68bcdeebcbdeece0566def95acaa416cfd65fc04b36e1f779&quot;,
       &quot;cleanup&quot;: {
         &quot;services_empty&quot;: {
           &quot;certweft.service&quot;: {
@@ -1160,26 +1502,26 @@
     {
       &quot;name&quot;: &quot;sqlite_full&quot;,
       &quot;passed&quot;: true,
-      &quot;old_boot_id&quot;: &quot;d0a53642-1f1b-4c75-83e0-1090cf361847&quot;,
-      &quot;current_boot_id&quot;: &quot;194dbf37-a1bf-41d1-a26b-bd9247e5cd43&quot;,
+      &quot;old_boot_id&quot;: &quot;94624a50-8274-4988-8379-b7e45207f05d&quot;,
+      &quot;current_boot_id&quot;: &quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa&quot;,
       &quot;before_shutdown&quot;: {
-        &quot;journal_sha256&quot;: &quot;c2b1f4697536ccc487e6580a79db76cd6a8479286f9837539cf9be8bf6babbd1&quot;,
-        &quot;recovery_sha256&quot;: &quot;38fb7b04691f6c55e4007b665a8f288c2e1c3ec1c61c31bda6d6bde638e7eca9&quot;,
-        &quot;gate_sha256&quot;: &quot;c2565c7019929d6f44013e9faeee3aa51171a413354f4b9d2fab6b49a864bca7&quot;,
+        &quot;journal_sha256&quot;: &quot;c1f037e72f957fd7794e500a5a7deb1f7faa9978460936db9f1cad1565b495ba&quot;,
+        &quot;recovery_sha256&quot;: &quot;c62d2c929fcfb81a617fc78c59087843c7afaac74bf759ed3761ca0241e82d04&quot;,
+        &quot;gate_sha256&quot;: &quot;688ffd05e1254da574cac87148ad2c6cd9ae400e148d0219e32fed2e4942248b&quot;,
         &quot;state&quot;: {
           &quot;schema&quot;: 1,
           &quot;state&quot;: &quot;APPLYING&quot;,
-          &quot;epoch&quot;: &quot;c9bb8c442d7e4f38aeee81fc4a13750c&quot;,
+          &quot;epoch&quot;: &quot;dd3acd8a396e45069e53a5c56abe01bc&quot;,
           &quot;revision&quot;: 2,
-          &quot;committed&quot;: &quot;38ca236d4a464886850ad565b83eb8ab&quot;,
-          &quot;committed_digest&quot;: &quot;0ca0cb2fb6d5f399585d6e82aa841db4a0465c87b0f5d9b53409218a95266639&quot;,
-          &quot;candidate&quot;: &quot;4925f85401a54fae97f673a22032fdab&quot;
+          &quot;committed&quot;: &quot;2ed8357480cb46e9b8b274379baa59b1&quot;,
+          &quot;committed_digest&quot;: &quot;46b82f1b323d616453ecdce42f6955bbabca5342231d670edee93284f26ec232&quot;,
+          &quot;candidate&quot;: &quot;8fae37cc76304e09af27204ec1647679&quot;
         },
         &quot;requests&quot;: [
           [
             &quot;installed-first&quot;,
             &quot;COMMITTED&quot;,
-            &quot;{\&quot;committed\&quot;: \&quot;38ca236d4a464886850ad565b83eb8ab\&quot;}&quot;
+            &quot;{\&quot;committed\&quot;: \&quot;2ed8357480cb46e9b8b274379baa59b1\&quot;}&quot;
           ],
           [
             &quot;pending-sqlite_full&quot;,
@@ -1194,28 +1536,28 @@
             &quot;{\&quot;failure_stage\&quot;: \&quot;storage_validation\&quot;, \&quot;restored\&quot;: false, \&quot;updates_enabled\&quot;: false, \&quot;may_have_changed_service\&quot;: false, \&quot;tls_observed_before_failure\&quot;: false, \&quot;error\&quot;: \&quot;OperationalError\&quot;, \&quot;reason\&quot;: null, \&quot;sqlite_error\&quot;: \&quot;SQLITE_FULL\&quot;, \&quot;errno\&quot;: null}&quot;
           ]
         ],
-        &quot;active&quot;: &quot;v-4925f85401a54fae97f673a22032fdab/tls.conf&quot;
+        &quot;active&quot;: &quot;v-8fae37cc76304e09af27204ec1647679/tls.conf&quot;
       },
       &quot;before_writer_on_new_boot&quot;: {
-        &quot;boot_id&quot;: &quot;194dbf37-a1bf-41d1-a26b-bd9247e5cd43&quot;,
-        &quot;uptime_seconds&quot;: 2.3,
-        &quot;journal_sha256&quot;: &quot;c2b1f4697536ccc487e6580a79db76cd6a8479286f9837539cf9be8bf6babbd1&quot;,
-        &quot;recovery_sha256&quot;: &quot;38fb7b04691f6c55e4007b665a8f288c2e1c3ec1c61c31bda6d6bde638e7eca9&quot;,
-        &quot;gate_sha256&quot;: &quot;c2565c7019929d6f44013e9faeee3aa51171a413354f4b9d2fab6b49a864bca7&quot;,
+        &quot;boot_id&quot;: &quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa&quot;,
+        &quot;uptime_seconds&quot;: 2.75,
+        &quot;journal_sha256&quot;: &quot;c1f037e72f957fd7794e500a5a7deb1f7faa9978460936db9f1cad1565b495ba&quot;,
+        &quot;recovery_sha256&quot;: &quot;c62d2c929fcfb81a617fc78c59087843c7afaac74bf759ed3761ca0241e82d04&quot;,
+        &quot;gate_sha256&quot;: &quot;688ffd05e1254da574cac87148ad2c6cd9ae400e148d0219e32fed2e4942248b&quot;,
         &quot;state&quot;: {
           &quot;schema&quot;: 1,
           &quot;state&quot;: &quot;APPLYING&quot;,
-          &quot;epoch&quot;: &quot;c9bb8c442d7e4f38aeee81fc4a13750c&quot;,
+          &quot;epoch&quot;: &quot;dd3acd8a396e45069e53a5c56abe01bc&quot;,
           &quot;revision&quot;: 2,
-          &quot;committed&quot;: &quot;38ca236d4a464886850ad565b83eb8ab&quot;,
-          &quot;committed_digest&quot;: &quot;0ca0cb2fb6d5f399585d6e82aa841db4a0465c87b0f5d9b53409218a95266639&quot;,
-          &quot;candidate&quot;: &quot;4925f85401a54fae97f673a22032fdab&quot;
+          &quot;committed&quot;: &quot;2ed8357480cb46e9b8b274379baa59b1&quot;,
+          &quot;committed_digest&quot;: &quot;46b82f1b323d616453ecdce42f6955bbabca5342231d670edee93284f26ec232&quot;,
+          &quot;candidate&quot;: &quot;8fae37cc76304e09af27204ec1647679&quot;
         },
         &quot;requests&quot;: [
           [
             &quot;installed-first&quot;,
             &quot;COMMITTED&quot;,
-            &quot;{\&quot;committed\&quot;: \&quot;38ca236d4a464886850ad565b83eb8ab\&quot;}&quot;
+            &quot;{\&quot;committed\&quot;: \&quot;2ed8357480cb46e9b8b274379baa59b1\&quot;}&quot;
           ],
           [
             &quot;pending-sqlite_full&quot;,
@@ -1230,16 +1572,16 @@
             &quot;{\&quot;failure_stage\&quot;: \&quot;storage_validation\&quot;, \&quot;restored\&quot;: false, \&quot;updates_enabled\&quot;: false, \&quot;may_have_changed_service\&quot;: false, \&quot;tls_observed_before_failure\&quot;: false, \&quot;error\&quot;: \&quot;OperationalError\&quot;, \&quot;reason\&quot;: null, \&quot;sqlite_error\&quot;: \&quot;SQLITE_FULL\&quot;, \&quot;errno\&quot;: null}&quot;
           ]
         ],
-        &quot;active&quot;: &quot;v-4925f85401a54fae97f673a22032fdab/tls.conf&quot;,
+        &quot;active&quot;: &quot;v-8fae37cc76304e09af27204ec1647679/tls.conf&quot;,
         &quot;writer_main_pid&quot;: &quot;0&quot;
       },
-      &quot;mount_before_uuid&quot;: &quot;c5aa114e-18b5-4581-b789-b1184dcce3c3&quot;,
+      &quot;mount_before_uuid&quot;: &quot;dfd9b7e9-ebb7-4072-8d3d-8203fb2c9627&quot;,
       &quot;mount_after&quot;: {
         &quot;target&quot;: &quot;/var/lib/certweft&quot;,
         &quot;source&quot;: &quot;/dev/loop0&quot;,
         &quot;fstype&quot;: &quot;ext4&quot;,
         &quot;options&quot;: &quot;rw,relatime&quot;,
-        &quot;uuid&quot;: &quot;c5aa114e-18b5-4581-b789-b1184dcce3c3&quot;
+        &quot;uuid&quot;: &quot;dfd9b7e9-ebb7-4072-8d3d-8203fb2c9627&quot;
       },
       &quot;fault_before&quot;: {
         &quot;scope&quot;: &quot;SQLite fault checked by formal root verifier, not a test SQL substitute&quot;
@@ -1252,7 +1594,7 @@
         &quot;before&quot;: {
           &quot;ok&quot;: true,
           &quot;gate&quot;: {
-            &quot;epoch&quot;: &quot;040bb776aae54ff48f56cd8524b6ab3b&quot;,
+            &quot;epoch&quot;: &quot;5117435530ec447491e285216bd1ae71&quot;,
             &quot;reason&quot;: &quot;unclean_or_blocked&quot;,
             &quot;revision&quot;: 4,
             &quot;state&quot;: &quot;RECOVERY_REQUIRED&quot;,
@@ -1279,32 +1621,32 @@
         &quot;root_failed_history&quot;: {
           &quot;kind&quot;: &quot;recover-certificate&quot;,
           &quot;request_id&quot;: &quot;blocked-before-sqlite_full-cert&quot;,
-          &quot;digest&quot;: &quot;26e66da916f1ad31252bcbceb94978a00db87bcc2d48e0c8bec439cd9843581a&quot;,
+          &quot;digest&quot;: &quot;89e6204ee0b6f24cb2ba7358182ba79a49f7eef7a2eee86b190d66409a5fd563&quot;,
           &quot;state&quot;: &quot;FAILED&quot;,
           &quot;timing&quot;: {
             &quot;budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;d0a53642-1f1b-4c75-83e0-1090cf361847&quot;,
-              &quot;accepted_boot_ns&quot;: 17409114799,
-              &quot;expires_boot_ns&quot;: 27409114799,
-              &quot;accepted_wall_ns&quot;: 1793685672129752962,
+              &quot;boot_id&quot;: &quot;94624a50-8274-4988-8379-b7e45207f05d&quot;,
+              &quot;accepted_boot_ns&quot;: 18162502924,
+              &quot;expires_boot_ns&quot;: 28162502924,
+              &quot;accepted_wall_ns&quot;: 1793686998084765296,
               &quot;seconds&quot;: 10
             },
             &quot;authority&quot;: {
-              &quot;gate_epoch&quot;: &quot;040bb776aae54ff48f56cd8524b6ab3b&quot;,
+              &quot;gate_epoch&quot;: &quot;5117435530ec447491e285216bd1ae71&quot;,
               &quot;gate_revision&quot;: 5
             }
           },
           &quot;target&quot;: {
             &quot;schema&quot;: 1,
             &quot;state&quot;: &quot;APPLYING&quot;,
-            &quot;epoch&quot;: &quot;c9bb8c442d7e4f38aeee81fc4a13750c&quot;,
+            &quot;epoch&quot;: &quot;dd3acd8a396e45069e53a5c56abe01bc&quot;,
             &quot;revision&quot;: 2,
-            &quot;committed&quot;: &quot;38ca236d4a464886850ad565b83eb8ab&quot;,
-            &quot;committed_digest&quot;: &quot;0ca0cb2fb6d5f399585d6e82aa841db4a0465c87b0f5d9b53409218a95266639&quot;,
-            &quot;candidate&quot;: &quot;4925f85401a54fae97f673a22032fdab&quot;
+            &quot;committed&quot;: &quot;2ed8357480cb46e9b8b274379baa59b1&quot;,
+            &quot;committed_digest&quot;: &quot;46b82f1b323d616453ecdce42f6955bbabca5342231d670edee93284f26ec232&quot;,
+            &quot;candidate&quot;: &quot;8fae37cc76304e09af27204ec1647679&quot;
           },
-          &quot;probe&quot;: &quot;bcc459db29ce48218ff3fcb0549b25aa&quot;,
+          &quot;probe&quot;: &quot;84208374b14b42f79853a8cb558847ac&quot;,
           &quot;result&quot;: {
             &quot;failure_stage&quot;: &quot;storage_validation&quot;,
             &quot;restored&quot;: false,
@@ -1320,7 +1662,7 @@
         &quot;after&quot;: {
           &quot;ok&quot;: true,
           &quot;gate&quot;: {
-            &quot;epoch&quot;: &quot;040bb776aae54ff48f56cd8524b6ab3b&quot;,
+            &quot;epoch&quot;: &quot;5117435530ec447491e285216bd1ae71&quot;,
             &quot;reason&quot;: &quot;operator_prepared&quot;,
             &quot;revision&quot;: 5,
             &quot;state&quot;: &quot;VERIFY_REQUIRED&quot;,
@@ -1335,8 +1677,8 @@
           &quot;completion_recorded&quot;: false
         },
         &quot;runtime&quot;: {
-          &quot;main_pid&quot;: 2493,
-          &quot;invocation_id&quot;: &quot;0af22a6af86f474ea52a0acac1925a3d&quot;,
+          &quot;main_pid&quot;: 2499,
+          &quot;invocation_id&quot;: &quot;14984c88585d4e2594b74eba623c79fb&quot;,
           &quot;cmdline&quot;: [
             &quot;/opt/certweft/bin/python&quot;,
             &quot;-I&quot;,
@@ -1346,7 +1688,7 @@
           ],
           &quot;cwd&quot;: &quot;/&quot;,
           &quot;unit&quot;: {
-            &quot;ExecStart&quot;: &quot;{ path=/opt/certweft/bin/python ; argv[]=/opt/certweft/bin/python -I -m certweft.service /etc/certweft/writer.json ; ignore_errors=no ; start_time=[Tue 2026-11-03 14:01:11 CST] ; stop_time=[n/a] ; pid=2493 ; code=(null) ; status=0/0 }&quot;,
+            &quot;ExecStart&quot;: &quot;{ path=/opt/certweft/bin/python ; argv[]=/opt/certweft/bin/python -I -m certweft.service /etc/certweft/writer.json ; ignore_errors=no ; start_time=[Tue 2026-11-03 14:23:17 CST] ; stop_time=[n/a] ; pid=2499 ; code=(null) ; status=0/0 }&quot;,
             &quot;FragmentPath&quot;: &quot;/etc/systemd/system/certweft.service&quot;,
             &quot;DropInPaths&quot;: &quot;/etc/systemd/system/certweft.service.d/reboot-evidence.conf&quot;
           },
@@ -1355,7 +1697,7 @@
             &quot;Uid&quot;: &quot;0\t0\t0\t0&quot;,
             &quot;Gid&quot;: &quot;0\t0\t0\t0&quot;,
             &quot;VmHWM&quot;: &quot;21888 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21884 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21880 kB&quot;,
             &quot;CapEff&quot;: &quot;0000000000000001&quot;,
             &quot;NoNewPrivs&quot;: &quot;1&quot;
           }
@@ -1366,7 +1708,7 @@
         &quot;before&quot;: {
           &quot;ok&quot;: true,
           &quot;gate&quot;: {
-            &quot;epoch&quot;: &quot;6faa0c340e6f4447abc8b0078ad11d0f&quot;,
+            &quot;epoch&quot;: &quot;30247c3c6e064f3fbf945ec63e0175d8&quot;,
             &quot;reason&quot;: &quot;unclean_or_blocked&quot;,
             &quot;revision&quot;: 6,
             &quot;state&quot;: &quot;RECOVERY_REQUIRED&quot;,
@@ -1393,32 +1735,32 @@
         &quot;root_failed_history&quot;: {
           &quot;kind&quot;: &quot;recover-certificate&quot;,
           &quot;request_id&quot;: &quot;blocked-after-sqlite_full-cert&quot;,
-          &quot;digest&quot;: &quot;9d6ff04d104675df1801f0028056e28ff3216282ebdc76dbe8ff4c73d47560c9&quot;,
+          &quot;digest&quot;: &quot;a03f12dc2829e2355dd8e6c5f75c227a5a873e31ceac63595406a1e8305bb99e&quot;,
           &quot;state&quot;: &quot;FAILED&quot;,
           &quot;timing&quot;: {
             &quot;budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;194dbf37-a1bf-41d1-a26b-bd9247e5cd43&quot;,
-              &quot;accepted_boot_ns&quot;: 6571800919,
-              &quot;expires_boot_ns&quot;: 16571800919,
-              &quot;accepted_wall_ns&quot;: 1793685682015556878,
+              &quot;boot_id&quot;: &quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa&quot;,
+              &quot;accepted_boot_ns&quot;: 7658794795,
+              &quot;expires_boot_ns&quot;: 17658794795,
+              &quot;accepted_wall_ns&quot;: 1793687010102540128,
               &quot;seconds&quot;: 10
             },
             &quot;authority&quot;: {
-              &quot;gate_epoch&quot;: &quot;6faa0c340e6f4447abc8b0078ad11d0f&quot;,
+              &quot;gate_epoch&quot;: &quot;30247c3c6e064f3fbf945ec63e0175d8&quot;,
               &quot;gate_revision&quot;: 7
             }
           },
           &quot;target&quot;: {
             &quot;schema&quot;: 1,
             &quot;state&quot;: &quot;APPLYING&quot;,
-            &quot;epoch&quot;: &quot;c9bb8c442d7e4f38aeee81fc4a13750c&quot;,
+            &quot;epoch&quot;: &quot;dd3acd8a396e45069e53a5c56abe01bc&quot;,
             &quot;revision&quot;: 2,
-            &quot;committed&quot;: &quot;38ca236d4a464886850ad565b83eb8ab&quot;,
-            &quot;committed_digest&quot;: &quot;0ca0cb2fb6d5f399585d6e82aa841db4a0465c87b0f5d9b53409218a95266639&quot;,
-            &quot;candidate&quot;: &quot;4925f85401a54fae97f673a22032fdab&quot;
+            &quot;committed&quot;: &quot;2ed8357480cb46e9b8b274379baa59b1&quot;,
+            &quot;committed_digest&quot;: &quot;46b82f1b323d616453ecdce42f6955bbabca5342231d670edee93284f26ec232&quot;,
+            &quot;candidate&quot;: &quot;8fae37cc76304e09af27204ec1647679&quot;
           },
-          &quot;probe&quot;: &quot;8bdd471b0b274825bddf1cc1badfa8fc&quot;,
+          &quot;probe&quot;: &quot;656a55025f264f54a5ba53e7e66e98db&quot;,
           &quot;result&quot;: {
             &quot;failure_stage&quot;: &quot;storage_validation&quot;,
             &quot;restored&quot;: false,
@@ -1434,7 +1776,7 @@
         &quot;after&quot;: {
           &quot;ok&quot;: true,
           &quot;gate&quot;: {
-            &quot;epoch&quot;: &quot;6faa0c340e6f4447abc8b0078ad11d0f&quot;,
+            &quot;epoch&quot;: &quot;30247c3c6e064f3fbf945ec63e0175d8&quot;,
             &quot;reason&quot;: &quot;operator_prepared&quot;,
             &quot;revision&quot;: 7,
             &quot;state&quot;: &quot;VERIFY_REQUIRED&quot;,
@@ -1449,8 +1791,8 @@
           &quot;completion_recorded&quot;: false
         },
         &quot;runtime&quot;: {
-          &quot;main_pid&quot;: 493,
-          &quot;invocation_id&quot;: &quot;044107ebc3b945349f8998e37d511d13&quot;,
+          &quot;main_pid&quot;: 485,
+          &quot;invocation_id&quot;: &quot;a316a91571a44858916f9dde17ef8f0d&quot;,
           &quot;cmdline&quot;: [
             &quot;/opt/certweft/bin/python&quot;,
             &quot;-I&quot;,
@@ -1468,19 +1810,19 @@
           &quot;memory&quot;: {
             &quot;Uid&quot;: &quot;0\t0\t0\t0&quot;,
             &quot;Gid&quot;: &quot;0\t0\t0\t0&quot;,
-            &quot;VmHWM&quot;: &quot;21860 kB&quot;,
-            &quot;VmRSS&quot;: &quot;21860 kB&quot;,
+            &quot;VmHWM&quot;: &quot;21892 kB&quot;,
+            &quot;VmRSS&quot;: &quot;21892 kB&quot;,
             &quot;CapEff&quot;: &quot;0000000000000001&quot;,
             &quot;NoNewPrivs&quot;: &quot;1&quot;
           }
         }
       },
-      &quot;candidate_leaf_while_faulted&quot;: &quot;17ea671f63dbc2ffcc884de77161bb02ddce0af147ce8be9d47d17fecd80e8b5&quot;,
+      &quot;candidate_leaf_while_faulted&quot;: &quot;32ca811adde4d83b23626c1ce134bd5a0d664af6add77db54be25c4672e620a5&quot;,
       &quot;observer_detached_only_after_boot_evidence_verified&quot;: true,
       &quot;closed_after_storage_repair&quot;: {
         &quot;ok&quot;: true,
         &quot;gate&quot;: {
-          &quot;epoch&quot;: &quot;cacf6a7587e54527baef9c623240bf5b&quot;,
+          &quot;epoch&quot;: &quot;4004053d6f16458bb8c4a71b5f2bba60&quot;,
           &quot;reason&quot;: &quot;unclean_or_blocked&quot;,
           &quot;revision&quot;: 8,
           &quot;state&quot;: &quot;RECOVERY_REQUIRED&quot;,
@@ -1495,8 +1837,8 @@
         &quot;completion_recorded&quot;: false
       },
       &quot;writer_runtime_after_repair&quot;: {
-        &quot;main_pid&quot;: 1594,
-        &quot;invocation_id&quot;: &quot;e2a2d832229d4247aaa36313b8fb610f&quot;,
+        &quot;main_pid&quot;: 1592,
+        &quot;invocation_id&quot;: &quot;934c4e256eb64a3ba4c6729c8f3f2279&quot;,
         &quot;cmdline&quot;: [
           &quot;/opt/certweft/bin/python&quot;,
           &quot;-I&quot;,
@@ -1506,7 +1848,7 @@
         ],
         &quot;cwd&quot;: &quot;/&quot;,
         &quot;unit&quot;: {
-          &quot;ExecStart&quot;: &quot;{ path=/opt/certweft/bin/python ; argv[]=/opt/certweft/bin/python -I -m certweft.service /etc/certweft/writer.json ; ignore_errors=no ; start_time=[Tue 2026-11-03 14:01:22 CST] ; stop_time=[n/a] ; pid=1594 ; code=(null) ; status=0/0 }&quot;,
+          &quot;ExecStart&quot;: &quot;{ path=/opt/certweft/bin/python ; argv[]=/opt/certweft/bin/python -I -m certweft.service /etc/certweft/writer.json ; ignore_errors=no ; start_time=[Tue 2026-11-03 14:23:30 CST] ; stop_time=[n/a] ; pid=1592 ; code=(null) ; status=0/0 }&quot;,
           &quot;FragmentPath&quot;: &quot;/etc/systemd/system/certweft.service&quot;,
           &quot;DropInPaths&quot;: &quot;/etc/systemd/system/certweft.service.d/reboot-evidence.conf&quot;
         },
@@ -1514,8 +1856,8 @@
         &quot;memory&quot;: {
           &quot;Uid&quot;: &quot;0\t0\t0\t0&quot;,
           &quot;Gid&quot;: &quot;0\t0\t0\t0&quot;,
-          &quot;VmHWM&quot;: &quot;21660 kB&quot;,
-          &quot;VmRSS&quot;: &quot;21660 kB&quot;,
+          &quot;VmHWM&quot;: &quot;21656 kB&quot;,
+          &quot;VmRSS&quot;: &quot;21656 kB&quot;,
           &quot;CapEff&quot;: &quot;0000000000000001&quot;,
           &quot;NoNewPrivs&quot;: &quot;1&quot;
         }
@@ -1531,7 +1873,7 @@
           &quot;fixed-sqlite_full-open&quot;
         ],
         &quot;gate&quot;: {
-          &quot;epoch&quot;: &quot;cacf6a7587e54527baef9c623240bf5b&quot;,
+          &quot;epoch&quot;: &quot;4004053d6f16458bb8c4a71b5f2bba60&quot;,
           &quot;reason&quot;: &quot;operator_opened&quot;,
           &quot;revision&quot;: 11,
           &quot;state&quot;: &quot;RUNNING&quot;,
@@ -1542,43 +1884,43 @@
         {
           &quot;kind&quot;: &quot;recover-certificate&quot;,
           &quot;request_id&quot;: &quot;fixed-sqlite_full-cert&quot;,
-          &quot;digest&quot;: &quot;c7094020547e24b131f017a4b2849aa21d64166ffb834184e40eba7ac1a75a2f&quot;,
+          &quot;digest&quot;: &quot;0771ad2eff5e6025b48460698f41167b5201507bd91e972101b09ec4fb6f3495&quot;,
           &quot;state&quot;: &quot;VERIFIED_CLOSED&quot;,
           &quot;timing&quot;: {
             &quot;budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;194dbf37-a1bf-41d1-a26b-bd9247e5cd43&quot;,
-              &quot;accepted_boot_ns&quot;: 7028609669,
-              &quot;expires_boot_ns&quot;: 17028609669,
-              &quot;accepted_wall_ns&quot;: 1793685682472353961,
+              &quot;boot_id&quot;: &quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa&quot;,
+              &quot;accepted_boot_ns&quot;: 8353774462,
+              &quot;expires_boot_ns&quot;: 18353774462,
+              &quot;accepted_wall_ns&quot;: 1793687010797501587,
               &quot;seconds&quot;: 10
             },
             &quot;authority&quot;: {
-              &quot;gate_epoch&quot;: &quot;cacf6a7587e54527baef9c623240bf5b&quot;,
+              &quot;gate_epoch&quot;: &quot;4004053d6f16458bb8c4a71b5f2bba60&quot;,
               &quot;gate_revision&quot;: 9
             }
           },
           &quot;target&quot;: {
             &quot;schema&quot;: 1,
             &quot;state&quot;: &quot;APPLYING&quot;,
-            &quot;epoch&quot;: &quot;c9bb8c442d7e4f38aeee81fc4a13750c&quot;,
+            &quot;epoch&quot;: &quot;dd3acd8a396e45069e53a5c56abe01bc&quot;,
             &quot;revision&quot;: 2,
-            &quot;committed&quot;: &quot;38ca236d4a464886850ad565b83eb8ab&quot;,
-            &quot;committed_digest&quot;: &quot;0ca0cb2fb6d5f399585d6e82aa841db4a0465c87b0f5d9b53409218a95266639&quot;,
-            &quot;candidate&quot;: &quot;4925f85401a54fae97f673a22032fdab&quot;
+            &quot;committed&quot;: &quot;2ed8357480cb46e9b8b274379baa59b1&quot;,
+            &quot;committed_digest&quot;: &quot;46b82f1b323d616453ecdce42f6955bbabca5342231d670edee93284f26ec232&quot;,
+            &quot;candidate&quot;: &quot;8fae37cc76304e09af27204ec1647679&quot;
           },
-          &quot;probe&quot;: &quot;eb5069aa10ab4ed8858925eb27ca5ead&quot;,
+          &quot;probe&quot;: &quot;0e685e26ff2041e7bf2f04288fa1ea9c&quot;,
           &quot;result&quot;: {
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
             &quot;restored&quot;: true,
             &quot;updates_enabled&quot;: false,
-            &quot;committed&quot;: &quot;38ca236d4a464886850ad565b83eb8ab&quot;,
-            &quot;fingerprint&quot;: &quot;d73691cd04ce298b646aab456c868c24c68127e93b715a82c3094d92c9ec8fda&quot;,
+            &quot;committed&quot;: &quot;2ed8357480cb46e9b8b274379baa59b1&quot;,
+            &quot;fingerprint&quot;: &quot;07fcb689ec6692ba200eaae4cc28fbe094b3bcce34c8ee5f88687d292bb26f81&quot;,
             &quot;prior_health&quot;: &quot;HEALTHY&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;cacf6a7587e54527baef9c623240bf5b&quot;,
+              &quot;gate_epoch&quot;: &quot;4004053d6f16458bb8c4a71b5f2bba60&quot;,
               &quot;gate_revision&quot;: 10
             }
           }
@@ -1586,19 +1928,19 @@
         {
           &quot;kind&quot;: &quot;reconcile-closed&quot;,
           &quot;request_id&quot;: &quot;fixed-sqlite_full-journal&quot;,
-          &quot;digest&quot;: &quot;71c1f5ec70e9a3aeea644a30a8526393281382ed224e69123d58fc49d386126e&quot;,
+          &quot;digest&quot;: &quot;329132176eda54c464dfaef6636c26c79db26b4e0e3ae9922a639aa573b15eb9&quot;,
           &quot;state&quot;: &quot;JOURNAL_VERIFIED_CLOSED&quot;,
           &quot;timing&quot;: {
             &quot;budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;194dbf37-a1bf-41d1-a26b-bd9247e5cd43&quot;,
-              &quot;accepted_boot_ns&quot;: 7516348795,
-              &quot;expires_boot_ns&quot;: 17516348795,
-              &quot;accepted_wall_ns&quot;: 1793685682960095670,
+              &quot;boot_id&quot;: &quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa&quot;,
+              &quot;accepted_boot_ns&quot;: 8850646212,
+              &quot;expires_boot_ns&quot;: 18850646212,
+              &quot;accepted_wall_ns&quot;: 1793687011294363254,
               &quot;seconds&quot;: 10
             },
             &quot;authority&quot;: {
-              &quot;gate_epoch&quot;: &quot;cacf6a7587e54527baef9c623240bf5b&quot;,
+              &quot;gate_epoch&quot;: &quot;4004053d6f16458bb8c4a71b5f2bba60&quot;,
               &quot;gate_revision&quot;: 10
             }
           },
@@ -1606,28 +1948,28 @@
             &quot;core&quot;: {
               &quot;schema&quot;: 1,
               &quot;state&quot;: &quot;APPLYING&quot;,
-              &quot;epoch&quot;: &quot;c9bb8c442d7e4f38aeee81fc4a13750c&quot;,
+              &quot;epoch&quot;: &quot;dd3acd8a396e45069e53a5c56abe01bc&quot;,
               &quot;revision&quot;: 2,
-              &quot;committed&quot;: &quot;38ca236d4a464886850ad565b83eb8ab&quot;,
-              &quot;committed_digest&quot;: &quot;0ca0cb2fb6d5f399585d6e82aa841db4a0465c87b0f5d9b53409218a95266639&quot;,
-              &quot;candidate&quot;: &quot;4925f85401a54fae97f673a22032fdab&quot;
+              &quot;committed&quot;: &quot;2ed8357480cb46e9b8b274379baa59b1&quot;,
+              &quot;committed_digest&quot;: &quot;46b82f1b323d616453ecdce42f6955bbabca5342231d670edee93284f26ec232&quot;,
+              &quot;candidate&quot;: &quot;8fae37cc76304e09af27204ec1647679&quot;
             },
-            &quot;journal_digest&quot;: &quot;fd359c47df220b86ec4e8720350f54d5593ae3996eb6d1848bf76220b88161eb&quot;,
+            &quot;journal_digest&quot;: &quot;0788a44f702c305647aaa7245d23e0bb89713f2e4aefd507b151abb2c07e4e7a&quot;,
             &quot;certificate_request_id&quot;: &quot;fixed-sqlite_full-cert&quot;
           },
-          &quot;probe&quot;: &quot;0afaecf942064b8fb7332232e4322bb1&quot;,
+          &quot;probe&quot;: &quot;d81da00094f743b5845588dafd2409d6&quot;,
           &quot;result&quot;: {
             &quot;journal_reconciled&quot;: true,
             &quot;health_verified&quot;: true,
             &quot;prior_health&quot;: &quot;HEALTHY&quot;,
-            &quot;receipt_digest&quot;: &quot;c8221823f718f95a85672830d75a48f7d1f252d292d62396191503060399a3f5&quot;,
-            &quot;after_digest&quot;: &quot;9def92f9ac2b55673d67453f1eb5ffdbf7aab16557cfbed5177660c3d987fbd2&quot;,
+            &quot;receipt_digest&quot;: &quot;7899dba43d6cfc92135183fd38465319408e936aa8e70adcca7130d43f64a77e&quot;,
+            &quot;after_digest&quot;: &quot;1313b18417c77f8e312af713633fe1b2839d39f143f8d0081e4b64b1bfe9fbdf&quot;,
             &quot;closed_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;cacf6a7587e54527baef9c623240bf5b&quot;,
+              &quot;gate_epoch&quot;: &quot;4004053d6f16458bb8c4a71b5f2bba60&quot;,
               &quot;gate_revision&quot;: 10
             },
-            &quot;committed&quot;: &quot;38ca236d4a464886850ad565b83eb8ab&quot;,
-            &quot;fingerprint&quot;: &quot;d73691cd04ce298b646aab456c868c24c68127e93b715a82c3094d92c9ec8fda&quot;,
+            &quot;committed&quot;: &quot;2ed8357480cb46e9b8b274379baa59b1&quot;,
+            &quot;fingerprint&quot;: &quot;07fcb689ec6692ba200eaae4cc28fbe094b3bcce34c8ee5f88687d292bb26f81&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;main_committed&quot;: true
           }
@@ -1635,36 +1977,36 @@
         {
           &quot;kind&quot;: &quot;prepare-opening&quot;,
           &quot;request_id&quot;: &quot;fixed-sqlite_full-intent&quot;,
-          &quot;digest&quot;: &quot;d87af8a75a6cec5d7a3491b1908cc6df5f949fc54593877a3c48991e9d43b5d1&quot;,
+          &quot;digest&quot;: &quot;70b87c558868576864d93818f3fe7e12c4f4ee07c3e76c4a29376bfb877d74bb&quot;,
           &quot;state&quot;: &quot;OPENING_VERIFIED_CLOSED&quot;,
           &quot;timing&quot;: {
             &quot;budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;194dbf37-a1bf-41d1-a26b-bd9247e5cd43&quot;,
-              &quot;accepted_boot_ns&quot;: 7985637420,
-              &quot;expires_boot_ns&quot;: 17985637420,
-              &quot;accepted_wall_ns&quot;: 1793685683429382462,
+              &quot;boot_id&quot;: &quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa&quot;,
+              &quot;accepted_boot_ns&quot;: 9327966379,
+              &quot;expires_boot_ns&quot;: 19327966379,
+              &quot;accepted_wall_ns&quot;: 1793687011771683129,
               &quot;seconds&quot;: 10
             },
             &quot;authority&quot;: {
-              &quot;gate_epoch&quot;: &quot;cacf6a7587e54527baef9c623240bf5b&quot;,
+              &quot;gate_epoch&quot;: &quot;4004053d6f16458bb8c4a71b5f2bba60&quot;,
               &quot;gate_revision&quot;: 10
             }
           },
           &quot;target&quot;: {
             &quot;preparation_request_id&quot;: &quot;fixed-sqlite_full-journal&quot;,
-            &quot;receipt_digest&quot;: &quot;c8221823f718f95a85672830d75a48f7d1f252d292d62396191503060399a3f5&quot;,
-            &quot;core_epoch&quot;: &quot;b942055d9bff438fa7cb7a84c1bf81d5&quot;,
+            &quot;receipt_digest&quot;: &quot;7899dba43d6cfc92135183fd38465319408e936aa8e70adcca7130d43f64a77e&quot;,
+            &quot;core_epoch&quot;: &quot;5c7adbaf91914fb29faccc79405e04c8&quot;,
             &quot;core_revision&quot;: 3,
-            &quot;journal_digest&quot;: &quot;9def92f9ac2b55673d67453f1eb5ffdbf7aab16557cfbed5177660c3d987fbd2&quot;,
+            &quot;journal_digest&quot;: &quot;1313b18417c77f8e312af713633fe1b2839d39f143f8d0081e4b64b1bfe9fbdf&quot;,
             &quot;degraded_references&quot;: {}
           },
-          &quot;probe&quot;: &quot;e8574e40999a429397e0aa20d516abce&quot;,
+          &quot;probe&quot;: &quot;f42f154e0bbb42e1aac330ac0b9d447b&quot;,
           &quot;result&quot;: {
             &quot;pair_verified&quot;: true,
             &quot;degraded_references_verified&quot;: true,
             &quot;degraded_reference_count&quot;: 0,
-            &quot;marker_digest&quot;: &quot;5ace5815d30fface1620cb9b1313944c6a37eebac8747211e4c889bed67c221b&quot;,
+            &quot;marker_digest&quot;: &quot;f7ca895b7b0b12997f12207763133464d9c2c8a053d071c522ddf20babb537d4&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           }
@@ -1672,51 +2014,51 @@
         {
           &quot;kind&quot;: &quot;prepare-release&quot;,
           &quot;request_id&quot;: &quot;fixed-sqlite_full-release&quot;,
-          &quot;digest&quot;: &quot;ccb6adb043148b7b7f8b24d72209f54db22e5df231e5f9a4b8b5a856140d89a9&quot;,
+          &quot;digest&quot;: &quot;c9372476b8a4849860f0b6f8e1da152c47e505b878d6c9cac28acbfee2787ac3&quot;,
           &quot;state&quot;: &quot;RELEASE_VERIFIED_CLOSED&quot;,
           &quot;timing&quot;: {
             &quot;budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;194dbf37-a1bf-41d1-a26b-bd9247e5cd43&quot;,
-              &quot;accepted_boot_ns&quot;: 8023645712,
-              &quot;expires_boot_ns&quot;: 18023645712,
-              &quot;accepted_wall_ns&quot;: 1793685683467376962,
+              &quot;boot_id&quot;: &quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa&quot;,
+              &quot;accepted_boot_ns&quot;: 9365636129,
+              &quot;expires_boot_ns&quot;: 19365636129,
+              &quot;accepted_wall_ns&quot;: 1793687011809338129,
               &quot;seconds&quot;: 10
             },
             &quot;authority&quot;: {
-              &quot;gate_epoch&quot;: &quot;cacf6a7587e54527baef9c623240bf5b&quot;,
+              &quot;gate_epoch&quot;: &quot;4004053d6f16458bb8c4a71b5f2bba60&quot;,
               &quot;gate_revision&quot;: 10
             }
           },
           &quot;target&quot;: {
             &quot;opening_request_id&quot;: &quot;fixed-sqlite_full-intent&quot;,
-            &quot;opening_marker_digest&quot;: &quot;5ace5815d30fface1620cb9b1313944c6a37eebac8747211e4c889bed67c221b&quot;,
-            &quot;source_request_digest&quot;: &quot;d87af8a75a6cec5d7a3491b1908cc6df5f949fc54593877a3c48991e9d43b5d1&quot;,
+            &quot;opening_marker_digest&quot;: &quot;f7ca895b7b0b12997f12207763133464d9c2c8a053d071c522ddf20babb537d4&quot;,
+            &quot;source_request_digest&quot;: &quot;70b87c558868576864d93818f3fe7e12c4f4ee07c3e76c4a29376bfb877d74bb&quot;,
             &quot;source_budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;194dbf37-a1bf-41d1-a26b-bd9247e5cd43&quot;,
-              &quot;accepted_boot_ns&quot;: 7985637420,
-              &quot;expires_boot_ns&quot;: 17985637420,
-              &quot;accepted_wall_ns&quot;: 1793685683429382462,
+              &quot;boot_id&quot;: &quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa&quot;,
+              &quot;accepted_boot_ns&quot;: 9327966379,
+              &quot;expires_boot_ns&quot;: 19327966379,
+              &quot;accepted_wall_ns&quot;: 1793687011771683129,
               &quot;seconds&quot;: 10
             },
             &quot;opening_target&quot;: {
               &quot;preparation_request_id&quot;: &quot;fixed-sqlite_full-journal&quot;,
-              &quot;receipt_digest&quot;: &quot;c8221823f718f95a85672830d75a48f7d1f252d292d62396191503060399a3f5&quot;,
-              &quot;core_epoch&quot;: &quot;b942055d9bff438fa7cb7a84c1bf81d5&quot;,
+              &quot;receipt_digest&quot;: &quot;7899dba43d6cfc92135183fd38465319408e936aa8e70adcca7130d43f64a77e&quot;,
+              &quot;core_epoch&quot;: &quot;5c7adbaf91914fb29faccc79405e04c8&quot;,
               &quot;core_revision&quot;: 3,
-              &quot;journal_digest&quot;: &quot;9def92f9ac2b55673d67453f1eb5ffdbf7aab16557cfbed5177660c3d987fbd2&quot;,
+              &quot;journal_digest&quot;: &quot;1313b18417c77f8e312af713633fe1b2839d39f143f8d0081e4b64b1bfe9fbdf&quot;,
               &quot;degraded_references&quot;: {}
             }
           },
-          &quot;probe&quot;: &quot;b124c73c29a24bb2ae5327a67e212b29&quot;,
+          &quot;probe&quot;: &quot;1559f46708544dd1aac4d1bada8762fc&quot;,
           &quot;result&quot;: {
             &quot;storage_verified&quot;: true,
             &quot;certificate_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;38ca236d4a464886850ad565b83eb8ab&quot;,
-            &quot;fingerprint&quot;: &quot;d73691cd04ce298b646aab456c868c24c68127e93b715a82c3094d92c9ec8fda&quot;,
-            &quot;receipt_digest&quot;: &quot;dd7b295bb361307935705a8f8ce6d3058d3bf0ae3540add77d31165b73d56cf9&quot;,
+            &quot;committed&quot;: &quot;2ed8357480cb46e9b8b274379baa59b1&quot;,
+            &quot;fingerprint&quot;: &quot;07fcb689ec6692ba200eaae4cc28fbe094b3bcce34c8ee5f88687d292bb26f81&quot;,
+            &quot;receipt_digest&quot;: &quot;ed9778089e55164c5f3a27fa21581c382192a85fa2a5507acf516c2783dca48a&quot;,
             &quot;updates_enabled&quot;: false,
             &quot;release_authorized&quot;: false
           }
@@ -1724,65 +2066,65 @@
         {
           &quot;kind&quot;: &quot;open-updates&quot;,
           &quot;request_id&quot;: &quot;fixed-sqlite_full-open&quot;,
-          &quot;digest&quot;: &quot;c60ac98c058ac2560441945b31f29d762c3c23f84136ab6daa94d20d8bd811d6&quot;,
+          &quot;digest&quot;: &quot;da976da4ec287f6acc1a9b19052bef6df16b2d5536bb578ca56c3b4e260695c1&quot;,
           &quot;state&quot;: &quot;OPENED&quot;,
           &quot;timing&quot;: {
             &quot;budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;194dbf37-a1bf-41d1-a26b-bd9247e5cd43&quot;,
-              &quot;accepted_boot_ns&quot;: 8571882837,
-              &quot;expires_boot_ns&quot;: 18571882837,
-              &quot;accepted_wall_ns&quot;: 1793685684463716041,
+              &quot;boot_id&quot;: &quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa&quot;,
+              &quot;accepted_boot_ns&quot;: 10003049212,
+              &quot;expires_boot_ns&quot;: 20003049212,
+              &quot;accepted_wall_ns&quot;: 1793687012209418083,
               &quot;seconds&quot;: 10
             },
             &quot;authority&quot;: {
-              &quot;gate_epoch&quot;: &quot;cacf6a7587e54527baef9c623240bf5b&quot;,
+              &quot;gate_epoch&quot;: &quot;4004053d6f16458bb8c4a71b5f2bba60&quot;,
               &quot;gate_revision&quot;: 10
             }
           },
           &quot;target&quot;: {
             &quot;release_request_id&quot;: &quot;fixed-sqlite_full-release&quot;,
-            &quot;release_receipt_digest&quot;: &quot;dd7b295bb361307935705a8f8ce6d3058d3bf0ae3540add77d31165b73d56cf9&quot;,
-            &quot;release_digest&quot;: &quot;ccb6adb043148b7b7f8b24d72209f54db22e5df231e5f9a4b8b5a856140d89a9&quot;,
+            &quot;release_receipt_digest&quot;: &quot;ed9778089e55164c5f3a27fa21581c382192a85fa2a5507acf516c2783dca48a&quot;,
+            &quot;release_digest&quot;: &quot;c9372476b8a4849860f0b6f8e1da152c47e505b878d6c9cac28acbfee2787ac3&quot;,
             &quot;release_budget&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;194dbf37-a1bf-41d1-a26b-bd9247e5cd43&quot;,
-              &quot;accepted_boot_ns&quot;: 8023645712,
-              &quot;expires_boot_ns&quot;: 18023645712,
-              &quot;accepted_wall_ns&quot;: 1793685683467376962,
+              &quot;boot_id&quot;: &quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa&quot;,
+              &quot;accepted_boot_ns&quot;: 9365636129,
+              &quot;expires_boot_ns&quot;: 19365636129,
+              &quot;accepted_wall_ns&quot;: 1793687011809338129,
               &quot;seconds&quot;: 10
             },
             &quot;release_target&quot;: {
               &quot;opening_request_id&quot;: &quot;fixed-sqlite_full-intent&quot;,
-              &quot;opening_marker_digest&quot;: &quot;5ace5815d30fface1620cb9b1313944c6a37eebac8747211e4c889bed67c221b&quot;,
-              &quot;source_request_digest&quot;: &quot;d87af8a75a6cec5d7a3491b1908cc6df5f949fc54593877a3c48991e9d43b5d1&quot;,
+              &quot;opening_marker_digest&quot;: &quot;f7ca895b7b0b12997f12207763133464d9c2c8a053d071c522ddf20babb537d4&quot;,
+              &quot;source_request_digest&quot;: &quot;70b87c558868576864d93818f3fe7e12c4f4ee07c3e76c4a29376bfb877d74bb&quot;,
               &quot;source_budget&quot;: {
                 &quot;version&quot;: 1,
-                &quot;boot_id&quot;: &quot;194dbf37-a1bf-41d1-a26b-bd9247e5cd43&quot;,
-                &quot;accepted_boot_ns&quot;: 7985637420,
-                &quot;expires_boot_ns&quot;: 17985637420,
-                &quot;accepted_wall_ns&quot;: 1793685683429382462,
+                &quot;boot_id&quot;: &quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa&quot;,
+                &quot;accepted_boot_ns&quot;: 9327966379,
+                &quot;expires_boot_ns&quot;: 19327966379,
+                &quot;accepted_wall_ns&quot;: 1793687011771683129,
                 &quot;seconds&quot;: 10
               },
               &quot;opening_target&quot;: {
                 &quot;preparation_request_id&quot;: &quot;fixed-sqlite_full-journal&quot;,
-                &quot;receipt_digest&quot;: &quot;c8221823f718f95a85672830d75a48f7d1f252d292d62396191503060399a3f5&quot;,
-                &quot;core_epoch&quot;: &quot;b942055d9bff438fa7cb7a84c1bf81d5&quot;,
+                &quot;receipt_digest&quot;: &quot;7899dba43d6cfc92135183fd38465319408e936aa8e70adcca7130d43f64a77e&quot;,
+                &quot;core_epoch&quot;: &quot;5c7adbaf91914fb29faccc79405e04c8&quot;,
                 &quot;core_revision&quot;: 3,
-                &quot;journal_digest&quot;: &quot;9def92f9ac2b55673d67453f1eb5ffdbf7aab16557cfbed5177660c3d987fbd2&quot;,
+                &quot;journal_digest&quot;: &quot;1313b18417c77f8e312af713633fe1b2839d39f143f8d0081e4b64b1bfe9fbdf&quot;,
                 &quot;degraded_references&quot;: {}
               }
             }
           },
-          &quot;probe&quot;: &quot;203b145731004136b684553c23735043&quot;,
+          &quot;probe&quot;: &quot;011a2dae68f9454285fea699c011a90c&quot;,
           &quot;result&quot;: {
             &quot;storage_verified&quot;: true,
             &quot;tls_confirmed&quot;: true,
-            &quot;committed&quot;: &quot;38ca236d4a464886850ad565b83eb8ab&quot;,
-            &quot;fingerprint&quot;: &quot;d73691cd04ce298b646aab456c868c24c68127e93b715a82c3094d92c9ec8fda&quot;,
-            &quot;admission_digest&quot;: &quot;2667980f4feb28e068cd0bada918e5303bb8ffeaf17efd6875882c6ae234f634&quot;,
+            &quot;committed&quot;: &quot;2ed8357480cb46e9b8b274379baa59b1&quot;,
+            &quot;fingerprint&quot;: &quot;07fcb689ec6692ba200eaae4cc28fbe094b3bcce34c8ee5f88687d292bb26f81&quot;,
+            &quot;admission_digest&quot;: &quot;019aaa53f60ecbf275ad84218c85de5d761ac13ab84c61d34634e4e089374baf&quot;,
             &quot;opened_gate&quot;: {
-              &quot;gate_epoch&quot;: &quot;cacf6a7587e54527baef9c623240bf5b&quot;,
+              &quot;gate_epoch&quot;: &quot;4004053d6f16458bb8c4a71b5f2bba60&quot;,
               &quot;gate_revision&quot;: 11
             },
             &quot;updates_enabled&quot;: true
@@ -1791,29 +2133,269 @@
       ],
       &quot;old_pending_history_after_reconciliation&quot;: {
         &quot;request_id&quot;: &quot;pending-sqlite_full&quot;,
-        &quot;digest&quot;: &quot;22270315beb8fc3fffa5baae051cdaa449b2bbdd1c2b05940a2233a8a69907b5&quot;,
+        &quot;digest&quot;: &quot;53919fc4951c156b21b437952dea1b07a09c5772c30ed337cf78f05c65a85470&quot;,
         &quot;state&quot;: &quot;INTERRUPTED&quot;,
         &quot;result&quot;: {
           &quot;reconciled_closed&quot;: true,
           &quot;prior_state&quot;: &quot;RUNNING&quot;,
           &quot;execution_outcome&quot;: &quot;unknown&quot;,
-          &quot;committed&quot;: &quot;38ca236d4a464886850ad565b83eb8ab&quot;,
+          &quot;committed&quot;: &quot;2ed8357480cb46e9b8b274379baa59b1&quot;,
           &quot;recovery_request_id&quot;: &quot;fixed-sqlite_full-journal&quot;,
           &quot;updates_enabled&quot;: false
         },
         &quot;timing&quot;: {
           &quot;activation&quot;: {
             &quot;version&quot;: 1,
-            &quot;boot_id&quot;: &quot;d0a53642-1f1b-4c75-83e0-1090cf361847&quot;,
-            &quot;accepted_boot_ns&quot;: 16235907465,
-            &quot;expires_boot_ns&quot;: 26235907465,
-            &quot;accepted_wall_ns&quot;: 1793685670956545212,
+            &quot;boot_id&quot;: &quot;94624a50-8274-4988-8379-b7e45207f05d&quot;,
+            &quot;accepted_boot_ns&quot;: 16990182090,
+            &quot;expires_boot_ns&quot;: 26990182090,
+            &quot;accepted_wall_ns&quot;: 1793686996912453212,
             &quot;seconds&quot;: 10
           },
           &quot;recovery&quot;: null
         }
       },
-      &quot;restored_committed_leaf&quot;: &quot;d73691cd04ce298b646aab456c868c24c68127e93b715a82c3094d92c9ec8fda&quot;,
+      &quot;restored_committed_leaf&quot;: &quot;07fcb689ec6692ba200eaae4cc28fbe094b3bcce34c8ee5f88687d292bb26f81&quot;,
+      &quot;closed_after_repair_valid_request_response&quot;: {
+        &quot;ok&quot;: false,
+        &quot;error&quot;: &quot;Rejected&quot;,
+        &quot;reason&quot;: &quot;recovery_required&quot;
+      },
+      &quot;root_stale_authority_response&quot;: {
+        &quot;ok&quot;: false,
+        &quot;reason&quot;: &quot;stale_gate_authority&quot;
+      },
+      &quot;current_root_prepare_response&quot;: {
+        &quot;ok&quot;: true,
+        &quot;prepared&quot;: true,
+        &quot;updates_enabled&quot;: false,
+        &quot;restored&quot;: false,
+        &quot;gate&quot;: {
+          &quot;epoch&quot;: &quot;4004053d6f16458bb8c4a71b5f2bba60&quot;,
+          &quot;reason&quot;: &quot;operator_prepared&quot;,
+          &quot;revision&quot;: 9,
+          &quot;state&quot;: &quot;VERIFY_REQUIRED&quot;,
+          &quot;version&quot;: 1
+        }
+      },
+      &quot;old_failed_prefix_control&quot;: {
+        &quot;gate_before&quot;: {
+          &quot;ok&quot;: true,
+          &quot;gate&quot;: {
+            &quot;epoch&quot;: &quot;4004053d6f16458bb8c4a71b5f2bba60&quot;,
+            &quot;reason&quot;: &quot;operator_prepared&quot;,
+            &quot;revision&quot;: 9,
+            &quot;state&quot;: &quot;VERIFY_REQUIRED&quot;,
+            &quot;version&quot;: 1
+          },
+          &quot;executor_busy&quot;: false,
+          &quot;gate_allows_updates&quot;: false,
+          &quot;opening_intent_verified_closed&quot;: false,
+          &quot;release_prepared_closed&quot;: false,
+          &quot;storage_health_not_verified&quot;: true,
+          &quot;journal_prepared_closed&quot;: false,
+          &quot;completion_recorded&quot;: false
+        },
+        &quot;gate_after&quot;: {
+          &quot;ok&quot;: true,
+          &quot;gate&quot;: {
+            &quot;epoch&quot;: &quot;4004053d6f16458bb8c4a71b5f2bba60&quot;,
+            &quot;reason&quot;: &quot;operator_prepared&quot;,
+            &quot;revision&quot;: 9,
+            &quot;state&quot;: &quot;VERIFY_REQUIRED&quot;,
+            &quot;version&quot;: 1
+          },
+          &quot;executor_busy&quot;: false,
+          &quot;gate_allows_updates&quot;: false,
+          &quot;opening_intent_verified_closed&quot;: false,
+          &quot;release_prepared_closed&quot;: false,
+          &quot;storage_health_not_verified&quot;: true,
+          &quot;journal_prepared_closed&quot;: false,
+          &quot;completion_recorded&quot;: false
+        },
+        &quot;response&quot;: {
+          &quot;ok&quot;: false,
+          &quot;error&quot;: &quot;Rejected&quot;,
+          &quot;reason&quot;: &quot;recovery_step_FAILED&quot;
+        },
+        &quot;history&quot;: {
+          &quot;kind&quot;: &quot;recover-certificate&quot;,
+          &quot;request_id&quot;: &quot;blocked-before-sqlite_full-cert&quot;,
+          &quot;digest&quot;: &quot;89e6204ee0b6f24cb2ba7358182ba79a49f7eef7a2eee86b190d66409a5fd563&quot;,
+          &quot;state&quot;: &quot;FAILED&quot;,
+          &quot;timing&quot;: {
+            &quot;budget&quot;: {
+              &quot;version&quot;: 1,
+              &quot;boot_id&quot;: &quot;94624a50-8274-4988-8379-b7e45207f05d&quot;,
+              &quot;accepted_boot_ns&quot;: 18162502924,
+              &quot;expires_boot_ns&quot;: 28162502924,
+              &quot;accepted_wall_ns&quot;: 1793686998084765296,
+              &quot;seconds&quot;: 10
+            },
+            &quot;authority&quot;: {
+              &quot;gate_epoch&quot;: &quot;5117435530ec447491e285216bd1ae71&quot;,
+              &quot;gate_revision&quot;: 5
+            }
+          },
+          &quot;target&quot;: {
+            &quot;schema&quot;: 1,
+            &quot;state&quot;: &quot;APPLYING&quot;,
+            &quot;epoch&quot;: &quot;dd3acd8a396e45069e53a5c56abe01bc&quot;,
+            &quot;revision&quot;: 2,
+            &quot;committed&quot;: &quot;2ed8357480cb46e9b8b274379baa59b1&quot;,
+            &quot;committed_digest&quot;: &quot;46b82f1b323d616453ecdce42f6955bbabca5342231d670edee93284f26ec232&quot;,
+            &quot;candidate&quot;: &quot;8fae37cc76304e09af27204ec1647679&quot;
+          },
+          &quot;probe&quot;: &quot;84208374b14b42f79853a8cb558847ac&quot;,
+          &quot;result&quot;: {
+            &quot;failure_stage&quot;: &quot;storage_validation&quot;,
+            &quot;restored&quot;: false,
+            &quot;updates_enabled&quot;: false,
+            &quot;may_have_changed_service&quot;: false,
+            &quot;tls_observed_before_failure&quot;: false,
+            &quot;error&quot;: &quot;OperationalError&quot;,
+            &quot;reason&quot;: null,
+            &quot;sqlite_error&quot;: &quot;SQLITE_FULL&quot;,
+            &quot;errno&quot;: null
+          }
+        },
+        &quot;catalog_core_wire_unchanged&quot;: true
+      },
+      &quot;catalogs_before&quot;: {
+        &quot;normal&quot;: [
+          {
+            &quot;id&quot;: &quot;installed-first&quot;,
+            &quot;digest&quot;: &quot;61aafd86d9f4db4e179e86d90c0157401a986679bd09036fd6de2ddaca93844b&quot;,
+            &quot;state&quot;: &quot;COMMITTED&quot;,
+            &quot;result&quot;: &quot;{\&quot;committed\&quot;: \&quot;2ed8357480cb46e9b8b274379baa59b1\&quot;}&quot;,
+            &quot;timing&quot;: &quot;{\&quot;activation\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;94624a50-8274-4988-8379-b7e45207f05d\&quot;, \&quot;accepted_boot_ns\&quot;: 15220921131, \&quot;expires_boot_ns\&quot;: 25220921131, \&quot;accepted_wall_ns\&quot;: 1793686995143187086, \&quot;seconds\&quot;: 10}, \&quot;recovery\&quot;: null}&quot;
+          },
+          {
+            &quot;id&quot;: &quot;pending-sqlite_full&quot;,
+            &quot;digest&quot;: &quot;53919fc4951c156b21b437952dea1b07a09c5772c30ed337cf78f05c65a85470&quot;,
+            &quot;state&quot;: &quot;RUNNING&quot;,
+            &quot;result&quot;: null,
+            &quot;timing&quot;: &quot;{\&quot;activation\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;94624a50-8274-4988-8379-b7e45207f05d\&quot;, \&quot;accepted_boot_ns\&quot;: 16990182090, \&quot;expires_boot_ns\&quot;: 26990182090, \&quot;accepted_wall_ns\&quot;: 1793686996912453212, \&quot;seconds\&quot;: 10}, \&quot;recovery\&quot;: null}&quot;
+          }
+        ],
+        &quot;root&quot;: [
+          {
+            &quot;id&quot;: &quot;blocked-before-sqlite_full-cert&quot;,
+            &quot;digest&quot;: &quot;89e6204ee0b6f24cb2ba7358182ba79a49f7eef7a2eee86b190d66409a5fd563&quot;,
+            &quot;state&quot;: &quot;FAILED&quot;,
+            &quot;timing&quot;: &quot;{\&quot;budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;94624a50-8274-4988-8379-b7e45207f05d\&quot;, \&quot;accepted_boot_ns\&quot;: 18162502924, \&quot;expires_boot_ns\&quot;: 28162502924, \&quot;accepted_wall_ns\&quot;: 1793686998084765296, \&quot;seconds\&quot;: 10}, \&quot;authority\&quot;: {\&quot;gate_epoch\&quot;: \&quot;5117435530ec447491e285216bd1ae71\&quot;, \&quot;gate_revision\&quot;: 5}}&quot;,
+            &quot;target&quot;: &quot;{\&quot;schema\&quot;: 1, \&quot;state\&quot;: \&quot;APPLYING\&quot;, \&quot;epoch\&quot;: \&quot;dd3acd8a396e45069e53a5c56abe01bc\&quot;, \&quot;revision\&quot;: 2, \&quot;committed\&quot;: \&quot;2ed8357480cb46e9b8b274379baa59b1\&quot;, \&quot;committed_digest\&quot;: \&quot;46b82f1b323d616453ecdce42f6955bbabca5342231d670edee93284f26ec232\&quot;, \&quot;candidate\&quot;: \&quot;8fae37cc76304e09af27204ec1647679\&quot;}&quot;,
+            &quot;probe&quot;: &quot;84208374b14b42f79853a8cb558847ac&quot;,
+            &quot;result&quot;: &quot;{\&quot;failure_stage\&quot;: \&quot;storage_validation\&quot;, \&quot;restored\&quot;: false, \&quot;updates_enabled\&quot;: false, \&quot;may_have_changed_service\&quot;: false, \&quot;tls_observed_before_failure\&quot;: false, \&quot;error\&quot;: \&quot;OperationalError\&quot;, \&quot;reason\&quot;: null, \&quot;sqlite_error\&quot;: \&quot;SQLITE_FULL\&quot;, \&quot;errno\&quot;: null}&quot;,
+            &quot;kind&quot;: &quot;recover-certificate&quot;
+          }
+        ]
+      },
+      &quot;catalogs_after&quot;: {
+        &quot;normal&quot;: [
+          {
+            &quot;id&quot;: &quot;fresh-sqlite_full&quot;,
+            &quot;digest&quot;: &quot;74477d0e60053464367a3ed4711a73c0e2afd585944fa006d2c9305634850810&quot;,
+            &quot;state&quot;: &quot;COMMITTED&quot;,
+            &quot;result&quot;: &quot;{\&quot;committed\&quot;: \&quot;0f4beb05d77b405b892ab08a7f427226\&quot;}&quot;,
+            &quot;timing&quot;: &quot;{\&quot;activation\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa\&quot;, \&quot;accepted_boot_ns\&quot;: 10810142546, \&quot;expires_boot_ns\&quot;: 20810142546, \&quot;accepted_wall_ns\&quot;: 1793687013016518917, \&quot;seconds\&quot;: 10}, \&quot;recovery\&quot;: null}&quot;
+          },
+          {
+            &quot;id&quot;: &quot;installed-first&quot;,
+            &quot;digest&quot;: &quot;61aafd86d9f4db4e179e86d90c0157401a986679bd09036fd6de2ddaca93844b&quot;,
+            &quot;state&quot;: &quot;COMMITTED&quot;,
+            &quot;result&quot;: &quot;{\&quot;committed\&quot;: \&quot;2ed8357480cb46e9b8b274379baa59b1\&quot;}&quot;,
+            &quot;timing&quot;: &quot;{\&quot;activation\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;94624a50-8274-4988-8379-b7e45207f05d\&quot;, \&quot;accepted_boot_ns\&quot;: 15220921131, \&quot;expires_boot_ns\&quot;: 25220921131, \&quot;accepted_wall_ns\&quot;: 1793686995143187086, \&quot;seconds\&quot;: 10}, \&quot;recovery\&quot;: null}&quot;
+          },
+          {
+            &quot;id&quot;: &quot;pending-sqlite_full&quot;,
+            &quot;digest&quot;: &quot;53919fc4951c156b21b437952dea1b07a09c5772c30ed337cf78f05c65a85470&quot;,
+            &quot;state&quot;: &quot;INTERRUPTED&quot;,
+            &quot;result&quot;: &quot;{\&quot;reconciled_closed\&quot;: true, \&quot;prior_state\&quot;: \&quot;RUNNING\&quot;, \&quot;execution_outcome\&quot;: \&quot;unknown\&quot;, \&quot;committed\&quot;: \&quot;2ed8357480cb46e9b8b274379baa59b1\&quot;, \&quot;recovery_request_id\&quot;: \&quot;fixed-sqlite_full-journal\&quot;, \&quot;updates_enabled\&quot;: false}&quot;,
+            &quot;timing&quot;: &quot;{\&quot;activation\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;94624a50-8274-4988-8379-b7e45207f05d\&quot;, \&quot;accepted_boot_ns\&quot;: 16990182090, \&quot;expires_boot_ns\&quot;: 26990182090, \&quot;accepted_wall_ns\&quot;: 1793686996912453212, \&quot;seconds\&quot;: 10}, \&quot;recovery\&quot;: null}&quot;
+          },
+          {
+            &quot;id&quot;: &quot;stale-sqlite_full&quot;,
+            &quot;digest&quot;: &quot;53919fc4951c156b21b437952dea1b07a09c5772c30ed337cf78f05c65a85470&quot;,
+            &quot;state&quot;: &quot;FAILED&quot;,
+            &quot;result&quot;: &quot;{\&quot;error\&quot;: \&quot;Rejected\&quot;, \&quot;expired\&quot;: false, \&quot;sqlite_error\&quot;: null, \&quot;errno\&quot;: null}&quot;,
+            &quot;timing&quot;: &quot;{\&quot;activation\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa\&quot;, \&quot;accepted_boot_ns\&quot;: 10735924213, \&quot;expires_boot_ns\&quot;: 20735924213, \&quot;accepted_wall_ns\&quot;: 1793687012942307375, \&quot;seconds\&quot;: 10}, \&quot;recovery\&quot;: null}&quot;
+          }
+        ],
+        &quot;root&quot;: [
+          {
+            &quot;id&quot;: &quot;blocked-after-sqlite_full-cert&quot;,
+            &quot;digest&quot;: &quot;a03f12dc2829e2355dd8e6c5f75c227a5a873e31ceac63595406a1e8305bb99e&quot;,
+            &quot;state&quot;: &quot;FAILED&quot;,
+            &quot;timing&quot;: &quot;{\&quot;budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa\&quot;, \&quot;accepted_boot_ns\&quot;: 7658794795, \&quot;expires_boot_ns\&quot;: 17658794795, \&quot;accepted_wall_ns\&quot;: 1793687010102540128, \&quot;seconds\&quot;: 10}, \&quot;authority\&quot;: {\&quot;gate_epoch\&quot;: \&quot;30247c3c6e064f3fbf945ec63e0175d8\&quot;, \&quot;gate_revision\&quot;: 7}}&quot;,
+            &quot;target&quot;: &quot;{\&quot;schema\&quot;: 1, \&quot;state\&quot;: \&quot;APPLYING\&quot;, \&quot;epoch\&quot;: \&quot;dd3acd8a396e45069e53a5c56abe01bc\&quot;, \&quot;revision\&quot;: 2, \&quot;committed\&quot;: \&quot;2ed8357480cb46e9b8b274379baa59b1\&quot;, \&quot;committed_digest\&quot;: \&quot;46b82f1b323d616453ecdce42f6955bbabca5342231d670edee93284f26ec232\&quot;, \&quot;candidate\&quot;: \&quot;8fae37cc76304e09af27204ec1647679\&quot;}&quot;,
+            &quot;probe&quot;: &quot;656a55025f264f54a5ba53e7e66e98db&quot;,
+            &quot;result&quot;: &quot;{\&quot;failure_stage\&quot;: \&quot;storage_validation\&quot;, \&quot;restored\&quot;: false, \&quot;updates_enabled\&quot;: false, \&quot;may_have_changed_service\&quot;: false, \&quot;tls_observed_before_failure\&quot;: false, \&quot;error\&quot;: \&quot;OperationalError\&quot;, \&quot;reason\&quot;: null, \&quot;sqlite_error\&quot;: \&quot;SQLITE_FULL\&quot;, \&quot;errno\&quot;: null}&quot;,
+            &quot;kind&quot;: &quot;recover-certificate&quot;
+          },
+          {
+            &quot;id&quot;: &quot;blocked-before-sqlite_full-cert&quot;,
+            &quot;digest&quot;: &quot;89e6204ee0b6f24cb2ba7358182ba79a49f7eef7a2eee86b190d66409a5fd563&quot;,
+            &quot;state&quot;: &quot;FAILED&quot;,
+            &quot;timing&quot;: &quot;{\&quot;budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;94624a50-8274-4988-8379-b7e45207f05d\&quot;, \&quot;accepted_boot_ns\&quot;: 18162502924, \&quot;expires_boot_ns\&quot;: 28162502924, \&quot;accepted_wall_ns\&quot;: 1793686998084765296, \&quot;seconds\&quot;: 10}, \&quot;authority\&quot;: {\&quot;gate_epoch\&quot;: \&quot;5117435530ec447491e285216bd1ae71\&quot;, \&quot;gate_revision\&quot;: 5}}&quot;,
+            &quot;target&quot;: &quot;{\&quot;schema\&quot;: 1, \&quot;state\&quot;: \&quot;APPLYING\&quot;, \&quot;epoch\&quot;: \&quot;dd3acd8a396e45069e53a5c56abe01bc\&quot;, \&quot;revision\&quot;: 2, \&quot;committed\&quot;: \&quot;2ed8357480cb46e9b8b274379baa59b1\&quot;, \&quot;committed_digest\&quot;: \&quot;46b82f1b323d616453ecdce42f6955bbabca5342231d670edee93284f26ec232\&quot;, \&quot;candidate\&quot;: \&quot;8fae37cc76304e09af27204ec1647679\&quot;}&quot;,
+            &quot;probe&quot;: &quot;84208374b14b42f79853a8cb558847ac&quot;,
+            &quot;result&quot;: &quot;{\&quot;failure_stage\&quot;: \&quot;storage_validation\&quot;, \&quot;restored\&quot;: false, \&quot;updates_enabled\&quot;: false, \&quot;may_have_changed_service\&quot;: false, \&quot;tls_observed_before_failure\&quot;: false, \&quot;error\&quot;: \&quot;OperationalError\&quot;, \&quot;reason\&quot;: null, \&quot;sqlite_error\&quot;: \&quot;SQLITE_FULL\&quot;, \&quot;errno\&quot;: null}&quot;,
+            &quot;kind&quot;: &quot;recover-certificate&quot;
+          },
+          {
+            &quot;id&quot;: &quot;fixed-sqlite_full-cert&quot;,
+            &quot;digest&quot;: &quot;0771ad2eff5e6025b48460698f41167b5201507bd91e972101b09ec4fb6f3495&quot;,
+            &quot;state&quot;: &quot;VERIFIED_CLOSED&quot;,
+            &quot;timing&quot;: &quot;{\&quot;budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa\&quot;, \&quot;accepted_boot_ns\&quot;: 8353774462, \&quot;expires_boot_ns\&quot;: 18353774462, \&quot;accepted_wall_ns\&quot;: 1793687010797501587, \&quot;seconds\&quot;: 10}, \&quot;authority\&quot;: {\&quot;gate_epoch\&quot;: \&quot;4004053d6f16458bb8c4a71b5f2bba60\&quot;, \&quot;gate_revision\&quot;: 9}}&quot;,
+            &quot;target&quot;: &quot;{\&quot;schema\&quot;: 1, \&quot;state\&quot;: \&quot;APPLYING\&quot;, \&quot;epoch\&quot;: \&quot;dd3acd8a396e45069e53a5c56abe01bc\&quot;, \&quot;revision\&quot;: 2, \&quot;committed\&quot;: \&quot;2ed8357480cb46e9b8b274379baa59b1\&quot;, \&quot;committed_digest\&quot;: \&quot;46b82f1b323d616453ecdce42f6955bbabca5342231d670edee93284f26ec232\&quot;, \&quot;candidate\&quot;: \&quot;8fae37cc76304e09af27204ec1647679\&quot;}&quot;,
+            &quot;probe&quot;: &quot;0e685e26ff2041e7bf2f04288fa1ea9c&quot;,
+            &quot;result&quot;: &quot;{\&quot;storage_verified\&quot;: true, \&quot;certificate_verified\&quot;: true, \&quot;tls_confirmed\&quot;: true, \&quot;restored\&quot;: true, \&quot;updates_enabled\&quot;: false, \&quot;committed\&quot;: \&quot;2ed8357480cb46e9b8b274379baa59b1\&quot;, \&quot;fingerprint\&quot;: \&quot;07fcb689ec6692ba200eaae4cc28fbe094b3bcce34c8ee5f88687d292bb26f81\&quot;, \&quot;prior_health\&quot;: \&quot;HEALTHY\&quot;, \&quot;closed_gate\&quot;: {\&quot;gate_epoch\&quot;: \&quot;4004053d6f16458bb8c4a71b5f2bba60\&quot;, \&quot;gate_revision\&quot;: 10}}&quot;,
+            &quot;kind&quot;: &quot;recover-certificate&quot;
+          },
+          {
+            &quot;id&quot;: &quot;fixed-sqlite_full-intent&quot;,
+            &quot;digest&quot;: &quot;70b87c558868576864d93818f3fe7e12c4f4ee07c3e76c4a29376bfb877d74bb&quot;,
+            &quot;state&quot;: &quot;OPENING_VERIFIED_CLOSED&quot;,
+            &quot;timing&quot;: &quot;{\&quot;budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa\&quot;, \&quot;accepted_boot_ns\&quot;: 9327966379, \&quot;expires_boot_ns\&quot;: 19327966379, \&quot;accepted_wall_ns\&quot;: 1793687011771683129, \&quot;seconds\&quot;: 10}, \&quot;authority\&quot;: {\&quot;gate_epoch\&quot;: \&quot;4004053d6f16458bb8c4a71b5f2bba60\&quot;, \&quot;gate_revision\&quot;: 10}}&quot;,
+            &quot;target&quot;: &quot;{\&quot;preparation_request_id\&quot;: \&quot;fixed-sqlite_full-journal\&quot;, \&quot;receipt_digest\&quot;: \&quot;7899dba43d6cfc92135183fd38465319408e936aa8e70adcca7130d43f64a77e\&quot;, \&quot;core_epoch\&quot;: \&quot;5c7adbaf91914fb29faccc79405e04c8\&quot;, \&quot;core_revision\&quot;: 3, \&quot;journal_digest\&quot;: \&quot;1313b18417c77f8e312af713633fe1b2839d39f143f8d0081e4b64b1bfe9fbdf\&quot;, \&quot;degraded_references\&quot;: {}}&quot;,
+            &quot;probe&quot;: &quot;f42f154e0bbb42e1aac330ac0b9d447b&quot;,
+            &quot;result&quot;: &quot;{\&quot;pair_verified\&quot;: true, \&quot;degraded_references_verified\&quot;: true, \&quot;degraded_reference_count\&quot;: 0, \&quot;marker_digest\&quot;: \&quot;f7ca895b7b0b12997f12207763133464d9c2c8a053d071c522ddf20babb537d4\&quot;, \&quot;updates_enabled\&quot;: false, \&quot;release_authorized\&quot;: false}&quot;,
+            &quot;kind&quot;: &quot;prepare-opening&quot;
+          },
+          {
+            &quot;id&quot;: &quot;fixed-sqlite_full-journal&quot;,
+            &quot;digest&quot;: &quot;329132176eda54c464dfaef6636c26c79db26b4e0e3ae9922a639aa573b15eb9&quot;,
+            &quot;state&quot;: &quot;JOURNAL_VERIFIED_CLOSED&quot;,
+            &quot;timing&quot;: &quot;{\&quot;budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa\&quot;, \&quot;accepted_boot_ns\&quot;: 8850646212, \&quot;expires_boot_ns\&quot;: 18850646212, \&quot;accepted_wall_ns\&quot;: 1793687011294363254, \&quot;seconds\&quot;: 10}, \&quot;authority\&quot;: {\&quot;gate_epoch\&quot;: \&quot;4004053d6f16458bb8c4a71b5f2bba60\&quot;, \&quot;gate_revision\&quot;: 10}}&quot;,
+            &quot;target&quot;: &quot;{\&quot;core\&quot;: {\&quot;schema\&quot;: 1, \&quot;state\&quot;: \&quot;APPLYING\&quot;, \&quot;epoch\&quot;: \&quot;dd3acd8a396e45069e53a5c56abe01bc\&quot;, \&quot;revision\&quot;: 2, \&quot;committed\&quot;: \&quot;2ed8357480cb46e9b8b274379baa59b1\&quot;, \&quot;committed_digest\&quot;: \&quot;46b82f1b323d616453ecdce42f6955bbabca5342231d670edee93284f26ec232\&quot;, \&quot;candidate\&quot;: \&quot;8fae37cc76304e09af27204ec1647679\&quot;}, \&quot;journal_digest\&quot;: \&quot;0788a44f702c305647aaa7245d23e0bb89713f2e4aefd507b151abb2c07e4e7a\&quot;, \&quot;certificate_request_id\&quot;: \&quot;fixed-sqlite_full-cert\&quot;}&quot;,
+            &quot;probe&quot;: &quot;d81da00094f743b5845588dafd2409d6&quot;,
+            &quot;result&quot;: &quot;{\&quot;journal_reconciled\&quot;: true, \&quot;health_verified\&quot;: true, \&quot;prior_health\&quot;: \&quot;HEALTHY\&quot;, \&quot;receipt_digest\&quot;: \&quot;7899dba43d6cfc92135183fd38465319408e936aa8e70adcca7130d43f64a77e\&quot;, \&quot;after_digest\&quot;: \&quot;1313b18417c77f8e312af713633fe1b2839d39f143f8d0081e4b64b1bfe9fbdf\&quot;, \&quot;closed_gate\&quot;: {\&quot;gate_epoch\&quot;: \&quot;4004053d6f16458bb8c4a71b5f2bba60\&quot;, \&quot;gate_revision\&quot;: 10}, \&quot;committed\&quot;: \&quot;2ed8357480cb46e9b8b274379baa59b1\&quot;, \&quot;fingerprint\&quot;: \&quot;07fcb689ec6692ba200eaae4cc28fbe094b3bcce34c8ee5f88687d292bb26f81\&quot;, \&quot;updates_enabled\&quot;: false, \&quot;main_committed\&quot;: true}&quot;,
+            &quot;kind&quot;: &quot;reconcile-closed&quot;
+          },
+          {
+            &quot;id&quot;: &quot;fixed-sqlite_full-open&quot;,
+            &quot;digest&quot;: &quot;da976da4ec287f6acc1a9b19052bef6df16b2d5536bb578ca56c3b4e260695c1&quot;,
+            &quot;state&quot;: &quot;OPENED&quot;,
+            &quot;timing&quot;: &quot;{\&quot;budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa\&quot;, \&quot;accepted_boot_ns\&quot;: 10003049212, \&quot;expires_boot_ns\&quot;: 20003049212, \&quot;accepted_wall_ns\&quot;: 1793687012209418083, \&quot;seconds\&quot;: 10}, \&quot;authority\&quot;: {\&quot;gate_epoch\&quot;: \&quot;4004053d6f16458bb8c4a71b5f2bba60\&quot;, \&quot;gate_revision\&quot;: 10}}&quot;,
+            &quot;target&quot;: &quot;{\&quot;release_request_id\&quot;: \&quot;fixed-sqlite_full-release\&quot;, \&quot;release_receipt_digest\&quot;: \&quot;ed9778089e55164c5f3a27fa21581c382192a85fa2a5507acf516c2783dca48a\&quot;, \&quot;release_digest\&quot;: \&quot;c9372476b8a4849860f0b6f8e1da152c47e505b878d6c9cac28acbfee2787ac3\&quot;, \&quot;release_budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa\&quot;, \&quot;accepted_boot_ns\&quot;: 9365636129, \&quot;expires_boot_ns\&quot;: 19365636129, \&quot;accepted_wall_ns\&quot;: 1793687011809338129, \&quot;seconds\&quot;: 10}, \&quot;release_target\&quot;: {\&quot;opening_request_id\&quot;: \&quot;fixed-sqlite_full-intent\&quot;, \&quot;opening_marker_digest\&quot;: \&quot;f7ca895b7b0b12997f12207763133464d9c2c8a053d071c522ddf20babb537d4\&quot;, \&quot;source_request_digest\&quot;: \&quot;70b87c558868576864d93818f3fe7e12c4f4ee07c3e76c4a29376bfb877d74bb\&quot;, \&quot;source_budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa\&quot;, \&quot;accepted_boot_ns\&quot;: 9327966379, \&quot;expires_boot_ns\&quot;: 19327966379, \&quot;accepted_wall_ns\&quot;: 1793687011771683129, \&quot;seconds\&quot;: 10}, \&quot;opening_target\&quot;: {\&quot;preparation_request_id\&quot;: \&quot;fixed-sqlite_full-journal\&quot;, \&quot;receipt_digest\&quot;: \&quot;7899dba43d6cfc92135183fd38465319408e936aa8e70adcca7130d43f64a77e\&quot;, \&quot;core_epoch\&quot;: \&quot;5c7adbaf91914fb29faccc79405e04c8\&quot;, \&quot;core_revision\&quot;: 3, \&quot;journal_digest\&quot;: \&quot;1313b18417c77f8e312af713633fe1b2839d39f143f8d0081e4b64b1bfe9fbdf\&quot;, \&quot;degraded_references\&quot;: {}}}}&quot;,
+            &quot;probe&quot;: &quot;011a2dae68f9454285fea699c011a90c&quot;,
+            &quot;result&quot;: &quot;{\&quot;storage_verified\&quot;: true, \&quot;tls_confirmed\&quot;: true, \&quot;committed\&quot;: \&quot;2ed8357480cb46e9b8b274379baa59b1\&quot;, \&quot;fingerprint\&quot;: \&quot;07fcb689ec6692ba200eaae4cc28fbe094b3bcce34c8ee5f88687d292bb26f81\&quot;, \&quot;admission_digest\&quot;: \&quot;019aaa53f60ecbf275ad84218c85de5d761ac13ab84c61d34634e4e089374baf\&quot;, \&quot;opened_gate\&quot;: {\&quot;gate_epoch\&quot;: \&quot;4004053d6f16458bb8c4a71b5f2bba60\&quot;, \&quot;gate_revision\&quot;: 11}, \&quot;updates_enabled\&quot;: true}&quot;,
+            &quot;kind&quot;: &quot;open-updates&quot;
+          },
+          {
+            &quot;id&quot;: &quot;fixed-sqlite_full-release&quot;,
+            &quot;digest&quot;: &quot;c9372476b8a4849860f0b6f8e1da152c47e505b878d6c9cac28acbfee2787ac3&quot;,
+            &quot;state&quot;: &quot;RELEASE_VERIFIED_CLOSED&quot;,
+            &quot;timing&quot;: &quot;{\&quot;budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa\&quot;, \&quot;accepted_boot_ns\&quot;: 9365636129, \&quot;expires_boot_ns\&quot;: 19365636129, \&quot;accepted_wall_ns\&quot;: 1793687011809338129, \&quot;seconds\&quot;: 10}, \&quot;authority\&quot;: {\&quot;gate_epoch\&quot;: \&quot;4004053d6f16458bb8c4a71b5f2bba60\&quot;, \&quot;gate_revision\&quot;: 10}}&quot;,
+            &quot;target&quot;: &quot;{\&quot;opening_request_id\&quot;: \&quot;fixed-sqlite_full-intent\&quot;, \&quot;opening_marker_digest\&quot;: \&quot;f7ca895b7b0b12997f12207763133464d9c2c8a053d071c522ddf20babb537d4\&quot;, \&quot;source_request_digest\&quot;: \&quot;70b87c558868576864d93818f3fe7e12c4f4ee07c3e76c4a29376bfb877d74bb\&quot;, \&quot;source_budget\&quot;: {\&quot;version\&quot;: 1, \&quot;boot_id\&quot;: \&quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa\&quot;, \&quot;accepted_boot_ns\&quot;: 9327966379, \&quot;expires_boot_ns\&quot;: 19327966379, \&quot;accepted_wall_ns\&quot;: 1793687011771683129, \&quot;seconds\&quot;: 10}, \&quot;opening_target\&quot;: {\&quot;preparation_request_id\&quot;: \&quot;fixed-sqlite_full-journal\&quot;, \&quot;receipt_digest\&quot;: \&quot;7899dba43d6cfc92135183fd38465319408e936aa8e70adcca7130d43f64a77e\&quot;, \&quot;core_epoch\&quot;: \&quot;5c7adbaf91914fb29faccc79405e04c8\&quot;, \&quot;core_revision\&quot;: 3, \&quot;journal_digest\&quot;: \&quot;1313b18417c77f8e312af713633fe1b2839d39f143f8d0081e4b64b1bfe9fbdf\&quot;, \&quot;degraded_references\&quot;: {}}}&quot;,
+            &quot;probe&quot;: &quot;1559f46708544dd1aac4d1bada8762fc&quot;,
+            &quot;result&quot;: &quot;{\&quot;storage_verified\&quot;: true, \&quot;certificate_verified\&quot;: true, \&quot;tls_confirmed\&quot;: true, \&quot;committed\&quot;: \&quot;2ed8357480cb46e9b8b274379baa59b1\&quot;, \&quot;fingerprint\&quot;: \&quot;07fcb689ec6692ba200eaae4cc28fbe094b3bcce34c8ee5f88687d292bb26f81\&quot;, \&quot;receipt_digest\&quot;: \&quot;ed9778089e55164c5f3a27fa21581c382192a85fa2a5507acf516c2783dca48a\&quot;, \&quot;updates_enabled\&quot;: false, \&quot;release_authorized\&quot;: false}&quot;,
+            &quot;kind&quot;: &quot;prepare-release&quot;
+          }
+        ]
+      },
+      &quot;terminal_history_preserved&quot;: true,
       &quot;stale_response&quot;: {
         &quot;ok&quot;: false,
         &quot;error&quot;: &quot;Rejected&quot;,
@@ -1821,7 +2403,7 @@
       },
       &quot;stale_history&quot;: {
         &quot;request_id&quot;: &quot;stale-sqlite_full&quot;,
-        &quot;digest&quot;: &quot;22270315beb8fc3fffa5baae051cdaa449b2bbdd1c2b05940a2233a8a69907b5&quot;,
+        &quot;digest&quot;: &quot;53919fc4951c156b21b437952dea1b07a09c5772c30ed337cf78f05c65a85470&quot;,
         &quot;state&quot;: &quot;FAILED&quot;,
         &quot;result&quot;: {
           &quot;error&quot;: &quot;Rejected&quot;,
@@ -1832,10 +2414,10 @@
         &quot;timing&quot;: {
           &quot;activation&quot;: {
             &quot;version&quot;: 1,
-            &quot;boot_id&quot;: &quot;194dbf37-a1bf-41d1-a26b-bd9247e5cd43&quot;,
-            &quot;accepted_boot_ns&quot;: 9253468920,
-            &quot;expires_boot_ns&quot;: 19253468920,
-            &quot;accepted_wall_ns&quot;: 1793685685145319042,
+            &quot;boot_id&quot;: &quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa&quot;,
+            &quot;accepted_boot_ns&quot;: 10735924213,
+            &quot;expires_boot_ns&quot;: 20735924213,
+            &quot;accepted_wall_ns&quot;: 1793687012942307375,
             &quot;seconds&quot;: 10
           },
           &quot;recovery&quot;: null
@@ -1845,25 +2427,25 @@
         &quot;ok&quot;: true,
         &quot;result&quot;: {
           &quot;request_id&quot;: &quot;fresh-sqlite_full&quot;,
-          &quot;digest&quot;: &quot;a8e0c123664cfcbaf31c7b73b3e335459db0666b403202e767b28a3b4ba312a5&quot;,
+          &quot;digest&quot;: &quot;74477d0e60053464367a3ed4711a73c0e2afd585944fa006d2c9305634850810&quot;,
           &quot;state&quot;: &quot;COMMITTED&quot;,
           &quot;result&quot;: {
-            &quot;committed&quot;: &quot;226098bf45f148ba9b58e52fa18420f1&quot;
+            &quot;committed&quot;: &quot;0f4beb05d77b405b892ab08a7f427226&quot;
           },
           &quot;timing&quot;: {
             &quot;activation&quot;: {
               &quot;version&quot;: 1,
-              &quot;boot_id&quot;: &quot;194dbf37-a1bf-41d1-a26b-bd9247e5cd43&quot;,
-              &quot;accepted_boot_ns&quot;: 9327745629,
-              &quot;expires_boot_ns&quot;: 19327745629,
-              &quot;accepted_wall_ns&quot;: 1793685685219596667,
+              &quot;boot_id&quot;: &quot;88e8e3e4-c024-43db-a6a3-f0d500ee34fa&quot;,
+              &quot;accepted_boot_ns&quot;: 10810142546,
+              &quot;expires_boot_ns&quot;: 20810142546,
+              &quot;accepted_wall_ns&quot;: 1793687013016518917,
               &quot;seconds&quot;: 10
             },
             &quot;recovery&quot;: null
           }
         }
       },
-      &quot;fresh_wire_leaf&quot;: &quot;17ea671f63dbc2ffcc884de77161bb02ddce0af147ce8be9d47d17fecd80e8b5&quot;,
+      &quot;fresh_wire_leaf&quot;: &quot;32ca811adde4d83b23626c1ce134bd5a0d664af6add77db54be25c4672e620a5&quot;,
       &quot;cleanup&quot;: {
         &quot;services_empty&quot;: {
           &quot;certweft.service&quot;: {

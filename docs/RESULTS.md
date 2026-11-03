@@ -8,18 +8,20 @@ fails without restoration. After repair, explicit root recovery is still require
 old pending work becomes INTERRUPTED, old core authority is refused and fresh
 core authority really activates the same candidate with the exact expected leaf.
 
-Current results: **126 Linux tests** with zero failures/errors/skips; three
+Current results: **129 Linux tests** with zero failures/errors/skips; three
 installed storage-fault VM reboot/repair cases; eight installed deployment
 regressions; and 14 source-service runtime storage-fault scenarios all passed.
 The six current JSON/HTML pairs are storage-reboot, storage-reboot-host,
 storage-reboot-units, boot-bootstrap, deployment and storage. All bind the same
 59-file source manifest; bootstrap overlaps deployment and is not counted as an
 independent performance trial. Old reboot-stage reports retain their recorded
-source. Host post-SSH check/repair observations were 3.667 / 3.882 / 3.921 seconds,
+source. Host post-SSH check/repair observations were 3.983 / 4.260 / 4.406 seconds,
 not boot time or recovery guarantees. Writer samples after repair were
-21,656 / 21,648 / 21,660 KiB, not a stability or cross-mode memory comparison.
+21,652 / 21,656 / 21,656 KiB, not a stability or cross-mode memory comparison.
 
-The current source includes 59 manifest files. No application module, packaged
+The current source includes 59 manifest files. The [storage reboot review](STORAGE_REBOOT_REVIEW.md) adds old-root closed-state
+controls, full immutable/terminal history checks and current-invocation errno
+evidence, plus a genuine post-repair valid-request denial. No application module, packaged
 unit, privilege allowance or license changes were made. The harness explicitly
 closes SQLite read connections; the new descriptor regression checks this without
 relying on garbage collection. The initial busy-mount attempt and later one-shot

@@ -104,16 +104,16 @@ separate source-run reports.
 
 | Observation | Result |
 |---|---:|
-| Installed operator submit → COMMITTED and independently checked new TLS leaf | 0.80 s |
-| Main SIGKILL → observed new management socket, admission still closed | 1.10 s |
-| Writer RSS at initial-ready sample | 21,744 KiB |
-| Signer Python RSS during credential observation | 5,504 KiB |
-| Paused executor RSS before crash | 23,360 KiB |
+| Installed operator submit → COMMITTED and independently checked new TLS leaf | 0.79 s |
+| Main SIGKILL → observed new management socket, admission still closed | 1.11 s |
+| Writer RSS at initial-ready sample | 21,752 KiB |
+| Signer Python RSS during credential observation | 21,016 KiB |
+| Paused executor RSS before crash | 23,356 KiB |
 | End-state unique regular files | 24 |
-| End-state logical / allocated regular-file bytes | 102,237 / 176,128 |
+| End-state logical / allocated regular-file bytes | 102,241 / 176,128 |
 
 The role, timing and storage scope restrictions above apply to every row. In
-particular, 1.10 seconds is not a certificate-restoration time or recovery upper
+particular, 1.11 seconds is not a certificate-restoration time or recovery upper
 bound. These are separate process snapshots and must not be summed into a total
 service memory claim.
 

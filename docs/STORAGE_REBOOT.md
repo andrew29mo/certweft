@@ -41,19 +41,22 @@ with host-side shutdown/start observations.
 
 | Fault still active after boot | Required evidence |
 | --- | --- |
-| ext4 ENOSPC | A real write fails with errno 28 before and after boot; writer startup fails under its bounded restart policy; management/root CLI cannot report success |
-| Read-only ext4 | A real write fails with errno 30 before and after boot; the writer cannot open its lifetime lease for writing; management/root CLI cannot report success |
+| ext4 ENOSPC | A real write fails with errno 28 before and after boot; the current writer invocation records errno 28 at Gate persistence and fails under its bounded restart policy; management/root CLI cannot report success |
+| Read-only ext4 | A real write fails with errno 30 before and after boot; the current writer invocation records errno 30 opening its lifetime lease for writing; management/root CLI cannot report success |
 | SQLite FULL | The service remains available but closed; a valid new request is rejected, and the formal root certificate verifier fails at storage validation with SQLITE_FULL, restored=false and updates_enabled=false |
 
 **Management unavailable is not a persisted Gate transition.** With ENOSPC or
 read-only storage, the old Gate can still say RUNNING because a replacement
 record cannot be written. No live writer is accepting operations; a stale file
 is not current admission permission. After storage repair, a new service session
-must still refuse updates until the explicit root workflow completes.
+must still refuse updates until the explicit root workflow completes. A valid
+candidate/current-CAS submission actually checks this denial; the test does not
+rely only on a status flag.
 
-The candidate remains online while the fault is present. A failed command is
-neither a rollback nor evidence that the committed certificate is served. The
-report checks the candidate's exact leaf fingerprint during the fault, then
+The candidate remains online while the fault is present. The selected exception
+records bind the current boot/unit/invocation; stage matching is an executable assertion, not a full raw traceback archive. A failed
+command is neither a rollback nor evidence that the committed certificate is
+served. The report checks the candidate's exact leaf fingerprint during the fault, then
 checks the exact committed leaf after root recovery.
 
 ## Repair and stale-operation controls
@@ -73,8 +76,13 @@ UID, CAP_CHOWN and NoNewPrivileges. The Nginx unit is never edited.
 Once writable, the restarted writer still denies updates. The installed root CLI
 must complete persisted certificate restoration, journal reconciliation, opening
 intention, fresh release preparation and paired opening. The old pending request
-must become INTERRUPTED, not replayed or declared COMMITTED. An old core CAS
-request must fail without changing core/wire, while the same valid candidate with
+must become INTERRUPTED, not replayed or declared COMMITTED. Full normal/root
+catalogs preserve old identity and timing fields and every terminal row. The
+preboot Gate authority is explicitly rejected while still closed; current root
+authority positively prepares VERIFY_REQUIRED. The SQLite old failed prefix is
+then retried in that state and must read its original FAILED history without
+changing Gate/catalog/core/wire, before a new recovery prefix is allowed. An old
+core CAS request must fail without changing core/wire, while the same valid candidate with
 a fresh CAS token must really COMMIT and present its exact new leaf on a new
 trusted TLS/HTTP-200 connection. Issuance was completed before the fault; this is
 actual activation after repair, not a new CA issuance/network-availability test.
@@ -108,9 +116,12 @@ fixture state is restored for the next controlled installation reset. The host
 restores the prior Docker context even on a failure. Private CA/state/image files
 are not uploaded.
 
+See [STORAGE_REBOOT_REVIEW.md](STORAGE_REBOOT_REVIEW.md) for the corrected
+old-prefix, historical-row and failure-cause controls.
+
 ## Results and boundaries
 
-All three installed fault/reboot/repair cases passed, together with 126 Linux
+All three installed fault/reboot/repair cases passed, together with 129 Linux
 unit tests (zero failed/errors/skipped), eight installed deployment regressions
 and 14 source-service runtime fault scenarios at the same 59-file manifest. Each
 fault's bootstrap repeats the four installation/issuance/activation setup cases;
@@ -118,9 +129,9 @@ these overlap the deployment matrix and are not independent benchmark trials.
 
 | Fault | Admission while faulted after boot | Post-SSH check/repair sequence | Writer RSS after repair |
 | --- | --- | --- | --- |
-| ENOSPC | No management endpoint | 3.667 s | 21,656 KiB |
-| Read-only | No management endpoint | 3.882 s | 21,648 KiB |
-| SQLite FULL | Management closed; root storage validation failed | 3.921 s | 21,660 KiB |
+| ENOSPC | No management endpoint | 3.983 s | 21,652 KiB |
+| Read-only | No management endpoint | 4.260 s | 21,656 KiB |
+| SQLite FULL | Management closed; root storage validation failed | 4.406 s | 21,656 KiB |
 
 The initial attempts found a harness descriptor-lifetime defect (SQLite context
 exit does not close a connection) and a one-shot observer dependency conflict

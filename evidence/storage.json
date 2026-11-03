@@ -38,15 +38,15 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 0,
-      "elapsed_seconds": 0.3514742790000014
+      "elapsed_seconds": 0.35376999900000783
     },
     {
       "fault": "enospc",
       "phase": "prepare",
       "ext4_image_bytes": 33554432,
       "service_memory_before_fault": {
-        "VmHWM": "21124 kB",
-        "VmRSS": "21124 kB"
+        "VmHWM": "21144 kB",
+        "VmRSS": "21144 kB"
       },
       "baseline_observed_before_fault": true,
       "executor_memory_at_checkpoint": {
@@ -81,20 +81,20 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 1,
-      "elapsed_seconds": 0.9433382549999862
+      "elapsed_seconds": 0.923287820000013
     },
     {
       "fault": "enospc",
       "phase": "post",
       "ext4_image_bytes": 33554432,
       "service_memory_before_fault": {
-        "VmHWM": "21140 kB",
-        "VmRSS": "21140 kB"
+        "VmHWM": "21144 kB",
+        "VmRSS": "21144 kB"
       },
       "candidate_observed_before_fault": true,
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22688 kB",
-        "VmRSS": "22688 kB"
+        "VmHWM": "22684 kB",
+        "VmRSS": "22684 kB"
       },
       "filled_bytes": 26443776,
       "observed_errno": 28,
@@ -124,15 +124,15 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 1,
-      "elapsed_seconds": 1.5207084010000074
+      "elapsed_seconds": 1.3741343620000066
     },
     {
       "fault": "enospc",
       "phase": "cancel",
       "ext4_image_bytes": 33554432,
       "service_memory_before_fault": {
-        "VmHWM": "21140 kB",
-        "VmRSS": "21140 kB"
+        "VmHWM": "21128 kB",
+        "VmRSS": "21128 kB"
       },
       "candidate_observed_before_fault": true,
       "executor_memory_at_checkpoint": {
@@ -167,7 +167,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 1,
-      "elapsed_seconds": 1.1714770459999784
+      "elapsed_seconds": 1.2460790560000135
     },
     {
       "fault": "readonly",
@@ -204,7 +204,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 0,
-      "elapsed_seconds": 0.48559266200001616
+      "elapsed_seconds": 0.3239894559999925
     },
     {
       "fault": "readonly",
@@ -239,20 +239,20 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 1,
-      "elapsed_seconds": 0.4526492729999916
+      "elapsed_seconds": 0.38184084400000984
     },
     {
       "fault": "readonly",
       "phase": "post",
       "ext4_image_bytes": 33554432,
       "service_memory_before_fault": {
-        "VmHWM": "21132 kB",
-        "VmRSS": "21132 kB"
+        "VmHWM": "21168 kB",
+        "VmRSS": "21168 kB"
       },
       "candidate_observed_before_fault": true,
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22684 kB",
-        "VmRSS": "22684 kB"
+        "VmHWM": "22680 kB",
+        "VmRSS": "22680 kB"
       },
       "observed_errno": 30,
       "mount_options": "rw,relatime\nro,relatime",
@@ -274,7 +274,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 1,
-      "elapsed_seconds": 1.1465854559999968
+      "elapsed_seconds": 1.1250355110000214
     },
     {
       "fault": "readonly",
@@ -286,8 +286,8 @@
       },
       "candidate_observed_before_fault": true,
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22684 kB",
-        "VmRSS": "22684 kB"
+        "VmHWM": "22688 kB",
+        "VmRSS": "22688 kB"
       },
       "observed_errno": 30,
       "mount_options": "rw,relatime\nro,relatime",
@@ -316,7 +316,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 1,
-      "elapsed_seconds": 1.0798265389999813
+      "elapsed_seconds": 1.055650414000013
     },
     {
       "fault": "sqlite_full",
@@ -325,8 +325,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21144 kB",
-        "VmRSS": "21144 kB"
+        "VmHWM": "21140 kB",
+        "VmRSS": "21140 kB"
       },
       "initial_reply": {
         "ok": false,
@@ -351,7 +351,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 0,
-      "elapsed_seconds": 0.8026726800000006
+      "elapsed_seconds": 0.7881614260000163
     },
     {
       "fault": "sqlite_full",
@@ -365,8 +365,8 @@
       },
       "baseline_observed_before_fault": true,
       "executor_memory_at_checkpoint": {
-        "VmHWM": "21528 kB",
-        "VmRSS": "21528 kB"
+        "VmHWM": "21636 kB",
+        "VmRSS": "21636 kB"
       },
       "new_update_reply": {
         "ok": false,
@@ -390,7 +390,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 1,
-      "elapsed_seconds": 1.2560582399999873
+      "elapsed_seconds": 1.2457184609999956
     },
     {
       "fault": "sqlite_full",
@@ -404,8 +404,8 @@
       },
       "candidate_observed_before_fault": true,
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22692 kB",
-        "VmRSS": "22692 kB"
+        "VmHWM": "22796 kB",
+        "VmRSS": "22796 kB"
       },
       "new_update_reply": {
         "ok": false,
@@ -429,7 +429,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 1,
-      "elapsed_seconds": 2.1943136110000125
+      "elapsed_seconds": 2.1088898339999957
     },
     {
       "fault": "sqlite_full",
@@ -438,13 +438,13 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21128 kB",
-        "VmRSS": "21128 kB"
+        "VmHWM": "21144 kB",
+        "VmRSS": "21144 kB"
       },
       "candidate_observed_before_fault": true,
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22684 kB",
-        "VmRSS": "22684 kB"
+        "VmHWM": "22796 kB",
+        "VmRSS": "22796 kB"
       },
       "cancel_reply": {
         "ok": false,
@@ -474,7 +474,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 1,
-      "elapsed_seconds": 2.000976960999992
+      "elapsed_seconds": 1.8868818390000115
     },
     {
       "fault": "sqlite_full",
@@ -483,8 +483,8 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21148 kB",
-        "VmRSS": "21148 kB"
+        "VmHWM": "21144 kB",
+        "VmRSS": "21144 kB"
       },
       "candidate_observed_before_fault": true,
       "executor_memory_at_checkpoint": {
@@ -520,7 +520,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 1,
-      "elapsed_seconds": 2.1690833629999986
+      "elapsed_seconds": 2.114882397999992
     },
     {
       "fault": "sqlite_full",
@@ -529,13 +529,13 @@
       "pager_max_pages": 9,
       "allocation_bytes": 65536,
       "service_memory_before_fault": {
-        "VmHWM": "21176 kB",
-        "VmRSS": "21176 kB"
+        "VmHWM": "21148 kB",
+        "VmRSS": "21148 kB"
       },
       "candidate_observed_before_fault": true,
       "executor_memory_at_checkpoint": {
-        "VmHWM": "22792 kB",
-        "VmRSS": "22792 kB"
+        "VmHWM": "22788 kB",
+        "VmRSS": "22788 kB"
       },
       "cancel_reply": {
         "ok": false,
@@ -566,7 +566,7 @@
       "passed": true,
       "cleanup_verified": true,
       "tracked_executors": 1,
-      "elapsed_seconds": 1.0213932999999997
+      "elapsed_seconds": 0.9706359010000085
     }
   ],
   "scope": "formal certweft.service + executor; Nginx; ext4 loop filesystem in isolated Linux VM",
@@ -621,7 +621,7 @@
     "tools/opening_vm.py": "656b8d1f7c461cd2657eeb3e8db1af2e50516435032c40788496916372522b04",
     "tools/recovery_vm.py": "104fc1ee43c382f5bb0d4d7c19c3369bb4c656097966e4e05c9008b3a9f285ee",
     "tools/opening_mutation.py": "41370aa7417e65830048b0e4c984cf8c3de5a1602fb51410f7268a6e8b2868c1",
-    "tools/storage_reboot_vm.py": "0eb9d584d528ced66482ac043f4cf35642185d7b7a9ab79320b195fab9f652a4",
+    "tools/storage_reboot_vm.py": "dd5ed1f816f2a0135cff1aa4445919470d1d11b1579a1bbedd45d46c1973e12e",
     "tools/explore.py": "0c299e094c40dd76dbb20f150f5bd5dab61910ce775930a16c5ad9336ca693ec",
     "tools/credential_probe.py": "8717ad04ed86278a11e511f4a122c8da3baf72fb2024d58d1194eae60268be46",
     "tools/operations_vm.py": "3afea1405dea8dd8f459d1db08d587b017937ffe48740a6608367ebf439cbc85",
@@ -644,7 +644,7 @@
     "tests/test_service_process.py": "db7bccfa6248f8a9281cd380f5db317f71116b06711f195100f86a7f5a70e9b9",
     "tests/test_deployment.py": "11d3612e6ac18ac4967168437ef03cfc6eab58afe0dbcbe3fbf1378d6270ecc7",
     "tests/test_reconciliation.py": "91d301f53893145dd6400efc00c67204441a80b15428c0e9032629137db3cac9",
-    "tests/test_reboot_evidence.py": "2b7cf36aa9a3502638a17df62b7599eb85620a760d0248dd434ab05b2857a030",
+    "tests/test_reboot_evidence.py": "da5cfb3528d91750eeefb44f4a6fb7e7857fb7b438df96682150d0e80d2fb973",
     "policy/server.tpl": "e16f01b5b18ad33bf563df84ac348bd783fc06a2b82896ee506ed26255245550"
   },
   "source_unchanged": true
